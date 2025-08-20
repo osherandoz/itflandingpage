@@ -1,0 +1,240 @@
+.hero-section {
+  background: linear-gradient(135deg, #0C0E1D 0%, #1a1f3a 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding-top: 70px; /* Account for fixed navbar */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.hero-container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 20px;
+  text-align: center;
+  position: relative;
+  transform: translateZ(0);
+}
+
+.hero-logo {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 120px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(0);
+}
+
+.hero-logo img {
+  width: 80px;
+  height: 40px;
+  object-fit: contain;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-top: 100px;
+  transform: translateZ(0);
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transform: translateZ(0);
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #e0e0e0;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  transform: translateZ(0);
+}
+
+.hero-features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+.hero-feature {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #3B82F6;
+  font-weight: 600;
+  font-size: 1.1rem;
+  background: rgba(59, 130, 246, 0.1);
+  padding: 8px 16px;
+  border-radius: 25px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.hero-cta {
+  background: linear-gradient(45deg, #3B82F6, #1D4ED8);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+  transform: translateZ(0);
+  will-change: transform;
+  margin-bottom: 1rem;
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px) translateZ(0);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  background: linear-gradient(45deg, #1D4ED8, #3B82F6);
+}
+
+.hero-cta:active {
+  transform: translateY(0) translateZ(0);
+}
+
+.hero-guarantee {
+  color: #e0e0e0;
+  font-size: 1rem;
+  margin-top: 1rem;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-guarantee strong {
+  color: #3B82F6;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: 60px; /* Account for smaller navbar on mobile */
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .hero-logo {
+    display: none; /* Hide logo on mobile for cleaner look */
+  }
+  
+  .hero-content {
+    padding-top: 50px;
+  }
+  
+  .hero-features {
+    gap: 8px;
+  }
+  
+  .hero-feature {
+    font-size: 1rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding-top: 60px;
+    min-height: 90vh; /* Slightly reduce height on mobile */
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-cta {
+    padding: 12px 30px;
+    font-size: 1rem;
+  }
+  
+  .hero-content {
+    padding-top: 30px;
+  }
+  
+  .hero-features {
+    gap: 6px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-feature {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+  }
+  
+  .hero-guarantee {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-title {
+    font-size: 1.8rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+  
+  .hero-cta {
+    padding: 10px 25px;
+    font-size: 0.95rem;
+  }
+  
+  .hero-feature {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+  }
+  
+  .hero-guarantee {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+}
