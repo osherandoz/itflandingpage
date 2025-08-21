@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { openWhatsApp } from '../utils/whatsapp';
 import Modal from './Modal';
+import ContactForm from './ContactForm';
 import './Footer.css';
 
 const Footer = () => {
@@ -142,6 +143,10 @@ const Footer = () => {
           <p>📧 <a href="mailto:info@poncho.tech" className="modal-link">info@poncho.tech</a></p>
         </div>
       )
+    },
+    contact: {
+      title: 'טופס יצירת קשר',
+      content: <ContactForm />
     }
   };
 
@@ -149,19 +154,27 @@ const Footer = () => {
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
+          {/* Column 1: Contact Info */}
           <div className="footer-section">
-            <h3>צור קשר</h3>
+            <h3>פרטי קשר</h3>
             <div className="contact-info">
               <p><i className="fas fa-map-marker-alt"></i> נתניה, ישראל</p>
               <p><i className="fas fa-phone"></i> 050-9823-235</p>
               <p><i className="fas fa-envelope"></i> info@poncho.tech</p>
             </div>
-            <button className="footer-cta" onClick={openWhatsApp}>
-              <i className="fab fa-whatsapp"></i>
-              דברו איתנו בוואטסאפ
-            </button>
+            <div className="contact-buttons">
+              <button className="footer-cta" onClick={openWhatsApp}>
+                <i className="fab fa-whatsapp"></i>
+                דברו איתנו בוואטסאפ
+              </button>
+              <button className="footer-cta contact-form-btn" onClick={() => openModal('contact')}>
+                <i className="fas fa-envelope"></i>
+                טופס יצירת קשר
+              </button>
+            </div>
           </div>
 
+          {/* Column 2: Social Media */}
           <div className="footer-section">
             <h3>עקבו אחרינו</h3>
             <div className="social-links">
@@ -180,12 +193,32 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Column 3: Newsletter */}
           <div className="footer-section">
             <h3>הישארו מעודכנים</h3>
             <div className="newsletter">
               <input type="email" placeholder="האימייל שלך" />
               <button type="submit">
                 <i className="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+
+          {/* Column 4: Quick Links */}
+          <div className="footer-section">
+            <h3>קישורים מהירים</h3>
+            <div className="quick-links">
+              <button onClick={() => openModal('privacy')} className="quick-link">
+                <i className="fas fa-shield-alt"></i>
+                מדיניות פרטיות
+              </button>
+              <button onClick={() => openModal('accessibility')} className="quick-link">
+                <i className="fas fa-universal-access"></i>
+                נגישות
+              </button>
+              <button onClick={() => openModal('terms')} className="quick-link">
+                <i className="fas fa-file-contract"></i>
+                תנאי שימוש
               </button>
             </div>
           </div>
@@ -232,6 +265,14 @@ const Footer = () => {
         title={modalContent.terms.title}
       >
         {modalContent.terms.content}
+      </Modal>
+
+      <Modal
+        isOpen={activeModal === 'contact'}
+        onClose={closeModal}
+        title={modalContent.contact.title}
+      >
+        {modalContent.contact.content}
       </Modal>
     </footer>
   );

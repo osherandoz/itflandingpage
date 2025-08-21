@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
@@ -8,8 +8,46 @@ import HowItWorks from './components/HowItWorks';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 function App() {
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+  const [hasAcceptedPrivacy, setHasAcceptedPrivacy] = useState(false);
+
+  useEffect(() => {
+    // Check if user has already accepted privacy policy
+    const accepted = localStorage.getItem('privacyPolicyAccepted');
+    if (accepted === 'true') {
+      setHasAcceptedPrivacy(true);
+    } else {
+      // Show privacy policy modal for new users
+      setShowPrivacyPolicy(true);
+    }
+  }, []);
+
+  const handlePrivacyAccept = () => {
+    setShowPrivacyPolicy(false);
+    setHasAcceptedPrivacy(true);
+  };
+
+  const handlePrivacyDecline = () => {
+    // You can redirect to a different page or show a message
+    alert('על מנת להשתמש באתר, עליכם להסכים למדיניות הפרטיות');
+  };
+
+  // Don't render the main content until privacy policy is accepted
+  if (!hasAcceptedPrivacy) {
+    return (
+      <div dir="rtl" className="app">
+        <PrivacyPolicy 
+          isOpen={showPrivacyPolicy}
+          onAccept={handlePrivacyAccept}
+          onDecline={handlePrivacyDecline}
+        />
+      </div>
+    );
+  }
+
   return (
     <div dir="rtl" className="app">
       <Navbar />
@@ -31,9 +69,7 @@ function App() {
       <section id="faq">
         <FAQ />
       </section>
-      <section id="contact">
-        <Footer />
-      </section>
+      <Footer />
     </div>
   );
 }

@@ -12,8 +12,8 @@
 
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
   margin-bottom: 40px;
 }
 
@@ -208,6 +208,8 @@
   margin: 0;
 }
 
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .footer {
@@ -215,8 +217,8 @@
   }
   
   .footer-content {
-    grid-template-columns: 1fr;
-    gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
   }
   
   .footer-section h3 {
@@ -272,6 +274,7 @@
   }
   
   .footer-content {
+    grid-template-columns: 1fr;
     gap: 25px;
   }
   
@@ -349,5 +352,111 @@
   
   .footer-cta i {
     font-size: 0.9rem;
+  }
+}
+
+/* Responsive adjustments for contact form in footer */
+@media (max-width: 768px) {
+  .contact-form-wrapper .contact-form-container {
+    padding: 12px;
+  }
+  
+  .contact-form-wrapper .contact-form-header h2 {
+    font-size: 1.1rem;
+  }
+  
+  .contact-form-wrapper .contact-form-header p {
+    font-size: 0.8rem;
+  }
+  
+  .contact-form-wrapper .form-group input,
+  .contact-form-wrapper .form-group textarea {
+    padding: 6px 8px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .contact-form-wrapper .submit-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+
+
+.contact-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.contact-form-btn {
+  background: linear-gradient(45deg, #3B82F6, #1D4ED8) !important;
+}
+
+.contact-form-btn:hover {
+  background: linear-gradient(45deg, #1D4ED8, #3B82F6) !important;
+}
+
+.quick-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quick-link {
+  background: none;
+  border: none;
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 8px 0;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quick-link:hover {
+  color: #3B82F6;
+  transform: translateX(-5px);
+}
+
+.quick-link i {
+  color: #3B82F6;
+  width: 16px;
+  text-align: center;
+}
+
+/* Responsive adjustments for contact buttons */
+@media (max-width: 768px) {
+  .contact-buttons {
+    gap: 8px;
+  }
+  
+  .quick-links {
+    gap: 6px;
+  }
+  
+  .quick-link {
+    font-size: 0.85rem;
+    padding: 6px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-buttons {
+    gap: 6px;
+  }
+  
+  .quick-links {
+    gap: 5px;
+  }
+  
+  .quick-link {
+    font-size: 0.8rem;
+    padding: 5px 0;
   }
 }

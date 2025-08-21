@@ -1,12 +1,61 @@
-# React + Vite
+# Landing Page - Israel Tech Force
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+אתר נחיתה מודרני עם מדיניות פרטיות וטופס יצירת קשר.
 
-Currently, two official plugins are available:
+## תכונות עיקריות
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🔒 מדיניות פרטיות
+- מודל מדיניות פרטיות בעברית
+- מופיע לכל משתמש חדש
+- שמירת הסכמה ב-localStorage
+- עיצוב מותאם למובייל
 
-## Expanding the ESLint configuration
+### 📞 טופס יצירת קשר
+- שדות: שם מלא, דוא"ל, טלפון, תיאור בעיה
+- אימות טופס מלא
+- הסכמה ליצירת קשר
+- עיצוב רספונסיבי
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 📱 עיצוב מותאם למובייל
+- תמיכה מלאה במכשירים ניידים
+- עיצוב רספונסיבי
+- חוויית משתמש מותאמת
+
+## התקנה והרצה
+
+```bash
+# התקנת תלויות
+npm install
+
+# הרצת השרת המקומי
+npm run dev
+
+# בנייה לפרודקשן
+npm run build
+```
+
+## מבנה הפרויקט
+
+```
+src/
+├── components/
+│   ├── PrivacyPolicy.jsx    # מודל מדיניות פרטיות
+│   ├── ContactForm.jsx      # טופס יצירת קשר
+│   ├── Modal.jsx           # רכיב מודל כללי
+│   └── ...                 # רכיבים נוספים
+├── App.jsx                 # רכיב ראשי
+└── ...
+```
+
+## שימוש
+
+1. **מדיניות פרטיות**: מופיעה אוטומטית למשתמשים חדשים
+2. **טופס יצירת קשר**: נגיש דרך תפריט הניווט "צור קשר"
+3. **שמירת נתונים**: הסכמה למדיניות נשמרת ב-localStorage
+
+## טכנולוגיות
+
+- React 19
+- Vite
+- CSS3 עם Flexbox/Grid
+- LocalStorage לניהול מצב
