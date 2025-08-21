@@ -22,3 +22,4 @@ export const getWhatsAppUrl = (message = "היי, הגעתי דרך האתר ש�
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 };
+
