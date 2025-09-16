@@ -9,16 +9,37 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import NewsletterPopup from './components/NewsletterPopup';
+// Import test utility for MailerLite API (development only)
+import { testMailerLite, testSubscribe } from './utils/test-mailerlite.js';
+
+// Expose test functions to window for console testing
+if (typeof window !== 'undefined') {
+  window.testMailerLite = testMailerLite;
+  window.testSubscribe = testSubscribe;
+}
 
 function App() {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
   const [hasAcceptedPrivacy, setHasAcceptedPrivacy] = useState(false);
+  const [showNewsletterPopup, setShowNewsletterPopup] = useState(false);
 
   useEffect(() => {
     // Check if user has already accepted privacy policy
     const accepted = localStorage.getItem('privacyPolicyAccepted');
     if (accepted === 'true') {
       setHasAcceptedPrivacy(true);
+      
+      // Check if newsletter popup should be shown
+      const popupShown = localStorage.getItem('newsletterPopupShown');
+      const subscribed = localStorage.getItem('newsletterSubscribed');
+      
+      if (!popupShown && !subscribed) {
+        // Show newsletter popup after a short delay for better UX
+        setTimeout(() => {
+          setShowNewsletterPopup(true);
+        }, 2000);
+      }
     } else {
       // Show privacy policy modal for new users
       setShowPrivacyPolicy(true);
@@ -28,11 +49,25 @@ function App() {
   const handlePrivacyAccept = () => {
     setShowPrivacyPolicy(false);
     setHasAcceptedPrivacy(true);
+    
+    // Show newsletter popup after privacy policy is accepted
+    setTimeout(() => {
+      setShowNewsletterPopup(true);
+    }, 1000);
   };
 
   const handlePrivacyDecline = () => {
     // You can redirect to a different page or show a message
     alert('על מנת להשתמש באתר, עליכם להסכים למדיניות הפרטיות');
+  };
+
+  const handleNewsletterClose = () => {
+    setShowNewsletterPopup(false);
+  };
+
+  const handleNewsletterSubscribe = (formData) => {
+    console.log('Newsletter subscription successful:', formData);
+    // Additional tracking or analytics can be added here
   };
 
   // Don't render the main content until privacy policy is accepted
@@ -70,6 +105,13 @@ function App() {
         <FAQ />
       </section>
       <Footer />
+      
+      {/* Newsletter Popup */}
+      <NewsletterPopup
+        isOpen={showNewsletterPopup}
+        onClose={handleNewsletterClose}
+        onSubscribe={handleNewsletterSubscribe}
+      />
     </div>
   );
 }

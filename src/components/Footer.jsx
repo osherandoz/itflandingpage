@@ -2,10 +2,17 @@ import React, { useState } from 'react';
 import { openWhatsApp } from '../utils/whatsapp';
 import Modal from './Modal';
 import ContactForm from './ContactForm';
+import { subscribeToNewsletter, validateEmail } from '../utils/mailerlite';
 import './Footer.css';
 
 const Footer = () => {
   const [activeModal, setActiveModal] = useState(null);
+  const [newsletterData, setNewsletterData] = useState({
+    fullName: '',
+    email: ''
+  });
+  const [newsletterStatus, setNewsletterStatus] = useState({ message: '', type: '' });
+  const [isSubscribing, setIsSubscribing] = useState(false);
 
   const openModal = (modalType) => {
     setActiveModal(modalType);
@@ -13,6 +20,46 @@ const Footer = () => {
 
   const closeModal = () => {
     setActiveModal(null);
+  };
+
+  const handleNewsletterSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!newsletterData.fullName.trim()) {
+      setNewsletterStatus({ message: 'אנא הכניסו שם מלא', type: 'error' });
+      return;
+    }
+
+    if (!newsletterData.email.trim()) {
+      setNewsletterStatus({ message: 'אנא הכניסו כתובת אימייל', type: 'error' });
+      return;
+    }
+
+    if (!validateEmail(newsletterData.email)) {
+      setNewsletterStatus({ message: 'כתובת האימייל אינה תקינה', type: 'error' });
+      return;
+    }
+
+    setIsSubscribing(true);
+    setNewsletterStatus({ message: '', type: '' });
+
+    try {
+      const result = await subscribeToNewsletter(newsletterData.fullName, newsletterData.email);
+      
+      if (result.success) {
+        setNewsletterStatus({ message: result.message, type: 'success' });
+        setNewsletterData({ fullName: '', email: '' });
+      } else {
+        setNewsletterStatus({ message: result.message, type: 'error' });
+      }
+    } catch {
+      setNewsletterStatus({ 
+        message: 'שגיאה בהרשמה לניוזלטר - אנא נסו שוב מאוחר יותר', 
+        type: 'error' 
+      });
+    } finally {
+      setIsSubscribing(false);
+    }
   };
 
   const modalContent = {
@@ -196,12 +243,30 @@ const Footer = () => {
           {/* Column 3: Newsletter */}
           <div className="footer-section">
             <h3>הישארו מעודכנים</h3>
-            <div className="newsletter">
-              <input type="email" placeholder="האימייל שלך" />
-              <button type="submit">
+            <form className="newsletter" onSubmit={handleNewsletterSubmit}>
+              <input 
+                type="text" 
+                placeholder="שם מלא" 
+                value={newsletterData.fullName}
+                onChange={(e) => setNewsletterData(prev => ({ ...prev, fullName: e.target.value }))}
+                disabled={isSubscribing}
+              />
+              <input 
+                type="email" 
+                placeholder="האימייל שלך" 
+                value={newsletterData.email}
+                onChange={(e) => setNewsletterData(prev => ({ ...prev, email: e.target.value }))}
+                disabled={isSubscribing}
+              />
+              <button type="submit" disabled={isSubscribing}>
                 <i className="fas fa-paper-plane"></i>
               </button>
-            </div>
+            </form>
+            {newsletterStatus.message && (
+              <div className={`newsletter-status ${newsletterStatus.type}`}>
+                {newsletterStatus.message}
+              </div>
+            )}
           </div>
 
           {/* Column 4: Quick Links */}
