@@ -3,7 +3,8 @@
 
 // Smoove API configuration
 const SMOOVE_API_KEY = '84bc9a64-a6c8-4777-af10-94d24a811ec5';
-const SMOOVE_API_URL = 'https://api.smoove.io';
+// Use proxy in development, direct API in production
+const SMOOVE_API_URL = import.meta.env.DEV ? '/api/smoove' : 'https://rest.smoove.io/v1';
 
 /**
  * Validates email format
@@ -17,18 +18,26 @@ export const validateEmail = (email) => {
 
 /**
  * Subscribes a user to the newsletter
- * @param {string} fullName - User's full name
+ * @param {string} firstName - User's first name
+ * @param {string} lastName - User's last name
  * @param {string} email - User's email address
  * @param {string} listId - Optional Smoove list ID
  * @returns {Promise<Object>} - Result object with success status and message
  */
-export const subscribeToNewsletter = async (fullName, email, listId = null) => {
+export const subscribeToNewsletter = async (firstName, lastName, email, listId = null) => {
   try {
     // Validate inputs
-    if (!fullName || !fullName.trim()) {
+    if (!firstName || !firstName.trim()) {
       return {
         success: false,
-        message: 'שם מלא הוא שדה חובה'
+        message: 'שם פרטי הוא שדה חובה'
+      };
+    }
+
+    if (!lastName || !lastName.trim()) {
+      return {
+        success: false,
+        message: 'שם משפחה הוא שדה חובה'
       };
     }
 
@@ -49,8 +58,8 @@ export const subscribeToNewsletter = async (fullName, email, listId = null) => {
     // Prepare subscriber data for Smoove API
     const subscriberData = {
       email: email.trim(),
-      first_name: fullName.trim().split(' ')[0] || fullName.trim(),
-      last_name: fullName.trim().split(' ').slice(1).join(' ') || '',
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
       status: 'active',
       list_id: listId || 'default'
     };

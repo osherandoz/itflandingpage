@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { subscribeToNewsletter, validateEmail } from '../utils/mailerlite';
+import { subscribeToNewsletter, validateEmail } from '../utils/smoove';
 import './NewsletterPopup.css';
 
 const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,8 +28,13 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
     e.preventDefault();
     
     // Validation
-    if (!formData.fullName.trim()) {
-      setStatus({ message: 'אנא הכניסו שם מלא', type: 'error' });
+    if (!formData.firstName.trim()) {
+      setStatus({ message: 'אנא הכניסו שם פרטי', type: 'error' });
+      return;
+    }
+
+    if (!formData.lastName.trim()) {
+      setStatus({ message: 'אנא הכניסו שם משפחה', type: 'error' });
       return;
     }
 
@@ -46,7 +52,11 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
     setStatus({ message: '', type: '' });
 
     try {
-      const result = await subscribeToNewsletter(formData.fullName, formData.email);
+      const result = await subscribeToNewsletter(
+        formData.firstName, 
+        formData.lastName, 
+        formData.email
+      );
       
       if (result.success) {
         setStatus({ message: '🎉 תודה! המרדריך בדרך אליך!', type: 'success' });
@@ -118,9 +128,21 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
             <div className="form-group">
               <input
                 type="text"
-                name="fullName"
-                placeholder="השם המלא שלך"
-                value={formData.fullName}
+                name="firstName"
+                placeholder="שם פרטי"
+                value={formData.firstName}
+                onChange={handleInputChange}
+                disabled={isSubmitting}
+                required
+              />
+            </div>
+            
+            <div className="form-group">
+              <input
+                type="text"
+                name="lastName"
+                placeholder="שם משפחה"
+                value={formData.lastName}
                 onChange={handleInputChange}
                 disabled={isSubmitting}
                 required

@@ -18,8 +18,13 @@ The Smoove API key is configured in `src/utils/smoove.js`:
 
 ```javascript
 const SMOOVE_API_KEY = '84bc9a64-a6c8-4777-af10-94d24a811ec5';
-const SMOOVE_API_URL = 'https://api.smoove.io';
+// Use proxy in development, direct API in production
+const SMOOVE_API_URL = import.meta.env.DEV ? '/api/smoove' : 'https://rest.smoove.io/v1';
 ```
+
+### CORS Solution
+
+To avoid CORS issues during development, the project uses a Vite proxy configuration. The proxy forwards requests from `/api/smoove/*` to `https://rest.smoove.io/v1/*` during development, while production builds use the direct API URL.
 
 ## Features
 
@@ -38,11 +43,12 @@ const SMOOVE_API_URL = 'https://api.smoove.io';
 
 ## API Functions
 
-### `subscribeToNewsletter(fullName, email, listId)`
+### `subscribeToNewsletter(firstName, lastName, email, listId)`
 Subscribes a user to the newsletter.
 
 **Parameters:**
-- `fullName` (string): User's full name
+- `firstName` (string): User's first name
+- `lastName` (string): User's last name
 - `email` (string): User's email address
 - `listId` (string, optional): Smoove list ID to add subscriber to
 
@@ -72,8 +78,8 @@ To collect additional information (like company, phone), modify the `subscriberD
 ```javascript
 const subscriberData = {
   email: email.trim(),
-  first_name: fullName.trim().split(' ')[0] || fullName.trim(),
-  last_name: fullName.trim().split(' ').slice(1).join(' ') || '',
+  firstName: firstName.trim(),
+  lastName: lastName.trim(),
   status: 'active',
   list_id: listId || 'default',
   custom_fields: {
@@ -87,7 +93,7 @@ const subscriberData = {
 To add subscribers to specific Smoove lists, pass the list ID:
 
 ```javascript
-const result = await subscribeToNewsletter(fullName, email, 'your-list-id');
+const result = await subscribeToNewsletter(firstName, lastName, email, 'your-list-id');
 ```
 
 ### Modifying Messages
@@ -103,9 +109,14 @@ Update the Hebrew messages in the `subscribeToNewsletter` function to match your
 
 ### Common Issues
 
-1. **401 Unauthorized**: Check if the Smoove API key is valid and not expired
-2. **409 Conflict**: User is already subscribed (this is handled gracefully)
-3. **400 Bad Request**: Invalid email format or missing required fields
+1. **CORS Error**: If you see "Access to fetch at 'https://rest.smoove.io/v1' has been blocked by CORS policy":
+   - Make sure you're running the development server with `npm run dev`
+   - The proxy configuration should handle this automatically
+   - Check the browser console for proxy logs
+
+2. **401 Unauthorized**: Check if the Smoove API key is valid and not expired
+3. **409 Conflict**: User is already subscribed (this is handled gracefully)
+4. **400 Bad Request**: Invalid email format or missing required fields
 
 ### Testing
 

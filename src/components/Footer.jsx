@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { openWhatsApp } from '../utils/whatsapp';
 import Modal from './Modal';
 import ContactForm from './ContactForm';
-import { subscribeToNewsletter, validateEmail } from '../utils/mailerlite';
+import { subscribeToNewsletter, validateEmail } from '../utils/smoove';
 import './Footer.css';
 
 const Footer = () => {
   const [activeModal, setActiveModal] = useState(null);
   const [newsletterData, setNewsletterData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: ''
   });
   const [newsletterStatus, setNewsletterStatus] = useState({ message: '', type: '' });
@@ -25,8 +26,13 @@ const Footer = () => {
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
     
-    if (!newsletterData.fullName.trim()) {
-      setNewsletterStatus({ message: 'אנא הכניסו שם מלא', type: 'error' });
+    if (!newsletterData.firstName.trim()) {
+      setNewsletterStatus({ message: 'אנא הכניסו שם פרטי', type: 'error' });
+      return;
+    }
+
+    if (!newsletterData.lastName.trim()) {
+      setNewsletterStatus({ message: 'אנא הכניסו שם משפחה', type: 'error' });
       return;
     }
 
@@ -44,11 +50,15 @@ const Footer = () => {
     setNewsletterStatus({ message: '', type: '' });
 
     try {
-      const result = await subscribeToNewsletter(newsletterData.fullName, newsletterData.email);
+      const result = await subscribeToNewsletter(
+        newsletterData.firstName, 
+        newsletterData.lastName, 
+        newsletterData.email
+      );
       
       if (result.success) {
         setNewsletterStatus({ message: result.message, type: 'success' });
-        setNewsletterData({ fullName: '', email: '' });
+        setNewsletterData({ firstName: '', lastName: '', email: '' });
       } else {
         setNewsletterStatus({ message: result.message, type: 'error' });
       }
@@ -246,9 +256,16 @@ const Footer = () => {
             <form className="newsletter" onSubmit={handleNewsletterSubmit}>
               <input 
                 type="text" 
-                placeholder="שם מלא" 
-                value={newsletterData.fullName}
-                onChange={(e) => setNewsletterData(prev => ({ ...prev, fullName: e.target.value }))}
+                placeholder="שם פרטי" 
+                value={newsletterData.firstName}
+                onChange={(e) => setNewsletterData(prev => ({ ...prev, firstName: e.target.value }))}
+                disabled={isSubscribing}
+              />
+              <input 
+                type="text" 
+                placeholder="שם משפחה" 
+                value={newsletterData.lastName}
+                onChange={(e) => setNewsletterData(prev => ({ ...prev, lastName: e.target.value }))}
                 disabled={isSubscribing}
               />
               <input 

@@ -10,12 +10,12 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import NewsletterPopup from './components/NewsletterPopup';
-// Import test utility for MailerLite API (development only)
-import { testMailerLite, testSubscribe } from './utils/test-mailerlite.js';
+// Import test utility for Smoove API (development only)
+import { testSmoove, testSubscribe } from './utils/test-smoove.js';
 
 // Expose test functions to window for console testing
 if (typeof window !== 'undefined') {
-  window.testMailerLite = testMailerLite;
+  window.testSmoove = testSmoove;
   window.testSubscribe = testSubscribe;
 }
 
