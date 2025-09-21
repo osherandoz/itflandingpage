@@ -1,5 +1,87 @@
 /* Newsletter Popup Styles - High Converting Design */
 
+/* Countdown Timer Styles */
+.countdown-timer {
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.countdown-timer h3 {
+  color: white;
+  margin: 0 0 15px 0;
+  font-size: 1.2em;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.countdown-display {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 15px 10px;
+  min-width: 70px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.countdown-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.countdown-number {
+  font-size: 2em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.countdown-label {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive countdown */
+@media (max-width: 480px) {
+  .countdown-display {
+    gap: 10px;
+  }
+  
+  .countdown-item {
+    min-width: 60px;
+    padding: 12px 8px;
+  }
+  
+  .countdown-number {
+    font-size: 1.6em;
+  }
+  
+  .countdown-label {
+    font-size: 0.8em;
+  }
+}
+
 .newsletter-popup-overlay {
   position: fixed;
   top: 0;
