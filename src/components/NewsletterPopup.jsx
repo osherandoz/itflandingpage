@@ -94,7 +94,7 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
       );
       
       if (result.success) {
-        setStatus({ message: '🎉 תודה! המרדריך בדרך אליך!', type: 'success' });
+        setStatus({ message: '🎉 תודה! המדריך בדרך אליך! אם המייל לא הגיע תוך מספר דקות, בדוק/י את תיקיית הספאם. אם לא התקבל – נשמח לעזור בוואטסאפ: +972509823235', type: 'success' });
         
         // Track successful subscription
         localStorage.setItem('newsletterSubscribed', 'true');
@@ -105,10 +105,10 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
           onSubscribe(formData);
         }
         
-        // Close popup after 2 seconds
+        // Keep popup open a bit longer so user can read the note
         setTimeout(() => {
           onClose();
-        }, 2000);
+        }, 4000);
       } else {
         setStatus({ message: result.message, type: 'error' });
       }
