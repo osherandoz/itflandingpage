@@ -12,6 +12,8 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import NewsletterPopup from './components/NewsletterPopup';
 // Import test utility for Smoove API (development only)
 import { testSmoove, testSubscribe } from './utils/test-smoove.js';
+import { Analytics } from "@vercel/analytics/react"
+
 
 // Expose test functions to window for console testing
 if (typeof window !== 'undefined') {
