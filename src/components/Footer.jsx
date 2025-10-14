@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import { openWhatsApp } from '../utils/whatsapp';
 import Modal from './Modal';
 import ContactForm from './ContactForm';
-import { subscribeToNewsletter, validateEmail } from '../utils/smoove';
+// Newsletter integration disabled - using external link instead
+// import { subscribeToNewsletter, validateEmail } from '../utils/smoove';
 import './Footer.css';
 
 const Footer = () => {
   const [activeModal, setActiveModal] = useState(null);
-  const [newsletterData, setNewsletterData] = useState({
-    firstName: '',
-    lastName: '',
-    email: ''
-  });
-  const [newsletterStatus, setNewsletterStatus] = useState({ message: '', type: '' });
-  const [isSubscribing, setIsSubscribing] = useState(false);
+  // Newsletter form disabled - using external link instead
+  // const [newsletterData, setNewsletterData] = useState({
+  //   firstName: '',
+  //   lastName: '',
+  //   email: ''
+  // });
+  // const [newsletterStatus, setNewsletterStatus] = useState({ message: '', type: '' });
+  // const [isSubscribing, setIsSubscribing] = useState(false);
 
   const openModal = (modalType) => {
     setActiveModal(modalType);
@@ -23,54 +25,55 @@ const Footer = () => {
     setActiveModal(null);
   };
 
-  const handleNewsletterSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!newsletterData.firstName.trim()) {
-      setNewsletterStatus({ message: 'אנא הכניסו שם פרטי', type: 'error' });
-      return;
-    }
-
-    if (!newsletterData.lastName.trim()) {
-      setNewsletterStatus({ message: 'אנא הכניסו שם משפחה', type: 'error' });
-      return;
-    }
-
-    if (!newsletterData.email.trim()) {
-      setNewsletterStatus({ message: 'אנא הכניסו כתובת אימייל', type: 'error' });
-      return;
-    }
-
-    if (!validateEmail(newsletterData.email)) {
-      setNewsletterStatus({ message: 'כתובת האימייל אינה תקינה', type: 'error' });
-      return;
-    }
-
-    setIsSubscribing(true);
-    setNewsletterStatus({ message: '', type: '' });
-
-    try {
-      const result = await subscribeToNewsletter(
-        newsletterData.firstName, 
-        newsletterData.lastName, 
-        newsletterData.email
-      );
-      
-      if (result.success) {
-        setNewsletterStatus({ message: result.message, type: 'success' });
-        setNewsletterData({ firstName: '', lastName: '', email: '' });
-      } else {
-        setNewsletterStatus({ message: result.message, type: 'error' });
-      }
-    } catch {
-      setNewsletterStatus({ 
-        message: 'שגיאה בהרשמה לניוזלטר - אנא נסו שוב מאוחר יותר', 
-        type: 'error' 
-      });
-    } finally {
-      setIsSubscribing(false);
-    }
-  };
+  // Newsletter form submission disabled - using external link instead
+  // const handleNewsletterSubmit = async (e) => {
+  //   e.preventDefault();
+  //   
+  //   if (!newsletterData.firstName.trim()) {
+  //     setNewsletterStatus({ message: 'אנא הכניסו שם פרטי', type: 'error' });
+  //     return;
+  //   }
+  //
+  //   if (!newsletterData.lastName.trim()) {
+  //     setNewsletterStatus({ message: 'אנא הכניסו שם משפחה', type: 'error' });
+  //     return;
+  //   }
+  //
+  //   if (!newsletterData.email.trim()) {
+  //     setNewsletterStatus({ message: 'אנא הכניסו כתובת אימייל', type: 'error' });
+  //     return;
+  //   }
+  //
+  //   if (!validateEmail(newsletterData.email)) {
+  //     setNewsletterStatus({ message: 'כתובת האימייל אינה תקינה', type: 'error' });
+  //     return;
+  //   }
+  //
+  //   setIsSubscribing(true);
+  //   setNewsletterStatus({ message: '', type: '' });
+  //
+  //   try {
+  //     const result = await subscribeToNewsletter(
+  //       newsletterData.firstName, 
+  //       newsletterData.lastName, 
+  //       newsletterData.email
+  //     );
+  //     
+  //     if (result.success) {
+  //       setNewsletterStatus({ message: result.message, type: 'success' });
+  //       setNewsletterData({ firstName: '', lastName: '', email: '' });
+  //     } else {
+  //       setNewsletterStatus({ message: result.message, type: 'error' });
+  //     }
+  //   } catch {
+  //     setNewsletterStatus({ 
+  //       message: 'שגיאה בהרשמה לניוזלטר - אנא נסו שוב מאוחר יותר', 
+  //       type: 'error' 
+  //     });
+  //   } finally {
+  //     setIsSubscribing(false);
+  //   }
+  // };
 
   const modalContent = {
     privacy: {
@@ -252,38 +255,38 @@ const Footer = () => {
 
           {/* Column 3: Newsletter */}
           <div className="footer-section">
-            <h3>הישארו מעודכנים</h3>
-            <form className="newsletter" onSubmit={handleNewsletterSubmit}>
-              <input 
-                type="text" 
-                placeholder="שם פרטי" 
-                value={newsletterData.firstName}
-                onChange={(e) => setNewsletterData(prev => ({ ...prev, firstName: e.target.value }))}
-                disabled={isSubscribing}
-              />
-              <input 
-                type="text" 
-                placeholder="שם משפחה" 
-                value={newsletterData.lastName}
-                onChange={(e) => setNewsletterData(prev => ({ ...prev, lastName: e.target.value }))}
-                disabled={isSubscribing}
-              />
-              <input 
-                type="email" 
-                placeholder="האימייל שלך" 
-                value={newsletterData.email}
-                onChange={(e) => setNewsletterData(prev => ({ ...prev, email: e.target.value }))}
-                disabled={isSubscribing}
-              />
-              <button type="submit" disabled={isSubscribing}>
-                <i className="fas fa-paper-plane"></i>
-              </button>
-            </form>
-            {newsletterStatus.message && (
-              <div className={`newsletter-status ${newsletterStatus.type}`}>
-                {newsletterStatus.message}
-              </div>
-            )}
+            <h3>הצטרפו לניוזלטר</h3>
+            <p style={{ marginBottom: '1rem', fontSize: '0.95rem', lineHeight: '1.6' }}>
+              הצטרפו לרשימת התפוצה שלנו וקבלו עדכונים, טיפים וכלים שימושיים ישירות לתיבת האימייל שלכם
+            </p>
+            <a 
+              href="https://israeltechforce.vp4.me/newslettersub" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="newsletter-link-btn"
+              style={{
+                display: 'inline-block',
+                padding: '12px 24px',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: 'white',
+                textDecoration: 'none',
+                borderRadius: '8px',
+                fontWeight: '600',
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+              }}
+              onMouseOver={(e) => {
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)';
+              }}
+              onMouseOut={(e) => {
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+              }}
+            >
+              <i className="fas fa-envelope" style={{ marginLeft: '8px' }}></i>
+              הצטרפו לניוזלטר שלנו
+            </a>
           </div>
 
           {/* Column 4: Quick Links */}
