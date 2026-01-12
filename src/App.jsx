@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import AboutMe from './components/AboutMe';
-import Services from './components/Services';
-import HowItWorks from './components/HowItWorks';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
-import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
-// Newsletter popup disabled - users will use external link instead
-// import NewsletterPopup from './components/NewsletterPopup';
+import Home from './pages/Home';
+import ArticleTemplate from './components/ArticleTemplate';
 // Import test utility for Smoove API (development only)
 import { testSmoove, testSubscribe } from './utils/test-smoove.js';
 import { Analytics } from "@vercel/analytics/react"
@@ -89,35 +82,13 @@ function App() {
   }
 
   return (
-    <div dir="rtl" className="app">
-      <Navbar />
-      <section id="hero">
-        <HeroSection />
-      </section>
-      <section id="about">
-        <AboutMe />
-      </section>
-      <section id="services">
-        <Services />
-      </section>
-      <section id="how-it-works">
-        <HowItWorks />
-      </section>
-      <section id="testimonials">
-        <Testimonials />
-      </section>
-      <section id="faq">
-        <FAQ />
-      </section>
-      <Footer />
-      
-      {/* Newsletter Popup - DISABLED - Users will use external link instead */}
-      {/* <NewsletterPopup
-        isOpen={showNewsletterPopup}
-        onClose={handleNewsletterClose}
-        onSubscribe={handleNewsletterSubscribe}
-      /> */}
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/articles/:slug" element={<ArticleTemplate />} />
+      </Routes>
+      <Analytics />
+    </>
   );
 }
 

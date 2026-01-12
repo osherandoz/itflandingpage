@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { openWhatsApp } from '../utils/whatsapp';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,11 +18,25 @@ const Navbar = () => {
   }, []);
 
   const scrollToSection = (sectionId) => {
+    // If we're on article page, navigate to home first
+    if (location.pathname !== '/') {
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
+    
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMobileMenuOpen(false);
+  };
+
+  const handleLogoClick = () => {
+    if (location.pathname !== '/') {
+      window.location.href = '/';
+    } else {
+      scrollToSection('hero');
+    }
   };
 
   const navItems = [
@@ -29,6 +45,7 @@ const Navbar = () => {
     { id: 'services', label: 'שירותים' },
     { id: 'how-it-works', label: 'איך זה עובד' },
     { id: 'testimonials', label: 'המלצות' },
+    { id: 'articles', label: 'מאמרים' },
     { id: 'faq', label: 'שאלות נפוצות' },
     { id: 'contact', label: 'צור קשר' }
   ];
@@ -36,7 +53,7 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        <div className="navbar-logo" onClick={() => scrollToSection('hero')}>
+        <div className="navbar-logo" onClick={handleLogoClick}>
           <img src="/images/israeltechforce-logo-white.png" alt="Israel Tech Force Logo" />
         </div>
         

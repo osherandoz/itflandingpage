@@ -3,15 +3,14 @@ import './ContactForm.css';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
+    name: '',
     phone: '',
-    issueDescription: '',
     consent: false
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -32,24 +31,14 @@ const ContactForm = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'שם מלא הוא שדה חובה';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'כתובת דוא"ל היא שדה חובה';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'כתובת דוא"ל לא תקינה';
+    if (!formData.name.trim()) {
+      newErrors.name = 'שם מלא הוא שדה חובה';
     }
 
     if (!formData.phone.trim()) {
       newErrors.phone = 'מספר טלפון הוא שדה חובה';
     } else if (!/^[\d\s\-\+\(\)]+$/.test(formData.phone)) {
       newErrors.phone = 'מספר טלפון לא תקין';
-    }
-
-    if (!formData.issueDescription.trim()) {
-      newErrors.issueDescription = 'תיאור הבעיה הוא שדה חובה';
     }
 
     if (!formData.consent) {
@@ -60,34 +49,64 @@ const ContactForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (validateForm()) {
-      // Here you would typically send the data to your backend
-      console.log('Form submitted:', formData);
+      setIsSubmitting(true);
       
-      // Show success message
-      setIsSubmitted(true);
-      
-      // Reset form
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        issueDescription: '',
-        consent: false
-      });
-      
-      // Hide success message after 5 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-      }, 5000);
+      try {
+        // Prepare data for Google Apps Script
+        const payload = {
+          name: formData.name.trim(),
+          phone: formData.phone.trim(),
+          consent: formData.consent
+        };
+
+        // POST to Google Apps Script webhook
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxjC5PMa8rPZbSrDoe8mTEjSMAV34OXF3X_NHb6ZPD1xa0q1BWHkw_FYIaLkOWiWocD2Q/exec', {
+          method: 'POST',
+          mode: 'no-cors', // Google Apps Script requires no-cors for web apps
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload)
+        });
+
+        // Show success message
+        setIsSubmitted(true);
+        
+        // Reset form
+        setFormData({
+          name: '',
+          phone: '',
+          consent: false
+        });
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        // Even with no-cors, we show success as the request was sent
+        setIsSubmitted(true);
+        setFormData({
+          name: '',
+          phone: '',
+          consent: false
+        });
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
   return (
-    <div className="contact-form-container">
+    <div className="contact-form-container" id="contact-form">
       <div className="contact-form-header">
         <h2>צור קשר</h2>
         <p>מלאו את הטופס למטה ונחזור אליכם בהקדם האפשרי</p>
@@ -101,31 +120,19 @@ const ContactForm = () => {
 
       <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="fullName">שם מלא *</label>
+          <label htmlFor="name">שם מלא *</label>
           <input
             type="text"
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
+            id="name"
+            name="name"
+            value={formData.name}
             onChange={handleInputChange}
-            className={errors.fullName ? 'error' : ''}
+            className={errors.name ? 'error' : ''}
             placeholder="הכנס את שמך המלא"
+            disabled={isSubmitting}
+            required
           />
-          {errors.fullName && <span className="error-message">{errors.fullName}</span>}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">כתובת דוא"ל *</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={errors.email ? 'error' : ''}
-            placeholder="הכנס את כתובת הדואל שלך"
-          />
-          {errors.email && <span className="error-message">{errors.email}</span>}
+          {errors.name && <span className="error-message">{errors.name}</span>}
         </div>
 
         <div className="form-group">
@@ -138,22 +145,10 @@ const ContactForm = () => {
             onChange={handleInputChange}
             className={errors.phone ? 'error' : ''}
             placeholder="הכנס את מספר הטלפון שלך"
+            disabled={isSubmitting}
+            required
           />
           {errors.phone && <span className="error-message">{errors.phone}</span>}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="issueDescription">תיאור הבעיה *</label>
-          <textarea
-            id="issueDescription"
-            name="issueDescription"
-            value={formData.issueDescription}
-            onChange={handleInputChange}
-            className={errors.issueDescription ? 'error' : ''}
-            placeholder="תאר את הבעיה או השאלה שלך"
-            rows="5"
-          />
-          {errors.issueDescription && <span className="error-message">{errors.issueDescription}</span>}
         </div>
 
         <div className="form-group checkbox-group">
@@ -164,15 +159,24 @@ const ContactForm = () => {
               checked={formData.consent}
               onChange={handleInputChange}
               className={errors.consent ? 'error' : ''}
+              disabled={isSubmitting}
+              required
             />
             <span className="checkmark"></span>
-            אני מסכים שאתם תוכלו ליצור איתי קשר כדי לפתור את הבעיה ואני מאשר זאת
+            מאשר ליצור קשר?
           </label>
           {errors.consent && <span className="error-message">{errors.consent}</span>}
         </div>
 
-        <button type="submit" className="submit-btn">
-          שלח פנייה
+        <button type="submit" className="submit-btn" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <>
+              <i className="fas fa-spinner fa-spin"></i>
+              שולח...
+            </>
+          ) : (
+            'שלח פנייה'
+          )}
         </button>
       </form>
     </div>
