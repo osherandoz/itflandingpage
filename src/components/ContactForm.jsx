@@ -56,22 +56,32 @@ const ContactForm = () => {
       setIsSubmitting(true);
       
       try {
-        // Prepare data for Google Apps Script
-        const payload = {
-          name: formData.name.trim(),
-          phone: formData.phone.trim(),
-          consent: formData.consent
-        };
+        // Prepare data for Google Apps Script as URL-encoded form data
+        const formDataToSend = new URLSearchParams();
+        formDataToSend.append('name', formData.name.trim());
+        formDataToSend.append('phone', formData.phone.trim());
+        formDataToSend.append('consent', String(formData.consent));
+        formDataToSend.append('source', 'Contact Form');
+        formDataToSend.append('timestamp', new Date().toISOString());
 
         // POST to Google Apps Script webhook
-        await fetch('https://script.google.com/macros/s/AKfycbxjC5PMa8rPZbSrDoe8mTEjSMAV34OXF3X_NHb6ZPD1xa0q1BWHkw_FYIaLkOWiWocD2Q/exec', {
-          method: 'POST',
-          mode: 'no-cors', // Google Apps Script requires no-cors for web apps
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload)
+        Promise.resolve(
+          fetch('https://script.google.com/macros/s/AKfycbwr4FOqy9lWcGaj_PIl0Oc3wuUzhHPTEGUcIv0BDBk0knm5117ByAV6D5Qd8lXLIgUowQ/exec', {
+            method: 'POST',
+            mode: 'no-cors', // Google Apps Script requires no-cors for web apps
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formDataToSend.toString()
+          })
+        ).catch(() => {
+          // Silently handle fetch errors - with no-cors we can't read responses anyway
         });
+
+        // Track Lead event in Meta Pixel
+        if (typeof window !== 'undefined' && window.fbq) {
+          window.fbq('track', 'Lead');
+        }
 
         // Show success message
         setIsSubmitted(true);
@@ -114,7 +124,7 @@ const ContactForm = () => {
 
       {isSubmitted && (
         <div className="success-message">
-          <p>תודה! פנייתכם נשלחה בהצלחה. נחזור אליכם בהקדם האפשרי.</p>
+          <p>הפרטים התקבלו! נחזור אליך בהקדם</p>
         </div>
       )}
 

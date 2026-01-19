@@ -65,11 +65,11 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
         formDataToSend.append('source', 'WhatsApp Disabled Popup');
         formDataToSend.append('timestamp', new Date().toISOString());
 
-        // POST to Google Apps Script webhook (v10)
+        // POST to Google Apps Script webhook
         // Note: With 'no-cors' mode, we can't read the response, but the request is sent
         // Using Promise.resolve to prevent unhandled promise rejections from browser extensions
         Promise.resolve(
-          fetch('https://script.google.com/macros/s/AKfycbzOQWNrB6Td72t4oMONkLL2Fm6GX1TM3ZP08uV7ng7pwUr76gvls1JOU_r3sl2izRIb2g/exec', {
+          fetch('https://script.google.com/macros/s/AKfycbwr4FOqy9lWcGaj_PIl0Oc3wuUzhHPTEGUcIv0BDBk0knm5117ByAV6D5Qd8lXLIgUowQ/exec', {
             method: 'POST',
             mode: 'no-cors',
             headers: {
@@ -81,6 +81,11 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
           // Silently handle fetch errors - with no-cors we can't read responses anyway
           // The error might be from browser extensions, not our code
         });
+
+        // Track Lead event in Meta Pixel
+        if (typeof window !== 'undefined' && window.fbq) {
+          window.fbq('track', 'Lead');
+        }
 
         // Show success message
         setIsSubmitted(true);
@@ -171,7 +176,7 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
               <div className="success-icon">
                 <i className="fas fa-check-circle"></i>
               </div>
-              <h3>תודה! פנייתך התקבלה</h3>
+              <h3>הפרטים התקבלו! נחזור אליך בהקדם</h3>
               <p>נחזור אליך בהקדם האפשרי כדי לעזור לשחזר את החשבון שלך.</p>
             </div>
           ) : (
