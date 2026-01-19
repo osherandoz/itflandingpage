@@ -57,37 +57,53 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
       setIsSubmitting(true);
       
       try {
-        // Prepare data for Google Apps Script as URL-encoded form data
-        const formDataToSend = new URLSearchParams();
-        formDataToSend.append('name', formData.name.trim());
-        formDataToSend.append('phone', formData.phone.trim());
-        formDataToSend.append('consent', String(formData.consent));      // boolean as string
-        formDataToSend.append('source', 'WhatsApp Disabled Popup');
-        formDataToSend.append('timestamp', new Date().toISOString());
-
-        // POST to Google Apps Script webhook
-        // Note: With 'no-cors' mode, we can't read the response, but the request is sent
-        // Using Promise.resolve to prevent unhandled promise rejections from browser extensions
-        Promise.resolve(
-          fetch('https://script.google.com/macros/s/AKfycbwr4FOqy9lWcGaj_PIl0Oc3wuUzhHPTEGUcIv0BDBk0knm5117ByAV6D5Qd8lXLIgUowQ/exec', {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: formDataToSend.toString()
-          })
-        ).catch(() => {
-          // Silently handle fetch errors - with no-cors we can't read responses anyway
-          // The error might be from browser extensions, not our code
-        });
-
-        // Track Lead event in Meta Pixel
+        // Track Lead event in Meta Pixel immediately
         if (typeof window !== 'undefined' && window.fbq) {
           window.fbq('track', 'Lead');
+          console.log('✅ Meta Pixel Lead event triggered (Popup)');
         }
 
-        // Show success message
+        // Build GET URL with query parameters
+        const baseUrl = 'https://script.google.com/macros/s/AKfycbyFbqdWOAObMBAFHLaA0wR8OJMHgju2qTAq3WvNAq9VL67nXKhdTtKRO5g96d4ruE_ttQ/exec';
+        
+        // Ensure values are properly encoded
+        const nameValue = formData.name.trim();
+        const phoneValue = formData.phone.trim();
+        const consentValue = formData.consent ? 'true' : 'false';
+        
+        // Build URL with properly encoded parameters
+        const params = new URLSearchParams({
+          name: nameValue,
+          phone: phoneValue,
+          consent: consentValue
+        });
+        const finalUrl = `${baseUrl}?${params.toString()}`;
+
+        console.log('📤 Sending popup form data:', {
+          name: nameValue,
+          phone: phoneValue,
+          consent: consentValue,
+          url: finalUrl
+        });
+        console.log('🔗 Full URL:', finalUrl);
+        console.log('🔍 URLSearchParams:', params.toString());
+
+        // Use XMLHttpRequest to send the form data
+        // This will show up in Network tab and handle redirects properly
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', finalUrl, true);
+        xhr.onload = () => {
+          console.log('✅ Request completed. Status:', xhr.status, '(Popup)');
+          console.log('📥 Response:', xhr.responseText, '(Popup)');
+        };
+        xhr.onerror = () => {
+          console.log('⚠️ Request error occurred (Popup)');
+        };
+        xhr.send();
+
+        console.log('📤 Form data sent (Popup). Check Network tab for request.');
+
+        // Show success message immediately
         setIsSubmitted(true);
         
         // Reset form
@@ -176,7 +192,7 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
               <div className="success-icon">
                 <i className="fas fa-check-circle"></i>
               </div>
-              <h3>הפרטים התקבלו! נחזור אליך בהקדם</h3>
+              <h3>תודה! הפרטים התקבלו</h3>
               <p>נחזור אליך בהקדם האפשרי כדי לעזור לשחזר את החשבון שלך.</p>
             </div>
           ) : (

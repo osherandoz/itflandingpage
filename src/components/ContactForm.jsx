@@ -42,7 +42,7 @@ const ContactForm = () => {
     }
 
     if (!formData.consent) {
-      newErrors.consent = 'עליכם להסכים לתנאים כדי לשלוח את הטופס';
+      newErrors.consent = 'עליכם להסכים ליצירת קשר כדי לשלוח את הטופס';
     }
 
     setErrors(newErrors);
@@ -56,34 +56,53 @@ const ContactForm = () => {
       setIsSubmitting(true);
       
       try {
-        // Prepare data for Google Apps Script as URL-encoded form data
-        const formDataToSend = new URLSearchParams();
-        formDataToSend.append('name', formData.name.trim());
-        formDataToSend.append('phone', formData.phone.trim());
-        formDataToSend.append('consent', String(formData.consent));
-        formDataToSend.append('source', 'Contact Form');
-        formDataToSend.append('timestamp', new Date().toISOString());
-
-        // POST to Google Apps Script webhook
-        Promise.resolve(
-          fetch('https://script.google.com/macros/s/AKfycbwr4FOqy9lWcGaj_PIl0Oc3wuUzhHPTEGUcIv0BDBk0knm5117ByAV6D5Qd8lXLIgUowQ/exec', {
-            method: 'POST',
-            mode: 'no-cors', // Google Apps Script requires no-cors for web apps
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: formDataToSend.toString()
-          })
-        ).catch(() => {
-          // Silently handle fetch errors - with no-cors we can't read responses anyway
-        });
-
-        // Track Lead event in Meta Pixel
+        // Track Lead event in Meta Pixel immediately
         if (typeof window !== 'undefined' && window.fbq) {
           window.fbq('track', 'Lead');
+          console.log('✅ Meta Pixel Lead event triggered');
         }
 
-        // Show success message
+        // Build GET URL with query parameters
+        const baseUrl = 'https://script.google.com/macros/s/AKfycbzziLRW7EWKO43zDdihAPneBF6aAd6aiXp4HyMIa5an3vOxJKHIr9xIJo-KdLTi2AYpmQ/exec';
+        
+        // Ensure values are properly encoded
+        const nameValue = formData.name.trim();
+        const phoneValue = formData.phone.trim();
+        const consentValue = formData.consent ? 'true' : 'false';
+        
+        // Build URL with properly encoded parameters
+        const params = new URLSearchParams({
+          name: nameValue,
+          phone: phoneValue,
+          consent: consentValue
+        });
+        const finalUrl = `${baseUrl}?${params.toString()}`;
+
+        console.log('📤 Sending form data:', {
+          name: nameValue,
+          phone: phoneValue,
+          consent: consentValue,
+          url: finalUrl
+        });
+        console.log('🔗 Full URL:', finalUrl);
+        console.log('🔍 URLSearchParams:', params.toString());
+
+        // Use XMLHttpRequest to send the form data
+        // This will show up in Network tab and handle redirects properly
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', finalUrl, true);
+        xhr.onload = () => {
+          console.log('✅ Request completed. Status:', xhr.status);
+          console.log('📥 Response:', xhr.responseText);
+        };
+        xhr.onerror = () => {
+          console.log('⚠️ Request error occurred');
+        };
+        xhr.send();
+
+        console.log('📤 Form data sent. Check Network tab for request.');
+
+        // Show success message immediately
         setIsSubmitted(true);
         
         // Reset form
@@ -124,7 +143,7 @@ const ContactForm = () => {
 
       {isSubmitted && (
         <div className="success-message">
-          <p>הפרטים התקבלו! נחזור אליך בהקדם</p>
+          <p>תודה! הפרטים התקבלו</p>
         </div>
       )}
 
