@@ -37,7 +37,7 @@ const ContactForm = () => {
 
     if (!formData.phone.trim()) {
       newErrors.phone = 'מספר טלפון הוא שדה חובה';
-    } else if (!/^[\d\s\-\+\(\)]+$/.test(formData.phone)) {
+    } else if (!/^[\d\s\-+()]+$/.test(formData.phone)) {
       newErrors.phone = 'מספר טלפון לא תקין';
     }
 
@@ -64,7 +64,7 @@ const ContactForm = () => {
         };
 
         // POST to Google Apps Script webhook
-        const response = await fetch('https://script.google.com/macros/s/AKfycbxjC5PMa8rPZbSrDoe8mTEjSMAV34OXF3X_NHb6ZPD1xa0q1BWHkw_FYIaLkOWiWocD2Q/exec', {
+        await fetch('https://script.google.com/macros/s/AKfycbxjC5PMa8rPZbSrDoe8mTEjSMAV34OXF3X_NHb6ZPD1xa0q1BWHkw_FYIaLkOWiWocD2Q/exec', {
           method: 'POST',
           mode: 'no-cors', // Google Apps Script requires no-cors for web apps
           headers: {

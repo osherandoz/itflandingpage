@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import WhatsAppDisabledPopup from './components/WhatsAppDisabledPopup';
 import Home from './pages/Home';
 import ArticleTemplate from './components/ArticleTemplate';
 // Import test utility for Smoove API (development only)
@@ -18,6 +19,7 @@ if (typeof window !== 'undefined') {
 function App() {
   const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
   const [hasAcceptedPrivacy, setHasAcceptedPrivacy] = useState(false);
+  const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false);
   // Newsletter popup disabled - using external link instead
   // const [showNewsletterPopup, setShowNewsletterPopup] = useState(false);
 
@@ -27,16 +29,14 @@ function App() {
     if (accepted === 'true') {
       setHasAcceptedPrivacy(true);
       
-      // Newsletter popup disabled - users will use external link instead
-      // const popupShown = localStorage.getItem('newsletterPopupShown');
-      // const subscribed = localStorage.getItem('newsletterSubscribed');
-      
-      // if (!popupShown && !subscribed) {
-      //   // Show newsletter popup after a short delay for better UX
-      //   setTimeout(() => {
-      //     setShowNewsletterPopup(true);
-      //   }, 2000);
-      // }
+      // Check if WhatsApp popup should be shown
+      const whatsappPopupShown = localStorage.getItem('whatsappDisabledPopupShown');
+      if (!whatsappPopupShown) {
+        // Show WhatsApp popup after a short delay
+        setTimeout(() => {
+          setShowWhatsAppPopup(true);
+        }, 1500);
+      }
     } else {
       // Show privacy policy modal for new users
       setShowPrivacyPolicy(true);
@@ -47,15 +47,20 @@ function App() {
     setShowPrivacyPolicy(false);
     setHasAcceptedPrivacy(true);
     
-    // Newsletter popup disabled - users will use external link instead
-    // setTimeout(() => {
-    //   setShowNewsletterPopup(true);
-    // }, 1000);
+    // Show WhatsApp disabled popup after privacy policy is accepted
+    setTimeout(() => {
+      setShowWhatsAppPopup(true);
+    }, 1000);
   };
 
   const handlePrivacyDecline = () => {
     // You can redirect to a different page or show a message
     alert('על מנת להשתמש באתר, עליכם להסכים למדיניות הפרטיות');
+  };
+
+  const handleWhatsAppPopupClose = () => {
+    setShowWhatsAppPopup(false);
+    localStorage.setItem('whatsappDisabledPopupShown', 'true');
   };
 
   // Newsletter handlers disabled - using external link instead
@@ -87,6 +92,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/articles/:slug" element={<ArticleTemplate />} />
       </Routes>
+      
+      {/* WhatsApp Disabled Popup */}
+      <WhatsAppDisabledPopup
+        isOpen={showWhatsAppPopup}
+        onClose={handleWhatsAppPopupClose}
+      />
+      
       <Analytics />
     </>
   );

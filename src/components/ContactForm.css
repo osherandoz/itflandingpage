@@ -171,6 +171,58 @@
   cursor: not-allowed;
 }
 
+/* Ban Duration Options */
+.ban-duration-options {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.duration-btn {
+  flex: 1;
+  padding: 12px 20px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.duration-btn:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.duration-btn.active {
+  background: linear-gradient(45deg, #3B82F6, #1D4ED8);
+  border-color: #3B82F6;
+  color: white;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.duration-btn.active:hover {
+  background: linear-gradient(45deg, #1D4ED8, #3B82F6);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.duration-btn.error {
+  border-color: #fc8181;
+  box-shadow: 0 0 0 3px rgba(252, 129, 129, 0.2);
+}
+
+.duration-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .submit-btn:active {
   transform: translateY(0);
   box-shadow: 0 2px 6px rgba(99, 179, 237, 0.3);
