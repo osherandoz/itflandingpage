@@ -4,6 +4,7 @@ import './App.css';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import WhatsAppDisabledPopup from './components/WhatsAppDisabledPopup';
 import Home from './pages/Home';
+import Privacy from './pages/Privacy';
 import ArticleTemplate from './components/ArticleTemplate';
 // Import test utility for Smoove API (development only)
 import { testSmoove, testSubscribe } from './utils/test-smoove.js';
@@ -90,6 +91,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/articles/:slug" element={<ArticleTemplate />} />
       </Routes>
       
