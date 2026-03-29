@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow:
 
-Sitemap: https://itf-recovery.co.il/sitemap.xml
+Sitemap: https://israeltechforce.com/sitemap.xml
