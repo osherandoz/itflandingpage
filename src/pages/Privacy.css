@@ -57,13 +57,14 @@
   margin-bottom: 6px;
 }
 
-.privacy-page-updated {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid #e9ecef;
-  color: #999 !important;
-  font-size: 0.9rem;
-  text-align: center;
+.privacy-page-link {
+  color: #3498db;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.privacy-page-link:hover {
+  color: #2980b9;
 }
 
 @media (max-width: 768px) {

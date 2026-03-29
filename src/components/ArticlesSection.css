@@ -5,30 +5,17 @@
   position: relative;
 }
 
-.articles-section .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
 .section-header {
   text-align: center;
   margin-bottom: 50px;
 }
 
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
+.articles-section .section-title {
   color: #ffffff;
-  margin-bottom: 1rem;
 }
 
-.section-subtitle {
-  font-size: 1.2rem;
+.articles-section .section-subtitle {
   color: #e0e0e0;
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
 }
 
 .articles-grid {
@@ -227,14 +214,6 @@
 @media (max-width: 768px) {
   .articles-section {
     padding: 60px 0;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .section-subtitle {
-    font-size: 1rem;
   }
 
   .articles-grid {

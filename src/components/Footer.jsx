@@ -1,21 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { openWhatsApp } from '../utils/whatsapp';
 import Modal from './Modal';
 import ContactForm from './ContactForm';
-// Newsletter integration disabled - using external link instead
-// import { subscribeToNewsletter, validateEmail } from '../utils/smoove';
 import './Footer.css';
 
 const Footer = () => {
   const [activeModal, setActiveModal] = useState(null);
-  // Newsletter form disabled - using external link instead
-  // const [newsletterData, setNewsletterData] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   email: ''
-  // });
-  // const [newsletterStatus, setNewsletterStatus] = useState({ message: '', type: '' });
-  // const [isSubscribing, setIsSubscribing] = useState(false);
 
   const openModal = (modalType) => {
     setActiveModal(modalType);
@@ -25,106 +16,7 @@ const Footer = () => {
     setActiveModal(null);
   };
 
-  // Newsletter form submission disabled - using external link instead
-  // const handleNewsletterSubmit = async (e) => {
-  //   e.preventDefault();
-  //   
-  //   if (!newsletterData.firstName.trim()) {
-  //     setNewsletterStatus({ message: 'אנא הכניסו שם פרטי', type: 'error' });
-  //     return;
-  //   }
-  //
-  //   if (!newsletterData.lastName.trim()) {
-  //     setNewsletterStatus({ message: 'אנא הכניסו שם משפחה', type: 'error' });
-  //     return;
-  //   }
-  //
-  //   if (!newsletterData.email.trim()) {
-  //     setNewsletterStatus({ message: 'אנא הכניסו כתובת אימייל', type: 'error' });
-  //     return;
-  //   }
-  //
-  //   if (!validateEmail(newsletterData.email)) {
-  //     setNewsletterStatus({ message: 'כתובת האימייל אינה תקינה', type: 'error' });
-  //     return;
-  //   }
-  //
-  //   setIsSubscribing(true);
-  //   setNewsletterStatus({ message: '', type: '' });
-  //
-  //   try {
-  //     const result = await subscribeToNewsletter(
-  //       newsletterData.firstName, 
-  //       newsletterData.lastName, 
-  //       newsletterData.email
-  //     );
-  //     
-  //     if (result.success) {
-  //       setNewsletterStatus({ message: result.message, type: 'success' });
-  //       setNewsletterData({ firstName: '', lastName: '', email: '' });
-  //     } else {
-  //       setNewsletterStatus({ message: result.message, type: 'error' });
-  //     }
-  //   } catch {
-  //     setNewsletterStatus({ 
-  //       message: 'שגיאה בהרשמה לניוזלטר - אנא נסו שוב מאוחר יותר', 
-  //       type: 'error' 
-  //     });
-  //   } finally {
-  //     setIsSubscribing(false);
-  //   }
-  // };
-
   const modalContent = {
-    privacy: {
-      title: 'מדיניות פרטיות',
-      content: (
-        <div className="modal-content-text">
-          <p><strong>עדכון אחרון: 19/08/2025</strong></p>
-
-          <p>אנו ב־ITF Recovery (להלן: "החברה", "אנחנו" או "האתר") מכבדים את פרטיות המשתמשים שלנו, ופועלים בשקיפות מלאה בכל הקשור לאיסוף ושימוש במידע. מטרת מסמך זה היא להסביר כיצד אנו אוספים, שומרים ומשתמשים במידע שמתקבל דרך האתר.</p>
-
-          <h4>איזה מידע אנו אוספים?</h4>
-          <p>האתר אינו אוסף מידע אישי ממשתמשיו, למעט:</p>
-          <ul>
-            <li>כתובת דואר אלקטרוני – במידה ותבחרו להירשם לניוזלטר/רשימת תפוצה.</li>
-          </ul>
-
-          <h4>כיצד אנו משתמשים במידע?</h4>
-          <p>כתובת הדוא"ל שתסופק לנו תשמש אך ורק למטרות הבאות:</p>
-          <ul>
-            <li>שליחת עדכונים, טיפים ומידע הקשור לשירותי החברה.</li>
-            <li>העברת הצעות מיוחדות או תכנים שיווקיים רלוונטיים.</li>
-          </ul>
-
-          <h4>שיתוף מידע עם צדדים שלישיים</h4>
-          <p>אנחנו לא מעבירים ולא משתפים את פרטי המשתמשים עם גורמים חיצוניים, למעט במקרים בהם הדבר נדרש על פי חוק, הוראה של רשות מוסמכת, או לצורך הגנה משפטית.</p>
-
-          <h4>שמירת מידע</h4>
-          <ul>
-            <li>כתובת הדוא"ל נשמרת במערכת ניהול רשימות תפוצה מאובטחת.</li>
-            <li>בכל עת ניתן להסיר את עצמכם מהרשימה על ידי לחיצה על קישור ההסרה המצורף לכל הודעת דוא"ל שנשלחת.</li>
-          </ul>
-
-          <h4>שימוש בעוגיות (Cookies)</h4>
-          <p>האתר עשוי לעשות שימוש בעוגיות בסיסיות לצורך שיפור חוויית המשתמש וניטור טכני (כגון ביצועי האתר). בעוגיות אלו אין מידע מזהה אישי.</p>
-
-          <h4>אבטחת מידע</h4>
-          <p>אנו מיישמים אמצעי אבטחה מתאימים כדי לשמור על המידע שנאסף באתר מפני גישה בלתי מורשית, שימוש לא תקין או חשיפה.</p>
-
-          <h4>זכויות המשתמש</h4>
-          <p>בכל עת עומדת לך הזכות:</p>
-          <ul>
-            <li>לבקש הסרה מיידית מרשימת התפוצה.</li>
-            <li>לפנות אלינו לקבלת מידע נוסף על האופן שבו אנו שומרים או משתמשים בפרטיך.</li>
-          </ul>
-
-          <h4>יצירת קשר</h4>
-          <p>לשאלות או בקשות נוספות בעניין מדיניות פרטיות זו, ניתן לפנות אלינו בכתובת:</p>
-          <p>📧 <a href="mailto:privacy@poncho.tech" className="modal-link">privacy@poncho.tech</a></p>
-        </div>
-      )
-    },
     accessibility: {
       title: 'נגישות',
       content: (
@@ -293,10 +185,10 @@ const Footer = () => {
           <div className="footer-section">
             <h3>קישורים מהירים</h3>
             <div className="quick-links">
-              <button onClick={() => openModal('privacy')} className="quick-link">
+              <Link to="/privacy" className="quick-link">
                 <i className="fas fa-shield-alt"></i>
                 מדיניות פרטיות
-              </button>
+              </Link>
               <button onClick={() => openModal('accessibility')} className="quick-link">
                 <i className="fas fa-universal-access"></i>
                 נגישות
@@ -311,9 +203,9 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <div className="footer-links">
-            <button onClick={() => openModal('privacy')} className="footer-link">
+            <Link to="/privacy" className="footer-link">
               מדיניות פרטיות
-            </button>
+            </Link>
             <button onClick={() => openModal('accessibility')} className="footer-link">
               נגישות
             </button>
@@ -328,14 +220,6 @@ const Footer = () => {
       </div>
 
       {/* Modals */}
-      <Modal
-        isOpen={activeModal === 'privacy'}
-        onClose={closeModal}
-        title={modalContent.privacy.title}
-      >
-        {modalContent.privacy.content}
-      </Modal>
-
       <Modal
         isOpen={activeModal === 'accessibility'}
         onClose={closeModal}
