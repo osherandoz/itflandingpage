@@ -85,6 +85,42 @@ const ArticleTemplate = () => {
     );
   }
 
+  if (article.placeholder) {
+    return (
+      <div dir="rtl" style={{ minHeight: '100vh', background: '#0C0E1D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ textAlign: 'center', padding: '60px 20px', maxWidth: '480px' }}>
+          <i className="fas fa-tools" style={{ fontSize: '3rem', color: '#3B82F6', display: 'block', marginBottom: '20px' }}></i>
+          <h1 style={{ color: '#ffffff', marginBottom: '12px', fontSize: '1.8rem' }}>המאמר בדרך...</h1>
+          <p style={{ color: '#e0e0e0', marginBottom: '32px', fontSize: '1.05rem', lineHeight: '1.6' }}>
+            המאמר הזה עדיין בכתיבה. בינתיים, יש לך שאלה? נשמח לעזור ישירות.
+          </p>
+          <button
+            onClick={openWhatsApp}
+            style={{
+              background: '#25D366',
+              color: 'white',
+              border: 'none',
+              padding: '14px 32px',
+              borderRadius: '50px',
+              fontSize: '1rem',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontFamily: 'inherit',
+            }}
+          >
+            <i className="fab fa-whatsapp"></i>
+            דברו איתנו בוואטסאפ
+          </button>
+          <br /><br />
+          <Link to="/" style={{ color: '#3B82F6', fontSize: '0.95rem' }}>← חזרה לעמוד הבית</Link>
+        </div>
+      </div>
+    );
+  }
+
   // Update document title and meta description
   useEffect(() => {
     // Use metaTitle if available, otherwise use title
@@ -122,6 +158,21 @@ const ArticleTemplate = () => {
       ogDescMeta.content = article.metaDescription;
       document.head.appendChild(ogDescMeta);
     }
+  }, [article]);
+
+  // Inject noindex for placeholder articles
+  useEffect(() => {
+    if (!article || !article.placeholder) return;
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.name = 'robots';
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.content = 'noindex, nofollow';
+    return () => {
+      if (robotsMeta) robotsMeta.remove();
+    };
   }, [article]);
 
   return (
