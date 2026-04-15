@@ -190,3 +190,20 @@
     font-size: 1.1rem;
   }
 }
+
+.navbar-backdrop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navbar-backdrop {
+    display: block;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+}
