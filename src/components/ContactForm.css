@@ -302,8 +302,35 @@
     padding: 10px 18px;
     font-size: 0.9rem;
   }
-  
+
   .checkbox-label {
     font-size: 0.75rem;
   }
+}
+
+.form-whatsapp-note {
+  text-align: center;
+  margin-top: 12px;
+  color: var(--color-text-muted, #b0b0b0);
+  font-size: 0.85rem;
+}
+
+.form-whatsapp-link {
+  background: none;
+  border: none;
+  color: var(--color-cta, #25D366);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.form-whatsapp-link:hover {
+  color: var(--color-cta-dark, #128C7E);
 }
