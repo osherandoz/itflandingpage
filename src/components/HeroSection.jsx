@@ -15,9 +15,9 @@ const HeroSection = () => {
         {/* Trust Bar */}
         <div className="hero-trust-bar">
           <span>✓ 5,000+ חשבונות שוחזרו</span>
-          <span className="trust-divider">|</span>
+          <span className="trust-divider" aria-hidden="true">|</span>
           <span>⭐ דירוג 4.9/5</span>
-          <span className="trust-divider">|</span>
+          <span className="trust-divider" aria-hidden="true">|</span>
           <span>✓ תשלום רק אחרי הצלחה</span>
         </div>
 
@@ -25,7 +25,7 @@ const HeroSection = () => {
         <div className="hero-logo">
           <img
             src="/images/israeltechforce-logo-white.png"
-            alt="IsraelTechForce"
+            alt="IsraelTechForce — מומחים לשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ"
             loading="eager"
             decoding="sync"
           />
@@ -50,12 +50,12 @@ const HeroSection = () => {
           </div>
 
           <button className="hero-cta" onClick={openWhatsApp}>
-            <i className="fab fa-whatsapp"></i>
+            <i className="fab fa-whatsapp" aria-hidden="true"></i>
             שלחו הודעה עכשיו — חינם
           </button>
 
           <p className="hero-guarantee">
-            <i className="fas fa-shield-alt"></i>
+            <i className="fas fa-shield-alt" aria-hidden="true"></i>
             <strong>100% אחריות</strong> — לא הצלחנו? לא תשלם כלום
           </p>
         </div>
