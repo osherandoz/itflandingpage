@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
+import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import HeroSection from '../components/HeroSection';
 import AboutMe from '../components/AboutMe';
 import Services from '../components/Services';
@@ -53,6 +54,7 @@ const Home = () => {
         </div>
       </section>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 };
