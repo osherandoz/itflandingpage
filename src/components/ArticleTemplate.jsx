@@ -160,6 +160,49 @@ const ArticleTemplate = () => {
     }
   }, [article]);
 
+  // Inject Article JSON-LD for real (non-placeholder) articles
+  useEffect(() => {
+    if (!article || article.placeholder) return;
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: article.title,
+      description: article.metaDescription,
+      author: {
+        '@type': 'Person',
+        name: article.author,
+        url: 'https://israeltechforce.com',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'IsraelTechForce',
+        url: 'https://israeltechforce.com',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://israeltechforce.com/images/israeltechforce-logo-white.png',
+        },
+      },
+      datePublished: article.date,
+      dateModified: article.date,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `https://israeltechforce.com/articles/${article.slug}`,
+      },
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'article-schema';
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+
+    return () => {
+      const el = document.getElementById('article-schema');
+      if (el) el.remove();
+    };
+  }, [article]);
+
   // Inject noindex for placeholder articles
   useEffect(() => {
     if (!article || !article.placeholder) return;
