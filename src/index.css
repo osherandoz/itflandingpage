@@ -98,3 +98,18 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+/* Global section title accent line */
+.section-title {
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: var(--color-primary);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
