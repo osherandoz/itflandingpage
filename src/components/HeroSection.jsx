@@ -4,58 +4,62 @@ import './HeroSection.css';
 
 const HeroSection = () => {
   useEffect(() => {
-    // Preload the logo image to prevent loading delays
-    const preloadImage = new Image();
-    preloadImage.src = '/images/israeltechforce-logo-white.png';
-    
-    // Also preload other critical images
-    const criticalImages = [
-      '/images/testimonial-1.jpg',
-      '/images/testimonial-2.jpg',
-      '/images/testimonial-3.jpg',
-      '/images/testimonial-4.jpg',
-      '/images/testimonial-5.jpg',
-      '/images/testimonial-6.jpg',
-      '/images/default-avatar.png'
-    ];
-    
-    criticalImages.forEach(src => {
-      const img = new Image();
-      img.src = src;
-    });
+    const img = new Image();
+    img.src = '/images/israeltechforce-logo-white.png';
   }, []);
 
   return (
     <section className="hero-section">
       <div className="hero-container">
+
+        {/* Trust Bar */}
+        <div className="hero-trust-bar">
+          <span>✓ 5,000+ חשבונות שוחזרו</span>
+          <span className="trust-divider">|</span>
+          <span>⭐ דירוג 4.9/5</span>
+          <span className="trust-divider">|</span>
+          <span>✓ תשלום רק אחרי הצלחה</span>
+        </div>
+
+        {/* Logo — visible on all screen sizes */}
         <div className="hero-logo">
-          <img 
-            src="/images/israeltechforce-logo-white.png" 
-            alt="IsraelTechForce - מומחים לשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ"
+          <img
+            src="/images/israeltechforce-logo-white.png"
+            alt="IsraelTechForce"
             loading="eager"
             decoding="sync"
           />
         </div>
-        
+
         <div className="hero-content">
           <h1 className="hero-title">
-            שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ שנחסמו או נפרצו
+            חסמו לך את החשבון?{' '}
+            <span className="hero-highlight">אנחנו מחזירים אותך</span>{' '}
+            תוך 24 שעות
           </h1>
+
           <p className="hero-subtitle">
-            מומחים לשחזור חשבונות רשתות חברתיות עם הצלחה של 95%+ | הצלחנו לשחזר אלפי חשבונות גם כשמטא אמרו שאין סיכוי | תשלום רק אחרי הצלחה מוכחת
+            95%+ הצלחה בשחזור חשבונות פייסבוק, אינסטגרם ו-WhatsApp —
+            גם במקרים שמטא אמרו שאין סיכוי
           </p>
+
           <div className="hero-features">
-            <span className="hero-feature">✓ שחזור מהיר תוך 24-48 שעות</span>
+            <span className="hero-feature">✓ שחזור תוך 24-48 שעות</span>
             <span className="hero-feature">✓ תשלום רק אחרי הצלחה</span>
             <span className="hero-feature">✓ זמינות 24/6</span>
           </div>
+
           <button className="hero-cta" onClick={openWhatsApp}>
-            קבל עזרה מיידית - חינם
+            <i className="fab fa-whatsapp"></i>
+            שלחו הודעה עכשיו — חינם
           </button>
+
           <p className="hero-guarantee">
-            <strong>100% אחריות</strong> - אם לא הצלחנו לשחזר את החשבון, לא תשלם כלום
+            <i className="fas fa-shield-alt"></i>
+            <strong>100% אחריות</strong> — לא הצלחנו? לא תשלם כלום
           </p>
         </div>
+
       </div>
     </section>
   );
