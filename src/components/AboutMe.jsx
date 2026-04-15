@@ -41,19 +41,19 @@ const AboutMe = () => {
             
             <div className="about-features">
               <div className="feature">
-                <i className="fas fa-shield-alt"></i>
+                <i className="fas fa-shield-alt" aria-hidden="true"></i>
                 <span>מומחיות באבטחה מתקדמת</span>
               </div>
               <div className="feature">
-                <i className="fas fa-clock"></i>
+                <i className="fas fa-clock" aria-hidden="true"></i>
                 <span>זמינות 24/6 - תמיכה מיידית</span>
               </div>
               <div className="feature">
-                <i className="fas fa-users"></i>
+                <i className="fas fa-users" aria-hidden="true"></i>
                 <span>אלפי לקוחות מרוצים בישראל</span>
               </div>
               <div className="feature">
-                <i className="fas fa-certificate"></i>
+                <i className="fas fa-certificate" aria-hidden="true"></i>
                 <span>הוכחות מקצועיות ורפרנסים</span>
               </div>
             </div>

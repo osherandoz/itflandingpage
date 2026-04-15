@@ -74,24 +74,24 @@ const Services = () => {
           {services.map((service, index) => (
             <div key={index} className="service-card">
               <div className="service-icon">
-                <i className={service.icon}></i>
+                <i className={service.icon} aria-hidden="true"></i>
               </div>
               <h3 className="service-title">{service.title}</h3>
               <p className="service-description">{service.description}</p>
               <ul className="service-features">
                 {service.features.map((feature, featureIndex) => (
                   <li key={featureIndex}>
-                    <i className="fas fa-check"></i>
+                    <i className="fas fa-check" aria-hidden="true"></i>
                     {feature}
                   </li>
                 ))}
               </ul>
-              <button 
+              <button
                 className="service-cta"
                 onClick={() => handleServiceClick(service.title)}
               >
                 <span>קבל עזרה מקצועית עכשיו</span>
-                <i className="fas fa-arrow-left"></i>
+                <i className="fas fa-arrow-left" aria-hidden="true"></i>
               </button>
             </div>
           ))}
