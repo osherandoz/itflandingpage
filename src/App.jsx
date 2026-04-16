@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router';
 import './App.css';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import WhatsAppDisabledPopup from './components/WhatsAppDisabledPopup';
