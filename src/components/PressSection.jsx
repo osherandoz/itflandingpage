@@ -21,7 +21,13 @@ const PressSection = () => {
   return (
     <section className="press-section" aria-label="כפי שסוקרנו בתקשורת">
       <div className="press-container">
-        <p className="press-label">כפי שסוקרנו ב:</p>
+
+        <div className="press-header">
+          <span className="press-divider" aria-hidden="true"></span>
+          <p className="press-label">כפי שסוקרנו בתקשורת</p>
+          <span className="press-divider" aria-hidden="true"></span>
+        </div>
+
         <div className="press-items">
           {pressItems.map((item) => (
             <a
@@ -38,9 +44,11 @@ const PressSection = () => {
             </a>
           ))}
         </div>
+
         <Link to="/press" className="press-more-link">
           ← צפייה בכל הכתבות
         </Link>
+
       </div>
     </section>
   );
