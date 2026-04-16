@@ -1,22 +1,6 @@
 import Press from '../../src/pages/Press';
 import { pressItems } from '../../src/data/press';
-
-const buildNewsArticleSchema = (item) => ({
-  "@context": "https://schema.org",
-  "@type": "NewsArticle",
-  "headline": item.headline,
-  "datePublished": item.dateISO,
-  "url": item.url,
-  "publisher": {
-    "@type": "Organization",
-    "name": item.publisher,
-  },
-  "about": {
-    "@type": "LocalBusiness",
-    "name": "IsraelTechForce - ITF Recovery",
-    "url": "https://israeltechforce.com",
-  },
-});
+import { buildNewsArticleSchema } from '../../src/data/pressSchemas.js';
 
 export const meta = () => [
   { title: 'כפי שסוקרנו בתקשורת | IsraelTechForce' },

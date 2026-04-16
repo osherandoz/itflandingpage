@@ -1,5 +1,7 @@
 import ArticleTemplate from '../../src/components/ArticleTemplate';
 import { getArticleBySlug } from '../../src/data/articles';
+import { buildBlogPostingSchema } from '../../src/data/schemas.js';
+import { useParams } from 'react-router';
 
 export const meta = ({ params }) => {
   const article = getArticleBySlug(params.slug);
@@ -18,9 +20,9 @@ export const meta = ({ params }) => {
     ];
   }
 
-  const canonicalUrl = `https://israeltechforce.com/articles/${params.slug}`;
+  const canonicalUrl = `https://www.israeltechforce.com/articles/${params.slug}`;
   const ogImage =
-    'https://israeltechforce.com/images/israeltechforce-logo-white.png';
+    'https://www.israeltechforce.com/images/israeltechforce-logo-white.png';
 
   return [
     { title: article.metaTitle || `${article.title} | IsraelTechForce` },
@@ -45,4 +47,23 @@ export const meta = ({ params }) => {
   ];
 };
 
-export default ArticleTemplate;
+export default function ArticleRoute() {
+  const { slug } = useParams();
+  const article = getArticleBySlug(slug);
+
+  // Only inject BlogPosting schema for real (non-placeholder) articles
+  const blogPostingSchema =
+    article && !article.placeholder ? buildBlogPostingSchema(article) : null;
+
+  return (
+    <>
+      {blogPostingSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+        />
+      )}
+      <ArticleTemplate />
+    </>
+  );
+}
