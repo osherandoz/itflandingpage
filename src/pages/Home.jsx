@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import StatsStrip from '../components/StatsStrip';
+import PressSection from '../components/PressSection';
 import HeroSection from '../components/HeroSection';
 import AboutMe from '../components/AboutMe';
 import Services from '../components/Services';
@@ -32,6 +33,7 @@ const Home = () => {
         <HeroSection />
       </section>
       <StatsStrip />
+      <PressSection />
       <section id="about">
         <AboutMe />
       </section>
