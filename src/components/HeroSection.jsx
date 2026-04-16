@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { openWhatsApp } from '../utils/whatsapp';
 import './HeroSection.css';
 
 const HeroSection = () => {
-  useEffect(() => {
-    const img = new Image();
-    img.src = '/images/israeltechforce-logo-white.png';
-  }, []);
 
   return (
     <section className="hero-section">
@@ -32,8 +28,11 @@ const HeroSection = () => {
           <img
             src="/images/israeltechforce-logo-white.png"
             alt="IsraelTechForce — מומחים לשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ"
+            width="3000"
+            height="2212"
             loading="eager"
             decoding="sync"
+            fetchPriority="high"
           />
         </div>
 

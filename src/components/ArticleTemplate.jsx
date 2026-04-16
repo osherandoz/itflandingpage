@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router';
 import { getArticleBySlug } from '../data/articles';
 import { openWhatsApp } from '../utils/whatsapp';
 import './ArticleTemplate.css';
