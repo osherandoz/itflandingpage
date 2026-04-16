@@ -66,32 +66,12 @@ const ArticleTemplate = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [tableOfContents]);
 
-  const scrollToHeading = (id) => {
-    const heading = headingsRef.current[id];
-    if (heading) {
-      heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
-
-  if (!article) {
-    return (
-      <div className="article-not-found">
-        <div className="container">
-          <h1>מאמר לא נמצא</h1>
-          <p>המאמר שביקשתם לא נמצא.</p>
-          <Link to="/" className="back-home-btn">חזור לעמוד הבית</Link>
-        </div>
-      </div>
-    );
-  }
-
-  // Update document title and meta description
+  // Update document title and meta tags (must be before early returns)
   useEffect(() => {
-    // Use metaTitle if available, otherwise use title
+    if (!article) return;
     const pageTitle = article.metaTitle || article.title;
     document.title = pageTitle;
-    
-    // Update meta description
+
     let metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', article.metaDescription);
@@ -102,7 +82,6 @@ const ArticleTemplate = () => {
       document.head.appendChild(metaDescription);
     }
 
-    // Add Open Graph tags
     const ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle) {
       ogTitle.setAttribute('content', pageTitle);
@@ -123,6 +102,119 @@ const ArticleTemplate = () => {
       document.head.appendChild(ogDescMeta);
     }
   }, [article]);
+
+  // Inject Article JSON-LD for real (non-placeholder) articles
+  useEffect(() => {
+    if (!article || article.placeholder) return;
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: article.title,
+      description: article.metaDescription,
+      author: {
+        '@type': 'Person',
+        name: article.author,
+        url: 'https://israeltechforce.com',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'IsraelTechForce',
+        url: 'https://israeltechforce.com',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://israeltechforce.com/images/israeltechforce-logo-white.png',
+        },
+      },
+      datePublished: article.date,
+      dateModified: article.date,
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': `https://israeltechforce.com/articles/${article.slug}`,
+      },
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'article-schema';
+    script.textContent = JSON.stringify(schema);
+    document.head.appendChild(script);
+
+    return () => {
+      const el = document.getElementById('article-schema');
+      if (el) el.remove();
+    };
+  }, [article]);
+
+  // Inject noindex for placeholder articles
+  useEffect(() => {
+    if (!article || !article.placeholder) return;
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.name = 'robots';
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.content = 'noindex, nofollow';
+    return () => {
+      if (robotsMeta) robotsMeta.remove();
+    };
+  }, [article]);
+
+  const scrollToHeading = (id) => {
+    const heading = headingsRef.current[id];
+    if (heading) {
+      heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  if (!article) {
+    return (
+      <div className="article-not-found">
+        <div className="container">
+          <h1>מאמר לא נמצא</h1>
+          <p>המאמר שביקשתם לא נמצא.</p>
+          <Link to="/" className="back-home-btn">חזור לעמוד הבית</Link>
+        </div>
+      </div>
+    );
+  }
+
+  if (article.placeholder) {
+    return (
+      <div dir="rtl" style={{ minHeight: '100vh', background: '#0C0E1D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ textAlign: 'center', padding: '60px 20px', maxWidth: '480px' }}>
+          <i className="fas fa-tools" style={{ fontSize: '3rem', color: '#3B82F6', display: 'block', marginBottom: '20px' }}></i>
+          <h1 style={{ color: '#ffffff', marginBottom: '12px', fontSize: '1.8rem' }}>המאמר בדרך...</h1>
+          <p style={{ color: '#e0e0e0', marginBottom: '32px', fontSize: '1.05rem', lineHeight: '1.6' }}>
+            המאמר הזה עדיין בכתיבה. בינתיים, יש לך שאלה? נשמח לעזור ישירות.
+          </p>
+          <button
+            onClick={openWhatsApp}
+            style={{
+              background: '#25D366',
+              color: 'white',
+              border: 'none',
+              padding: '14px 32px',
+              borderRadius: '50px',
+              fontSize: '1rem',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              fontFamily: 'inherit',
+            }}
+          >
+            <i className="fab fa-whatsapp"></i>
+            דברו איתנו בוואטסאפ
+          </button>
+          <br /><br />
+          <Link to="/" style={{ color: '#3B82F6', fontSize: '0.95rem' }}>← חזרה לעמוד הבית</Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="article-template">

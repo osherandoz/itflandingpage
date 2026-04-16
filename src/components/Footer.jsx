@@ -151,32 +151,13 @@ const Footer = () => {
             <p style={{ marginBottom: '1rem', fontSize: '0.95rem', lineHeight: '1.6' }}>
               הצטרפו לרשימת התפוצה שלנו וקבלו עדכונים, טיפים וכלים שימושיים ישירות לתיבת האימייל שלכם
             </p>
-            <a 
-              href="https://israeltechforce.vp4.me/newslettersub" 
-              target="_blank" 
+            <a
+              href="https://israeltechforce.vp4.me/newslettersub"
+              target="_blank"
               rel="noopener noreferrer"
               className="newsletter-link-btn"
-              style={{
-                display: 'inline-block',
-                padding: '12px 24px',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: 'white',
-                textDecoration: 'none',
-                borderRadius: '8px',
-                fontWeight: '600',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-              }}
-              onMouseOver={(e) => {
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.15)';
-              }}
-              onMouseOut={(e) => {
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-              }}
             >
-              <i className="fas fa-envelope" style={{ marginLeft: '8px' }}></i>
+              <i className="fas fa-envelope"></i>
               הצטרפו לניוזלטר שלנו
             </a>
           </div>

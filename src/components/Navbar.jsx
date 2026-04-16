@@ -78,7 +78,7 @@ const Navbar = () => {
           </button>
         </div>
         
-        <button 
+        <button
           className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
@@ -87,6 +87,14 @@ const Navbar = () => {
           <span></span>
         </button>
       </div>
+
+      {isMobileMenuOpen && (
+        <div
+          className="navbar-backdrop"
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
     </nav>
   );
 };

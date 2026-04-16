@@ -125,6 +125,7 @@ export const articles = [
   {
     id: 'instagram-recovery',
     slug: 'instagram-recovery',
+    placeholder: true,
     title: 'איך לשחזר חשבון אינסטגרם שנחסם',
     excerpt: 'מדריך מקיף לשחזור חשבון אינסטגרם שנחסם. למד על תהליך הערעור, מסמכים נדרשים, וטיפים מקצועיים.',
     featured: false,
@@ -139,6 +140,7 @@ export const articles = [
   {
     id: 'facebook-account-recovery',
     slug: 'facebook-account-recovery',
+    placeholder: true,
     title: 'שחזור חשבון פייסבוק שנחסם או נפרץ',
     excerpt: 'כל מה שצריך לדעת על שחזור חשבון פייסבוק. מהזיהוי הראשוני ועד לשחזור מלא של החשבון.',
     featured: false,

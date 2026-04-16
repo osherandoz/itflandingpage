@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { openWhatsApp } from '../utils/whatsapp';
 import './ContactForm.css';
 
 const ContactForm = () => {
@@ -204,9 +205,21 @@ const ContactForm = () => {
               שולח...
             </>
           ) : (
-            'שלח פנייה'
+            'שלחו הודעה — נחזור אליכם תוך שעה'
           )}
         </button>
+
+        <p className="form-whatsapp-note">
+          לשירות מיידי —{' '}
+          <button
+            type="button"
+            className="form-whatsapp-link"
+            onClick={openWhatsApp}
+          >
+            <i className="fab fa-whatsapp"></i>
+            דברו איתנו ישירות בוואטסאפ
+          </button>
+        </p>
       </form>
     </div>
   );

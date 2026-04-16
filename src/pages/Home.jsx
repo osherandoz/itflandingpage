@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
+import FloatingWhatsApp from '../components/FloatingWhatsApp';
+import StatsStrip from '../components/StatsStrip';
 import HeroSection from '../components/HeroSection';
 import AboutMe from '../components/AboutMe';
 import Services from '../components/Services';
@@ -29,6 +31,7 @@ const Home = () => {
       <section id="hero">
         <HeroSection />
       </section>
+      <StatsStrip />
       <section id="about">
         <AboutMe />
       </section>
@@ -53,6 +56,7 @@ const Home = () => {
         </div>
       </section>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 };
