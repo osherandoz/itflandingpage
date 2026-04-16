@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './StatsStrip.css';
 
 const STATS = [
-  { end: 5000, suffix: '+', label: 'חשבונות שוחזרו' },
+  { end: 2500, suffix: '+', label: 'חשבונות שוחזרו' },
   { end: 95,   suffix: '%', label: 'אחוזי הצלחה' },
   { end: 24,   suffix: '/6', label: 'זמינות שירות' },
 ];

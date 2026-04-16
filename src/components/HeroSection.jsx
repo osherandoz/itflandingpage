@@ -12,9 +12,15 @@ const HeroSection = () => {
     <section className="hero-section">
       <div className="hero-container">
 
+        {/* LIVE availability badge */}
+        <div className="hero-live-badge" aria-label="זמינים עכשיו">
+          <span className="hero-live-dot" aria-hidden="true"></span>
+          זמינים עכשיו · מענה תוך דקות
+        </div>
+
         {/* Trust Bar */}
         <div className="hero-trust-bar">
-          <span>✓ 5,000+ חשבונות שוחזרו</span>
+          <span>✓ 2,500+ חשבונות שוחזרו</span>
           <span className="trust-divider" aria-hidden="true">|</span>
           <span>⭐ דירוג 4.9/5</span>
           <span className="trust-divider" aria-hidden="true">|</span>
@@ -35,8 +41,12 @@ const HeroSection = () => {
           <h1 className="hero-title">
             חסמו לך את החשבון?{' '}
             <span className="hero-highlight">אנחנו מחזירים אותך</span>{' '}
-            תוך 24 שעות
+            בזמן הקצר ביותר
           </h1>
+
+          <p className="hero-urgency" role="alert">
+            ⚠️ כל יום שעובר פוגע בסיכויי השחזור — פעל עכשיו
+          </p>
 
           <p className="hero-subtitle">
             95%+ הצלחה בשחזור חשבונות פייסבוק, אינסטגרם ו-WhatsApp —
@@ -44,15 +54,20 @@ const HeroSection = () => {
           </p>
 
           <div className="hero-features">
-            <span className="hero-feature">✓ שחזור תוך 24-48 שעות</span>
+            <span className="hero-feature">✓ שחזור מהיר ככל האפשר</span>
             <span className="hero-feature">✓ תשלום רק אחרי הצלחה</span>
             <span className="hero-feature">✓ זמינות 24/6</span>
           </div>
 
-          <button className="hero-cta" onClick={openWhatsApp}>
+          <button className="hero-cta hero-cta-pulse" onClick={openWhatsApp}>
             <i className="fab fa-whatsapp" aria-hidden="true"></i>
             שלחו הודעה עכשיו — חינם
           </button>
+
+          <p className="hero-last-recovery" aria-live="polite">
+            <span className="hero-last-recovery-dot" aria-hidden="true">⚡</span>
+            חשבון אחרון שוחזר: לפני שעתיים
+          </p>
 
           <p className="hero-guarantee">
             <i className="fas fa-shield-alt" aria-hidden="true"></i>
