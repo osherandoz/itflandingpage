@@ -47,7 +47,7 @@ const Navbar = () => {
     { id: 'testimonials', label: 'המלצות' },
     { id: 'articles', label: 'מאמרים' },
     { id: 'faq', label: 'שאלות נפוצות' },
-    { id: 'contact', label: 'צור קשר' }
+    { id: 'contact', label: 'שליחת פרטים' }
   ];
 
   return (
