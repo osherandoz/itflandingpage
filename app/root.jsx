@@ -3,56 +3,9 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
 import PrivacyPolicy from '../src/components/PrivacyPolicy';
 import WhatsAppDisabledPopup from '../src/components/WhatsAppDisabledPopup';
+import { LOCAL_BUSINESS_SCHEMA, SERVICE_SCHEMAS } from '../src/data/schemas.js';
 import '../src/index.css';
 import '../src/App.css';
-
-const LOCAL_BUSINESS_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "IsraelTechForce - ITF Recovery",
-  "description": "מומחים לשחזור חשבונות רשתות חברתיות שנחסמו או נפרצו - פייסבוק, אינסטגרם, וואטסאפ",
-  "url": "https://israeltechforce.com",
-  "telephone": "+972509823235",
-  "email": "info@poncho.tech",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Netanya",
-    "addressCountry": "IL"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": "32.3215",
-    "longitude": "34.8532"
-  },
-  "areaServed": { "@type": "Country", "name": "Israel" },
-  "sameAs": [
-    "https://www.facebook.com/OsheRevach23",
-    "https://www.instagram.com/osher_revach_1/",
-    "https://www.tiktok.com/@israeltechforce",
-    "https://www.facebook.com/groups/661405387897704/",
-    "https://www.facebook.com/groups/334387796292468/"
-  ],
-  "priceRange": "₪₪",
-  "openingHours": "Su-Fr 08:00-22:00"
-};
-
-const SERVICE_SCHEMA = {
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "serviceType": "שחזור חשבונות רשתות חברתיות",
-  "provider": { "@type": "LocalBusiness", "name": "IsraelTechForce - ITF Recovery" },
-  "areaServed": { "@type": "Country", "name": "Israel" },
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "שירותי שחזור חשבונות",
-    "itemListElement": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "שחזור חשבון פייסבוק" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "שחזור חשבון אינסטגרם" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "שחזור חשבון וואטסאפ" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "תמיכה Facebook Business Manager" } }
-    ]
-  }
-};
 
 const META_PIXEL_SCRIPT = `
 !function(f,b,e,v,n,t,s)
@@ -89,15 +42,19 @@ export function Layout({ children }) {
         <meta name="language" content="Hebrew" />
         <meta name="content-language" content="he" />
 
-        {/* Structured Data */}
+        {/* Structured Data — LocalBusiness (global) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(LOCAL_BUSINESS_SCHEMA) }}
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(SERVICE_SCHEMA) }}
-        />
+        {/* Structured Data — one Service schema per service (global) */}
+        {SERVICE_SCHEMAS.map((schema) => (
+          <script
+            key={schema.name}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        ))}
 
         {/* Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
