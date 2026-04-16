@@ -63,6 +63,15 @@ const ContactForm = () => {
           console.log('✅ Meta Pixel Lead event triggered');
         }
 
+        // Track form submission in GA4
+        if (typeof window !== 'undefined' && window.gtag) {
+          window.gtag('event', 'generate_lead', {
+            event_category: 'Contact',
+            event_label: 'Contact Form',
+            value: 1,
+          });
+        }
+
         // Build GET URL with query parameters
         const baseUrl = 'https://script.google.com/macros/s/AKfycbzziLRW7EWKO43zDdihAPneBF6aAd6aiXp4HyMIa5an3vOxJKHIr9xIJo-KdLTi2AYpmQ/exec';
         

@@ -28,7 +28,9 @@ const LOCAL_BUSINESS_SCHEMA = {
   "sameAs": [
     "https://www.facebook.com/OsheRevach23",
     "https://www.instagram.com/osher_revach_1/",
-    "https://www.tiktok.com/@israeltechforce"
+    "https://www.tiktok.com/@israeltechforce",
+    "https://www.facebook.com/groups/661405387897704/",
+    "https://www.facebook.com/groups/334387796292468/"
   ],
   "priceRange": "₪₪",
   "openingHours": "Su-Fr 08:00-22:00"
@@ -116,6 +118,18 @@ export function Layout({ children }) {
           href="/images/israeltechforce-logo-white.png"
           fetchPriority="high"
         />
+
+        {/* Google Search Console verification */}
+        <meta name="google-site-verification" content="aE9CLpD9QGwjrSkACJUNpS8Ps8vCkLxMuP9jRl3v_aM" />
+
+        {/* Google Analytics 4 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-M2TYTNN02X" />
+        <script dangerouslySetInnerHTML={{ __html: `
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-M2TYTNN02X');
+` }} />
 
         {/* Meta Pixel */}
         <script dangerouslySetInnerHTML={{ __html: META_PIXEL_SCRIPT }} />
