@@ -1,8 +1,5 @@
-import { useState, useEffect } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
-import PrivacyPolicy from '../src/components/PrivacyPolicy';
-import WhatsAppDisabledPopup from '../src/components/WhatsAppDisabledPopup';
 import { LOCAL_BUSINESS_SCHEMA, SERVICE_SCHEMAS } from '../src/data/schemas.js';
 import '../src/index.css';
 import '../src/App.css';
@@ -110,55 +107,9 @@ gtag('config', 'G-M2TYTNN02X');
 }
 
 export default function Root() {
-  // Default true so SSR renders full page content (better for SEO crawlers)
-  const [hasAcceptedPrivacy, setHasAcceptedPrivacy] = useState(true);
-  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
-  const [showWhatsAppPopup, setShowWhatsAppPopup] = useState(false);
-
-  useEffect(() => {
-    // Only runs on client - check localStorage
-    const accepted = localStorage.getItem('privacyPolicyAccepted');
-    if (accepted !== 'true') {
-      setHasAcceptedPrivacy(false);
-      setShowPrivacyPolicy(true);
-    } else {
-      const whatsappPopupShown = localStorage.getItem('whatsappDisabledPopupShown');
-      if (!whatsappPopupShown) {
-        setTimeout(() => setShowWhatsAppPopup(true), 1500);
-      }
-    }
-  }, []);
-
-  const handlePrivacyAccept = () => {
-    localStorage.setItem('privacyPolicyAccepted', 'true');
-    setShowPrivacyPolicy(false);
-    setHasAcceptedPrivacy(true);
-    setTimeout(() => setShowWhatsAppPopup(true), 1000);
-  };
-
-  const handlePrivacyDecline = () => {
-    alert('על מנת להשתמש באתר, עליכם להסכים למדיניות הפרטיות');
-  };
-
-  const handleWhatsAppPopupClose = () => {
-    setShowWhatsAppPopup(false);
-    localStorage.setItem('whatsappDisabledPopupShown', 'true');
-  };
-
   return (
     <>
-      {!hasAcceptedPrivacy && (
-        <PrivacyPolicy
-          isOpen={showPrivacyPolicy}
-          onAccept={handlePrivacyAccept}
-          onDecline={handlePrivacyDecline}
-        />
-      )}
       <Outlet />
-      <WhatsAppDisabledPopup
-        isOpen={showWhatsAppPopup}
-        onClose={handleWhatsAppPopupClose}
-      />
       <Analytics />
     </>
   );
