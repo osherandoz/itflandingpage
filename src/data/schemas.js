@@ -41,6 +41,7 @@ export const LOCAL_BUSINESS_SCHEMA = {
     reviewCount: 2500,
   },
   sameAs: [
+    'https://share.google/yNPb3RHHkfrk8sxNa',
     'https://www.facebook.com/israeltechforce23',
     'https://www.facebook.com/OsheRevach23',
     'https://www.instagram.com/osher_revach_1/',
