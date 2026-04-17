@@ -1,28 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Home -->
   <url>
-    <loc>https://israeltechforce.com/</loc>
+    <loc>https://www.israeltechforce.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <!-- Static pages -->
   <url>
-    <loc>https://israeltechforce.com/privacy</loc>
+    <loc>https://www.israeltechforce.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://israeltechforce.com/articles/whatsapp-unblock</loc>
+    <loc>https://www.israeltechforce.com/press</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <!-- Phase C — Dedicated service pages -->
+  <url>
+    <loc>https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%95%D7%95%D7%90%D7%98%D7%A1%D7%90%D7%A4</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7-%D7%9E%D7%95%D7%A9%D7%91%D7%AA</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D-%D7%A0%D7%A4%D7%A8%D7%A5</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%9E%D7%A0%D7%94%D7%9C-%D7%9E%D7%95%D7%93%D7%A2%D7%95%D7%AA</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <!-- Phase C — FAQ + Testimonials -->
+  <url>
+    <loc>https://www.israeltechforce.com/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://israeltechforce.com/articles/instagram-recovery</loc>
+    <loc>https://www.israeltechforce.com/testimonials</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
+  </url>
+  <!-- Articles -->
+  <url>
+    <loc>https://www.israeltechforce.com/articles/whatsapp-unblock</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://israeltechforce.com/articles/facebook-account-recovery</loc>
+    <loc>https://www.israeltechforce.com/articles/facebook-account-disabled</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/instagram-hacked-recovery</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/shadowban-instagram-2025</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/whatsapp-recovery-guide</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/ads-manager-blocked</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/facebook-disabled-vs-limited</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/protect-instagram-account</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/facebook-recovery-no-email-phone</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>
