@@ -4,6 +4,7 @@ export default [
   index("./routes/home.jsx"),
   route("privacy", "./routes/privacy.jsx"),
   route("press", "./routes/press.jsx"),
+  route("articles", "./routes/articles.jsx"),
   route("articles/:slug", "./routes/articles.$slug.jsx"),
   // Phase C — Dedicated service pages
   route("שחזור-חשבון-פייסבוק", "./routes/facebook-recovery.jsx"),
