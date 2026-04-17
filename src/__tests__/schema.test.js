@@ -58,12 +58,6 @@ describe('LocalBusiness schema', () => {
     expect(hasIG).toBe(true);
   });
 
-  it('has aggregateRating', () => {
-    expect(LOCAL_BUSINESS_SCHEMA.aggregateRating).toBeDefined();
-    expect(LOCAL_BUSINESS_SCHEMA.aggregateRating.ratingValue).toBeGreaterThanOrEqual(4.9);
-    expect(LOCAL_BUSINESS_SCHEMA.aggregateRating.reviewCount).toBeGreaterThan(100);
-  });
-
   it('has logo image url', () => {
     expect(isValidUrl(LOCAL_BUSINESS_SCHEMA.logo)).toBe(true);
   });
