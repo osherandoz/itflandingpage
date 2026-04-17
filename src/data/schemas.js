@@ -33,13 +33,6 @@ export const LOCAL_BUSINESS_SCHEMA = {
   areaServed: { '@type': 'Country', name: 'Israel' },
   priceRange: '₪₪',
   openingHours: 'Su-Fr 08:00-22:00',
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: 4.9,
-    bestRating: 5,
-    worstRating: 1,
-    reviewCount: 2500,
-  },
   sameAs: [
     'https://share.google/yNPb3RHHkfrk8sxNa',
     'https://www.facebook.com/israeltechforce23',
