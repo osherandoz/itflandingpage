@@ -20,7 +20,7 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
 
   // Countdown timer logic
   useEffect(() => {
-    const targetDate = new Date('2025-09-27T20:00:00').getTime();
+    const targetDate = new Date('2026-06-01T20:00:00').getTime();
 
     const updateCountdown = () => {
       const now = new Date().getTime();

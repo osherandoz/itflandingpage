@@ -151,15 +151,13 @@ const Footer = () => {
             <p style={{ marginBottom: '1rem', fontSize: '0.95rem', lineHeight: '1.6' }}>
               הצטרפו לרשימת התפוצה שלנו וקבלו עדכונים, טיפים וכלים שימושיים ישירות לתיבת האימייל שלכם
             </p>
-            <a
-              href="https://israeltechforce.vp4.me/newslettersub"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
               className="newsletter-link-btn"
+              onClick={() => window.__openNewsletterPopup?.()}
             >
               <i className="fas fa-envelope"></i>
               הצטרפו לניוזלטר שלנו
-            </a>
+            </button>
           </div>
 
           {/* Column 4: Quick Links */}

@@ -1,6 +1,8 @@
+import { useState, useEffect } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
 import SocialProofToast from '../src/components/SocialProofToast.jsx';
+import NewsletterPopup from '../src/components/NewsletterPopup.jsx';
 import { LOCAL_BUSINESS_SCHEMA, SERVICE_SCHEMAS, PERSON_SCHEMA } from '../src/data/schemas.js';
 import '../src/index.css';
 import '../src/App.css';
@@ -113,11 +115,39 @@ gtag('config', 'G-M2TYTNN02X');
 }
 
 export default function Root() {
+  const [showNewsletter, setShowNewsletter] = useState(false);
+
+  useEffect(() => {
+    // Allow footer button (and any other caller) to open the popup imperatively
+    window.__openNewsletterPopup = () => setShowNewsletter(true);
+    return () => { delete window.__openNewsletterPopup; };
+  }, []);
+
+  useEffect(() => {
+    // Show popup once when user scrolls past 40% of the page
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('newsletterPopupShown')) return;
+
+    const handleScroll = () => {
+      const scrolled = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      if (scrolled >= 0.4) {
+        setShowNewsletter(true);
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
       <Outlet />
       <Analytics />
       <SocialProofToast />
+      <NewsletterPopup
+        isOpen={showNewsletter}
+        onClose={() => setShowNewsletter(false)}
+      />
     </>
   );
 }

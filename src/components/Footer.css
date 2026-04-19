@@ -515,8 +515,12 @@
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
   border-radius: 8px;
   font-weight: 600;
+  font-size: 1rem;
+  font-family: inherit;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
