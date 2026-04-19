@@ -36,7 +36,7 @@ export const LOCAL_BUSINESS_SCHEMA = {
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.9',
-    reviewCount: '2500',
+    reviewCount: '6',
     bestRating: '5',
   },
   sameAs: [

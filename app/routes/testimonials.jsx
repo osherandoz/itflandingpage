@@ -84,7 +84,7 @@ const REVIEWS_SCHEMA = [
     '@context': 'https://schema.org',
     '@type': 'AggregateRating',
     ratingValue: 4.9,
-    reviewCount: 2500,
+    reviewCount: 6,
     bestRating: 5,
     worstRating: 1,
     itemReviewed: {

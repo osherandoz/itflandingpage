@@ -8,7 +8,7 @@ const STATS = [
 ];
 
 const useCountUp = (end, duration, active) => {
-  const start = end > 100 ? end - 20 : 0;
+  const start = end > 100 ? end - 20 : Math.round(end * 0.85);
   const [count, setCount] = useState(start);
   useEffect(() => {
     if (!active) return;
