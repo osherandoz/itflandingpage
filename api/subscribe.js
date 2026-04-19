@@ -131,30 +131,33 @@ export default async function handler(req, res) {
   }
 
   try {
-    const smooveRes = await fetch('https://rest.smoove.io/v1/contacts', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        email: safeEmail,
-        firstName: safeFirst,
-        lastName: safeLast,
-        status: 'active',
-        list_id: listId,
-        allowDuplicates: false,
-      }),
-    });
+    // Smoove expects lists_ToSubscribe as an array of integer list IDs
+    const smooveRes = await fetch(
+      'https://rest.smoove.io/v1/Contacts?updateIfExists=true&restoreIfDeleted=true&restoreIfUnsubscribed=true',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          email: safeEmail,
+          firstName: safeFirst,
+          lastName: safeLast,
+          lists_ToSubscribe: [parseInt(listId, 10)],
+        }),
+      }
+    );
 
+    const responseText = await smooveRes.text();
     if (smooveRes.ok) {
       return res.status(200).json({ success: true });
     }
     if (smooveRes.status === 409) {
       return res.status(200).json({ success: true }); // already subscribed — silent
     }
-    console.error('Smoove error:', smooveRes.status, await smooveRes.text());
+    console.error('Smoove error:', smooveRes.status, responseText);
     return res.status(502).json({ error: 'שגיאה בהרשמה. נסה שוב מאוחר יותר.' });
   } catch (err) {
     console.error('Subscribe fetch error:', err);
