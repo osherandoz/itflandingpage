@@ -6,7 +6,8 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: ''
+    email: '',
+    website: '', // honeypot — must stay empty
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState({ message: '', type: '' });
@@ -88,9 +89,10 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
 
     try {
       const result = await subscribeToNewsletter(
-        formData.firstName, 
-        formData.lastName, 
-        formData.email
+        formData.firstName,
+        formData.lastName,
+        formData.email,
+        formData.website, // honeypot field
       );
       
       if (result.success) {
@@ -182,6 +184,17 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
           </div>
 
           <form className="popup-form" onSubmit={handleSubmit}>
+            {/* Honeypot — hidden from humans, bots fill it */}
+            <input
+              type="text"
+              name="website"
+              value={formData.website}
+              onChange={handleInputChange}
+              autoComplete="off"
+              tabIndex={-1}
+              aria-hidden="true"
+              style={{ display: 'none' }}
+            />
             <div className="form-group">
               <input
                 type="text"
