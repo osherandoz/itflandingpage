@@ -225,10 +225,10 @@
   .hiw-row--right .hiw-spacer,
   .hiw-row--left  .hiw-spacer { display: none; }
 
-  /* Line hugs the nodes column */
+  /* Line hugs the nodes column — right side in RTL */
   .hiw-line {
-    right: auto;
-    left: 23px;   /* centre of 48-px col */
+    left: auto;
+    right: 23px;  /* centre of 48-px node col */
   }
 
   /* Reset slide-in for mobile (just fade) */
