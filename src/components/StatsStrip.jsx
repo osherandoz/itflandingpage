@@ -8,11 +8,12 @@ const STATS = [
 ];
 
 const useCountUp = (end, duration, active) => {
-  const [count, setCount] = useState(0);
+  const start = end > 100 ? end - 20 : 0;
+  const [count, setCount] = useState(start);
   useEffect(() => {
     if (!active) return;
-    let current = 0;
-    const step = end / (duration / 16);
+    let current = start;
+    const step = (end - start) / (duration / 16);
     const timer = setInterval(() => {
       current += step;
       if (current >= end) {
@@ -23,7 +24,7 @@ const useCountUp = (end, duration, active) => {
       }
     }, 16);
     return () => clearInterval(timer);
-  }, [active, end, duration]);
+  }, [active, end, duration, start]);
   return count;
 };
 

@@ -19,7 +19,7 @@ export const LOCAL_BUSINESS_SCHEMA = {
   logo: LOGO_URL,
   image: LOGO_URL,
   telephone: '+972509823235',
-  email: 'info@poncho.tech',
+  email: 'osher@israeltechforce.com',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Netanya',

@@ -1,5 +1,6 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
+import SocialProofToast from '../src/components/SocialProofToast.jsx';
 import { LOCAL_BUSINESS_SCHEMA, SERVICE_SCHEMAS } from '../src/data/schemas.js';
 import '../src/index.css';
 import '../src/App.css';
@@ -111,6 +112,7 @@ export default function Root() {
     <>
       <Outlet />
       <Analytics />
+      <SocialProofToast />
     </>
   );
 }

@@ -51,7 +51,7 @@ const Privacy = () => {
 
         <h2>יצירת קשר</h2>
         <p>לשאלות או בקשות נוספות בעניין מדיניות פרטיות זו, ניתן לפנות אלינו בכתובת:</p>
-        <p><a href="mailto:privacy@poncho.tech" className="privacy-page-link">privacy@poncho.tech</a></p>
+        <p><a href="mailto:osher@israeltechforce.com" className="privacy-page-link">osher@israeltechforce.com</a></p>
       </div>
     </div>
   );

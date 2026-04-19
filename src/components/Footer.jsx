@@ -92,7 +92,7 @@ const Footer = () => {
           
           <h4>יצירת קשר</h4>
           <p>לשאלות או הבהרות ניתן לפנות אלינו בכתובת:</p>
-          <p>📧 <a href="mailto:info@poncho.tech" className="modal-link">info@poncho.tech</a></p>
+          <p>📧 <a href="mailto:osher@israeltechforce.com" className="modal-link">osher@israeltechforce.com</a></p>
         </div>
       )
     },
@@ -112,7 +112,7 @@ const Footer = () => {
             <div className="contact-info">
               <p><i className="fas fa-map-marker-alt"></i> נתניה, ישראל</p>
               <p><i className="fas fa-phone"></i> 050-9823-235</p>
-              <p><i className="fas fa-envelope"></i> info@poncho.tech</p>
+              <p><i className="fas fa-envelope"></i> osher@israeltechforce.com</p>
             </div>
             <div className="contact-buttons">
               <button className="footer-cta" onClick={openWhatsApp}>
