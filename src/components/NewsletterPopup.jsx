@@ -142,7 +142,7 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
         <div className="popup-content">
           <div className="popup-header">
             <div className="gift-icon">🎁</div>
-            <h2>הירשם עכשיו, קבל מרדריך לשחזור אינסטגרם מתנה!</h2>
+            <h2>הירשם עכשיו, קבל מדריך לשחזור אינסטגרם מתנה!</h2>
             <p>הצטרף לרשימת התפוצה שלנו וקבל מיד את המדריך המלא לשחזור חשבון אינסטגרם שנחסם</p>
           </div>
 

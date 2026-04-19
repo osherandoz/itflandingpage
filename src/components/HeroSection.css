@@ -1,3 +1,24 @@
+/* ── Floating background icons ── */
+@keyframes bgIconFloat {
+  0%, 100% { transform: translateY(0)   rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(4deg); }
+  66%       { transform: translateY(6px)  rotate(-3deg); }
+}
+
+.hero-bg-icons {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-bg-icon {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.06);
+  animation: bgIconFloat 7s ease-in-out infinite;
+  line-height: 1;
+}
+
 /* ── Animations ── */
 @keyframes liveDot {
   0%, 100% { opacity: 1; transform: scale(1); }

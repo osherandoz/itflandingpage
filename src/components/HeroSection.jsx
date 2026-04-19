@@ -6,6 +6,16 @@ const HeroSection = () => {
 
   return (
     <section className="hero-section">
+      {/* Decorative floating social icons — background only */}
+      <div className="hero-bg-icons" aria-hidden="true">
+        <i className="fab fa-facebook hero-bg-icon" style={{ top: '12%', right: '8%',  fontSize: '5rem',  animationDelay: '0s' }} />
+        <i className="fab fa-instagram hero-bg-icon" style={{ top: '55%', right: '4%',  fontSize: '3.5rem', animationDelay: '1.4s' }} />
+        <i className="fab fa-whatsapp hero-bg-icon"  style={{ top: '75%', right: '14%', fontSize: '4rem',  animationDelay: '2.8s' }} />
+        <i className="fab fa-facebook hero-bg-icon"  style={{ top: '80%', left: '6%',   fontSize: '3rem',  animationDelay: '0.7s' }} />
+        <i className="fab fa-instagram hero-bg-icon" style={{ top: '20%', left: '5%',   fontSize: '4.5rem', animationDelay: '2.1s' }} />
+        <i className="fab fa-whatsapp hero-bg-icon"  style={{ top: '42%', left: '10%',  fontSize: '3rem',  animationDelay: '3.5s' }} />
+      </div>
+
       <div className="hero-container">
 
         {/* LIVE availability badge */}
