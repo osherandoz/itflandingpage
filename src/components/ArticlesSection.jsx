@@ -32,11 +32,7 @@ const ArticlesSection = () => {
               <div className="article-meta">
                 <span className="article-date">
                   <i className="far fa-calendar"></i>
-                  {new Date(article.date).toLocaleDateString('he-IL', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
+                  {article.date.split('-').reverse().join('/')}
                 </span>
                 <span className="article-read-time">
                   <i className="far fa-clock"></i>

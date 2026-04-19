@@ -46,7 +46,7 @@ export default function ArticlesPage() {
                   <p className="article-card-excerpt">{article.excerpt}</p>
                   <div className="article-card-meta">
                     <span><i className="fas fa-clock"></i> {article.readTime}</span>
-                    <span><i className="fas fa-calendar"></i> {article.date}</span>
+                    <span><i className="fas fa-calendar"></i> {article.date.split('-').reverse().join('/')}</span>
                   </div>
                 </div>
               </Link>

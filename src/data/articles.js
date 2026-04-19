@@ -155,8 +155,8 @@ export const articles = [
   {
     id: 'facebook-account-disabled',
     slug: 'facebook-account-disabled',
-    title: 'חשבון פייסבוק הושבת: מה עושים עכשיו? מדריך שלם 2025',
-    displayTitle: 'חשבון פייסבוק הושבת: מה עושים עכשיו? מדריך שלם 2025',
+    title: 'חשבון פייסבוק הושבת: מה עושים עכשיו? מדריך שלם 2026',
+    displayTitle: 'חשבון פייסבוק הושבת: מה עושים עכשיו? מדריך שלם 2026',
     excerpt: 'מדריך מקצועי לכל מי שחשבון הפייסבוק שלו הושבת. מה הסיבות, מה עושים מיד, ואיך לשחזר את החשבון בצורה מהירה ומקצועית.',
     featured: false,
     icon: 'fab fa-facebook',
@@ -164,7 +164,7 @@ export const articles = [
     date: '2026-03-01',
     author: 'אושר רווח',
     readTime: '8 דקות',
-    metaTitle: 'חשבון פייסבוק הושבת? מדריך מלא לשחזור 2025 | IsraelTechForce',
+    metaTitle: 'חשבון פייסבוק הושבת? מדריך מלא לשחזור 2026 | IsraelTechForce',
     metaDescription: 'חשבון הפייסבוק שלך הושבת? למד מה הסיבות, מה עושים עכשיו, ואיך לשחזר אותו בצורה מקצועית. IsraelTechForce. תשלום רק אחרי הצלחה.',
     content: `
       <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
@@ -231,8 +231,8 @@ export const articles = [
   {
     id: 'instagram-hacked-recovery',
     slug: 'instagram-hacked-recovery',
-    title: 'פרצו לי לאינסטגרם: צעדים ראשונים לשחזור 2025',
-    displayTitle: 'פרצו לי לאינסטגרם: צעדים ראשונים לשחזור 2025',
+    title: 'פרצו לי לאינסטגרם: צעדים ראשונים לשחזור 2026',
+    displayTitle: 'פרצו לי לאינסטגרם: צעדים ראשונים לשחזור 2026',
     excerpt: 'חשבון האינסטגרם שלך נפרץ? מדריך מקצועי לכל הצעדים הראשונים שצריך לעשות עכשיו כדי לשחזר ולאבטח את החשבון.',
     featured: false,
     icon: 'fab fa-instagram',
@@ -240,7 +240,7 @@ export const articles = [
     date: '2026-03-05',
     author: 'אושר רווח',
     readTime: '7 דקות',
-    metaTitle: 'פרצו לי לאינסטגרם: מה עושים עכשיו? 2025 | IsraelTechForce',
+    metaTitle: 'פרצו לי לאינסטגרם: מה עושים עכשיו? 2026 | IsraelTechForce',
     metaDescription: 'חשבון האינסטגרם שלך נפרץ? כל הצעדים הראשונים שצריך לעשות עכשיו כדי לשחזר ולאבטח את החשבון. IsraelTechForce. 95%+ הצלחה.',
     content: `
       <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
@@ -306,8 +306,8 @@ export const articles = [
   {
     id: 'shadowban-instagram-2025',
     slug: 'shadowban-instagram-2025',
-    title: 'מה זה Shadowban ואיך יוצאים ממנו בישראל 2025',
-    displayTitle: 'מה זה Shadowban ואיך יוצאים ממנו בישראל 2025',
+    title: 'מה זה Shadowban ואיך יוצאים ממנו בישראל 2026',
+    displayTitle: 'מה זה Shadowban ואיך יוצאים ממנו בישראל 2026',
     excerpt: 'מה זה שאדובאן באינסטגרם, איך מזהים אותו ואיך יוצאים ממנו. מדריך מקצועי מ-IsraelTechForce.',
     featured: false,
     icon: 'fab fa-instagram',
@@ -315,7 +315,7 @@ export const articles = [
     date: '2026-03-10',
     author: 'אושר רווח',
     readTime: '6 דקות',
-    metaTitle: 'Shadowban אינסטגרם: מה זה ואיך יוצאים ממנו 2025 | IsraelTechForce',
+    metaTitle: 'Shadowban אינסטגרם: מה זה ואיך יוצאים ממנו 2026 | IsraelTechForce',
     metaDescription: 'מה זה שאדובאן באינסטגרם, איך מזהים אותו ואיך יוצאים ממנו. מדריך מקצועי מ-IsraelTechForce.',
     content: `
       <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
@@ -373,8 +373,8 @@ export const articles = [
   {
     id: 'whatsapp-recovery-guide',
     slug: 'whatsapp-recovery-guide',
-    title: 'שחזור חשבון וואטסאפ: המדריך המלא 2025',
-    displayTitle: 'שחזור חשבון וואטסאפ: המדריך המלא 2025',
+    title: 'שחזור חשבון וואטסאפ: המדריך המלא 2026',
+    displayTitle: 'שחזור חשבון וואטסאפ: המדריך המלא 2026',
     excerpt: 'מדריך מקיף לשחזור חשבון וואטסאפ — מה לעשות כשהחשבון נחסם, נגנב, או אבד הגישה אליו.',
     featured: false,
     icon: 'fab fa-whatsapp',
@@ -382,7 +382,7 @@ export const articles = [
     date: '2026-03-15',
     author: 'אושר רווח',
     readTime: '9 דקות',
-    metaTitle: 'שחזור חשבון וואטסאפ: המדריך המלא 2025 | IsraelTechForce',
+    metaTitle: 'שחזור חשבון וואטסאפ: המדריך המלא 2026 | IsraelTechForce',
     metaDescription: 'מדריך מקיף לשחזור חשבון וואטסאפ. מה לעשות כשהחשבון נחסם, נגנב, או אבד הגישה אליו. IsraelTechForce. תשלום רק אחרי הצלחה.',
     content: `
       <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
@@ -437,8 +437,8 @@ export const articles = [
   {
     id: 'ads-manager-blocked',
     slug: 'ads-manager-blocked',
-    title: 'מנהל המודעות נחסם: כל מה שצריך לדעת 2025',
-    displayTitle: 'מנהל המודעות נחסם: כל מה שצריך לדעת 2025',
+    title: 'מנהל המודעות נחסם: כל מה שצריך לדעת 2026',
+    displayTitle: 'מנהל המודעות נחסם: כל מה שצריך לדעת 2026',
     excerpt: 'מנהל המודעות שלך נחסם? למד מה הסיבות ואיך לשחזר אותו. מומחים ל-Business Manager.',
     featured: false,
     icon: 'fab fa-facebook',
@@ -446,7 +446,7 @@ export const articles = [
     date: '2026-03-20',
     author: 'אושר רווח',
     readTime: '8 דקות',
-    metaTitle: 'מנהל המודעות נחסם? כל מה שצריך לדעת 2025 | IsraelTechForce',
+    metaTitle: 'מנהל המודעות נחסם? כל מה שצריך לדעת 2026 | IsraelTechForce',
     metaDescription: 'מנהל המודעות שלך נחסם? למד מה הסיבות ואיך לשחזר אותו. IsraelTechForce. מומחים לשחזור Business Manager.',
     content: `
       <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
@@ -513,8 +513,8 @@ export const articles = [
   {
     id: 'facebook-disabled-vs-limited',
     slug: 'facebook-disabled-vs-limited',
-    title: 'ההבדל בין חשבון פייסבוק מושבת לחשבון מוגבל 2025',
-    displayTitle: 'ההבדל בין חשבון פייסבוק מושבת לחשבון מוגבל 2025',
+    title: 'ההבדל בין חשבון פייסבוק מושבת לחשבון מוגבל 2026',
+    displayTitle: 'ההבדל בין חשבון פייסבוק מושבת לחשבון מוגבל 2026',
     excerpt: 'מה ההבדל בין חשבון פייסבוק מושבת לחשבון מוגבל? ואיך מתמודדים עם כל מצב?',
     featured: false,
     icon: 'fab fa-facebook',
@@ -522,7 +522,7 @@ export const articles = [
     date: '2026-03-25',
     author: 'אושר רווח',
     readTime: '5 דקות',
-    metaTitle: 'פייסבוק מושבת vs מוגבל: ההבדל ומה עושים 2025 | IsraelTechForce',
+    metaTitle: 'פייסבוק מושבת vs מוגבל: ההבדל ומה עושים 2026 | IsraelTechForce',
     metaDescription: 'מה ההבדל בין חשבון פייסבוק מושבת לחשבון מוגבל? ואיך מתמודדים עם כל מצב? IsraelTechForce מסביר.',
     content: `
       <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
@@ -576,8 +576,8 @@ export const articles = [
   {
     id: 'protect-instagram-account',
     slug: 'protect-instagram-account',
-    title: 'איך להגן על חשבון האינסטגרם שלך: 7 כללים 2025',
-    displayTitle: 'איך להגן על חשבון האינסטגרם שלך: 7 כללים 2025',
+    title: 'איך להגן על חשבון האינסטגרם שלך: 7 כללים 2026',
+    displayTitle: 'איך להגן על חשבון האינסטגרם שלך: 7 כללים 2026',
     excerpt: '7 כללים פשוטים להגנה על חשבון האינסטגרם שלך מפני פריצות וחסימות.',
     featured: false,
     icon: 'fab fa-instagram',
@@ -585,7 +585,7 @@ export const articles = [
     date: '2026-04-01',
     author: 'אושר רווח',
     readTime: '5 דקות',
-    metaTitle: '7 כללים להגנה על חשבון האינסטגרם 2025 | IsraelTechForce',
+    metaTitle: '7 כללים להגנה על חשבון האינסטגרם 2026 | IsraelTechForce',
     metaDescription: '7 כללים פשוטים להגנה על חשבון האינסטגרם שלך מפני פריצות וחסימות. מדריך מ-IsraelTechForce.',
     content: `
       <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
@@ -630,8 +630,8 @@ export const articles = [
   {
     id: 'facebook-recovery-no-email-phone',
     slug: 'facebook-recovery-no-email-phone',
-    title: 'שחזור חשבון פייסבוק ללא מייל וללא טלפון: אפשרי? 2025',
-    displayTitle: 'שחזור חשבון פייסבוק ללא מייל וללא טלפון: אפשרי? 2025',
+    title: 'שחזור חשבון פייסבוק ללא מייל וללא טלפון: אפשרי? 2026',
+    displayTitle: 'שחזור חשבון פייסבוק ללא מייל וללא טלפון: אפשרי? 2026',
     excerpt: 'האם ניתן לשחזר חשבון פייסבוק ללא גישה למייל ולטלפון? IsraelTechForce — פתרונות מתקדמים.',
     featured: false,
     icon: 'fab fa-facebook',
@@ -639,7 +639,7 @@ export const articles = [
     date: '2026-04-05',
     author: 'אושר רווח',
     readTime: '7 דקות',
-    metaTitle: 'שחזור פייסבוק ללא מייל וטלפון: אפשרי? 2025 | IsraelTechForce',
+    metaTitle: 'שחזור פייסבוק ללא מייל וטלפון: אפשרי? 2026 | IsraelTechForce',
     metaDescription: 'האם ניתן לשחזר חשבון פייסבוק ללא גישה למייל ולטלפון? IsraelTechForce. פתרונות מתקדמים לשחזור חשבונות.',
     content: `
       <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
