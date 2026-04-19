@@ -1,6 +1,6 @@
 import ArticleTemplate from '../../src/components/ArticleTemplate';
 import { getArticleBySlug } from '../../src/data/articles';
-import { buildBlogPostingSchema } from '../../src/data/schemas.js';
+import { buildBlogPostingSchema, buildBreadcrumbSchema } from '../../src/data/schemas.js';
 import { useParams } from 'react-router';
 
 export const meta = ({ params }) => {
@@ -51,9 +51,15 @@ export default function ArticleRoute() {
   const { slug } = useParams();
   const article = getArticleBySlug(slug);
 
-  // Only inject BlogPosting schema for real (non-placeholder) articles
-  const blogPostingSchema =
-    article && !article.placeholder ? buildBlogPostingSchema(article) : null;
+  const isReal = article && !article.placeholder;
+  const blogPostingSchema = isReal ? buildBlogPostingSchema(article) : null;
+  const breadcrumbSchema = isReal
+    ? buildBreadcrumbSchema([
+        { name: 'בית', item: 'https://www.israeltechforce.com/' },
+        { name: 'מאמרים', item: 'https://www.israeltechforce.com/articles' },
+        { name: article.displayTitle || article.title },
+      ])
+    : null;
 
   return (
     <>
@@ -61,6 +67,12 @@ export default function ArticleRoute() {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+        />
+      )}
+      {breadcrumbSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       )}
       <ArticleTemplate />

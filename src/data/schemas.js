@@ -182,3 +182,16 @@ export const PERSON_SCHEMA = {
     'https://www.facebook.com/OsheRevach23',
   ],
 };
+
+// ─── BreadcrumbList builder ───────────────────────────────────────────────────
+// items: [{ name, item? }]  — last item has no `item` (current page)
+export const buildBreadcrumbSchema = (items) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((crumb, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: crumb.name,
+    ...(crumb.item ? { item: crumb.item } : {}),
+  })),
+});

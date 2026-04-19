@@ -56,6 +56,11 @@ export const SERVICE_PAGES = [
       },
     ],
     testimonialIds: [1, 2, 3],
+    relatedArticles: [
+      { slug: 'facebook-account-disabled', title: 'חשבון פייסבוק מושבת — מה עושים?' },
+      { slug: 'facebook-recovery-no-email-phone', title: 'שחזור פייסבוק בלי מייל ובלי טלפון' },
+      { slug: 'facebook-disabled-vs-limited', title: 'מושבת לעומת מוגבל — ההבדל שחשוב לדעת' },
+    ],
   },
 
   {
@@ -115,6 +120,11 @@ export const SERVICE_PAGES = [
       },
     ],
     testimonialIds: [2, 4, 3],
+    relatedArticles: [
+      { slug: 'instagram-hacked-recovery', title: 'אינסטגרם נפרץ — מה עושים מיד?' },
+      { slug: 'shadowban-instagram-2025', title: 'Shadowban באינסטגרם 2026 — המדריך המלא' },
+      { slug: 'protect-instagram-account', title: 'איך מגינים על חשבון האינסטגרם' },
+    ],
   },
 
   {
@@ -174,6 +184,10 @@ export const SERVICE_PAGES = [
       },
     ],
     testimonialIds: [1, 5, 6],
+    relatedArticles: [
+      { slug: 'whatsapp-recovery-guide', title: 'מדריך שחזור וואטסאפ — כל מה שצריך לדעת' },
+      { slug: 'whatsapp-unblock', title: 'איך מסירים חסימה בוואטסאפ' },
+    ],
   },
 
   {
@@ -233,6 +247,10 @@ export const SERVICE_PAGES = [
       },
     ],
     testimonialIds: [3, 5, 1],
+    relatedArticles: [
+      { slug: 'facebook-account-disabled', title: 'חשבון פייסבוק מושבת — מה עושים?' },
+      { slug: 'facebook-disabled-vs-limited', title: 'מושבת לעומת מוגבל — ההבדל שחשוב לדעת' },
+    ],
   },
 
   {
@@ -292,6 +310,10 @@ export const SERVICE_PAGES = [
       },
     ],
     testimonialIds: [2, 4, 3],
+    relatedArticles: [
+      { slug: 'instagram-hacked-recovery', title: 'אינסטגרם נפרץ — מה עושים מיד?' },
+      { slug: 'protect-instagram-account', title: 'איך מגינים על חשבון האינסטגרם' },
+    ],
   },
 
   {
@@ -351,5 +373,8 @@ export const SERVICE_PAGES = [
       },
     ],
     testimonialIds: [6, 3, 5],
+    relatedArticles: [
+      { slug: 'ads-manager-blocked', title: 'מנהל מודעות חסום — מה עושים?' },
+    ],
   },
 ];

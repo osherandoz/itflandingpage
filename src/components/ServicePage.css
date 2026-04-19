@@ -464,3 +464,40 @@
     padding: 14px 28px;
   }
 }
+
+/* ---- Related Articles ---- */
+.service-related-articles {
+  background: #0C0E1D;
+  padding: 3rem 0;
+  border-top: 1px solid #1a1f3a;
+}
+
+.service-related-articles h2 {
+  font-size: 1.4rem;
+  color: #e2e8f0;
+  margin-bottom: 1.2rem;
+}
+
+.service-related-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.service-related-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #60a5fa;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.service-related-link:hover {
+  color: #93c5fd;
+  text-decoration: underline;
+}

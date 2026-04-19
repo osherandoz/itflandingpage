@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingWhatsApp from './FloatingWhatsApp';
 import { openWhatsApp } from '../utils/whatsapp';
+import { buildBreadcrumbSchema } from '../data/schemas';
 import './ServicePage.css';
 
 // All 6 testimonials inlined so the template has no extra data dependency
@@ -113,8 +115,17 @@ const ServicePage = ({ pageData }) => {
     openWhatsApp(`היי, אני מעוניין/ת בשירות: ${pageData.keyword}`);
   };
 
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'בית', item: 'https://www.israeltechforce.com/' },
+    { name: pageData.keyword },
+  ]);
+
   return (
     <div dir="rtl" className="service-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Navbar />
 
       <main>
@@ -224,6 +235,25 @@ const ServicePage = ({ pageData }) => {
             <ServiceFAQ faqs={pageData.faqs} />
           </div>
         </section>
+
+        {/* ---- RELATED ARTICLES ---- */}
+        {pageData.relatedArticles && pageData.relatedArticles.length > 0 && (
+          <section className="service-related-articles">
+            <div className="service-container">
+              <h2>מאמרים קשורים</h2>
+              <ul className="service-related-list">
+                {pageData.relatedArticles.map((a) => (
+                  <li key={a.slug}>
+                    <Link to={`/articles/${a.slug}`} className="service-related-link">
+                      <i className="fas fa-file-alt" aria-hidden="true"></i>
+                      {a.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
 
         {/* ---- FINAL CTA ---- */}
         <section className="service-cta-final">
