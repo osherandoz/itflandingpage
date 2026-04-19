@@ -4,7 +4,7 @@ export const pressItems = [
     siteName: 'Ynet',
     siteShortName: 'ynet',
     siteColor: '#E62020',
-    headline: 'החברה לא נותנת מענה',
+    headline: 'החברה לא נותנת מענה, אבל אנחנו יודעים איך להגיע אליה',
     summary:
       'כתבה בYnet על חסימות חשבונות רשתות חברתיות ואי-מענה של החברות — ואיך מומחים כמו IsraelTechForce ממלאים את החלל.',
     date: '23.2.2022',
