@@ -33,6 +33,12 @@ export const LOCAL_BUSINESS_SCHEMA = {
   areaServed: { '@type': 'Country', name: 'Israel' },
   priceRange: '₪₪',
   openingHours: 'Su-Fr 08:00-22:00',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    reviewCount: '2500',
+    bestRating: '5',
+  },
   sameAs: [
     'https://share.google/yNPb3RHHkfrk8sxNa',
     'https://www.facebook.com/israeltechforce23',
@@ -156,3 +162,23 @@ export const buildBlogPostingSchema = (article) => ({
     name: BUSINESS_NAME,
   },
 });
+
+// ─── Person (owner / author) ─────────────────────────────────────────────────
+export const PERSON_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE_URL}/#author`,
+  name: 'אושר רווח',
+  jobTitle: 'מומחה שחזור חשבונות רשתות חברתיות',
+  url: SITE_URL,
+  image: `${SITE_URL}/images/osher-photo-1.jpg`,
+  worksFor: {
+    '@type': 'Organization',
+    '@id': `${SITE_URL}/#business`,
+    name: BUSINESS_NAME,
+  },
+  sameAs: [
+    'https://www.instagram.com/osher_revach_1/',
+    'https://www.facebook.com/OsheRevach23',
+  ],
+};

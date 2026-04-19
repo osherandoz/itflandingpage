@@ -62,13 +62,31 @@ const AboutMe = () => {
           <div className="about-images">
             <div className="image-grid">
               <div className="image-item main-image">
-                <img src="/images/צילום אור לוי -8380.jpg" alt="אושר - מומחה שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ" />
+                <img
+                  src="/images/osher-photo-1.jpg"
+                  alt="אושר רווח — מומחה שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ"
+                  width={600}
+                  height={800}
+                  loading="lazy"
+                />
               </div>
               <div className="image-item">
-                <img src="/images/צילום אור לוי -8092.jpg" alt="IsraelTechForce - מומחים לשחזור חשבונות רשתות חברתיות" />
+                <img
+                  src="/images/osher-photo-2.jpg"
+                  alt="IsraelTechForce — מומחים לשחזור חשבונות רשתות חברתיות"
+                  width={600}
+                  height={800}
+                  loading="lazy"
+                />
               </div>
               <div className="image-item">
-                <img src="/images/צילום אור לוי -8391.jpg" alt="שחזור חשבונות - שירות מקצועי ואמין" />
+                <img
+                  src="/images/osher-photo-3.jpg"
+                  alt="שחזור חשבונות — שירות מקצועי ואמין"
+                  width={600}
+                  height={800}
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>

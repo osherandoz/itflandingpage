@@ -1,7 +1,7 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
 import SocialProofToast from '../src/components/SocialProofToast.jsx';
-import { LOCAL_BUSINESS_SCHEMA, SERVICE_SCHEMAS } from '../src/data/schemas.js';
+import { LOCAL_BUSINESS_SCHEMA, SERVICE_SCHEMAS, PERSON_SCHEMA } from '../src/data/schemas.js';
 import '../src/index.css';
 import '../src/App.css';
 
@@ -53,6 +53,11 @@ export function Layout({ children }) {
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
           />
         ))}
+        {/* Structured Data — Person (Osher Revach) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_SCHEMA) }}
+        />
 
         {/* Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
