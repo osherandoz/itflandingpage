@@ -15,6 +15,7 @@
 .hero-bg-icon {
   position: absolute;
   color: rgba(255, 255, 255, 0.06);
+  will-change: transform;
   animation: bgIconFloat 7s ease-in-out infinite;
   line-height: 1;
 }
@@ -31,17 +32,15 @@
   95%           { box-shadow: 0 0 0 18px rgba(37, 211, 102, 0); }
 }
 
-/* Animated gradient background */
-@keyframes gradientPulse {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Gradient uses a pseudo-element so only transform runs on the compositor */
+@keyframes gradientDrift {
+  0%   { transform: translateX(0) translateY(0); }
+  50%  { transform: translateX(-25%) translateY(-5%); }
+  100% { transform: translateX(0) translateY(0); }
 }
 
 .hero-section {
   background: linear-gradient(-45deg, #0C0E1D, #1a1f3a, #0f1729, #162040);
-  background-size: 400% 400%;
-  animation: gradientPulse 10s ease infinite;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -49,6 +48,19 @@
   position: relative;
   overflow: hidden;
   padding-top: 70px;
+}
+
+/* Drifting gradient — transform-only so it stays on the GPU compositor */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  inset: -25%;
+  background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(26,31,58,.9), transparent 70%),
+              radial-gradient(ellipse 60% 50% at 20% 70%, rgba(22,32,64,.7), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+  animation: gradientDrift 14s ease-in-out infinite;
 }
 
 /* Diagonal grid texture overlay */

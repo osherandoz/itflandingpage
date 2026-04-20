@@ -47,8 +47,9 @@
   100% { transform: translate(40px, -30px); }
 }
 .svc-orb {
-  position: absolute; border-radius: 50%; filter: blur(80px);
+  position: absolute; border-radius: 50%; filter: blur(40px);
   pointer-events: none; z-index: 0;
+  will-change: transform;
   animation: svc-drift 18s ease-in-out infinite alternate;
 }
 .svc-orb-a { width:500px; height:500px; background:radial-gradient(closest-side,#2563eb,transparent); top:-120px; left:-160px; opacity:.35 }
@@ -110,16 +111,16 @@
 
 /* ─── Entrance animation ─────────────────────────────── */
 @keyframes svc-card-in {
-  to { opacity:1; transform:none; filter:none }
+  to { opacity:1; transform:none }
 }
 
 .svc-reveal {
-  opacity: 0; transform: translateY(30px) scale(.98); filter: blur(8px);
-  transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1), filter .9s ease;
+  opacity: 0; transform: translateY(30px) scale(.98);
+  transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1);
 }
-.svc-reveal.svc-in { opacity:1; transform:none; filter:none }
+.svc-reveal.svc-in { opacity:1; transform:none }
 
-.svc-grid .svc-card { opacity:0; transform:translateY(40px) scale(.96); filter:blur(8px) }
+.svc-grid .svc-card { opacity:0; transform:translateY(40px) scale(.96) }
 .svc-grid.svc-in .svc-card { animation: svc-card-in .9s cubic-bezier(.2,.7,.2,1) forwards }
 .svc-grid.svc-in .svc-card:nth-child(1){ animation-delay:.05s }
 .svc-grid.svc-in .svc-card:nth-child(2){ animation-delay:.15s }
@@ -156,9 +157,12 @@
   -webkit-mask: linear-gradient(#000,#000) content-box, linear-gradient(#000,#000);
   -webkit-mask-composite: xor; mask-composite: exclude;
   padding: 1px;
+  animation: none;
+}
+.svc-card:hover::before {
+  opacity: 1;
   animation: svc-spin 6s linear infinite;
 }
-.svc-card:hover::before { opacity: 1 }
 @keyframes svc-spin { to { --svc-angle: 360deg } }
 
 /* ─── Card inner ─────────────────────────────────────── */

@@ -4,21 +4,11 @@ import { Analytics } from "@vercel/analytics/react";
 import SocialProofToast from '../src/components/SocialProofToast.jsx';
 import NewsletterPopup from '../src/components/NewsletterPopup.jsx';
 import { LOCAL_BUSINESS_SCHEMA, SERVICE_SCHEMAS, PERSON_SCHEMA } from '../src/data/schemas.js';
+// Self-hosted font — eliminates render-blocking Google Fonts round-trip
+import '@fontsource/heebo/400.css';
+import '@fontsource/heebo/700.css';
 import '../src/index.css';
 import '../src/App.css';
-
-const META_PIXEL_SCRIPT = `
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1911202046942044');
-fbq('track', 'PageView');
-`;
 
 export function Layout({ children }) {
   return (
@@ -61,17 +51,16 @@ export function Layout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_SCHEMA) }}
         />
 
-        {/* Fonts */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700&display=swap"
-        />
+        {/* Font Awesome — non-blocking (print trick) */}
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          media="print"
+          onLoad="this.media='all'"
         />
+        <noscript>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+        </noscript>
 
         {/* Preload LCP image */}
         <link
@@ -93,9 +82,6 @@ gtag('js', new Date());
 gtag('config', 'G-M2TYTNN02X');
 ` }} />
 
-        {/* Meta Pixel */}
-        <script dangerouslySetInnerHTML={{ __html: META_PIXEL_SCRIPT }} />
-
         {/* Route-injected CSS/links */}
         <Links />
       </head>
@@ -114,8 +100,25 @@ gtag('config', 'G-M2TYTNN02X');
   );
 }
 
+const META_PIXEL_ID = '1911202046942044';
+
 export default function Root() {
   const [showNewsletter, setShowNewsletter] = useState(false);
+
+  // Meta Pixel — injected after hydration so it never blocks rendering
+  useEffect(() => {
+    if (window.fbq) return; // already loaded
+    /* eslint-disable */
+    (function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+      t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    })(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    /* eslint-enable */
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'PageView');
+  }, []);
 
   useEffect(() => {
     // Allow footer button (and any other caller) to open the popup imperatively
