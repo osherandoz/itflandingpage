@@ -37,7 +37,7 @@ const HeroSection = () => {
         <div className="hero-logo">
           <img
             src="/images/israeltechforce-logo-white.png"
-            alt="IsraelTechForce — מומחים לשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ"
+            alt="IsraelTechForce - מומחים לשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ"
             width="3000"
             height="2212"
             loading="eager"
@@ -54,13 +54,12 @@ const HeroSection = () => {
           </h1>
 
           <p className="hero-urgency" role="alert">
-            ⚠️ כל יום שעובר פוגע בסיכויי השחזור — פעל עכשיו
+            ⚠️ כל יום שעובר פוגע בסיכויי השחזור. פעל עכשיו
           </p>
 
           <p className="hero-subtitle">
-            95%+ הצלחה בשחזור חשבונות פייסבוק, אינסטגרם ו-WhatsApp —
-            גם במקרים שמטא אמרו שאין סיכוי.{' '}
-            <strong>וגם פתרונות לעסקים: ביזנס מנג׳ר, דפים עסקיים וחשבונות מודעות</strong>
+            95%+ הצלחה בשחזור חשבונות פייסבוק, אינסטגרם ו-WhatsApp, גם במקרים שמטא אמרו שאין סיכוי.{' '}
+            <strong>וגם פתרונות לעסקים: ביזנס מנג׳ר, דפים עסקיים וחשבונות מודעות.</strong>
           </p>
 
           <div className="hero-features">
@@ -71,7 +70,7 @@ const HeroSection = () => {
 
           <button className="hero-cta hero-cta-pulse" onClick={openWhatsApp}>
             <i className="fab fa-whatsapp" aria-hidden="true"></i>
-            שלחו הודעה עכשיו — חינם
+            שלחו הודעה עכשיו, ללא עלות
           </button>
 
           <p className="hero-last-recovery" aria-live="polite">
@@ -81,7 +80,7 @@ const HeroSection = () => {
 
           <p className="hero-guarantee">
             <i className="fas fa-shield-alt" aria-hidden="true"></i>
-            <strong>בלי תשלום מראש</strong> — לא הצלחנו? לא משלמים. נקודה.
+            <strong>בלי תשלום מראש.</strong> לא הצלחנו? לא משלמים. נקודה.
           </p>
         </div>
 

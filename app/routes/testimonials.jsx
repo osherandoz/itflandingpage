@@ -96,14 +96,14 @@ const REVIEWS_SCHEMA = [
 ];
 
 export const meta = () => [
-  { title: 'ביקורות לקוחות — IsraelTechForce | דירוג 4.9/5' },
+  { title: 'ביקורות לקוחות - IsraelTechForce | דירוג 4.9/5' },
   {
     name: 'description',
     content:
       'קרא ביקורות אמיתיות מלקוחות שסמכו על IsraelTechForce לשחזור חשבונות. דירוג 4.9/5 מ-2,500+ לקוחות.',
   },
   { property: 'og:type', content: 'website' },
-  { property: 'og:title', content: 'ביקורות לקוחות — IsraelTechForce' },
+  { property: 'og:title', content: 'ביקורות לקוחות - IsraelTechForce' },
   { property: 'og:description', content: 'ביקורות אמיתיות מ-2,500+ לקוחות מרוצים. דירוג 4.9/5.' },
   { property: 'og:url', content: 'https://www.israeltechforce.com/testimonials' },
   { property: 'og:locale', content: 'he_IL' },

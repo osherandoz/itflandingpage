@@ -64,7 +64,7 @@ const AboutMe = () => {
               <div className="image-item main-image">
                 <img
                   src="/images/osher-photo-1.jpg"
-                  alt="אושר רווח — מומחה שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ"
+                  alt="אושר רווח, מומחה שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ"
                   width={600}
                   height={800}
                   loading="lazy"
@@ -73,7 +73,7 @@ const AboutMe = () => {
               <div className="image-item">
                 <img
                   src="/images/osher-photo-2.jpg"
-                  alt="IsraelTechForce — מומחים לשחזור חשבונות רשתות חברתיות"
+                  alt="IsraelTechForce, מומחים לשחזור חשבונות רשתות חברתיות"
                   width={600}
                   height={800}
                   loading="lazy"
@@ -82,7 +82,7 @@ const AboutMe = () => {
               <div className="image-item">
                 <img
                   src="/images/osher-photo-3.jpg"
-                  alt="שחזור חשבונות — שירות מקצועי ואמין"
+                  alt="שחזור חשבונות, שירות מקצועי ואמין"
                   width={600}
                   height={800}
                   loading="lazy"

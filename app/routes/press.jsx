@@ -7,7 +7,7 @@ export const meta = () => [
   {
     name: 'description',
     content:
-      'IsraelTechForce בתקשורת — כתבות בYnet, ערוץ הכלכלה וקהילות פייסבוק על שחזור חשבונות מושבתים ברשתות החברתיות.',
+      'IsraelTechForce בתקשורת: כתבות ב-Ynet, ערוץ הכלכלה וקהילות פייסבוק על שחזור חשבונות מושבתים ברשתות החברתיות.',
   },
   { property: 'og:title', content: 'IsraelTechForce בתקשורת' },
   {

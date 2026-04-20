@@ -6,21 +6,21 @@ const STEPS = [
   {
     icon: 'fas fa-comments',
     title: 'שולחים הודעה',
-    description: 'שולחים הודעה בוואטסאפ — נציג עונה תוך דקות ומתחיל לבדוק את המקרה שלך.',
+    description: 'שולחים הודעה בוואטסאפ, נציג עונה תוך דקות ומתחיל לבדוק את המקרה שלך.',
     time: '~ 2 דקות',
     color: '#3B82F6',
   },
   {
     icon: 'fas fa-search',
     title: 'אבחון מהיר',
-    description: 'כמה שאלות קצרות ובדיקה מקצועית של הבעיה — בלי בזבוז זמן. אנחנו יודעים בדיוק מה לחפש.',
+    description: 'כמה שאלות קצרות ובדיקה מקצועית של הבעיה, בלי בזבוז זמן. אנחנו יודעים בדיוק מה לחפש.',
     time: '~ 10 דקות',
     color: '#8B5CF6',
   },
   {
     icon: 'fas fa-file-invoice',
     title: 'הצעה ושקיפות מלאה',
-    description: 'הצעת מחיר ברורה עם אחוז הצלחה משוער לכל אופציה. אין הפתעות — תשלום רק אחרי הצלחה.',
+    description: 'הצעת מחיר ברורה עם אחוז הצלחה משוער לכל אופציה. אין הפתעות, תשלום רק אחרי הצלחה.',
     time: '~ 5 דקות',
     color: '#F59E0B',
   },
@@ -55,7 +55,7 @@ const HowItWorks = () => {
       <div className="container">
         <h2 className="section-title">איך זה עובד?</h2>
         <p className="section-subtitle">
-          מהפנייה הראשונה ועד לשחזור — תהליך פשוט, שקוף ומהיר
+          מהפנייה הראשונה ועד לשחזור: תהליך פשוט, שקוף ומהיר
         </p>
 
         <div className="hiw-timeline">
@@ -96,7 +96,7 @@ const HowItWorks = () => {
 
         {/* Bottom CTA */}
         <div className="hiw-cta">
-          <p className="hiw-cta-text">מוכן להתחיל? אבחון ראשוני — חינמי לחלוטין</p>
+          <p className="hiw-cta-text">מוכן להתחיל? אבחון ראשוני, חינמי לחלוטין</p>
           <button className="hiw-cta-btn" onClick={openWhatsApp}>
             <i className="fab fa-whatsapp" aria-hidden="true" />
             שלח הודעה עכשיו

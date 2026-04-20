@@ -134,11 +134,11 @@ const ServicePage = ({ pageData }) => {
           <div className="service-container">
             <h1>{pageData.title}</h1>
             <p className="service-hero-subtitle">
-              שירות מקצועי ומהיר לשחזור חשבונות — תשלום רק אחרי הצלחה מוכחת
+              שירות מקצועי ומהיר לשחזור חשבונות. תשלום רק אחרי הצלחה מוכחת
             </p>
             <button className="service-cta-btn" onClick={handleCTA}>
               <i className="fab fa-whatsapp" aria-hidden="true"></i>
-              שלחו הודעה עכשיו — חינם
+              שלחו הודעה עכשיו, ללא עלות
             </button>
           </div>
         </section>
@@ -181,7 +181,7 @@ const ServicePage = ({ pageData }) => {
         {/* ---- STEPS ---- */}
         <section className="service-steps">
           <div className="service-container">
-            <h2>הפתרון שלנו — 3 שלבים פשוטים</h2>
+            <h2>הפתרון שלנו: 3 שלבים פשוטים</h2>
             <div className="service-steps-grid">
               {pageData.steps.map((step, index) => (
                 <div key={index} className="service-step-card">
@@ -206,7 +206,7 @@ const ServicePage = ({ pageData }) => {
                   <div className="service-testimonial-header">
                     <img
                       src={t.image}
-                      alt={`${t.name} — ${t.role}`}
+                      alt={`${t.name}, ${t.role}`}
                       className="service-testimonial-img"
                       onError={(e) => {
                         e.target.src = '/images/default-avatar.png';
@@ -260,8 +260,7 @@ const ServicePage = ({ pageData }) => {
           <div className="service-container">
             <h2>מוכנים לפתור את הבעיה?</h2>
             <p>
-              שלחו הודעת וואטסאפ עכשיו — אבחון ראשוני חינם, ותשלום רק אחרי שהחשבון
-              חזר לידיכם.
+              שלחו הודעת וואטסאפ עכשיו. אבחון ראשוני חינם, ותשלום רק אחרי שהחשבון חזר לידיכם.
             </p>
             <button className="service-cta-btn" onClick={handleCTA}>
               <i className="fab fa-whatsapp" aria-hidden="true"></i>

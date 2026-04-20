@@ -214,12 +214,12 @@ const ContactForm = () => {
               שולח...
             </>
           ) : (
-            'שלחו הודעה — נחזור אליכם תוך שעה'
+            'שלחו הודעה, נחזור אליכם תוך שעה'
           )}
         </button>
 
         <p className="form-whatsapp-note">
-          לשירות מיידי —{' '}
+          רוצים מענה מיידי?{' '}
           <button
             type="button"
             className="form-whatsapp-link"
