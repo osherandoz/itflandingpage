@@ -51,16 +51,11 @@ export function Layout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_SCHEMA) }}
         />
 
-        {/* Font Awesome — non-blocking (print trick) */}
+        {/* Font Awesome */}
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-          media="print"
-          onLoad={(e) => { e.currentTarget.media = 'all'; }}
         />
-        <noscript>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-        </noscript>
 
         {/* Preload LCP image */}
         <link
