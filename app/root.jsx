@@ -56,7 +56,7 @@ export function Layout({ children }) {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
           media="print"
-          onLoad="this.media='all'"
+          onLoad={(e) => { e.currentTarget.media = 'all'; }}
         />
         <noscript>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
