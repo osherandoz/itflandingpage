@@ -21,7 +21,7 @@ export const meta = () => [
     content:
       'מומחים לשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ שנחסמו או נפרצו. הצלחה של 95%+ | תשלום רק אחרי הצלחה.',
   },
-  { property: 'og:url', content: 'https://israeltechforce.com/' },
+  { property: 'og:url', content: 'https://www.israeltechforce.com/' },
   { property: 'og:site_name', content: 'IsraelTechForce' },
   { property: 'og:locale', content: 'he_IL' },
   {
@@ -42,7 +42,7 @@ export const meta = () => [
     name: 'twitter:image',
     content: 'https://israeltechforce.com/images/israeltechforce-logo-white.png',
   },
-  { tagName: 'link', rel: 'canonical', href: 'https://israeltechforce.com/' },
+  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/' },
 ];
 
 export default function HomeRoute() {

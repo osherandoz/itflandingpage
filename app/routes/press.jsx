@@ -14,13 +14,13 @@ export const meta = () => [
     property: 'og:description',
     content: 'כתבות וסיקורים על שירות שחזור חשבונות IsraelTechForce.',
   },
-  { property: 'og:url', content: 'https://israeltechforce.com/press' },
+  { property: 'og:url', content: 'https://www.israeltechforce.com/press' },
   { property: 'og:type', content: 'website' },
   {
     property: 'og:image',
     content: 'https://israeltechforce.com/images/israeltechforce-logo-white.png',
   },
-  { tagName: 'link', rel: 'canonical', href: 'https://israeltechforce.com/press' },
+  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/press' },
 ];
 
 export default function PressRoute() {

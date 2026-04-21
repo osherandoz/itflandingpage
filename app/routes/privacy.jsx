@@ -7,8 +7,7 @@ export const meta = () => [
     content:
       'מדיניות הפרטיות של IsraelTechForce - כיצד אנו אוספים ומשתמשים במידע.',
   },
-  { name: 'robots', content: 'noindex, follow' },
-  { tagName: 'link', rel: 'canonical', href: 'https://israeltechforce.com/privacy' },
+  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/privacy' },
 ];
 
 export default Privacy;
