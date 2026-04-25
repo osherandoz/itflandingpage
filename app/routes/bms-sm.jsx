@@ -1,98 +1,117 @@
-import BMSSocialManagers from '../../src/pages/bms-sm';
+import BmsSm from '../../src/pages/BmsSm';
 
-const BMS_SM_SCHEMA = {
+const URL = 'https://www.israeltechforce.com/bms-sm';
+const TITLE = 'קורס BMS למנהלות סושיאל — הגיעי מוכנה לכל לקוח | אושר רווח';
+const DESCRIPTION =
+  'קורס מקוון למנהלות סושיאל ופרילנסריות: איך לזהות תשתית פרסום בעייתית לפני האונבורדינג, לנהל הרשאות נכון ולדעת מה לעשות כשמשהו משתבש. 197₪ בלבד.';
+const OG_IMAGE = 'https://www.israeltechforce.com/og-bms-sm.jpg';
+
+export const meta = () => [
+  { title: TITLE },
+  { name: 'description', content: DESCRIPTION },
+  { property: 'og:type', content: 'website' },
+  { property: 'og:title', content: 'קורס BMS — הגיעי מוכנה לכל לקוח חדש' },
+  { property: 'og:description', content: "הצ׳קליסט שכל מנהלת סושיאל צריכה לפני שהיא חותמת על לקוח. 197₪ בלבד." },
+  { property: 'og:url', content: URL },
+  { property: 'og:image', content: OG_IMAGE },
+  { property: 'og:locale', content: 'he_IL' },
+  { name: 'twitter:card', content: 'summary_large_image' },
+  { name: 'twitter:title', content: TITLE },
+  { name: 'twitter:description', content: DESCRIPTION },
+  { tagName: 'link', rel: 'canonical', href: URL },
+];
+
+const COURSE_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Course',
-  name: 'BMS — קורס למנהלות סושיאל',
+  name: 'קורס BMS — Business Manager Security למנהלות סושיאל',
   description:
-    'קורס מקוון למנהלות סושיאל: איך לזהות תשתית פרסום בעייתית לפני האונבורדינג. 15 שיעורים.',
+    'קורס מקוון למנהלות סושיאל ופרילנסריות המלמד כיצד לזהות תשתית פרסום בעייתית, לנהל הרשאות נכון ולהגן על עצמן ועל לקוחותיהן.',
+  url: URL,
+  inLanguage: 'he',
   provider: {
-    '@type': 'Organization',
-    name: 'Israel Tech Force',
+    '@type': 'Person',
+    name: 'אושר רווח',
     url: 'https://www.israeltechforce.com',
   },
-  url: 'https://www.israeltechforce.com/bms-sm',
-  inLanguage: 'he',
   offers: {
     '@type': 'Offer',
     price: '197',
     priceCurrency: 'ILS',
     availability: 'https://schema.org/InStock',
-    url: 'https://www.israeltechforce.com/checkout/bms',
+    url: URL,
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '5',
+    reviewCount: '4',
+  },
+  hasCourseInstance: {
+    '@type': 'CourseInstance',
+    courseMode: 'online',
+    courseWorkload: 'PT3H',
   },
 };
 
-const FAQ_BMS_SCHEMA = {
+const FAQ_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'למי הקורס BMS מיועד?',
+      name: 'אני כבר עובדת שנים עם ביזנס מנג׳ר, זה רלוונטי אליי?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'מנהלות סושיאל ופרילנסריות שעובדות עם לקוחות שמפרסמים בפייסבוק ואינסטגרם.',
+        text: 'בדיוק בשבילך. BMS מלמד איך המערכת באמת עובדת, למה דברים נחסמים, ואיך לבנות תשתית שתחזיק לאורך זמן.',
       },
     },
     {
       '@type': 'Question',
-      name: 'כמה זמן לוקח קורס BMS?',
+      name: 'מה קורה אם הלקוח שלי הוא שגרם לחסימה?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'הקורס כולל 15 שיעורים קצרים. רוב הסטודנטיות מסיימות תוך 3-4 שעות.',
+        text: 'חלק מהקורס מוקדש לדיוק לזה: איך לזהות מי אחראי, איך לתקן, ואיך לתקשר ללקוח בצורה מקצועית.',
       },
     },
     {
       '@type': 'Question',
-      name: 'האם יש ערבות להחזר כסף?',
+      name: 'כמה זמן לוקח?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'כן, ערבות השבת כסף מלאה תוך 7 ימים מהרכישה, ללא שאלות.',
+        text: 'שעתיים-שלוש בסה"כ. ניתן לעשות בקצב שלך, ולחזור לחלק ספציפי כשיש תקלה אצל לקוח.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'האם הקורס מבטיח שלא יהיו בעיות?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'לא. המטרה היא שתגיעי מוכנה יותר, תזהי בעיות מוקדם יותר, ותדעי מה לעשות כשמשהו קורה.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'זה מתאים גם לפרילנסרית מתחילה?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'כן, אבל גם לוותיקה. הקורס בנוי כך שכל שלב מוסיף שכבה.',
       },
     },
   ],
 };
 
-export const meta = () => [
-  { title: 'קורס BMS למנהלות סושיאל — הגיעי מוכנה לכל לקוח | אושר רווח' },
-  {
-    name: 'description',
-    content:
-      'קורס מקוון למנהלות סושיאל: איך לזהות תשתית פרסום בעייתית לפני האונבורדינג. 15 שיעורים. 197₪ בלבד.',
-  },
-  { property: 'og:type', content: 'website' },
-  { property: 'og:title', content: 'קורס BMS למנהלות סושיאל — הגיעי מוכנה לכל לקוח' },
-  {
-    property: 'og:description',
-    content: 'קורס מקוון למנהלות סושיאל: איך לזהות תשתית פרסום בעייתית לפני האונבורדינג.',
-  },
-  { property: 'og:url', content: 'https://www.israeltechforce.com/bms-sm' },
-  { property: 'og:locale', content: 'he_IL' },
-  {
-    property: 'og:image',
-    content: 'https://www.israeltechforce.com/og-bms-sm.jpg',
-  },
-  { name: 'twitter:card', content: 'summary_large_image' },
-  { name: 'twitter:title', content: 'קורס BMS למנהלות סושיאל' },
-  {
-    name: 'twitter:description',
-    content: 'איך לזהות תשתית פרסום בעייתית לפני האונבורדינג. 15 שיעורים. 197₪.',
-  },
-  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/bms-sm' },
-];
-
-export default function BMSSmRoute() {
+export default function BmsSmRoute() {
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(BMS_SM_SCHEMA) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(COURSE_SCHEMA) }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_BMS_SCHEMA) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
       />
-      <BMSSocialManagers />
+      <BmsSm />
     </>
   );
 }

@@ -1,15 +1,7 @@
 /**
  * POST /api/bms-lead
- * Secure lead submission for BMS-SM landing page.
- * Collects firstName + phone, adds to Smoove list 1078775.
- *
- * Security layers:
- *  1. CORS — only israeltechforce.com origins
- *  2. Method guard — POST only
- *  3. Honeypot — bot detection
- *  4. Input validation — name/phone format
- *  5. Rate limiting — max 5 req / IP / hour
- *  6. Duplicate prevention — same phone silent no-op within 1h
+ * Secure BMS landing-page lead capture — proxies to Smoove API.
+ * Captures Name + Phone (no email) and tags contacts by source.
  */
 
 const ALLOWED_ORIGINS = [
@@ -35,7 +27,6 @@ function applyCors(req, res) {
   return false;
 }
 
-// ─── Rate Limiting ────────────────────────────────────────────────────────────
 const rateLimitStore = new Map();
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
@@ -52,9 +43,7 @@ function checkRateLimit(ip) {
   return true;
 }
 
-// ─── Duplicate Prevention ─────────────────────────────────────────────────────
 const recentPhones = new Map();
-
 function isDuplicate(phone) {
   const now = Date.now();
   const expiry = recentPhones.get(phone);
@@ -63,15 +52,22 @@ function isDuplicate(phone) {
   return false;
 }
 
-// ─── Validation ───────────────────────────────────────────────────────────────
-const PHONE_RE = /^[\d\s\-+()]{7,20}$/;
 const NAME_RE = /^[\u0590-\u05FF\u0020a-zA-Z\s\-']{1,50}$/;
 
-function sanitize(str) {
-  return String(str).trim().replace(/[<>"]/g, '').substring(0, 200);
+function normalizePhone(raw) {
+  const digits = String(raw || '').replace(/[^\d+]/g, '');
+  if (!digits) return '';
+  // Accept Israeli formats: 05xxxxxxxx / +9725xxxxxxxx / 9725xxxxxxxx
+  if (/^05\d{8}$/.test(digits)) return digits;
+  if (/^\+9725\d{8}$/.test(digits)) return '0' + digits.slice(4);
+  if (/^9725\d{8}$/.test(digits)) return '0' + digits.slice(3);
+  return '';
 }
 
-// ─── Main Handler ─────────────────────────────────────────────────────────────
+function sanitize(str) {
+  return String(str).trim().replace(/[<>"']/g, '').substring(0, 200);
+}
+
 export default async function handler(req, res) {
   if (applyCors(req, res)) return;
 
@@ -83,35 +79,37 @@ export default async function handler(req, res) {
     .split(',')[0]
     .trim();
   if (!checkRateLimit(ip)) {
-    return res.status(429).json({ error: 'יותר מדי בקשות. נסה שוב מאוחר יותר.' });
+    return res.status(429).json({ error: 'יותר מדי בקשות. נסי שוב מאוחר יותר.' });
   }
 
-  const { firstName, phone, website } = req.body || {};
+  const { firstName, phone, website, source } = req.body || {};
 
   // Honeypot
   if (website) {
     return res.status(200).json({ success: true });
   }
 
-  // Validation
   if (!firstName || !NAME_RE.test(String(firstName).trim())) {
     return res.status(400).json({ error: 'שם לא תקין' });
   }
-  if (!phone || !PHONE_RE.test(String(phone).trim())) {
+
+  const safePhone = normalizePhone(phone);
+  if (!safePhone) {
     return res.status(400).json({ error: 'מספר טלפון לא תקין' });
   }
-
   const safeName = sanitize(firstName);
-  const safePhone = sanitize(phone).replace(/\s/g, '');
+  const safeSource = sanitize(source || 'bms-sm-landing');
 
   if (isDuplicate(safePhone)) {
     return res.status(200).json({ success: true });
   }
 
   const apiKey = process.env.SMOOVE_API_KEY;
+  const listId = parseInt(process.env.SMOOVE_LIST_ID || '1078775', 10);
+
   if (!apiKey) {
     console.error('SMOOVE_API_KEY env var is not set');
-    return res.status(500).json({ error: 'שגיאת שרת. נסה שוב מאוחר יותר.' });
+    return res.status(500).json({ error: 'שגיאת שרת. נסי שוב מאוחר יותר.' });
   }
 
   try {
@@ -125,10 +123,14 @@ export default async function handler(req, res) {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          FirstName: safeName,
-          Phone: safePhone,
-          Lists: [{ Id: 1078775 }],
-          CustomFields: [{ Key: 'source', Value: 'bms-sm-landing' }],
+          cellPhone: safePhone,
+          firstName: safeName,
+          lists_ToSubscribe: [listId],
+          customFields: [
+            { key: 'source', value: safeSource },
+            { key: 'audience', value: 'social-manager' },
+            { key: 'lead_date', value: new Date().toISOString() },
+          ],
         }),
       }
     );
@@ -137,10 +139,10 @@ export default async function handler(req, res) {
     if (smooveRes.ok || smooveRes.status === 409) {
       return res.status(200).json({ success: true });
     }
-    console.error('Smoove bms-lead error:', smooveRes.status, responseText);
-    return res.status(502).json({ error: 'שגיאה בהרשמה. נסה שוב מאוחר יותר.' });
+    console.error('Smoove error:', smooveRes.status, responseText);
+    return res.status(502).json({ error: 'שגיאה בהרשמה. נסי שוב מאוחר יותר.' });
   } catch (err) {
-    console.error('BMS lead handler error:', err);
-    return res.status(500).json({ error: 'שגיאת שרת. נסה שוב מאוחר יותר.' });
+    console.error('BMS lead fetch error:', err);
+    return res.status(500).json({ error: 'שגיאת שרת. נסי שוב מאוחר יותר.' });
   }
 }
