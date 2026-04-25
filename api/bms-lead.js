@@ -82,7 +82,16 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'יותר מדי בקשות. נסי שוב מאוחר יותר.' });
   }
 
-  const { firstName, phone, website, source } = req.body || {};
+  // Vercel can sometimes deliver the body as a raw JSON string instead of an object
+  let body = req.body;
+  if (typeof body === 'string') {
+    try {
+      body = JSON.parse(body);
+    } catch {
+      body = {};
+    }
+  }
+  const { firstName, phone, website, source } = body || {};
 
   // Honeypot
   if (website) {
@@ -126,11 +135,11 @@ export default async function handler(req, res) {
           cellPhone: safePhone,
           firstName: safeName,
           lists_ToSubscribe: [listId],
-          customFields: [
-            { key: 'source', value: safeSource },
-            { key: 'audience', value: 'social-manager' },
-            { key: 'lead_date', value: new Date().toISOString() },
-          ],
+          customFields: {
+            source: safeSource,
+            audience: 'social-manager',
+            lead_date: new Date().toISOString(),
+          },
         }),
       }
     );

@@ -194,28 +194,27 @@ describe('sanitize()', () => {
 
 // ─── Smoove Payload Shape ─────────────────────────────────────────────────────
 describe('Smoove lead payload', () => {
-  it('contains required fields for list 1078775', () => {
+  it('uses camelCase field names matching the Smoove REST API spec', () => {
     const payload = {
-      FirstName: 'שרה',
-      Phone: '0501234567',
-      Lists: [{ Id: 1078775 }],
-      CustomFields: [{ Key: 'source', Value: 'bms-sm-landing' }],
+      firstName: 'שרה',
+      cellPhone: '0501234567',
+      lists_ToSubscribe: [1078775],
+      customFields: { source: 'bms-sm-landing' },
     };
 
-    expect(payload.Lists).toHaveLength(1);
-    expect(payload.Lists[0].Id).toBe(1078775);
-    expect(payload.CustomFields[0].Key).toBe('source');
-    expect(payload.CustomFields[0].Value).toBe('bms-sm-landing');
-    expect(payload.FirstName).toBeTruthy();
-    expect(payload.Phone).toBeTruthy();
+    expect(payload.lists_ToSubscribe).toHaveLength(1);
+    expect(payload.lists_ToSubscribe[0]).toBe(1078775);
+    expect(payload.customFields.source).toBe('bms-sm-landing');
+    expect(payload.firstName).toBeTruthy();
+    expect(payload.cellPhone).toBeTruthy();
   });
 
   it('serialises to valid JSON', () => {
     const payload = {
-      FirstName: 'שרה',
-      Phone: '0501234567',
-      Lists: [{ Id: 1078775 }],
-      CustomFields: [{ Key: 'source', Value: 'bms-sm-landing' }],
+      firstName: 'שרה',
+      cellPhone: '0501234567',
+      lists_ToSubscribe: [1078775],
+      customFields: { source: 'bms-sm-landing' },
     };
     expect(() => JSON.parse(JSON.stringify(payload))).not.toThrow();
   });
