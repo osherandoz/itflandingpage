@@ -39,6 +39,8 @@
   ],
   "rewrites": [
     { "source": "/api/subscribe", "destination": "/api/subscribe" },
+    { "source": "/api/bms-lead", "destination": "/api/bms-lead" },
+    { "source": "/api/webhook-payment", "destination": "/api/webhook-payment" },
     { "source": "/(.*)", "destination": "/api/ssr" }
   ]
 }

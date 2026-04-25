@@ -16,4 +16,8 @@ export default [
   // Phase C — FAQ + Testimonials
   route("faq", "./routes/faq.jsx"),
   route("testimonials", "./routes/testimonials.jsx"),
+  // BMS-SM — Course landing page + thank-you pages
+  route("bms-sm", "./routes/bms-sm.jsx"),
+  route("תודה-קליסט", "./routes/thank-you-lead.jsx"),
+  route("תודה-רכישה", "./routes/thank-you-purchase.jsx"),
 ];
