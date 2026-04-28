@@ -92,7 +92,7 @@ export default async function handler(req, res) {
       body = {};
     }
   }
-  const { firstName, email, phone, website, source } = body || {};
+  const { firstName, email, phone, website } = body || {};
 
   // Honeypot
   if (website) {
@@ -109,7 +109,6 @@ export default async function handler(req, res) {
 
   const safeName = sanitize(firstName);
   const safeEmail = sanitize(email).toLowerCase();
-  const safeSource = sanitize(source || 'bms-sm-landing');
 
   // Phone is optional — null means not provided / not valid Israeli format
   const safePhone = phone ? normalizePhone(phone) : null;
@@ -133,11 +132,6 @@ export default async function handler(req, res) {
     email: safeEmail,
     firstName: safeName,
     lists_ToSubscribe: [listId],
-    customFields: {
-      source: safeSource,
-      audience: 'social-manager',
-      lead_date: new Date().toISOString(),
-    },
   };
   if (safePhone) contactPayload.cellPhone = safePhone;
 
