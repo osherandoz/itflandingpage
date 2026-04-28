@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
 import SocialProofToast from '../src/components/SocialProofToast.jsx';
 import NewsletterPopup from '../src/components/NewsletterPopup.jsx';
@@ -97,7 +97,10 @@ gtag('config', 'G-M2TYTNN02X');
 
 const META_PIXEL_ID = '1911202046942044';
 
+const NO_NEWSLETTER_ROUTES = ['/bms-sm', '/תודה-קליסט', '/תודה-רכישה'];
+
 export default function Root() {
+  const { pathname } = useLocation();
   const [showNewsletter, setShowNewsletter] = useState(false);
 
   // Meta Pixel — injected after hydration so it never blocks rendering
@@ -122,7 +125,8 @@ export default function Root() {
   }, []);
 
   useEffect(() => {
-    // Show popup once when user scrolls past 40% of the page
+    // Show popup once when user scrolls past 40% — suppressed on BMS/thank-you routes
+    if (NO_NEWSLETTER_ROUTES.includes(pathname)) return;
     if (typeof localStorage !== 'undefined' && localStorage.getItem('newsletterPopupShown')) return;
 
     const handleScroll = () => {
@@ -135,7 +139,7 @@ export default function Root() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [pathname]);
 
   return (
     <>

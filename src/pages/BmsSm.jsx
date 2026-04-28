@@ -711,10 +711,6 @@ export default function BmsSm() {
                   <i className="fa-solid fa-lock" aria-hidden="true" />
                   🔒 תשלום מאובטח
                 </div>
-                <div className="offer-trust-item">
-                  <i className="fa-solid fa-shield-halved" aria-hidden="true" />
-                  🛡️ ערבות 7 ימים
-                </div>
               </div>
             </div>
 
@@ -740,10 +736,6 @@ export default function BmsSm() {
 
           </div>
 
-          <div className="guarantee" role="note">
-            <i className="fa-solid fa-shield-halved" aria-hidden="true" />
-            <div className="guarantee-title">🛡️ ערבות מלאה: 7 ימים כסף חזרה, ללא שאלות.</div>
-          </div>
         </div>
       </section>
 
