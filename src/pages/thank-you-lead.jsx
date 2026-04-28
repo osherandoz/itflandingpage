@@ -23,10 +23,9 @@ export default function ThankYouLead() {
     <main className="ty-page" dir="rtl">
       <div className="ty-card">
         <span className="ty-icon" aria-hidden="true">📋</span>
-        <h1 className="ty-title">הצ׳קליסט בדרך אלייך — בדקי את הטלפון</h1>
+        <h1 className="ty-title">הצ׳קליסט בדרך אלייך — בדקי את המייל</h1>
         <p className="ty-subtitle">
-          שלחנו לך את הצ׳קליסט ישירות לטלפון. אם לא קיבלת תוך כמה דקות — בדקי שנכתב הנייד
-          הנכון.
+          שלחנו לך את הצ׳קליסט ישירות למייל. אם לא קיבלת תוך כמה דקות — בדקי תיבת הספאם.
         </p>
 
         <hr className="ty-divider" />

@@ -4,7 +4,7 @@
  * and route/schema integrity.
  * Run: npm test
  */
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 
 // ─── localStorage mock (Node test env has no DOM) ─────────────────────────────
 const localStorageMock = (() => {
@@ -23,7 +23,6 @@ Object.defineProperty(globalThis, 'localStorage', { value: localStorageMock, wri
 const FORTY_EIGHT_HOURS_MS = 48 * 60 * 60 * 1000;
 const DEADLINE_KEY = 'bms_sm_deadline';
 
-/** Returns the stored deadline or creates a new 48h one. */
 function getOrCreateDeadline(now = Date.now()) {
   const stored = parseInt(localStorage.getItem(DEADLINE_KEY) || '0', 10);
   if (!stored || stored < now) {
@@ -34,7 +33,6 @@ function getOrCreateDeadline(now = Date.now()) {
   return stored;
 }
 
-/** Formats milliseconds diff into { h, m, s } zero-padded strings. */
 function formatCountdown(diffMs) {
   const diff = Math.max(0, diffMs);
   const h = Math.floor(diff / 3600000);
@@ -48,12 +46,14 @@ function formatCountdown(diffMs) {
 }
 
 // ─── Validation helpers (mirror of bms-lead.js) ───────────────────────────────
-const PHONE_RE = /^[\d\s\-+()]{7,20}$/;
-const NAME_RE = /^[\u0590-\u05FF\u0020a-zA-Z\s\-']{1,50}$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^[\d\s\-+()]{9,20}$/;
+const NAME_RE = /^[֐-׿ a-zA-Z\s\-']{1,50}$/;
 
-function validateLead(firstName, phone) {
+function validateLead(firstName, email, phone) {
   if (!firstName || !NAME_RE.test(String(firstName).trim())) return 'שם לא תקין';
-  if (!phone || !PHONE_RE.test(String(phone).trim())) return 'מספר טלפון לא תקין';
+  if (!email || !EMAIL_RE.test(String(email).trim())) return 'כתובת מייל לא תקינה';
+  if (phone && !PHONE_RE.test(String(phone).trim())) return 'מספר טלפון לא תקין';
   return null;
 }
 
@@ -85,22 +85,20 @@ describe('Countdown timer', () => {
   });
 
   it('creates a new deadline if stored one is in the past', () => {
-    localStorage.setItem(DEADLINE_KEY, String(Date.now() - 1000)); // 1s ago
+    localStorage.setItem(DEADLINE_KEY, String(Date.now() - 1000));
     const deadline = getOrCreateDeadline();
     expect(deadline).toBeGreaterThan(Date.now());
   });
 
   it('formats 48h diff correctly', () => {
-    const diff = 48 * 3600000;
-    const result = formatCountdown(diff);
+    const result = formatCountdown(48 * 3600000);
     expect(result.h).toBe('48');
     expect(result.m).toBe('00');
     expect(result.s).toBe('00');
   });
 
   it('formats 1h 30m 5s correctly', () => {
-    const diff = 1 * 3600000 + 30 * 60000 + 5000;
-    const result = formatCountdown(diff);
+    const result = formatCountdown(1 * 3600000 + 30 * 60000 + 5000);
     expect(result.h).toBe('01');
     expect(result.m).toBe('30');
     expect(result.s).toBe('05');
@@ -123,52 +121,76 @@ describe('Countdown timer', () => {
 
 // ─── Lead Form Validation ─────────────────────────────────────────────────────
 describe('Lead form validation', () => {
-  it('accepts a valid Hebrew name and phone', () => {
-    expect(validateLead('שרה', '0501234567')).toBeNull();
+  it('accepts valid Hebrew name + email', () => {
+    expect(validateLead('שרה', 'sarah@example.com')).toBeNull();
   });
 
-  it('accepts Latin name', () => {
-    expect(validateLead('Sarah', '050-123-4567')).toBeNull();
+  it('accepts Latin name + email', () => {
+    expect(validateLead('Sarah', 'sarah@example.com')).toBeNull();
   });
 
   it('accepts name with spaces', () => {
-    expect(validateLead('שרה כהן', '0501234567')).toBeNull();
+    expect(validateLead('שרה כהן', 'sarah@example.com')).toBeNull();
   });
 
-  it('accepts phone with + prefix (international)', () => {
-    expect(validateLead('מיכל', '+972501234567')).toBeNull();
+  it('accepts valid email + optional phone', () => {
+    expect(validateLead('מיכל', 'michal@example.com', '0501234567')).toBeNull();
+  });
+
+  it('accepts valid email with no phone (phone is optional)', () => {
+    expect(validateLead('שרה', 'sarah@example.com', undefined)).toBeNull();
+  });
+
+  it('accepts email + international phone', () => {
+    expect(validateLead('מיכל', 'michal@example.com', '+972501234567')).toBeNull();
   });
 
   it('rejects empty name', () => {
-    expect(validateLead('', '0501234567')).toBe('שם לא תקין');
+    expect(validateLead('', 'sarah@example.com')).toBe('שם לא תקין');
   });
 
   it('rejects null name', () => {
-    expect(validateLead(null, '0501234567')).toBe('שם לא תקין');
+    expect(validateLead(null, 'sarah@example.com')).toBe('שם לא תקין');
   });
 
   it('rejects name that is too long (>50 chars)', () => {
-    expect(validateLead('א'.repeat(51), '0501234567')).toBe('שם לא תקין');
+    expect(validateLead('א'.repeat(51), 'sarah@example.com')).toBe('שם לא תקין');
   });
 
   it('rejects name with special characters', () => {
-    expect(validateLead('<script>alert(1)</script>', '0501234567')).toBe('שם לא תקין');
+    expect(validateLead('<script>alert(1)</script>', 'sarah@example.com')).toBe('שם לא תקין');
   });
 
-  it('rejects empty phone', () => {
-    expect(validateLead('שרה', '')).toBe('מספר טלפון לא תקין');
+  it('rejects empty email', () => {
+    expect(validateLead('שרה', '')).toBe('כתובת מייל לא תקינה');
   });
 
-  it('rejects phone that is too short (<7 chars)', () => {
-    expect(validateLead('שרה', '12345')).toBe('מספר טלפון לא תקין');
+  it('rejects null email', () => {
+    expect(validateLead('שרה', null)).toBe('כתובת מייל לא תקינה');
   });
 
-  it('rejects phone with letters', () => {
-    expect(validateLead('שרה', 'abc1234567')).toBe('מספר טלפון לא תקין');
+  it('rejects email without @', () => {
+    expect(validateLead('שרה', 'notanemail')).toBe('כתובת מייל לא תקינה');
   });
 
-  it('rejects phone that is too long (>20 chars)', () => {
-    expect(validateLead('שרה', '1'.repeat(21))).toBe('מספר טלפון לא תקין');
+  it('rejects email without domain', () => {
+    expect(validateLead('שרה', 'sarah@')).toBe('כתובת מייל לא תקינה');
+  });
+
+  it('rejects malformed email with spaces', () => {
+    expect(validateLead('שרה', 'sarah @example.com')).toBe('כתובת מייל לא תקינה');
+  });
+
+  it('rejects invalid phone when provided', () => {
+    expect(validateLead('שרה', 'sarah@example.com', 'abc1234567')).toBe('מספר טלפון לא תקין');
+  });
+
+  it('rejects phone that is too short when provided', () => {
+    expect(validateLead('שרה', 'sarah@example.com', '12345')).toBe('מספר טלפון לא תקין');
+  });
+
+  it('rejects phone that is too long when provided', () => {
+    expect(validateLead('שרה', 'sarah@example.com', '1'.repeat(21))).toBe('מספר טלפון לא תקין');
   });
 });
 
@@ -194,25 +216,33 @@ describe('sanitize()', () => {
 
 // ─── Smoove Payload Shape ─────────────────────────────────────────────────────
 describe('Smoove lead payload', () => {
-  it('uses camelCase field names matching the Smoove REST API spec', () => {
+  it('includes email and firstName, subscribes to list', () => {
     const payload = {
+      email: 'sarah@example.com',
       firstName: 'שרה',
-      cellPhone: '0501234567',
       lists_ToSubscribe: [1078775],
-      customFields: { source: 'bms-sm-landing' },
+      customFields: { source: 'bms-sm-landing', audience: 'social-manager' },
     };
 
+    expect(payload.email).toBe('sarah@example.com');
+    expect(payload.firstName).toBeTruthy();
     expect(payload.lists_ToSubscribe).toHaveLength(1);
     expect(payload.lists_ToSubscribe[0]).toBe(1078775);
     expect(payload.customFields.source).toBe('bms-sm-landing');
-    expect(payload.firstName).toBeTruthy();
-    expect(payload.cellPhone).toBeTruthy();
+    expect(payload.customFields.audience).toBe('social-manager');
+  });
+
+  it('optionally includes cellPhone', () => {
+    const withPhone = { email: 'sarah@example.com', firstName: 'שרה', cellPhone: '0501234567', lists_ToSubscribe: [1078775], customFields: {} };
+    const withoutPhone = { email: 'sarah@example.com', firstName: 'שרה', lists_ToSubscribe: [1078775], customFields: {} };
+    expect(withPhone.cellPhone).toBe('0501234567');
+    expect(withoutPhone.cellPhone).toBeUndefined();
   });
 
   it('serialises to valid JSON', () => {
     const payload = {
+      email: 'sarah@example.com',
       firstName: 'שרה',
-      cellPhone: '0501234567',
       lists_ToSubscribe: [1078775],
       customFields: { source: 'bms-sm-landing' },
     };
@@ -238,8 +268,7 @@ describe('Checklist questions', () => {
     it(`question ${i + 1} is a non-empty Hebrew string`, () => {
       expect(q).toBeTruthy();
       expect(q.length).toBeGreaterThan(10);
-      // Contains Hebrew characters
-      expect(/[\u0590-\u05FF]/.test(q)).toBe(true);
+      expect(/[֐-׿]/.test(q)).toBe(true);
     });
   });
 });
