@@ -121,7 +121,7 @@ export default async function handler(req, res) {
   }
 
   const apiKey = process.env.SMOOVE_API_KEY;
-  const listId = parseInt(process.env.SMOOVE_LIST_ID || '1078775', 10);
+  const listId = parseInt(process.env.SMOOVE_BMS_LIST_ID || '1131098', 10);
 
   if (!apiKey) {
     console.error('SMOOVE_API_KEY env var is not set');
