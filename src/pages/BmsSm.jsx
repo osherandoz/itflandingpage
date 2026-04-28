@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 import '@fontsource/heebo/800.css';
 import './BmsSm.css';
 
@@ -135,7 +136,7 @@ function useCountdown() {
   const h = Math.floor(remaining / 3600000);
   const m = Math.floor((remaining % 3600000) / 60000);
   const s = Math.floor((remaining % 60000) / 1000);
-  return `${pad(h)}:${pad(m)}:${pad(s)}`;
+  return { time: `${pad(h)}:${pad(m)}:${pad(s)}`, expired: remaining === 0 };
 }
 
 function trackEvent(name, gaEvent, params = {}) {
@@ -151,10 +152,10 @@ function initials(name) {
 /* ── LeadForm ── */
 
 function LeadForm({ variant = 'hero', onSuccess }) {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [newsletter, setNewsletter] = useState(false);
   const [website, setWebsite] = useState(''); // honeypot
   const [status, setStatus] = useState('idle');
@@ -164,7 +165,6 @@ function LeadForm({ variant = 'hero', onSuccess }) {
     e.preventDefault();
     setError('');
     if (!firstName.trim()) { setError('נא למלא שם פרטי'); return; }
-    if (!lastName.trim()) { setError('נא למלא שם משפחה'); return; }
     if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       setError('נא למלא כתובת מייל תקינה'); return;
     }
@@ -179,20 +179,19 @@ function LeadForm({ variant = 'hero', onSuccess }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           firstName: firstName.trim(),
-          lastName: lastName.trim(),
           email: email.trim(),
           phone: phone.trim() || undefined,
-          newsletter: true,
+          newsletter,
           website,
           source: `bms-sm-${variant}`,
         }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok && data.success) {
-        setStatus('success');
         trackEvent('Lead', 'generate_lead', { content_name: 'BMS_SM_lead', form_variant: variant, source: 'bms-sm' });
         trackEvent('CompleteRegistration', 'form_submit_lead', { page: 'bms-sm', form_variant: variant });
         if (onSuccess) onSuccess();
+        navigate('/תודה-קליסט');
       } else {
         setStatus('idle');
         setError(data.error || 'שגיאה בשליחה. נסי שוב.');
@@ -203,31 +202,18 @@ function LeadForm({ variant = 'hero', onSuccess }) {
     }
   };
 
-  if (status === 'success') {
-    return (
-      <div className="lead-success">
-        <i className="fa-solid fa-circle-check" aria-hidden="true" />
-        הצ׳קליסט בדרך אלייך למייל. בדקי את תיבת הדואר תוך דקה.
-      </div>
-    );
-  }
-
   return (
     <form onSubmit={submit} noValidate>
       <div className="form-row">
         <input className="input" type="text" placeholder="שם פרטי" value={firstName}
           onChange={(e) => setFirstName(e.target.value)} autoComplete="given-name" required />
-        <input className="input" type="text" placeholder="שם משפחה" value={lastName}
-          onChange={(e) => setLastName(e.target.value)} autoComplete="family-name" required />
-      </div>
-      <div className="form-row">
         <input className="input" type="email" placeholder="כתובת מייל" value={email}
           onChange={(e) => setEmail(e.target.value)} autoComplete="email" inputMode="email" required />
-        <input className="input" type="tel" placeholder="טלפון (לא חובה)" value={phone}
-          onChange={(e) => setPhone(e.target.value)} autoComplete="tel" inputMode="tel" />
       </div>
+      <input className="input" type="tel" placeholder="טלפון נייד (לא חובה)" value={phone}
+        onChange={(e) => setPhone(e.target.value)} autoComplete="tel" inputMode="tel" />
       <div className="honeypot" aria-hidden="true">
-        <label>Website<input type="text" tabIndex="-1" value={website} onChange={(e) => setWebsite(e.target.value)} /></label>
+        <label>Website<input type="text" tabIndex={-1} autoComplete="off" value={website} onChange={(e) => setWebsite(e.target.value)} /></label>
       </div>
       <label className="newsletter-check">
         <input
@@ -253,7 +239,7 @@ function LeadForm({ variant = 'hero', onSuccess }) {
 /* ── Main component ── */
 
 export default function BmsSm() {
-  const countdown = useCountdown();
+  const { time: countdown, expired: countdownExpired } = useCountdown();
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
   const [exitOpen, setExitOpen] = useState(false);
@@ -318,16 +304,18 @@ export default function BmsSm() {
     <div className="bmsm" dir="rtl">
 
       {/* TOPBAR */}
-      <div className="topbar" role="alert" aria-live="polite">
-        <div className="topbar-inner">
-          <span className="topbar-dot" aria-hidden="true" />
-          <span>⏰ מחיר ההשקה 197₪ מסתיים בעוד:</span>
-          <span className="topbar-time">{countdown}</span>
-          <a href="#offer" onClick={scrollToOffer} className="topbar-link">
-            לרכישה לחץ כאן ←
-          </a>
+      {!countdownExpired && (
+        <div className="topbar" role="alert" aria-live="polite">
+          <div className="topbar-inner">
+            <span className="topbar-dot" aria-hidden="true" />
+            <span>⏰ מחיר ההשקה 197₪ מסתיים בעוד:</span>
+            <span className="topbar-time">{countdown}</span>
+            <a href="#offer" onClick={scrollToOffer} className="topbar-link">
+              לרכישה לחץ כאן ←
+            </a>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* NAV */}
       <nav className="nav" aria-label="ניווט ראשי">
@@ -394,44 +382,46 @@ export default function BmsSm() {
         </div>
       </section>
 
-      {/* VIDEO */}
-      <section className="section section-darker">
-        <div className="wrap">
-          <div className="sec-head">
-            <h2 className="sec-title">
-              כך מזהים תשתית פרסום שרופה, לפני שהיא עולה לך לקוח
-            </h2>
-            <p className="sec-sub">
-              אושר רווח מראה את 3 הסימנים שכל מנהלת סושיאל חייבת לדעת לזהות
-              לפני שהיא מקבלת אחריות על חשבון פרסום.
-            </p>
-          </div>
+      {/* VIDEO — hidden until VIDEO_ID is set */}
+      {VIDEO_ID !== 'YOUR_VIDEO_ID' && (
+        <section className="section section-darker">
+          <div className="wrap">
+            <div className="sec-head">
+              <h2 className="sec-title">
+                כך מזהים תשתית פרסום שרופה, לפני שהיא עולה לך לקוח
+              </h2>
+              <p className="sec-sub">
+                אושר רווח מראה את 3 הסימנים שכל מנהלת סושיאל חייבת לדעת לזהות
+                לפני שהיא מקבלת אחריות על חשבון פרסום.
+              </p>
+            </div>
 
-          <div className="video-wrap" role="region" aria-label="וידאו הסבר">
-            {videoPlaying && VIDEO_ID !== 'YOUR_VIDEO_ID' ? (
-              <iframe
-                src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0`}
-                title="BMS: כך מזהים תשתית פרסום שרופה"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              />
-            ) : (
-              <div className="video-placeholder">
-                <button
-                  className="play-btn"
-                  onClick={() => {
-                    setVideoPlaying(true);
-                    trackEvent('ViewContent', 'video_play', { page: 'bms-sm' });
-                  }}
-                  aria-label="נגן וידאו"
-                >
-                  <i className="fa-solid fa-play" aria-hidden="true" />
-                </button>
-              </div>
-            )}
+            <div className="video-wrap" role="region" aria-label="וידאו הסבר">
+              {videoPlaying ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0`}
+                  title="BMS: כך מזהים תשתית פרסום שרופה"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : (
+                <div className="video-placeholder">
+                  <button
+                    className="play-btn"
+                    onClick={() => {
+                      setVideoPlaying(true);
+                      trackEvent('ViewContent', 'video_play', { page: 'bms-sm' });
+                    }}
+                    aria-label="נגן וידאו"
+                  >
+                    <i className="fa-solid fa-play" aria-hidden="true" />
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* PROBLEM */}
       <section className="section section-dark">
@@ -802,8 +792,8 @@ export default function BmsSm() {
       </footer>
 
       {/* STICKY CTA (mobile) */}
-      <div className="sticky-cta" aria-hidden="true">
-        <a href={CHECKOUT_URL} className="btn-cta" onClick={onBuyClick} tabIndex={-1}>
+      <div className="sticky-cta">
+        <a href={CHECKOUT_URL} className="btn-cta" onClick={onBuyClick} aria-label="רכשי את הקורס BMS ב-197 שקלים">
           אני רוצה להגיע מוכנה לכל לקוח, 197₪ ←
         </a>
       </div>

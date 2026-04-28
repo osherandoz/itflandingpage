@@ -1,7 +1,7 @@
 /**
  * POST /api/bms-lead
  * Secure BMS landing-page lead capture — proxies to Smoove API.
- * Captures Name + Phone (no email) and tags contacts by source.
+ * Captures firstName + email (required) + phone (optional), tags contacts by source.
  */
 
 const ALLOWED_ORIGINS = [
@@ -43,25 +43,26 @@ function checkRateLimit(ip) {
   return true;
 }
 
-const recentPhones = new Map();
-function isDuplicate(phone) {
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const NAME_RE = /^[֐-׿ a-zA-Z\s\-']{1,50}$/;
+
+const recentEmails = new Map();
+function isDuplicate(email) {
   const now = Date.now();
-  const expiry = recentPhones.get(phone);
+  const expiry = recentEmails.get(email);
   if (expiry && now < expiry) return true;
-  recentPhones.set(phone, now + RATE_LIMIT_WINDOW_MS);
+  recentEmails.set(email, now + RATE_LIMIT_WINDOW_MS);
   return false;
 }
 
-const NAME_RE = /^[\u0590-\u05FF\u0020a-zA-Z\s\-']{1,50}$/;
-
 function normalizePhone(raw) {
   const digits = String(raw || '').replace(/[^\d+]/g, '');
-  if (!digits) return '';
+  if (!digits) return null;
   // Accept Israeli formats: 05xxxxxxxx / +9725xxxxxxxx / 9725xxxxxxxx
   if (/^05\d{8}$/.test(digits)) return digits;
   if (/^\+9725\d{8}$/.test(digits)) return '0' + digits.slice(4);
   if (/^9725\d{8}$/.test(digits)) return '0' + digits.slice(3);
-  return '';
+  return null;
 }
 
 function sanitize(str) {
@@ -91,7 +92,7 @@ export default async function handler(req, res) {
       body = {};
     }
   }
-  const { firstName, phone, website, source } = body || {};
+  const { firstName, email, phone, website, source } = body || {};
 
   // Honeypot
   if (website) {
@@ -102,14 +103,21 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'שם לא תקין' });
   }
 
-  const safePhone = normalizePhone(phone);
-  if (!safePhone) {
-    return res.status(400).json({ error: 'מספר טלפון לא תקין' });
+  if (!email || !EMAIL_RE.test(String(email).trim())) {
+    return res.status(400).json({ error: 'כתובת מייל לא תקינה' });
   }
+
   const safeName = sanitize(firstName);
+  const safeEmail = sanitize(email).toLowerCase();
   const safeSource = sanitize(source || 'bms-sm-landing');
 
-  if (isDuplicate(safePhone)) {
+  // Phone is optional — null means not provided / not valid Israeli format
+  const safePhone = phone ? normalizePhone(phone) : null;
+  if (phone && !safePhone) {
+    return res.status(400).json({ error: 'מספר טלפון לא תקין' });
+  }
+
+  if (isDuplicate(safeEmail)) {
     return res.status(200).json({ success: true });
   }
 
@@ -121,6 +129,18 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'שגיאת שרת. נסי שוב מאוחר יותר.' });
   }
 
+  const contactPayload = {
+    email: safeEmail,
+    firstName: safeName,
+    lists_ToSubscribe: [listId],
+    customFields: {
+      source: safeSource,
+      audience: 'social-manager',
+      lead_date: new Date().toISOString(),
+    },
+  };
+  if (safePhone) contactPayload.cellPhone = safePhone;
+
   try {
     const smooveRes = await fetch(
       'https://rest.smoove.io/v1/Contacts?updateIfExists=true&restoreIfDeleted=true&restoreIfUnsubscribed=true',
@@ -131,16 +151,7 @@ export default async function handler(req, res) {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({
-          cellPhone: safePhone,
-          firstName: safeName,
-          lists_ToSubscribe: [listId],
-          customFields: {
-            source: safeSource,
-            audience: 'social-manager',
-            lead_date: new Date().toISOString(),
-          },
-        }),
+        body: JSON.stringify(contactPayload),
       }
     );
 
