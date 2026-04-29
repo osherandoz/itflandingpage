@@ -500,6 +500,25 @@
   opacity: 0; pointer-events: none;
 }
 
+.bmsm-v2 .consent-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  margin: 16px 0 4px;
+  font-size: .875rem;
+  color: var(--espresso-2);
+  line-height: 1.5;
+}
+.bmsm-v2 .consent-check input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
 .bmsm-v2 .cta-gold {
   width: 100%; margin-top: 18px;
   background: linear-gradient(180deg, var(--gold) 0%, var(--gold-2) 60%, var(--gold-3) 100%);

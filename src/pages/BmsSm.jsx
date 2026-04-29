@@ -47,6 +47,7 @@ function LeadForm() {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail]         = useState('');
   const [website, setWebsite]     = useState(''); // honeypot
+  const [consent, setConsent]     = useState(false);
   const [loading, setLoading]     = useState(false);
   const [error, setError]         = useState('');
   const [success, setSuccess]     = useState(false);
@@ -135,7 +136,17 @@ function LeadForm() {
         </div>
       </div>
 
-      <button className="cta-gold" type="submit" disabled={loading}>
+      <label className="consent-check">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={e => setConsent(e.target.checked)}
+          required
+        />
+        <span>אני מאשרת קבלת עדכונים ותכנים מאושר רווח למייל. ניתן להסיר בכל עת.</span>
+      </label>
+
+      <button className="cta-gold" type="submit" disabled={loading || !consent}>
         {loading ? 'שולחת...' : (
           <>
             אני רוצה לדעת <span className="cta-small">(בחינם)</span>
