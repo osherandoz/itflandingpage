@@ -22,9 +22,9 @@ const LANDING_PAGES = [
   {
     title: 'קורס BMS — דף VSL חדש',
     path: '/VSL-BMS',
-    desc: 'דף מכירה עם וידאו VSL בראש (3 מקרים אמיתיים). הדף שעבדנו עליו עכשיו.',
-    status: 'wip',
-    note: 'צריך: לינק וידאו, לינק תשלום, 4 תמונות, Pixel ID',
+    desc: 'דף מכירה ברמת פרודקשן עם וידאו VSL, סיפורי 3 מקרים אמיתיים, מתודולוגיה ויזואלית, 4 מודולים + 3 בונוסים, מובייל-פרפקט.',
+    status: 'live',
+    note: 'הדף באוויר. נשאר רק להחליף 3 placeholders: VIDEO_EMBED_URL, PURCHASE_URL, Pixel ID.',
   },
   {
     title: 'שחזור חשבון פייסבוק',
@@ -116,22 +116,17 @@ const INTEGRATIONS = [
 const OPEN_TASKS = [
   {
     title: 'להעלות לינק וידאו ל-VSL-BMS',
-    desc: 'אחרי שתסיים להקליט את ה-VSL — להחליף את ה-placeholder בקובץ VslBms.jsx.',
+    desc: 'אחרי שתסיים להקליט את ה-VSL — להחליף את ה-VIDEO_EMBED_URL בקובץ VslBms.jsx.',
     status: 'todo',
   },
   {
     title: 'להעלות לינק תשלום ל-VSL-BMS',
-    desc: 'לינק חשבונית ירוקה / Smoove במקום ה-#.',
-    status: 'todo',
-  },
-  {
-    title: 'להעלות 4 תמונות לדף VSL-BMS',
-    desc: 'תמונת hero, תמונת אושר, ו-3 תמונות לסטורי. צריך להעלות ל-public/images/vsl-bms/.',
+    desc: 'לינק חשבונית ירוקה / Smoove במקום ה-# בקובץ VslBms.jsx (PURCHASE_URL).',
     status: 'todo',
   },
   {
     title: 'להגדיר Pixel ID של פייסבוק',
-    desc: 'יש סקריפט מוכן בדף — צריך רק להחליף YOUR_PIXEL_ID במזהה האמיתי.',
+    desc: 'יש סקריפט מוכן בדף — צריך רק להחליף YOUR_PIXEL_ID במזהה האמיתי. רלוונטי גם ל-VSL-BMS.',
     status: 'todo',
   },
   {
@@ -143,6 +138,59 @@ const OPEN_TASKS = [
     title: 'תיקוני lint קטנים',
     desc: '49 שגיאות lint ישנות בקבצים קיימים (לא קריטי, אבל כדאי לסדר).',
     status: 'idea',
+  },
+];
+
+const RECENTLY_DONE = [
+  {
+    title: 'דף VSL-BMS — בנייה ראשונית',
+    desc: 'יצירת הדף בנתיב /VSL-BMS עם כל הקופי המלא, JSON-LD Course Schema, Meta tags ו-OG.',
+    status: 'live',
+  },
+  {
+    title: 'VSL-BMS — שדרוג קופי (StoryBrand + JTBD + Provost)',
+    desc: 'עיבוד מלא של הקופי דרך 3 פריימוורקים מקצועיים — מסר ממוקד לקוח, פוקוס על תוצאה, וקצב משפטים.',
+    status: 'live',
+  },
+  {
+    title: 'VSL-BMS — הטמעת תמונות מקצועיות',
+    desc: 'כל 6 התמונות מ-public/images/vsl-bms (hero, 3 story photos, author, cinematic background, OG image).',
+    status: 'live',
+  },
+  {
+    title: 'VSL-BMS — ליטוש UX/UI מלא (5 סקילים)',
+    desc: 'ui-ux-pro-max + design-critique + mobile-design + ux-copy + accessibility-review. החלפת כל האימוג׳י באייקוני SVG (Lucide), Trust Bar, Sticky CTA, focus states, ARIA, prefers-reduced-motion.',
+    status: 'live',
+  },
+  {
+    title: 'VSL-BMS — מערכת טיפוגרפיה משודרגת',
+    desc: 'שלישיית פונטים: Heebo 900 (כותרות) + Assistant (גוף) + Frank Ruhl Libre (ציטוטים). אגרסיבי letter-spacing, גדלים מוגדלים, font-smoothing.',
+    status: 'live',
+  },
+  {
+    title: 'VSL-BMS — הסרת כל ה-em dashes (51 מופעים)',
+    desc: 'מחיקה מלאה של em-dashes מכל הטקסטים (JSX, CSS, route file). הוחלפו ב-נקודה/פסיק/נקודתיים לפי הקשר.',
+    status: 'live',
+  },
+  {
+    title: 'VSL-BMS — סקציית "המתודולוגיה" חדשה',
+    desc: 'במקום עיגול גנרי — 3 כרטיסי שלבים שמתחברים ישירות ל-3 המקרים (לילך → דליה → מאיה). אייקונים, צללים, hover effects.',
+    status: 'live',
+  },
+  {
+    title: 'VSL-BMS — תוכן הקורס האמיתי + מבנה חבילה',
+    desc: '4 מודולי יסוד + 3 בונוסים (פריצות, טיפים, הרצאת בר שלג). Value box משודרג עם תגי בונוס בזהב, שווי כולל ₪638.',
+    status: 'live',
+  },
+  {
+    title: 'VSL-BMS — אופטימיזציית מובייל מקיפה',
+    desc: '4 breakpoints (1024 / 768 / 480 / 360). Touch targets 56px+, tap highlight, no-hover על מגע, photo-grid תוקן, footer padding ל-sticky CTA, safe-area-inset.',
+    status: 'live',
+  },
+  {
+    title: 'דף /dashboard פנימי',
+    desc: 'דף מעקב פרטי (noindex) שאתה רואה עכשיו — סיכום של כל מה שעבדנו עליו.',
+    status: 'live',
   },
 ];
 

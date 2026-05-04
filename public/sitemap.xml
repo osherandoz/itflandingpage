@@ -48,6 +48,17 @@
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
+  <!-- BMS course landing pages -->
+  <url>
+    <loc>https://www.israeltechforce.com/bms-sm</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/VSL-BMS</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
   <!-- Phase C — FAQ + Testimonials -->
   <url>
     <loc>https://www.israeltechforce.com/faq</loc>
