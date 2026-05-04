@@ -18,6 +18,10 @@ export default [
   route("testimonials", "./routes/testimonials.jsx"),
   // BMS-SM — Course landing page + thank-you pages
   route("bms-sm", "./routes/bms-sm.jsx"),
+  // VSL-BMS — Video sales letter for BMS course
+  route("VSL-BMS", "./routes/vsl-bms.jsx"),
   route("תודה-קליסט", "./routes/thank-you-lead.jsx"),
   route("תודה-רכישה", "./routes/thank-you-purchase.jsx"),
+  // Internal — private tracking dashboard (noindex)
+  route("dashboard", "./routes/dashboard.jsx"),
 ];

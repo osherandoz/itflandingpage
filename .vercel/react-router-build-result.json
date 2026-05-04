@@ -1,0 +1,427 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "routes/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/privacy": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/press": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/articles": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/articles.$slug": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/facebook-recovery": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/instagram-recovery": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/whatsapp-recovery": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/facebook-disabled": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/instagram-hacked": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/ads-manager": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/faq": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/testimonials": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/bms-sm": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/vsl-bms": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/thank-you-lead": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/thank-you-purchase": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/dashboard": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "app/root.jsx",
+        "path": "",
+        "config": {}
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "app/routes/home.jsx",
+        "index": true,
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/privacy": {
+        "id": "routes/privacy",
+        "parentId": "root",
+        "file": "app/routes/privacy.jsx",
+        "path": "privacy",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/press": {
+        "id": "routes/press",
+        "parentId": "root",
+        "file": "app/routes/press.jsx",
+        "path": "press",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/articles": {
+        "id": "routes/articles",
+        "parentId": "root",
+        "file": "app/routes/articles.jsx",
+        "path": "articles",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/articles.$slug": {
+        "id": "routes/articles.$slug",
+        "parentId": "root",
+        "file": "app/routes/articles.$slug.jsx",
+        "path": "articles/:slug",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/facebook-recovery": {
+        "id": "routes/facebook-recovery",
+        "parentId": "root",
+        "file": "app/routes/facebook-recovery.jsx",
+        "path": "שחזור-חשבון-פייסבוק",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/instagram-recovery": {
+        "id": "routes/instagram-recovery",
+        "parentId": "root",
+        "file": "app/routes/instagram-recovery.jsx",
+        "path": "שחזור-חשבון-אינסטגרם",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/whatsapp-recovery": {
+        "id": "routes/whatsapp-recovery",
+        "parentId": "root",
+        "file": "app/routes/whatsapp-recovery.jsx",
+        "path": "שחזור-חשבון-וואטסאפ",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/facebook-disabled": {
+        "id": "routes/facebook-disabled",
+        "parentId": "root",
+        "file": "app/routes/facebook-disabled.jsx",
+        "path": "חשבון-פייסבוק-מושבת",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/instagram-hacked": {
+        "id": "routes/instagram-hacked",
+        "parentId": "root",
+        "file": "app/routes/instagram-hacked.jsx",
+        "path": "חשבון-אינסטגרם-נפרץ",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/ads-manager": {
+        "id": "routes/ads-manager",
+        "parentId": "root",
+        "file": "app/routes/ads-manager.jsx",
+        "path": "שחזור-מנהל-מודעות",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/faq": {
+        "id": "routes/faq",
+        "parentId": "root",
+        "file": "app/routes/faq.jsx",
+        "path": "faq",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/testimonials": {
+        "id": "routes/testimonials",
+        "parentId": "root",
+        "file": "app/routes/testimonials.jsx",
+        "path": "testimonials",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/bms-sm": {
+        "id": "routes/bms-sm",
+        "parentId": "root",
+        "file": "app/routes/bms-sm.jsx",
+        "path": "bms-sm",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/vsl-bms": {
+        "id": "routes/vsl-bms",
+        "parentId": "root",
+        "file": "app/routes/vsl-bms.jsx",
+        "path": "VSL-BMS",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/thank-you-lead": {
+        "id": "routes/thank-you-lead",
+        "parentId": "root",
+        "file": "app/routes/thank-you-lead.jsx",
+        "path": "תודה-קליסט",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/thank-you-purchase": {
+        "id": "routes/thank-you-purchase",
+        "parentId": "root",
+        "file": "app/routes/thank-you-purchase.jsx",
+        "path": "תודה-רכישה",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/dashboard": {
+        "id": "routes/dashboard",
+        "parentId": "root",
+        "file": "app/routes/dashboard.jsx",
+        "path": "dashboard",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "C:/Users/osher/OneDrive/Desktop/ניהול עסק/פרויקטים חדשים/landingpage/.claude/worktrees/gifted-shaw-a3549b/app",
+    "basename": "/",
+    "buildDirectory": "C:/Users/osher/OneDrive/Desktop/ניהול עסק/פרויקטים חדשים/landingpage/.claude/worktrees/gifted-shaw-a3549b/build",
+    "future": {
+      "unstable_optimizeDeps": false,
+      "unstable_passThroughRequests": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_trailingSlashAwareDataRequests": false,
+      "unstable_previewServerPrerendering": false,
+      "v8_middleware": false,
+      "v8_splitRouteModules": false,
+      "v8_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.jsx",
+        "path": ""
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "./routes/home.jsx",
+        "index": true
+      },
+      "routes/privacy": {
+        "id": "routes/privacy",
+        "parentId": "root",
+        "file": "./routes/privacy.jsx",
+        "path": "privacy"
+      },
+      "routes/press": {
+        "id": "routes/press",
+        "parentId": "root",
+        "file": "./routes/press.jsx",
+        "path": "press"
+      },
+      "routes/articles": {
+        "id": "routes/articles",
+        "parentId": "root",
+        "file": "./routes/articles.jsx",
+        "path": "articles"
+      },
+      "routes/articles.$slug": {
+        "id": "routes/articles.$slug",
+        "parentId": "root",
+        "file": "./routes/articles.$slug.jsx",
+        "path": "articles/:slug"
+      },
+      "routes/facebook-recovery": {
+        "id": "routes/facebook-recovery",
+        "parentId": "root",
+        "file": "./routes/facebook-recovery.jsx",
+        "path": "שחזור-חשבון-פייסבוק"
+      },
+      "routes/instagram-recovery": {
+        "id": "routes/instagram-recovery",
+        "parentId": "root",
+        "file": "./routes/instagram-recovery.jsx",
+        "path": "שחזור-חשבון-אינסטגרם"
+      },
+      "routes/whatsapp-recovery": {
+        "id": "routes/whatsapp-recovery",
+        "parentId": "root",
+        "file": "./routes/whatsapp-recovery.jsx",
+        "path": "שחזור-חשבון-וואטסאפ"
+      },
+      "routes/facebook-disabled": {
+        "id": "routes/facebook-disabled",
+        "parentId": "root",
+        "file": "./routes/facebook-disabled.jsx",
+        "path": "חשבון-פייסבוק-מושבת"
+      },
+      "routes/instagram-hacked": {
+        "id": "routes/instagram-hacked",
+        "parentId": "root",
+        "file": "./routes/instagram-hacked.jsx",
+        "path": "חשבון-אינסטגרם-נפרץ"
+      },
+      "routes/ads-manager": {
+        "id": "routes/ads-manager",
+        "parentId": "root",
+        "file": "./routes/ads-manager.jsx",
+        "path": "שחזור-מנהל-מודעות"
+      },
+      "routes/faq": {
+        "id": "routes/faq",
+        "parentId": "root",
+        "file": "./routes/faq.jsx",
+        "path": "faq"
+      },
+      "routes/testimonials": {
+        "id": "routes/testimonials",
+        "parentId": "root",
+        "file": "./routes/testimonials.jsx",
+        "path": "testimonials"
+      },
+      "routes/bms-sm": {
+        "id": "routes/bms-sm",
+        "parentId": "root",
+        "file": "./routes/bms-sm.jsx",
+        "path": "bms-sm"
+      },
+      "routes/vsl-bms": {
+        "id": "routes/vsl-bms",
+        "parentId": "root",
+        "file": "./routes/vsl-bms.jsx",
+        "path": "VSL-BMS"
+      },
+      "routes/thank-you-lead": {
+        "id": "routes/thank-you-lead",
+        "parentId": "root",
+        "file": "./routes/thank-you-lead.jsx",
+        "path": "תודה-קליסט"
+      },
+      "routes/thank-you-purchase": {
+        "id": "routes/thank-you-purchase",
+        "parentId": "root",
+        "file": "./routes/thank-you-purchase.jsx",
+        "path": "תודה-רכישה"
+      },
+      "routes/dashboard": {
+        "id": "routes/dashboard",
+        "parentId": "root",
+        "file": "./routes/dashboard.jsx",
+        "path": "dashboard"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "allowedActionOrigins": false,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.jsx",
+        "children": [
+          {
+            "file": "./routes/home.jsx",
+            "index": true
+          },
+          {
+            "file": "./routes/privacy.jsx",
+            "path": "privacy"
+          },
+          {
+            "file": "./routes/press.jsx",
+            "path": "press"
+          },
+          {
+            "file": "./routes/articles.jsx",
+            "path": "articles"
+          },
+          {
+            "file": "./routes/articles.$slug.jsx",
+            "path": "articles/:slug"
+          },
+          {
+            "file": "./routes/facebook-recovery.jsx",
+            "path": "שחזור-חשבון-פייסבוק"
+          },
+          {
+            "file": "./routes/instagram-recovery.jsx",
+            "path": "שחזור-חשבון-אינסטגרם"
+          },
+          {
+            "file": "./routes/whatsapp-recovery.jsx",
+            "path": "שחזור-חשבון-וואטסאפ"
+          },
+          {
+            "file": "./routes/facebook-disabled.jsx",
+            "path": "חשבון-פייסבוק-מושבת"
+          },
+          {
+            "file": "./routes/instagram-hacked.jsx",
+            "path": "חשבון-אינסטגרם-נפרץ"
+          },
+          {
+            "file": "./routes/ads-manager.jsx",
+            "path": "שחזור-מנהל-מודעות"
+          },
+          {
+            "file": "./routes/faq.jsx",
+            "path": "faq"
+          },
+          {
+            "file": "./routes/testimonials.jsx",
+            "path": "testimonials"
+          },
+          {
+            "file": "./routes/bms-sm.jsx",
+            "path": "bms-sm"
+          },
+          {
+            "file": "./routes/vsl-bms.jsx",
+            "path": "VSL-BMS"
+          },
+          {
+            "file": "./routes/thank-you-lead.jsx",
+            "path": "תודה-קליסט"
+          },
+          {
+            "file": "./routes/thank-you-purchase.jsx",
+            "path": "תודה-רכישה"
+          },
+          {
+            "file": "./routes/dashboard.jsx",
+            "path": "dashboard"
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}
