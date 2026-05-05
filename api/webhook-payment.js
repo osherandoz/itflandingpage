@@ -60,7 +60,18 @@ export default async function handler(req, res) {
     req.headers['x-hub-signature-256'];
 
   if (!isTestMode && secret && !verifySignature(req.body, signature, secret)) {
-    console.warn('[webhook-payment] signature verification failed');
+    // Diagnostic dump — helps identify GI's actual signature format
+    let computedHex = '';
+    try {
+      const raw = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+      computedHex = crypto.createHmac('sha256', secret).update(raw).digest('hex');
+    } catch {}
+    console.warn('[webhook-payment] signature verification failed', {
+      receivedSignature: signature,
+      computedSignatureHex: computedHex,
+      allHeaders: req.headers,
+      bodyPreview: typeof req.body === 'string' ? req.body.slice(0, 500) : JSON.stringify(req.body).slice(0, 500),
+    });
     return res.status(401).json({ error: 'Invalid signature' });
   }
 
