@@ -17,6 +17,7 @@
 import crypto from 'crypto';
 
 const BMS_PURCHASE_LIST_ID = 1123232;
+const NEWSLETTER_LIST_ID = 1078775;
 
 function verifySignature(rawBody, signature, secret) {
   if (!signature || !secret) return false;
@@ -129,7 +130,7 @@ export default async function handler(req, res) {
   const contactPayload = {
     email: safeEmail,
     firstName,
-    lists_ToSubscribe: [BMS_PURCHASE_LIST_ID],
+    lists_ToSubscribe: [BMS_PURCHASE_LIST_ID, NEWSLETTER_LIST_ID],
   };
   if (phone) contactPayload.cellPhone = phone;
 

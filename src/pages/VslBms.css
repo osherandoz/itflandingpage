@@ -1110,6 +1110,17 @@
 }
 .vsl-bms-page .final-cta .cta-btn { margin-top: 50px; }
 
+.vsl-bms-page .cta-consent-note {
+  margin: 14px auto 0;
+  max-width: 460px;
+  font-family: var(--font-body), 'Heebo', sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.01em;
+}
+
 /* Trust bar, unified, single component */
 .vsl-bms-page .trust-bar {
   display: flex;

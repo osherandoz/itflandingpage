@@ -629,6 +629,10 @@ export default function VslBms() {
             <span className="arrow"><IconArrowLeft size={18} /></span>
           </a>
 
+          <p className="cta-consent-note">
+            ברכישה את/ה מסכימ/ה לקבל עדכונים שיווקיים מאיתנו. ניתן להסיר בכל עת.
+          </p>
+
           <div className="trust-bar">
             <div className="trust-item">
               <IconLock size={18} />
