@@ -144,7 +144,7 @@ export default async function handler(req, res) {
     const listRes = await fetch(
       `https://rest.smoove.io/v1/Lists/${BMS_PURCHASE_LIST_ID}/Contacts`,
       {
-        method: 'POST',
+        method: 'PUT',
         headers: smooveHeaders,
         body: JSON.stringify({ Email: safeEmail }),
       }
