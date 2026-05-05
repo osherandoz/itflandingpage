@@ -139,7 +139,7 @@ export default async function handler(req, res) {
     const responseText = await smooveRes.text();
     if (smooveRes.ok || smooveRes.status === 409) {
       console.log('[webhook-payment] BMS buyer added to list', BMS_PURCHASE_LIST_ID, safeEmail);
-      return res.status(200).json({ success: true });
+      return res.status(200).json({ success: true, smooveStatus: smooveRes.status, smooveResponse: responseText });
     }
 
     console.error('[webhook-payment] Smoove error', smooveRes.status, responseText);
