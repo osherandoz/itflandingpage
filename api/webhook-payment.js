@@ -85,8 +85,10 @@ export default async function handler(req, res) {
     }
   }
 
-  // Normalise field names across possible Green Invoice payload shapes
+  // Normalise field names across possible Green Invoice payload shapes.
+  // Real Green Invoice / Morning webhook v2.1 uses body.payer.{name, email, phone}.
   const name =
+    body.payer?.name ||
     body.customerName ||
     body.customer_name ||
     body.firstName ||
@@ -95,12 +97,14 @@ export default async function handler(req, res) {
     body.client?.name ||
     '';
   const email =
+    body.payer?.email ||
     body.customerEmail ||
     body.customer_email ||
     body.email ||
     body.client?.emails?.[0] ||
     '';
   const phone =
+    body.payer?.phone ||
     body.customerPhone ||
     body.customer_phone ||
     body.phone ||
