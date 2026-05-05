@@ -41,7 +41,7 @@ const HERO_IMAGE = '/images/vsl-bms/section_invitation-md.webp';
 const STORY_IMG_1 = '/images/vsl-bms/account_disabled-sm.webp';
 const STORY_IMG_2 = '/images/vsl-bms/business_manager-sm.webp';
 const STORY_IMG_3 = '/images/vsl-bms/osher_auth-sm.webp';
-const AUTHOR_IMAGE = '/images/vsl-bms/osher_auth-md.webp';
+const AUTHOR_IMAGE = '/images/vsl-bms/osher_with_laptop-md.webp';
 
 const PRICE = 197;
 const WHATSAPP_URL = 'https://wa.me/972509823235';
@@ -254,7 +254,7 @@ export default function VslBms() {
             alt="אושר רווח, IsraelTechForce"
             className="authority-image"
             width="960"
-            height="960"
+            height="1440"
             loading="lazy"
             decoding="async"
           />
