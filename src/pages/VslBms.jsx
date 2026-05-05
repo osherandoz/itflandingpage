@@ -222,6 +222,8 @@ export default function VslBms() {
               <strong>צריך לבנות נכון לפני.</strong>
             </p>
 
+            <p className="photo-caption">חמש שנים בשטח. אלו שלושת הסיפורים שאני רואה הכי הרבה: חשבונות שהושבתו, BM ריק, ואני בלילות הכי קשים שלהם.</p>
+
             <div className="photo-grid">
               <img src={STORY_IMG_1} alt="חשבון מושבת" loading="lazy" />
               <img src={STORY_IMG_2} alt="BM ריק" loading="lazy" />
@@ -542,7 +544,7 @@ export default function VslBms() {
               <span className="deliverable-num bonus-pill">בונוס 03</span>
               <span className="deliverable-lessons">הרצאת אורח</span>
             </div>
-            <h3 className="deliverable-title">בר שלג: הוקוס (Hooks)</h3>
+            <h3 className="deliverable-title">בר שלג: הוקים (Hooks)</h3>
             <p className="deliverable-body">
               שיעור אורח בלעדי מבר שלג על איך לכתוב Hooks שבאמת מושכים תשומת לב.{' '}
               <strong>כי תשתית טובה זה חצי מהמשחק. החצי השני הוא תוכן שגורם לאנשים לעצור.</strong>

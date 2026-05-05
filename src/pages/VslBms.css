@@ -396,24 +396,36 @@
 .vsl-bms-page .story-text p { margin-bottom: 20px; color: #cbd5e1; }
 .vsl-bms-page .story-text strong { color: #fff; font-weight: 800; }
 
+.vsl-bms-page .photo-caption {
+  margin: 36px auto 18px;
+  max-width: 560px;
+  padding: 0 16px;
+  font-family: var(--font-body), 'Heebo', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  text-align: center;
+  color: var(--text-soft);
+  font-weight: 500;
+}
 .vsl-bms-page .photo-grid {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0;
-  margin: 40px auto 18px;
-  max-width: 420px;
+  margin: 14px auto 22px;
+  max-width: 520px;
   position: relative;
 }
 .vsl-bms-page .photo-grid img {
-  width: 130px;
-  height: 130px;
+  width: 170px;
+  height: 170px;
   object-fit: cover;
   border-radius: var(--r-sm);
   border: 3px solid var(--bg-card);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
 }
-.vsl-bms-page .photo-grid img:nth-child(2) { transform: translate(-15px, 10px); z-index: 2; }
-.vsl-bms-page .photo-grid img:nth-child(3) { transform: translate(-30px, 0); }
+.vsl-bms-page .photo-grid img:nth-child(2) { transform: translate(-18px, 12px); z-index: 2; }
+.vsl-bms-page .photo-grid img:nth-child(3) { transform: translate(-36px, 0); }
 .vsl-bms-page .photo-tag {
   display: block;
   width: fit-content;
@@ -571,13 +583,28 @@
   justify-content: center;
 }
 .vsl-bms-page .anti-pill {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 60px;
-  padding: 8px 20px;
-  font-size: 14px;
-  color: var(--text-soft);
-  display: inline-block;
+  display: block;
+  margin: 0 auto;
+  max-width: 720px;
+  padding: 0 16px;
+  font-family: 'Frank Ruhl Libre', 'Heebo', serif;
+  font-size: clamp(20px, 2.4vw, 28px);
+  line-height: 1.4;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  letter-spacing: -0.005em;
+  font-style: italic;
+  position: relative;
+}
+.vsl-bms-page .anti-pill::before,
+.vsl-bms-page .anti-pill::after {
+  content: '"';
+  font-family: 'Frank Ruhl Libre', serif;
+  color: var(--tech-blue-glow);
+  font-size: 1.2em;
+  font-weight: 700;
+  margin: 0 6px;
+  opacity: 0.85;
 }
 
 /* Framework */
@@ -1164,9 +1191,11 @@
   text-align: center;
 }
 .vsl-bms-page .whatsapp-prompt {
-  color: var(--text-muted);
-  font-size: 14px;
-  margin-bottom: 12px !important;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 14px !important;
+  letter-spacing: -0.005em;
 }
 .vsl-bms-page .whatsapp-cta {
   display: inline-flex;
@@ -1449,13 +1478,18 @@
   .vsl-bms-page .story-text p { font-size: 15px; margin-bottom: 18px; }
 
   /* Photo grid, properly sized (no scale hack) */
+  .vsl-bms-page .photo-caption {
+    font-size: 15px;
+    margin: 28px auto 14px;
+    padding: 0 12px;
+  }
   .vsl-bms-page .photo-grid {
-    max-width: 300px;
-    margin: 32px auto 12px;
+    max-width: 360px;
+    margin: 14px auto 16px;
   }
   .vsl-bms-page .photo-grid img {
-    width: 92px;
-    height: 92px;
+    width: 116px;
+    height: 116px;
     border-width: 2px;
   }
   .vsl-bms-page .photo-grid img:nth-child(2) {
@@ -1632,7 +1666,7 @@
 
   /* WhatsApp CTA */
   .vsl-bms-page .whatsapp-cta-wrapper { margin-top: 28px; }
-  .vsl-bms-page .whatsapp-prompt { font-size: 13px; }
+  .vsl-bms-page .whatsapp-prompt { font-size: 16px; font-weight: 600; }
   .vsl-bms-page .whatsapp-cta {
     padding: 12px 18px;
     font-size: 14px;
@@ -1673,10 +1707,11 @@
   }
   .vsl-bms-page .cta-btn .arrow { width: 28px; height: 28px; }
 
-  .vsl-bms-page .photo-grid { max-width: 270px; }
-  .vsl-bms-page .photo-grid img { width: 82px; height: 82px; }
-  .vsl-bms-page .photo-grid img:nth-child(2) { transform: translate(-9px, 6px); }
-  .vsl-bms-page .photo-grid img:nth-child(3) { transform: translate(-18px, 0); }
+  .vsl-bms-page .photo-caption { font-size: 14.5px; }
+  .vsl-bms-page .photo-grid { max-width: 320px; }
+  .vsl-bms-page .photo-grid img { width: 102px; height: 102px; }
+  .vsl-bms-page .photo-grid img:nth-child(2) { transform: translate(-12px, 8px); }
+  .vsl-bms-page .photo-grid img:nth-child(3) { transform: translate(-24px, 0); }
 
   .vsl-bms-page .black-card {
     padding: 30px 18px;
@@ -1712,7 +1747,7 @@
 @media (max-width: 360px) {
   .vsl-bms-page { font-size: 15px; }
   .vsl-bms-page .container { padding: 0 12px; }
-  .vsl-bms-page .photo-grid img { width: 74px; height: 74px; }
+  .vsl-bms-page .photo-grid img { width: 92px; height: 92px; }
   .vsl-bms-page .trust-item { font-size: 12px; padding: 6px 10px; }
   .vsl-bms-page .cta-btn { font-size: 14.5px; }
 }
