@@ -36,11 +36,12 @@ const IconTarget = (p) => (<Icon {...p}><circle cx="12" cy="12" r="10" /><circle
 // TODO: החלף בערכים אמיתיים לפני העלאה לאוויר
 const VIDEO_EMBED_URL = '';
 const PURCHASE_URL = 'https://mrng.to/engo98ytvh';
-const HERO_IMAGE = '/images/vsl-bms/section_invitation.png';
-const STORY_IMG_1 = '/images/vsl-bms/account_disabled.png';
-const STORY_IMG_2 = '/images/vsl-bms/business_manager.png';
-const STORY_IMG_3 = '/images/vsl-bms/osher_auth.png';
-const AUTHOR_IMAGE = '/images/vsl-bms/osher_auth.png';
+// Optimized WebPs (94% smaller than original PNGs). See public/images/vsl-bms/.
+const HERO_IMAGE = '/images/vsl-bms/section_invitation-md.webp';
+const STORY_IMG_1 = '/images/vsl-bms/account_disabled-sm.webp';
+const STORY_IMG_2 = '/images/vsl-bms/business_manager-sm.webp';
+const STORY_IMG_3 = '/images/vsl-bms/osher_auth-sm.webp';
+const AUTHOR_IMAGE = '/images/vsl-bms/osher_auth-md.webp';
 
 const PRICE = 197;
 const WHATSAPP_URL = 'https://wa.me/972509823235';
@@ -154,7 +155,15 @@ export default function VslBms() {
             הגיע הזמן לסגור אותם, לבנות נכון, פעם אחת ולתמיד.
           </p>
 
-          <img src={HERO_IMAGE} alt="קורס BMS, Business Manager Setup" className="invitation-image" loading="lazy" />
+          <img
+            src={HERO_IMAGE}
+            alt="קורס BMS, Business Manager Setup"
+            className="invitation-image"
+            width="960"
+            height="640"
+            loading="lazy"
+            decoding="async"
+          />
 
           <div className="invitation-content">
             <p>
@@ -225,9 +234,9 @@ export default function VslBms() {
             <p className="photo-caption">חמש שנים בשטח. אלו שלושת הסיפורים שאני רואה הכי הרבה: חשבונות שהושבתו, BM ריק, ואני בלילות הכי קשים שלהם.</p>
 
             <div className="photo-grid">
-              <img src={STORY_IMG_1} alt="חשבון מושבת" loading="lazy" />
-              <img src={STORY_IMG_2} alt="BM ריק" loading="lazy" />
-              <img src={STORY_IMG_3} alt="אושר רווח" loading="lazy" />
+              <img src={STORY_IMG_1} alt="חשבון מושבת" width="480" height="480" loading="lazy" decoding="async" />
+              <img src={STORY_IMG_2} alt="BM ריק" width="480" height="480" loading="lazy" decoding="async" />
+              <img src={STORY_IMG_3} alt="אושר רווח" width="480" height="480" loading="lazy" decoding="async" />
             </div>
             <span className="photo-tag">2020 → היום</span>
           </div>
@@ -238,7 +247,7 @@ export default function VslBms() {
 
       {/* CINEMATIC */}
       <section className="cinematic">
-        <div className="cinematic-bg" style={{ backgroundImage: "url('/images/vsl-bms/cinematic_background.png')" }} />
+        <div className="cinematic-bg" style={{ backgroundImage: "url('/images/vsl-bms/cinematic_background-md.webp')" }} />
         <div className="container">
           <p className="question-prompt">מה המכנה המשותף לכל שלושת המקרים?</p>
 
@@ -391,7 +400,15 @@ export default function VslBms() {
       {/* AUTHORITY */}
       <section className="authority-section">
         <div className="container">
-          <img src={AUTHOR_IMAGE} alt="אושר רווח, IsraelTechForce" className="authority-image" loading="lazy" />
+          <img
+            src={AUTHOR_IMAGE}
+            alt="אושר רווח, IsraelTechForce"
+            className="authority-image"
+            width="960"
+            height="960"
+            loading="lazy"
+            decoding="async"
+          />
 
           <div className="author-quote-card">
             <span className="small-label">למה אני כאן בכלל?</span>

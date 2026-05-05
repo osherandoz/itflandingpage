@@ -51,11 +51,24 @@ export function Layout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_SCHEMA) }}
         />
 
-        {/* Font Awesome */}
+        {/* Preconnect to external font/CDN origins, eliminates DNS+TCP+TLS round-trip */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
+
+        {/* Font Awesome, deferred so it does not block first paint */}
         <link
-          rel="stylesheet"
+          rel="preload"
+          as="style"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          onLoad="this.onload=null;this.rel='stylesheet'"
         />
+        <noscript>
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          />
+        </noscript>
 
         {/* Preload LCP image */}
         <link
