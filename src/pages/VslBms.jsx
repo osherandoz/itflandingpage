@@ -35,7 +35,7 @@ const IconTarget = (p) => (<Icon {...p}><circle cx="12" cy="12" r="10" /><circle
 
 // TODO: החלף בערכים אמיתיים לפני העלאה לאוויר
 const VIDEO_EMBED_URL = '';
-const PURCHASE_URL = '#';
+const PURCHASE_URL = 'https://mrng.to/engo98ytvh';
 const HERO_IMAGE = '/images/vsl-bms/section_invitation.png';
 const STORY_IMG_1 = '/images/vsl-bms/account_disabled.png';
 const STORY_IMG_2 = '/images/vsl-bms/business_manager.png';
