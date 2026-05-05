@@ -5,7 +5,7 @@ export const meta = () => [
   {
     name: 'description',
     content:
-      'מדיניות הפרטיות של IsraelTechForce - כיצד אנו אוספים ומשתמשים במידע.',
+      'מדיניות הפרטיות של IsraelTechForce - איזה מידע נאסף, למה, מי עוד רואה אותו, ומה הזכויות שלך. עודכן 2026.',
   },
   { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/privacy' },
 ];
