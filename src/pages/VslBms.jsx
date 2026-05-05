@@ -119,7 +119,7 @@ export default function VslBms() {
         <div className="container">
           <div className="video-wrapper">
             <div className="video-banner">
-              <div className="vb-line"><IconVolume size={18} />תפעילו רמקולים, תכבו פלאפונים והפרעות</div>
+              <div className="vb-line"><IconVolume size={18} />תפעילו רמקולים, הניחו את הטלפונים בצד</div>
               <div>ותצפו בהדרכה הזו עד הסוף. היא תחסוך לכם אלפי שקלים</div>
             </div>
             <div className="video-player">
@@ -137,8 +137,8 @@ export default function VslBms() {
           </div>
 
           <div className="cta-wrapper">
-            <a href="#final-cta" className="cta-btn" onClick={trackLead}>
-              <span>שתוק וקח את הכסף שלי</span>
+            <a href="#final-cta" className="cta-btn cta-btn-glow" onClick={trackLead}>
+              <span>אני רוצה לשמור על החשבונות שלי</span>
               <span className="arrow"><IconArrowLeft size={18} /></span>
             </a>
           </div>
@@ -148,11 +148,11 @@ export default function VslBms() {
       {/* INVITATION + BLACK CARD */}
       <section className="invitation">
         <div className="container text-center">
-          <h2>עכשיו אתם יודעים. השאלה היא מה עושים עם זה.</h2>
+          <h2>מוכנים לצעד הבא?</h2>
 
           <p className="subtitle">
-            הפרצות קיימות. הסיכון אמיתי.<br />
-            הגיע הזמן לסגור אותם, לבנות נכון, פעם אחת ולתמיד.
+            יש לכם הזדמנות לצמצם את הסיכון, לסגור את הפירצות,<br />
+            לבנות נכון ומדויק. אחת ולתמיד.
           </p>
 
           <img
@@ -201,37 +201,38 @@ export default function VslBms() {
 
       <div className="gradient-divider" />
 
-      {/* STORY */}
+      {/* STORY — also acts as authority section, moved up for visibility */}
       <section className="story-section">
         <div className="container">
-          <div className="story-quote">
-            <span className="accent">"</span>אחת לא ידעה. השנייה לא הספיקה.<br />
-            השלישית ידעה, אבל אף אחד לא הכין אותה.<br />
-            שלושתן יכלו להימנע מזה לחלוטין.<span className="accent">"</span>
-          </div>
-
-          <p className="story-question">אז למה אני בכלל עוסק בזה?</p>
+          <h2 className="story-headline">למה לסמוך עליי?</h2>
 
           <div className="story-text">
             <p>
-              שמי אושר רווח. בן 31 מנתניה. <strong>חמש שנים אני עוסק בהצלת עסקים דיגיטליים.</strong>
-              {' '}אבל לא התחלתי מתוך תשוקה לטכנולוגיה. התחלתי מתוך מצוקה.
+              אני אושר רווח, בן 31 מנתניה. <strong>5 שנים אני עוסק בהצלת עסקים דיגיטליים.</strong>
+              {' '}לפני זה הייתי מתכנת בהייטק. אבל לא התחלתי מתוך תשוקה לטכנולוגיה. התחלתי מתוך מצוקה.
             </p>
 
             <p>
-              שנת 2020. אשתי בר, שהייתה בשיא הדרך שלה באינסטגרם. <strong>נחסמה.</strong>
+              שנת 2020. אשתי בר, שהייתה בשיא שלה כיוצרת תוכן. <strong>נחסמה.</strong>
               {' '}הגישה לחשבון פשוט נסגרה. ברגע אחד. לא היה שום דבר שהיא עשתה לא בסדר.
-              ומשם ניסיתי, חקרתי, ולא הפסקתי עד שהחזרתי לה את הכל.
+              ניסיתי, חקרתי, ולא הפסקתי עד שהחשבון חזר.
             </p>
 
             <p>
               <strong>מאז אני עושה את זה לאחרים.</strong>
-              {' '}מעל 2,500 עסקים שחזרו לפעול בדיגיטל. אבל עם הזמן הבנתי:
-              לשחזר אחרי זה לא מספיק.{' '}
-              <strong>צריך לבנות נכון לפני.</strong>
+              {' '}מעל 2,500 עסקים שחזרו לפעול בדיגיטל. אבל עם הזמן החלטתי לחקור,
+              אם אני פוגש את הלקוח רק אחרי, מה בעצם קורה שם לפני?
             </p>
 
-            <p className="photo-caption">חמש שנים בשטח. אלו שלושת הסיפורים שאני רואה הכי הרבה: חשבונות שהושבתו, BM ריק, ואני בלילות הכי קשים שלהם.</p>
+            <p>
+              הצלחתי ליצור שיטה מדויקת שתצמצם באופן משמעותי את אחוזי החסימות והפריצות.
+              {' '}<strong>כי אנשים לא נחסמים סתם. מדובר בנוסחה ברורה.</strong>
+            </p>
+
+            <p className="photo-caption">
+              לילות כימים עם אלפי בעלי עסקים עם BM (ביזנס מנג'ר) מושבת,
+              ואלפי שקלים שהם יכלו להרוויח. לא חבל?
+            </p>
 
             <div className="photo-grid">
               <img src={STORY_IMG_1} alt="חשבון מושבת" width="480" height="480" loading="lazy" decoding="async" />
@@ -245,6 +246,61 @@ export default function VslBms() {
 
       <div className="gradient-divider" />
 
+      {/* AUTHORITY — moved up for visibility right after personal story */}
+      <section className="authority-section">
+        <div className="container">
+          <img
+            src={AUTHOR_IMAGE}
+            alt="אושר רווח, IsraelTechForce"
+            className="authority-image"
+            width="960"
+            height="960"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <div className="author-quote-card">
+            <span className="small-label">למה אני כאן בכלל?</span>
+
+            <div className="big-quote">
+              לא רציתי להיות מי שמחזיר את החשבונות.<br />
+              רציתי להיות מי שמלמד איך לא להגיע לשם.
+            </div>
+
+            <p className="small-text">כשאשתי בר נחסמה ב-2020 לא הייתה לי ברירה. ניסיתי. טעיתי. ניסיתי שוב.</p>
+            <p className="small-text">ואחרי שהצלחתי, אנשים התחילו לפנות. ואחרי שהם פנו, הבנתי משהו חשוב:</p>
+            <p className="small-text-bold">כולם מחפשים פתרון אחרי. אני רוצה לתת את הכלים לא להגיע לשם.</p>
+
+            <p className="italic">
+              אני לא קוסם. אני לא לוחם סייבר עם טריקים מסתוריים.<br />
+              אני פשוט יודע איך המערכת עובדת, ואיך לבנות נכון מההתחלה.
+            </p>
+
+            <p className="small-text-bold">זה לא שיווק. זה מה שאני עושה בפועל, כל יום.</p>
+
+            <div className="closing-line">
+              <span className="you-chant">BMS</span>
+              <p className="small-text">לא עוד כלי. לא עוד קורס.</p>
+              <p className="small-text-bold">הבסיס שיתן לכם לישון בשקט.</p>
+            </div>
+
+            <div className="stage-note">
+              <strong>מה שתלמד בקורס הזה</strong> הוא בדיוק מה שהיה מציל את לילך, את דליה ואת מאיה,
+              לפני שהן בכלל הגיעו אליי.
+            </div>
+          </div>
+
+          <div className="cta-wrapper">
+            <a href="#final-cta" className="cta-btn" onClick={trackLead}>
+              <span>אני רוצה תשתית שעובדת. קחו אותי לקורס</span>
+              <span className="arrow"><IconArrowLeft size={18} /></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div className="gradient-divider" />
+
       {/* CINEMATIC */}
       <section className="cinematic">
         <div className="cinematic-bg" style={{ backgroundImage: "url('/images/vsl-bms/cinematic_background-md.webp')" }} />
@@ -252,8 +308,8 @@ export default function VslBms() {
           <p className="question-prompt">מה המכנה המשותף לכל שלושת המקרים?</p>
 
           <h2>
-            לא נפרצו בגלל מזל רע.<br />
-            הם נפלו בגלל תשתית שגויה.
+            הם לא נפרצו בגלל מזל רע.<br />
+            הם נפלו בגלל נוסחה שאף אחד לא סיפר להם.
           </h2>
 
           <div className="text-center" style={{ marginTop: 40 }}>
@@ -261,8 +317,8 @@ export default function VslBms() {
           </div>
 
           <h3 className="text-center" style={{ marginTop: 30 }}>
-            BMS זה לא <span className="gradient-text">קורס טכנולוגיה</span>.<br />
-            זה הנשק שמבדיל בין מי שנשבר למי שנשאר.
+            BMS זה לא <span className="gradient-text">קורס שיווק</span>.<br />
+            זו שיטה שתמנע מכם את התסכול של הלקוחות שלי.
           </h3>
 
           <ul className="anti-list">
@@ -397,61 +453,6 @@ export default function VslBms() {
         </div>
       </section>
 
-      {/* AUTHORITY */}
-      <section className="authority-section">
-        <div className="container">
-          <img
-            src={AUTHOR_IMAGE}
-            alt="אושר רווח, IsraelTechForce"
-            className="authority-image"
-            width="960"
-            height="960"
-            loading="lazy"
-            decoding="async"
-          />
-
-          <div className="author-quote-card">
-            <span className="small-label">למה אני כאן בכלל?</span>
-
-            <div className="big-quote">
-              "לא רציתי להיות מי שמחזיר.<br />
-              רציתי להיות מי שמלמד איך לא להגיע לשם."
-            </div>
-
-            <p className="small-text">כשאשתי בר נחסמה ב-2020 לא הייתה לי ברירה. ניסיתי. טעיתי. ניסיתי שוב.</p>
-            <p className="small-text">ואחרי שהצלחתי, אנשים התחילו לפנות. ואחרי שהם פנו, הבנתי משהו חשוב:</p>
-            <p className="small-text-bold">כולם מחפשים פתרון אחרי. אני רוצה לתת את הכלים לפני.</p>
-
-            <p className="italic">
-              "אני לא קוסם. אני לא לוחם סייבר עם טריקים מסתוריים.<br />
-              אני פשוט יודע איך המערכת עובדת, ואיך לבנות נכון מההתחלה."
-            </p>
-
-            <p className="small-text-bold">זה לא שיווק. זה מה שאני עושה בפועל, כל יום.</p>
-
-            <div className="closing-line">
-              <span className="you-chant">"BMS."</span>
-              <p className="small-text">לא עוד כלי. לא עוד קורס.</p>
-              <p className="small-text-bold">הבסיס שיתן לכם לישון בשקט.</p>
-            </div>
-
-            <div className="stage-note">
-              <strong>מה שתלמד בקורס הזה</strong> הוא בדיוק מה שהיה מציל את לילך, את דליה ואת מאיה,
-              לפני שהן בכלל הגיעו אליי.
-            </div>
-          </div>
-
-          <div className="cta-wrapper">
-            <a href="#final-cta" className="cta-btn" onClick={trackLead}>
-              <span>אני רוצה תשתית שעובדת. קחו אותי לקורס</span>
-              <span className="arrow"><IconArrowLeft size={18} /></span>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <div className="gradient-divider" />
-
       {/* DELIVERABLES. 7 modules */}
       <section className="deliverables">
         <div className="container">
@@ -465,10 +466,11 @@ export default function VslBms() {
             שעומדת בכל סיטואציה.
           </h2>
 
-          <p className="lead">
-            לא מצגות. לא תיאוריה. <strong>הדרכות ישירות, screen recording, יישום מידי.</strong>
-            {' '}אחרי הקורס אתה מוכן. גם אם לא נגעת ב-Business Manager מעולם.
-          </p>
+          <div className="featured-callout">
+            <div className="featured-callout-line"><strong>לא מצגות. לא תיאוריה.</strong></div>
+            <div className="featured-callout-main">הדרכות ישירות, הקלטת מסך, יישום מיידי.</div>
+            <div className="featured-callout-line">אחרי הקורס אתם מוכנים. גם אם לא נגעתם ב-Business Manager מעולם.</div>
+          </div>
 
           <div className="deliverable-item">
             <div className="deliverable-head">
@@ -586,6 +588,91 @@ export default function VslBms() {
 
       <div className="gradient-divider" />
 
+      {/* FAQ */}
+      <section className="faq-section" aria-labelledby="faq-heading">
+        <div className="container">
+          <div className="text-center">
+            <span className="section-label">שאלות נפוצות</span>
+          </div>
+          <h2 id="faq-heading" className="text-center">
+            יש לכם <span className="gradient-text">שאלה</span>? סביר להניח שהתשובה כאן.
+          </h2>
+
+          <div className="faq-list">
+            <details className="faq-item">
+              <summary>למי הקורס מתאים?</summary>
+              <div className="faq-answer">
+                לבעלי עסקים שמפרסמים בפייסבוק ובאינסטגרם, למנהלי סושיאל שמנהלים חשבונות של לקוחות,
+                ולקמפיינרים/ות שמריצים תקציבי פרסום. בקיצור, לכל מי שיש לו נכס דיגיטלי שהוא לא יכול להרשות לעצמו לאבד.
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>אני לא טכנולוגי. אני יכול בכלל להתמודד עם זה?</summary>
+              <div className="faq-answer">
+                בהחלט. הקורס בנוי בהקלטות מסך עם הנחיה צעד-אחר-צעד. אין הנחה של ידע מוקדם.
+                אם אתם יודעים להפעיל פייסבוק ולהיכנס לחשבון, אתם יודעים מספיק.
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>כמה זמן ייקח לי לסיים את הקורס?</summary>
+              <div className="faq-answer">
+                בערך 3 שעות מצטברות של תוכן. אפשר לעבור הכל בערב אחד, או לפזר על פני שבוע.
+                את היישום עצמו אפשר לעשות תוך כדי, מסך אחרי מסך.
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>מה אני מקבל אחרי הרכישה?</summary>
+              <div className="faq-answer">
+                גישה מיידית ל-LMS עם כל המודולים והבונוסים. שולחים לכם מייל עם שם משתמש וסיסמה תוך דקות.
+                גישה לכל החיים, כולל עדכונים עתידיים.
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>האם יש החזר כספי אם הקורס לא מתאים לי?</summary>
+              <div className="faq-answer">
+                במחיר של ₪197 ועם גישה מיידית לתוכן הדיגיטלי, אין מדיניות החזרים.
+                אם יש לכם ספק לפני הרכישה, שלחו לי הודעה בוואטסאפ ואני אענה אישית על כל שאלה.
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>מה ההבדל בין הקורס הזה לכל מה שיש בחינם ביוטיוב?</summary>
+              <div className="faq-answer">
+                ביוטיוב יש "טיפים". כאן יש שיטה. הקורס בנוי על 5 שנים של עבודה עם מעל 2,500 עסקים אמיתיים שהושבתו או נפרצו,
+                והוא מתעדכן בהתאם לשינויים האחרונים של מטא. אין כפילויות, אין מילוי זמן, רק יישום.
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>האם הקורס מתעדכן?</summary>
+              <div className="faq-answer">
+                כן. כשמטא משנה משהו, אני מעדכן. הגישה שלכם אוטומטית כוללת את כל העדכונים העתידיים, ללא תוספת תשלום.
+              </div>
+            </details>
+
+            <details className="faq-item">
+              <summary>אפשר לדבר איתך אם נתקעתי תוך כדי?</summary>
+              <div className="faq-answer">
+                התלמידים שלי יכולים לפנות אליי בוואטסאפ אם משהו לא ברור. לא הבטחה לתמיכה אישית מלאה,
+                אבל אני עונה בפועל לכולם.
+              </div>
+            </details>
+          </div>
+
+          <p className="faq-foot">
+            יש שאלה שלא מצאתם פה?{' '}
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="faq-foot-link">שלחו הודעה בוואטסאפ</a>.
+            {' '}אני עונה אישית.
+          </p>
+        </div>
+      </section>
+
+      <div className="gradient-divider" />
+
       {/* FINAL CTA */}
       <section className="final-cta" id="final-cta">
         <div className="container">
@@ -601,7 +688,7 @@ export default function VslBms() {
 
             <div className="value-box-rows">
               <div className="value-row">
-                <span className="label">4 מודולי יסוד, 9 שיעורים מוקלטים (screen recording מלא)</span>
+                <span className="label">4 מודולי יסוד, 9 שיעורים מוקלטים (הקלטת מסך מלאה)</span>
                 <span className="value">ערך ₪297</span>
               </div>
               <div className="value-row value-bonus">
@@ -623,7 +710,13 @@ export default function VslBms() {
             </div>
 
             <div className="value-box-price">
-              <p className="strike">שווי אמיתי: <s>₪638</s></p>
+              <p className="strike-real-value">
+                <span className="strike-label">שווי אמיתי:</span>
+                <span className="strike-amount">
+                  <span className="strike-amount-text">₪638</span>
+                  <span className="strike-x" aria-hidden="true">✕</span>
+                </span>
+              </p>
               <p className="today-label">המחיר שלך היום:</p>
               <div className="price-num">₪{PRICE}</div>
               <p className="micro">תשלום חד-פעמי · כולל מע"מ · גישה מיידית</p>
