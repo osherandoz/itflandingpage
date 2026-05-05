@@ -151,10 +151,10 @@
 
 /* Display headings, for Hero & top-of-section impact */
 .vsl-bms-page .hero h1 {
-  font-size: clamp(34px, 6.2vw, 62px);
-  line-height: 1.05;
-  letter-spacing: -0.04em;
-  font-weight: 900;
+  font-size: clamp(28px, 4.6vw, 50px);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  font-weight: 800;
 }
 
 /* Story quote, big quote, key emotional moments, Frank Ruhl Libre serif */
@@ -1375,11 +1375,12 @@
     padding: 28px 0 32px;
   }
   .vsl-bms-page .hero h1 {
-    font-size: clamp(26px, 7.2vw, 36px);
-    line-height: 1.15;
-    letter-spacing: -0.03em;
+    font-size: clamp(20px, 5.3vw, 28px);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 800;
     margin-bottom: 24px;
-    padding: 0 8px;
+    padding: 0 12px;
   }
 
   /* Video wrapper, lighter shadow for mobile perf */
