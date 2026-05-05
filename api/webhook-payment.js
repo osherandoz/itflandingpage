@@ -113,37 +113,51 @@ export default async function handler(req, res) {
   const contactPayload = {
     Email: safeEmail,
     FirstName: firstName,
-    Lists: [{ Id: BMS_PURCHASE_LIST_ID }],
   };
   if (phone) contactPayload.Phone = phone;
 
   if (isDryRun) {
-    console.log('[webhook-payment] DRY RUN — Smoove call skipped', contactPayload);
-    return res.status(200).json({ success: true, dryRun: true, payload: contactPayload });
+    console.log('[webhook-payment] DRY RUN — Smoove call skipped', { contactPayload, listId: BMS_PURCHASE_LIST_ID });
+    return res.status(200).json({ success: true, dryRun: true, payload: contactPayload, listId: BMS_PURCHASE_LIST_ID });
   }
 
+  const smooveHeaders = {
+    Authorization: `Bearer ${apiKey}`,
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+  };
+
   try {
-    const smooveRes = await fetch(
+    // Step 1 — create / update the contact
+    const contactRes = await fetch(
       'https://rest.smoove.io/v1/Contacts?updateIfExists=true&restoreIfDeleted=true&restoreIfUnsubscribed=true',
+      { method: 'POST', headers: smooveHeaders, body: JSON.stringify(contactPayload) }
+    );
+
+    const contactText = await contactRes.text();
+    if (!contactRes.ok && contactRes.status !== 409) {
+      console.error('[webhook-payment] Smoove contact error', contactRes.status, contactText);
+      return res.status(502).json({ error: 'Smoove contact error', detail: contactText });
+    }
+
+    // Step 2 — subscribe the contact to the BMS purchase list
+    const listRes = await fetch(
+      `https://rest.smoove.io/v1/Lists/${BMS_PURCHASE_LIST_ID}/Contacts`,
       {
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(contactPayload),
+        headers: smooveHeaders,
+        body: JSON.stringify({ Email: safeEmail }),
       }
     );
 
-    const responseText = await smooveRes.text();
-    if (smooveRes.ok || smooveRes.status === 409) {
-      console.log('[webhook-payment] BMS buyer added to list', BMS_PURCHASE_LIST_ID, safeEmail);
-      return res.status(200).json({ success: true, smooveStatus: smooveRes.status, smooveResponse: responseText });
+    const listText = await listRes.text();
+    if (listRes.ok || listRes.status === 409) {
+      console.log('[webhook-payment] BMS buyer subscribed to list', BMS_PURCHASE_LIST_ID, safeEmail);
+      return res.status(200).json({ success: true, listStatus: listRes.status, listResponse: listText });
     }
 
-    console.error('[webhook-payment] Smoove error', smooveRes.status, responseText);
-    return res.status(502).json({ error: 'Smoove API error' });
+    console.error('[webhook-payment] Smoove list error', listRes.status, listText);
+    return res.status(502).json({ error: 'Smoove list error', detail: listText });
   } catch (err) {
     console.error('[webhook-payment] handler error', err);
     return res.status(500).json({ error: 'Server error' });
