@@ -9,7 +9,7 @@ const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.webp';
 export const meta = () => [
   { title: TITLE },
   { name: 'description', content: DESCRIPTION },
-  // Prevent indexing of A/B test variant — avoid duplicate-content penalty
+  // Prevent indexing of A/B test variant. Avoids duplicate-content penalty.
   { name: 'robots', content: 'noindex, nofollow' },
   { property: 'og:type', content: 'website' },
   { property: 'og:title', content: 'חשבון פרסום נחסם = ₪150,000 לאיבוד בין לילה. יש שיטה אחת שמונעת את זה.' },

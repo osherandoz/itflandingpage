@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './VslBmsV2.css';
 
 /* ============================================================
-   ICONS — structural Lucide-style (per brief Iconography section)
+   ICONS. Structural Lucide-style (per brief Iconography section).
    Emojis are used inline in copy text only
    ============================================================ */
 const Icon = ({ children, size = 20, strokeWidth = 2, ...rest }) => (
@@ -92,7 +92,7 @@ export default function VslBmsV2() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // VideoPlay — fired when iframe is interacted with (best-effort for embedded players)
+  // VideoPlay. Fires when iframe is interacted with (best-effort for embedded players).
   const handleVideoMessage = () => {
     if (videoPlayedFired.current) return;
     videoPlayedFired.current = true;
@@ -122,7 +122,7 @@ export default function VslBmsV2() {
             ההדרכה הזו (4 דקות) תראה לכם איך להימנע ממנה.
           </p>
 
-          {/* Trust bar — 4 pills */}
+          {/* Trust bar (4 pills) */}
           <ul className="v2-trust-bar" aria-label="הוכחות חברתיות">
             <li><span className="v2-trust-mark">✅</span> 2,500+ עסקים שוחזרו</li>
             <li><span className="v2-trust-mark">✅</span> 95% הצלחה</li>
@@ -163,7 +163,7 @@ export default function VslBmsV2() {
               onClick={trackPurchaseClick}
               aria-label={`הצטרף/י לקורס BMS ב-₪${PRICE}`}
             >
-              <span>כן, אני רוצה את השיטה — ₪{PRICE}</span>
+              <span>כן, אני רוצה את השיטה ב-₪{PRICE}</span>
               <span className="v2-cta-arrow"><IconArrowLeft size={18} /></span>
             </a>
             <p className="v2-cta-microcopy">תשלום חד-פעמי · גישה מיידית · כולל מע״מ</p>
@@ -238,11 +238,11 @@ export default function VslBmsV2() {
 
             <p>
               שמי אושר רווח. ב-2020 אשתי בר הייתה בשיא שלה כיוצרת תוכן.
-              בוקר אחד היא ניסתה להיכנס לחשבון — ולא הצליחה.
+              בוקר אחד היא ניסתה להיכנס לחשבון. לא הצליחה.
               נחסם. בלי הסבר, בלי אזהרה, בלי דרך לדבר עם בנאדם אמיתי בצד השני.
             </p>
 
-            <p>ניסיתי. נכשלתי. ניסיתי שוב. אחרי שבועיים של ניסיון וטעייה — היא חזרה.</p>
+            <p>ניסיתי. נכשלתי. ניסיתי שוב. אחרי שבועיים של ניסיון וטעייה, היא חזרה.</p>
 
             <p>
               מאז עברו 5 שנים. <strong>2,500 עסקים שוחזרו</strong>.
@@ -251,7 +251,7 @@ export default function VslBmsV2() {
 
             <p>
               ואז הבנתי משהו: <strong>כל הלקוחות שהגיעו אליי כבר היו פצועים.</strong>
-              {' '}הם הגיעו אחרי שזה קרה. השאלה האמיתית הייתה — למה זה קרה מלכתחילה?
+              {' '}הם הגיעו אחרי שזה קרה. השאלה האמיתית הייתה: למה זה קרה מלכתחילה?
             </p>
 
             <p>
@@ -267,35 +267,35 @@ export default function VslBmsV2() {
         <div className="v2-container">
           <h2 className="v2-section-h2 v2-text-center">
             3 עסקים. 3 פעמים שהם הגיעו אליי בייאוש.<br />
-            <span className="v2-emph">ב-3 הפעמים — אותה טעות בדיוק.</span>
+            <span className="v2-emph">ב-3 הפעמים. אותה טעות בדיוק.</span>
           </h2>
           <p className="v2-section-sub v2-text-center">השמות שונו. הסיפורים אמיתיים ב-100%.</p>
 
           <div className="v2-cases-grid">
             <article className="v2-case-card">
-              <h3 className="v2-case-title">🔴 לילך — יועצת עסקית, מנהלת דיגיטל</h3>
+              <h3 className="v2-case-title">🔴 לילך, יועצת עסקית ומנהלת דיגיטל</h3>
               <p>
                 קמפיין של <strong>₪150,000</strong> ירד לה מהאשראי בין לילה.
                 עסק ששותק. לקוחות שעזבו.
-                ולא רק זה — היא גם נעקצה מ"מקצוען" שהבטיח לסייע ולא הצליח.
+                ולא רק זה. היא גם נעקצה מ"מקצוען" שהבטיח לסייע ולא הצליח.
               </p>
             </article>
 
             <article className="v2-case-card">
-              <h3 className="v2-case-title">🔴 דליה — בעלת עסק</h3>
+              <h3 className="v2-case-title">🔴 דליה, בעלת עסק</h3>
               <p>
                 <strong>חצי שנה</strong> היא חיפשה מי בכלל מחזיק בדף העסקי שלה.
                 פניות לתמיכה? לא עזרו.
                 למחלקה המשפטית של מטא? לא ענו.
-                עם BMS — היא לא הייתה מגיעה למצב הזה.
+                עם BMS היא לא הייתה מגיעה למצב הזה.
               </p>
             </article>
 
             <article className="v2-case-card">
-              <h3 className="v2-case-title">🔴 מאיה — קמפיינרית</h3>
+              <h3 className="v2-case-title">🔴 מאיה, קמפיינרית</h3>
               <p>
                 חשבון של לקוח נחסם. לא באשמתה.
-                אבל היא נשאה בעלויות התיקון — <strong>אלפי שקלים מהכיס שלה</strong>.
+                אבל היא נשאה בעלויות התיקון. <strong>אלפי שקלים מהכיס שלה</strong>.
                 הכל היה נמנע עם הכנה מוקדמת.
               </p>
             </article>
@@ -323,7 +323,7 @@ export default function VslBmsV2() {
               <span className="v2-stage-saves">→ היה מציל את לילך</span>
               <p>
                 תשתית מהיום הראשון: הרשאות, גיבויים, חיבורים נכונים.
-                אם בונים נכון פעם אחת — אין מצב שירידה של ₪150K אצל לילך הייתה קורית.
+                אם בונים נכון פעם אחת. אין מצב שירידה של ₪150K אצל לילך הייתה קורית.
               </p>
             </article>
 
@@ -342,7 +342,7 @@ export default function VslBmsV2() {
               <h3>שחזור מהיר</h3>
               <span className="v2-stage-saves">→ הייתה מצילה את מאיה</span>
               <p>
-                כשמשהו משתבש — יש תוכנית מוכנה. תבניות, ערוצים, סדר פעולות.
+                כשמשהו משתבש, יש תוכנית מוכנה. תבניות, ערוצים, סדר פעולות.
                 לא פאניקה. לא אלפי שקלים מהכיס.
               </p>
             </article>
@@ -350,17 +350,17 @@ export default function VslBmsV2() {
 
           <div className="v2-cta-wrap">
             <a href={getPurchaseUrl()} className="v2-cta" onClick={trackPurchaseClick}>
-              <span>אני רוצה את כל ה-3 שלבים — ₪{PRICE}</span>
+              <span>אני רוצה את כל ה-3 שלבים ב-₪{PRICE}</span>
               <span className="v2-cta-arrow"><IconArrowLeft size={18} /></span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* ─── 7. WHAT'S INSIDE — MODULES AS OUTCOMES ─── */}
+      {/* ─── 7. WHAT'S INSIDE. MODULES AS OUTCOMES ─── */}
       <section className="v2-inside">
         <div className="v2-container">
-          <h2 className="v2-section-h2 v2-text-center">אחרי הקורס — תדעו לעשות את כל זה.</h2>
+          <h2 className="v2-section-h2 v2-text-center">אחרי הקורס. תדעו לעשות את כל זה.</h2>
           <p className="v2-section-sub v2-text-center">
             לא מצגות. לא תיאוריה. הקלטות מסך, צעד-אחר-צעד, יישום מיידי.
           </p>
@@ -370,7 +370,7 @@ export default function VslBmsV2() {
               <span className="v2-module-tag">📍 מודול 1 · 3 שיעורים</span>
               <h3>הפרופיל האישי</h3>
               <p>
-                תדעו אילו <strong>4 הגדרות בפרופיל האישי שלכם</strong> פותחות את ה-BM שלכם לפריצה —
+                תדעו אילו <strong>4 הגדרות בפרופיל האישי שלכם</strong> פותחות את ה-BM שלכם לפריצה.
                 ואיך לסגור אותן ב-7 דקות.
               </p>
               <ul className="v2-module-bullets">
@@ -385,7 +385,7 @@ export default function VslBmsV2() {
               <span className="v2-module-tag">📍 מודול 2 · שיעור אחד</span>
               <h3>בידול עסקי</h3>
               <p>
-                תדעו איך להפריד פעם אחת ולתמיד בין הפרטי לעסקי —
+                תדעו איך להפריד פעם אחת ולתמיד בין הפרטי לעסקי,
                 כך שאם מחר תרצו למכור את העסק או להעביר ניהול, הכל מוכן.
               </p>
             </article>
@@ -395,7 +395,7 @@ export default function VslBmsV2() {
               <h3>מדברים ביזנס</h3>
               <p>
                 תדעו את ההבדל בין מרכז החשבונות לביזנס מנג'ר.
-                תקימו תיק עסקי מסודר. כל הנכסים שלכם — תחת קורת גג אחת.
+                תקימו תיק עסקי מסודר. כל הנכסים שלכם, תחת קורת גג אחת.
                 <em> (הצעד שלילך לא ידעה לעשות.)</em>
               </p>
             </article>
@@ -412,12 +412,12 @@ export default function VslBmsV2() {
 
           {/* Bonuses */}
           <div className="v2-bonuses-header">
-            <span>🎁 ובחבילה — 3 בונוסים שלא תמצאו בשום מקום אחר</span>
+            <span>🎁 ובחבילה: 3 בונוסים שלא תמצאו בשום מקום אחר</span>
           </div>
 
           <div className="v2-bonuses">
             <article className="v2-bonus">
-              <h4>🎁 בונוס 01 · 3 שיעורים · פריצות וחסימות — מה לעשות כשזה קורה</h4>
+              <h4>🎁 בונוס 01 · 3 שיעורים · פריצות וחסימות. מה לעשות כשזה קורה</h4>
               <p>
                 מה זו פריצה? איך זה נראה? איך מגיבים?
                 <em> (הידע שדליה לא הייתה צריכה לחפש 6 חודשים.)</em>
@@ -433,7 +433,7 @@ export default function VslBmsV2() {
             </article>
 
             <article className="v2-bonus">
-              <h4>🎁 בונוס 03 · הרצאת אורח — בר שלג, "הוקים שעוצרים גלילה"</h4>
+              <h4>🎁 בונוס 03 · הרצאת אורח של בר שלג, "הוקים שעוצרים גלילה"</h4>
               <p>
                 הקלטה בלעדית של בר על איך כותבים hooks שמושכים תשומת לב באמת.
                 כי תשתית בלי תוכן זה חצי משחק.
@@ -447,7 +447,7 @@ export default function VslBmsV2() {
 
           <div className="v2-cta-wrap">
             <a href={getPurchaseUrl()} className="v2-cta v2-cta-primary" onClick={trackPurchaseClick}>
-              <span>אני רוצה את הכל — ₪{PRICE}</span>
+              <span>אני רוצה את הכל ב-₪{PRICE}</span>
               <span className="v2-cta-arrow"><IconArrowLeft size={18} /></span>
             </a>
           </div>
@@ -467,7 +467,7 @@ export default function VslBmsV2() {
               </summary>
               <div className="v2-obj-answer">
                 הקורס בנוי בהקלטות מסך. אתם רואים בדיוק מה אני עושה ועושים אחריי.
-                אם אתם יודעים להפעיל פייסבוק — אתם יודעים מספיק.
+                אם אתם יודעים להפעיל פייסבוק, אתם יודעים מספיק.
               </div>
             </details>
 
@@ -478,7 +478,7 @@ export default function VslBmsV2() {
               </summary>
               <div className="v2-obj-answer">
                 חסימה ממוצעת עולה ₪3,500. זה פי 18 מהקורס.
-                אם הקורס יחסוך לכם חסימה אחת ב-5 השנים הקרובות — הוא משלם את עצמו 18 פעמים.
+                אם הקורס יחסוך לכם חסימה אחת ב-5 השנים הקרובות, הוא משלם את עצמו 18 פעמים.
               </div>
             </details>
 
@@ -494,12 +494,12 @@ export default function VslBmsV2() {
 
             <details className="v2-obj">
               <summary>
-                <span>❓ אם אקנה ולא יעבוד לי — מה?</span>
+                <span>❓ אם אקנה ולא יעבוד לי, מה אז?</span>
                 <span className="v2-obj-chevron"><IconChevronDown size={18} /></span>
               </summary>
               <div className="v2-obj-answer">
                 תשלח/י לי הודעה. אני עונה אישית.
-                לא הבטחתי תמיכה אישית מלאה — אבל בפועל אני עונה לכל תלמיד.
+                לא הבטחתי תמיכה אישית מלאה. אבל בפועל אני עונה לכל תלמיד.
               </div>
             </details>
           </div>
@@ -530,7 +530,7 @@ export default function VslBmsV2() {
             </ul>
 
             <a href={getPurchaseUrl()} className="v2-cta v2-cta-mega" onClick={trackPurchaseClick}>
-              <span>🚀 כן, אני רוצה את הכל — ₪{PRICE}</span>
+              <span>🚀 כן, אני רוצה את הכל ב-₪{PRICE}</span>
             </a>
 
             <p className="v2-trust-line">
@@ -546,7 +546,7 @@ export default function VslBmsV2() {
             <h3>ההבטחה שלי האמיתית:</h3>
             <p>
               הקורס הזה <strong>לא מבטיח</strong> שלעולם לא תיחסמו או תיפרצו.<br />
-              מי שמבטיח לכם דבר כזה — משקר.
+              מי שמבטיח לכם דבר כזה, משקר.
             </p>
             <p className="v2-promise-yes">
               <strong>מה שאני כן מבטיח:</strong><br />
@@ -559,7 +559,7 @@ export default function VslBmsV2() {
 
           {/* WhatsApp fallback */}
           <div className="v2-wa-fallback">
-            <p>יש שאלה לפני? שלחו לי הודעה אישית בוואטסאפ — אני עונה תוך שעות.</p>
+            <p>יש שאלה לפני? שלחו לי הודעה אישית בוואטסאפ. אני עונה תוך שעות.</p>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v2-wa-btn">
               <IconWhatsApp size={20} />
               <span>שלחו הודעה. אושר עונה אישית</span>

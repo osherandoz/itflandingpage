@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Assistant:wght@400;500;600;700&display=swap');
 
 /* ============================================================
-   VSL-BMS-V2 — A/B TEST VARIANT
+   VSL-BMS-V2. A/B TEST VARIANT.
    All rules scoped to .vsl-v2 to prevent leakage into V1.
    ============================================================ */
 
@@ -824,71 +824,168 @@
 
 @media (max-width: 767px) {
   .vsl-v2 { font-size: 15.5px; }
-  .vsl-v2 section { padding: 44px 0; }
+  .vsl-v2 section { padding: 40px 0; }
+  .vsl-v2 .v2-container { padding: 0 16px; }
+
+  /* Announcement */
+  .vsl-v2 .v2-announcement { font-size: 12.5px; padding: 11px 14px; line-height: 1.4; }
 
   /* Hero */
-  .vsl-v2 .v2-hero { padding: 30px 0 40px; }
+  .vsl-v2 .v2-hero { padding: 26px 0 36px; }
   .vsl-v2 .v2-h1 {
-    font-size: clamp(22px, 6.4vw, 30px);
-    line-height: 1.22;
+    font-size: clamp(22px, 5.6vw, 28px);
+    line-height: 1.25;
     padding: 0 4px;
+    margin-bottom: 18px;
   }
-  .vsl-v2 .v2-subhead { font-size: 15px; padding: 0 4px; }
+  .vsl-v2 .v2-h1-sub { font-size: 0.82em; }
+  .vsl-v2 .v2-subhead { font-size: 14.5px; padding: 0 6px; line-height: 1.7; margin-bottom: 22px; }
 
+  /* Trust bar 2x2 */
   .vsl-v2 .v2-trust-bar {
-    grid-template-columns: 1fr 1fr;
     display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
+    margin-bottom: 26px;
+    padding: 0 2px;
   }
-  .vsl-v2 .v2-trust-bar li { font-size: 12.5px; padding: 8px 12px; justify-content: center; }
+  .vsl-v2 .v2-trust-bar li {
+    font-size: 12px;
+    padding: 9px 8px;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.3;
+    min-height: 38px;
+  }
 
-  .vsl-v2 .v2-video-banner { font-size: 13.5px; padding: 10px 14px; }
-  .vsl-v2 .v2-video-thumb-play { width: 60px; height: 60px; font-size: 24px; }
-  .vsl-v2 .v2-video-thumb-text { font-size: 15px; }
+  /* Video */
+  .vsl-v2 .v2-video-wrap { border-radius: 14px; }
+  .vsl-v2 .v2-video-banner { font-size: 13px; padding: 10px 14px; line-height: 1.4; }
+  .vsl-v2 .v2-video-thumb-play { width: 54px; height: 54px; font-size: 22px; }
+  .vsl-v2 .v2-video-thumb-text { font-size: 14px; line-height: 1.4; padding: 0 16px; }
 
+  /* CTAs. Full-width with proper touch height */
   .vsl-v2 .v2-cta {
     width: 100%;
     min-width: 0;
-    font-size: 16px;
-    padding: 16px 20px;
+    font-size: 15.5px;
+    padding: 16px 18px;
+    min-height: 54px;
+    line-height: 1.3;
   }
-  .vsl-v2 .v2-cta-primary { padding: 17px 22px; font-size: 16.5px; }
-  .vsl-v2 .v2-cta-mega { font-size: 17px; padding: 18px 22px; }
+  .vsl-v2 .v2-cta-primary { padding: 17px 18px; font-size: 16px; animation: none; }
+  .vsl-v2 .v2-cta-mega { font-size: 16.5px; padding: 18px 18px; }
+  .vsl-v2 .v2-cta-microcopy { font-size: 12.5px; }
 
-  /* Sections */
-  .vsl-v2 .v2-section-h2 { font-size: clamp(20px, 5.5vw, 26px); padding: 0 4px; }
+  /* Section heading */
+  .vsl-v2 .v2-section-h2 { font-size: clamp(20px, 5.4vw, 25px); padding: 0 4px; line-height: 1.28; }
 
+  /* Grids stack */
   .vsl-v2 .v2-cost-grid, .vsl-v2 .v2-cases-grid,
   .vsl-v2 .v2-stages, .vsl-v2 .v2-bonuses, .vsl-v2 .v2-modules {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 12px;
+    margin: 22px 0 26px;
   }
   .vsl-v2 .v2-cost-card, .vsl-v2 .v2-case-card, .vsl-v2 .v2-stage,
-  .vsl-v2 .v2-module, .vsl-v2 .v2-bonus { padding: 22px 18px; }
+  .vsl-v2 .v2-module, .vsl-v2 .v2-bonus { padding: 20px 16px; }
 
-  /* Who am I — stack */
-  .vsl-v2 .v2-who-grid { grid-template-columns: 1fr; gap: 24px; }
+  .vsl-v2 .v2-cost-card h3 { font-size: 18px; padding-bottom: 10px; margin-bottom: 12px; }
+  .vsl-v2 .v2-cost-card li { font-size: 14.5px; }
+  .vsl-v2 .v2-cost-closer { font-size: 17px; padding: 18px 16px; line-height: 1.55; }
+  .vsl-v2 .v2-cases-closer { font-size: 17px; padding: 0 8px; }
+
+  /* Who am I. Stack and center */
+  .vsl-v2 .v2-who-grid { grid-template-columns: 1fr; gap: 20px; }
   .vsl-v2 .v2-who-image-col { text-align: center; }
-  .vsl-v2 .v2-who-image-col img { max-width: 240px; margin: 0 auto; }
-  .vsl-v2 .v2-who-text-col p { font-size: 15.5px; }
+  .vsl-v2 .v2-who-image-col img { max-width: 220px; margin: 0 auto; }
+  .vsl-v2 .v2-who-text-col .v2-section-h2 { text-align: center; }
+  .vsl-v2 .v2-who-text-col p { font-size: 15px; line-height: 1.75; margin-bottom: 14px; }
 
-  /* Pricing */
-  .vsl-v2 .v2-price-card { padding: 26px 20px; }
+  /* Modules */
+  .vsl-v2 .v2-module-tag { font-size: 11.5px; padding: 4px 9px; }
+  .vsl-v2 .v2-module h3 { font-size: 17px; }
+  .vsl-v2 .v2-module p { font-size: 14.5px; }
+  .vsl-v2 .v2-module-bullets li { font-size: 12.5px; padding: 4px 9px; }
+
+  /* Stages */
+  .vsl-v2 .v2-stage h3 { font-size: 19px; }
+  .vsl-v2 .v2-stage p { font-size: 14.5px; }
+  .vsl-v2 .v2-stage-num { font-size: 12.5px; padding: 5px 12px; margin-bottom: 11px; }
+  .vsl-v2 .v2-stage-saves { font-size: 12.5px; }
+
+  /* Pricing card */
+  .vsl-v2 .v2-price-card { padding: 24px 18px; border-radius: 18px; }
+  .vsl-v2 .v2-strike-amount { font-size: 22px; }
+  .vsl-v2 .v2-price-strike-row { font-size: 15px; }
+  .vsl-v2 .v2-price-today { font-size: clamp(56px, 16vw, 72px); margin-top: 4px; }
   .vsl-v2 .v2-price-includes li {
     flex-direction: column;
     align-items: flex-start;
-    gap: 4px;
+    gap: 3px;
+    padding: 9px 0;
+    font-size: 14.5px;
   }
+  .vsl-v2 .v2-price-value { font-size: 13px; }
+  .vsl-v2 .v2-trust-line { font-size: 11.5px; line-height: 1.5; }
+  .vsl-v2 .v2-consent { font-size: 12px; line-height: 1.55; padding: 0 2px; }
 
   /* Bonuses header */
-  .vsl-v2 .v2-bonuses-header { font-size: 16px; padding: 12px 18px; }
+  .vsl-v2 .v2-bonuses-header {
+    font-size: 14.5px;
+    padding: 11px 16px;
+    line-height: 1.35;
+    text-align: center;
+  }
+  .vsl-v2 .v2-bonus h4 { font-size: 14.5px; line-height: 1.45; }
+  .vsl-v2 .v2-bonus p { font-size: 14px; }
+
+  /* Summary bar */
+  .vsl-v2 .v2-summary-bar { font-size: 13.5px; padding: 12px 14px; line-height: 1.45; }
 
   /* Promise */
-  .vsl-v2 .v2-promise { padding: 22px 18px; }
-  .vsl-v2 .v2-promise p { font-size: 15px; }
+  .vsl-v2 .v2-promise { padding: 22px 16px; }
+  .vsl-v2 .v2-promise h3 { font-size: 18px; margin-bottom: 12px; }
+  .vsl-v2 .v2-promise p { font-size: 14.5px; line-height: 1.7; margin-bottom: 12px; }
+  .vsl-v2 .v2-promise-yes { padding: 14px 14px; }
+
+  /* Objections / FAQ */
+  .vsl-v2 .v2-obj summary, .vsl-v2 .v2-faq-item summary {
+    padding: 16px 16px;
+    font-size: 14.5px;
+    line-height: 1.4;
+    gap: 10px;
+  }
+  .vsl-v2 .v2-obj-answer, .vsl-v2 .v2-faq-item > div {
+    padding: 14px 16px 18px;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+
+  /* WhatsApp fallback */
+  .vsl-v2 .v2-wa-fallback p { font-size: 14px; }
+  .vsl-v2 .v2-wa-btn { font-size: 14.5px; padding: 11px 18px; min-height: 48px; }
+
+  /* Sticky bar */
+  .vsl-v2 .v2-sticky-inner { padding: 10px 12px; gap: 10px; }
+  .vsl-v2 .v2-sticky-label { font-size: 11.5px; }
+  .vsl-v2 .v2-sticky-price { font-size: 17px; }
+  .vsl-v2 .v2-sticky-btn { font-size: 14.5px; padding: 11px 18px; min-height: 46px; }
+
+  /* Footer */
+  .vsl-v2 .v2-footer-disclaimer { font-size: 12px; }
+  .vsl-v2 .v2-footer-links a { font-size: 13.5px; }
+  .vsl-v2 .v2-footer-copy { font-size: 12px; }
 }
 
+/* iPhone SE / very small phones */
 @media (max-width: 380px) {
-  .vsl-v2 .v2-h1 { font-size: 22px; }
-  .vsl-v2 .v2-trust-bar li { font-size: 11.5px; padding: 7px 10px; }
+  .vsl-v2 .v2-container { padding: 0 14px; }
+  .vsl-v2 .v2-h1 { font-size: 21px; line-height: 1.28; }
+  .vsl-v2 .v2-section-h2 { font-size: 19px; }
+  .vsl-v2 .v2-trust-bar li { font-size: 11px; padding: 8px 6px; min-height: 36px; }
+  .vsl-v2 .v2-cta { font-size: 14.5px; padding: 14px 14px; }
+  .vsl-v2 .v2-price-today { font-size: 54px; }
+  .vsl-v2 .v2-bonuses-header { font-size: 13.5px; padding: 10px 14px; }
+  .vsl-v2 .v2-cost-closer { font-size: 16px; }
 }
