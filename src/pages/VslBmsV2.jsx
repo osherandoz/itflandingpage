@@ -117,23 +117,23 @@ export default function VslBmsV2() {
           </h1>
 
           <p className="v2-subhead">
-            ב-2026, מטא הסירה מעל <strong>10 מיליון חשבונות עסקיים</strong> בלי הודעה מראש.
+            ב-<span className="v2-num">2026</span>, מטא הסירה מעל <strong><span className="v2-num">10</span> מיליון חשבונות עסקיים</strong> בלי הודעה מראש.
             רובם המכריע נחסמו בגלל טעות הגדרה אחת שאף אחד לא טרח לספר עליה.
-            ההדרכה הזו (4 דקות) תראה לכם איך להימנע ממנה.
+            ההדרכה הזו (<span className="v2-num">4</span> דקות) תראה לכם איך להימנע ממנה.
           </p>
 
           {/* Trust bar (4 pills) */}
           <ul className="v2-trust-bar" aria-label="הוכחות חברתיות">
-            <li><span className="v2-trust-mark">✅</span> 2,500+ עסקים שוחזרו</li>
-            <li><span className="v2-trust-mark">✅</span> 95% הצלחה</li>
-            <li><span className="v2-trust-mark">✅</span> 5 שנים בתחום</li>
-            <li><span className="v2-trust-mark">✅</span> מומלץ ע״י לקוחות בפייסבוק</li>
+            <li><span className="v2-trust-mark">✓</span> <span className="v2-num">2,500+</span> עסקים שוחזרו</li>
+            <li><span className="v2-trust-mark">✓</span> <span className="v2-num">95%</span> הצלחה</li>
+            <li><span className="v2-trust-mark">✓</span> <span className="v2-num">5</span> שנים בתחום</li>
+            <li><span className="v2-trust-mark">✓</span> מומלץ ע״י לקוחות בפייסבוק</li>
           </ul>
 
           {/* Video */}
           <div className="v2-video-wrap" onClick={handleVideoMessage}>
             <div className="v2-video-banner">
-              ▶ 4 דקות שיכולות להציל לך ₪150,000
+              ▶ <span className="v2-num">4</span> דקות שיכולות להציל לך <span className="v2-num">₪150,000</span>
             </div>
             <div className="v2-video-frame">
               {VIDEO_EMBED_URL ? (
@@ -180,7 +180,7 @@ export default function VslBmsV2() {
             <article className="v2-cost-card v2-cost-direct">
               <h3>עלות ישירה</h3>
               <ul>
-                <li>₪3,500–₪50,000+ לשחזור עם איש מקצוע</li>
+                <li><span className="v2-num">₪3,500–₪50,000+</span> לשחזור עם איש מקצוע</li>
                 <li>שבועיים עד חודש של downtime</li>
                 <li>כל הקמפיינים מתאפסים</li>
               </ul>
@@ -206,7 +206,7 @@ export default function VslBmsV2() {
           </div>
 
           <p className="v2-cost-closer">
-            הקורס עולה <strong>₪{PRICE}</strong>. חסימה אחת ממוצעת עולה <strong>פי 18</strong> מזה.<br />
+            הקורס עולה <strong><span className="v2-num">₪{PRICE}</span></strong>. חסימה אחת ממוצעת עולה <strong>פי <span className="v2-num">18</span></strong> מזה.<br />
             הוא משלם את עצמו עוד לפני שלמדתם את המודול הראשון.
           </p>
 
@@ -245,8 +245,8 @@ export default function VslBmsV2() {
             <p>ניסיתי. נכשלתי. ניסיתי שוב. אחרי שבועיים של ניסיון וטעייה, היא חזרה.</p>
 
             <p>
-              מאז עברו 5 שנים. <strong>2,500 עסקים שוחזרו</strong>.
-              אלפי שעות של מחקר. <strong>אחוז הצלחה של 95%</strong>.
+              מאז עברו <span className="v2-num">5</span> שנים. <strong><span className="v2-num">2,500</span> עסקים שוחזרו</strong>.
+              אלפי שעות של מחקר. <strong>אחוז הצלחה של <span className="v2-num">95%</span></strong>.
             </p>
 
             <p>
@@ -256,7 +256,7 @@ export default function VslBmsV2() {
 
             <p>
               <strong>הקורס הזה הוא התשובה.</strong>
-              {' '}זה לא קורס "טריקים". זו השיטה שגיליתי אחרי 2,500 מקרים על איך לא להגיע לרגע שבו אתם צריכים אותי.
+              {' '}זה לא קורס "טריקים". זו השיטה שגיליתי אחרי <span className="v2-num">2,500</span> מקרים על איך לא להגיע לרגע שבו אתם צריכים אותי.
             </p>
           </div>
         </div>
@@ -514,31 +514,35 @@ export default function VslBmsV2() {
           </h2>
 
           <div className="v2-price-card">
-            <div className="v2-price-strike-row">
-              <span className="v2-strike-label">✕ שווי אמיתי:</span>
-              <span className="v2-strike-amount">₪{ORIGINAL_VALUE}</span>
+            <div className="v2-price-head">
+              <div className="v2-price-strike-row">
+                <span className="v2-strike-label">✕ שווי אמיתי:</span>
+                <span className="v2-strike-amount">₪{ORIGINAL_VALUE}</span>
+              </div>
+              <div className="v2-price-today-label">המחיר היום</div>
+              <div className="v2-price-today">₪{PRICE}</div>
             </div>
-            <div className="v2-price-today-label">המחיר היום:</div>
-            <div className="v2-price-today">₪{PRICE}</div>
 
             <ul className="v2-price-includes">
-              <li><span className="v2-price-check">✅</span> 4 מודולים · 9 שיעורים <span className="v2-price-value">(שווי ₪297)</span></li>
-              <li><span className="v2-price-check">✅</span> בונוס 01 · פריצות וחסימות <span className="v2-price-value">(שווי ₪97)</span></li>
-              <li><span className="v2-price-check">✅</span> בונוס 02 · טיפים מבפנים <span className="v2-price-value">(שווי ₪97)</span></li>
-              <li><span className="v2-price-check">✅</span> בונוס 03 · הרצאת בר שלג <span className="v2-price-value">(שווי ₪147)</span></li>
-              <li><span className="v2-price-check">✅</span> עדכונים לכל החיים <span className="v2-price-value">(∞)</span></li>
+              <li><span><span className="v2-price-check">✓</span> <span className="v2-num">4</span> מודולים · <span className="v2-num">9</span> שיעורים</span> <span className="v2-price-value">שווי <span className="v2-num">₪297</span></span></li>
+              <li><span><span className="v2-price-check">✓</span> בונוס <span className="v2-num">01</span> · פריצות וחסימות</span> <span className="v2-price-value">שווי <span className="v2-num">₪97</span></span></li>
+              <li><span><span className="v2-price-check">✓</span> בונוס <span className="v2-num">02</span> · טיפים מבפנים</span> <span className="v2-price-value">שווי <span className="v2-num">₪97</span></span></li>
+              <li><span><span className="v2-price-check">✓</span> בונוס <span className="v2-num">03</span> · הרצאת בר שלג</span> <span className="v2-price-value">שווי <span className="v2-num">₪147</span></span></li>
+              <li><span><span className="v2-price-check">✓</span> עדכונים לכל החיים</span> <span className="v2-price-value">∞</span></li>
             </ul>
 
-            <a href={getPurchaseUrl()} className="v2-cta v2-cta-mega" onClick={trackPurchaseClick}>
-              <span>🚀 כן, אני רוצה את הכל ב-₪{PRICE}</span>
-            </a>
+            <div className="v2-price-foot">
+              <a href={getPurchaseUrl()} className="v2-cta v2-cta-mega" onClick={trackPurchaseClick}>
+                <span>כן, אני רוצה את הכל ב-₪{PRICE}</span>
+              </a>
 
-            <p className="v2-trust-line">
-              🔒 תשלום מאובטח · 📧 חשבונית מס מיידית · ⚡ גישה מיידית למייל
-            </p>
-            <p className="v2-consent">
-              ברכישה את/ה מסכימ/ה לקבל עדכונים שיווקיים מאיתנו. ניתן להסיר בכל עת.
-            </p>
+              <p className="v2-trust-line">
+                תשלום מאובטח · חשבונית מס מיידית · גישה מיידית למייל
+              </p>
+              <p className="v2-consent">
+                ברכישה את/ה מסכימ/ה לקבל עדכונים שיווקיים מאיתנו. ניתן להסיר בכל עת.
+              </p>
+            </div>
           </div>
 
           {/* Honest risk-reduction block (replaces brief's 7-day guarantee) */}
