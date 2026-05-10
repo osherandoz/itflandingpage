@@ -112,7 +112,7 @@ export default function VslBmsV2() {
       <section className="v2-hero">
         <div className="v2-container">
           <h1 className="v2-h1">
-            חשבון פרסום נחסם = <span className="v2-amount-loss">₪150,000</span> לאיבוד בין לילה.<br />
+            חשבון פרסום נחסם = <span className="v2-amount-loss">150,000</span> הלכו לאיבוד בין לילה<br />
             <span className="v2-h1-sub">יש שיטה אחת שמונעת את זה. היא נקראת <span className="v2-bms-accent">BMS</span>.</span>
           </h1>
 
