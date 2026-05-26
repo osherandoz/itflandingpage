@@ -183,6 +183,20 @@
   .testimonials .container {
     padding-left: 0;
     padding-right: 0;
+    position: relative;
+  }
+
+  /* Fade hint on the left edge — signals more content on swipe */
+  .testimonials .container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 100%;
+    background: linear-gradient(to right, #0C0E1D 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 2;
   }
 
   .testimonials-grid {

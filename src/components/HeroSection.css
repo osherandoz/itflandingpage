@@ -42,6 +42,7 @@
 .hero-section {
   background: linear-gradient(-45deg, #0C0E1D, #1a1f3a, #0f1729, #162040);
   min-height: 100vh;
+  min-height: 100svh; /* Excludes browser chrome on iOS/Android */
   display: flex;
   align-items: center;
   justify-content: center;

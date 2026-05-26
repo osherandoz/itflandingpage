@@ -290,6 +290,7 @@
   .svc-shell { padding-top: 60px !important; padding-bottom: 80px !important }
   .svc-header { margin-bottom: 40px; gap: 16px }
   .svc-card-inner { padding: 22px 18px 20px }
+  .svc-stat-sep { display: none }
 }
 
 @media (prefers-reduced-motion: reduce) {
