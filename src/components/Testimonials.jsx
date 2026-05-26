@@ -65,9 +65,9 @@ const Testimonials = () => {
   return (
     <section className="testimonials">
       <div className="container">
-        <h2 className="section-title">מה הלקוחות אומרים</h2>
+        <h2 className="section-title">הם כבר חזרו לאוויר</h2>
         <p className="section-subtitle">
-          מאות לקוחות מרוצים שסומכים עלינו לפתרון בעיות החשבונות שלהם
+          לקוחות אמיתיים, בשמות אמיתיים, שחזרו לנהל את העסק שלהם.
         </p>
         
         <div className="testimonials-grid">
