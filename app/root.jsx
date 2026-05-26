@@ -7,6 +7,7 @@ import { LOCAL_BUSINESS_SCHEMA, SERVICE_SCHEMAS, PERSON_SCHEMA } from '../src/da
 // Self-hosted font — eliminates render-blocking Google Fonts round-trip
 import '@fontsource/heebo/400.css';
 import '@fontsource/heebo/700.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../src/index.css';
 import '../src/App.css';
 
@@ -54,21 +55,6 @@ export function Layout({ children }) {
         {/* Preconnect to external font/CDN origins, eliminates DNS+TCP+TLS round-trip */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
-
-        {/* Font Awesome, deferred so it does not block first paint */}
-        <link
-          rel="preload"
-          as="style"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-          onLoad="this.onload=null;this.rel='stylesheet'"
-        />
-        <noscript>
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-          />
-        </noscript>
 
         {/* Preload LCP image */}
         <link

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
 import { openWhatsApp } from '../utils/whatsapp';
-import SvgIcon from './SvgIcon';
 import Modal from './Modal';
 import ContactForm from './ContactForm';
 import './Footer.css';
@@ -132,16 +131,16 @@ const Footer = () => {
             <h3>עקבו אחרינו</h3>
             <div className="social-links">
               <a href="https://www.facebook.com/OsheRevach23" className="social-link" aria-label="עמוד פייסבוק">
-                <SvgIcon name="facebook" aria-hidden="true" />
+                <i className="fab fa-facebook" aria-hidden="true"></i>
               </a>
               <a href="https://www.instagram.com/osher_revach_1/" className="social-link" aria-label="עמוד אינסטגרם">
-                <SvgIcon name="instagram" aria-hidden="true" />
+                <i className="fab fa-instagram" aria-hidden="true"></i>
               </a>
               <a href="https://wa.me/+972509823235" className="social-link" aria-label="שלח הודעת וואטסאפ" onClick={(e) => { e.preventDefault(); openWhatsApp(); }}>
-                <SvgIcon name="whatsapp" aria-hidden="true" />
+                <i className="fab fa-whatsapp" aria-hidden="true"></i>
               </a>
               <a href="https://www.tiktok.com/@israeltechforce" className="social-link" aria-label="ערוץ טיקטוק">
-                <SvgIcon name="tiktok" aria-hidden="true" />
+                <i className="fab fa-tiktok" aria-hidden="true"></i>
               </a>
             </div>
           </div>

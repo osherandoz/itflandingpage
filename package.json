@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@fontsource/heebo": "^5.2.8",
+    "@fortawesome/fontawesome-free": "^7.2.0",
     "@react-router/node": "^7.14.1",
     "@vercel/analytics": "^1.5.0",
     "@vercel/react-router": "^1.2.6",
@@ -20,6 +21,7 @@
     "isbot": "^5.1.38",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-icons": "^5.6.0",
     "react-router": "^7.14.1"
   },
   "devDependencies": {
