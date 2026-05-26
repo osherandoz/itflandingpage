@@ -10,8 +10,8 @@ const CARDS = [
     title: 'שחזור חשבון פייסבוק שנחסם או נפרץ',
     problem: <>התחברת והחשבון נעלם? קיבלת התראה על <b>פעילות חשודה</b>, מישהו שינה את הסיסמה, או העלית תוכן שסומן בטעות? אנחנו מחזירים גישה מלאה - גם כשהתמיכה של פייסבוק עונה באוטומט.</>,
     bullets: ['שחזור גישה ללא סיסמה / אימייל', 'הסרת חסימות לאחר דיווח שווא', 'אבטחה מחדש מפני פריצה חוזרת', 'ניטור אפשרי של נקודות תורפה נוספות'],
-    ctaLabel: 'פרטים נוספים',
-    path: '/שחזור-חשבון-פייסבוק',
+    ctaLabel: 'קבל עזרה עכשיו',
+    path: null,
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M13.5 22v-8h2.7l.4-3.1H13.5V8.9c0-.9.3-1.5 1.6-1.5h1.7V4.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.4V14h2.7v8h3.4z"/>
@@ -23,9 +23,9 @@ const CARDS = [
     tag: 'Instagram',
     title: 'שחזור חשבון אינסטגרם שהושבת',
     problem: <>איבדת גישה בגלל <b>דיווחי הטרדה שקריים</b>, זיהוי פנים שכשל, או חשבון שנעלם אחרי התחזות? אנחנו נטפל לך בזה מול מטא ונשחזר את החשבון.</>,
-    bullets: ['שחזור מלא עם כל הפוסטים והעוקבים', 'ערעור דיווחי הטרדה וזכויות יוצרים', 'טיפול בחשבונות שהתחזו אליך', 'תמיכה 24/7 עד לסגירת הטיפול'],
-    ctaLabel: 'פרטים נוספים',
-    path: '/שחזור-חשבון-אינסטגרם',
+    bullets: ['שחזור מלא עם כל הפוסטים והעוקבים', 'ערעור דיווחי הטרדה וזכויות יוצרים', 'טיפול בחשבונות שהתחזו אליך', 'תמיכה 24/6 עד לסגירת הטיפול'],
+    ctaLabel: 'קבל עזרה עכשיו',
+    path: null,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <rect x="3" y="3" width="18" height="18" rx="5"/>
@@ -40,8 +40,8 @@ const CARDS = [
     title: 'שחזור מספר וואטסאפ שנחטף',
     problem: <>קיבלת הודעה <b>"הוסף את קוד ה-SMS"</b> והחשבון נעלם? זרים שולחים הודעות מהמספר שלך? אנחנו עוצרים את החטיפה ומחזירים שליטה תוך שעות.</>,
     bullets: ['שחזור חשבון וואטסאפ שנחטף', 'ניטרול אימות דו-שלבי שנגנב', 'אבטחה מחדש ומניעת גישה לגורם זר', 'ליווי אישי עד לסגירה מלאה'],
-    ctaLabel: 'פרטים נוספים',
-    path: '/שחזור-חשבון-וואטסאפ',
+    ctaLabel: 'קבל עזרה עכשיו',
+    path: null,
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.4A10 10 0 1 0 12 2zm5.6 14c-.2.6-1.3 1.2-1.8 1.3-.5.1-1.1.1-1.8-.1-1.6-.5-3.6-1.6-5-3.4-1-1.2-1.6-2.6-1.8-3.2-.1-.6.1-1.1.4-1.4.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.8.1.1.1.3 0 .4l-.3.4c-.1.1-.3.3-.4.4-.1.1-.3.3-.1.5.1.3.7 1.1 1.5 1.8 1 .9 1.8 1.2 2.1 1.3.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.2.1.3.2.4.3 0 .1 0 .6-.2 1z"/>
@@ -54,8 +54,8 @@ const CARDS = [
     title: 'חשבון מודעות שהושעה או נחסם',
     problem: <>הקמפיין החם שלך קרס כי <b>מטא החליטה?</b> אמצעי תשלום נדחה או החשבון דווח? אנחנו יודעים איך לערער, להחזיר הרצה, ולמנוע חסימה חוזרת.</>,
     bullets: ['איפוס מודעות ופיקסלים', 'ערעור מקצועי על חסימה', 'החזרת היסטוריית קמפיינים', 'מניעת חסימה חוזרת'],
-    ctaLabel: 'פרטים נוספים',
-    path: '/שחזור-מנהל-מודעות',
+    ctaLabel: 'קבל עזרה עכשיו',
+    path: null,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M3 11v2a2 2 0 0 0 2 2h2l5 4V5L7 9H5a2 2 0 0 0-2 2z"/>
@@ -69,8 +69,8 @@ const CARDS = [
     title: 'תקיעה ב-Business Manager',
     problem: <>איבדת גישה למרכז העסקים, משתמש-על נעלם או הדומיין שלך הועבר? אנחנו <b>מחזירים בעלות</b> על הנכסים ומחברים מחדש דפים, פיקסלים וקטלוגים.</>,
     bullets: ['החזרת בעלות על Business Manager', 'טיפול בהשתלטות שותף-לשעבר', 'חיבור דפים ונכסים בחזרה', 'הגדרת הרשאות חסינה מפני פריצה'],
-    ctaLabel: 'פרטים נוספים',
-    path: '/שחזור-מנהל-מודעות',
+    ctaLabel: 'קבל עזרה עכשיו',
+    path: null,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="7" width="18" height="13" rx="2"/>
@@ -173,7 +173,7 @@ const Services = () => {
         <header className="svc-header svc-reveal" ref={headerRef}>
           <span className="svc-eyebrow">
             <span className="svc-dot" aria-hidden="true" />
-            שירותי שחזור מקצועיים · פעילים 24/7
+            שירותי שחזור מקצועיים · פעילים 24/6
           </span>
           <h2 className="svc-title">
             מחזירים לך את <span className="svc-accent">הדיגיטל</span><br/>
@@ -185,7 +185,7 @@ const Services = () => {
           <div className="svc-stat-row">
             <div className="svc-stat"><b>95%+</b><span>הצלחה בשחזור</span></div>
             <div className="svc-stat-sep" aria-hidden="true" />
-            <div className="svc-stat"><b>24/7</b><span>זמינות צוות</span></div>
+            <div className="svc-stat"><b>24/6</b><span>זמינות צוות</span></div>
             <div className="svc-stat-sep" aria-hidden="true" />
             <div className="svc-stat"><b>~48h</b><span>זמן ממוצע</span></div>
           </div>

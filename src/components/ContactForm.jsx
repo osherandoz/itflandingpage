@@ -12,6 +12,7 @@ const ContactForm = () => {
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -20,13 +21,11 @@ const ContactForm = () => {
       [name]: type === 'checkbox' ? checked : value
     }));
 
-    // Clear error when user starts typing
+    // Clear field error and submit error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
+    if (submitError) setSubmitError(false);
   };
 
   const validateForm = () => {
@@ -80,36 +79,30 @@ const ContactForm = () => {
 
         const xhr = new XMLHttpRequest();
         xhr.open('GET', finalUrl, true);
-        xhr.send();
+        xhr.timeout = 10000;
 
-        // Show success message immediately
-        setIsSubmitted(true);
-        
-        // Reset form
-        setFormData({
-          name: '',
-          phone: '',
-          consent: false
-        });
-        
-        // Hide success message after 5 seconds
-        setTimeout(() => {
-          setIsSubmitted(false);
-        }, 5000);
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        // Even with no-cors, we show success as the request was sent
-        setIsSubmitted(true);
-        setFormData({
-          name: '',
-          phone: '',
-          consent: false
-        });
-        setTimeout(() => {
-          setIsSubmitted(false);
-        }, 5000);
-      } finally {
+        xhr.onload = () => {
+          setIsSubmitting(false);
+          setIsSubmitted(true);
+          setSubmitError(false);
+          setFormData({ name: '', phone: '', consent: false });
+          setTimeout(() => setIsSubmitted(false), 5000);
+        };
+
+        xhr.onerror = () => {
+          setIsSubmitting(false);
+          setSubmitError(true);
+        };
+
+        xhr.ontimeout = () => {
+          setIsSubmitting(false);
+          setSubmitError(true);
+        };
+
+        xhr.send();
+      } catch {
         setIsSubmitting(false);
+        setSubmitError(true);
       }
     }
   };
@@ -124,6 +117,17 @@ const ContactForm = () => {
       {isSubmitted && (
         <div className="success-message" role="alert">
           <p>תודה! הפרטים התקבלו</p>
+        </div>
+      )}
+
+      {submitError && (
+        <div className="submit-error-message" role="alert">
+          <p>משהו השתבש בשליחה. נסו שוב או{' '}
+            <button type="button" className="form-whatsapp-link" onClick={openWhatsApp}>
+              <i className="fab fa-whatsapp" aria-hidden="true"></i>
+              דברו איתנו ישירות בוואטסאפ
+            </button>
+          </p>
         </div>
       )}
 

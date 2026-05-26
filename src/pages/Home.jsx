@@ -11,6 +11,7 @@ import ArticlesSection from '../components/ArticlesSection';
 import FAQ from '../components/FAQ';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
+import StickyCtaBar from '../components/StickyCtaBar';
 
 const Home = () => {
   useEffect(() => {
@@ -57,6 +58,7 @@ const Home = () => {
       </section>
       <Footer />
       <FloatingWhatsApp />
+      <StickyCtaBar />
     </div>
   );
 };

@@ -1,0 +1,108 @@
+.sticky-cta-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 12px 20px;
+  background: oklch(14% 0.015 255);
+  border-top: 1px solid oklch(35% 0.04 255 / 0.5);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.sticky-cta-bar--visible {
+  transform: translateY(0);
+}
+
+.sticky-cta-bar__text {
+  margin: 0;
+  color: oklch(88% 0.02 255);
+  font-size: 0.95rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.sticky-cta-bar__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: oklch(55% 0.18 255);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.sticky-cta-bar__btn:hover {
+  background: oklch(48% 0.18 255);
+  transform: translateY(-1px);
+}
+
+.sticky-cta-bar__btn:active {
+  transform: translateY(0);
+}
+
+.sticky-cta-bar__dismiss {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: oklch(55% 0.01 255);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 6px;
+  line-height: 1;
+  border-radius: 50%;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.sticky-cta-bar__dismiss:hover {
+  color: oklch(80% 0.01 255);
+  background: oklch(25% 0.01 255 / 0.6);
+}
+
+/* Ensure bar sits above the floating WhatsApp button */
+@media (max-width: 768px) {
+  .sticky-cta-bar {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .sticky-cta-bar__text {
+    font-size: 0.85rem;
+  }
+
+  .sticky-cta-bar__btn {
+    font-size: 0.85rem;
+    padding: 7px 16px;
+  }
+
+  .sticky-cta-bar__dismiss {
+    left: 10px;
+  }
+}
+
+@media (max-width: 380px) {
+  .sticky-cta-bar__text {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sticky-cta-bar {
+    transition: none;
+  }
+}

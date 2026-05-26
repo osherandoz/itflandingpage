@@ -6,7 +6,6 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
 }
 
 .contact-form-header {
@@ -44,6 +43,27 @@
   margin: 0;
   font-weight: 500;
   font-size: 0.9rem;
+}
+
+.submit-error-message {
+  background: rgba(220, 53, 69, 0.12);
+  border: 1px solid rgba(220, 53, 69, 0.35);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.submit-error-message p {
+  color: #f8b4ba;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 .contact-form {
