@@ -49,21 +49,15 @@ const HeroSection = () => {
         <div className="hero-content">
           <h1 className="hero-title">
             חסמו לך את החשבון?{' '}
-            <span className="hero-highlight">אנחנו מחזירים אותך</span>{' '}
-            בזמן הקצר ביותר
+            <span className="hero-highlight">אנחנו מחזירים אותו.</span>
           </h1>
 
-          <p className="hero-urgency" role="alert">
-            ⚠️ כל יום שעובר פוגע בסיכויי השחזור. פעל עכשיו
-          </p>
-
           <p className="hero-subtitle">
-            95%+ הצלחה בשחזור חשבונות פייסבוק, אינסטגרם ו-WhatsApp, גם במקרים שמטא אמרו שאין סיכוי.{' '}
-            <strong>וגם פתרונות לעסקים: ביזנס מנג׳ר, דפים עסקיים וחשבונות מודעות.</strong>
+            מתמחים בחשבונות שמטא הכריזו עליהם כאבודים. פייסבוק, אינסטגרם, WhatsApp ופתרונות מלאים לביזנס מנג׳ר.
           </p>
 
           <div className="hero-features">
-            <span className="hero-feature">✓ שחזור מהיר ככל האפשר</span>
+            <span className="hero-feature">✓ מענה תוך שעות</span>
             <span className="hero-feature">✓ תשלום רק אחרי הצלחה</span>
             <span className="hero-feature">✓ זמינות 24/6</span>
           </div>
@@ -73,14 +67,9 @@ const HeroSection = () => {
             שלחו הודעה עכשיו, ללא עלות
           </button>
 
-          <p className="hero-last-recovery" aria-live="polite">
-            <span className="hero-last-recovery-dot" aria-hidden="true">⚡</span>
-            חשבון אחרון שוחזר: לפני שעתיים
-          </p>
-
           <p className="hero-guarantee">
             <i className="fas fa-shield-alt" aria-hidden="true"></i>
-            <strong>בלי תשלום מראש.</strong> לא הצלחנו? לא משלמים. נקודה.
+            <strong>בלי תשלום מראש.</strong> לא הצלחנו? לא משלמים.
           </p>
         </div>
 

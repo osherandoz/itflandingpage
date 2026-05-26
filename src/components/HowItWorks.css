@@ -104,13 +104,11 @@
 .hiw-card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-top: 3px solid var(--c, #3B82F6);
   border-radius: 14px;
   padding: 24px;
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  backdrop-filter: blur(8px);
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -244,4 +242,15 @@
   .hiw-card { padding: 18px; gap: 12px; }
   .hiw-card-icon { width: 44px; height: 44px; font-size: 1.2rem; }
   .hiw-card-title { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hiw-row--right .hiw-card,
+  .hiw-row--left  .hiw-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hiw-node { transition: none; }
+  .hiw-cta-btn { transition: none; }
 }

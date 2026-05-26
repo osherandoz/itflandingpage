@@ -53,9 +53,9 @@ const HowItWorks = () => {
   return (
     <section className="hiw-section">
       <div className="container">
-        <h2 className="section-title">איך זה עובד?</h2>
+        <h2 className="section-title">מהפנייה ועד לשחזור</h2>
         <p className="section-subtitle">
-          מהפנייה הראשונה ועד לשחזור: תהליך פשוט, שקוף ומהיר
+          מסבירים לך בדיוק מה קורה בכל שלב, בלי הפתעות.
         </p>
 
         <div className="hiw-timeline">

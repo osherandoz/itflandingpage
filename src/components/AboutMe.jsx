@@ -7,37 +7,18 @@ const AboutMe = () => {
       <div className="container">
         <h2 className="section-title">מומחה שחזור חשבונות רשתות חברתיות</h2>
         <p className="section-subtitle">
-          מומחה מוכר ומוערך בתחום שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ עם ניסיון של שנים
+          אחד מחלוצי תחום השחזור בישראל, עם למעלה מ-2,500 הצלחות מוכחות מאחוריו.
         </p>
         
         <div className="about-content">
           <div className="about-text">
-            <h3>שלום, אני אושר - מומחה שחזור חשבונות</h3>
+            <h3>שלום, אני אושר, מומחה שחזור חשבונות</h3>
             <p>
               מומחה מוביל בישראל לשחזור חשבונות רשתות חברתיות ואחד מחלוצי התחום בארץ. מתמחה בפתרון בעיות מורכבות של חשבונות פייסבוק, אינסטגרם ווואטסאפ שנחסמו או נפרצו.
             </p>
             <p>
               עם למעלה מ-2,500 חשבונות ששוחזרו בהצלחה ו-95% אחוזי הצלחה, אני מביא איתי ניסיון עשיר, כלים מתקדמים וטכניקות ייחודיות שפותחו לאורך שנים. מתמחה בפתרון בעיות גם במקרים שמטא (Meta) טוענים שאין סיכוי.
             </p>
-            
-            <div className="about-stats">
-              <div className="stat">
-                <span className="stat-number">2,500+</span>
-                <span className="stat-label">חשבונות שוחזרו</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">95%</span>
-                <span className="stat-label">אחוזי הצלחה</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">24/6</span>
-                <span className="stat-label">זמינות</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">5+</span>
-                <span className="stat-label">שנות ניסיון</span>
-              </div>
-            </div>
             
             <div className="about-features">
               <div className="feature">

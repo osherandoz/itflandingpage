@@ -60,7 +60,6 @@ const ContactForm = () => {
         // Track Lead event in Meta Pixel immediately
         if (typeof window !== 'undefined' && window.fbq) {
           window.fbq('track', 'Lead');
-          console.log('✅ Meta Pixel Lead event triggered');
         }
 
         // Track form submission in GA4
@@ -72,45 +71,16 @@ const ContactForm = () => {
           });
         }
 
-        // Build GET URL with query parameters
         const baseUrl = 'https://script.google.com/macros/s/AKfycbzziLRW7EWKO43zDdihAPneBF6aAd6aiXp4HyMIa5an3vOxJKHIr9xIJo-KdLTi2AYpmQ/exec';
-        
-        // Ensure values are properly encoded
         const nameValue = formData.name.trim();
         const phoneValue = formData.phone.trim();
         const consentValue = formData.consent ? 'true' : 'false';
-        
-        // Build URL with properly encoded parameters
-        const params = new URLSearchParams({
-          name: nameValue,
-          phone: phoneValue,
-          consent: consentValue
-        });
+        const params = new URLSearchParams({ name: nameValue, phone: phoneValue, consent: consentValue });
         const finalUrl = `${baseUrl}?${params.toString()}`;
 
-        console.log('📤 Sending form data:', {
-          name: nameValue,
-          phone: phoneValue,
-          consent: consentValue,
-          url: finalUrl
-        });
-        console.log('🔗 Full URL:', finalUrl);
-        console.log('🔍 URLSearchParams:', params.toString());
-
-        // Use XMLHttpRequest to send the form data
-        // This will show up in Network tab and handle redirects properly
         const xhr = new XMLHttpRequest();
         xhr.open('GET', finalUrl, true);
-        xhr.onload = () => {
-          console.log('✅ Request completed. Status:', xhr.status);
-          console.log('📥 Response:', xhr.responseText);
-        };
-        xhr.onerror = () => {
-          console.log('⚠️ Request error occurred');
-        };
         xhr.send();
-
-        console.log('📤 Form data sent. Check Network tab for request.');
 
         // Show success message immediately
         setIsSubmitted(true);
@@ -152,7 +122,7 @@ const ContactForm = () => {
       </div>
 
       {isSubmitted && (
-        <div className="success-message">
+        <div className="success-message" role="alert">
           <p>תודה! הפרטים התקבלו</p>
         </div>
       )}
@@ -202,7 +172,7 @@ const ContactForm = () => {
               required
             />
             <span className="checkmark"></span>
-            מאשר ליצור קשר?
+            אני מאשר/ת ליצור איתי קשר
           </label>
           {errors.consent && <span className="error-message">{errors.consent}</span>}
         </div>

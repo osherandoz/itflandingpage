@@ -57,7 +57,7 @@ const FAQ = () => {
       <div className="container">
         <h2 className="section-title">שאלות נפוצות על שחזור חשבונות</h2>
         <p className="section-subtitle">
-          תשובות מפורטות לשאלות הנפוצות ביותר על שירותי שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ
+          אם הספקת לשאול את עצמך, כנראה שיש כאן תשובה.
         </p>
         
         <div className="faq-container">

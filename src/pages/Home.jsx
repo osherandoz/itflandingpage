@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
-import StatsStrip from '../components/StatsStrip';
 import PressSection from '../components/PressSection';
 import HeroSection from '../components/HeroSection';
 import AboutMe from '../components/AboutMe';
@@ -32,7 +31,6 @@ const Home = () => {
       <section id="hero">
         <HeroSection />
       </section>
-      <StatsStrip />
       <PressSection />
       <section id="about">
         <AboutMe />
@@ -52,7 +50,7 @@ const Home = () => {
       <section id="faq">
         <FAQ />
       </section>
-      <section id="contact" style={{ background: '#1a1f3a', padding: '80px 0' }}>
+      <section id="contact" style={{ background: 'var(--color-bg-section)', padding: '80px 0' }}>
         <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
           <ContactForm />
         </div>

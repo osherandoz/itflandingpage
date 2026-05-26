@@ -53,11 +53,11 @@ const Navbar = () => {
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        <div className="navbar-logo" onClick={handleLogoClick}>
+        <button className="navbar-logo" onClick={handleLogoClick} aria-label="חזרה לדף הבית">
           <img src="/images/israeltechforce-logo-white.png" alt="Israel Tech Force Logo" />
-        </div>
-        
-        <div className={`navbar-menu ${isMobileMenuOpen ? 'active' : ''}`}>
+        </button>
+
+        <div id="mobile-nav-menu" className={`navbar-menu ${isMobileMenuOpen ? 'active' : ''}`}>
           {navItems.map((item) => (
             <button
               key={item.id}
@@ -81,6 +81,9 @@ const Navbar = () => {
         <button
           className={`mobile-menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-nav-menu"
+          aria-label="פתח תפריט ניווט"
         >
           <span></span>
           <span></span>

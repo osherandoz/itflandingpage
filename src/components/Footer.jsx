@@ -130,17 +130,17 @@ const Footer = () => {
           <div className="footer-section">
             <h3>עקבו אחרינו</h3>
             <div className="social-links">
-              <a href="https://www.facebook.com/OsheRevach23" className="social-link">
-                <i className="fab fa-facebook"></i>
+              <a href="https://www.facebook.com/OsheRevach23" className="social-link" aria-label="עמוד פייסבוק">
+                <i className="fab fa-facebook" aria-hidden="true"></i>
               </a>
-              <a href="https://www.instagram.com/osher_revach_1/" className="social-link">
-                <i className="fab fa-instagram"></i>
+              <a href="https://www.instagram.com/osher_revach_1/" className="social-link" aria-label="עמוד אינסטגרם">
+                <i className="fab fa-instagram" aria-hidden="true"></i>
               </a>
-              <a href="https://wa.me/+972509823235" className="social-link" onClick={(e) => { e.preventDefault(); openWhatsApp(); }}>
-                <i className="fab fa-whatsapp"></i>
+              <a href="https://wa.me/+972509823235" className="social-link" aria-label="שלח הודעת וואטסאפ" onClick={(e) => { e.preventDefault(); openWhatsApp(); }}>
+                <i className="fab fa-whatsapp" aria-hidden="true"></i>
               </a>
-              <a href="https://www.tiktok.com/@israeltechforce" className="social-link">
-                <i className="fab fa-tiktok"></i>
+              <a href="https://www.tiktok.com/@israeltechforce" className="social-link" aria-label="ערוץ טיקטוק">
+                <i className="fab fa-tiktok" aria-hidden="true"></i>
               </a>
             </div>
           </div>
@@ -193,7 +193,7 @@ const Footer = () => {
             </button>
           </div>
           <div className="copyright">
-            <p>© 2025 IsraelTechForce. כל הזכויות שמורות</p>
+            <p>© 2026 IsraelTechForce. כל הזכויות שמורות</p>
           </div>
         </div>
       </div>

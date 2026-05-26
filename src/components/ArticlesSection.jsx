@@ -10,9 +10,9 @@ const ArticlesSection = () => {
     <section className="articles-section" id="articles">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title">מרכז ידע ומומחיות</h2>
+          <h2 className="section-title">הגנה מתחילה בידע</h2>
           <p className="section-subtitle">
-            מדריכים מקצועיים, טיפים וכלים שיעזרו לכם לשמור על החשבונות שלכם בטוחים ופעילים
+            מדריכים פרקטיים שמסבירים איך להגן על החשבונות לפני שהבעיה מתחילה.
           </p>
         </div>
 

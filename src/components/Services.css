@@ -87,12 +87,10 @@
   margin: 0; font-weight: 800;
   font-size: clamp(32px, 5vw, 62px);
   line-height: 1.08; letter-spacing: -.02em;
-  background: linear-gradient(180deg, #ffffff 0%, #c9d6ff 60%, #8aa3e6 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: #ffffff;
 }
 .svc-accent {
-  background: linear-gradient(120deg, #60a5fa 0%, #3b82f6 40%, #93c5fd 80%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: #60a5fa;
 }
 
 .svc-subtitle {
@@ -104,8 +102,7 @@
 .svc-stat { display: flex; align-items: baseline; gap: 8px; color: #9aa5c1; font-size: 14px; }
 .svc-stat b {
   font-size: 22px; font-weight: 700;
-  background: linear-gradient(180deg,#fff,#a8c3ff);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: #ffffff;
 }
 .svc-stat-sep { width: 1px; height: 22px; background: rgba(255,255,255,.14); align-self: center; }
 
