@@ -96,8 +96,6 @@ gtag('config', 'G-M2TYTNN02X');
 
 const META_PIXEL_ID = '1911202046942044';
 
-const NO_NEWSLETTER_ROUTES = ['/bms-sm', '/תודה-קליסט', '/תודה-רכישה'];
-
 export default function Root() {
   const { pathname } = useLocation();
   const [showNewsletter, setShowNewsletter] = useState(false);
@@ -124,8 +122,8 @@ export default function Root() {
   }, []);
 
   useEffect(() => {
-    // Show popup once when user scrolls past 40% — suppressed on BMS/thank-you routes
-    if (NO_NEWSLETTER_ROUTES.includes(pathname)) return;
+    // Show popup once when user scrolls past 40% — home page only
+    if (pathname !== '/') return;
     if (typeof localStorage !== 'undefined' && localStorage.getItem('newsletterPopupShown')) return;
 
     const handleScroll = () => {

@@ -6,6 +6,13 @@ const DESCRIPTION =
   '3 מקרים אמיתיים. 3 עסקים שיכלו להימנע מהנפילה. הדרכה חינמית עם אושר רווח, מומחה לשחזור נכסים דיגיטליים. קורס BMS ב-₪197.';
 const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.png';
 
+export const links = () => [
+  {
+    rel: 'stylesheet',
+    href: 'https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@400;500;700;800;900&display=swap',
+  },
+];
+
 export const meta = () => [
   { title: TITLE },
   { name: 'description', content: DESCRIPTION },
