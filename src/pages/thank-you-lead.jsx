@@ -1,8 +1,6 @@
 import { useEffect, useRef } from 'react';
 import './thank-you-lead.css';
 
-const BMS_URL = '/bms-sm';
-
 const CHECKLIST_ITEMS = [
   { num: '01', text: 'מי מחזיק בבעלות על חשבון המודעות' },
   { num: '02', text: 'הפיקסל משויך לחשבון הנכון' },
@@ -64,21 +62,6 @@ export default function ThankYouLead() {
             ))}
           </ol>
           <p className="tyl-list-note">חמש דקות מול הלקוח. חוסכת לעצמך שבועות של בעיות.</p>
-        </div>
-      </section>
-
-      {/* SOFT BMS BRIDGE */}
-      <section className="tyl-bridge">
-        <div className="tyl-container tyl-bridge-inner">
-          <h2 className="tyl-bridge-title">מה עושים כשמוצאים בעיה?</h2>
-          <p className="tyl-bridge-body">
-            הצ׳קליסט מראה לך מה לחפש. אם את מוצאת בעיה — הרשאה פתוחה, פיקסל לא נכון,
-            חשבון שהבעלות עליו עמומה — צריך לדעת איך לפתור אותה.
-            קורס BMS מלמד את זה. בדיוק את זה.
-          </p>
-          <a href={BMS_URL} className="tyl-link" aria-label="לפרטים על קורס BMS">
-            לפרטים על קורס BMS ←
-          </a>
         </div>
       </section>
 

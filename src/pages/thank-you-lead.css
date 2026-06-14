@@ -131,48 +131,6 @@
   margin: 0;
 }
 
-/* ── Bridge ────────────────────────────────────── */
-.tyl-bridge {
-  padding: 48px 0 64px;
-  background: var(--bg-2);
-  border-top: 1px solid var(--border);
-}
-
-.tyl-bridge-inner {
-  text-align: center;
-}
-
-.tyl-bridge-title {
-  font-size: clamp(1.3rem, 3.5vw, 1.8rem);
-  font-weight: 900;
-  margin: 0 0 16px;
-  color: #fff;
-}
-
-.tyl-bridge-body {
-  font-size: 1rem;
-  color: var(--muted);
-  line-height: 1.8;
-  max-width: 520px;
-  margin: 0 auto 28px;
-}
-
-.tyl-link {
-  display: inline-block;
-  color: var(--accent);
-  font-weight: 700;
-  font-size: 1rem;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(59, 130, 246, .4);
-  padding-bottom: 2px;
-  transition: color .15s, border-color .15s;
-}
-
-.tyl-link:hover {
-  color: #60a5fa;
-  border-color: #60a5fa;
-}
-
 /* ── Footer ────────────────────────────────────── */
 .tyl-footer {
   display: flex;
