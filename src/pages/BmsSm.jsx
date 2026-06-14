@@ -13,19 +13,45 @@ function trackGa(event, params) {
   if (typeof window !== 'undefined' && window.gtag) window.gtag('event', event, params);
 }
 
+const DOMAIN_TYPOS = {
+  'gmial.com': 'gmail.com', 'gmai.com': 'gmail.com', 'gmail.co': 'gmail.com',
+  'gmail.co.il': 'gmail.com', 'gmail.cm': 'gmail.com', 'gamil.com': 'gmail.com',
+  'gmaill.com': 'gmail.com', 'gmal.com': 'gmail.com', 'gnail.com': 'gmail.com',
+  'yahooo.com': 'yahoo.com', 'yaho.com': 'yahoo.com', 'yahoo.co': 'yahoo.com',
+  'yhoo.com': 'yahoo.com', 'hotmial.com': 'hotmail.com', 'hotmai.com': 'hotmail.com',
+  'hotmal.com': 'hotmail.com', 'outlok.com': 'outlook.com', 'outook.com': 'outlook.com',
+  'walla.com': 'walla.co.il', 'wala.co.il': 'walla.co.il',
+};
+
 function LeadForm() {
   const navigate = useNavigate();
-  const [firstName, setFirstName]       = useState('');
-  const [email, setEmail]               = useState('');
-  const [website, setWebsite]           = useState(''); // honeypot
-  const [loading, setLoading]           = useState(false);
-  const [error, setError]               = useState('');
-  const [success, setSuccess]           = useState(false);
-  const [emailBlurred, setEmailBlurred] = useState(false);
+  const [firstName, setFirstName]             = useState('');
+  const [email, setEmail]                     = useState('');
+  const [website, setWebsite]                 = useState(''); // honeypot
+  const [loading, setLoading]                 = useState(false);
+  const [error, setError]                     = useState('');
+  const [success, setSuccess]                 = useState(false);
+  const [emailBlurred, setEmailBlurred]       = useState(false);
+  const [emailSuggestion, setEmailSuggestion] = useState('');
 
   const emailOk       = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
   const showEmailErr  = emailBlurred && email.length > 0 && !emailOk;
   const showEmailOk   = emailBlurred && emailOk;
+
+  const handleEmailBlur = () => {
+    setEmailBlurred(true);
+    const atIdx = email.lastIndexOf('@');
+    if (atIdx > 0) {
+      const domain = email.slice(atIdx + 1).toLowerCase();
+      const fix = DOMAIN_TYPOS[domain];
+      setEmailSuggestion(fix ? `${email.slice(0, atIdx)}@${fix}` : '');
+    }
+  };
+
+  const acceptSuggestion = () => {
+    setEmail(emailSuggestion);
+    setEmailSuggestion('');
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -110,7 +136,7 @@ function LeadForm() {
             placeholder="you@agency.co.il"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            onBlur={() => setEmailBlurred(true)}
+            onBlur={handleEmailBlur}
             required
             maxLength={254}
             autoComplete="email"
@@ -126,6 +152,15 @@ function LeadForm() {
           {showEmailErr && (
             <span id="bms-email-err" className="field-hint-err" role="alert">
               נראה שהמייל לא תקין
+            </span>
+          )}
+          {emailSuggestion && !showEmailErr && (
+            <span className="field-hint-suggest">
+              האם התכוונת ל-
+              <button type="button" className="field-suggest-btn" onClick={acceptSuggestion}>
+                {emailSuggestion}
+              </button>
+              ?
             </span>
           )}
         </div>

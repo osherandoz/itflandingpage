@@ -547,6 +547,24 @@
   color: #f87171;
   font-weight: 600;
 }
+.bmsm-v2 .field-hint-suggest {
+  display: block;
+  margin-top: 5px;
+  font-size: .78rem;
+  color: var(--text-muted);
+}
+.bmsm-v2 .field-suggest-btn {
+  background: none;
+  border: none;
+  color: var(--accent);
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 
 .bmsm-v2 .honeypot {
   position: absolute; left: -9999px; top: -9999px;
