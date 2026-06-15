@@ -495,7 +495,7 @@ export default function BmsSm() {
           <div className="form-shell">
             <div className="head">
               <h2>
-                שלחי לי את הצ׳קליסט,{' '}
+                תשלח לי את הצ׳קליסט,{' '}
                 <span className="gold">זה לוקח שניה</span>
               </h2>
             </div>
