@@ -22,6 +22,7 @@ export default function ThankYouLead() {
   useEffect(() => {
     if (firedRef.current) return;
     firedRef.current = true;
+    trackFb('Lead');
     trackFb('CompleteRegistration', { content_name: 'bms-sm-checklist' });
     trackGa('form_submit_lead', { page: 'bms-sm' });
   }, []);
