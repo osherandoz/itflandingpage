@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
 import SocialProofToast from '../src/components/SocialProofToast.jsx';
@@ -67,6 +67,13 @@ export function Layout({ children }) {
         {/* Google Search Console verification */}
         <meta name="google-site-verification" content="aE9CLpD9QGwjrSkACJUNpS8Ps8vCkLxMuP9jRl3v_aM" />
 
+        {/* Meta Pixel base code — loads on every route, including SPA navigations */}
+        <script dangerouslySetInnerHTML={{ __html: `
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1911202046942044');
+fbq('track','PageView');
+` }} />
+
         {/* Microsoft Clarity */}
         <script dangerouslySetInnerHTML={{ __html: `
 (function(c,l,a,r,i,t,y){
@@ -103,26 +110,19 @@ gtag('config', 'G-M2TYTNN02X');
   );
 }
 
-const META_PIXEL_ID = '1911202046942044';
-
 export default function Root() {
   const { pathname } = useLocation();
   const [showNewsletter, setShowNewsletter] = useState(false);
+  const isFirstRender = useRef(true);
 
-  // Meta Pixel — injected after hydration so it never blocks rendering
+  // Meta Pixel — PageView on SPA route changes (initial PageView fired by <head> script)
   useEffect(() => {
-    if (window.fbq) return; // already loaded
-    /* eslint-disable */
-    (function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
-      t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    })(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    /* eslint-enable */
-    window.fbq('init', META_PIXEL_ID);
-    window.fbq('track', 'PageView');
-  }, []);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (window.fbq) window.fbq('track', 'PageView');
+  }, [pathname]);
 
   useEffect(() => {
     // Allow footer button (and any other caller) to open the popup imperatively
