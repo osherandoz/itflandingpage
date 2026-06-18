@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import './thank-you-lead.css';
 
 const CHECKLIST_ITEMS = [
@@ -9,22 +9,12 @@ const CHECKLIST_ITEMS = [
   { num: '05', text: 'בעלות על הנכסים הדיגיטליים' },
 ];
 
-function trackFb(event, params) {
-  if (typeof window !== 'undefined' && window.fbq) window.fbq('track', event, params);
-}
-function trackGa(event, params) {
-  if (typeof window !== 'undefined' && window.gtag) window.gtag('event', event, params);
-}
-
 export default function ThankYouLead() {
-  const firedRef = useRef(false);
-
   useEffect(() => {
-    if (firedRef.current) return;
-    firedRef.current = true;
-    trackFb('Lead');
-    trackFb('CompleteRegistration', { content_name: 'bms-sm-checklist' });
-    trackGa('form_submit_lead', { page: 'bms-sm' });
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'PageView');
+      window.fbq('track', 'Lead');
+    }
   }, []);
 
   return (
