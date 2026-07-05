@@ -30,7 +30,7 @@ const IconWhatsApp = (p) => (<Icon {...p}><path d="M21 11.5a8.38 8.38 0 0 1-.9 3
 /* ============================================================
    CONFIG
    ============================================================ */
-const VIDEO_EMBED_URL = '';
+const VIDEO_EMBED_URL = 'https://www.youtube.com/embed/7Ac7-Kdl1-c';
 const BASE_PURCHASE_URL = 'https://mrng.to/engo98ytvh';
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 const PRICE = 197;
@@ -142,7 +142,6 @@ export default function VslBmsV2() {
                   title="VSL BMS V2"
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
-                  onLoad={handleVideoMessage}
                 />
               ) : (
                 <div className="v2-video-placeholder">

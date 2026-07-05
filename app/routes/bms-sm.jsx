@@ -4,7 +4,7 @@ const URL = 'https://www.israeltechforce.com/bms-sm';
 const TITLE = 'קורס BMS למנהלות סושיאל — הגיעי מוכנה לכל לקוח | אושר רווח';
 const DESCRIPTION =
   'קורס מקוון למנהלות סושיאל ופרילנסריות: איך לזהות תשתית פרסום בעייתית לפני האונבורדינג, לנהל הרשאות נכון ולדעת מה לעשות כשמשהו משתבש. 197₪ בלבד.';
-const OG_IMAGE = 'https://www.israeltechforce.com/og-bms-sm.jpg';
+const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.png';
 
 export const meta = () => [
   { title: TITLE },

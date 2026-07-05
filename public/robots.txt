@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow:
 
-Sitemap: https://israeltechforce.com/sitemap.xml
+Sitemap: https://www.israeltechforce.com/sitemap.xml

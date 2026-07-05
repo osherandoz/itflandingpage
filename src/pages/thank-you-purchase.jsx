@@ -1,9 +1,10 @@
+import { useEffect } from 'react';
 import './thank-you-purchase.css';
 
 // Tracking helpers
 function trackFb(event, params) {
   if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', event, params);
+    window.fbq(event === 'Purchase' ? 'track' : 'trackCustom', event, params);
   }
 }
 function trackGa(event, params) {
@@ -13,11 +14,19 @@ function trackGa(event, params) {
 }
 
 export default function ThankYouPurchase() {
-  // Fire purchase events on mount
-  if (typeof window !== 'undefined') {
+  // Fire purchase events once per browser session — survives StrictMode double-mount and refreshes
+  useEffect(() => {
+    if (sessionStorage.getItem('bmsPurchaseTracked')) return;
+    sessionStorage.setItem('bmsPurchaseTracked', '1');
+    // Stable transaction id per session so GA4 dedup works across refreshes
+    let txId = sessionStorage.getItem('bmsTxId');
+    if (!txId) {
+      txId = `bms-${Date.now()}`;
+      sessionStorage.setItem('bmsTxId', txId);
+    }
     trackFb('Purchase', { value: 197, currency: 'ILS' });
-    trackGa('purchase', { value: 197, currency: 'ILS', transaction_id: `bms-${Date.now()}` });
-  }
+    trackGa('purchase', { value: 197, currency: 'ILS', transaction_id: txId });
+  }, []);
 
   return (
     <main className="ty-purchase-page" dir="rtl">

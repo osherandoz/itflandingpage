@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+// Heebo heading weights, self-hosted (400/700 already loaded in root)
+import '@fontsource/heebo/800.css';
+import '@fontsource/heebo/900.css';
 import './VslBms.css';
 
 /* ============================================================
@@ -44,21 +47,41 @@ const AUTHOR_IMAGE = '/images/vsl-bms/osher_with_laptop-md.webp';
 const PRICE = 197;
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 
-function trackLead() {
+// In-page CTA scroll clicks — custom event, NOT Lead (Lead fires only on thank-you-lead)
+function trackCtaClick() {
   if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-    window.fbq('track', 'Lead');
+    window.fbq('trackCustom', 'CTAClick');
   }
 }
 
-function trackPurchase() {
+// Click on checkout link — InitiateCheckout. Purchase fires only on thank-you-purchase.
+function trackInitiateCheckout() {
   if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-    window.fbq('track', 'Purchase', { value: PRICE, currency: 'ILS' });
+    window.fbq('track', 'InitiateCheckout', { value: PRICE, currency: 'ILS' });
   }
 }
 
 export default function VslBms() {
   const [showStickyCta, setShowStickyCta] = useState(false);
   const [heroAnimating, setHeroAnimating] = useState(false);
+  // Sticky retires while the real purchase section is on screen; after the user
+  // has seen the price once, the sticky goes straight to checkout.
+  const [finalCtaInView, setFinalCtaInView] = useState(false);
+  const [passedFinalCta, setPassedFinalCta] = useState(false);
+
+  useEffect(() => {
+    const finalCta = document.getElementById('final-cta');
+    if (!finalCta) return;
+    const ctaObserver = new IntersectionObserver(
+      ([entry]) => {
+        setFinalCtaInView(entry.isIntersecting);
+        if (entry.isIntersecting) setPassedFinalCta(true);
+      },
+      { threshold: 0.15 }
+    );
+    ctaObserver.observe(finalCta);
+    return () => ctaObserver.disconnect();
+  }, []);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -122,10 +145,10 @@ export default function VslBms() {
       {/* HERO + VSL */}
       <section className="hero">
         <h1>
-          מנהלות סושיאל, בעלי עסקים או קמפיינרים?<br />
-          <span className="gradient-text">הנכסים הדיגיטליים שלכם חשופים</span><br />
-          ואתם כנראה לא יודעים את זה.
+          הטעויות שעולות לעסקים<br />
+          <span className="gradient-text">אלפי שקלים בשנה</span>
         </h1>
+        <p className="hero-sub">חשבון פייסבוק פרוץ, אינסטגרם חסום, Business Manager קפוא. ואתם לא יודעים למה.</p>
 
         <div className="container">
           <div className="video-wrapper">
@@ -150,8 +173,18 @@ export default function VslBms() {
             </div>
           </div>
 
+          <div className="video-summary">
+            <p className="video-summary-title">מה תלמדו בקורס:</p>
+            <ul>
+              <li>איך לאבטח את חשבונות המטא שלכם לפני שקורה משהו.</li>
+              <li>איך להחזיר גישה לחשבון חסום או פרוץ.</li>
+              <li>איך לבנות תשתית דיגיטלית שלא קורסת.</li>
+            </ul>
+            <p className="video-summary-price">197 ש"ח. פעם אחת. ללא מנוי.</p>
+          </div>
+
           <div className="cta-wrapper">
-            <a href="#final-cta" className="cta-btn cta-btn-glow" onClick={trackLead}>
+            <a href="#final-cta" className="cta-btn cta-btn-glow" onClick={trackCtaClick}>
               <span>אני רוצה לשמור על החשבונות שלי</span>
               <span className="arrow"><IconArrowLeft size={18} /></span>
             </a>
@@ -200,10 +233,10 @@ export default function VslBms() {
           </div>
 
           <div className="black-card">
-            <h2>הקורס מתאים לך אם:</h2>
-            <p>את/ה מנהל/ת סושיאל שמנהל/ת חשבונות של לקוחות, ורוצה לישון בשקט בלילה.</p>
-            <p>את/ה קמפיינר/ית שמריץ/ה תקציבי פרסום, ויודע/ת שהסיכון שחשבון יישבת הוא אמיתי.</p>
-            <p>את/ה בעל/ת עסק שכל הלידים מגיעים מהדיגיטל, ולא מוכן/ה לסמוך על "יהיה בסדר".</p>
+            <h2>הקורס מתאים לכם אם:</h2>
+            <p>אתם מנהלים סושיאל ומנהלים חשבונות של לקוחות, ורוצים לישון בשקט בלילה.</p>
+            <p>אתם קמפיינרים שמריצים תקציבי פרסום, ויודעים שהסיכון שחשבון יישבת הוא אמיתי.</p>
+            <p>אתם בעלי עסק שכל הלידים מגיעים מהדיגיטל, ולא מוכנים לסמוך על "יהיה בסדר".</p>
           </div>
         </div>
       </section>
@@ -248,7 +281,7 @@ export default function VslBms() {
               <img src={STORY_IMG_2} alt="Business Manager ריק ללא נכסים" width="480" height="480" loading="lazy" decoding="async" />
               <img src={STORY_IMG_3} alt="אושר רווח עובד על שחזור חשבון לקוח" width="480" height="480" loading="lazy" decoding="async" />
             </div>
-            <span className="photo-tag">2020 → היום</span>
+            <span className="photo-tag">מ-2020 ועד היום</span>
           </div>
         </div>
       </section>
@@ -300,8 +333,8 @@ export default function VslBms() {
           </div>
 
           <div className="cta-wrapper">
-            <a href="#final-cta" className="cta-btn" onClick={trackLead}>
-              <span>אני רוצה תשתית שעובדת. קחו אותי לקורס</span>
+            <a href={PURCHASE_URL} className="cta-btn" onClick={trackInitiateCheckout}>
+              <span>הצטרף לקורס עכשיו — 197 ש"ח בלבד</span>
               <span className="arrow"><IconArrowLeft size={18} /></span>
             </a>
           </div>
@@ -584,7 +617,7 @@ export default function VslBms() {
       <section className="final-cta" id="final-cta">
         <div className="container">
           <h2>
-            מוכן/ה לבנות<br />
+            מוכנים לבנות<br />
             <span className="gradient-text">תשתית שאי אפשר לשבור</span>?
           </h2>
 
@@ -627,21 +660,49 @@ export default function VslBms() {
               <p className="today-label">המחיר שלך היום:</p>
               <div className="price-num">₪{PRICE}</div>
               <p className="micro">תשלום חד-פעמי · כולל מע"מ · גישה מיידית</p>
+              <p className="urgency-note">המחיר עולה ל-297 ש"ח ב-1.8.2026</p>
             </div>
           </div>
 
           <div className="checklist">
-            <div className="checklist-title">זה בשבילך אם:</div>
-            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>את/ה מנהל/ת סושיאל שמנהל/ת חשבונות של לקוחות</span></div>
-            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>את/ה קמפיינר/ית שעובד/ת עם חשבונות מודעות</span></div>
-            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>את/ה בעל/ת עסק שמפרסם/ת בפייסבוק ואינסטגרם</span></div>
-            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>רוצה להבין איך להגן על הנכסים הדיגיטליים שלך</span></div>
+            <div className="checklist-title">זה בשבילכם אם:</div>
+            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>אתם מנהלים סושיאל עם חשבונות של לקוחות</span></div>
+            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>אתם קמפיינרים שעובדים עם חשבונות מודעות</span></div>
+            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>אתם בעלי עסק שמפרסם בפייסבוק ואינסטגרם</span></div>
+            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>אתם רוצים להגן על הנכסים הדיגיטליים שלכם</span></div>
+          </div>
+
+          {/* Social proof — real recovery clients, framed as expertise proof */}
+          <div className="vsl-testimonials" aria-label="המלצות לקוחות">
+            <p className="vsl-testimonials-title">מי שכבר עבד עם אושר:</p>
+            <div className="vsl-testimonial">
+              <img src="/images/matanel.jpg" alt="מתנאל לייני" width="48" height="48" loading="lazy" decoding="async" />
+              <blockquote>
+                <p>"הצליח להחזיר לי את החשבון מחסימות שלא ברא השטן, רק תנו לו את ההזדמנות והוא יסדר."</p>
+                <footer>מתנאל לייני · יוצר תוכן ומשפיען</footer>
+              </blockquote>
+            </div>
+            <div className="vsl-testimonial">
+              <img src="/images/gal.jpg" alt="גל נמני" width="48" height="48" loading="lazy" decoding="async" />
+              <blockquote>
+                <p>"לאחר שנעקצתי על ידי חברה אחרת, פניתי לאושר ובמסירות הוא החזיר לי את העסק לחיים. ממש ככה!"</p>
+                <footer>גל נמני · מנכ"לית Go-Tech</footer>
+              </blockquote>
+            </div>
+            <div className="vsl-testimonial">
+              <img src="/images/ofira.jpg" alt="אופירה יחיא" width="48" height="48" loading="lazy" decoding="async" />
+              <blockquote>
+                <p>"המצב היה כמעט בלתי הפיך - לאחר כשבועיים אושר החזיר לי את החשבון בנחת וברוגע לא אופייניים."</p>
+                <footer>אופירה יחיא · קונדיטורית ויוצרת תוכן</footer>
+              </blockquote>
+            </div>
+            <a href="/testimonials" className="vsl-testimonials-more">לכל ההמלצות ←</a>
           </div>
 
           <a
             href={PURCHASE_URL}
             className="cta-btn"
-            onClick={trackPurchase}
+            onClick={trackInitiateCheckout}
             style={{ marginTop: 40 }}
           >
             <span>הצטרפו לקורס ב-₪{PRICE}</span>
@@ -649,7 +710,7 @@ export default function VslBms() {
           </a>
 
           <p className="cta-consent-note">
-            ברכישה את/ה מסכימ/ה לקבל עדכונים שיווקיים מאיתנו. ניתן להסיר בכל עת.
+            ברכישה אתם מסכימים לקבל עדכונים שיווקיים מאיתנו. ניתן להסיר בכל עת.
           </p>
 
           <div className="trust-bar">
@@ -727,8 +788,10 @@ export default function VslBms() {
             <details className="faq-item">
               <summary>האם יש החזר כספי אם הקורס לא מתאים לי?</summary>
               <div className="faq-answer">
-                במחיר של ₪197 ועם גישה מיידית לתוכן הדיגיטלי, אין מדיניות החזרים.
-                אם יש לכם ספק לפני הרכישה, שלחו לי הודעה בוואטסאפ ואני אענה אישית על כל שאלה.
+                לפני שאתם מתלבטים: הסילבוס המלא מפורט כאן בדף (4 מודולים + 3 בונוסים, כ-3 שעות),
+                הגישה היא לכל החיים כולל עדכונים, ואני זמין בוואטסאפ לכל שאלה, גם לפני הרכישה.
+                מכיוון שמדובר בתוכן דיגיטלי עם גישה מיידית, לא ניתן החזר לאחר הרכישה, בהתאם לחוק הגנת הצרכן.
+                יש ספק? שלחו לי הודעה ואענה אישית.
               </div>
             </details>
 
@@ -766,12 +829,12 @@ export default function VslBms() {
 
       </main>
 
-      {/* STICKY MOBILE CTA */}
-      <div className={`sticky-cta ${showStickyCta ? 'visible' : ''}`} role="region" aria-label="קיצור דרך לרכישה">
+      {/* STICKY MOBILE CTA — hidden while the purchase section is on screen */}
+      <div className={`sticky-cta ${showStickyCta && !finalCtaInView ? 'visible' : ''}`} role="region" aria-label="קיצור דרך לרכישה">
         <a
-          href="#final-cta"
+          href={passedFinalCta ? PURCHASE_URL : '#final-cta'}
           className="sticky-cta-btn"
-          onClick={trackLead}
+          onClick={passedFinalCta ? trackInitiateCheckout : trackCtaClick}
           aria-label={`הצטרפו לקורס BMS ב-${PRICE} שקלים`}
         >
           <span>הצטרפו ב-₪{PRICE}</span>

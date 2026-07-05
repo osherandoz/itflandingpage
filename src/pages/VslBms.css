@@ -174,6 +174,15 @@
   letter-spacing: -0.02em;
   font-weight: 800;
 }
+.vsl-bms-page .hero .hero-sub {
+  font-size: clamp(16px, 1.8vw, 20px);
+  color: var(--text-soft);
+  font-weight: 500;
+  line-height: 1.5;
+  margin: 0 auto 32px;
+  max-width: 680px;
+  padding: 0 20px;
+}
 
 /* Big quote, key emotional moment, Frank Ruhl Libre serif */
 .vsl-bms-page .author-quote-card .big-quote,
@@ -261,6 +270,114 @@
   font-size: 15px;
   font-family: 'Heebo', 'Assistant', sans-serif;
   background: var(--bg-darkest);
+}
+
+/* Video summary — silent-watcher text block below VSL */
+.vsl-bms-page .video-summary {
+  max-width: 720px;
+  margin: 24px auto 0;
+  padding: 20px 24px;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(96, 165, 250, 0.15);
+  border-radius: var(--r-md);
+  text-align: right;
+}
+.vsl-bms-page .video-summary-title {
+  font-weight: 700;
+  font-size: clamp(14px, 1.5vw, 16px);
+  color: var(--tech-blue-glow);
+  margin-bottom: 10px;
+}
+.vsl-bms-page .video-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.vsl-bms-page .video-summary ul li {
+  font-size: clamp(14px, 1.5vw, 15px);
+  color: var(--text-mid);
+  padding-right: 16px;
+  position: relative;
+}
+.vsl-bms-page .video-summary ul li::before {
+  content: '›';
+  position: absolute;
+  right: 0;
+  color: var(--tech-blue-bright);
+}
+.vsl-bms-page .video-summary-price {
+  font-size: clamp(14px, 1.5vw, 15px);
+  font-weight: 700;
+  color: var(--text-soft);
+  margin: 0;
+}
+
+/* Testimonials — expertise proof before the purchase button */
+.vsl-bms-page .vsl-testimonials {
+  max-width: 640px;
+  margin: 48px auto 0;
+  text-align: right;
+}
+.vsl-bms-page .vsl-testimonials-title {
+  font-weight: 700;
+  font-size: clamp(15px, 1.6vw, 17px);
+  color: var(--text-soft);
+  margin-bottom: 18px;
+  text-align: center;
+}
+.vsl-bms-page .vsl-testimonial {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  background: rgba(37, 99, 235, 0.07);
+  border: 1px solid rgba(96, 165, 250, 0.12);
+  border-radius: var(--r-md);
+  margin-bottom: 12px;
+}
+.vsl-bms-page .vsl-testimonial img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.vsl-bms-page .vsl-testimonial blockquote {
+  margin: 0;
+}
+.vsl-bms-page .vsl-testimonial blockquote p {
+  font-size: clamp(14px, 1.5vw, 16px);
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+.vsl-bms-page .vsl-testimonial blockquote footer {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+.vsl-bms-page .vsl-testimonials-more {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--tech-blue-glow);
+  text-decoration: none;
+  margin-top: 4px;
+}
+.vsl-bms-page .vsl-testimonials-more:hover {
+  text-decoration: underline;
+}
+
+/* Urgency note — temporal pricing alert */
+.vsl-bms-page .urgency-note {
+  font-size: clamp(13px, 1.4vw, 15px);
+  font-weight: 700;
+  color: var(--accent-orange);
+  margin-top: 10px;
+  text-align: center;
 }
 
 /* CTA button */
@@ -907,11 +1024,11 @@
 
 /* Bonus items, distinct gold color treatment */
 .vsl-bms-page .deliverable-item.bonus-item::before {
-  background: #fbbf24 !important;
-  box-shadow: 0 0 20px rgba(251, 191, 36, 0.6) !important;
+  background: #fbbf24;
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
 }
 .vsl-bms-page .deliverable-item.bonus-item .deliverable-title {
-  color: #fbbf24 !important;
+  color: #fbbf24;
 }
 
 /* Course stats row */
@@ -972,20 +1089,8 @@
   margin-bottom: 14px;
   line-height: 1.2;
 }
-.vsl-bms-page .deliverable-item:nth-child(1) .deliverable-title { color: #ef4444; }
-.vsl-bms-page .deliverable-item:nth-child(1)::before { background: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.6); }
-.vsl-bms-page .deliverable-item:nth-child(2) .deliverable-title { color: #f97316; }
-.vsl-bms-page .deliverable-item:nth-child(2)::before { background: #f97316; box-shadow: 0 0 20px rgba(249, 115, 22, 0.6); }
-.vsl-bms-page .deliverable-item:nth-child(3) .deliverable-title { color: #fbbf24; }
-.vsl-bms-page .deliverable-item:nth-child(3)::before { background: #fbbf24; box-shadow: 0 0 20px rgba(251, 191, 36, 0.6); }
-.vsl-bms-page .deliverable-item:nth-child(4) .deliverable-title { color: #34d399; }
-.vsl-bms-page .deliverable-item:nth-child(4)::before { background: #34d399; box-shadow: 0 0 20px rgba(52, 211, 153, 0.6); }
-.vsl-bms-page .deliverable-item:nth-child(5) .deliverable-title { color: #22d3ee; }
-.vsl-bms-page .deliverable-item:nth-child(5)::before { background: #22d3ee; box-shadow: 0 0 20px rgba(34, 211, 238, 0.6); }
-.vsl-bms-page .deliverable-item:nth-child(6) .deliverable-title { color: #60a5fa; }
-.vsl-bms-page .deliverable-item:nth-child(6)::before { background: #60a5fa; box-shadow: 0 0 20px rgba(96, 165, 250, 0.6); }
-.vsl-bms-page .deliverable-item:nth-child(7) .deliverable-title { color: #a78bfa; }
-.vsl-bms-page .deliverable-item:nth-child(7)::before { background: #a78bfa; box-shadow: 0 0 20px rgba(167, 139, 250, 0.6); }
+/* Core modules: blue. Gold is reserved exclusively for bonuses (.bonus-item). */
+.vsl-bms-page .deliverable-item::before { background: var(--tech-blue-bright); box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
 .vsl-bms-page .deliverable-body { color: var(--text-mid); line-height: 1.7; }
 .vsl-bms-page .deliverable-body strong { color: #fff; font-weight: 800; }
 
@@ -1294,8 +1399,9 @@
 .vsl-bms-page .vsl-footer .disclaimer {
   max-width: 720px;
   margin: 0 auto;
-  font-size: 12px;
-  color: var(--text-dim);
+  font-size: 13px;
+  /* text-muted, not text-dim: legal text must pass WCAG AA (4.5:1) on --bg-darkest */
+  color: var(--text-muted);
   line-height: 1.6;
 }
 .vsl-bms-page .vsl-footer .legal-links {
@@ -1372,8 +1478,8 @@
     padding: 28px 0 32px;
   }
   .vsl-bms-page .hero h1 {
-    font-size: clamp(18px, 4.6vw, 24px);
-    line-height: 1.3;
+    font-size: 26px;
+    line-height: 1.25;
     letter-spacing: -0.01em;
     font-weight: 800;
     margin-bottom: 24px;
@@ -1640,13 +1746,13 @@
   .vsl-bms-page .vsl-footer {
     padding: 36px 16px;
   }
-  .vsl-bms-page .vsl-footer .disclaimer { font-size: 11.5px; }
+  .vsl-bms-page .vsl-footer .disclaimer { font-size: 12.5px; }
   .vsl-bms-page .vsl-footer .legal-links a { margin: 0 8px; font-size: 13px; }
 }
 
 /* iPhone SE and small phones */
 @media (max-width: 480px) {
-  .vsl-bms-page h1 { font-size: 26px !important; line-height: 1.15; }
+  .vsl-bms-page h1 { line-height: 1.15; }
   .vsl-bms-page h2 { font-size: 24px; line-height: 1.2; }
   .vsl-bms-page h3 { font-size: 20px; }
 

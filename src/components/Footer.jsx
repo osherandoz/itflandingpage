@@ -160,10 +160,35 @@ const Footer = () => {
             </button>
           </div>
 
-          {/* Column 4: Quick Links */}
+          {/* Column 4: Services — internal links for SEO (money pages were orphaned) */}
+          <div className="footer-section">
+            <h3>השירותים שלנו</h3>
+            <div className="quick-links">
+              <Link to="/שחזור-חשבון-פייסבוק" className="quick-link">שחזור חשבון פייסבוק</Link>
+              <Link to="/שחזור-חשבון-אינסטגרם" className="quick-link">שחזור חשבון אינסטגרם</Link>
+              <Link to="/שחזור-חשבון-וואטסאפ" className="quick-link">שחזור חשבון וואטסאפ</Link>
+              <Link to="/חשבון-פייסבוק-מושבת" className="quick-link">חשבון פייסבוק מושבת</Link>
+              <Link to="/חשבון-אינסטגרם-נפרץ" className="quick-link">חשבון אינסטגרם נפרץ</Link>
+              <Link to="/שחזור-מנהל-מודעות" className="quick-link">שחזור מנהל מודעות</Link>
+            </div>
+          </div>
+
+          {/* Column 5: Quick Links */}
           <div className="footer-section">
             <h3>קישורים מהירים</h3>
             <div className="quick-links">
+              <Link to="/faq" className="quick-link">
+                <i className="fas fa-circle-question"></i>
+                שאלות נפוצות
+              </Link>
+              <Link to="/testimonials" className="quick-link">
+                <i className="fas fa-star"></i>
+                המלצות לקוחות
+              </Link>
+              <Link to="/articles" className="quick-link">
+                <i className="fas fa-newspaper"></i>
+                מאמרים
+              </Link>
               <Link to="/privacy" className="quick-link">
                 <i className="fas fa-shield-alt"></i>
                 מדיניות פרטיות

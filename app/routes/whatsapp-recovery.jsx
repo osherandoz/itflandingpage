@@ -1,5 +1,6 @@
 import ServicePage from '../../src/components/ServicePage';
 import { SERVICE_PAGES } from '../../src/data/servicePages';
+import { buildHowToSchema, buildBreadcrumbSchema } from '../../src/data/schemas';
 
 const pageData = SERVICE_PAGES.find(p => p.slug === 'whatsapp-recovery');
 
@@ -41,6 +42,13 @@ const FAQ_SCHEMA = {
   })),
 };
 
+const HOWTO_SCHEMA = buildHowToSchema(pageData);
+
+const BREADCRUMB_SCHEMA = buildBreadcrumbSchema([
+  { name: 'דף הבית', item: 'https://www.israeltechforce.com/' },
+  { name: pageData.title },
+]);
+
 export default function WhatsAppRecoveryRoute() {
   return (
     <>
@@ -51,6 +59,14 @@ export default function WhatsAppRecoveryRoute() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(HOWTO_SCHEMA) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_SCHEMA) }}
       />
       <ServicePage pageData={pageData} />
     </>

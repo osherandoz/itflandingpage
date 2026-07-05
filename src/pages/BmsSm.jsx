@@ -588,8 +588,6 @@ export default function BmsSm() {
           © {new Date().getFullYear()} Israel Tech Force · אושר רווח · כל הזכויות שמורות
           {' '}·{' '}
           <a href="/privacy">פרטיות</a>
-          {' '}·{' '}
-          <a href="/terms">תנאי שימוש</a>
         </div>
       </footer>
 

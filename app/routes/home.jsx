@@ -4,7 +4,7 @@ import { FAQ_SCHEMA } from '../../src/data/faqSchema.js';
 export const meta = () => [
   {
     title:
-      'IsraelTechForce - שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ | ITF Recovery',
+      'שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ | IsraelTechForce',
   },
   {
     name: 'description',
@@ -26,7 +26,7 @@ export const meta = () => [
   { property: 'og:locale', content: 'he_IL' },
   {
     property: 'og:image',
-    content: 'https://israeltechforce.com/images/israeltechforce-logo-white.png',
+    content: 'https://www.israeltechforce.com/images/israeltechforce-logo-white.png',
   },
   { name: 'twitter:card', content: 'summary_large_image' },
   {
@@ -40,7 +40,7 @@ export const meta = () => [
   },
   {
     name: 'twitter:image',
-    content: 'https://israeltechforce.com/images/israeltechforce-logo-white.png',
+    content: 'https://www.israeltechforce.com/images/israeltechforce-logo-white.png',
   },
   { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/' },
 ];

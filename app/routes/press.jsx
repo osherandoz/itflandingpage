@@ -18,7 +18,7 @@ export const meta = () => [
   { property: 'og:type', content: 'website' },
   {
     property: 'og:image',
-    content: 'https://israeltechforce.com/images/israeltechforce-logo-white.png',
+    content: 'https://www.israeltechforce.com/images/israeltechforce-logo-white.png',
   },
   { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/press' },
 ];

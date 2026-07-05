@@ -33,12 +33,8 @@ export const LOCAL_BUSINESS_SCHEMA = {
   areaServed: { '@type': 'Country', name: 'Israel' },
   priceRange: '₪₪',
   openingHours: 'Su-Fr 08:00-22:00',
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    reviewCount: '6',
-    bestRating: '5',
-  },
+  // aggregateRating removed: self-serving reviews on LocalBusiness are ineligible
+  // for rich results per Google policy and risk a structured-data manual action.
   sameAs: [
     'https://share.google/yNPb3RHHkfrk8sxNa',
     'https://www.facebook.com/israeltechforce23',
@@ -134,7 +130,7 @@ export const buildBlogPostingSchema = (article) => ({
   headline: article.displayTitle || article.title,
   description: article.metaDescription || article.excerpt,
   datePublished: article.date,
-  dateModified: article.date,
+  dateModified: article.dateModified || article.date,
   url: `${SITE_URL}/articles/${article.slug}`,
   image: LOGO_URL,
   inLanguage: 'he',
@@ -169,9 +165,21 @@ export const PERSON_SCHEMA = {
   '@type': 'Person',
   '@id': `${SITE_URL}/#author`,
   name: 'אושר רווח',
+  alternateName: 'Osher Revach',
   jobTitle: 'מומחה שחזור חשבונות רשתות חברתיות',
+  description:
+    'מומחה ישראלי לשחזור חשבונות דיגיטליים, מייסד IsraelTechForce. מאז 2020 שחזר מעל 2,500 חשבונות פייסבוק, אינסטגרם ווואטסאפ לעסקים וליוצרי תוכן.',
   url: SITE_URL,
   image: `${SITE_URL}/images/osher-photo-1.jpg`,
+  knowsAbout: [
+    'שחזור חשבונות פייסבוק',
+    'שחזור חשבונות אינסטגרם',
+    'שחזור חשבונות וואטסאפ',
+    'Meta Business Manager',
+    'Facebook account recovery',
+    'Instagram account recovery',
+    'אבטחת נכסים דיגיטליים',
+  ],
   worksFor: {
     '@type': 'Organization',
     '@id': `${SITE_URL}/#business`,
@@ -182,6 +190,22 @@ export const PERSON_SCHEMA = {
     'https://www.facebook.com/OsheRevach23',
   ],
 };
+
+// ─── HowTo builder (service pages — "3 שלבים" section) ───────────────────────
+// pageData: { title, path, steps: [{ title, desc }] }
+export const buildHowToSchema = (pageData) => ({
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: pageData.howToName || pageData.title,
+  description: pageData.metaDescription || pageData.description,
+  inLanguage: 'he',
+  step: pageData.steps.map((s, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: s.title,
+    text: s.desc,
+  })),
+});
 
 // ─── BreadcrumbList builder ───────────────────────────────────────────────────
 // items: [{ name, item? }]  — last item has no `item` (current page)

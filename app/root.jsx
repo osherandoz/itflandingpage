@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
-import SocialProofToast from '../src/components/SocialProofToast.jsx';
 import NewsletterPopup from '../src/components/NewsletterPopup.jsx';
 import { LOCAL_BUSINESS_SCHEMA, SERVICE_SCHEMAS, PERSON_SCHEMA } from '../src/data/schemas.js';
 // Self-hosted font — eliminates render-blocking Google Fonts round-trip
@@ -25,13 +24,6 @@ export function Layout({ children }) {
 
         {/* Site-wide static meta */}
         <meta name="author" content="IsraelTechForce - ITF Recovery" />
-        <meta name="keywords" content="שחזור חשבון פייסבוק, שחזור חשבון אינסטגרם, שחזור חשבון וואטסאפ, חשבון נחסם, חשבון נפרץ, ITF Recovery, IsraelTechForce" />
-        <meta name="geo.region" content="IL" />
-        <meta name="geo.placename" content="Netanya, Israel" />
-        <meta name="geo.position" content="32.3215;34.8532" />
-        <meta name="ICBM" content="32.3215, 34.8532" />
-        <meta name="language" content="Hebrew" />
-        <meta name="content-language" content="he" />
 
         {/* Structured Data — LocalBusiness (global) */}
         <script
@@ -56,14 +48,6 @@ export function Layout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
-        {/* Preload LCP image */}
-        <link
-          rel="preload"
-          as="image"
-          href="/images/israeltechforce-logo-white.png"
-          fetchPriority="high"
-        />
-
         {/* Google Search Console verification */}
         <meta name="google-site-verification" content="aE9CLpD9QGwjrSkACJUNpS8Ps8vCkLxMuP9jRl3v_aM" />
 
@@ -71,6 +55,7 @@ export function Layout({ children }) {
         <script dangerouslySetInnerHTML={{ __html: `
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init','1911202046942044');
+fbq('track','PageView');
 ` }} />
 
         {/* Microsoft Clarity */}
@@ -150,7 +135,6 @@ export default function Root() {
     <>
       <Outlet />
       <Analytics />
-      <SocialProofToast />
       <NewsletterPopup
         isOpen={showNewsletter}
         onClose={() => setShowNewsletter(false)}

@@ -25,6 +25,7 @@
       "routes/testimonials": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/bms-sm": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/vsl-bms": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/vsl-bms-v2": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/thank-you-lead": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/thank-you-purchase": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/dashboard": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
@@ -171,6 +172,15 @@
           "runtime": "nodejs"
         }
       },
+      "routes/vsl-bms-v2": {
+        "id": "routes/vsl-bms-v2",
+        "parentId": "root",
+        "file": "app/routes/vsl-bms-v2.jsx",
+        "path": "VSL-BMS-V2",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
       "routes/thank-you-lead": {
         "id": "routes/thank-you-lead",
         "parentId": "root",
@@ -201,9 +211,9 @@
     }
   },
   "reactRouterConfig": {
-    "appDirectory": "C:/Users/osher/OneDrive/Desktop/ניהול עסק/פרויקטים חדשים/landingpage/.claude/worktrees/gifted-shaw-a3549b/app",
+    "appDirectory": "C:/Users/osher/OneDrive/Desktop/ניהול עסק/פרויקטים חדשים/landingpage/app",
     "basename": "/",
-    "buildDirectory": "C:/Users/osher/OneDrive/Desktop/ניהול עסק/פרויקטים חדשים/landingpage/.claude/worktrees/gifted-shaw-a3549b/build",
+    "buildDirectory": "C:/Users/osher/OneDrive/Desktop/ניהול עסק/פרויקטים חדשים/landingpage/build",
     "future": {
       "unstable_optimizeDeps": false,
       "unstable_passThroughRequests": false,
@@ -310,6 +320,12 @@
         "file": "./routes/vsl-bms.jsx",
         "path": "VSL-BMS"
       },
+      "routes/vsl-bms-v2": {
+        "id": "routes/vsl-bms-v2",
+        "parentId": "root",
+        "file": "./routes/vsl-bms-v2.jsx",
+        "path": "VSL-BMS-V2"
+      },
       "routes/thank-you-lead": {
         "id": "routes/thank-you-lead",
         "parentId": "root",
@@ -402,6 +418,10 @@
           {
             "file": "./routes/vsl-bms.jsx",
             "path": "VSL-BMS"
+          },
+          {
+            "file": "./routes/vsl-bms-v2.jsx",
+            "path": "VSL-BMS-V2"
           },
           {
             "file": "./routes/thank-you-lead.jsx",

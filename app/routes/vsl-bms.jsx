@@ -1,7 +1,7 @@
 import VslBms from '../../src/pages/VslBms';
 
 const URL = 'https://www.israeltechforce.com/VSL-BMS';
-const TITLE = 'הטעות שעולה לעסקים ישראלים אלפי שקלים בשנה. איך מונעים אותה | אושר רווח';
+const TITLE = 'הטעות שעולה לעסקים אלפי שקלים בשנה | אושר רווח';
 const DESCRIPTION =
   '3 מקרים אמיתיים. 3 עסקים שיכלו להימנע מהנפילה. הדרכה חינמית עם אושר רווח, מומחה לשחזור נכסים דיגיטליים. קורס BMS ב-₪197.';
 const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.png';
@@ -9,7 +9,8 @@ const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.png';
 export const links = () => [
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@400;500;700;800;900&display=swap',
+    // Heebo is self-hosted via @fontsource (root + page imports) — only Assistant + Frank Ruhl Libre from Google
+    href: 'https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;700;800&family=Frank+Ruhl+Libre:wght@500;700&display=swap',
   },
 ];
 
