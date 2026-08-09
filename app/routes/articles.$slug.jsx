@@ -3,6 +3,15 @@ import { getArticleBySlug } from '../../src/data/articles';
 import { buildBlogPostingSchema, buildBreadcrumbSchema } from '../../src/data/schemas.js';
 import { useParams } from 'react-router';
 
+// Unknown/placeholder slugs must be a real 404, not a soft-404 (SEO)
+export function loader({ params }) {
+  const article = getArticleBySlug(params.slug);
+  if (!article || article.placeholder) {
+    throw new Response('Not Found', { status: 404 });
+  }
+  return null;
+}
+
 export const meta = ({ params }) => {
   const article = getArticleBySlug(params.slug);
 
@@ -22,7 +31,7 @@ export const meta = ({ params }) => {
 
   const canonicalUrl = `https://www.israeltechforce.com/articles/${params.slug}`;
   const ogImage =
-    'https://www.israeltechforce.com/images/israeltechforce-logo-white.png';
+    'https://www.israeltechforce.com/images/og-card.png';
 
   return [
     { title: article.metaTitle || `${article.title} | IsraelTechForce` },

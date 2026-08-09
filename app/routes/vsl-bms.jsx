@@ -7,6 +7,8 @@ const DESCRIPTION =
 const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.png';
 
 export const links = () => [
+  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
   {
     rel: 'stylesheet',
     // Heebo is self-hosted via @fontsource (root + page imports) — only Assistant + Frank Ruhl Libre from Google

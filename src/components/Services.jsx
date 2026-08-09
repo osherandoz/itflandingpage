@@ -12,6 +12,7 @@ const CARDS = [
     bullets: ['שחזור גישה ללא סיסמה / אימייל', 'הסרת חסימות לאחר דיווח שווא', 'אבטחה מחדש מפני פריצה חוזרת', 'ניטור אפשרי של נקודות תורפה נוספות'],
     ctaLabel: 'קבל עזרה עכשיו',
     path: null,
+    page: '/שחזור-חשבון-פייסבוק',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M13.5 22v-8h2.7l.4-3.1H13.5V8.9c0-.9.3-1.5 1.6-1.5h1.7V4.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.4V14h2.7v8h3.4z"/>
@@ -26,6 +27,7 @@ const CARDS = [
     bullets: ['שחזור מלא עם כל הפוסטים והעוקבים', 'ערעור דיווחי הטרדה וזכויות יוצרים', 'טיפול בחשבונות שהתחזו אליך', 'תמיכה 24/6 עד לסגירת הטיפול'],
     ctaLabel: 'קבל עזרה עכשיו',
     path: null,
+    page: '/שחזור-חשבון-אינסטגרם',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <rect x="3" y="3" width="18" height="18" rx="5"/>
@@ -42,6 +44,7 @@ const CARDS = [
     bullets: ['שחזור חשבון וואטסאפ שנחטף', 'ניטרול אימות דו-שלבי שנגנב', 'אבטחה מחדש ומניעת גישה לגורם זר', 'ליווי אישי עד לסגירה מלאה'],
     ctaLabel: 'קבל עזרה עכשיו',
     path: null,
+    page: '/שחזור-חשבון-וואטסאפ',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.4A10 10 0 1 0 12 2zm5.6 14c-.2.6-1.3 1.2-1.8 1.3-.5.1-1.1.1-1.8-.1-1.6-.5-3.6-1.6-5-3.4-1-1.2-1.6-2.6-1.8-3.2-.1-.6.1-1.1.4-1.4.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.8.1.1.1.3 0 .4l-.3.4c-.1.1-.3.3-.4.4-.1.1-.3.3-.1.5.1.3.7 1.1 1.5 1.8 1 .9 1.8 1.2 2.1 1.3.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.2.1.3.2.4.3 0 .1 0 .6-.2 1z"/>
@@ -56,6 +59,7 @@ const CARDS = [
     bullets: ['איפוס מודעות ופיקסלים', 'ערעור מקצועי על חסימה', 'החזרת היסטוריית קמפיינים', 'מניעת חסימה חוזרת'],
     ctaLabel: 'קבל עזרה עכשיו',
     path: null,
+    page: '/שחזור-מנהל-מודעות',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M3 11v2a2 2 0 0 0 2 2h2l5 4V5L7 9H5a2 2 0 0 0-2 2z"/>
@@ -242,11 +246,35 @@ const Services = () => {
                       <span className="svc-arrow" aria-hidden="true">←</span>
                     </button>
                   )}
+
+                  {card.page && (
+                    <Link
+                      to={card.page}
+                      className="svc-more-link"
+                      onClick={() => trackClick(`${card.title} — guide`)}
+                    >
+                      למדריך המלא על השירות
+                      <span className="svc-arrow" aria-hidden="true">←</span>
+                    </Link>
+                  )}
                 </div>
               </div>
             </article>
           ))}
         </div>
+
+        {/* Deep-dive service pages */}
+        <nav className="svc-pages" aria-label="מדריכי שחזור מפורטים">
+          <h3 className="svc-pages-title">מדריכים מפורטים לפי מצב</h3>
+          <div className="svc-pages-links">
+            <Link to="/שחזור-חשבון-פייסבוק">שחזור חשבון פייסבוק</Link>
+            <Link to="/שחזור-חשבון-אינסטגרם">שחזור חשבון אינסטגרם</Link>
+            <Link to="/שחזור-חשבון-וואטסאפ">שחזור חשבון וואטסאפ</Link>
+            <Link to="/חשבון-פייסבוק-מושבת">חשבון פייסבוק מושבת</Link>
+            <Link to="/חשבון-אינסטגרם-נפרץ">חשבון אינסטגרם נפרץ</Link>
+            <Link to="/שחזור-מנהל-מודעות">שחזור מנהל מודעות</Link>
+          </div>
+        </nav>
 
       </div>
     </section>

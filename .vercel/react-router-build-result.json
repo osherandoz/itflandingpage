@@ -211,14 +211,13 @@
     }
   },
   "reactRouterConfig": {
-    "appDirectory": "C:/Users/osher/OneDrive/Desktop/ניהול עסק/פרויקטים חדשים/landingpage/app",
+    "appDirectory": "C:/Users/osher/OneDrive/Desktop/ניהול עסק/פרויקטים חדשים/landingpage/itflandingpage/app",
     "basename": "/",
-    "buildDirectory": "C:/Users/osher/OneDrive/Desktop/ניהול עסק/פרויקטים חדשים/landingpage/build",
+    "buildDirectory": "C:/Users/osher/OneDrive/Desktop/ניהול עסק/פרויקטים חדשים/landingpage/itflandingpage/build",
     "future": {
       "unstable_optimizeDeps": false,
-      "unstable_passThroughRequests": false,
-      "unstable_subResourceIntegrity": false,
-      "unstable_trailingSlashAwareDataRequests": false,
+      "v8_passThroughRequests": false,
+      "v8_trailingSlashAwareDataRequests": false,
       "unstable_previewServerPrerendering": false,
       "v8_middleware": false,
       "v8_splitRouteModules": false,
@@ -352,6 +351,7 @@
     "serverBuildFile": "index.js",
     "serverModuleFormat": "esm",
     "ssr": true,
+    "subResourceIntegrity": false,
     "allowedActionOrigins": false,
     "unstable_routeConfig": [
       {

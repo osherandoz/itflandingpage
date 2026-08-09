@@ -9,8 +9,8 @@
  *
  * Env vars:
  *   SMOOVE_API_KEY     — Smoove REST API key (required)
- *   WEBHOOK_SECRET     — Green Invoice webhook signing secret (recommended)
- *   WEBHOOK_TEST_MODE  — when "true", skips signature verification (testing only)
+ *   WEBHOOK_SECRET     — Green Invoice webhook signing secret (required)
+ *   WEBHOOK_TEST_MODE  — when "true", skips signature verification (non-production only)
  *   SMOOVE_DRY_RUN     — when "true", logs the payload but does not call Smoove
  */
 
@@ -39,7 +39,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const isTestMode = process.env.WEBHOOK_TEST_MODE === 'true';
+  // Test mode can never disable signature checks in production
+  const isTestMode =
+    process.env.WEBHOOK_TEST_MODE === 'true' && process.env.VERCEL_ENV !== 'production';
   const isDryRun = process.env.SMOOVE_DRY_RUN === 'true';
 
   console.log('[webhook-payment] incoming', {
@@ -49,7 +51,6 @@ export default async function handler(req, res) {
         req.headers['x-signature'] ||
         req.headers['x-hub-signature-256']
     ),
-    body: req.body,
     testMode: isTestMode,
     dryRun: isDryRun,
   });
@@ -66,18 +67,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Server misconfigured' });
     }
     if (!verifySignature(req.body, signature, secret)) {
-      // Diagnostic dump — helps identify GI's actual signature format
-      let computedHex = '';
-      try {
-        const raw = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
-        computedHex = crypto.createHmac('sha256', secret).update(raw).digest('hex');
-      } catch {}
-      console.warn('[webhook-payment] signature verification failed', {
-        receivedSignature: signature,
-        computedSignatureHex: computedHex,
-        allHeaders: req.headers,
-        bodyPreview: typeof req.body === 'string' ? req.body.slice(0, 500) : JSON.stringify(req.body).slice(0, 500),
-      });
+      console.warn('[webhook-payment] signature verification failed');
       return res.status(401).json({ error: 'Invalid signature' });
     }
   }
@@ -166,7 +156,7 @@ export default async function handler(req, res) {
     }
 
     console.error('[webhook-payment] Smoove error', smooveRes.status, responseText);
-    return res.status(502).json({ error: 'Smoove API error', detail: responseText });
+    return res.status(502).json({ error: 'Smoove API error' });
   } catch (err) {
     console.error('[webhook-payment] handler error', err);
     return res.status(500).json({ error: 'Server error' });

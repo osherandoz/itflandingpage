@@ -170,6 +170,8 @@ const Footer = () => {
               <Link to="/חשבון-פייסבוק-מושבת" className="quick-link">חשבון פייסבוק מושבת</Link>
               <Link to="/חשבון-אינסטגרם-נפרץ" className="quick-link">חשבון אינסטגרם נפרץ</Link>
               <Link to="/שחזור-מנהל-מודעות" className="quick-link">שחזור מנהל מודעות</Link>
+              <Link to="/bms-sm" className="quick-link">קורס BMS — מניעת חסימות</Link>
+              <Link to="/VSL-BMS" className="quick-link">הדרכה: איך לא להיחסם</Link>
             </div>
           </div>
 

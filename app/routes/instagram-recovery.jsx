@@ -12,7 +12,7 @@ export const meta = () => [
   { property: 'og:description', content: pageData.metaDescription },
   { property: 'og:url', content: 'https://www.israeltechforce.com/שחזור-חשבון-אינסטגרם' },
   { property: 'og:locale', content: 'he_IL' },
-  { property: 'og:image', content: 'https://www.israeltechforce.com/images/israeltechforce-logo-white.png' },
+  { property: 'og:image', content: 'https://www.israeltechforce.com/images/og-card.png' },
   { name: 'twitter:card', content: 'summary_large_image' },
   { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/שחזור-חשבון-אינסטגרם' },
 ];

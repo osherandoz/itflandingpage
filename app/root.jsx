@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
 import NewsletterPopup from '../src/components/NewsletterPopup.jsx';
-import { LOCAL_BUSINESS_SCHEMA, SERVICE_SCHEMAS, PERSON_SCHEMA } from '../src/data/schemas.js';
+import { LOCAL_BUSINESS_SCHEMA, PERSON_SCHEMA } from '../src/data/schemas.js';
 // Self-hosted font — eliminates render-blocking Google Fonts round-trip
 import '@fontsource/heebo/400.css';
 import '@fontsource/heebo/700.css';
@@ -15,8 +15,8 @@ export function Layout({ children }) {
     <html lang="he" dir="rtl">
       <head>
         <meta charSet="UTF-8" />
-        <link rel="icon" type="image/png" href="/images/israeltechforce-logo-white.png" />
-        <link rel="apple-touch-icon" href="/images/israeltechforce-logo-white.png" />
+        <link rel="icon" type="image/png" sizes="64x64" href="/images/favicon-64.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         {/* Per-route meta (title, description, OG, Twitter, canonical) */}
@@ -30,23 +30,11 @@ export function Layout({ children }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(LOCAL_BUSINESS_SCHEMA) }}
         />
-        {/* Structured Data — one Service schema per service (global) */}
-        {SERVICE_SCHEMAS.map((schema) => (
-          <script
-            key={schema.name}
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-          />
-        ))}
         {/* Structured Data — Person (Osher Revach) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_SCHEMA) }}
         />
-
-        {/* Preconnect to external font/CDN origins, eliminates DNS+TCP+TLS round-trip */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
         {/* Google Search Console verification */}
         <meta name="google-site-verification" content="aE9CLpD9QGwjrSkACJUNpS8Ps8vCkLxMuP9jRl3v_aM" />

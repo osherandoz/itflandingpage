@@ -26,7 +26,7 @@ export const meta = () => [
   { property: 'og:locale', content: 'he_IL' },
   {
     property: 'og:image',
-    content: 'https://www.israeltechforce.com/images/israeltechforce-logo-white.png',
+    content: 'https://www.israeltechforce.com/images/og-card.png',
   },
   { name: 'twitter:card', content: 'summary_large_image' },
   {
@@ -40,7 +40,7 @@ export const meta = () => [
   },
   {
     name: 'twitter:image',
-    content: 'https://www.israeltechforce.com/images/israeltechforce-logo-white.png',
+    content: 'https://www.israeltechforce.com/images/og-card.png',
   },
   { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/' },
 ];

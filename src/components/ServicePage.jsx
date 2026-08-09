@@ -4,7 +4,6 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingWhatsApp from './FloatingWhatsApp';
 import { openWhatsApp } from '../utils/whatsapp';
-import { buildBreadcrumbSchema } from '../data/schemas';
 import './ServicePage.css';
 
 // All 6 testimonials inlined so the template has no extra data dependency
@@ -115,17 +114,8 @@ const ServicePage = ({ pageData }) => {
     openWhatsApp(`היי, אני מעוניין/ת בשירות: ${pageData.keyword}`);
   };
 
-  const breadcrumbSchema = buildBreadcrumbSchema([
-    { name: 'בית', item: 'https://www.israeltechforce.com/' },
-    { name: pageData.keyword },
-  ]);
-
   return (
     <div dir="rtl" className="service-page">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
       <Navbar />
 
       <main>

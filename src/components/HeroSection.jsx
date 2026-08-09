@@ -36,12 +36,12 @@ const HeroSection = () => {
         {/* Logo — visible on all screen sizes */}
         <div className="hero-logo">
           <img
-            src="/images/israeltechforce-logo-white.png"
+            src="/images/logo-hero.webp"
             alt="IsraelTechForce - מומחים לשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ"
-            width="3000"
-            height="2212"
+            width="260"
+            height="192"
             loading="eager"
-            decoding="sync"
+            decoding="async"
             fetchPriority="high"
           />
         </div>

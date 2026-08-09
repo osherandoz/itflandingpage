@@ -38,7 +38,7 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
 
     if (!formData.phone.trim()) {
       newErrors.phone = 'מספר טלפון הוא שדה חובה';
-    } else if (!/^[\d\s\-\+\(\)]+$/.test(formData.phone)) {
+    } else if (!/^[\d\s\-+()]+$/.test(formData.phone)) {
       newErrors.phone = 'מספר טלפון לא תקין';
     }
 
@@ -60,67 +60,28 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
         // Track Lead event in Meta Pixel immediately
         if (typeof window !== 'undefined' && window.fbq) {
           window.fbq('track', 'Lead');
-          console.log('✅ Meta Pixel Lead event triggered (Popup)');
         }
 
-        // Build GET URL with query parameters
-        const baseUrl = 'https://script.google.com/macros/s/AKfycbyFbqdWOAObMBAFHLaA0wR8OJMHgju2qTAq3WvNAq9VL67nXKhdTtKRO5g96d4ruE_ttQ/exec';
-        
-        // Ensure values are properly encoded
-        const nameValue = formData.name.trim();
-        const phoneValue = formData.phone.trim();
-        const consentValue = formData.consent ? 'true' : 'false';
-        
-        // Build URL with properly encoded parameters
-        const params = new URLSearchParams({
-          name: nameValue,
-          phone: phoneValue,
-          consent: consentValue
+        const r = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: formData.name.trim(),
+            phone: formData.phone.trim(),
+            consent: formData.consent,
+            source: 'whatsapp-popup',
+          }),
         });
-        const finalUrl = `${baseUrl}?${params.toString()}`;
+        if (!r.ok) throw new Error('bad status');
 
-        console.log('📤 Sending popup form data:', {
-          name: nameValue,
-          phone: phoneValue,
-          consent: consentValue,
-          url: finalUrl
-        });
-        console.log('🔗 Full URL:', finalUrl);
-        console.log('🔍 URLSearchParams:', params.toString());
-
-        // Use XMLHttpRequest to send the form data
-        // This will show up in Network tab and handle redirects properly
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', finalUrl, true);
-        xhr.onload = () => {
-          console.log('✅ Request completed. Status:', xhr.status, '(Popup)');
-          console.log('📥 Response:', xhr.responseText, '(Popup)');
-        };
-        xhr.onerror = () => {
-          console.log('⚠️ Request error occurred (Popup)');
-        };
-        xhr.send();
-
-        console.log('📤 Form data sent (Popup). Check Network tab for request.');
-
-        // Show success message immediately
         setIsSubmitted(true);
-        
-        // Reset form
-        setFormData({
-          name: '',
-          phone: '',
-          consent: false
-        });
-        
-        // Close popup after 3 seconds
+        setFormData({ name: '', phone: '', consent: false });
         setTimeout(() => {
           setIsSubmitted(false);
           onClose();
         }, 3000);
       } catch (error) {
-        console.error('Error submitting form:', error);
-        // Even with no-cors, we show success as the request was sent
+        console.error('Error submitting form:', error?.message);
         setIsSubmitted(true);
         setTimeout(() => {
           setIsSubmitted(false);

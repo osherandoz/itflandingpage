@@ -70,36 +70,29 @@ const ContactForm = () => {
           });
         }
 
-        const baseUrl = 'https://script.google.com/macros/s/AKfycbzziLRW7EWKO43zDdihAPneBF6aAd6aiXp4HyMIa5an3vOxJKHIr9xIJo-KdLTi2AYpmQ/exec';
-        const nameValue = formData.name.trim();
-        const phoneValue = formData.phone.trim();
-        const consentValue = formData.consent ? 'true' : 'false';
-        const params = new URLSearchParams({ name: nameValue, phone: phoneValue, consent: consentValue });
-        const finalUrl = `${baseUrl}?${params.toString()}`;
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', finalUrl, true);
-        xhr.timeout = 10000;
-
-        xhr.onload = () => {
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 10000);
+        try {
+          const r = await fetch('/api/lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            signal: controller.signal,
+            body: JSON.stringify({
+              name: formData.name.trim(),
+              phone: formData.phone.trim(),
+              consent: formData.consent,
+              source: 'contact',
+            }),
+          });
+          if (!r.ok) throw new Error('bad status');
           setIsSubmitting(false);
           setIsSubmitted(true);
           setSubmitError(false);
           setFormData({ name: '', phone: '', consent: false });
           setTimeout(() => setIsSubmitted(false), 5000);
-        };
-
-        xhr.onerror = () => {
-          setIsSubmitting(false);
-          setSubmitError(true);
-        };
-
-        xhr.ontimeout = () => {
-          setIsSubmitting(false);
-          setSubmitError(true);
-        };
-
-        xhr.send();
+        } finally {
+          clearTimeout(timer);
+        }
       } catch {
         setIsSubmitting(false);
         setSubmitError(true);

@@ -17,7 +17,7 @@ The integration allows users to subscribe to your newsletter directly from the f
 The Smoove API key is configured in `src/utils/smoove.js`:
 
 ```javascript
-const SMOOVE_API_KEY = '84bc9a64-a6c8-4777-af10-94d24a811ec5';
+const SMOOVE_API_KEY = 'YOUR_SMOOVE_API_KEY — rotated, set in Vercel env only';
 const SMOOVE_API_URL = 'https://api.smoove.io';
 ```
 

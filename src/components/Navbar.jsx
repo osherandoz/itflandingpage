@@ -54,7 +54,7 @@ const Navbar = () => {
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         <button className="navbar-logo" onClick={handleLogoClick} aria-label="חזרה לדף הבית">
-          <img src="/images/israeltechforce-logo-white.png" alt="Israel Tech Force Logo" />
+          <img src="/images/logo-hero.webp" alt="Israel Tech Force Logo" width="260" height="192" />
         </button>
 
         <div id="mobile-nav-menu" className={`navbar-menu ${isMobileMenuOpen ? 'active' : ''}`}>

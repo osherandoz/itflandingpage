@@ -5,6 +5,7 @@
 
 const SITE_URL = 'https://www.israeltechforce.com';
 const LOGO_URL = `${SITE_URL}/images/israeltechforce-logo-white.png`;
+const OG_IMAGE_URL = `${SITE_URL}/images/og-card.png`;
 const BUSINESS_NAME = 'IsraelTechForce - ITF Recovery';
 
 // ─── LocalBusiness ────────────────────────────────────────────────────────────
@@ -17,7 +18,7 @@ export const LOCAL_BUSINESS_SCHEMA = {
     'מומחים לשחזור חשבונות רשתות חברתיות שנחסמו או נפרצו — פייסבוק, אינסטגרם, וואטסאפ. תשלום רק אחרי הצלחה.',
   url: SITE_URL,
   logo: LOGO_URL,
-  image: LOGO_URL,
+  image: OG_IMAGE_URL,
   telephone: '+972509823235',
   email: 'osher@israeltechforce.com',
   address: {
@@ -132,7 +133,7 @@ export const buildBlogPostingSchema = (article) => ({
   datePublished: article.date,
   dateModified: article.dateModified || article.date,
   url: `${SITE_URL}/articles/${article.slug}`,
-  image: LOGO_URL,
+  image: OG_IMAGE_URL,
   inLanguage: 'he',
   author: {
     '@type': 'Person',

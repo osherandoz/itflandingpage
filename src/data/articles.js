@@ -122,37 +122,6 @@ export const articles = [
       <p>זכרו: כל יום שעובר מקרב אתכם לנקודת האל-חזור של 30 הימים. אל תחכו - פעלו עכשיו!</p>
     `
   },
-  // Placeholder for future articles
-  {
-    id: 'instagram-recovery',
-    slug: 'instagram-recovery',
-    placeholder: true,
-    title: 'איך לשחזר חשבון אינסטגרם שנחסם',
-    excerpt: 'מדריך מקיף לשחזור חשבון אינסטגרם שנחסם. למד על תהליך הערעור, מסמכים נדרשים, וטיפים מקצועיים.',
-    featured: false,
-    icon: 'fab fa-instagram',
-    category: 'שחזור חשבונות',
-    date: '2025-01-10',
-    author: 'אושר רווח',
-    readTime: '6 דקות',
-    metaDescription: 'מדריך מקצועי לשחזור חשבון אינסטגרם שנחסם, כולל תהליך הערעור וטיפים מקצועיים.',
-    content: '<p>תוכן המאמר יופיע כאן בקרוב...</p>'
-  },
-  {
-    id: 'facebook-account-recovery',
-    slug: 'facebook-account-recovery',
-    placeholder: true,
-    title: 'שחזור חשבון פייסבוק שנחסם או נפרץ',
-    excerpt: 'כל מה שצריך לדעת על שחזור חשבון פייסבוק. מהזיהוי הראשוני ועד לשחזור מלא של החשבון.',
-    featured: false,
-    icon: 'fab fa-facebook',
-    category: 'שחזור חשבונות',
-    date: '2025-01-05',
-    author: 'אושר רווח',
-    readTime: '7 דקות',
-    metaDescription: 'מדריך מקצועי לשחזור חשבון פייסבוק שנחסם או נפרץ.',
-    content: '<p>תוכן המאמר יופיע כאן בקרוב...</p>'
-  },
   {
     id: 'facebook-account-disabled',
     slug: 'facebook-account-disabled',
