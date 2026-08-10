@@ -6,7 +6,7 @@ const HeroSection = () => {
 
   return (
     <section className="hero-section">
-      {/* Decorative floating social icons — background only */}
+      {/* Decorative floating social icons, background only */}
       <div className="hero-bg-icons" aria-hidden="true">
         <i className="fab fa-facebook hero-bg-icon" style={{ top: '12%', right: '8%',  fontSize: '5rem',  animationDelay: '0s' }} />
         <i className="fab fa-instagram hero-bg-icon" style={{ top: '55%', right: '4%',  fontSize: '3.5rem', animationDelay: '1.4s' }} />
@@ -33,7 +33,7 @@ const HeroSection = () => {
           <span>✓ תשלום רק אחרי הצלחה</span>
         </div>
 
-        {/* Logo — visible on all screen sizes */}
+        {/* Logo, visible on all screen sizes */}
         <div className="hero-logo">
           <img
             src="/images/logo-hero.webp"

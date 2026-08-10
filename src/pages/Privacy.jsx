@@ -161,19 +161,19 @@ const Privacy = () => {
           </p>
           <ul className="privacy-vendor-list">
             <li>
-              <strong>Smoove</strong> (ישראל) — מערכת לניהול רשימות תפוצה ושליחת מיילים אוטומטיים. רואה: שם, מייל, טלפון.
+              <strong>Smoove</strong> (ישראל), מערכת לניהול רשימות תפוצה ושליחת מיילים אוטומטיים. רואה: שם, מייל, טלפון.
               <a href="https://www.smoove.io/privacy-policy" target="_blank" rel="noopener noreferrer" className="privacy-link"> מדיניות פרטיות</a>
             </li>
             <li>
-              <strong>Morning (חשבונית ירוקה)</strong> (ישראל) — סליקה והפקת חשבוניות. רואה: שם, מייל, טלפון, פרטי תשלום.
+              <strong>Morning (חשבונית ירוקה)</strong> (ישראל), סליקה והפקת חשבוניות. רואה: שם, מייל, טלפון, פרטי תשלום.
               <a href="https://www.greeninvoice.co.il/privacy" target="_blank" rel="noopener noreferrer" className="privacy-link"> מדיניות פרטיות</a>
             </li>
             <li>
-              <strong>Vercel</strong> (ארה״ב) — אחסון ושירותי ענן עבור האתר. רואה: לוגי שרת אנונימיים.
+              <strong>Vercel</strong> (ארה״ב), אחסון ושירותי ענן עבור האתר. רואה: לוגי שרת אנונימיים.
               <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="privacy-link"> מדיניות פרטיות</a>
             </li>
             <li>
-              <strong>Meta / Facebook</strong> (ארה״ב, אירלנד) — פיקסל לפרסום ממוקד. רואה: התנהגות גלישה אנונימית, רק אם
+              <strong>Meta / Facebook</strong> (ארה״ב, אירלנד), פיקסל לפרסום ממוקד. רואה: התנהגות גלישה אנונימית, רק אם
               הסכמת לעוגיות שיווק.
               <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer" className="privacy-link"> מדיניות פרטיות</a>
             </li>

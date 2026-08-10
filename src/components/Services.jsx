@@ -251,7 +251,7 @@ const Services = () => {
                     <Link
                       to={card.page}
                       className="svc-more-link"
-                      onClick={() => trackClick(`${card.title} — guide`)}
+                      onClick={() => trackClick(`${card.title}, guide`)}
                     >
                       למדריך המלא על השירות
                       <span className="svc-arrow" aria-hidden="true">←</span>

@@ -57,9 +57,9 @@ export const SERVICE_PAGES = [
     ],
     testimonialIds: [1, 2, 3],
     relatedArticles: [
-      { slug: 'facebook-account-disabled', title: 'חשבון פייסבוק מושבת — מה עושים?' },
+      { slug: 'facebook-account-disabled', title: 'חשבון פייסבוק מושבת, מה עושים?' },
       { slug: 'facebook-recovery-no-email-phone', title: 'שחזור פייסבוק בלי מייל ובלי טלפון' },
-      { slug: 'facebook-disabled-vs-limited', title: 'מושבת לעומת מוגבל — ההבדל שחשוב לדעת' },
+      { slug: 'facebook-disabled-vs-limited', title: 'מושבת לעומת מוגבל, ההבדל שחשוב לדעת' },
     ],
   },
 
@@ -121,8 +121,8 @@ export const SERVICE_PAGES = [
     ],
     testimonialIds: [2, 4, 3],
     relatedArticles: [
-      { slug: 'instagram-hacked-recovery', title: 'אינסטגרם נפרץ — מה עושים מיד?' },
-      { slug: 'shadowban-instagram-2025', title: 'Shadowban באינסטגרם 2026 — המדריך המלא' },
+      { slug: 'instagram-hacked-recovery', title: 'אינסטגרם נפרץ, מה עושים מיד?' },
+      { slug: 'shadowban-instagram-2025', title: 'Shadowban באינסטגרם 2026, המדריך המלא' },
       { slug: 'protect-instagram-account', title: 'איך מגינים על חשבון האינסטגרם' },
     ],
   },
@@ -185,7 +185,7 @@ export const SERVICE_PAGES = [
     ],
     testimonialIds: [1, 5, 6],
     relatedArticles: [
-      { slug: 'whatsapp-recovery-guide', title: 'מדריך שחזור וואטסאפ — כל מה שצריך לדעת' },
+      { slug: 'whatsapp-recovery-guide', title: 'מדריך שחזור וואטסאפ, כל מה שצריך לדעת' },
       { slug: 'whatsapp-unblock', title: 'איך מסירים חסימה בוואטסאפ' },
     ],
   },
@@ -248,8 +248,8 @@ export const SERVICE_PAGES = [
     ],
     testimonialIds: [3, 5, 1],
     relatedArticles: [
-      { slug: 'facebook-account-disabled', title: 'חשבון פייסבוק מושבת — מה עושים?' },
-      { slug: 'facebook-disabled-vs-limited', title: 'מושבת לעומת מוגבל — ההבדל שחשוב לדעת' },
+      { slug: 'facebook-account-disabled', title: 'חשבון פייסבוק מושבת, מה עושים?' },
+      { slug: 'facebook-disabled-vs-limited', title: 'מושבת לעומת מוגבל, ההבדל שחשוב לדעת' },
     ],
   },
 
@@ -311,7 +311,7 @@ export const SERVICE_PAGES = [
     ],
     testimonialIds: [2, 4, 3],
     relatedArticles: [
-      { slug: 'instagram-hacked-recovery', title: 'אינסטגרם נפרץ — מה עושים מיד?' },
+      { slug: 'instagram-hacked-recovery', title: 'אינסטגרם נפרץ, מה עושים מיד?' },
       { slug: 'protect-instagram-account', title: 'איך מגינים על חשבון האינסטגרם' },
     ],
   },
@@ -328,7 +328,7 @@ export const SERVICE_PAGES = [
     whatIsIt: `<p>מנהל המודעות חסום. הפרסום עצר. הקמפיינים לא רצים. כל יום שהחשבון חסום עולה כסף אמיתי. לא רק תקציב שהולך לאיבוד. גם הכנסות שלא מגיעות. אנחנו מבינים כמה זה יקר, ופועלים מהר.</p>
 <p>מטא חוסמת חשבונות פרסום ממגוון סיבות: כרטיס אשראי שנדחה, קמפיין שנחשב למטעה, ביצוע פעולות שנראו חשודות, או הפרה לכאורה של מדיניות הפרסום. הבעיה הגדולה היא שמנגנוני הערעור הרגילים של מטא הם איטיים ולא אפקטיביים. תשלחו טופס, תחכו שבועות, ותקבלו תשובה אוטומטית. בינתיים העסק שלכם סובל.</p>
 <p>IsraelTechForce עובדת עם עסקים ומשרדי פרסום שחשבונות הפרסום שלהם חסומים. אנחנו מכירים לעומק את מדיניות הפרסום של מטא, יודעים לנסח ערעורים שנשמעים, ויודעים מה לתקן בחשבון לפני ואחרי השחרור. הממוצע שלנו: שחרור תוך 24-72 שעות.</p>
-<p><b>רוצים למנוע את החסימה הבאה?</b> אחרי השחרור, <a href="/bms-sm">קורס BMS שלנו (₪197)</a> מלמד איך להגדיר ביזנס מנג'ר חסין חסימות — 15 שיעורים מוקלטים שנבנו מתוך 2,500+ מקרי שחזור.</p>`,
+<p><b>רוצים למנוע את החסימה הבאה?</b> אחרי השחרור, <a href="/bms-sm">קורס BMS שלנו (₪197)</a> מלמד איך להגדיר ביזנס מנג'ר חסין חסימות, 15 שיעורים מוקלטים שנבנו מתוך 2,500+ מקרי שחזור.</p>`,
     steps: [
       {
         icon: 'fas fa-sitemap',
@@ -348,9 +348,9 @@ export const SERVICE_PAGES = [
     ],
     faqs: [
       {
-        question: 'הביזנס מנג\'ר שלי נחסם — מה עושים?',
+        question: 'הביזנס מנג\'ר שלי נחסם, מה עושים?',
         answer:
-          'קודם כל לא לפתוח ביזנס מנג\'ר חדש — זה עלול להחמיר את החסימה. שולחים אלינו הודעה, אנחנו מאבחנים חינם את סיבת החסימה, מגישים ערעור ממוקד למטא דרך הערוצים הנכונים, וברוב המקרים הביזנס מנג\'ר משוחרר תוך 24-72 שעות. תשלום רק אחרי הצלחה.',
+          'קודם כל לא לפתוח ביזנס מנג\'ר חדש, זה עלול להחמיר את החסימה. שולחים אלינו הודעה, אנחנו מאבחנים חינם את סיבת החסימה, מגישים ערעור ממוקד למטא דרך הערוצים הנכונים, וברוב המקרים הביזנס מנג\'ר משוחרר תוך 24-72 שעות. תשלום רק אחרי הצלחה.',
       },
       {
         question: 'חסמו לי את מנהל המודעות ללא הסבר. מה עושים?',
@@ -380,7 +380,7 @@ export const SERVICE_PAGES = [
     ],
     testimonialIds: [6, 3, 5],
     relatedArticles: [
-      { slug: 'ads-manager-blocked', title: 'מנהל מודעות חסום — מה עושים?' },
+      { slug: 'ads-manager-blocked', title: 'מנהל מודעות חסום, מה עושים?' },
     ],
   },
 ];

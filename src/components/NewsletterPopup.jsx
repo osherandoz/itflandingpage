@@ -7,7 +7,7 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
     firstName: '',
     lastName: '',
     email: '',
-    website: '', // honeypot — must stay empty
+    website: '', // honeypot, must stay empty
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState({ message: '', type: '' });
@@ -127,7 +127,7 @@ const NewsletterPopup = ({ isOpen, onClose, onSubscribe }) => {
           </div>
 
           <form className="popup-form" onSubmit={handleSubmit}>
-            {/* Honeypot — hidden from humans, bots fill it */}
+            {/* Honeypot, hidden from humans, bots fill it */}
             <input
               type="text"
               name="website"

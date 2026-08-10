@@ -103,7 +103,7 @@ const ArticleTemplate = () => {
     }
   }, [article]);
 
-  // Article JSON-LD is rendered SSR by the route (buildBlogPostingSchema) — no client-side duplicate here.
+  // Article JSON-LD is rendered SSR by the route (buildBlogPostingSchema), no client-side duplicate here.
 
   // Inject noindex for placeholder articles
   useEffect(() => {
@@ -215,7 +215,7 @@ const ArticleTemplate = () => {
               </div>
             </header>
 
-            {/* Short answer — direct, self-contained block for AI-engine citation (GEO) */}
+            {/* Short answer, direct, self-contained block for AI-engine citation (GEO) */}
             {article.shortAnswer && (
               <div className="article-short-answer">
                 <span className="short-answer-label">תשובה קצרה</span>

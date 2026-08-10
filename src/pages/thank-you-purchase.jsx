@@ -14,7 +14,7 @@ function trackGa(event, params) {
 }
 
 export default function ThankYouPurchase() {
-  // Fire purchase events once per browser session — survives StrictMode double-mount and refreshes
+  // Fire purchase events once per browser session, survives StrictMode double-mount and refreshes
   useEffect(() => {
     if (sessionStorage.getItem('bmsPurchaseTracked')) return;
     sessionStorage.setItem('bmsPurchaseTracked', '1');
@@ -37,9 +37,9 @@ export default function ThankYouPurchase() {
           <span>הרכישה אושרה</span>
         </div>
 
-        <h1 className="ty-purchase-title">הרכישה אושרה — כל הכבוד שהחלטת ✓</h1>
+        <h1 className="ty-purchase-title">הרכישה אושרה, כל הכבוד שהחלטת ✓</h1>
         <p className="ty-purchase-subtitle">
-          פרטי הגישה לקורס בדרך אליך למייל — בדקי תוך 5 דקות.
+          פרטי הגישה לקורס בדרך אליך למייל, בדקי תוך 5 דקות.
           <br />
           לא קיבלת? בדקי בתיקיית הספאם.
         </p>
@@ -55,7 +55,7 @@ export default function ThankYouPurchase() {
             aria-label="עקבי אחריי באינסטגרם"
           >
             <span aria-hidden="true">📸</span>
-            בינתיים — עקבי אחריי באינסטגרם לתכנים נוספים
+            בינתיים, עקבי אחריי באינסטגרם לתכנים נוספים
           </a>
           <a href="/bms-sm" className="ty-purchase-btn ty-purchase-btn--primary">
             לעמוד הקורס ←

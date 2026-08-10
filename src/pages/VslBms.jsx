@@ -47,14 +47,14 @@ const AUTHOR_IMAGE = '/images/vsl-bms/osher_with_laptop-md.webp';
 const PRICE = 197;
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 
-// In-page CTA scroll clicks — custom event, NOT Lead (Lead fires only on thank-you-lead)
+// In-page CTA scroll clicks, custom event, NOT Lead (Lead fires only on thank-you-lead)
 function trackCtaClick() {
   if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
     window.fbq('trackCustom', 'CTAClick');
   }
 }
 
-// Click on checkout link — InitiateCheckout. Purchase fires only on thank-you-purchase.
+// Click on checkout link, InitiateCheckout. Purchase fires only on thank-you-purchase.
 function trackInitiateCheckout() {
   if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
     window.fbq('track', 'InitiateCheckout', { value: PRICE, currency: 'ILS' });
@@ -243,7 +243,7 @@ export default function VslBms() {
 
       <div className="gradient-divider" aria-hidden="true" />
 
-      {/* STORY — also acts as authority section, moved up for visibility */}
+      {/* STORY, also acts as authority section, moved up for visibility */}
       <section className="story-section">
         <div className="container">
           <h2 className="story-headline">למה לסמוך עליי?</h2>
@@ -288,7 +288,7 @@ export default function VslBms() {
 
       <div className="gradient-divider" aria-hidden="true" />
 
-      {/* AUTHORITY — moved up for visibility right after personal story */}
+      {/* AUTHORITY, moved up for visibility right after personal story */}
       <section className="authority-section">
         <div className="container">
           <img
@@ -334,7 +334,7 @@ export default function VslBms() {
 
           <div className="cta-wrapper">
             <a href={PURCHASE_URL} className="cta-btn" onClick={trackInitiateCheckout}>
-              <span>הצטרף לקורס עכשיו — 197 ש"ח בלבד</span>
+              <span>הצטרף לקורס עכשיו, 197 ש"ח בלבד</span>
               <span className="arrow"><IconArrowLeft size={18} /></span>
             </a>
           </div>
@@ -414,7 +414,7 @@ export default function VslBms() {
 
       <div className="gradient-divider" aria-hidden="true" />
 
-      {/* FRAMEWORK — 3-step methodology */}
+      {/* FRAMEWORK, 3-step methodology */}
       <section className="framework">
         <div className="container-wide">
           <div className="text-center">
@@ -672,7 +672,7 @@ export default function VslBms() {
             <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>אתם רוצים להגן על הנכסים הדיגיטליים שלכם</span></div>
           </div>
 
-          {/* Social proof — real recovery clients, framed as expertise proof */}
+          {/* Social proof, real recovery clients, framed as expertise proof */}
           <div className="vsl-testimonials" aria-label="המלצות לקוחות">
             <p className="vsl-testimonials-title">מי שכבר עבד עם אושר:</p>
             <div className="vsl-testimonial">
@@ -742,7 +742,7 @@ export default function VslBms() {
 
       <div className="gradient-divider" aria-hidden="true" />
 
-      {/* FAQ — placed after Final CTA so the price reveal stays the peak */}
+      {/* FAQ, placed after Final CTA so the price reveal stays the peak */}
       <section className="faq-section" aria-labelledby="faq-heading">
         <div className="container">
           <div className="text-center">
@@ -829,7 +829,7 @@ export default function VslBms() {
 
       </main>
 
-      {/* STICKY MOBILE CTA — hidden while the purchase section is on screen */}
+      {/* STICKY MOBILE CTA, hidden while the purchase section is on screen */}
       <div className={`sticky-cta ${showStickyCta && !finalCtaInView ? 'visible' : ''}`} role="region" aria-label="קיצור דרך לרכישה">
         <a
           href={passedFinalCta ? PURCHASE_URL : '#final-cta'}
