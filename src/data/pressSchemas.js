@@ -2,7 +2,7 @@
  * NewsArticle JSON-LD builder — imported by press route and tests.
  */
 const SITE_URL = 'https://www.israeltechforce.com';
-const LOGO_URL = `${SITE_URL}/images/israeltechforce-logo-white.png`;
+const LOGO_URL = `${SITE_URL}/images/og-card.png`;
 
 export const buildNewsArticleSchema = (item) => ({
   '@context': 'https://schema.org',

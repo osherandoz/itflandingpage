@@ -14,7 +14,11 @@ const SiteLogo = ({ item }) => {
       </span>
     );
   }
-  return <span className="press-logo-text">{item.siteName}</span>;
+  return (
+    <span className="press-logo-text" style={item.siteColor ? { color: item.siteColor } : undefined}>
+      {item.siteName}
+    </span>
+  );
 };
 
 const PressSection = () => {
@@ -29,7 +33,8 @@ const PressSection = () => {
         </div>
 
         <div className="press-items">
-          {pressItems.map((item) => (
+          {/* Homepage strip shows the 4 most recent; full list lives at /press */}
+          {pressItems.slice(0, 4).map((item) => (
             <a
               key={item.id}
               href={item.url}
