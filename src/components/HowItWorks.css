@@ -137,9 +137,9 @@
 .hiw-time-badge {
   display: inline-block;
   background: color-mix(in srgb, var(--c, #3B82F6) 15%, transparent);
-  /* Mixed with white so the badge text clears 4.5:1 on the dark card — the
-     raw brand hue (used for the border/icon/node) does not. */
-  color: color-mix(in srgb, var(--c, #3B82F6) 100%, white 28%);
+  /* Mixed with white so the badge text clears 4.5:1 against its own tinted
+     fill — the raw brand hue (used for the border/icon/node) does not. */
+  color: color-mix(in srgb, var(--c, #3B82F6) 100%, white 45%);
   border: 1px solid color-mix(in srgb, var(--c, #3B82F6) 30%, transparent);
   border-radius: 20px;
   padding: 2px 10px;
