@@ -7,10 +7,11 @@ import './Newsletter.css';
 
 /* ============================================================
    THE SAFETY SIGNAL. Monthly newsletter subscribe page.
-   Register: brand. Scene: a campaign manager reading her inbox
-   at 7am with coffee, before she opens Ads Manager. Calm bulletin,
-   not an alarm. Ink-drenched hero, warm paper body, one signal color.
-   All rules scoped to .tss.
+   Register: brand, but built on the site's own dark system
+   (#0C0E1D + glass cards + #3B82F6 blue) rather than a one-off
+   palette. WhatsApp is a support channel here, not the subject:
+   the newsletter covers policy, product, and safety, not just
+   the crisis line. All rules scoped to .tss.
    ============================================================ */
 
 const WHATSAPP_URL = 'https://wa.me/972509823235';
@@ -52,7 +53,7 @@ function trackSubscribe(location) {
 /* ============================================================
    SIGNUP FORM. Two fields only. Rendered twice (hero + closing).
    ============================================================ */
-function SignupForm({ location, tone = 'dark' }) {
+function SignupForm({ location }) {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState(''); // honeypot, must stay empty
@@ -93,7 +94,7 @@ function SignupForm({ location, tone = 'dark' }) {
 
   if (done) {
     return (
-      <div className={`tss-form tss-form--${tone} tss-done`} role="status">
+      <div className="tss-form tss-done" role="status">
         <p className="tss-done-title">נרשמת. הגיליון הבא יגיע אליך בתחילת החודש.</p>
         <p className="tss-done-note">
           אם המייל לא מופיע בתיבה הראשית, תבדוק בלשונית קידומים או בספאם ותסמן אותו כ"לא ספאם".
@@ -104,7 +105,7 @@ function SignupForm({ location, tone = 'dark' }) {
   }
 
   return (
-    <form className={`tss-form tss-form--${tone}`} onSubmit={handleSubmit} noValidate>
+    <form className="tss-form" onSubmit={handleSubmit} noValidate>
       {/* honeypot: hidden from humans, bots fill it */}
       <input
         type="text"
@@ -166,8 +167,8 @@ const SEGMENTS = [
   {
     n: '01',
     title: 'עדכון מטא',
-    short: 'מה השתנה במדיניות ובאכיפה החודש',
-    body: 'מטא משנה כללים בלי להודיע, ובדרך כלל מגלים את זה מהחסימה. אני עוקב אחרי השינויים בממשקי המפרסמים ובמדיניות, ומתרגם למה שרלוונטי למי שמריץ קמפיינים מישראל. לא תקציר של בלוג רשמי, אלא מה זה אומר בפועל על החשבון שלך.',
+    short: 'מדיניות, אכיפה ופיצ׳רים חדשים',
+    body: 'מטא משנה כללים ומוציאה פיצ׳רים חדשים בלי להודיע כמו שצריך. אני עוקב אחרי מה שקורה בממשקי המפרסמים, במדיניות ובעדכוני המוצר, ומתרגם למה שבאמת רלוונטי למי שמנהל דף, קמפיין או עמוד עסקי מישראל.',
   },
   {
     n: '02',
@@ -239,9 +240,9 @@ export default function Newsletter() {
             </h1>
 
             <p className="tss-lead">
-              אחת לחודש אני שולח גיליון קצר: מה מטא שינתה במדיניות או באכיפה, איזה גל חסימות עובר
-              עכשיו על ישראלים, ומה כדאי לבדוק בחשבון שלך לפני שזה נוגע בך. חמש דקות קריאה.
-              אם באותו חודש אין מה לדווח, הגיליון פשוט קצר יותר.
+              אחת לחודש אני שולח גיליון קצר: מה מטא שינתה במדיניות, אילו פיצ׳רים חדשים יצאו
+              לפייסבוק ולאינסטגרם, ומה כדאי לבדוק בחשבון שלך כדי להישאר בצד הבטוח. חמש דקות קריאה.
+              אם באותו חודש אין הרבה לדווח, הגיליון פשוט קצר יותר.
             </p>
 
             <SignupForm location="hero" tone="dark" />
@@ -335,7 +336,7 @@ export default function Newsletter() {
             <p>
               כשגל החסימות של יולי 2026 פגע בישראל, <a href={PRESS_MAKO} target="_blank" rel="noopener noreferrer">N12</a>{' '}
               ו־<a href={PRESS_ICE} target="_blank" rel="noopener noreferrer">ice</a> פנו אליי לניתוח מה קורה.
-              הגיליון הזה הוא מה שאני רואה מהצד השני של החסימה, לפני שזה הופך אצלך לתור בוואטסאפ.
+              הגיליון הזה הוא מה שאני רואה מהצד השני של החסימה, לפני שזה מגיע אליך כמשבר בזמן אמת.
             </p>
             <p className="tss-author-links">
               <Link to="/press">כל הכתבות</Link>

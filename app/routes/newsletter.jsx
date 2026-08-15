@@ -3,7 +3,7 @@ import Newsletter, { FAQS } from '../../src/pages/Newsletter';
 const URL = 'https://www.israeltechforce.com/newsletter';
 const TITLE = 'The Safety Signal - ניוזלטר חודשי על אבטחת חשבונות מטא | IsraelTechForce';
 const DESCRIPTION =
-  'פעם בחודש: מה מטא שינתה במדיניות ובאכיפה, מקרה חסימה אמיתי מהשבועות האחרונים, ובדיקה אחת שמורידה סיכון. חמש דקות קריאה, בחינם.';
+  'פעם בחודש: מה מטא שינתה במדיניות ובפיצ׳רים, מקרה אמיתי מהשבועות האחרונים, ובדיקה אחת שמורידה סיכון. חמש דקות קריאה, בחינם.';
 
 export const meta = () => [
   { title: TITLE },
