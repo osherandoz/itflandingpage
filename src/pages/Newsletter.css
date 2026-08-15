@@ -48,11 +48,15 @@
 
 .tss *, .tss *::before, .tss *::after { box-sizing: border-box; }
 .tss a { color: inherit; }
-.tss h1, .tss h2, .tss h3 { margin: 0; font-weight: 900; letter-spacing: -0.03em; line-height: 1.14; }
-.tss p { margin: 0; }
-.tss ul, .tss ol { margin: 0; padding: 0; list-style: none; }
-.tss button { font: inherit; cursor: pointer; }
-.tss img { max-width: 100%; display: block; }
+/* :where() keeps these resets at zero specificity, so any .tss-xxx class
+   below (margin-top, margin-bottom, etc.) always wins the cascade instead
+   of losing to a class+element selector like ".tss p". Bit us in production:
+   .tss-lead, .tss-h2, .tss-micro, .tss-close-sub all computed margin 0. */
+.tss :where(h1, h2, h3) { margin: 0; font-weight: 900; letter-spacing: -0.03em; line-height: 1.14; }
+.tss :where(p) { margin: 0; }
+.tss :where(ul, ol) { margin: 0; padding: 0; list-style: none; }
+.tss :where(button) { font: inherit; cursor: pointer; }
+.tss :where(img) { max-width: 100%; display: block; }
 .tss :focus-visible { outline: 3px solid var(--tss-accent); outline-offset: 3px; border-radius: 4px; }
 
 /* ─── HEADER ─────────────────────────────────────────────── */
