@@ -46,6 +46,9 @@ type Pages = {
   "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05DE\u05E0\u05D4\u05DC-\u05DE\u05D5\u05D3\u05E2\u05D5\u05EA": {
     params: {};
   };
+  "/newsletter": {
+    params: {};
+  };
   "/faq": {
     params: {};
   };
@@ -75,7 +78,7 @@ type Pages = {
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/privacy" | "/press" | "/articles" | "/articles/:slug" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05E4\u05D9\u05D9\u05E1\u05D1\u05D5\u05E7" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D0\u05D9\u05E0\u05E1\u05D8\u05D2\u05E8\u05DD" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D5\u05D5\u05D0\u05D8\u05E1\u05D0\u05E4" | "/\u05D7\u05E9\u05D1\u05D5\u05DF-\u05E4\u05D9\u05D9\u05E1\u05D1\u05D5\u05E7-\u05DE\u05D5\u05E9\u05D1\u05EA" | "/\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D0\u05D9\u05E0\u05E1\u05D8\u05D2\u05E8\u05DD-\u05E0\u05E4\u05E8\u05E5" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05DE\u05E0\u05D4\u05DC-\u05DE\u05D5\u05D3\u05E2\u05D5\u05EA" | "/faq" | "/testimonials" | "/bms-sm" | "/VSL-BMS" | "/VSL-BMS-V2" | "/\u05EA\u05D5\u05D3\u05D4-\u05E7\u05DC\u05D9\u05E1\u05D8" | "/\u05EA\u05D5\u05D3\u05D4-\u05E8\u05DB\u05D9\u05E9\u05D4" | "/dashboard";
+    page: "/" | "/privacy" | "/press" | "/articles" | "/articles/:slug" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05E4\u05D9\u05D9\u05E1\u05D1\u05D5\u05E7" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D0\u05D9\u05E0\u05E1\u05D8\u05D2\u05E8\u05DD" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D5\u05D5\u05D0\u05D8\u05E1\u05D0\u05E4" | "/\u05D7\u05E9\u05D1\u05D5\u05DF-\u05E4\u05D9\u05D9\u05E1\u05D1\u05D5\u05E7-\u05DE\u05D5\u05E9\u05D1\u05EA" | "/\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D0\u05D9\u05E0\u05E1\u05D8\u05D2\u05E8\u05DD-\u05E0\u05E4\u05E8\u05E5" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05DE\u05E0\u05D4\u05DC-\u05DE\u05D5\u05D3\u05E2\u05D5\u05EA" | "/newsletter" | "/faq" | "/testimonials" | "/bms-sm" | "/VSL-BMS" | "/VSL-BMS-V2" | "/\u05EA\u05D5\u05D3\u05D4-\u05E7\u05DC\u05D9\u05E1\u05D8" | "/\u05EA\u05D5\u05D3\u05D4-\u05E8\u05DB\u05D9\u05E9\u05D4" | "/dashboard";
   };
   "./routes/home.jsx": {
     id: "routes/home";
@@ -120,6 +123,10 @@ type RouteFiles = {
   "./routes/ads-manager.jsx": {
     id: "routes/ads-manager";
     page: "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05DE\u05E0\u05D4\u05DC-\u05DE\u05D5\u05D3\u05E2\u05D5\u05EA";
+  };
+  "./routes/newsletter.jsx": {
+    id: "routes/newsletter";
+    page: "/newsletter";
   };
   "./routes/faq.jsx": {
     id: "routes/faq";
@@ -168,6 +175,7 @@ type RouteModules = {
   "routes/facebook-disabled": typeof import("./app/./routes/facebook-disabled.jsx");
   "routes/instagram-hacked": typeof import("./app/./routes/instagram-hacked.jsx");
   "routes/ads-manager": typeof import("./app/./routes/ads-manager.jsx");
+  "routes/newsletter": typeof import("./app/./routes/newsletter.jsx");
   "routes/faq": typeof import("./app/./routes/faq.jsx");
   "routes/testimonials": typeof import("./app/./routes/testimonials.jsx");
   "routes/bms-sm": typeof import("./app/./routes/bms-sm.jsx");

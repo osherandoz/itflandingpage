@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
-import NewsletterPopup from '../src/components/NewsletterPopup.jsx';
 import { LOCAL_BUSINESS_SCHEMA, PERSON_SCHEMA } from '../src/data/schemas.js';
 // Self-hosted font — eliminates render-blocking Google Fonts round-trip
 import '@fontsource/heebo/400.css';
@@ -84,7 +83,6 @@ gtag('config', 'G-M2TYTNN02X');
 
 export default function Root() {
   const { pathname } = useLocation();
-  const [showNewsletter, setShowNewsletter] = useState(false);
   const isFirstRender = useRef(true);
 
   // Meta Pixel — PageView on SPA route changes (initial PageView fired by <head> script)
@@ -96,37 +94,14 @@ export default function Root() {
     if (window.fbq) window.fbq('track', 'PageView');
   }, [pathname]);
 
-  useEffect(() => {
-    // Allow footer button (and any other caller) to open the popup imperatively
-    window.__openNewsletterPopup = () => setShowNewsletter(true);
-    return () => { delete window.__openNewsletterPopup; };
-  }, []);
-
-  useEffect(() => {
-    // Show popup once when user scrolls past 40% — home page only
-    if (pathname !== '/') return;
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('newsletterPopupShown')) return;
-
-    const handleScroll = () => {
-      const scrolled = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
-      if (scrolled >= 0.4) {
-        setShowNewsletter(true);
-        window.removeEventListener('scroll', handleScroll);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [pathname]);
+  // The scroll-triggered newsletter popup used to fire here on the home page.
+  // Removed: /newsletter is the subscribe surface now, and the popup covered
+  // the footer link to it.
 
   return (
     <>
       <Outlet />
       <Analytics />
-      <NewsletterPopup
-        isOpen={showNewsletter}
-        onClose={() => setShowNewsletter(false)}
-      />
     </>
   );
 }

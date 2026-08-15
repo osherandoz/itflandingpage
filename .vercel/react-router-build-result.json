@@ -21,6 +21,7 @@
       "routes/facebook-disabled": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/instagram-hacked": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/ads-manager": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/newsletter": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/faq": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/testimonials": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/bms-sm": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
@@ -132,6 +133,15 @@
         "parentId": "root",
         "file": "app/routes/ads-manager.jsx",
         "path": "שחזור-מנהל-מודעות",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/newsletter": {
+        "id": "routes/newsletter",
+        "parentId": "root",
+        "file": "app/routes/newsletter.jsx",
+        "path": "newsletter",
         "config": {
           "runtime": "nodejs"
         }
@@ -295,6 +305,12 @@
         "file": "./routes/ads-manager.jsx",
         "path": "שחזור-מנהל-מודעות"
       },
+      "routes/newsletter": {
+        "id": "routes/newsletter",
+        "parentId": "root",
+        "file": "./routes/newsletter.jsx",
+        "path": "newsletter"
+      },
       "routes/faq": {
         "id": "routes/faq",
         "parentId": "root",
@@ -402,6 +418,10 @@
           {
             "file": "./routes/ads-manager.jsx",
             "path": "שחזור-מנהל-מודעות"
+          },
+          {
+            "file": "./routes/newsletter.jsx",
+            "path": "newsletter"
           },
           {
             "file": "./routes/faq.jsx",

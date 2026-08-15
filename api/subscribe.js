@@ -71,9 +71,10 @@ function sanitize(str) {
   return String(str).trim().replace(/[<>"']/g, '').substring(0, 200);
 }
 
-function validateInputs(firstName, lastName, email) {
+export function validateInputs(firstName, lastName, email) {
   if (!NAME_RE.test(firstName.trim()))  return 'שם פרטי לא תקין';
-  if (!NAME_RE.test(lastName.trim()))   return 'שם משפחה לא תקין';
+  // lastName is optional: /newsletter asks for first name only to cut form friction
+  if (lastName.trim() && !NAME_RE.test(lastName.trim())) return 'שם משפחה לא תקין';
   if (!EMAIL_RE.test(email.trim()) || email.length > 254) return 'כתובת מייל לא תקינה';
   return null;
 }

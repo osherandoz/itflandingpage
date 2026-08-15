@@ -147,17 +147,14 @@ const Footer = () => {
 
           {/* Column 3: Newsletter */}
           <div className="footer-section">
-            <h3>הצטרפו לניוזלטר</h3>
+            <h3>The Safety Signal</h3>
             <p style={{ marginBottom: '1rem', fontSize: '0.95rem', lineHeight: '1.6' }}>
-              הצטרפו לרשימת התפוצה שלנו וקבלו עדכונים, טיפים וכלים שימושיים ישירות לתיבת האימייל שלכם
+              הניוזלטר החודשי שלנו: מה מטא שינתה, מקרה חסימה אמיתי מהחודש האחרון, ובדיקה אחת שמורידה סיכון. חמש דקות קריאה.
             </p>
-            <button
-              className="newsletter-link-btn"
-              onClick={() => window.__openNewsletterPopup?.()}
-            >
+            <Link to="/newsletter" className="newsletter-link-btn">
               <i className="fas fa-envelope"></i>
-              הצטרפו לניוזלטר שלנו
-            </button>
+              הצטרפו לניוזלטר
+            </Link>
           </div>
 
           {/* Column 4: Services, internal links for SEO (money pages were orphaned) */}
@@ -190,6 +187,10 @@ const Footer = () => {
               <Link to="/articles" className="quick-link">
                 <i className="fas fa-newspaper"></i>
                 מאמרים
+              </Link>
+              <Link to="/newsletter" className="quick-link">
+                <i className="fas fa-envelope-open-text"></i>
+                ניוזלטר חודשי
               </Link>
               <Link to="/privacy" className="quick-link">
                 <i className="fas fa-shield-alt"></i>

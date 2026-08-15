@@ -13,6 +13,8 @@ export default [
   route("חשבון-פייסבוק-מושבת", "./routes/facebook-disabled.jsx"),
   route("חשבון-אינסטגרם-נפרץ", "./routes/instagram-hacked.jsx"),
   route("שחזור-מנהל-מודעות", "./routes/ads-manager.jsx"),
+  // Newsletter — The Safety Signal subscribe page
+  route("newsletter", "./routes/newsletter.jsx"),
   // Phase C — FAQ + Testimonials
   route("faq", "./routes/faq.jsx"),
   route("testimonials", "./routes/testimonials.jsx"),
