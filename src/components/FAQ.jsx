@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Icon from './Icon';
 import './FAQ.css';
 
 const FAQ = () => {
@@ -68,7 +69,7 @@ const FAQ = () => {
                 onClick={() => toggleFAQ(index)}
               >
                 <span>{faq.question}</span>
-                <i className={`fas fa-chevron-down ${openIndex === index ? 'rotated' : ''}`}></i>
+                <Icon name="chevronDown" className={openIndex === index ? 'rotated' : ''} />
               </button>
               <div className={`faq-answer ${openIndex === index ? 'open' : ''}`}>
                 <p>{faq.answer}</p>

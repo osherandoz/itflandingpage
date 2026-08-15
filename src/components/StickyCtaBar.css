@@ -40,6 +40,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
   white-space: nowrap;
   transition: background 0.2s ease, transform 0.15s ease;
 }
@@ -104,5 +105,22 @@
 @media (prefers-reduced-motion: reduce) {
   .sticky-cta-bar {
     transition: none;
+  }
+}
+
+/* Bar and the floating WhatsApp button now do the same thing — showing
+   both stacks a duplicate control over the same corner of the screen. */
+body:has(.sticky-cta-bar--visible) .floating-whatsapp {
+  display: none;
+}
+
+/* Reserve space so the fixed bar doesn't cover the last section of content. */
+body:has(.sticky-cta-bar--visible) {
+  padding-bottom: 65px;
+}
+
+@media (max-width: 768px) {
+  body:has(.sticky-cta-bar--visible) {
+    padding-bottom: 58px;
   }
 }

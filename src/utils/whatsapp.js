@@ -23,6 +23,19 @@ export const getWhatsAppUrl = (message = "היי, הגעתי דרך האתר ש�
   return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 };
 
+// For <a href={getWhatsAppUrl(...)}> CTAs — a real link opens reliably in
+// popup-blocked and in-app browsers (Instagram/Facebook webviews), unlike
+// button + window.open().
+export const trackWhatsAppClick = () => {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'click', {
+      event_category: 'WhatsApp',
+      event_label: 'whatsapp_redirect',
+      value: 1
+    });
+  }
+};
+
 
 
 

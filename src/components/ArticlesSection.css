@@ -97,7 +97,7 @@
   box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
 }
 
-.article-icon i {
+.article-icon svg {
   font-size: 2rem;
   color: white;
 }
@@ -105,7 +105,7 @@
 .article-category {
   display: inline-block;
   background: rgba(59, 130, 246, 0.2);
-  color: #3B82F6;
+  color: #93C5FD;
   padding: 5px 12px;
   border-radius: 15px;
   font-size: 0.82rem;
@@ -150,7 +150,7 @@
   gap: 5px;
 }
 
-.article-meta i {
+.article-meta svg {
   font-size: 0.9rem;
 }
 
@@ -179,7 +179,7 @@
   background: linear-gradient(45deg, #1D4ED8, #3B82F6);
 }
 
-.article-read-more i {
+.article-read-more svg {
   font-size: 0.9rem;
 }
 

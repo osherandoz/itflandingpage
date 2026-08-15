@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
 import './StickyCtaBar.css';
 
 const StickyCtaBar = () => {
@@ -29,11 +30,6 @@ const StickyCtaBar = () => {
     return () => io.disconnect();
   }, [dismissed]);
 
-  const handleCtaClick = () => {
-    const el = document.getElementById('contact');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   const handleDismiss = () => {
     setDismissed(true);
     setVisible(false);
@@ -47,16 +43,19 @@ const StickyCtaBar = () => {
       aria-hidden={!visible}
     >
       <p className="sticky-cta-bar__text">
-        החשבון שלך חסום?
+        אבחון חינם, תשובה תוך דקות
       </p>
-      <button
+      <a
         className="sticky-cta-bar__btn"
-        onClick={handleCtaClick}
+        href={getWhatsAppUrl('היי, החשבון שלי חסום, אשמח לעזרה')}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={trackWhatsAppClick}
         tabIndex={visible ? 0 : -1}
       >
         קבל עזרה עכשיו
         <span aria-hidden="true">↓</span>
-      </button>
+      </a>
       <button
         className="sticky-cta-bar__dismiss"
         onClick={handleDismiss}

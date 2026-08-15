@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { openWhatsApp } from '../utils/whatsapp';
+import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
+import Icon from './Icon';
 import './ContactForm.css';
 
 const ContactForm = () => {
@@ -116,10 +117,10 @@ const ContactForm = () => {
       {submitError && (
         <div className="submit-error-message" role="alert">
           <p>משהו השתבש בשליחה. נסו שוב או{' '}
-            <button type="button" className="form-whatsapp-link" onClick={openWhatsApp}>
-              <i className="fab fa-whatsapp" aria-hidden="true"></i>
+            <a className="form-whatsapp-link" href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}>
+              <Icon name="whatsapp" aria-hidden="true" />
               דברו איתנו ישירות בוואטסאפ
-            </button>
+            </a>
           </p>
         </div>
       )}
@@ -131,6 +132,7 @@ const ContactForm = () => {
             type="text"
             id="name"
             name="name"
+            autoComplete="name"
             value={formData.name}
             onChange={handleInputChange}
             className={errors.name ? 'error' : ''}
@@ -147,6 +149,8 @@ const ContactForm = () => {
             type="tel"
             id="phone"
             name="phone"
+            autoComplete="tel"
+            inputMode="tel"
             value={formData.phone}
             onChange={handleInputChange}
             className={errors.phone ? 'error' : ''}
@@ -177,7 +181,7 @@ const ContactForm = () => {
         <button type="submit" className="submit-btn" disabled={isSubmitting}>
           {isSubmitting ? (
             <>
-              <i className="fas fa-spinner fa-spin"></i>
+              <Icon name="spinner" spin aria-hidden="true" />
               שולח...
             </>
           ) : (
@@ -187,14 +191,16 @@ const ContactForm = () => {
 
         <p className="form-whatsapp-note">
           רוצים מענה מיידי?{' '}
-          <button
-            type="button"
+          <a
             className="form-whatsapp-link"
-            onClick={openWhatsApp}
+            href={getWhatsAppUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={trackWhatsAppClick}
           >
-            <i className="fab fa-whatsapp"></i>
+            <Icon name="whatsapp" aria-hidden="true" />
             דברו איתנו ישירות בוואטסאפ
-          </button>
+          </a>
         </p>
       </form>
     </div>

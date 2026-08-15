@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { pressItems } from '../data/press';
+import Icon from './Icon';
 import './PressSection.css';
 
 const SiteLogo = ({ item }) => {
@@ -10,7 +11,7 @@ const SiteLogo = ({ item }) => {
   if (item.siteShortName === 'facebook') {
     return (
       <span className="press-logo-text" style={{ color: item.siteColor }}>
-        <i className="fab fa-facebook" aria-hidden="true"></i> {item.siteName}
+        <Icon name="facebook" aria-hidden="true" /> {item.siteName}
       </span>
     );
   }

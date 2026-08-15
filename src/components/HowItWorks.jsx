@@ -1,31 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { openWhatsApp } from '../utils/whatsapp';
+import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
+import Icon from './Icon';
 import './HowItWorks.css';
 
 const STEPS = [
   {
-    icon: 'fas fa-comments',
+    icon: 'comments',
     title: 'שולחים הודעה',
     description: 'שולחים הודעה בוואטסאפ, נציג עונה תוך דקות ומתחיל לבדוק את המקרה שלך.',
     time: '~ 2 דקות',
     color: '#3B82F6',
   },
   {
-    icon: 'fas fa-search',
+    icon: 'search',
     title: 'אבחון מהיר',
     description: 'כמה שאלות קצרות ובדיקה מקצועית של הבעיה, בלי בזבוז זמן. אנחנו יודעים בדיוק מה לחפש.',
     time: '~ 10 דקות',
     color: '#8B5CF6',
   },
   {
-    icon: 'fas fa-file-invoice',
+    icon: 'invoice',
     title: 'הצעה ושקיפות מלאה',
     description: 'הצעת מחיר ברורה עם אחוז הצלחה משוער לכל אופציה. אין הפתעות, תשלום רק אחרי הצלחה.',
     time: '~ 5 דקות',
     color: '#F59E0B',
   },
   {
-    icon: 'fas fa-rocket',
+    icon: 'rocket',
     title: 'יוצאים לדרך',
     description: 'חתמת? יצאנו לדרך. בדרך כלל תראה תוצאות תוך 24–48 שעות.',
     time: '24–48 שעות',
@@ -73,7 +74,7 @@ const HowItWorks = () => {
                 {/* Card */}
                 <div className="hiw-card" style={{ '--c': step.color }}>
                   <div className="hiw-card-icon">
-                    <i className={step.icon} aria-hidden="true" />
+                    <Icon name={step.icon} aria-hidden="true" />
                   </div>
                   <div className="hiw-card-body">
                     <span className="hiw-time-badge">{step.time}</span>
@@ -97,10 +98,16 @@ const HowItWorks = () => {
         {/* Bottom CTA */}
         <div className="hiw-cta">
           <p className="hiw-cta-text">מוכן להתחיל? אבחון ראשוני, חינמי לחלוטין</p>
-          <button className="hiw-cta-btn" onClick={openWhatsApp}>
-            <i className="fab fa-whatsapp" aria-hidden="true" />
+          <a
+            className="hiw-cta-btn"
+            href={getWhatsAppUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={trackWhatsAppClick}
+          >
+            <Icon name="whatsapp" aria-hidden="true" />
             שלח הודעה עכשיו
-          </button>
+          </a>
         </div>
       </div>
     </section>

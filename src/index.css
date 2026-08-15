@@ -36,6 +36,14 @@
   box-sizing: border-box;
 }
 
+@keyframes icon-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+
 body {
   margin: 0;
   min-width: 320px;

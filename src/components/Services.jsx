@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router';
-import { openWhatsApp } from '../utils/whatsapp';
+import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
 import './Services.css';
 
 const CARDS = [
@@ -10,9 +10,7 @@ const CARDS = [
     title: 'שחזור חשבון פייסבוק שנחסם או נפרץ',
     problem: <>התחברת והחשבון נעלם? קיבלת התראה על <b>פעילות חשודה</b>, מישהו שינה את הסיסמה, או העלית תוכן שסומן בטעות? אנחנו מחזירים גישה מלאה - גם כשהתמיכה של פייסבוק עונה באוטומט.</>,
     bullets: ['שחזור גישה ללא סיסמה / אימייל', 'הסרת חסימות לאחר דיווח שווא', 'אבטחה מחדש מפני פריצה חוזרת', 'ניטור אפשרי של נקודות תורפה נוספות'],
-    ctaLabel: 'קבל עזרה עכשיו',
-    path: null,
-    page: '/שחזור-חשבון-פייסבוק',
+    message: 'היי, החשבון פייסבוק שלי נחסם או נפרץ, אשמח לעזרה',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M13.5 22v-8h2.7l.4-3.1H13.5V8.9c0-.9.3-1.5 1.6-1.5h1.7V4.6c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.1H7.4V14h2.7v8h3.4z"/>
@@ -25,9 +23,7 @@ const CARDS = [
     title: 'שחזור חשבון אינסטגרם שהושבת',
     problem: <>איבדת גישה בגלל <b>דיווחי הטרדה שקריים</b>, זיהוי פנים שכשל, או חשבון שנעלם אחרי התחזות? אנחנו נטפל לך בזה מול מטא ונשחזר את החשבון.</>,
     bullets: ['שחזור מלא עם כל הפוסטים והעוקבים', 'ערעור דיווחי הטרדה וזכויות יוצרים', 'טיפול בחשבונות שהתחזו אליך', 'תמיכה 24/6 עד לסגירת הטיפול'],
-    ctaLabel: 'קבל עזרה עכשיו',
-    path: null,
-    page: '/שחזור-חשבון-אינסטגרם',
+    message: 'היי, החשבון אינסטגרם שלי הושבת, אשמח לעזרה',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <rect x="3" y="3" width="18" height="18" rx="5"/>
@@ -42,9 +38,7 @@ const CARDS = [
     title: 'שחזור מספר וואטסאפ שנחטף',
     problem: <>קיבלת הודעה <b>"הוסף את קוד ה-SMS"</b> והחשבון נעלם? זרים שולחים הודעות מהמספר שלך? אנחנו עוצרים את החטיפה ומחזירים שליטה תוך שעות.</>,
     bullets: ['שחזור חשבון וואטסאפ שנחטף', 'ניטרול אימות דו-שלבי שנגנב', 'אבטחה מחדש ומניעת גישה לגורם זר', 'ליווי אישי עד לסגירה מלאה'],
-    ctaLabel: 'קבל עזרה עכשיו',
-    path: null,
-    page: '/שחזור-חשבון-וואטסאפ',
+    message: 'היי, מספר הוואטסאפ שלי נחטף, אשמח לעזרה',
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.4A10 10 0 1 0 12 2zm5.6 14c-.2.6-1.3 1.2-1.8 1.3-.5.1-1.1.1-1.8-.1-1.6-.5-3.6-1.6-5-3.4-1-1.2-1.6-2.6-1.8-3.2-.1-.6.1-1.1.4-1.4.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.8.1.1.1.3 0 .4l-.3.4c-.1.1-.3.3-.4.4-.1.1-.3.3-.1.5.1.3.7 1.1 1.5 1.8 1 .9 1.8 1.2 2.1 1.3.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.5-.1l1.7.8c.2.1.3.2.4.3 0 .1 0 .6-.2 1z"/>
@@ -57,9 +51,7 @@ const CARDS = [
     title: 'חשבון מודעות שהושעה או נחסם',
     problem: <>הקמפיין החם שלך קרס כי <b>מטא החליטה?</b> אמצעי תשלום נדחה או החשבון דווח? אנחנו יודעים איך לערער, להחזיר הרצה, ולמנוע חסימה חוזרת.</>,
     bullets: ['איפוס מודעות ופיקסלים', 'ערעור מקצועי על חסימה', 'החזרת היסטוריית קמפיינים', 'מניעת חסימה חוזרת'],
-    ctaLabel: 'קבל עזרה עכשיו',
-    path: null,
-    page: '/שחזור-מנהל-מודעות',
+    message: 'היי, חשבון המודעות שלי הושעה או נחסם, אשמח לעזרה',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M3 11v2a2 2 0 0 0 2 2h2l5 4V5L7 9H5a2 2 0 0 0-2 2z"/>
@@ -73,8 +65,7 @@ const CARDS = [
     title: 'תקיעה ב-Business Manager',
     problem: <>איבדת גישה למרכז העסקים, משתמש-על נעלם או הדומיין שלך הועבר? אנחנו <b>מחזירים בעלות</b> על הנכסים ומחברים מחדש דפים, פיקסלים וקטלוגים.</>,
     bullets: ['החזרת בעלות על Business Manager', 'טיפול בהשתלטות שותף-לשעבר', 'חיבור דפים ונכסים בחזרה', 'הגדרת הרשאות חסינה מפני פריצה'],
-    ctaLabel: 'קבל עזרה עכשיו',
-    path: null,
+    message: 'היי, אני תקוע/ה ב-Business Manager, אשמח לעזרה',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="7" width="18" height="13" rx="2"/>
@@ -89,8 +80,7 @@ const CARDS = [
     title: 'לא יודע איפה הבעיה? אנחנו מאתרים',
     problem: <>גישה שנעלמה ולא ברור היכן? טוויטר/X, TikTok, LinkedIn, Google Business? <b>אבחון חינם</b> בתוך שעה. אם יש פתרון, נציע אותו עוד באותה שיחה.</>,
     bullets: ['אבחון חינם לכל הפלטפורמות', 'הערכת סיכוי הצלחה לפני תשלום', 'ליווי צמוד של מנהל תיק', 'תגובה ראשונה תוך שעה'],
-    ctaLabel: 'קבל עזרה מקצועית אישית',
-    path: null,
+    message: 'היי, איבדתי גישה לחשבון ולא בטוח/ה איפה הבעיה, אשמח לאבחון',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M10 17l5-5-5-5"/>
@@ -99,6 +89,8 @@ const CARDS = [
     ),
   },
 ];
+
+const CTA_LABEL = 'קבל עזרה עכשיו';
 
 const CHECK_SVG = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -153,15 +145,10 @@ const Services = () => {
   }, []);
 
   const trackClick = (title) => {
+    trackWhatsAppClick();
     if (typeof gtag !== 'undefined') {
       gtag('event', 'click', { event_category: 'Service', event_label: title, value: 1 });
     }
-  };
-
-  const scrollToContact = () => {
-    const el = document.getElementById('contact') || document.querySelector('.contact-form');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    else openWhatsApp();
   };
 
   return (
@@ -228,35 +215,16 @@ const Services = () => {
 
                   <div className="svc-divider" aria-hidden="true" />
 
-                  {card.path ? (
-                    <Link
-                      to={card.path}
-                      className="svc-cta"
-                      onClick={() => trackClick(card.title)}
-                    >
-                      {card.ctaLabel}
-                      <span className="svc-arrow" aria-hidden="true">←</span>
-                    </Link>
-                  ) : (
-                    <button
-                      className="svc-cta"
-                      onClick={() => { trackClick(card.title); scrollToContact(); }}
-                    >
-                      {card.ctaLabel}
-                      <span className="svc-arrow" aria-hidden="true">←</span>
-                    </button>
-                  )}
-
-                  {card.page && (
-                    <Link
-                      to={card.page}
-                      className="svc-more-link"
-                      onClick={() => trackClick(`${card.title}, guide`)}
-                    >
-                      למדריך המלא על השירות
-                      <span className="svc-arrow" aria-hidden="true">←</span>
-                    </Link>
-                  )}
+                  <a
+                    href={getWhatsAppUrl(card.message)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="svc-cta"
+                    onClick={() => trackClick(card.title)}
+                  >
+                    {CTA_LABEL}
+                    <span className="svc-arrow" aria-hidden="true">←</span>
+                  </a>
                 </div>
               </div>
             </article>

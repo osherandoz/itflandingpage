@@ -1,6 +1,9 @@
 import React from 'react';
-import { openWhatsApp } from '../utils/whatsapp';
+import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
+import Icon from './Icon';
 import './HeroSection.css';
+
+const HERO_MESSAGE = 'היי, החשבון שלי חסום, אשמח לעזרה';
 
 const HeroSection = () => {
 
@@ -8,12 +11,12 @@ const HeroSection = () => {
     <section className="hero-section">
       {/* Decorative floating social icons, background only */}
       <div className="hero-bg-icons" aria-hidden="true">
-        <i className="fab fa-facebook hero-bg-icon" style={{ top: '12%', right: '8%',  fontSize: '5rem',  animationDelay: '0s' }} />
-        <i className="fab fa-instagram hero-bg-icon" style={{ top: '55%', right: '4%',  fontSize: '3.5rem', animationDelay: '1.4s' }} />
-        <i className="fab fa-whatsapp hero-bg-icon"  style={{ top: '75%', right: '14%', fontSize: '4rem',  animationDelay: '2.8s' }} />
-        <i className="fab fa-facebook hero-bg-icon"  style={{ top: '80%', left: '6%',   fontSize: '3rem',  animationDelay: '0.7s' }} />
-        <i className="fab fa-instagram hero-bg-icon" style={{ top: '20%', left: '5%',   fontSize: '4.5rem', animationDelay: '2.1s' }} />
-        <i className="fab fa-whatsapp hero-bg-icon"  style={{ top: '42%', left: '10%',  fontSize: '3rem',  animationDelay: '3.5s' }} />
+        <Icon name="facebook" className="hero-bg-icon" style={{ top: '12%', right: '8%', fontSize: '5rem', animationDelay: '0s' }} />
+        <Icon name="instagram" className="hero-bg-icon" style={{ top: '55%', right: '4%', fontSize: '3.5rem', animationDelay: '1.4s' }} />
+        <Icon name="whatsapp" className="hero-bg-icon" style={{ top: '75%', right: '14%', fontSize: '4rem', animationDelay: '2.8s' }} />
+        <Icon name="facebook" className="hero-bg-icon" style={{ top: '80%', left: '6%', fontSize: '3rem', animationDelay: '0.7s' }} />
+        <Icon name="instagram" className="hero-bg-icon" style={{ top: '20%', left: '5%', fontSize: '4.5rem', animationDelay: '2.1s' }} />
+        <Icon name="whatsapp" className="hero-bg-icon" style={{ top: '42%', left: '10%', fontSize: '3rem', animationDelay: '3.5s' }} />
       </div>
 
       <div className="hero-container">
@@ -24,16 +27,18 @@ const HeroSection = () => {
           זמינים עכשיו · מענה תוך דקות
         </div>
 
-        {/* Trust Bar */}
+        {/* Trust bar — every proof point in one compact row */}
         <div className="hero-trust-bar">
           <span>✓ 2,500+ חשבונות שוחזרו</span>
           <span className="trust-divider" aria-hidden="true">|</span>
           <span>⭐ דירוג 4.9/5</span>
           <span className="trust-divider" aria-hidden="true">|</span>
           <span>✓ תשלום רק אחרי הצלחה</span>
+          <span className="trust-divider" aria-hidden="true">|</span>
+          <span>✓ זמינות 24/6</span>
         </div>
 
-        {/* Logo, visible on all screen sizes */}
+        {/* Logo — hidden on mobile so the headline lands sooner */}
         <div className="hero-logo">
           <img
             src="/images/logo-hero.webp"
@@ -48,28 +53,28 @@ const HeroSection = () => {
 
         <div className="hero-content">
           <h1 className="hero-title">
-            חסמו לך את החשבון?{' '}
-            <span className="hero-highlight">אנחנו מחזירים אותו.</span>
+            נחזיר לך את החשבון.{' '}
+            <span className="hero-highlight">לא הצלחנו, לא שילמת.</span>
           </h1>
 
           <p className="hero-subtitle">
             מתמחים בחשבונות שמטא הכריזו עליהם כאבודים. פייסבוק, אינסטגרם, WhatsApp ופתרונות מלאים לביזנס מנג׳ר.
           </p>
 
-          <div className="hero-features">
-            <span className="hero-feature">✓ מענה תוך שעות</span>
-            <span className="hero-feature">✓ תשלום רק אחרי הצלחה</span>
-            <span className="hero-feature">✓ זמינות 24/6</span>
-          </div>
-
-          <button className="hero-cta hero-cta-pulse" onClick={openWhatsApp}>
-            <i className="fab fa-whatsapp" aria-hidden="true"></i>
-            שלחו הודעה עכשיו, ללא עלות
-          </button>
+          <a
+            className="hero-cta hero-cta-pulse"
+            href={getWhatsAppUrl(HERO_MESSAGE)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={trackWhatsAppClick}
+          >
+            <Icon name="whatsapp" aria-hidden="true" />
+            שלחו לנו את המקרה בוואטסאפ · תשובה תוך דקות
+          </a>
 
           <p className="hero-guarantee">
-            <i className="fas fa-shield-alt" aria-hidden="true"></i>
-            <strong>בלי תשלום מראש.</strong> לא הצלחנו? לא משלמים.
+            <Icon name="shield" aria-hidden="true" />
+            <strong>₪500–3,000 בממוצע.</strong> בלי תשלום מראש, ללא סיכון.
           </p>
         </div>
 

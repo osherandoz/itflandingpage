@@ -74,11 +74,10 @@
   transform: translateY(-2px);
 }
 
-.feature i {
+.feature svg {
   font-size: 1.2rem;
   color: #3B82F6;
-  width: 20px;
-  text-align: center;
+  flex-shrink: 0;
 }
 
 .feature span {
@@ -241,7 +240,7 @@
     padding: 12px;
   }
   
-  .feature i {
+  .feature svg {
     font-size: 1rem;
   }
   
@@ -273,7 +272,7 @@
     padding: 10px;
   }
   
-  .feature i {
+  .feature svg {
     font-size: 0.9rem;
   }
   

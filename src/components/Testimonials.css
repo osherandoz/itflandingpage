@@ -111,15 +111,15 @@
   gap: 3px;
 }
 
-.testimonial-rating .fas.fa-star {
+.testimonial-rating svg {
   font-size: 0.8rem;
 }
 
-.testimonial-rating .fas.fa-star.filled {
+.testimonial-rating svg.filled {
   color: #FFD700;
 }
 
-.testimonial-rating .fas.fa-star.empty {
+.testimonial-rating svg.empty {
   color: rgba(255, 255, 255, 0.2);
 }
 
@@ -145,7 +145,7 @@
   opacity: 0.7;
 }
 
-.quote-icon i {
+.quote-icon svg {
   color: white;
   font-size: 0.8rem;
 }
@@ -299,7 +299,7 @@
     height: 25px;
   }
   
-  .quote-icon i {
+  .quote-icon svg {
     font-size: 0.7rem;
   }
 }

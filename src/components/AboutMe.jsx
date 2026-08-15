@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from './Icon';
 import './AboutMe.css';
 
 const AboutMe = () => {
@@ -22,19 +23,19 @@ const AboutMe = () => {
             
             <div className="about-features">
               <div className="feature">
-                <i className="fas fa-shield-alt" aria-hidden="true"></i>
+                <Icon name="shield" aria-hidden="true" />
                 <span>מומחיות באבטחה מתקדמת</span>
               </div>
               <div className="feature">
-                <i className="fas fa-clock" aria-hidden="true"></i>
+                <Icon name="clock" aria-hidden="true" />
                 <span>זמינות 24/6 - תמיכה מיידית</span>
               </div>
               <div className="feature">
-                <i className="fas fa-users" aria-hidden="true"></i>
+                <Icon name="users" aria-hidden="true" />
                 <span>אלפי לקוחות מרוצים בישראל</span>
               </div>
               <div className="feature">
-                <i className="fas fa-certificate" aria-hidden="true"></i>
+                <Icon name="certificate" aria-hidden="true" />
                 <span>הוכחות מקצועיות ורפרנסים</span>
               </div>
             </div>

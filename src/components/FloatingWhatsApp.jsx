@@ -1,17 +1,21 @@
 import React from 'react';
-import { openWhatsApp } from '../utils/whatsapp';
+import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
+import Icon from './Icon';
 import './FloatingWhatsApp.css';
 
 const FloatingWhatsApp = () => (
-  <button
+  <a
     className="floating-whatsapp"
-    onClick={openWhatsApp}
+    href={getWhatsAppUrl()}
+    target="_blank"
+    rel="noopener noreferrer"
+    onClick={trackWhatsAppClick}
     aria-label="פתח שיחת WhatsApp"
     title="דברו איתנו בוואטסאפ"
   >
-    <i className="fab fa-whatsapp"></i>
+    <Icon name="whatsapp" />
     <span className="floating-whatsapp-label">דברו איתנו</span>
-  </button>
+  </a>
 );
 
 export default FloatingWhatsApp;

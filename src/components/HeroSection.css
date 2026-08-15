@@ -18,6 +18,7 @@
   will-change: transform;
   animation: bgIconFloat 7s ease-in-out infinite;
   line-height: 1;
+  display: block;
 }
 
 /* ── Animations ── */
@@ -169,42 +170,20 @@
   margin-right: auto;
 }
 
-/* ── Feature Pills — horizontal row ── */
-.hero-features {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 2rem;
-  justify-content: center;
-}
-
-.hero-feature {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--color-primary);
-  font-weight: 600;
-  font-size: 1rem;
-  background: rgba(59, 130, 246, 0.1);
-  padding: 8px 18px;
-  border-radius: 25px;
-  border: 1px solid rgba(59, 130, 246, 0.3);
-}
-
 /* ── CTA Button — WhatsApp green ── */
 .hero-cta {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   background: var(--color-cta);
-  color: white;
+  color: #07200F;
   border: none;
   padding: 16px 44px;
   font-size: 1.15rem;
   font-weight: 700;
   border-radius: 50px;
   cursor: pointer;
+  text-decoration: none;
   transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: var(--shadow-cta);
   margin-bottom: 1.2rem;
@@ -226,8 +205,10 @@
   transform: translateY(0);
 }
 
-.hero-cta i {
-  font-size: 1.3rem;
+.hero-cta svg {
+  width: 1.3rem;
+  height: 1.3rem;
+  flex-shrink: 0;
 }
 
 /* ── Guarantee ── */
@@ -243,7 +224,10 @@
   border: 1px solid var(--border-subtle);
 }
 
-.hero-guarantee i {
+.hero-guarantee svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
   color: var(--color-primary);
 }
 
@@ -257,11 +241,13 @@
 }
 
 @media (max-width: 768px) {
-  .hero-section { padding-top: 60px; min-height: 95vh; }
-  .hero-title   { font-size: 2.2rem; }
-  .hero-subtitle { font-size: 1.1rem; }
-  .hero-trust-bar { font-size: 0.82rem; padding: 8px 14px; }
-  .hero-live-badge { font-size: 0.8rem; padding: 5px 12px; }
+  .hero-section { padding-top: 60px; min-height: auto; }
+  .hero-title   { font-size: 2.2rem; margin-bottom: 1rem; }
+  .hero-subtitle { font-size: 1.1rem; margin-bottom: 1.4rem; }
+  .hero-trust-bar { font-size: 0.78rem; padding: 8px 14px; margin-bottom: 18px; }
+  .hero-live-badge { font-size: 0.8rem; padding: 5px 12px; margin-bottom: 12px; }
+  /* Logo repeats the navbar mark and pushes the headline below the fold — drop it here */
+  .hero-logo { display: none; }
   .hero-cta {
     padding: 14px 32px;
     font-size: 1.05rem;
@@ -273,7 +259,6 @@
 @media (max-width: 480px) {
   .hero-title    { font-size: 1.85rem; }
   .hero-subtitle { font-size: 1rem; }
-  .hero-feature  { font-size: 0.9rem; padding: 6px 12px; }
   .hero-guarantee { font-size: 0.85rem; }
 }
 

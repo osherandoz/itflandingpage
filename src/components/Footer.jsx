@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import { openWhatsApp } from '../utils/whatsapp';
+import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
+import Icon from './Icon';
 import Modal from './Modal';
 import ContactForm from './ContactForm';
 import './Footer.css';
@@ -110,17 +111,17 @@ const Footer = () => {
           <div className="footer-section">
             <h3>פרטי קשר</h3>
             <div className="contact-info">
-              <p><i className="fas fa-map-marker-alt"></i> נתניה, ישראל</p>
-              <p><i className="fas fa-phone"></i> 050-9823-235</p>
-              <p><i className="fas fa-envelope"></i> osher@israeltechforce.com</p>
+              <p><Icon name="mapPin" aria-hidden="true" /> נתניה, ישראל</p>
+              <p><Icon name="phone" aria-hidden="true" /> 050-9823-235</p>
+              <p><Icon name="envelope" aria-hidden="true" /> osher@israeltechforce.com</p>
             </div>
             <div className="contact-buttons">
-              <button className="footer-cta" onClick={openWhatsApp}>
-                <i className="fab fa-whatsapp"></i>
+              <a className="footer-cta" href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}>
+                <Icon name="whatsapp" aria-hidden="true" />
                 דברו איתנו בוואטסאפ
-              </button>
+              </a>
               <button className="footer-cta contact-form-btn" onClick={() => openModal('contact')}>
-                <i className="fas fa-envelope"></i>
+                <Icon name="envelope" aria-hidden="true" />
                 טופס יצירת קשר
               </button>
             </div>
@@ -131,16 +132,16 @@ const Footer = () => {
             <h3>עקבו אחרינו</h3>
             <div className="social-links">
               <a href="https://www.facebook.com/OsheRevach23" className="social-link" aria-label="עמוד פייסבוק">
-                <i className="fab fa-facebook" aria-hidden="true"></i>
+                <Icon name="facebook" aria-hidden="true" />
               </a>
               <a href="https://www.instagram.com/osher_revach_1/" className="social-link" aria-label="עמוד אינסטגרם">
-                <i className="fab fa-instagram" aria-hidden="true"></i>
+                <Icon name="instagram" aria-hidden="true" />
               </a>
-              <a href="https://wa.me/+972509823235" className="social-link" aria-label="שלח הודעת וואטסאפ" onClick={(e) => { e.preventDefault(); openWhatsApp(); }}>
-                <i className="fab fa-whatsapp" aria-hidden="true"></i>
+              <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className="social-link" aria-label="שלח הודעת וואטסאפ" onClick={trackWhatsAppClick}>
+                <Icon name="whatsapp" aria-hidden="true" />
               </a>
               <a href="https://www.tiktok.com/@israeltechforce" className="social-link" aria-label="ערוץ טיקטוק">
-                <i className="fab fa-tiktok" aria-hidden="true"></i>
+                <Icon name="tiktok" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -152,7 +153,7 @@ const Footer = () => {
               הניוזלטר החודשי שלנו: מה מטא שינתה, מקרה חסימה אמיתי מהחודש האחרון, ובדיקה אחת שמורידה סיכון. חמש דקות קריאה.
             </p>
             <Link to="/newsletter" className="newsletter-link-btn">
-              <i className="fas fa-envelope"></i>
+              <Icon name="envelope" aria-hidden="true" />
               הצטרפו לניוזלטר
             </Link>
           </div>
@@ -177,33 +178,21 @@ const Footer = () => {
             <h3>קישורים מהירים</h3>
             <div className="quick-links">
               <Link to="/faq" className="quick-link">
-                <i className="fas fa-circle-question"></i>
+                <Icon name="questionCircle" aria-hidden="true" />
                 שאלות נפוצות
               </Link>
               <Link to="/testimonials" className="quick-link">
-                <i className="fas fa-star"></i>
+                <Icon name="star" aria-hidden="true" />
                 המלצות לקוחות
               </Link>
               <Link to="/articles" className="quick-link">
-                <i className="fas fa-newspaper"></i>
+                <Icon name="newspaper" aria-hidden="true" />
                 מאמרים
               </Link>
               <Link to="/newsletter" className="quick-link">
-                <i className="fas fa-envelope-open-text"></i>
+                <Icon name="envelopeOpen" aria-hidden="true" />
                 ניוזלטר חודשי
               </Link>
-              <Link to="/privacy" className="quick-link">
-                <i className="fas fa-shield-alt"></i>
-                מדיניות פרטיות
-              </Link>
-              <button onClick={() => openModal('accessibility')} className="quick-link">
-                <i className="fas fa-universal-access"></i>
-                נגישות
-              </button>
-              <button onClick={() => openModal('terms')} className="quick-link">
-                <i className="fas fa-file-contract"></i>
-                תנאי שימוש
-              </button>
             </div>
           </div>
         </div>

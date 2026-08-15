@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router';
-import { openWhatsApp } from '../utils/whatsapp';
+import { useLocation } from 'react-router';
+import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -70,12 +70,15 @@ const Navbar = () => {
         </div>
         
         <div className="navbar-cta">
-          <button 
+          <a
             className="cta-button"
-            onClick={openWhatsApp}
+            href={getWhatsAppUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={trackWhatsAppClick}
           >
             דברו איתנו
-          </button>
+          </a>
         </div>
         
         <button

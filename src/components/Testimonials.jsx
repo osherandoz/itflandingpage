@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from './Icon';
 import './Testimonials.css';
 
 const Testimonials = () => {
@@ -55,10 +56,11 @@ const Testimonials = () => {
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, index) => (
-      <i 
-        key={index} 
-        className={`fas fa-star ${index < rating ? 'filled' : 'empty'}`}
-      ></i>
+      <Icon
+        key={index}
+        name="star"
+        className={index < rating ? 'filled' : 'empty'}
+      />
     ));
   };
 
@@ -94,7 +96,7 @@ const Testimonials = () => {
               
               <div className="testimonial-content">
                 <div className="quote-icon">
-                  <i className="fas fa-quote-right"></i>
+                  <Icon name="quote" aria-hidden="true" />
                 </div>
                 <p className="testimonial-quote">{testimonial.quote}</p>
               </div>
