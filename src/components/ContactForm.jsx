@@ -43,7 +43,7 @@ const ContactForm = () => {
     }
 
     if (!formData.consent) {
-      newErrors.consent = 'עליכם להסכים ליצירת קשר כדי לשלוח את הטופס';
+      newErrors.consent = 'עליך להסכים ליצירת קשר כדי לשלוח את הטופס';
     }
 
     setErrors(newErrors);
@@ -105,7 +105,7 @@ const ContactForm = () => {
     <div className="contact-form-container" id="contact-form">
       <div className="contact-form-header">
         <h2>צור קשר</h2>
-        <p>מלאו את הטופס למטה ונחזור אליכם בהקדם האפשרי</p>
+        <p>מלא/י את הטופס למטה ואחזור אליך בהקדם האפשרי</p>
       </div>
 
       {isSubmitted && (
@@ -116,10 +116,10 @@ const ContactForm = () => {
 
       {submitError && (
         <div className="submit-error-message" role="alert">
-          <p>משהו השתבש בשליחה. נסו שוב או{' '}
+          <p>משהו השתבש בשליחה. נסה/י שוב או{' '}
             <a className="form-whatsapp-link" href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}>
               <Icon name="whatsapp" aria-hidden="true" />
-              דברו איתנו ישירות בוואטסאפ
+              דבר/י איתי ישירות בוואטסאפ
             </a>
           </p>
         </div>
@@ -185,12 +185,12 @@ const ContactForm = () => {
               שולח...
             </>
           ) : (
-            'שלחו הודעה, נחזור אליכם תוך שעה'
+            'שלח/י הודעה, אחזור אליך תוך שעה'
           )}
         </button>
 
         <p className="form-whatsapp-note">
-          רוצים מענה מיידי?{' '}
+          רוצה מענה מיידי?{' '}
           <a
             className="form-whatsapp-link"
             href={getWhatsAppUrl()}
@@ -199,7 +199,7 @@ const ContactForm = () => {
             onClick={trackWhatsAppClick}
           >
             <Icon name="whatsapp" aria-hidden="true" />
-            דברו איתנו ישירות בוואטסאפ
+            דבר/י איתי ישירות בוואטסאפ
           </a>
         </p>
       </form>

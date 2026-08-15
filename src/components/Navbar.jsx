@@ -77,7 +77,7 @@ const Navbar = () => {
             rel="noopener noreferrer"
             onClick={trackWhatsAppClick}
           >
-            דברו איתנו
+            דבר/י איתי
           </a>
         </div>
         

@@ -11,10 +11,10 @@ const FloatingWhatsApp = () => (
     rel="noopener noreferrer"
     onClick={trackWhatsAppClick}
     aria-label="פתח שיחת WhatsApp"
-    title="דברו איתנו בוואטסאפ"
+    title="דבר/י איתי בוואטסאפ"
   >
     <Icon name="whatsapp" />
-    <span className="floating-whatsapp-label">דברו איתנו</span>
+    <span className="floating-whatsapp-label">דבר/י איתי</span>
   </a>
 );
 

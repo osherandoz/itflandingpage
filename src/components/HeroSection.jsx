@@ -22,9 +22,9 @@ const HeroSection = () => {
       <div className="hero-container">
 
         {/* LIVE availability badge */}
-        <div className="hero-live-badge" aria-label="זמינים עכשיו">
+        <div className="hero-live-badge" aria-label="זמין עכשיו">
           <span className="hero-live-dot" aria-hidden="true"></span>
-          זמינים עכשיו · מענה תוך דקות
+          זמין עכשיו · מענה תוך דקות
         </div>
 
         {/* Trust bar — every proof point in one compact row */}
@@ -53,12 +53,12 @@ const HeroSection = () => {
 
         <div className="hero-content">
           <h1 className="hero-title">
-            נחזיר לך את החשבון.{' '}
-            <span className="hero-highlight">לא הצלחנו, לא שילמת.</span>
+            אחזיר לך את החשבון.{' '}
+            <span className="hero-highlight">לא הצלחתי, לא שילמת.</span>
           </h1>
 
           <p className="hero-subtitle">
-            מתמחים בחשבונות שמטא הכריזו עליהם כאבודים. פייסבוק, אינסטגרם, WhatsApp ופתרונות מלאים לביזנס מנג׳ר.
+            מתמחה בחשבונות שמטא הכריזו עליהם כאבודים. פייסבוק, אינסטגרם, WhatsApp ופתרונות מלאים לביזנס מנג׳ר.
           </p>
 
           <a
@@ -69,7 +69,7 @@ const HeroSection = () => {
             onClick={trackWhatsAppClick}
           >
             <Icon name="whatsapp" aria-hidden="true" />
-            שלחו לנו את המקרה בוואטסאפ · תשובה תוך דקות
+            שלחו לי את המקרה בוואטסאפ · תשובה תוך דקות
           </a>
 
           <p className="hero-guarantee">

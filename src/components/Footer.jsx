@@ -22,7 +22,7 @@ const Footer = () => {
       title: 'נגישות',
       content: (
         <div className="modal-content-text">
-          <p>ב־ITF Recovery אנו מאמינים בזכותם של כלל המשתמשים, לרבות אנשים עם מוגבלות, ליהנות משירות נגיש ושוויוני.</p>
+          <p>ב־ITF Recovery אני מאמין בזכותם של כלל המשתמשים, לרבות אנשים עם מוגבלות, ליהנות משירות נגיש ושוויוני.</p>
           
           <h4>מצב הנגישות באתר</h4>
           <p>האתר תוכנן תוך מחשבה על חוויית שימוש נוחה ונגישה ככל האפשר. האתר כולל:</p>
@@ -36,10 +36,10 @@ const Footer = () => {
           <p>האתר מותאם לשימוש עם תוכנות קורא מסך ודפדפנים נפוצים.</p>
           
           <h4>פניות בנושא נגישות</h4>
-          <p>במידה ונתקלתם בקושי בשימוש באתר או שיש לכם הצעה לשיפור הנגישות, נשמח לשמוע:</p>
+          <p>במידה ונתקלת בקושי בשימוש באתר או שיש לך הצעה לשיפור הנגישות, אשמח לשמוע:</p>
           <p>📧 <a href="mailto:accessability@itf-recovery.co.il" className="modal-link">accessability@itf-recovery.co.il</a></p>
-          
-          <p>נשתדל לטפל בכל פנייה במהירות האפשרית ובאופן המקצועי ביותר.</p>
+
+          <p>אשתדל לטפל בכל פנייה במהירות האפשרית ובאופן המקצועי ביותר.</p>
         </div>
       )
     },
@@ -92,7 +92,7 @@ const Footer = () => {
           <p>על תנאי שימוש אלה יחולו דיני מדינת ישראל, ובמקרה של מחלוקת תהיה סמכות השיפוט הבלעדית נתונה לבתי המשפט המוסמכים במחוז תל אביב.</p>
           
           <h4>יצירת קשר</h4>
-          <p>לשאלות או הבהרות ניתן לפנות אלינו בכתובת:</p>
+          <p>לשאלות או הבהרות ניתן לפנות אליי בכתובת:</p>
           <p>📧 <a href="mailto:osher@israeltechforce.com" className="modal-link">osher@israeltechforce.com</a></p>
         </div>
       )
@@ -118,7 +118,7 @@ const Footer = () => {
             <div className="contact-buttons">
               <a className="footer-cta" href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}>
                 <Icon name="whatsapp" aria-hidden="true" />
-                דברו איתנו בוואטסאפ
+                דבר/י איתי בוואטסאפ
               </a>
               <button className="footer-cta contact-form-btn" onClick={() => openModal('contact')}>
                 <Icon name="envelope" aria-hidden="true" />
@@ -129,7 +129,7 @@ const Footer = () => {
 
           {/* Column 2: Social Media */}
           <div className="footer-section">
-            <h3>עקבו אחרינו</h3>
+            <h3>עקוב/י אחריי</h3>
             <div className="social-links">
               <a href="https://www.facebook.com/OsheRevach23" className="social-link" aria-label="עמוד פייסבוק">
                 <Icon name="facebook" aria-hidden="true" />
@@ -150,17 +150,17 @@ const Footer = () => {
           <div className="footer-section">
             <h3>The Safety Signal</h3>
             <p style={{ marginBottom: '1rem', fontSize: '0.95rem', lineHeight: '1.6' }}>
-              הניוזלטר החודשי שלנו: מה מטא שינתה, מקרה חסימה אמיתי מהחודש האחרון, ובדיקה אחת שמורידה סיכון. חמש דקות קריאה.
+              הניוזלטר החודשי שלי: מה מטא שינתה, מקרה חסימה אמיתי מהחודש האחרון, ובדיקה אחת שמורידה סיכון. חמש דקות קריאה.
             </p>
             <Link to="/newsletter" className="newsletter-link-btn">
               <Icon name="envelope" aria-hidden="true" />
-              הצטרפו לניוזלטר
+              הצטרף/י לניוזלטר
             </Link>
           </div>
 
           {/* Column 4: Services, internal links for SEO (money pages were orphaned) */}
           <div className="footer-section">
-            <h3>השירותים שלנו</h3>
+            <h3>השירותים שלי</h3>
             <div className="quick-links">
               <Link to="/שחזור-חשבון-פייסבוק" className="quick-link">שחזור חשבון פייסבוק</Link>
               <Link to="/שחזור-חשבון-אינסטגרם" className="quick-link">שחזור חשבון אינסטגרם</Link>
