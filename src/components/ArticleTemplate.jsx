@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router';
 import { getArticleBySlug } from '../data/articles';
 import { openWhatsApp } from '../utils/whatsapp';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ArticleTemplate.css';
 
 const ArticleTemplate = () => {

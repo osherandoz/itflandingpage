@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './FaqPage.css';
 
 const WHATSAPP_NUMBER = '972547274750';

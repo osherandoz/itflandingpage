@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingWhatsApp from './FloatingWhatsApp';
 import { openWhatsApp } from '../utils/whatsapp';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ServicePage.css';
 
 // All 6 testimonials inlined so the template has no extra data dependency
@@ -198,6 +199,10 @@ const ServicePage = ({ pageData }) => {
                       src={t.image}
                       alt={`${t.name}, ${t.role}`}
                       className="service-testimonial-img"
+                      width="56"
+                      height="56"
+                      loading="lazy"
+                      decoding="async"
                       onError={(e) => {
                         e.target.src = '/images/default-avatar.png';
                       }}

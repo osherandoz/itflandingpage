@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import { articles } from '../data/articles';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../components/ArticlesSection.css';
 import './ArticlesPage.css';
 

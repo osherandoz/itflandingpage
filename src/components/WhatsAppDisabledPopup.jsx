@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './WhatsAppDisabledPopup.css';
 
 const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { pressItems, communityGroups } from '../data/press';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './Press.css';
 
 const Press = () => {

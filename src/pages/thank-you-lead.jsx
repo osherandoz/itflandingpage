@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './thank-you-lead.css';
 
 const CHECKLIST_ITEMS = [

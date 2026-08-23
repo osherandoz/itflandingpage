@@ -77,9 +77,13 @@ const Testimonials = () => {
             <div key={testimonial.id} className="testimonial-card">
               <div className="testimonial-header">
                 <div className="testimonial-image">
-                  <img 
-                    src={testimonial.image} 
+                  <img
+                    src={testimonial.image}
                     alt={`${testimonial.name} - ${testimonial.role}`}
+                    width="60"
+                    height="60"
+                    loading="lazy"
+                    decoding="async"
                     onError={(e) => {
                       e.target.src = '/images/default-avatar.png';
                     }}

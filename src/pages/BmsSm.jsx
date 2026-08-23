@@ -4,6 +4,7 @@ import '@fontsource/heebo/400.css';
 import '@fontsource/heebo/700.css';
 import '@fontsource/heebo/800.css';
 import '@fontsource/heebo/900.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './BmsSm.css';
 
 function trackFb(event, params) {

@@ -5,7 +5,6 @@ import { LOCAL_BUSINESS_SCHEMA, PERSON_SCHEMA } from '../src/data/schemas.js';
 // Self-hosted font — eliminates render-blocking Google Fonts round-trip
 import '@fontsource/heebo/400.css';
 import '@fontsource/heebo/700.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../src/index.css';
 import '../src/App.css';
 
