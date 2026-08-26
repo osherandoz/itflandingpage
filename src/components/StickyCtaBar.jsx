@@ -1,11 +1,31 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
+import { useLang } from '../i18n';
 import './StickyCtaBar.css';
+
+const STR = {
+  he: {
+    barAria: 'קריאה לפעולה',
+    text: 'אבחון חינם, תשובה תוך דקות',
+    whatsappMessage: 'היי, החשבון שלי חסום, אשמח לעזרה',
+    cta: 'קבל עזרה עכשיו',
+    dismissAria: 'סגור',
+  },
+  en: {
+    barAria: 'Call to action',
+    text: 'Free diagnosis, answer within minutes',
+    whatsappMessage: "Hi, my account is blocked and I'd love some help",
+    cta: 'Get Help Now',
+    dismissAria: 'Close',
+  },
+};
 
 const StickyCtaBar = () => {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const hasShown = useRef(false);
+  const { lang } = useLang();
+  const t = STR[lang];
 
   useEffect(() => {
     if (dismissed) return;
@@ -39,27 +59,27 @@ const StickyCtaBar = () => {
     <div
       className={`sticky-cta-bar${visible ? ' sticky-cta-bar--visible' : ''}`}
       role="complementary"
-      aria-label="קריאה לפעולה"
+      aria-label={t.barAria}
       aria-hidden={!visible}
     >
       <p className="sticky-cta-bar__text">
-        אבחון חינם, תשובה תוך דקות
+        {t.text}
       </p>
       <a
         className="sticky-cta-bar__btn"
-        href={getWhatsAppUrl('היי, החשבון שלי חסום, אשמח לעזרה')}
+        href={getWhatsAppUrl(t.whatsappMessage)}
         target="_blank"
         rel="noopener noreferrer"
         onClick={trackWhatsAppClick}
         tabIndex={visible ? 0 : -1}
       >
-        קבל עזרה עכשיו
+        {t.cta}
         <span aria-hidden="true">↓</span>
       </a>
       <button
         className="sticky-cta-bar__dismiss"
         onClick={handleDismiss}
-        aria-label="סגור"
+        aria-label={t.dismissAria}
         tabIndex={visible ? 0 : -1}
       >
         ✕

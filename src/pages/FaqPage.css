@@ -6,7 +6,6 @@
   background: #0C0E1D;
   min-height: 100vh;
   color: #ffffff;
-  direction: rtl;
 }
 
 .faq-main {
@@ -103,7 +102,7 @@
   background: rgba(255, 255, 255, 0.05);
   border: none;
   padding: 18px 22px;
-  text-align: right;
+  text-align: start;
   cursor: pointer;
   display: flex;
   justify-content: space-between;

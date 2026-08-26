@@ -1,7 +1,6 @@
 .whatsapp-disabled-question {
   text-align: center;
   padding: 20px;
-  direction: rtl;
 }
 
 .question-icon {
@@ -80,7 +79,6 @@
 
 /* Form Styles */
 .whatsapp-disabled-form {
-  direction: rtl;
   padding: 10px;
 }
 
@@ -140,8 +138,7 @@
   background-color: rgba(255, 255, 255, 0.1);
   color: #ffffff;
   font-family: inherit;
-  direction: rtl;
-  text-align: right;
+  text-align: start;
 }
 
 .whatsapp-form .form-group input:focus,

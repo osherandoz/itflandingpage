@@ -1,4 +1,5 @@
 import Newsletter, { FAQS } from '../../src/pages/Newsletter';
+import { hreflangLinks } from '../../src/i18n/index.js';
 
 const URL = 'https://www.israeltechforce.com/newsletter';
 const TITLE = 'The Safety Signal - ניוזלטר חודשי על אבטחת חשבונות מטא | IsraelTechForce';
@@ -16,6 +17,7 @@ export const meta = () => [
   { property: 'og:image', content: 'https://www.israeltechforce.com/images/og-card.png' },
   { name: 'twitter:card', content: 'summary_large_image' },
   { tagName: 'link', rel: 'canonical', href: URL },
+  ...hreflangLinks('/newsletter', '/en/newsletter'),
 ];
 
 const FAQ_SCHEMA = {

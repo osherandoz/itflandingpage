@@ -1,63 +1,401 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <!-- Home -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.israeltechforce.com/</loc>
-    <lastmod>2026-08-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/"/>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  <!-- Static pages -->
+  <url>
+    <loc>https://www.israeltechforce.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <url>
     <loc>https://www.israeltechforce.com/privacy</loc>
-    <lastmod>2026-08-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/privacy"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/privacy"/>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.israeltechforce.com/press</loc>
-    <lastmod>2026-08-10</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/press"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/press"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/press"/>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
-  <!-- Phase C — Dedicated service pages -->
+  <url>
+    <loc>https://www.israeltechforce.com/en/press</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/press"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/press"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/press"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
   <url>
     <loc>https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7</loc>
-    <lastmod>2026-08-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/facebook-account-recovery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7"/>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/facebook-account-recovery</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/facebook-account-recovery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D</loc>
-    <lastmod>2026-08-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/instagram-account-recovery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D"/>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/instagram-account-recovery</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/instagram-account-recovery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%95%D7%95%D7%90%D7%98%D7%A1%D7%90%D7%A4</loc>
-    <lastmod>2026-08-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%95%D7%95%D7%90%D7%98%D7%A1%D7%90%D7%A4"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/whatsapp-account-recovery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%95%D7%95%D7%90%D7%98%D7%A1%D7%90%D7%A4"/>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7-%D7%9E%D7%95%D7%A9%D7%91%D7%AA</loc>
-    <lastmod>2026-08-09</lastmod>
+    <loc>https://www.israeltechforce.com/en/whatsapp-account-recovery</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%95%D7%95%D7%90%D7%98%D7%A1%D7%90%D7%A4"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/whatsapp-account-recovery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%95%D7%95%D7%90%D7%98%D7%A1%D7%90%D7%A4"/>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7-%D7%9E%D7%95%D7%A9%D7%91%D7%AA</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7-%D7%9E%D7%95%D7%A9%D7%91%D7%AA"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/facebook-account-disabled"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7-%D7%9E%D7%95%D7%A9%D7%91%D7%AA"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/facebook-account-disabled</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7-%D7%9E%D7%95%D7%A9%D7%91%D7%AA"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/facebook-account-disabled"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7-%D7%9E%D7%95%D7%A9%D7%91%D7%AA"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D-%D7%A0%D7%A4%D7%A8%D7%A5</loc>
-    <lastmod>2026-08-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D-%D7%A0%D7%A4%D7%A8%D7%A5"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/instagram-account-hacked"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D-%D7%A0%D7%A4%D7%A8%D7%A5"/>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://www.israeltechforce.com/en/instagram-account-hacked</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D-%D7%A0%D7%A4%D7%A8%D7%A5"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/instagram-account-hacked"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D-%D7%A0%D7%A4%D7%A8%D7%A5"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%9E%D7%A0%D7%94%D7%9C-%D7%9E%D7%95%D7%93%D7%A2%D7%95%D7%AA</loc>
-    <lastmod>2026-08-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%9E%D7%A0%D7%94%D7%9C-%D7%9E%D7%95%D7%93%D7%A2%D7%95%D7%AA"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/ads-manager-recovery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%9E%D7%A0%D7%94%D7%9C-%D7%9E%D7%95%D7%93%D7%A2%D7%95%D7%AA"/>
+    <lastmod>2026-08-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
-  <!-- BMS course landing pages -->
+  <url>
+    <loc>https://www.israeltechforce.com/en/ads-manager-recovery</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%9E%D7%A0%D7%94%D7%9C-%D7%9E%D7%95%D7%93%D7%A2%D7%95%D7%AA"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/ads-manager-recovery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%9E%D7%A0%D7%94%D7%9C-%D7%9E%D7%95%D7%93%D7%A2%D7%95%D7%AA"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/faq</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/faq"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/faq</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/faq"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/testimonials</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/testimonials"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/testimonials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/testimonials"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/testimonials</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/testimonials"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/testimonials"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/testimonials"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/newsletter</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/newsletter"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/newsletter"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/newsletter"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/newsletter</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/newsletter"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/newsletter"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/newsletter"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/articles</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/whatsapp-unblock</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/whatsapp-unblock"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/whatsapp-unblock"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/whatsapp-unblock"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/articles/whatsapp-unblock</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/whatsapp-unblock"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/whatsapp-unblock"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/whatsapp-unblock"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/facebook-account-disabled</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/facebook-account-disabled"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/facebook-account-disabled"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/facebook-account-disabled"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/articles/facebook-account-disabled</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/facebook-account-disabled"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/facebook-account-disabled"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/facebook-account-disabled"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/instagram-hacked-recovery</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/instagram-hacked-recovery"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/instagram-hacked-recovery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/instagram-hacked-recovery"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/articles/instagram-hacked-recovery</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/instagram-hacked-recovery"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/instagram-hacked-recovery"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/instagram-hacked-recovery"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/shadowban-instagram-2025</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/shadowban-instagram-2025"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/shadowban-instagram-2025"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/shadowban-instagram-2025"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/articles/shadowban-instagram-2025</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/shadowban-instagram-2025"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/shadowban-instagram-2025"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/shadowban-instagram-2025"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/whatsapp-recovery-guide</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/whatsapp-recovery-guide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/whatsapp-recovery-guide"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/whatsapp-recovery-guide"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/articles/whatsapp-recovery-guide</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/whatsapp-recovery-guide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/whatsapp-recovery-guide"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/whatsapp-recovery-guide"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/ads-manager-blocked</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/ads-manager-blocked"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/ads-manager-blocked"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/ads-manager-blocked"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/articles/ads-manager-blocked</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/ads-manager-blocked"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/ads-manager-blocked"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/ads-manager-blocked"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/facebook-disabled-vs-limited</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/facebook-disabled-vs-limited"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/facebook-disabled-vs-limited"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/facebook-disabled-vs-limited"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/articles/facebook-disabled-vs-limited</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/facebook-disabled-vs-limited"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/facebook-disabled-vs-limited"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/facebook-disabled-vs-limited"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/protect-instagram-account</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/protect-instagram-account"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/protect-instagram-account"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/protect-instagram-account"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/articles/protect-instagram-account</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/protect-instagram-account"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/protect-instagram-account"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/protect-instagram-account"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/articles/facebook-recovery-no-email-phone</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/facebook-recovery-no-email-phone"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/facebook-recovery-no-email-phone"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/facebook-recovery-no-email-phone"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.israeltechforce.com/en/articles/facebook-recovery-no-email-phone</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://www.israeltechforce.com/articles/facebook-recovery-no-email-phone"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.israeltechforce.com/en/articles/facebook-recovery-no-email-phone"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.israeltechforce.com/articles/facebook-recovery-no-email-phone"/>
+    <lastmod>2026-08-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://www.israeltechforce.com/bms-sm</loc>
     <lastmod>2026-07-05</lastmod>
@@ -69,79 +407,5 @@
     <lastmod>2026-07-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.95</priority>
-  </url>
-  <!-- Phase C — FAQ + Testimonials -->
-  <url>
-    <loc>https://www.israeltechforce.com/faq</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.israeltechforce.com/testimonials</loc>
-    <lastmod>2026-07-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <!-- Articles index + individual articles -->
-  <url>
-    <loc>https://www.israeltechforce.com/articles</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.israeltechforce.com/articles/whatsapp-unblock</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.israeltechforce.com/articles/facebook-account-disabled</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://www.israeltechforce.com/articles/instagram-hacked-recovery</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://www.israeltechforce.com/articles/shadowban-instagram-2025</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://www.israeltechforce.com/articles/whatsapp-recovery-guide</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://www.israeltechforce.com/articles/ads-manager-blocked</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://www.israeltechforce.com/articles/facebook-disabled-vs-limited</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.israeltechforce.com/articles/protect-instagram-account</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.israeltechforce.com/articles/facebook-recovery-no-email-phone</loc>
-    <lastmod>2026-08-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 </urlset>

@@ -1,13 +1,73 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useParams } from 'react-router';
-import { getArticleBySlug } from '../data/articles';
-import { openWhatsApp } from '../utils/whatsapp';
+import { Link, useLocation } from 'react-router';
+import { useLang, togglePath } from '../i18n';
+import { openWhatsApp, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ArticleTemplate.css';
 
-const ArticleTemplate = () => {
-  const { slug } = useParams();
-  const article = getArticleBySlug(slug);
+const STR = {
+  he: {
+    notFoundTitle: 'מאמר לא נמצא',
+    notFoundText: 'המאמר שביקשתם לא נמצא.',
+    backHome: 'חזור לעמוד הבית',
+    placeholderTitle: 'המאמר בדרך...',
+    placeholderText: 'המאמר הזה עדיין בכתיבה. בינתיים, יש לך שאלה? נשמח לעזור ישירות.',
+    placeholderWhatsApp: 'דברו איתנו בוואטסאפ',
+    placeholderBack: '← חזרה לעמוד הבית',
+    breadcrumbHome: 'בית',
+    breadcrumbArticles: 'מאמרים',
+    authorLine: (
+      <span>נכתב ע"י <strong>אושר רווח</strong> | מומחה בשחזורי חשבונות</span>
+    ),
+    shortAnswerLabel: 'תשובה קצרה',
+    tocTitle: 'תוכן עניינים',
+    ctaTitle: 'אל תשאיר את החשבון שלך חסום',
+    ctaDescription: 'הצטרף למאות לקוחות שכבר חזרו לפעילות מלאה. קבל ייעוץ מקצועי חינם וחזור לפעילות תוך זמן קצר.',
+    ctaButton: 'לשחרור מיידי - לחץ כאן',
+    stickyCtaTitle: 'זקוק לשחרור חסימה עכשיו?',
+    stickyCtaText: 'צור קשר עכשיו וקבל עזרה מקצועית',
+    stickyCtaButton: 'צור קשר בוואטסאפ',
+    whatsappMessage: 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים',
+  },
+  en: {
+    notFoundTitle: 'Article Not Found',
+    notFoundText: 'The article you requested was not found.',
+    backHome: 'Back to Home',
+    placeholderTitle: 'This article is on its way...',
+    placeholderText: 'This article is still being written. In the meantime, have a question? We would be happy to help directly.',
+    placeholderWhatsApp: 'Talk to Us on WhatsApp',
+    placeholderBack: '← Back to Home',
+    breadcrumbHome: 'Home',
+    breadcrumbArticles: 'Articles',
+    authorLine: (
+      <span>Written by <strong>Osher Revach</strong> | Account Recovery Expert</span>
+    ),
+    shortAnswerLabel: 'Short Answer',
+    tocTitle: 'Table of Contents',
+    ctaTitle: 'Don’t Leave Your Account Locked',
+    ctaDescription: 'Join hundreds of clients who are already back in full operation. Get free professional advice and get back online fast.',
+    ctaButton: 'Get Unblocked Now - Click Here',
+    stickyCtaTitle: 'Need Your Account Unblocked Now?',
+    stickyCtaText: 'Get in touch now for professional help',
+    stickyCtaButton: 'Contact Us on WhatsApp',
+    whatsappMessage: WHATSAPP_DEFAULT_MSG.en,
+  },
+};
+
+const formatDate = (date, isEn) => {
+  if (!isEn) return date.split('-').reverse().join('/');
+  return new Date(`${date}T00:00:00`).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+};
+
+const ArticleTemplate = ({ article }) => {
+  const { lang, isEn, dir, prefix } = useLang();
+  const { pathname } = useLocation();
+  const t = STR[lang];
+  const homePath = prefix || '/';
   const [tableOfContents, setTableOfContents] = useState([]);
   const [activeHeading, setActiveHeading] = useState('');
   const contentRef = useRef(null);
@@ -20,7 +80,7 @@ const ArticleTemplate = () => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(article.content, 'text/html');
     const headings = doc.querySelectorAll('h2, h3');
-    
+
     const toc = Array.from(headings).map((heading, index) => {
       const id = `heading-${index}`;
       heading.id = id;
@@ -130,11 +190,11 @@ const ArticleTemplate = () => {
 
   if (!article) {
     return (
-      <div className="article-not-found">
+      <div className="article-not-found" dir={dir}>
         <div className="container">
-          <h1>מאמר לא נמצא</h1>
-          <p>המאמר שביקשתם לא נמצא.</p>
-          <Link to="/" className="back-home-btn">חזור לעמוד הבית</Link>
+          <h1>{t.notFoundTitle}</h1>
+          <p>{t.notFoundText}</p>
+          <Link to={homePath} className="back-home-btn">{t.backHome}</Link>
         </div>
       </div>
     );
@@ -142,15 +202,15 @@ const ArticleTemplate = () => {
 
   if (article.placeholder) {
     return (
-      <div dir="rtl" style={{ minHeight: '100vh', background: '#0C0E1D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div dir={dir} style={{ minHeight: '100vh', background: '#0C0E1D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center', padding: '60px 20px', maxWidth: '480px' }}>
           <i className="fas fa-tools" style={{ fontSize: '3rem', color: '#3B82F6', display: 'block', marginBottom: '20px' }}></i>
-          <h1 style={{ color: '#ffffff', marginBottom: '12px', fontSize: '1.8rem' }}>המאמר בדרך...</h1>
+          <h1 style={{ color: '#ffffff', marginBottom: '12px', fontSize: '1.8rem' }}>{t.placeholderTitle}</h1>
           <p style={{ color: '#e0e0e0', marginBottom: '32px', fontSize: '1.05rem', lineHeight: '1.6' }}>
-            המאמר הזה עדיין בכתיבה. בינתיים, יש לך שאלה? נשמח לעזור ישירות.
+            {t.placeholderText}
           </p>
           <button
-            onClick={openWhatsApp}
+            onClick={() => openWhatsApp(t.whatsappMessage)}
             style={{
               background: '#25D366',
               color: 'white',
@@ -167,25 +227,28 @@ const ArticleTemplate = () => {
             }}
           >
             <i className="fab fa-whatsapp"></i>
-            דברו איתנו בוואטסאפ
+            {t.placeholderWhatsApp}
           </button>
           <br /><br />
-          <Link to="/" style={{ color: '#3B82F6', fontSize: '0.95rem' }}>← חזרה לעמוד הבית</Link>
+          <Link to={homePath} style={{ color: '#3B82F6', fontSize: '0.95rem' }}>{t.placeholderBack}</Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="article-template">
+    <div className="article-template" dir={dir}>
       <div className="article-container">
         {/* Breadcrumb */}
         <nav className="breadcrumb">
-          <Link to="/">בית</Link>
+          <Link to={homePath}>{t.breadcrumbHome}</Link>
           <span className="breadcrumb-separator">/</span>
-          <Link to="/#articles">מאמרים</Link>
+          <Link to={`${homePath}#articles`}>{t.breadcrumbArticles}</Link>
           <span className="breadcrumb-separator">/</span>
           <span className="breadcrumb-current">{article.title}</span>
+          <Link className="breadcrumb-lang-toggle" to={togglePath(pathname)}>
+            {isEn ? 'עברית' : 'English'}
+          </Link>
         </nav>
 
         <div className="article-layout">
@@ -201,12 +264,12 @@ const ArticleTemplate = () => {
               <div className="article-meta-info">
               <div className="article-author">
                 <i className="fas fa-user"></i>
-                <span>נכתב ע"י <strong>אושר רווח</strong> | מומחה בשחזורי חשבונות</span>
+                {t.authorLine}
               </div>
                 <div className="article-meta-details">
                   <span className="article-date">
                     <i className="far fa-calendar"></i>
-                    {article.date.split('-').reverse().join('/')}
+                    {formatDate(article.date, isEn)}
                   </span>
                   <span className="article-read-time">
                     <i className="far fa-clock"></i>
@@ -219,7 +282,7 @@ const ArticleTemplate = () => {
             {/* Short answer, direct, self-contained block for AI-engine citation (GEO) */}
             {article.shortAnswer && (
               <div className="article-short-answer">
-                <span className="short-answer-label">תשובה קצרה</span>
+                <span className="short-answer-label">{t.shortAnswerLabel}</span>
                 <p>{article.shortAnswer}</p>
               </div>
             )}
@@ -229,7 +292,7 @@ const ArticleTemplate = () => {
               <div className="table-of-contents-top">
                 <h3 className="toc-title">
                   <i className="fas fa-list"></i>
-                  תוכן עניינים
+                  {t.tocTitle}
                 </h3>
                 <ul className="toc-list">
                   {tableOfContents.map((item) => (
@@ -251,7 +314,7 @@ const ArticleTemplate = () => {
             )}
 
             {/* Article Body */}
-            <div 
+            <div
               ref={contentRef}
               className="article-body"
               dangerouslySetInnerHTML={{ __html: article.content }}
@@ -260,14 +323,14 @@ const ArticleTemplate = () => {
             {/* CTA Box */}
             <div className="article-cta-box">
               <div className="cta-icon">🚨</div>
-              <h3 className="cta-title">אל תשאיר את החשבון שלך חסום</h3>
+              <h3 className="cta-title">{t.ctaTitle}</h3>
               <p className="cta-description">
-                הצטרף למאות לקוחות שכבר חזרו לפעילות מלאה. קבל ייעוץ מקצועי חינם וחזור לפעילות תוך זמן קצר.
+                {t.ctaDescription}
               </p>
-              <button 
+              <button
                 onClick={() => {
                   // Navigate to home page and scroll to contact form
-                  if (window.location.pathname === '/') {
+                  if (window.location.pathname === homePath) {
                     // Already on home page, just scroll
                     setTimeout(() => {
                       const form = document.getElementById('contact-form');
@@ -277,7 +340,7 @@ const ArticleTemplate = () => {
                     }, 100);
                   } else {
                     // Navigate to home page with hash - use React Router
-                    window.location.href = '/#contact-form';
+                    window.location.href = `${homePath}#contact-form`;
                     // After navigation, scroll to form
                     setTimeout(() => {
                       const form = document.getElementById('contact-form');
@@ -286,11 +349,11 @@ const ArticleTemplate = () => {
                       }
                     }, 500);
                   }
-                }} 
+                }}
                 className="cta-button"
               >
                 <i className="fas fa-arrow-down"></i>
-                לשחרור מיידי - לחץ כאן
+                {t.ctaButton}
               </button>
             </div>
           </article>
@@ -302,11 +365,11 @@ const ArticleTemplate = () => {
               <div className="sticky-cta-icon">
                 <i className="fas fa-headset"></i>
               </div>
-              <h4 className="sticky-cta-title">זקוק לשחרור חסימה עכשיו?</h4>
-              <p className="sticky-cta-text">צור קשר עכשיו וקבל עזרה מקצועית</p>
-              <button onClick={openWhatsApp} className="sticky-cta-button">
+              <h4 className="sticky-cta-title">{t.stickyCtaTitle}</h4>
+              <p className="sticky-cta-text">{t.stickyCtaText}</p>
+              <button onClick={() => openWhatsApp(t.whatsappMessage)} className="sticky-cta-button">
                 <i className="fab fa-whatsapp"></i>
-                צור קשר בוואטסאפ
+                {t.stickyCtaButton}
               </button>
             </div>
 
@@ -315,7 +378,7 @@ const ArticleTemplate = () => {
               <div className="table-of-contents-sidebar">
                 <h4 className="toc-sidebar-title">
                   <i className="fas fa-list"></i>
-                  תוכן עניינים
+                  {t.tocTitle}
                 </h4>
                 <ul className="toc-sidebar-list">
                   {tableOfContents.map((item) => (

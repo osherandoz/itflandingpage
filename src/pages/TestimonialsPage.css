@@ -6,7 +6,6 @@
   background: #0C0E1D;
   min-height: 100vh;
   color: #ffffff;
-  direction: rtl;
 }
 
 .testimonials-main {
@@ -224,7 +223,7 @@
 .testimonials-page .quote-icon {
   position: absolute;
   top: 0;
-  right: 0;
+  inset-inline-start: 0;
   width: 30px;
   height: 30px;
   background: linear-gradient(135deg, #3B82F6, #1D4ED8);
@@ -247,7 +246,7 @@
   margin: 0;
   flex: 1;
   font-style: italic;
-  padding-right: 40px;
+  padding-inline-start: 40px;
 }
 
 /* ————— CTA section ————— */
@@ -356,7 +355,7 @@
   }
 
   .testimonials-page .testimonial-quote {
-    padding-right: 32px;
+    padding-inline-start: 32px;
     font-size: 0.9rem;
   }
 
@@ -377,6 +376,6 @@
   }
 
   .testimonials-page .testimonial-quote {
-    padding-right: 0;
+    padding-inline-start: 0;
   }
 }

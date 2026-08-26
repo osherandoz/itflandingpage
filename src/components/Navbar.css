@@ -214,3 +214,18 @@
     z-index: 999;
   }
 }
+
+/* Language toggle — styled as a subtle pill so it reads as a mode switch, not a nav section */
+.nav-lang-toggle {
+  text-decoration: none;
+  border: 1px solid rgba(224, 224, 224, 0.35);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-lang-toggle::after {
+  display: none;
+}

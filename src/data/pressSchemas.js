@@ -4,14 +4,14 @@
 const SITE_URL = 'https://www.israeltechforce.com';
 const LOGO_URL = `${SITE_URL}/images/og-card.png`;
 
-export const buildNewsArticleSchema = (item) => ({
+export const buildNewsArticleSchema = (item, lang = 'he') => ({
   '@context': 'https://schema.org',
   '@type': 'NewsArticle',
   headline: item.headline,
   datePublished: item.dateISO,
   url: item.url,
   image: LOGO_URL,
-  inLanguage: 'he',
+  inLanguage: lang,
   publisher: {
     '@type': 'Organization',
     name: item.publisher,

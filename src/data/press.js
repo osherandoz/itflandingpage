@@ -99,6 +99,49 @@ export const pressItems = [
   },
 ];
 
+const PRESS_EN = {
+  'mako-instagram-wave-2026': {
+    headline: 'After WhatsApp: users in Israel report a wave of Instagram bans too',
+    summary:
+      "Osher Revach, social media security expert, is the only expert quoted in N12's report on the Instagram ban wave, including his analysis of a coordinated mass-reporting attack and ransom demands over WhatsApp.",
+  },
+  'ice-instagram-wave-2026': {
+    headline: 'After WhatsApp: an unusual wave of bans hits Instagram users in Israel',
+    summary:
+      '"According to social media security expert Osher Revach... this is a planned wave of attacks" — the ice website quotes Osher\'s analysis of the ban wave.',
+  },
+  'mako-whatsapp-lawsuit-2026': {
+    headline: '"My WhatsApp was blocked 3 times in the past week" — working on a class action',
+    summary:
+      "N12's follow-up piece on the ban wave: Osher Revach describes helping hundreds of people free of charge over a single weekend, and explains the pay-after-success model.",
+  },
+  'mako-whatsapp-wave-2026': {
+    headline: 'WhatsApp ban wave: many Israelis discovered their account was blocked',
+    summary:
+      'N12 quotes Osher Revach, "an expert in recovering Instagram, WhatsApp and Facebook accounts", on the major ban wave — including the "My WhatsApp Was Blocked" support group that hundreds joined in a single day.',
+  },
+  'mako-hitler-instagram-2025': {
+    headline: 'The Israeli who set out to illustrate: what if Hitler had Instagram?',
+    summary:
+      "A mako profile piece on Osher Revach's Holocaust Remembrance Day project — a social media simulation set in the Holocaust era that went viral.",
+  },
+  'ynet-2022': {
+    headline: "The company doesn't respond, but we know how to reach it",
+    summary:
+      "A Ynet article on social media account bans and the platforms' lack of response — and how experts like IsraelTechForce fill the gap.",
+  },
+  'facebook-economy-2025': {
+    headline: '375,000 members of a jobs group were suddenly deleted',
+    summary:
+      'A video piece by the Economy Channel on Facebook about a huge group that was suddenly deleted and the massive loss of content and followers — one of the cases that shows the need for a professional recovery service.',
+  },
+};
+
+export const pressItemsEn = pressItems.map((item) => ({
+  ...item,
+  ...PRESS_EN[item.id],
+}));
+
 export const communityGroups = [
   {
     id: 'instagram-group',
@@ -117,3 +160,19 @@ export const communityGroups = [
     description: 'קבוצת תמיכה מקצועית לחסימות וואטסאפ',
   },
 ];
+
+const GROUPS_EN = {
+  'instagram-group': {
+    name: '"My Instagram Was Blocked" | Facebook — help & support (Hebrew)',
+    description: 'Professional support group for Instagram bans',
+  },
+  'whatsapp-group': {
+    name: '"My WhatsApp Was Blocked" (Hebrew)',
+    description: 'Professional support group for WhatsApp bans',
+  },
+};
+
+export const communityGroupsEn = communityGroups.map((group) => ({
+  ...group,
+  ...GROUPS_EN[group.id],
+}));

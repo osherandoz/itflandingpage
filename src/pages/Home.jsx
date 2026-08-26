@@ -1,4 +1,5 @@
 import React, { useEffect, lazy, Suspense } from 'react';
+import { useLang } from '../i18n';
 import Navbar from '../components/Navbar';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import PressSection from '../components/PressSection';
@@ -16,6 +17,7 @@ const ArticlesSection = lazy(() => import('../components/ArticlesSection'));
 const FAQ = lazy(() => import('../components/FAQ'));
 
 const Home = () => {
+  const { dir } = useLang();
   useEffect(() => {
     // Handle hash-based scrolling (e.g., from article page CTA)
     if (window.location.hash === '#contact-form') {
@@ -29,7 +31,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div dir="rtl" className="app">
+    <div dir={dir} className="app">
       <Navbar />
       <section id="hero">
         <HeroSection />

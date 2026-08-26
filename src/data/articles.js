@@ -796,7 +796,7 @@ export const getFeaturedArticles = () => {
 
 // Helper function to get recent articles
 export const getRecentArticles = (limit = 3) => {
-  return articles
+  return [...articles]
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, limit);
 };

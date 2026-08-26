@@ -22,7 +22,7 @@
   top: 0;
   bottom: 0;
   /* Sits in the middle of the 60-px node column */
-  right: calc(50% - 1px);
+  inset-inline-start: calc(50% - 1px);
   width: 2px;
   background: linear-gradient(to bottom, #3B82F6, #8B5CF6, #F59E0B, #10B981);
   border-radius: 2px;
@@ -64,6 +64,13 @@
   opacity: 0;
   transform: translateX(-50px);
   transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+:where([dir="ltr"]) .hiw-row--right .hiw-card {
+  transform: translateX(-50px);
+}
+:where([dir="ltr"]) .hiw-row--left .hiw-card {
+  transform: translateX(50px);
 }
 
 .hiw-row--visible .hiw-card {
@@ -228,8 +235,8 @@
 
   /* Line hugs the nodes column — right side in RTL */
   .hiw-line {
-    left: auto;
-    right: 23px;  /* centre of 48-px node col */
+    inset-inline-end: auto;
+    inset-inline-start: 23px;  /* centre of 48-px node col */
   }
 
   /* Reset slide-in for mobile (just fade) */

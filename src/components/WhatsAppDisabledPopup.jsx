@@ -1,9 +1,59 @@
 import React, { useState } from 'react';
 import Modal from './Modal';
+import { useLang } from '../i18n';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './WhatsAppDisabledPopup.css';
 
+const STR = {
+  he: {
+    questionTitle: 'שאלה קצרה',
+    question: 'האם חשבון הוואטסאפ שלך נחסם או הושבת?',
+    questionSubtitle: 'אנחנו כאן כדי לעזור לך לשחזר את החשבון במהירות',
+    yesBtn: 'כן, החשבון שלי נחסם',
+    noBtn: 'לא, החשבון שלי פעיל',
+    formTitle: 'שחזור חשבון וואטסאפ',
+    successTitle: 'תודה! הפרטים התקבלו',
+    successText: 'נחזור אליך בהקדם האפשרי כדי לעזור לשחזר את החשבון שלך.',
+    formDescription: 'מלא את הפרטים למטה ונחזור אליך בהקדם האפשרי כדי לעזור לשחזר את החשבון שלך',
+    nameLabel: 'שם מלא *',
+    namePlaceholder: 'הכנס את שמך המלא',
+    nameRequired: 'שם מלא הוא שדה חובה',
+    phoneLabel: 'מספר טלפון *',
+    phonePlaceholder: 'הכנס את מספר הטלפון שלך',
+    phoneRequired: 'מספר טלפון הוא שדה חובה',
+    phoneInvalid: 'מספר טלפון לא תקין',
+    consentLabel: 'מאשר ליצור קשר?',
+    consentRequired: 'עליכם להסכים ליצירת קשר כדי לשלוח את הטופס',
+    sending: 'שולח...',
+    submit: 'שלח פנייה',
+  },
+  en: {
+    questionTitle: 'Quick Question',
+    question: 'Has your WhatsApp account been blocked or disabled?',
+    questionSubtitle: 'We are here to help you recover your account fast',
+    yesBtn: 'Yes, my account is blocked',
+    noBtn: 'No, my account is active',
+    formTitle: 'WhatsApp Account Recovery',
+    successTitle: 'Thank you! Your details were received',
+    successText: 'We will get back to you as soon as possible to help recover your account.',
+    formDescription: 'Fill in the details below and we will get back to you as soon as possible to help recover your account',
+    nameLabel: 'Full name *',
+    namePlaceholder: 'Enter your full name',
+    nameRequired: 'Full name is required',
+    phoneLabel: 'Phone number *',
+    phonePlaceholder: 'Enter your phone number',
+    phoneRequired: 'Phone number is required',
+    phoneInvalid: 'Invalid phone number',
+    consentLabel: 'I agree to be contacted',
+    consentRequired: 'You must agree to be contacted to send the form',
+    sending: 'Sending...',
+    submit: 'Send Request',
+  },
+};
+
 const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
+  const { lang, dir } = useLang();
+  const t = STR[lang];
   const [hasDisabledAccount, setHasDisabledAccount] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -34,17 +84,17 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
     const newErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'שם מלא הוא שדה חובה';
+      newErrors.name = t.nameRequired;
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = 'מספר טלפון הוא שדה חובה';
+      newErrors.phone = t.phoneRequired;
     } else if (!/^[\d\s\-+()]+$/.test(formData.phone)) {
-      newErrors.phone = 'מספר טלפון לא תקין';
+      newErrors.phone = t.phoneInvalid;
     }
 
     if (!formData.consent) {
-      newErrors.consent = 'עליכם להסכים ליצירת קשר כדי לשלוח את הטופס';
+      newErrors.consent = t.consentRequired;
     }
 
     setErrors(newErrors);
@@ -53,10 +103,10 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       setIsSubmitting(true);
-      
+
       try {
         // Track Lead event in Meta Pixel immediately
         if (typeof window !== 'undefined' && window.fbq) {
@@ -71,6 +121,7 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
             phone: formData.phone.trim(),
             consent: formData.consent,
             source: 'whatsapp-popup',
+            lang,
           }),
         });
         if (!r.ok) throw new Error('bad status');
@@ -115,28 +166,28 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
   // Show initial question
   if (hasDisabledAccount === null) {
     return (
-      <Modal isOpen={isOpen} onClose={handleClose} title="שאלה קצרה">
-        <div className="whatsapp-disabled-question">
+      <Modal isOpen={isOpen} onClose={handleClose} title={t.questionTitle}>
+        <div className="whatsapp-disabled-question" dir={dir}>
           <div className="question-icon">
             <i className="fab fa-whatsapp"></i>
           </div>
-          <h3>האם חשבון הוואטסאפ שלך נחסם או הושבת?</h3>
-          <p className="question-subtitle">אנחנו כאן כדי לעזור לך לשחזר את החשבון במהירות</p>
-          
+          <h3>{t.question}</h3>
+          <p className="question-subtitle">{t.questionSubtitle}</p>
+
           <div className="question-buttons">
-            <button 
+            <button
               className="answer-btn yes-btn"
               onClick={() => handleAnswer(true)}
             >
               <i className="fas fa-check-circle"></i>
-              כן, החשבון שלי נחסם
+              {t.yesBtn}
             </button>
-            <button 
+            <button
               className="answer-btn no-btn"
               onClick={() => handleAnswer(false)}
             >
               <i className="fas fa-times-circle"></i>
-              לא, החשבון שלי פעיל
+              {t.noBtn}
             </button>
           </div>
         </div>
@@ -147,15 +198,15 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
   // Show form if user answered yes
   if (hasDisabledAccount) {
     return (
-      <Modal isOpen={isOpen} onClose={handleClose} title="שחזור חשבון וואטסאפ">
-        <div className="whatsapp-disabled-form">
+      <Modal isOpen={isOpen} onClose={handleClose} title={t.formTitle}>
+        <div className="whatsapp-disabled-form" dir={dir}>
           {isSubmitted ? (
             <div className="success-message">
               <div className="success-icon">
                 <i className="fas fa-check-circle"></i>
               </div>
-              <h3>תודה! הפרטים התקבלו</h3>
-              <p>נחזור אליך בהקדם האפשרי כדי לעזור לשחזר את החשבון שלך.</p>
+              <h3>{t.successTitle}</h3>
+              <p>{t.successText}</p>
             </div>
           ) : (
             <>
@@ -164,13 +215,13 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
                   <i className="fab fa-whatsapp"></i>
                 </div>
                 <p className="form-description">
-                  מלא את הפרטים למטה ונחזור אליך בהקדם האפשרי כדי לעזור לשחזר את החשבון שלך
+                  {t.formDescription}
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="whatsapp-form">
                 <div className="form-group">
-                  <label htmlFor="name">שם מלא *</label>
+                  <label htmlFor="name">{t.nameLabel}</label>
                   <input
                     type="text"
                     id="name"
@@ -178,7 +229,7 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
                     value={formData.name}
                     onChange={handleInputChange}
                     className={errors.name ? 'error' : ''}
-                    placeholder="הכנס את שמך המלא"
+                    placeholder={t.namePlaceholder}
                     disabled={isSubmitting}
                     required
                   />
@@ -186,7 +237,7 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="phone">מספר טלפון *</label>
+                  <label htmlFor="phone">{t.phoneLabel}</label>
                   <input
                     type="tel"
                     id="phone"
@@ -194,7 +245,7 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
                     value={formData.phone}
                     onChange={handleInputChange}
                     className={errors.phone ? 'error' : ''}
-                    placeholder="הכנס את מספר הטלפון שלך"
+                    placeholder={t.phonePlaceholder}
                     disabled={isSubmitting}
                     required
                   />
@@ -213,7 +264,7 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
                       required
                     />
                     <span className="checkmark"></span>
-                    מאשר ליצור קשר?
+                    {t.consentLabel}
                   </label>
                   {errors.consent && <span className="error-message">{errors.consent}</span>}
                 </div>
@@ -222,12 +273,12 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
                   {isSubmitting ? (
                     <>
                       <i className="fas fa-spinner fa-spin"></i>
-                      שולח...
+                      {t.sending}
                     </>
                   ) : (
                     <>
                       <i className="fas fa-paper-plane"></i>
-                      שלח פנייה
+                      {t.submit}
                     </>
                   )}
                 </button>

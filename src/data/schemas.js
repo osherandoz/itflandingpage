@@ -3,10 +3,10 @@
  * All schema objects are plain JS (no JSX/React dependency).
  */
 
-const SITE_URL = 'https://www.israeltechforce.com';
-const LOGO_URL = `${SITE_URL}/images/israeltechforce-logo-white.png`;
-const OG_IMAGE_URL = `${SITE_URL}/images/og-card.png`;
-const BUSINESS_NAME = 'IsraelTechForce - ITF Recovery';
+export const SITE_URL = 'https://www.israeltechforce.com';
+export const LOGO_URL = `${SITE_URL}/images/israeltechforce-logo-white.png`;
+export const OG_IMAGE_URL = `${SITE_URL}/images/og-card.png`;
+export const BUSINESS_NAME = 'IsraelTechForce - ITF Recovery';
 
 // ─── LocalBusiness ────────────────────────────────────────────────────────────
 export const LOCAL_BUSINESS_SCHEMA = {

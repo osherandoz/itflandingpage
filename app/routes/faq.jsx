@@ -1,5 +1,7 @@
 import FaqPage from '../../src/pages/FaqPage';
 import { CENTRAL_FAQ_SCHEMA } from '../../src/data/centralFaqSchema';
+import { CATEGORIES_HE } from '../../src/data/faqCategories.js';
+import { hreflangLinks } from '../../src/i18n/index.js';
 
 export const meta = () => [
   { title: 'שאלות נפוצות - שחזור חשבונות | IsraelTechForce' },
@@ -19,6 +21,7 @@ export const meta = () => [
   },
   { name: 'twitter:card', content: 'summary_large_image' },
   { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/faq' },
+  ...hreflangLinks('/faq', '/en/faq'),
 ];
 
 export default function FaqRoute() {
@@ -28,7 +31,7 @@ export default function FaqRoute() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(CENTRAL_FAQ_SCHEMA) }}
       />
-      <FaqPage />
+      <FaqPage categories={CATEGORIES_HE} />
     </>
   );
 }

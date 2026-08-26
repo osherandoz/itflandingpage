@@ -29,7 +29,21 @@
       "routes/vsl-bms-v2": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/thank-you-lead": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/thank-you-purchase": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
-      "routes/dashboard": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+      "routes/dashboard": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.privacy": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.press": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.articles": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.articles.$slug": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.facebook-recovery": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.instagram-recovery": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.whatsapp-recovery": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.facebook-disabled": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.instagram-hacked": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.ads-manager": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.newsletter": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.faq": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/en.testimonials": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
     },
     "routes": {
       "root": {
@@ -217,6 +231,132 @@
         "config": {
           "runtime": "nodejs"
         }
+      },
+      "routes/en.home": {
+        "id": "routes/en.home",
+        "parentId": "root",
+        "file": "app/routes/en.home.jsx",
+        "path": "en",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.privacy": {
+        "id": "routes/en.privacy",
+        "parentId": "root",
+        "file": "app/routes/en.privacy.jsx",
+        "path": "en/privacy",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.press": {
+        "id": "routes/en.press",
+        "parentId": "root",
+        "file": "app/routes/en.press.jsx",
+        "path": "en/press",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.articles": {
+        "id": "routes/en.articles",
+        "parentId": "root",
+        "file": "app/routes/en.articles.jsx",
+        "path": "en/articles",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.articles.$slug": {
+        "id": "routes/en.articles.$slug",
+        "parentId": "root",
+        "file": "app/routes/en.articles.$slug.jsx",
+        "path": "en/articles/:slug",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.facebook-recovery": {
+        "id": "routes/en.facebook-recovery",
+        "parentId": "root",
+        "file": "app/routes/en.facebook-recovery.jsx",
+        "path": "en/facebook-account-recovery",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.instagram-recovery": {
+        "id": "routes/en.instagram-recovery",
+        "parentId": "root",
+        "file": "app/routes/en.instagram-recovery.jsx",
+        "path": "en/instagram-account-recovery",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.whatsapp-recovery": {
+        "id": "routes/en.whatsapp-recovery",
+        "parentId": "root",
+        "file": "app/routes/en.whatsapp-recovery.jsx",
+        "path": "en/whatsapp-account-recovery",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.facebook-disabled": {
+        "id": "routes/en.facebook-disabled",
+        "parentId": "root",
+        "file": "app/routes/en.facebook-disabled.jsx",
+        "path": "en/facebook-account-disabled",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.instagram-hacked": {
+        "id": "routes/en.instagram-hacked",
+        "parentId": "root",
+        "file": "app/routes/en.instagram-hacked.jsx",
+        "path": "en/instagram-account-hacked",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.ads-manager": {
+        "id": "routes/en.ads-manager",
+        "parentId": "root",
+        "file": "app/routes/en.ads-manager.jsx",
+        "path": "en/ads-manager-recovery",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.newsletter": {
+        "id": "routes/en.newsletter",
+        "parentId": "root",
+        "file": "app/routes/en.newsletter.jsx",
+        "path": "en/newsletter",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.faq": {
+        "id": "routes/en.faq",
+        "parentId": "root",
+        "file": "app/routes/en.faq.jsx",
+        "path": "en/faq",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/en.testimonials": {
+        "id": "routes/en.testimonials",
+        "parentId": "root",
+        "file": "app/routes/en.testimonials.jsx",
+        "path": "en/testimonials",
+        "config": {
+          "runtime": "nodejs"
+        }
       }
     }
   },
@@ -358,6 +498,90 @@
         "parentId": "root",
         "file": "./routes/dashboard.jsx",
         "path": "dashboard"
+      },
+      "routes/en.home": {
+        "id": "routes/en.home",
+        "parentId": "root",
+        "file": "./routes/en.home.jsx",
+        "path": "en"
+      },
+      "routes/en.privacy": {
+        "id": "routes/en.privacy",
+        "parentId": "root",
+        "file": "./routes/en.privacy.jsx",
+        "path": "en/privacy"
+      },
+      "routes/en.press": {
+        "id": "routes/en.press",
+        "parentId": "root",
+        "file": "./routes/en.press.jsx",
+        "path": "en/press"
+      },
+      "routes/en.articles": {
+        "id": "routes/en.articles",
+        "parentId": "root",
+        "file": "./routes/en.articles.jsx",
+        "path": "en/articles"
+      },
+      "routes/en.articles.$slug": {
+        "id": "routes/en.articles.$slug",
+        "parentId": "root",
+        "file": "./routes/en.articles.$slug.jsx",
+        "path": "en/articles/:slug"
+      },
+      "routes/en.facebook-recovery": {
+        "id": "routes/en.facebook-recovery",
+        "parentId": "root",
+        "file": "./routes/en.facebook-recovery.jsx",
+        "path": "en/facebook-account-recovery"
+      },
+      "routes/en.instagram-recovery": {
+        "id": "routes/en.instagram-recovery",
+        "parentId": "root",
+        "file": "./routes/en.instagram-recovery.jsx",
+        "path": "en/instagram-account-recovery"
+      },
+      "routes/en.whatsapp-recovery": {
+        "id": "routes/en.whatsapp-recovery",
+        "parentId": "root",
+        "file": "./routes/en.whatsapp-recovery.jsx",
+        "path": "en/whatsapp-account-recovery"
+      },
+      "routes/en.facebook-disabled": {
+        "id": "routes/en.facebook-disabled",
+        "parentId": "root",
+        "file": "./routes/en.facebook-disabled.jsx",
+        "path": "en/facebook-account-disabled"
+      },
+      "routes/en.instagram-hacked": {
+        "id": "routes/en.instagram-hacked",
+        "parentId": "root",
+        "file": "./routes/en.instagram-hacked.jsx",
+        "path": "en/instagram-account-hacked"
+      },
+      "routes/en.ads-manager": {
+        "id": "routes/en.ads-manager",
+        "parentId": "root",
+        "file": "./routes/en.ads-manager.jsx",
+        "path": "en/ads-manager-recovery"
+      },
+      "routes/en.newsletter": {
+        "id": "routes/en.newsletter",
+        "parentId": "root",
+        "file": "./routes/en.newsletter.jsx",
+        "path": "en/newsletter"
+      },
+      "routes/en.faq": {
+        "id": "routes/en.faq",
+        "parentId": "root",
+        "file": "./routes/en.faq.jsx",
+        "path": "en/faq"
+      },
+      "routes/en.testimonials": {
+        "id": "routes/en.testimonials",
+        "parentId": "root",
+        "file": "./routes/en.testimonials.jsx",
+        "path": "en/testimonials"
       }
     },
     "routeDiscovery": {
@@ -454,6 +678,62 @@
           {
             "file": "./routes/dashboard.jsx",
             "path": "dashboard"
+          },
+          {
+            "file": "./routes/en.home.jsx",
+            "path": "en"
+          },
+          {
+            "file": "./routes/en.privacy.jsx",
+            "path": "en/privacy"
+          },
+          {
+            "file": "./routes/en.press.jsx",
+            "path": "en/press"
+          },
+          {
+            "file": "./routes/en.articles.jsx",
+            "path": "en/articles"
+          },
+          {
+            "file": "./routes/en.articles.$slug.jsx",
+            "path": "en/articles/:slug"
+          },
+          {
+            "file": "./routes/en.facebook-recovery.jsx",
+            "path": "en/facebook-account-recovery"
+          },
+          {
+            "file": "./routes/en.instagram-recovery.jsx",
+            "path": "en/instagram-account-recovery"
+          },
+          {
+            "file": "./routes/en.whatsapp-recovery.jsx",
+            "path": "en/whatsapp-account-recovery"
+          },
+          {
+            "file": "./routes/en.facebook-disabled.jsx",
+            "path": "en/facebook-account-disabled"
+          },
+          {
+            "file": "./routes/en.instagram-hacked.jsx",
+            "path": "en/instagram-account-hacked"
+          },
+          {
+            "file": "./routes/en.ads-manager.jsx",
+            "path": "en/ads-manager-recovery"
+          },
+          {
+            "file": "./routes/en.newsletter.jsx",
+            "path": "en/newsletter"
+          },
+          {
+            "file": "./routes/en.faq.jsx",
+            "path": "en/faq"
+          },
+          {
+            "file": "./routes/en.testimonials.jsx",
+            "path": "en/testimonials"
           }
         ]
       }

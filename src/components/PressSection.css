@@ -94,6 +94,10 @@
   flex: 1;
 }
 
+[dir="ltr"] .press-headline {
+  direction: ltr;
+}
+
 /* ── Date ─────────────────────────────────────────────────────── */
 .press-date {
   color: #7a8aaa;

@@ -1,9 +1,56 @@
 import React, { useState } from 'react';
-import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
+import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { useLang } from '../i18n';
 import Icon from './Icon';
 import './ContactForm.css';
 
+const STR = {
+  he: {
+    header: 'צור קשר',
+    subheader: 'מלא/י את הטופס למטה ואחזור אליך בהקדם האפשרי',
+    success: 'תודה! הפרטים התקבלו',
+    submitErrorText: 'משהו השתבש בשליחה. נסה/י שוב או',
+    whatsappDirect: 'דבר/י איתי ישירות בוואטסאפ',
+    nameLabel: 'שם מלא *',
+    namePlaceholder: 'הכנס את שמך המלא',
+    nameRequired: 'שם מלא הוא שדה חובה',
+    phoneLabel: 'מספר טלפון *',
+    phonePlaceholder: 'הכנס את מספר הטלפון שלך',
+    phoneRequired: 'מספר טלפון הוא שדה חובה',
+    phoneInvalid: 'מספר טלפון לא תקין',
+    consentLabel: 'אני מאשר/ת ליצור איתי קשר',
+    consentRequired: 'עליך להסכים ליצירת קשר כדי לשלוח את הטופס',
+    sending: 'שולח...',
+    submit: 'שלח/י הודעה, אחזור אליך תוך שעה',
+    whatsappNote: 'רוצה מענה מיידי?',
+    whatsappMessage: 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים',
+  },
+  en: {
+    header: 'Contact Me',
+    subheader: 'Fill in the form below and I will get back to you as soon as possible',
+    success: 'Thank you! Your details were received',
+    submitErrorText: 'Something went wrong. Try again or',
+    whatsappDirect: 'chat with me directly on WhatsApp',
+    nameLabel: 'Full name *',
+    namePlaceholder: 'Enter your full name',
+    nameRequired: 'Full name is required',
+    phoneLabel: 'Phone number *',
+    phonePlaceholder: 'Enter your phone number',
+    phoneRequired: 'Phone number is required',
+    phoneInvalid: 'Invalid phone number',
+    consentLabel: 'I agree to be contacted',
+    consentRequired: 'You must agree to be contacted to send the form',
+    sending: 'Sending...',
+    submit: 'Send a message, I will get back to you within an hour',
+    whatsappNote: 'Want an immediate answer?',
+    whatsappMessage: WHATSAPP_DEFAULT_MSG.en,
+  },
+};
+
 const ContactForm = () => {
+  const { lang } = useLang();
+  const t = STR[lang];
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -33,17 +80,17 @@ const ContactForm = () => {
     const newErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'שם מלא הוא שדה חובה';
+      newErrors.name = t.nameRequired;
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = 'מספר טלפון הוא שדה חובה';
+      newErrors.phone = t.phoneRequired;
     } else if (!/^[\d\s\-+()]+$/.test(formData.phone)) {
-      newErrors.phone = 'מספר טלפון לא תקין';
+      newErrors.phone = t.phoneInvalid;
     }
 
     if (!formData.consent) {
-      newErrors.consent = 'עליך להסכים ליצירת קשר כדי לשלוח את הטופס';
+      newErrors.consent = t.consentRequired;
     }
 
     setErrors(newErrors);
@@ -52,10 +99,10 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       setIsSubmitting(true);
-      
+
       try {
         // Track Lead event in Meta Pixel immediately
         if (typeof window !== 'undefined' && window.fbq) {
@@ -83,6 +130,7 @@ const ContactForm = () => {
               phone: formData.phone.trim(),
               consent: formData.consent,
               source: 'contact',
+              lang,
             }),
           });
           if (!r.ok) throw new Error('bad status');
@@ -104,22 +152,22 @@ const ContactForm = () => {
   return (
     <div className="contact-form-container" id="contact-form">
       <div className="contact-form-header">
-        <h2>צור קשר</h2>
-        <p>מלא/י את הטופס למטה ואחזור אליך בהקדם האפשרי</p>
+        <h2>{t.header}</h2>
+        <p>{t.subheader}</p>
       </div>
 
       {isSubmitted && (
         <div className="success-message" role="alert">
-          <p>תודה! הפרטים התקבלו</p>
+          <p>{t.success}</p>
         </div>
       )}
 
       {submitError && (
         <div className="submit-error-message" role="alert">
-          <p>משהו השתבש בשליחה. נסה/י שוב או{' '}
-            <a className="form-whatsapp-link" href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}>
+          <p>{t.submitErrorText}{' '}
+            <a className="form-whatsapp-link" href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}>
               <Icon name="whatsapp" aria-hidden="true" />
-              דבר/י איתי ישירות בוואטסאפ
+              {t.whatsappDirect}
             </a>
           </p>
         </div>
@@ -127,7 +175,7 @@ const ContactForm = () => {
 
       <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="name">שם מלא *</label>
+          <label htmlFor="name">{t.nameLabel}</label>
           <input
             type="text"
             id="name"
@@ -136,7 +184,7 @@ const ContactForm = () => {
             value={formData.name}
             onChange={handleInputChange}
             className={errors.name ? 'error' : ''}
-            placeholder="הכנס את שמך המלא"
+            placeholder={t.namePlaceholder}
             disabled={isSubmitting}
             required
           />
@@ -144,7 +192,7 @@ const ContactForm = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="phone">מספר טלפון *</label>
+          <label htmlFor="phone">{t.phoneLabel}</label>
           <input
             type="tel"
             id="phone"
@@ -154,7 +202,7 @@ const ContactForm = () => {
             value={formData.phone}
             onChange={handleInputChange}
             className={errors.phone ? 'error' : ''}
-            placeholder="הכנס את מספר הטלפון שלך"
+            placeholder={t.phonePlaceholder}
             disabled={isSubmitting}
             required
           />
@@ -173,7 +221,7 @@ const ContactForm = () => {
               required
             />
             <span className="checkmark"></span>
-            אני מאשר/ת ליצור איתי קשר
+            {t.consentLabel}
           </label>
           {errors.consent && <span className="error-message">{errors.consent}</span>}
         </div>
@@ -182,24 +230,24 @@ const ContactForm = () => {
           {isSubmitting ? (
             <>
               <Icon name="spinner" spin aria-hidden="true" />
-              שולח...
+              {t.sending}
             </>
           ) : (
-            'שלח/י הודעה, אחזור אליך תוך שעה'
+            t.submit
           )}
         </button>
 
         <p className="form-whatsapp-note">
-          רוצה מענה מיידי?{' '}
+          {t.whatsappNote}{' '}
           <a
             className="form-whatsapp-link"
-            href={getWhatsAppUrl()}
+            href={getWhatsAppUrl(t.whatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={trackWhatsAppClick}
           >
             <Icon name="whatsapp" aria-hidden="true" />
-            דבר/י איתי ישירות בוואטסאפ
+            {t.whatsappDirect}
           </a>
         </p>
       </form>

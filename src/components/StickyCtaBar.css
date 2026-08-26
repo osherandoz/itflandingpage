@@ -56,7 +56,7 @@
 
 .sticky-cta-bar__dismiss {
   position: absolute;
-  left: 14px;
+  inset-inline-end: 14px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -92,7 +92,7 @@
   }
 
   .sticky-cta-bar__dismiss {
-    left: 10px;
+    inset-inline-end: 10px;
   }
 }
 

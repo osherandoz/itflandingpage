@@ -2,6 +2,8 @@ import { useEffect, useRef } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
 import { LOCAL_BUSINESS_SCHEMA, PERSON_SCHEMA } from '../src/data/schemas.js';
+import { LOCAL_BUSINESS_SCHEMA_EN, PERSON_SCHEMA_EN } from '../src/data/schemas.en.js';
+import { langFromPathname } from '../src/i18n/index.js';
 // Self-hosted font — eliminates render-blocking Google Fonts round-trip
 import '@fontsource/heebo/400.css';
 import '@fontsource/heebo/700.css';
@@ -9,8 +11,10 @@ import '../src/index.css';
 import '../src/App.css';
 
 export function Layout({ children }) {
+  const { pathname } = useLocation();
+  const lang = langFromPathname(pathname);
   return (
-    <html lang="he" dir="rtl">
+    <html lang={lang} dir={lang === 'en' ? 'ltr' : 'rtl'}>
       <head>
         <meta charSet="UTF-8" />
         <link rel="icon" type="image/png" sizes="64x64" href="/images/favicon-64.png" />
@@ -23,15 +27,19 @@ export function Layout({ children }) {
         {/* Site-wide static meta */}
         <meta name="author" content="IsraelTechForce - ITF Recovery" />
 
-        {/* Structured Data — LocalBusiness (global) */}
+        {/* Structured Data — LocalBusiness (global, language-matched) */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(LOCAL_BUSINESS_SCHEMA) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(lang === 'en' ? LOCAL_BUSINESS_SCHEMA_EN : LOCAL_BUSINESS_SCHEMA),
+          }}
         />
         {/* Structured Data — Person (Osher Revach) */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_SCHEMA) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(lang === 'en' ? PERSON_SCHEMA_EN : PERSON_SCHEMA),
+          }}
         />
 
         {/* Google Search Console verification */}

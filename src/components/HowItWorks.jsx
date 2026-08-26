@@ -1,42 +1,91 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
+import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { useLang } from '../i18n';
 import Icon from './Icon';
 import './HowItWorks.css';
 
-const STEPS = [
-  {
-    icon: 'comments',
-    title: 'שולחים הודעה',
-    description: 'שולחים הודעה בוואטסאפ, אני עונה תוך דקות ומתחיל לבדוק את המקרה שלך.',
-    time: '~ 2 דקות',
-    color: '#3B82F6',
+const STR = {
+  he: {
+    steps: [
+      {
+        icon: 'comments',
+        title: 'שולחים הודעה',
+        description: 'שולחים הודעה בוואטסאפ, אני עונה תוך דקות ומתחיל לבדוק את המקרה שלך.',
+        time: '~ 2 דקות',
+        color: '#3B82F6',
+      },
+      {
+        icon: 'search',
+        title: 'אבחון מהיר',
+        description: 'כמה שאלות קצרות ובדיקה מקצועית של הבעיה, בלי בזבוז זמן. אני יודע בדיוק מה לחפש.',
+        time: '~ 10 דקות',
+        color: '#8B5CF6',
+      },
+      {
+        icon: 'invoice',
+        title: 'הצעה ושקיפות מלאה',
+        description: 'הצעת מחיר ברורה עם אחוז הצלחה משוער לכל אופציה. אין הפתעות, תשלום רק אחרי הצלחה.',
+        time: '~ 5 דקות',
+        color: '#F59E0B',
+      },
+      {
+        icon: 'rocket',
+        title: 'יוצאים לדרך',
+        description: 'חתמת? אני יוצא לדרך. בדרך כלל תראה תוצאות תוך 24–48 שעות.',
+        time: '24–48 שעות',
+        color: '#10B981',
+      },
+    ],
+    title: 'מהפנייה ועד לשחזור',
+    subtitle: 'מסבירים לך בדיוק מה קורה בכל שלב, בלי הפתעות.',
+    ctaText: 'מוכן להתחיל? אבחון ראשוני, חינמי לחלוטין',
+    ctaButton: 'שלח הודעה עכשיו',
+    whatsappMessage: 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים',
   },
-  {
-    icon: 'search',
-    title: 'אבחון מהיר',
-    description: 'כמה שאלות קצרות ובדיקה מקצועית של הבעיה, בלי בזבוז זמן. אני יודע בדיוק מה לחפש.',
-    time: '~ 10 דקות',
-    color: '#8B5CF6',
+  en: {
+    steps: [
+      {
+        icon: 'comments',
+        title: 'Send a Message',
+        description: 'Message me on WhatsApp - I reply within minutes and start looking into your case.',
+        time: '~ 2 minutes',
+        color: '#3B82F6',
+      },
+      {
+        icon: 'search',
+        title: 'Quick Diagnosis',
+        description: 'A few short questions and a professional review of the problem, no time wasted. I know exactly what to look for.',
+        time: '~ 10 minutes',
+        color: '#8B5CF6',
+      },
+      {
+        icon: 'invoice',
+        title: 'Clear Quote, Full Transparency',
+        description: 'A clear price quote with an estimated success rate for each option. No surprises - you pay only after success.',
+        time: '~ 5 minutes',
+        color: '#F59E0B',
+      },
+      {
+        icon: 'rocket',
+        title: 'We Get to Work',
+        description: "Signed off? I get to work. You'll usually see results within 24–48 hours.",
+        time: '24–48 hours',
+        color: '#10B981',
+      },
+    ],
+    title: 'From First Message to Recovery',
+    subtitle: "You'll know exactly what happens at every step, no surprises.",
+    ctaText: 'Ready to start? Your first diagnosis is completely free',
+    ctaButton: 'Send a Message Now',
+    whatsappMessage: WHATSAPP_DEFAULT_MSG.en,
   },
-  {
-    icon: 'invoice',
-    title: 'הצעה ושקיפות מלאה',
-    description: 'הצעת מחיר ברורה עם אחוז הצלחה משוער לכל אופציה. אין הפתעות, תשלום רק אחרי הצלחה.',
-    time: '~ 5 דקות',
-    color: '#F59E0B',
-  },
-  {
-    icon: 'rocket',
-    title: 'יוצאים לדרך',
-    description: 'חתמת? אני יוצא לדרך. בדרך כלל תראה תוצאות תוך 24–48 שעות.',
-    time: '24–48 שעות',
-    color: '#10B981',
-  },
-];
+};
 
 const HowItWorks = () => {
   const [visible, setVisible] = useState(new Set());
   const refs = useRef([]);
+  const { lang } = useLang();
+  const t = STR[lang];
 
   useEffect(() => {
     const observers = refs.current.map((el, i) => {
@@ -54,16 +103,16 @@ const HowItWorks = () => {
   return (
     <section className="hiw-section">
       <div className="container">
-        <h2 className="section-title">מהפנייה ועד לשחזור</h2>
+        <h2 className="section-title">{t.title}</h2>
         <p className="section-subtitle">
-          מסבירים לך בדיוק מה קורה בכל שלב, בלי הפתעות.
+          {t.subtitle}
         </p>
 
         <div className="hiw-timeline">
           {/* Gradient connecting line */}
           <div className="hiw-line" aria-hidden="true" />
 
-          {STEPS.map((step, i) => {
+          {t.steps.map((step, i) => {
             const isRight = i % 2 === 0;
             return (
               <div
@@ -97,16 +146,16 @@ const HowItWorks = () => {
 
         {/* Bottom CTA */}
         <div className="hiw-cta">
-          <p className="hiw-cta-text">מוכן להתחיל? אבחון ראשוני, חינמי לחלוטין</p>
+          <p className="hiw-cta-text">{t.ctaText}</p>
           <a
             className="hiw-cta-btn"
-            href={getWhatsAppUrl()}
+            href={getWhatsAppUrl(t.whatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={trackWhatsAppClick}
           >
             <Icon name="whatsapp" aria-hidden="true" />
-            שלח הודעה עכשיו
+            {t.ctaButton}
           </a>
         </div>
       </div>

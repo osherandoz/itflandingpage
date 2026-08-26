@@ -1,6 +1,7 @@
 import ArticleTemplate from '../../src/components/ArticleTemplate';
 import { getArticleBySlug } from '../../src/data/articles';
 import { buildBlogPostingSchema, buildBreadcrumbSchema } from '../../src/data/schemas.js';
+import { hreflangLinks } from '../../src/i18n/index.js';
 import { useParams } from 'react-router';
 
 // Unknown/placeholder slugs must be a real 404, not a soft-404 (SEO)
@@ -53,6 +54,7 @@ export const meta = ({ params }) => {
     { name: 'twitter:description', content: article.excerpt },
     { name: 'twitter:image', content: ogImage },
     { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+    ...hreflangLinks('/articles/' + params.slug, '/en/articles/' + params.slug),
   ];
 };
 
@@ -84,7 +86,7 @@ export default function ArticleRoute() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       )}
-      <ArticleTemplate />
+      <ArticleTemplate article={article} />
     </>
   );
 }

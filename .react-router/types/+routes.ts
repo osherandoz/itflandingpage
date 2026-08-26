@@ -73,12 +73,56 @@ type Pages = {
   "/dashboard": {
     params: {};
   };
+  "/en": {
+    params: {};
+  };
+  "/en/privacy": {
+    params: {};
+  };
+  "/en/press": {
+    params: {};
+  };
+  "/en/articles": {
+    params: {};
+  };
+  "/en/articles/:slug": {
+    params: {
+      "slug": string;
+    };
+  };
+  "/en/facebook-account-recovery": {
+    params: {};
+  };
+  "/en/instagram-account-recovery": {
+    params: {};
+  };
+  "/en/whatsapp-account-recovery": {
+    params: {};
+  };
+  "/en/facebook-account-disabled": {
+    params: {};
+  };
+  "/en/instagram-account-hacked": {
+    params: {};
+  };
+  "/en/ads-manager-recovery": {
+    params: {};
+  };
+  "/en/newsletter": {
+    params: {};
+  };
+  "/en/faq": {
+    params: {};
+  };
+  "/en/testimonials": {
+    params: {};
+  };
 };
 
 type RouteFiles = {
   "root.jsx": {
     id: "root";
-    page: "/" | "/privacy" | "/press" | "/articles" | "/articles/:slug" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05E4\u05D9\u05D9\u05E1\u05D1\u05D5\u05E7" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D0\u05D9\u05E0\u05E1\u05D8\u05D2\u05E8\u05DD" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D5\u05D5\u05D0\u05D8\u05E1\u05D0\u05E4" | "/\u05D7\u05E9\u05D1\u05D5\u05DF-\u05E4\u05D9\u05D9\u05E1\u05D1\u05D5\u05E7-\u05DE\u05D5\u05E9\u05D1\u05EA" | "/\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D0\u05D9\u05E0\u05E1\u05D8\u05D2\u05E8\u05DD-\u05E0\u05E4\u05E8\u05E5" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05DE\u05E0\u05D4\u05DC-\u05DE\u05D5\u05D3\u05E2\u05D5\u05EA" | "/newsletter" | "/faq" | "/testimonials" | "/bms-sm" | "/VSL-BMS" | "/VSL-BMS-V2" | "/\u05EA\u05D5\u05D3\u05D4-\u05E7\u05DC\u05D9\u05E1\u05D8" | "/\u05EA\u05D5\u05D3\u05D4-\u05E8\u05DB\u05D9\u05E9\u05D4" | "/dashboard";
+    page: "/" | "/privacy" | "/press" | "/articles" | "/articles/:slug" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05E4\u05D9\u05D9\u05E1\u05D1\u05D5\u05E7" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D0\u05D9\u05E0\u05E1\u05D8\u05D2\u05E8\u05DD" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D5\u05D5\u05D0\u05D8\u05E1\u05D0\u05E4" | "/\u05D7\u05E9\u05D1\u05D5\u05DF-\u05E4\u05D9\u05D9\u05E1\u05D1\u05D5\u05E7-\u05DE\u05D5\u05E9\u05D1\u05EA" | "/\u05D7\u05E9\u05D1\u05D5\u05DF-\u05D0\u05D9\u05E0\u05E1\u05D8\u05D2\u05E8\u05DD-\u05E0\u05E4\u05E8\u05E5" | "/\u05E9\u05D7\u05D6\u05D5\u05E8-\u05DE\u05E0\u05D4\u05DC-\u05DE\u05D5\u05D3\u05E2\u05D5\u05EA" | "/newsletter" | "/faq" | "/testimonials" | "/bms-sm" | "/VSL-BMS" | "/VSL-BMS-V2" | "/\u05EA\u05D5\u05D3\u05D4-\u05E7\u05DC\u05D9\u05E1\u05D8" | "/\u05EA\u05D5\u05D3\u05D4-\u05E8\u05DB\u05D9\u05E9\u05D4" | "/dashboard" | "/en" | "/en/privacy" | "/en/press" | "/en/articles" | "/en/articles/:slug" | "/en/facebook-account-recovery" | "/en/instagram-account-recovery" | "/en/whatsapp-account-recovery" | "/en/facebook-account-disabled" | "/en/instagram-account-hacked" | "/en/ads-manager-recovery" | "/en/newsletter" | "/en/faq" | "/en/testimonials";
   };
   "./routes/home.jsx": {
     id: "routes/home";
@@ -160,6 +204,62 @@ type RouteFiles = {
     id: "routes/dashboard";
     page: "/dashboard";
   };
+  "./routes/en.home.jsx": {
+    id: "routes/en.home";
+    page: "/en";
+  };
+  "./routes/en.privacy.jsx": {
+    id: "routes/en.privacy";
+    page: "/en/privacy";
+  };
+  "./routes/en.press.jsx": {
+    id: "routes/en.press";
+    page: "/en/press";
+  };
+  "./routes/en.articles.jsx": {
+    id: "routes/en.articles";
+    page: "/en/articles";
+  };
+  "./routes/en.articles.$slug.jsx": {
+    id: "routes/en.articles.$slug";
+    page: "/en/articles/:slug";
+  };
+  "./routes/en.facebook-recovery.jsx": {
+    id: "routes/en.facebook-recovery";
+    page: "/en/facebook-account-recovery";
+  };
+  "./routes/en.instagram-recovery.jsx": {
+    id: "routes/en.instagram-recovery";
+    page: "/en/instagram-account-recovery";
+  };
+  "./routes/en.whatsapp-recovery.jsx": {
+    id: "routes/en.whatsapp-recovery";
+    page: "/en/whatsapp-account-recovery";
+  };
+  "./routes/en.facebook-disabled.jsx": {
+    id: "routes/en.facebook-disabled";
+    page: "/en/facebook-account-disabled";
+  };
+  "./routes/en.instagram-hacked.jsx": {
+    id: "routes/en.instagram-hacked";
+    page: "/en/instagram-account-hacked";
+  };
+  "./routes/en.ads-manager.jsx": {
+    id: "routes/en.ads-manager";
+    page: "/en/ads-manager-recovery";
+  };
+  "./routes/en.newsletter.jsx": {
+    id: "routes/en.newsletter";
+    page: "/en/newsletter";
+  };
+  "./routes/en.faq.jsx": {
+    id: "routes/en.faq";
+    page: "/en/faq";
+  };
+  "./routes/en.testimonials.jsx": {
+    id: "routes/en.testimonials";
+    page: "/en/testimonials";
+  };
 };
 
 type RouteModules = {
@@ -184,4 +284,18 @@ type RouteModules = {
   "routes/thank-you-lead": typeof import("./app/./routes/thank-you-lead.jsx");
   "routes/thank-you-purchase": typeof import("./app/./routes/thank-you-purchase.jsx");
   "routes/dashboard": typeof import("./app/./routes/dashboard.jsx");
+  "routes/en.home": typeof import("./app/./routes/en.home.jsx");
+  "routes/en.privacy": typeof import("./app/./routes/en.privacy.jsx");
+  "routes/en.press": typeof import("./app/./routes/en.press.jsx");
+  "routes/en.articles": typeof import("./app/./routes/en.articles.jsx");
+  "routes/en.articles.$slug": typeof import("./app/./routes/en.articles.$slug.jsx");
+  "routes/en.facebook-recovery": typeof import("./app/./routes/en.facebook-recovery.jsx");
+  "routes/en.instagram-recovery": typeof import("./app/./routes/en.instagram-recovery.jsx");
+  "routes/en.whatsapp-recovery": typeof import("./app/./routes/en.whatsapp-recovery.jsx");
+  "routes/en.facebook-disabled": typeof import("./app/./routes/en.facebook-disabled.jsx");
+  "routes/en.instagram-hacked": typeof import("./app/./routes/en.instagram-hacked.jsx");
+  "routes/en.ads-manager": typeof import("./app/./routes/en.ads-manager.jsx");
+  "routes/en.newsletter": typeof import("./app/./routes/en.newsletter.jsx");
+  "routes/en.faq": typeof import("./app/./routes/en.faq.jsx");
+  "routes/en.testimonials": typeof import("./app/./routes/en.testimonials.jsx");
 };

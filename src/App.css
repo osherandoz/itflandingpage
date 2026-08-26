@@ -11,20 +11,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  direction: rtl;
-  text-align: right;
+  text-align: start;
 }
 
+/* Direction inherited from <html dir> — rtl (Hebrew) or ltr (/en) */
 .app {
-  direction: rtl;
-  text-align: right;
+  text-align: start;
   min-height: 100vh;
 }
 
-/* RTL specific adjustments */
 input, textarea, select {
-  direction: rtl;
-  text-align: right;
+  text-align: start;
 }
 
 /* Smooth scrolling */

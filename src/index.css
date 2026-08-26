@@ -44,33 +44,29 @@
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
 
+/* Direction comes from <html dir> (rtl for Hebrew, ltr for /en) —
+   use logical values so both languages lay out correctly */
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  direction: rtl;
-  text-align: right;
+  text-align: start;
 }
 
 #root {
   width: 100%;
   margin: 0;
   padding: 0;
-  text-align: right;
-  direction: rtl;
+  text-align: start;
 }
 
-/* RTL specific adjustments */
 input, textarea, select, button {
-  direction: rtl;
-  text-align: right;
+  text-align: start;
   font-family: inherit;
 }
 
-/* Ensure proper RTL layout */
 .container {
-  direction: rtl;
-  text-align: right;
+  text-align: start;
 }
 
 /* Responsive images */

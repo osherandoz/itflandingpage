@@ -3,7 +3,6 @@
   min-height: 100vh;
   padding: 100px 0 60px;
   color: white;
-  direction: rtl;
 }
 
 .article-container {
@@ -175,12 +174,12 @@
 }
 
 .toc-item.h2 {
-  margin-right: 0;
+  margin-inline-start: 0;
   font-weight: 600;
 }
 
 .toc-item.h3 {
-  margin-right: 20px;
+  margin-inline-start: 20px;
   font-size: 0.9rem;
   color: #b0b0b0;
 }
@@ -196,7 +195,7 @@
 .toc-item a:hover,
 .toc-item a.active {
   color: #3B82F6;
-  padding-right: 10px;
+  padding-inline-start: 10px;
 }
 
 /* Trust Header Box */
@@ -208,7 +207,6 @@
   margin-bottom: 40px;
   text-align: center;
   box-shadow: 0 4px 20px rgba(255, 215, 0, 0.2);
-  direction: rtl;
 }
 
 .trust-header-content {
@@ -231,7 +229,6 @@
   margin: 0;
   line-height: 1.6;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  direction: rtl;
   text-align: center;
 }
 
@@ -240,8 +237,7 @@
   line-height: 1.8;
   font-size: 1.1rem;
   color: #e0e0e0;
-  direction: rtl;
-  text-align: right;
+  text-align: start;
 }
 
 .article-body h2 {
@@ -252,8 +248,7 @@
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 2px solid rgba(59, 130, 246, 0.3);
-  direction: rtl;
-  text-align: right;
+  text-align: start;
 }
 
 .article-body h3 {
@@ -262,23 +257,20 @@
   color: #ffffff;
   margin-top: 30px;
   margin-bottom: 15px;
-  direction: rtl;
-  text-align: right;
+  text-align: start;
 }
 
 .article-body p {
   margin-bottom: 20px;
   line-height: 1.8;
-  direction: rtl;
-  text-align: right;
+  text-align: start;
 }
 
 .article-body ul,
 .article-body ol {
   margin-bottom: 20px;
-  padding-right: 30px;
-  direction: rtl;
-  text-align: right;
+  padding-inline-start: 30px;
+  text-align: start;
 }
 
 .article-body ul li,
@@ -469,7 +461,7 @@
 
 .toc-sidebar-item.h3 {
   font-size: 0.85rem;
-  margin-right: 15px;
+  margin-inline-start: 15px;
   color: #b0b0b0;
 }
 
@@ -485,7 +477,7 @@
 .toc-sidebar-item a:hover,
 .toc-sidebar-item a.active {
   color: #3B82F6;
-  padding-right: 8px;
+  padding-inline-start: 8px;
 }
 
 /* Article Not Found */
@@ -597,4 +589,14 @@
   .trust-header-content i {
     font-size: 2rem;
   }
+}
+
+/* Language toggle pinned to the far edge of the breadcrumb row */
+.breadcrumb-lang-toggle {
+  margin-inline-start: auto;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 0.85rem;
+  text-decoration: none;
 }

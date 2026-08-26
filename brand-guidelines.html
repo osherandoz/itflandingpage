@@ -1,0 +1,737 @@
+<title>IsraelTechForce — Brand Guidelines</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&family=Assistant:wght@400;500;600;700&family=Frank+Ruhl+Libre:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-infrastructure: #1e40af;
+    --signal-blue: #2563eb;
+    --active-thread: #3b82f6;
+    --interface-glow: #60a5fa;
+
+    --command-black: #050709;
+    --midnight-slate: #0c1018;
+    --deep-slate: #131824;
+    --card-surface: #1a1f2e;
+
+    --light-canvas: #f5f7fa;
+    --light-white: #ffffff;
+
+    --stark-white: #ffffff;
+    --mist-text: #e2e8f0;
+    --storm-text: #cbd5e1;
+    --muted-slate: #94a3b8;
+    --dim-slate: #64748b;
+    --night-ink: #0f172a;
+
+    --alert-red: #ef4444;
+    --danger-deep: #dc2626;
+    --warning-amber: #f97316;
+    --confirm-green: #10b981;
+    --bonus-gold: #fbbf24;
+
+    --rounded-sm: 8px;
+    --rounded-md: 16px;
+    --rounded-lg: 24px;
+    --rounded-pill: 60px;
+
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+    --page-bg: var(--command-black);
+    --page-text: var(--mist-text);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { color-scheme: dark; }
+
+  body {
+    margin: 0;
+    background: var(--page-bg);
+    color: var(--page-text);
+    font-family: 'Assistant', 'Heebo', sans-serif;
+    direction: rtl;
+    text-align: right;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  ::selection { background: rgba(96,165,250,0.35); color: var(--stark-white); }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Header ---------- */
+
+  .brand-header {
+    background:
+      radial-gradient(700px 340px at 85% -10%, rgba(37,99,235,0.28), transparent 65%),
+      var(--command-black);
+    border-bottom: 1px solid rgba(96,165,250,0.15);
+    padding: 88px 0 64px;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card-surface);
+    border: 1px solid rgba(96,165,250,0.2);
+    color: var(--muted-slate);
+    font-family: 'Heebo', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: var(--rounded-pill);
+    margin-bottom: 28px;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--active-thread);
+    box-shadow: 0 0 10px rgba(96,165,250,0.9);
+  }
+
+  .brand-title {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 6vw, 60px);
+    line-height: 1.1;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+    margin: 0 0 18px;
+    color: var(--stark-white);
+  }
+
+  .brand-title em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--active-thread), var(--interface-glow));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .brand-sub {
+    font-size: clamp(16px, 1.8vw, 19px);
+    line-height: 1.7;
+    color: var(--storm-text);
+    max-width: 62ch;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(96,165,250,0.15);
+  }
+
+  .meta-item .k {
+    font-family: 'Heebo', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim-slate);
+    margin-bottom: 6px;
+  }
+
+  .meta-item .v {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--mist-text);
+  }
+
+  /* ---------- Nav ---------- */
+
+  .toc {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(5,7,9,0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(96,165,250,0.12);
+  }
+
+  .toc-inner {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    padding: 14px 28px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .toc-inner a {
+    flex: none;
+    font-family: 'Heebo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted-slate);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: var(--rounded-pill);
+    transition: color 0.2s var(--ease-out-quart), background-color 0.2s var(--ease-out-quart);
+    white-space: nowrap;
+  }
+
+  .toc-inner a:hover, .toc-inner a:focus-visible {
+    color: var(--stark-white);
+    background: var(--card-surface);
+    outline: none;
+  }
+
+  /* ---------- Sections ---------- */
+
+  section { padding: 84px 0; border-bottom: 1px solid rgba(96,165,250,0.1); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head { margin-bottom: 44px; }
+
+  .section-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--active-thread);
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 900;
+    font-size: clamp(26px, 4vw, 36px);
+    letter-spacing: -0.03em;
+    color: var(--stark-white);
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+
+  .section-desc {
+    color: var(--storm-text);
+    font-size: 16px;
+    line-height: 1.7;
+    max-width: 68ch;
+  }
+
+  /* ---------- Color swatches ---------- */
+
+  .swatch-group { margin-bottom: 36px; }
+
+  .swatch-group h3 {
+    font-family: 'Heebo', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-slate);
+    margin: 0 0 16px;
+  }
+
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .swatch {
+    border-radius: var(--rounded-md);
+    overflow: hidden;
+    border: 1px solid rgba(96,165,250,0.15);
+    background: var(--card-surface);
+  }
+
+  .swatch-fill {
+    height: 84px;
+    position: relative;
+  }
+
+  .swatch-meta {
+    padding: 12px 14px;
+  }
+
+  .swatch-name {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--mist-text);
+    margin-bottom: 3px;
+  }
+
+  .swatch-hex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--dim-slate);
+    text-transform: uppercase;
+  }
+
+  .swatch-role {
+    font-size: 12px;
+    color: var(--muted-slate);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ---------- Typography ---------- */
+
+  .type-specimen {
+    border: 1px solid rgba(96,165,250,0.15);
+    background: var(--midnight-slate);
+    border-radius: var(--rounded-md);
+    padding: 28px 30px;
+    margin-bottom: 16px;
+  }
+
+  .type-specimen .label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .type-specimen .role {
+    font-family: 'Heebo', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--active-thread);
+  }
+
+  .type-specimen .spec {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--dim-slate);
+  }
+
+  .t-display { font-family: 'Heebo', sans-serif; font-weight: 900; font-size: clamp(32px,5.6vw,56px); line-height: 1.15; letter-spacing: -0.035em; color: var(--stark-white); margin: 0; }
+  .t-headline { font-family: 'Heebo', sans-serif; font-weight: 900; font-size: clamp(30px,4.8vw,48px); line-height: 1.15; letter-spacing: -0.03em; color: var(--stark-white); margin: 0; }
+  .t-title { font-family: 'Heebo', sans-serif; font-weight: 900; font-size: clamp(22px,3vw,34px); line-height: 1.2; letter-spacing: -0.025em; color: var(--stark-white); margin: 0; }
+  .t-body { font-family: 'Assistant', sans-serif; font-weight: 400; font-size: clamp(16px,1.6vw,19px); line-height: 1.7; color: var(--storm-text); margin: 0; max-width: 60ch; }
+  .t-quote { font-family: 'Frank Ruhl Libre', serif; font-weight: 700; font-size: clamp(22px,3vw,32px); line-height: 1.4; color: var(--mist-text); margin: 0; }
+  .t-label { font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted-slate); margin: 0; }
+
+  .weight-cliff {
+    display: flex;
+    gap: 40px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+
+  .weight-cliff div { text-align: center; }
+
+  .weight-cliff .num {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    color: var(--stark-white);
+  }
+
+  .weight-cliff .lbl {
+    font-size: 12px;
+    color: var(--dim-slate);
+    margin-top: 4px;
+  }
+
+  /* ---------- Components ---------- */
+
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .comp-card {
+    background: var(--midnight-slate);
+    border: 1px solid rgba(96,165,250,0.15);
+    border-radius: var(--rounded-md);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .comp-card .comp-label {
+    font-family: 'Heebo', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim-slate);
+  }
+
+  .btn {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--rounded-pill);
+    padding: 18px 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--deep-infrastructure) 0%, var(--signal-blue) 50%, var(--active-thread) 100%);
+    color: var(--stark-white);
+    box-shadow: 0 0 0 1px rgba(96,165,250,0.35), 0 8px 24px rgba(37,99,235,0.35);
+  }
+
+  .btn-primary:hover { filter: brightness(1.06); }
+
+  .chip {
+    background: var(--card-surface);
+    border: 1px solid rgba(96,165,250,0.2);
+    color: var(--muted-slate);
+    font-family: 'Heebo', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    padding: 8px 20px;
+    border-radius: var(--rounded-pill);
+  }
+
+  .dot-row { display: flex; align-items: center; gap: 12px; }
+  .dot { width: 16px; height: 16px; border-radius: 50%; flex: none; }
+
+  .faq-demo {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 18px 22px;
+    font-family: 'Heebo', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--mist-text);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .faq-demo span:last-child { color: var(--interface-glow); }
+
+  /* ---------- Radius / spacing tokens ---------- */
+
+  .token-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+
+  .token-card {
+    background: var(--midnight-slate);
+    border: 1px solid rgba(96,165,250,0.15);
+    padding: 22px;
+    text-align: center;
+  }
+
+  .token-card .shape {
+    width: 56px;
+    height: 56px;
+    background: var(--signal-blue);
+    margin: 0 auto 14px;
+  }
+
+  .token-card .name { font-family: 'Heebo', sans-serif; font-weight: 700; font-size: 13px; color: var(--mist-text); }
+  .token-card .val { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--dim-slate); margin-top: 4px; }
+
+  /* ---------- Rules list ---------- */
+
+  .rules-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  @media (max-width: 720px) { .rules-grid { grid-template-columns: 1fr; } }
+
+  .rules-col h4 {
+    font-family: 'Heebo', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+  }
+
+  .rules-col.do h4 { color: var(--confirm-green); }
+  .rules-col.dont h4 { color: var(--alert-red); }
+
+  .rules-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+
+  .rules-col li {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--storm-text);
+    padding-inline-start: 26px;
+    position: relative;
+  }
+
+  .rules-col li::before {
+    position: absolute;
+    inset-inline-start: 0;
+    top: 2px;
+    font-family: 'Heebo', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+  }
+
+  .rules-col.do li::before { content: '✓'; color: var(--confirm-green); }
+  .rules-col.dont li::before { content: '✕'; color: var(--alert-red); }
+
+  .rules-col li b { color: var(--mist-text); }
+
+  /* ---------- Footer ---------- */
+
+  footer {
+    padding: 48px 0 64px;
+    text-align: center;
+  }
+
+  footer .foot-brand {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--dim-slate);
+    font-size: 14px;
+  }
+
+  @media (max-width: 600px) {
+    .brand-header { padding: 64px 0 44px; }
+    section { padding: 60px 0; }
+  }
+</style>
+
+<header class="brand-header">
+  <div class="wrap">
+    <div class="eyebrow">מסמך מותג · גרסה 1.0</div>
+    <h1 class="brand-title">Israel<em>TechForce</em> — שפת מותג</h1>
+    <p class="brand-sub">מערכת עיצוב אחת, מקור אמת אחד. כל צבע, גופן ורכיב שבדף — נלקחו ישירות מ־DESIGN.md של הפרויקט, לא הומצאו כאן מחדש. המסמך הזה קיים כדי שכל מי שבונה מסך חדש ידע בדיוק אילו טוקנים להשתמש בהם.</p>
+    <div class="header-meta">
+      <div class="meta-item"><div class="k">Display / Headline</div><div class="v">Heebo 900</div></div>
+      <div class="meta-item"><div class="k">Body</div><div class="v">Assistant 400</div></div>
+      <div class="meta-item"><div class="k">Quote</div><div class="v">Frank Ruhl Libre 700</div></div>
+      <div class="meta-item"><div class="k">Accent</div><div class="v">Structural Blue #2563EB</div></div>
+      <div class="meta-item"><div class="k">Direction</div><div class="v">RTL · עברית</div></div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#colors">צבעים</a>
+    <a href="#type">טיפוגרפיה</a>
+    <a href="#components">רכיבים</a>
+    <a href="#tokens">רדיוסים ומרווחים</a>
+    <a href="#rules">כללי שימוש</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section id="colors">
+    <div class="section-head">
+      <div class="section-num">01</div>
+      <h2 class="section-title">פלטת הצבעים</h2>
+      <p class="section-desc">רמפה כחולה סטרוקטורלית אחת עושה את כל העבודה. כל השאר — תשתית כהה או טקסט. כחול מופיע רק על מקום שדורש פעולה או סמכות — לא כקישוט.</p>
+    </div>
+
+    <div class="swatch-group">
+      <h3>ראשי — Structural Blue</h3>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-fill" style="background:#1e40af"></div><div class="swatch-meta"><div class="swatch-name">Deep Infrastructure</div><div class="swatch-hex">#1E40AF</div><div class="swatch-role">בסיס גרדיאנטים, hover עמוק</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#2563eb"></div><div class="swatch-meta"><div class="swatch-name">Signal Blue</div><div class="swatch-hex">#2563EB</div><div class="swatch-role">רקע CTA ראשי</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#3b82f6"></div><div class="swatch-meta"><div class="swatch-name">Active Thread</div><div class="swatch-hex">#3B82F6</div><div class="swatch-role">הדגשות אינטראקטיביות</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#60a5fa"></div><div class="swatch-meta"><div class="swatch-name">Interface Glow</div><div class="swatch-hex">#60A5FA</div><div class="swatch-role">זוהר, focus ring — לא כמילוי שטח</div></div></div>
+      </div>
+    </div>
+
+    <div class="swatch-group">
+      <h3>ניטרלי — תשתית כהה</h3>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-fill" style="background:#050709"></div><div class="swatch-meta"><div class="swatch-name">Command Black</div><div class="swatch-hex">#050709</div><div class="swatch-role">רקע בסיס</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#0c1018"></div><div class="swatch-meta"><div class="swatch-name">Midnight Slate</div><div class="swatch-hex">#0C1018</div><div class="swatch-role">סקשנים משניים</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#131824"></div><div class="swatch-meta"><div class="swatch-name">Deep Slate</div><div class="swatch-hex">#131824</div><div class="swatch-role">משטח ביניים</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#1a1f2e"></div><div class="swatch-meta"><div class="swatch-name">Card Surface</div><div class="swatch-hex">#1A1F2E</div><div class="swatch-role">רקע כרטיסים</div></div></div>
+      </div>
+    </div>
+
+    <div class="swatch-group">
+      <h3>ניטרלי — סקשנים בהירים</h3>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-fill" style="background:#f5f7fa"></div><div class="swatch-meta"><div class="swatch-name">Light Canvas</div><div class="swatch-hex">#F5F7FA</div><div class="swatch-role">סקשן הזמנה / מסגרת</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#0f172a"></div><div class="swatch-meta"><div class="swatch-name">Night Ink</div><div class="swatch-hex">#0F172A</div><div class="swatch-role">טקסט על רקע בהיר בלבד</div></div></div>
+      </div>
+    </div>
+
+    <div class="swatch-group">
+      <h3>סקלת טקסט</h3>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-fill" style="background:#ffffff"></div><div class="swatch-meta"><div class="swatch-name">Stark White</div><div class="swatch-hex">#FFFFFF</div><div class="swatch-role">טקסט ראשי על כהה</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#e2e8f0"></div><div class="swatch-meta"><div class="swatch-name">Mist Text</div><div class="swatch-hex">#E2E8F0</div><div class="swatch-role">טקסט משני</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#cbd5e1"></div><div class="swatch-meta"><div class="swatch-name">Storm Text</div><div class="swatch-hex">#CBD5E1</div><div class="swatch-role">גוף טקסט ארוך</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#94a3b8"></div><div class="swatch-meta"><div class="swatch-name">Muted Slate</div><div class="swatch-hex">#94A3B8</div><div class="swatch-role">תוויות, מטא־דאטה</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#64748b"></div><div class="swatch-meta"><div class="swatch-name">Dim Slate</div><div class="swatch-hex">#64748B</div><div class="swatch-role">הערות שוליים</div></div></div>
+      </div>
+    </div>
+
+    <div class="swatch-group">
+      <h3>אקצנטים סמנטיים</h3>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-fill" style="background:#ef4444"></div><div class="swatch-meta"><div class="swatch-name">Alert Red</div><div class="swatch-hex">#EF4444</div><div class="swatch-role">כשל, סימון מחיקה</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#dc2626"></div><div class="swatch-meta"><div class="swatch-name">Danger Deep</div><div class="swatch-hex">#DC2626</div><div class="swatch-role">סכנה עמוקה</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#f97316"></div><div class="swatch-meta"><div class="swatch-name">Warning Amber</div><div class="swatch-hex">#F97316</div><div class="swatch-role">גרדיאנטים בלבד</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#10b981"></div><div class="swatch-meta"><div class="swatch-name">Confirm Green</div><div class="swatch-hex">#10B981</div><div class="swatch-role">מצב הצלחה</div></div></div>
+        <div class="swatch"><div class="swatch-fill" style="background:#fbbf24"></div><div class="swatch-meta"><div class="swatch-name">Bonus Gold</div><div class="swatch-hex">#FBBF24</div><div class="swatch-role">בונוסים בלבד</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="type">
+    <div class="section-head">
+      <div class="section-num">02</div>
+      <h2 class="section-title">טיפוגרפיה</h2>
+      <p class="section-desc">שלוש משפחות, שלושה תפקידים. Heebo 900 לסמכות, Assistant 400 למידע, Frank Ruhl Libre לרגע רגשי — לא מתחרות אף פעם.</p>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label-row"><div class="role">Display — H1 בלבד</div><div class="spec">Heebo 900 · clamp(32,56px) · ls -0.035em</div></div>
+      <p class="t-display">התיק שלך לא בטוח כמו שחשבת</p>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label-row"><div class="role">Headline — כותרות H2</div><div class="spec">Heebo 900 · clamp(30,48px) · ls -0.03em</div></div>
+      <p class="t-headline">מה בדיוק מקבלים בתוך הקורס</p>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label-row"><div class="role">Title — תת־כותרות</div><div class="spec">Heebo 900 · clamp(22,34px) · ls -0.025em</div></div>
+      <p class="t-title">מודול 3: הגנת Business Manager</p>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label-row"><div class="role">Body — גוף טקסט</div><div class="spec">Assistant 400 · clamp(16,19px) · lh 1.7</div></div>
+      <p class="t-body">כל טקסט רץ מוגבל ל־760px רוחב מקסימלי, כך שאף שורה לא חורגת מ־65 תווים אפקטיביים — גם בעברית.</p>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label-row"><div class="role">Quote — ציטוט רגשי, פעם אחת בעמוד</div><div class="spec">Frank Ruhl Libre 700 · clamp(22,32px)</div></div>
+      <p class="t-quote">״ראיתי את מה שקורה כשמנהלת מדיה מגלה שהתיק שלה נעלם. זה לא חייב לקרות לך.״</p>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label-row"><div class="role">Label — תוויות, פילים, מודולים</div><div class="spec">Heebo 700 · 12px · ls 0.18em · uppercase</div></div>
+      <p class="t-label">מודול 01 · הגנה בסיסית</p>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label-row"><div class="role">כלל צוק המשקלים</div><div class="spec">אין 600 בהיררכיה ראשית</div></div>
+      <div class="weight-cliff">
+        <div><div class="num" style="font-weight:900">900</div><div class="lbl">כותרות</div></div>
+        <div><div class="num" style="font-weight:700">700</div><div class="lbl">תוויות / CTA / ציטוט</div></div>
+        <div><div class="num" style="font-weight:400">400</div><div class="lbl">גוף טקסט</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="components">
+    <div class="section-head">
+      <div class="section-num">03</div>
+      <h2 class="section-title">רכיבים</h2>
+      <p class="section-desc">צורה אחת לכפתורים — פיל מלא. עומק דרך שכבות טונליות, לא צללים.</p>
+    </div>
+
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-label">כפתור ראשי</div>
+        <button class="btn btn-primary">להצטרפות עכשיו ←</button>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-label">תווית סקשן</div>
+        <span class="chip">מודול 04 · תיוג</span>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-label">נקודות ציר — Timeline</div>
+        <div class="dot-row"><span class="dot" style="background:#ef4444"></span><span class="dot" style="background:#f97316"></span><span class="dot" style="background:#fbbf24"></span><span class="dot" style="background:#10b981"></span><span class="dot" style="background:#3b82f6"></span></div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-label">שאלה נפוצה — details/summary</div>
+        <div class="faq-demo"><span>כמה זמן לוקח ליישם?</span><span>+</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tokens">
+    <div class="section-head">
+      <div class="section-num">04</div>
+      <h2 class="section-title">רדיוסים ומרווחים</h2>
+      <p class="section-desc">קצוות מוגדרים מראש. שום פינה לא מומצאת אד־הוק.</p>
+    </div>
+
+    <div class="token-grid">
+      <div class="token-card"><div class="shape" style="border-radius:8px"></div><div class="name">sm</div><div class="val">8px</div></div>
+      <div class="token-card"><div class="shape" style="border-radius:16px"></div><div class="name">md</div><div class="val">16px</div></div>
+      <div class="token-card"><div class="shape" style="border-radius:24px"></div><div class="name">lg</div><div class="val">24px</div></div>
+      <div class="token-card"><div class="shape" style="border-radius:60px"></div><div class="name">pill</div><div class="val">60px</div></div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="section-head">
+      <div class="section-num">05</div>
+      <h2 class="section-title">כללי שימוש</h2>
+      <p class="section-desc">מה חובה ומה אסור — כדי שכל מסך חדש יישאר חלק מאותה מערכת.</p>
+    </div>
+
+    <div class="rules-grid">
+      <div class="rules-col do">
+        <h4>Do</h4>
+        <ul>
+          <li><b>Tracking שלילי</b> על כל כותרת Heebo 900 — מינימום ‎-0.025em.</li>
+          <li><b>clamp()</b> על כל גודל גופן. פיקסלים קבועים רק ב־mobile override.</li>
+          <li><b>עומק טונלי</b> — כל שכבה קלה יותר מקבלת גבול או סיבה מבנית.</li>
+          <li><b>drop-shadow()</b> לאנימציות זוהר, לא box-shadow.</li>
+          <li><b>logical properties</b> (‎inset-inline-start וכו') לפריסת RTL.</li>
+        </ul>
+      </div>
+      <div class="rules-col dont">
+        <h4>Don't</h4>
+        <ul>
+          <li><b>Gradient text</b> — הוסר מהפרויקט, לא חוזר.</li>
+          <li><b>צבע אקצנט שני</b> מתחרה בכחול. Bonus Gold הוא היוצא היחיד.</li>
+          <li><b>אפור מושתק</b> (‎Muted Slate) על רקע כחול רווי או גרדיאנט.</li>
+          <li><b>טיימר ספירה לאחור</b> או אנימציית דחיפות מכל סוג.</li>
+          <li><b>transition: all</b> — לפרט רק את המאפיינים שבאמת משתנים.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-brand">ISRAELTECHFORCE · BRAND SYSTEM V1 · מקור: DESIGN.md</div>
+</footer>

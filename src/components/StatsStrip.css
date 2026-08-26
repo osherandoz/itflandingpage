@@ -13,11 +13,11 @@
   flex-direction: column;
   align-items: center;
   padding: 0 52px;
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .stat-item:last-child {
-  border-left: none;
+  border-inline-end: none;
 }
 
 .stat-number {
@@ -61,7 +61,7 @@
 
   .stat-item {
     flex: 0 0 50%;
-    border-left: none;
+    border-inline-end: none;
     padding: 16px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }

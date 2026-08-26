@@ -36,7 +36,6 @@
   --tss-pad-x: clamp(20px, 5vw, 56px);
   --tss-gap-y: clamp(56px, 8vw, 100px);
 
-  direction: rtl;
   font-family: var(--tss-font);
   font-size: 17px;
   line-height: 1.7;
