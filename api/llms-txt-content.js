@@ -1,0 +1,54 @@
+// Markdown-for-agents payload served on Accept: text/markdown (see api/ssr.js).
+// Keep in sync with public/llms.txt — duplicated here because this file must
+// be bundled with the serverless function; public/ is deployed as static
+// assets only and isn't on the function's filesystem at runtime.
+export const LLMS_TXT = `# IsraelTechForce (ITF Recovery)
+
+> IsraelTechForce הוא שירות ישראלי לשחזור חשבונות דיגיטליים ברשתות חברתיות, שנוסד על ידי אושר רווח (Osher Revach) מנתניה. השירות מתמחה בשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ שנחסמו, הושבתו או נפרצו, וכן בשחזור Business Manager ומנהל מודעות של Meta. נכון ליולי 2026, מעל 2,500 עסקים שוחזרו עם אחוזי הצלחה של מעל 95%. מודל התשלום: תשלום רק לאחר הצלחה.
+
+> IsraelTechForce is an Israeli digital account recovery service founded by Osher Revach (Netanya, Israel). Specializes in recovering hacked, disabled, or locked Facebook, Instagram, and WhatsApp accounts, plus Meta Business Manager and Ad Account recovery. As of July 2026: 2,500+ businesses recovered, 95%+ success rate. Pay-after-success model.
+
+יצירת קשר: osher@israeltechforce.com | וואטסאפ: 050-9823-235 | נתניה, ישראל
+
+## שירותים (Services)
+
+- [שחזור חשבון פייסבוק](https://www.israeltechforce.com/שחזור-חשבון-פייסבוק): שחזור חשבונות פייסבוק חסומים, מושבתים או פרוצים. זמן טיפול ממוצע 24-48 שעות.
+- [שחזור חשבון אינסטגרם](https://www.israeltechforce.com/שחזור-חשבון-אינסטגרם): שחזור חשבונות אינסטגרם חסומים או מושבתים, כולל חשבונות עסקיים.
+- [שחזור חשבון וואטסאפ](https://www.israeltechforce.com/שחזור-חשבון-וואטסאפ): שחזור חשבונות וואטסאפ חסומים, כולל וואטסאפ עסקי.
+- [חשבון פייסבוק מושבת](https://www.israeltechforce.com/חשבון-פייסבוק-מושבת): טיפול בחשבונות פייסבוק שהושבתו על ידי מטא, כולל ערעורים.
+- [חשבון אינסטגרם נפרץ](https://www.israeltechforce.com/חשבון-אינסטגרם-נפרץ): החזרת שליטה בחשבונות אינסטגרם שנפרצו על ידי האקרים.
+- [שחזור מנהל מודעות](https://www.israeltechforce.com/שחזור-מנהל-מודעות): שחזור Business Manager וחשבונות מודעות של Meta שנחסמו או נפרצו.
+
+## מוצרים (Products)
+
+- [קורס BMS](https://www.israeltechforce.com/VSL-BMS): קורס דיגיטלי (₪197, תשלום חד-פעמי) ללימוד הגנה על נכסי Meta — אבטחת Business Manager, ניהול הרשאות ומניעת חסימות ופריצות. 4 מודולים + 3 בונוסים, כ-3 שעות תוכן, גישה לכל החיים.
+
+## מידע נוסף (More)
+
+- [שאלות נפוצות](https://www.israeltechforce.com/faq): תשובות לשאלות על תהליך השחזור, זמנים ומחירים.
+- [המלצות לקוחות](https://www.israeltechforce.com/testimonials): סיפורי הצלחה של לקוחות.
+- [מאמרים](https://www.israeltechforce.com/articles): מדריכים על שחזור חשבונות ואבטחה דיגיטלית.
+- [כתבו עלינו](https://www.israeltechforce.com/press): סיקור תקשורתי.
+
+## English Site (/en)
+
+The full site is also available in English at https://www.israeltechforce.com/en
+
+Contact: osher@israeltechforce.com | WhatsApp: +972-50-9823-235 | Netanya, Israel
+
+### Services (English)
+
+- [Facebook Account Recovery](https://www.israeltechforce.com/en/facebook-account-recovery): Recovery of blocked, disabled, or hacked Facebook accounts. Average turnaround 24-48 hours.
+- [Instagram Account Recovery](https://www.israeltechforce.com/en/instagram-account-recovery): Recovery of blocked or disabled Instagram accounts, including business accounts.
+- [WhatsApp Account Recovery](https://www.israeltechforce.com/en/whatsapp-account-recovery): Recovery of banned WhatsApp accounts, including WhatsApp Business.
+- [Disabled Facebook Account](https://www.israeltechforce.com/en/facebook-account-disabled): Handling Facebook accounts disabled by Meta, including appeals.
+- [Hacked Instagram Account](https://www.israeltechforce.com/en/instagram-account-hacked): Regaining control of Instagram accounts taken over by hackers.
+- [Ads Manager Recovery](https://www.israeltechforce.com/en/ads-manager-recovery): Recovery of disabled or hacked Meta Business Manager and ad accounts.
+
+### More (English)
+
+- [FAQ](https://www.israeltechforce.com/en/faq): Answers about the recovery process, timelines, and pricing. Pay only after success.
+- [Client Reviews](https://www.israeltechforce.com/en/testimonials): Client success stories.
+- [Articles](https://www.israeltechforce.com/en/articles): Guides on account recovery and digital security.
+- [Press](https://www.israeltechforce.com/en/press): Media coverage.
+`;
