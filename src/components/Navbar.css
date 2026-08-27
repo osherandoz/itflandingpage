@@ -33,6 +33,7 @@
   padding: 0;
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .navbar-logo:hover {
@@ -55,6 +56,7 @@
   background: none;
   border: none;
   color: #e0e0e0;
+  text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;

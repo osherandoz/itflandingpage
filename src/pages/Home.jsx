@@ -19,15 +19,26 @@ const FAQ = lazy(() => import('../components/FAQ'));
 const Home = () => {
   const { dir } = useLang();
   useEffect(() => {
-    // Handle hash-based scrolling (e.g., from article page CTA)
-    if (window.location.hash === '#contact-form') {
-      setTimeout(() => {
-        const form = document.getElementById('contact-form');
-        if (form) {
-          form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 300);
-    }
+    // Hash-based scrolling for links arriving from another page (navbar, article
+    // CTAs). The native jump misses #testimonials/#articles/#faq because those
+    // sections are lazy — so retry for a couple of seconds until they mount.
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+
+    // Keep correcting rather than firing once: ScrollRestoration resets to the
+    // top after hydration, and a lazy section mounting above the target shifts
+    // it again. Stop once the section is actually parked at the top.
+    let tries = 0;
+    const timer = setInterval(() => {
+      const el = document.getElementById(id);
+      const aligned = el && Math.abs(el.getBoundingClientRect().top) < 8;
+      // 'instant' on purpose: this is an arrival from another page, where a jump
+      // is the expected behaviour, and it overrides the global smooth scroll that
+      // would otherwise animate against ScrollRestoration.
+      if (el && !aligned) el.scrollIntoView({ block: 'start', behavior: 'instant' });
+      if (aligned || ++tries > 25) clearInterval(timer);
+    }, 100);
+    return () => clearInterval(timer);
   }, []);
 
   return (

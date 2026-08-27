@@ -60,44 +60,42 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    // If we're not on the home page, navigate to it first
-    if (location.pathname !== homePath) {
-      window.location.href = `${homePath}#${sectionId}`;
-      return;
-    }
+  const onHome = location.pathname === homePath;
 
+  // Nav items are real <a href> links so they are crawlable and open in a new
+  // tab like any link. On the home page the click is intercepted for a smooth
+  // scroll; anywhere else the href does the navigating.
+  const handleAnchorClick = (e, sectionId) => {
+    if (!onHome) return;
     const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (!element) return;
+    e.preventDefault();
+    element.scrollIntoView({ behavior: 'smooth' });
     setIsMobileMenuOpen(false);
-  };
-
-  const handleLogoClick = () => {
-    if (location.pathname !== homePath) {
-      window.location.href = homePath;
-    } else {
-      scrollToSection('hero');
-    }
   };
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
-        <button className="navbar-logo" onClick={handleLogoClick} aria-label={t.logoAria}>
+        <a
+          className="navbar-logo"
+          href={homePath}
+          aria-label={t.logoAria}
+          onClick={(e) => handleAnchorClick(e, 'hero')}
+        >
           <img src="/images/logo-hero.webp" alt="Israel Tech Force Logo" width="260" height="192" />
-        </button>
+        </a>
 
         <div id="mobile-nav-menu" className={`navbar-menu ${isMobileMenuOpen ? 'active' : ''}`}>
           {t.navItems.map((item) => (
-            <button
+            <a
               key={item.id}
               className="nav-item"
-              onClick={() => scrollToSection(item.id)}
+              href={`${homePath}#${item.id}`}
+              onClick={(e) => handleAnchorClick(e, item.id)}
             >
               {item.label}
-            </button>
+            </a>
           ))}
           <a
             className="nav-item nav-lang-toggle"

@@ -5,7 +5,7 @@ import Footer from './Footer';
 import FloatingWhatsApp from './FloatingWhatsApp';
 import ContactForm from './ContactForm';
 import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
-import { useLang } from '../i18n';
+import { useLang, SERVICE_PATHS } from '../i18n';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ServicePage.css';
 
@@ -24,6 +24,7 @@ const STR = {
     faqTitle: (keyword) => `שאלות נפוצות על ${keyword}`,
     faqSubtitle: 'תשובות לשאלות שלקוחות שואלים אותנו הכי הרבה',
     relatedTitle: 'מאמרים קשורים',
+    crossTitle: 'זה לא בדיוק המקרה שלך?',
     formTitle: 'מעדיפים שאחזור אליכם?',
     formSubtitle: 'השאירו שם וטלפון ואחזור אליכם עם אבחון ראשוני, ללא עלות.',
     finalTitle: 'מוכנים לפתור את הבעיה?',
@@ -45,6 +46,7 @@ const STR = {
     faqTitle: (keyword) => `Frequently Asked Questions About ${keyword}`,
     faqSubtitle: 'Answers to the questions clients ask us most',
     relatedTitle: 'Related Articles',
+    crossTitle: 'Not quite your case?',
     formTitle: 'Prefer That I Call You Back?',
     formSubtitle: 'Leave your name and phone number and I will get back to you with a free initial assessment.',
     finalTitle: 'Ready to Solve the Problem?',
@@ -340,6 +342,25 @@ const ServicePage = ({ pageData }) => {
             <ServiceFAQ faqs={pageData.faqs} />
           </div>
         </section>
+
+        {/* ---- SIBLING SERVICE ---- */}
+        {/* Sends each specific intent to the page that owns it, so the two
+            near-neighbour pages stop competing for the same query. */}
+        {pageData.crossLinks && pageData.crossLinks.length > 0 && (
+          <section className="service-cross-links">
+            <div className="service-container">
+              <h2>{t.crossTitle}</h2>
+              <div className="service-cross-grid">
+                {pageData.crossLinks.map((c) => (
+                  <Link key={c.slug} to={SERVICE_PATHS[c.slug][lang]} className="service-cross-card">
+                    <span className="service-cross-label">{c.label}</span>
+                    <span className="service-cross-note">{c.note}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* ---- RELATED ARTICLES ---- */}
         {pageData.relatedArticles && pageData.relatedArticles.length > 0 && (

@@ -56,6 +56,13 @@ export const SERVICE_PAGES_EN = [
       },
     ],
     testimonialIds: [1, 2, 3],
+    crossLinks: [
+      {
+        slug: 'facebook-disabled',
+        label: 'Disabled Facebook Account',
+        note: 'Got the "your account has been disabled" message rather than a temporary block? That is a different sanction with its own appeal path.',
+      },
+    ],
     relatedArticles: [
       { slug: 'facebook-account-disabled', title: 'Facebook Account Disabled: What to Do' },
       { slug: 'facebook-recovery-no-email-phone', title: 'Recovering Facebook Without Email or Phone' },
@@ -70,10 +77,10 @@ export const SERVICE_PAGES_EN = [
     title: 'Instagram Account Recovery: Getting Your Profile Back',
     metaTitle: 'Instagram Account Recovery | IsraelTechForce | Pay Only After Success',
     metaDescription:
-      'Instagram account blocked, hacked, or disabled? IsraelTechForce specializes in Instagram account recovery. 95%+ success rate, 24-48 hours. Message us now.',
+      'Instagram account blocked, disabled, or restricted? IsraelTechForce specializes in Instagram account recovery. 95%+ success rate, 24-48 hours. Message us now.',
     serviceType: 'Instagram account recovery',
     whatIsIt: `<p>You built a profile. You grew an audience. You created content people loved. And then, with no explanation, it was all gone. The Instagram account is disabled. The connection with your followers is cut off. And the business you built through this app grinds to a halt. We know how much that hurts.</p>
-<p>Instagram can disable an account over hashtags it considers banned, activity that looks like spam, user reports, or an algorithm that simply got it wrong. On top of that, the wave of hacking attacks on Instagram accounts has grown sharply. Attackers gain access through phishing, buy leaked login credentials, and lock the original owner out of the account within minutes.</p>
+<p>Instagram can disable an account over hashtags it considers banned, activity that looks like spam, user reports, or an algorithm that simply got it wrong. Sometimes it is a partial restriction: you cannot follow, comment, or post, and the account is still open. Sometimes it is a full disabling that requires identity verification with Meta. If your password was changed and someone else is inside, that is a hack, and it has its own page and its own process.</p>
 <p>The IsraelTechForce team has worked on hundreds of Instagram recovery cases. From small personal accounts to profiles with hundreds of thousands of followers. We know which appeal forms to file, how to verify identity with Meta, and how to speed the process up. Fast, methodical, and without putting what is left of the account at risk.</p>`,
     steps: [
       {
@@ -94,7 +101,7 @@ export const SERVICE_PAGES_EN = [
     ],
     faqs: [
       {
-        question: 'Can you recover an Instagram account that was hacked months ago?',
+        question: 'Can you recover an Instagram account that was disabled months ago?',
         answer:
           'Yes, in many cases it is possible even after time has passed. The longer it takes, the more complex it gets, but with our methods we have recovered accounts that were locked for over a year.',
       },
@@ -104,9 +111,9 @@ export const SERVICE_PAGES_EN = [
           'Yes. There are several recovery paths that do not depend on access to the original email, including verification through identity documents. That is exactly one of our specialties.',
       },
       {
-        question: 'My Instagram was hacked and the email was changed. What do I do?',
+        question: 'My account is restricted but not disabled. Do you handle that too?',
         answer:
-          'This is a case we handle all the time. Instagram has a dedicated mechanism for reporting unauthorized access. We know exactly how to activate it and prove original ownership.',
+          'Yes. Partial restrictions, such as not being able to follow, comment, or post, are a separate kind of sanction and need a different appeal from a full disabling. We identify which one you are under before filing.',
       },
       {
         question: 'Are recovery prices fixed?',
@@ -120,6 +127,13 @@ export const SERVICE_PAGES_EN = [
       },
     ],
     testimonialIds: [2, 4, 3],
+    crossLinks: [
+      {
+        slug: 'instagram-hacked',
+        label: 'Hacked Instagram Account',
+        note: 'Password or email changed and someone else is in the account? That is a hack, and it is urgent and handled differently.',
+      },
+    ],
     relatedArticles: [
       { slug: 'instagram-hacked-recovery', title: 'Instagram Hacked: What to Do Immediately' },
       { slug: 'shadowban-instagram-2025', title: 'Instagram Shadowban 2026: The Complete Guide' },
@@ -247,6 +261,13 @@ export const SERVICE_PAGES_EN = [
       },
     ],
     testimonialIds: [3, 5, 1],
+    crossLinks: [
+      {
+        slug: 'facebook-recovery',
+        label: 'Facebook Account Recovery',
+        note: 'Account temporarily blocked, hacked, or you are not sure what happened? Start from the general recovery page.',
+      },
+    ],
     relatedArticles: [
       { slug: 'facebook-account-disabled', title: 'Facebook Account Disabled: What to Do' },
       { slug: 'facebook-disabled-vs-limited', title: 'Disabled vs. Restricted: The Difference That Matters' },
@@ -310,6 +331,13 @@ export const SERVICE_PAGES_EN = [
       },
     ],
     testimonialIds: [2, 4, 3],
+    crossLinks: [
+      {
+        slug: 'instagram-recovery',
+        label: 'Instagram Account Recovery',
+        note: 'Not a hack but an Instagram disabling or restriction? The general page covers those cases.',
+      },
+    ],
     relatedArticles: [
       { slug: 'instagram-hacked-recovery', title: 'Instagram Hacked: What to Do Immediately' },
       { slug: 'protect-instagram-account', title: 'How to Protect Your Instagram Account' },
