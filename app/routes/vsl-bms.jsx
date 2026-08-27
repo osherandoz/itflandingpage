@@ -34,6 +34,8 @@ export const meta = () => [
 const COURSE_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Course',
+  // Same @id as the one emitted on /bms-sm — one course, two pages
+  '@id': `${URL}#course`,
   name: 'קורס BMS, Business Manager Setup',
   description:
     'קורס מקוון להגנה על נכסים דיגיטליים: בנייה נכונה של Business Manager, ניהול הרשאות, גיבוי ותכנית חירום.',

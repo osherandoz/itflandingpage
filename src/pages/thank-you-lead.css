@@ -153,9 +153,83 @@
 
 .tyl-footer a:hover { color: var(--text); }
 
+/* ── Next step (upsell) ────────────────────────── */
+.tyl-next {
+  padding: 56px 0 72px;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+}
+
+.tyl-next-card {
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.07);
+  border-radius: 18px;
+  padding: 38px 34px;
+  text-align: center;
+}
+
+.tyl-next-eyebrow {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.tyl-next-title {
+  font-size: clamp(1.35rem, 3.4vw, 1.9rem);
+  font-weight: 800;
+  line-height: 1.35;
+  color: var(--text);
+  margin: 0 0 16px;
+}
+
+.tyl-next-text {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto 28px;
+}
+
+.tyl-next-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 15px 34px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tyl-next-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 26px rgba(59, 130, 246, 0.5);
+}
+
+.tyl-next-note {
+  margin: 20px 0 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.tyl-next-note a {
+  color: var(--green);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.tyl-next-note a:hover { text-decoration: underline; }
+
 /* ── Mobile ────────────────────────────────────── */
 @media (max-width: 600px) {
   .tyl-hero { padding: 48px 0 36px; }
+
+  .tyl-next-card { padding: 30px 20px; }
 
   .tyl-item {
     padding: 16px 18px;
@@ -173,4 +247,5 @@
 @media (prefers-reduced-motion: reduce) {
   .tyl-item { transition: none; }
   .tyl-link { transition: none; }
+  .tyl-next-btn { transition: none; }
 }

@@ -21,15 +21,8 @@ export const trackWhatsAppClick = () => {
   trackSiteEvent('whatsapp_click');
 };
 
-export const openWhatsApp = (message = WHATSAPP_DEFAULT_MSG.he) => {
-  const phoneNumber = "972509823235";
-  const encodedMessage = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-  trackWhatsAppClick();
-  // Open WhatsApp in new tab
-  window.open(whatsappUrl, '_blank');
-};
-
+// openWhatsApp() removed: window.open() is swallowed by the Instagram and
+// Facebook in-app browsers. Every CTA now renders <a href={getWhatsAppUrl(...)}>.
 export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MSG.he) => {
   const phoneNumber = "972509823235";
   const encodedMessage = encodeURIComponent(message);

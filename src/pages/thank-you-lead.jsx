@@ -57,6 +57,44 @@ export default function ThankYouLead() {
         </div>
       </section>
 
+      {/* NEXT STEP — the checklist tells you what to check, the course tells you what to do */}
+      <section className="tyl-next" aria-labelledby="tylNextHead">
+        <div className="tyl-container">
+          <div className="tyl-next-card">
+            <span className="tyl-next-eyebrow">השלב הבא</span>
+            <h2 className="tyl-next-title" id="tylNextHead">
+              הצ׳קליסט אומר לך מה לבדוק.<br />
+              הקורס אומר לך מה לעשות עם התשובות.
+            </h2>
+            <p className="tyl-next-text">
+              קורס BMS הוא ההמשך הישיר: איך בונים תשתית פרסום שלא נשברת, איך מנהלים
+              הרשאות בלי להיות תלויה בלקוח, ומה עושים ברגע שמשהו כן משתבש.
+            </p>
+            <a
+              href="/VSL-BMS"
+              className="tyl-next-btn"
+              onClick={() => {
+                if (typeof window !== 'undefined' && window.fbq) {
+                  window.fbq('trackCustom', 'UpsellClick', { source: 'thank-you-lead' });
+                }
+              }}
+            >
+              לצפייה בהדרכה החינמית ← ₪197
+            </a>
+            <p className="tyl-next-note">
+              יש שאלה לפני?{' '}
+              <a
+                href="https://wa.me/972509823235"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                שלחי לי הודעה בוואטסאפ
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* FOOTER */}
       <footer className="tyl-footer">
         <span>© {new Date().getFullYear()} Israel Tech Force · אושר רווח</span>

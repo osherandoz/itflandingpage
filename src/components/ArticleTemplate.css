@@ -412,6 +412,49 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  text-decoration: none;
+}
+
+/* Related service page card */
+.sidebar-service-card {
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 20px;
+  padding: 26px;
+}
+
+.sidebar-service-eyebrow {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #60a5fa;
+  margin-bottom: 8px;
+}
+
+.sidebar-service-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 10px;
+}
+
+.sidebar-service-text {
+  font-size: 0.92rem;
+  color: #c3cfe2;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.sidebar-service-link {
+  display: inline-block;
+  font-weight: 700;
+  color: #3B82F6;
+  text-decoration: none;
+}
+
+.sidebar-service-link:hover {
+  text-decoration: underline;
 }
 
 .sticky-cta-button:hover {

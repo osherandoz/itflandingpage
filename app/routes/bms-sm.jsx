@@ -21,13 +21,19 @@ export const meta = () => [
   { tagName: 'link', rel: 'canonical', href: URL },
 ];
 
+// One course entity, shared @id with /VSL-BMS so the two pages are not read as
+// two different products. No aggregateRating: this page shows no reviews, and
+// self-serving ratings without visible reviews risk a structured-data penalty
+// (same reason it was dropped from LOCAL_BUSINESS_SCHEMA). The offer points at
+// the page that actually sells the course, not at this lead-magnet page.
 const COURSE_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Course',
+  '@id': 'https://www.israeltechforce.com/VSL-BMS#course',
   name: 'קורס BMS — Business Manager Security למנהלות סושיאל',
   description:
     'קורס מקוון למנהלות סושיאל ופרילנסריות המלמד כיצד לזהות תשתית פרסום בעייתית, לנהל הרשאות נכון ולהגן על עצמן ועל לקוחותיהן.',
-  url: URL,
+  url: 'https://www.israeltechforce.com/VSL-BMS',
   inLanguage: 'he',
   provider: {
     '@type': 'Person',
@@ -39,12 +45,7 @@ const COURSE_SCHEMA = {
     price: '197',
     priceCurrency: 'ILS',
     availability: 'https://schema.org/InStock',
-    url: URL,
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5',
-    reviewCount: '4',
+    url: 'https://www.israeltechforce.com/VSL-BMS',
   },
   hasCourseInstance: {
     '@type': 'CourseInstance',

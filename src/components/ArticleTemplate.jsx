@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router';
-import { useLang, togglePath } from '../i18n';
-import { openWhatsApp, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { useLang, togglePath, SERVICE_PATHS } from '../i18n';
+import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ArticleTemplate.css';
 
@@ -27,6 +27,9 @@ const STR = {
     stickyCtaTitle: 'זקוק לשחרור חסימה עכשיו?',
     stickyCtaText: 'צור קשר עכשיו וקבל עזרה מקצועית',
     stickyCtaButton: 'צור קשר בוואטסאפ',
+    serviceCardEyebrow: 'השירות שפותר את זה',
+    serviceCardText: 'עמוד השירות המלא: איך זה עובד, כמה זמן זה לוקח ומה לקוחות מספרים.',
+    serviceCardLink: (label) => `לעמוד ${label} ←`,
     whatsappMessage: 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים',
   },
   en: {
@@ -50,7 +53,44 @@ const STR = {
     stickyCtaTitle: 'Need Your Account Unblocked Now?',
     stickyCtaText: 'Get in touch now for professional help',
     stickyCtaButton: 'Contact Us on WhatsApp',
+    serviceCardEyebrow: 'The service that fixes this',
+    serviceCardText: 'The full service page: how it works, how long it takes, and what clients say.',
+    serviceCardLink: (label) => `Go to ${label} →`,
     whatsappMessage: WHATSAPP_DEFAULT_MSG.en,
+  },
+};
+
+// Article slug → the service page that sells the fix it describes. Without this
+// every article dead-ends in WhatsApp and the money pages get no traffic or link
+// equity from the content that ranks for them.
+const ARTICLE_SERVICE = {
+  'whatsapp-unblock': 'whatsapp-recovery',
+  'whatsapp-recovery-guide': 'whatsapp-recovery',
+  'facebook-account-disabled': 'facebook-disabled',
+  'facebook-disabled-vs-limited': 'facebook-disabled',
+  'facebook-recovery-no-email-phone': 'facebook-recovery',
+  'instagram-hacked-recovery': 'instagram-hacked',
+  'shadowban-instagram-2025': 'instagram-recovery',
+  'protect-instagram-account': 'instagram-recovery',
+  'ads-manager-blocked': 'ads-manager',
+};
+
+const SERVICE_LABELS = {
+  he: {
+    'facebook-recovery': 'שחזור חשבון פייסבוק',
+    'instagram-recovery': 'שחזור חשבון אינסטגרם',
+    'whatsapp-recovery': 'שחזור חשבון וואטסאפ',
+    'facebook-disabled': 'חשבון פייסבוק מושבת',
+    'instagram-hacked': 'חשבון אינסטגרם נפרץ',
+    'ads-manager': 'שחזור מנהל מודעות',
+  },
+  en: {
+    'facebook-recovery': 'Facebook Account Recovery',
+    'instagram-recovery': 'Instagram Account Recovery',
+    'whatsapp-recovery': 'WhatsApp Account Recovery',
+    'facebook-disabled': 'Disabled Facebook Account',
+    'instagram-hacked': 'Hacked Instagram Account',
+    'ads-manager': 'Ads Manager Recovery',
   },
 };
 
@@ -68,6 +108,11 @@ const ArticleTemplate = ({ article }) => {
   const { pathname } = useLocation();
   const t = STR[lang];
   const homePath = prefix || '/';
+  const whatsappHref = getWhatsAppUrl(t.whatsappMessage);
+  const serviceSlug = article ? ARTICLE_SERVICE[article.slug] : undefined;
+  const serviceLink = serviceSlug
+    ? { to: SERVICE_PATHS[serviceSlug][lang], label: SERVICE_LABELS[lang][serviceSlug] }
+    : null;
   const [tableOfContents, setTableOfContents] = useState([]);
   const [activeHeading, setActiveHeading] = useState('');
   const contentRef = useRef(null);
@@ -209,8 +254,11 @@ const ArticleTemplate = ({ article }) => {
           <p style={{ color: '#e0e0e0', marginBottom: '32px', fontSize: '1.05rem', lineHeight: '1.6' }}>
             {t.placeholderText}
           </p>
-          <button
-            onClick={() => openWhatsApp(t.whatsappMessage)}
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={trackWhatsAppClick}
             style={{
               background: '#25D366',
               color: 'white',
@@ -224,11 +272,12 @@ const ArticleTemplate = ({ article }) => {
               alignItems: 'center',
               gap: '8px',
               fontFamily: 'inherit',
+              textDecoration: 'none',
             }}
           >
             <i className="fab fa-whatsapp"></i>
             {t.placeholderWhatsApp}
-          </button>
+          </a>
           <br /><br />
           <Link to={homePath} style={{ color: '#3B82F6', fontSize: '0.95rem' }}>{t.placeholderBack}</Link>
         </div>
@@ -367,11 +416,29 @@ const ArticleTemplate = ({ article }) => {
               </div>
               <h4 className="sticky-cta-title">{t.stickyCtaTitle}</h4>
               <p className="sticky-cta-text">{t.stickyCtaText}</p>
-              <button onClick={() => openWhatsApp(t.whatsappMessage)} className="sticky-cta-button">
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={trackWhatsAppClick}
+                className="sticky-cta-button"
+              >
                 <i className="fab fa-whatsapp"></i>
                 {t.stickyCtaButton}
-              </button>
+              </a>
             </div>
+
+            {/* Related service page — the article's path to the money page */}
+            {serviceLink && (
+              <div className="sidebar-service-card">
+                <span className="sidebar-service-eyebrow">{t.serviceCardEyebrow}</span>
+                <h4 className="sidebar-service-title">{serviceLink.label}</h4>
+                <p className="sidebar-service-text">{t.serviceCardText}</p>
+                <Link to={serviceLink.to} className="sidebar-service-link">
+                  {t.serviceCardLink(serviceLink.label)}
+                </Link>
+              </div>
+            )}
 
             {/* Table of Contents - Sidebar */}
             {tableOfContents.length > 0 && (

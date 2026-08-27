@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { trackSiteEvent } from '../utils/track';
 import { useLang } from '../i18n';
 import Icon from './Icon';
 import './ContactForm.css';
@@ -134,6 +135,9 @@ const ContactForm = () => {
             }),
           });
           if (!r.ok) throw new Error('bad status');
+          // Apps Script only stores name/phone — the CRM event carries the page
+          // path and UTMs, so a lead is attributable to the page it came from.
+          trackSiteEvent('lead_form_submit');
           setIsSubmitting(false);
           setIsSubmitted(true);
           setSubmitError(false);

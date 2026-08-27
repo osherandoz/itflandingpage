@@ -3,7 +3,8 @@ import { Link } from 'react-router';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingWhatsApp from './FloatingWhatsApp';
-import { openWhatsApp, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import ContactForm from './ContactForm';
+import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
 import { useLang } from '../i18n';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ServicePage.css';
@@ -23,6 +24,8 @@ const STR = {
     faqTitle: (keyword) => `שאלות נפוצות על ${keyword}`,
     faqSubtitle: 'תשובות לשאלות שלקוחות שואלים אותנו הכי הרבה',
     relatedTitle: 'מאמרים קשורים',
+    formTitle: 'מעדיפים שאחזור אליכם?',
+    formSubtitle: 'השאירו שם וטלפון ואחזור אליכם עם אבחון ראשוני, ללא עלות.',
     finalTitle: 'מוכנים לפתור את הבעיה?',
     finalText: 'שלחו הודעת וואטסאפ עכשיו. אבחון ראשוני חינם, ותשלום רק אחרי שהחשבון חזר לידיכם.',
     ctaFinal: 'שלחו הודעה עכשיו',
@@ -42,6 +45,8 @@ const STR = {
     faqTitle: (keyword) => `Frequently Asked Questions About ${keyword}`,
     faqSubtitle: 'Answers to the questions clients ask us most',
     relatedTitle: 'Related Articles',
+    formTitle: 'Prefer That I Call You Back?',
+    formSubtitle: 'Leave your name and phone number and I will get back to you with a free initial assessment.',
     finalTitle: 'Ready to Solve the Problem?',
     finalText: 'Send a WhatsApp message now. Free initial assessment, and payment only after your account is back in your hands.',
     ctaFinal: 'Message Us Now',
@@ -214,9 +219,9 @@ const ServicePage = ({ pageData }) => {
     .map((id) => ALL_TESTIMONIALS[lang].find((tm) => tm.id === id))
     .filter(Boolean);
 
-  const handleCTA = () => {
-    openWhatsApp(t.whatsappMessage(pageData.keyword));
-  };
+  // A real <a> — button + window.open() is blocked inside the Instagram and
+  // Facebook in-app browsers, which is where most of this page's traffic lands.
+  const whatsappHref = getWhatsAppUrl(t.whatsappMessage(pageData.keyword));
 
   return (
     <div dir={dir} className="service-page">
@@ -228,10 +233,16 @@ const ServicePage = ({ pageData }) => {
           <div className="service-container">
             <h1>{pageData.title}</h1>
             <p className="service-hero-subtitle">{t.heroSubtitle}</p>
-            <button className="service-cta-btn" onClick={handleCTA}>
+            <a
+              className="service-cta-btn"
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={trackWhatsAppClick}
+            >
               <i className="fab fa-whatsapp" aria-hidden="true"></i>
               {t.ctaHero}
-            </button>
+            </a>
           </div>
         </section>
 
@@ -349,15 +360,30 @@ const ServicePage = ({ pageData }) => {
           </section>
         )}
 
+        {/* ---- LEAD FORM ---- */}
+        <section className="service-lead-form">
+          <div className="service-container">
+            <h2>{t.formTitle}</h2>
+            <p className="service-form-subtitle">{t.formSubtitle}</p>
+            <ContactForm />
+          </div>
+        </section>
+
         {/* ---- FINAL CTA ---- */}
         <section className="service-cta-final">
           <div className="service-container">
             <h2>{t.finalTitle}</h2>
             <p>{t.finalText}</p>
-            <button className="service-cta-btn" onClick={handleCTA}>
+            <a
+              className="service-cta-btn"
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={trackWhatsAppClick}
+            >
               <i className="fab fa-whatsapp" aria-hidden="true"></i>
               {t.ctaFinal}
-            </button>
+            </a>
           </div>
         </section>
       </main>
