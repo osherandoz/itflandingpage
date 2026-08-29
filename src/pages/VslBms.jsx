@@ -36,7 +36,10 @@ const IconTarget = (p) => (<Icon {...p}><circle cx="12" cy="12" r="10" /><circle
 
 // TODO: החלף בערכים אמיתיים לפני העלאה לאוויר
 const VIDEO_EMBED_URL = 'https://www.youtube.com/embed/7Ac7-Kdl1-c';
-const PURCHASE_URL = 'https://mrng.to/engo98ytvh';
+// Tagged like the V2 variant tags its own link — without this the two VSL
+// variants are indistinguishable at the payment provider and the A/B test
+// cannot be read.
+const PURCHASE_URL = 'https://mrng.to/engo98ytvh?utm_content=v1-mistake-headline';
 // Optimized WebPs (94% smaller than original PNGs). See public/images/vsl-bms/.
 const HERO_IMAGE = '/images/vsl-bms/section_invitation-md.webp';
 const STORY_IMG_1 = '/images/vsl-bms/account_disabled-sm.webp';

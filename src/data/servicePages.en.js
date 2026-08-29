@@ -75,7 +75,7 @@ export const SERVICE_PAGES_EN = [
     path: 'instagram-account-recovery',
     keyword: 'Instagram account recovery',
     title: 'Instagram Account Recovery: Getting Your Profile Back',
-    metaTitle: 'Instagram Account Recovery | IsraelTechForce | Pay Only After Success',
+    metaTitle: 'Instagram Account Recovery | IsraelTechForce | Pay After Success',
     metaDescription:
       'Instagram account blocked, disabled, or restricted? IsraelTechForce specializes in Instagram account recovery. 95%+ success rate, 24-48 hours. Message us now.',
     serviceType: 'Instagram account recovery',
@@ -209,7 +209,7 @@ export const SERVICE_PAGES_EN = [
     path: 'facebook-account-disabled',
     keyword: 'Facebook account disabled',
     title: 'Facebook Account Disabled? We Will Get It Back',
-    metaTitle: 'Facebook Account Disabled | IsraelTechForce | Restored Within 48 Hours',
+    metaTitle: 'Facebook Account Disabled | IsraelTechForce | Back in 48 Hours',
     metaDescription:
       'Facebook account disabled? IsraelTechForce specializes in restoring disabled Facebook accounts. 95%+ success rate, pay only after success. Message us now.',
     serviceType: 'Disabled Facebook account restoration',
@@ -351,7 +351,7 @@ export const SERVICE_PAGES_EN = [
     title: 'Ads Manager or Business Manager Disabled? Back to Advertising Within 72 Hours',
     metaTitle: 'Business Manager Disabled? Ads Manager Recovery | IsraelTechForce',
     metaDescription:
-      'Meta Business Manager or ad account disabled? IsraelTechForce specializes in restoring disabled Business Managers and Facebook ad accounts. Pay only after success. Reach out now.',
+      'Meta Business Manager or ad account disabled? IsraelTechForce restores blocked Business Managers and Facebook ad accounts. Pay only after success. Reach out now.',
     serviceType: 'Disabled Facebook Ads Manager restoration',
     whatIsIt: `<p>Ads Manager is disabled. The advertising has stopped. The campaigns are not running. Every day the account stays disabled costs real money. Not just wasted budget. Revenue that never arrives. We understand how expensive that is, and we move fast.</p>
 <p>Meta disables ad accounts for a range of reasons: a declined credit card, a campaign flagged as misleading, actions that looked suspicious, or an alleged violation of advertising policy. The big problem is that Meta’s standard appeal mechanisms are slow and ineffective. You submit a form, wait weeks, and get an automated response. Meanwhile your business suffers.</p>

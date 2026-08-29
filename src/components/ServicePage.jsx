@@ -25,6 +25,8 @@ const STR = {
     faqSubtitle: 'תשובות לשאלות שלקוחות שואלים אותנו הכי הרבה',
     relatedTitle: 'מאמרים קשורים',
     crossTitle: 'זה לא בדיוק המקרה שלך?',
+    breadcrumbHome: 'בית',
+    breadcrumbAria: 'מסלול ניווט',
     formTitle: 'מעדיפים שאחזור אליכם?',
     formSubtitle: 'השאירו שם וטלפון ואחזור אליכם עם אבחון ראשוני, ללא עלות.',
     finalTitle: 'מוכנים לפתור את הבעיה?',
@@ -47,6 +49,8 @@ const STR = {
     faqSubtitle: 'Answers to the questions clients ask us most',
     relatedTitle: 'Related Articles',
     crossTitle: 'Not quite your case?',
+    breadcrumbHome: 'Home',
+    breadcrumbAria: 'Breadcrumb',
     formTitle: 'Prefer That I Call You Back?',
     formSubtitle: 'Leave your name and phone number and I will get back to you with a free initial assessment.',
     finalTitle: 'Ready to Solve the Problem?',
@@ -214,7 +218,7 @@ function ServiceFAQ({ faqs }) {
 }
 
 const ServicePage = ({ pageData }) => {
-  const { lang, dir, prefix } = useLang();
+  const { lang, dir, prefix, home } = useLang();
   const t = STR[lang];
 
   const visibleTestimonials = pageData.testimonialIds
@@ -230,6 +234,20 @@ const ServicePage = ({ pageData }) => {
       <Navbar />
 
       <main>
+        {/* ---- BREADCRUMB ---- */}
+        {/* Visible counterpart to the BreadcrumbList schema, which until now
+            described a trail the page never actually showed. */}
+        <nav className="service-breadcrumb" aria-label={t.breadcrumbAria}>
+          <div className="service-container">
+            <ol>
+              <li>
+                <Link to={home}>{t.breadcrumbHome}</Link>
+              </li>
+              <li aria-current="page">{pageData.title}</li>
+            </ol>
+          </div>
+        </nav>
+
         {/* ---- HERO ---- */}
         <section className="service-hero">
           <div className="service-container">

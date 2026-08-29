@@ -192,22 +192,6 @@ export const PERSON_SCHEMA = {
   ],
 };
 
-// ─── HowTo builder (service pages — "3 שלבים" section) ───────────────────────
-// pageData: { title, path, steps: [{ title, desc }] }
-export const buildHowToSchema = (pageData) => ({
-  '@context': 'https://schema.org',
-  '@type': 'HowTo',
-  name: pageData.howToName || pageData.title,
-  description: pageData.metaDescription || pageData.description,
-  inLanguage: 'he',
-  step: pageData.steps.map((s, i) => ({
-    '@type': 'HowToStep',
-    position: i + 1,
-    name: s.title,
-    text: s.desc,
-  })),
-});
-
 // ─── BreadcrumbList builder ───────────────────────────────────────────────────
 // items: [{ name, item? }]  — last item has no `item` (current page)
 export const buildBreadcrumbSchema = (items) => ({
