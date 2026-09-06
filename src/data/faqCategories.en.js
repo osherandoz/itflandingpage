@@ -125,7 +125,7 @@ export const CATEGORIES_EN = [
       {
         question: 'Is the recovery process safe and secure?',
         answer:
-          'Yes, completely. The entire process is handled with full discretion — the information you provide is used solely to resolve the issue and is deleted afterwards at your request. Nothing is shared with any outside parties, and no documentation is published without your explicit consent. On request, we can also sign a non-disclosure agreement (NDA).',
+          'Yes, completely. The entire process is handled with full discretion — the information you provide is used solely to resolve the issue and is deleted afterwards at your request. Your details stay in the tools used to handle your case (lead form, email, site analytics) and are never sold or shared beyond that, and no documentation is published without your explicit consent. On request, we can also sign a non-disclosure agreement (NDA).',
       },
       {
         question: 'How long does the recovery process take?',

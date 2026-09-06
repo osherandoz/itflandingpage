@@ -219,7 +219,7 @@ const WhatsAppDisabledPopup = ({ isOpen, onClose }) => {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="whatsapp-form">
+              <form data-clarity-mask="true" onSubmit={handleSubmit} className="whatsapp-form">
                 <div className="form-group">
                   <label htmlFor="name">{t.nameLabel}</label>
                   <input

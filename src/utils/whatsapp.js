@@ -7,34 +7,23 @@ export const WHATSAPP_DEFAULT_MSG = {
   en: "Hi, I found you through your website and I'd love to get more details",
 };
 
-// For <a href={getWhatsAppUrl(...)}> CTAs — a real link opens reliably in
-// popup-blocked and in-app browsers (Instagram/Facebook webviews), unlike
-// button + window.open().
-export const trackWhatsAppClick = () => {
+// A WhatsApp click is a click, not a received message and not a lead.
+// `location` names the CTA that was clicked (hero, navbar, sticky-bar, ...).
+export const trackWhatsAppClick = (location = 'unknown') => {
+  const loc = typeof location === 'string' ? location : 'unknown'; // onClick passes an event
   if (typeof gtag !== 'undefined') {
-    gtag('event', 'click', {
-      event_category: 'WhatsApp',
-      event_label: 'whatsapp_redirect',
-      value: 1
-    });
+    gtag('event', 'contact_click', { channel: 'whatsapp', cta_location: loc });
   }
-  trackSiteEvent('whatsapp_click');
+  trackSiteEvent('whatsapp_click', { channel: 'whatsapp', cta_location: loc, intent: 'contact' });
 };
 
-// openWhatsApp() removed: window.open() is swallowed by the Instagram and
-// Facebook in-app browsers. Every CTA now renders <a href={getWhatsAppUrl(...)}>.
+// For <a onClick={onWhatsAppClick('hero')}> — a real link opens reliably in
+// popup-blocked and in-app browsers (Instagram/Facebook webviews), unlike
+// button + window.open().
+export const onWhatsAppClick = (location) => () => trackWhatsAppClick(location);
+
 export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MSG.he) => {
   const phoneNumber = "972509823235";
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 };
-
-
-
-
-
-
-
-
-
-

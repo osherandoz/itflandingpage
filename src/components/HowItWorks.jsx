@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
 import { useLang } from '../i18n';
 import Icon from './Icon';
 import './HowItWorks.css';
@@ -152,7 +152,7 @@ const HowItWorks = () => {
             href={getWhatsAppUrl(t.whatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={trackWhatsAppClick}
+            onClick={onWhatsAppClick('how-it-works')}
           >
             <Icon name="whatsapp" aria-hidden="true" />
             {t.ctaButton}

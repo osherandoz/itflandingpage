@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './thank-you-lead.css';
 
@@ -11,13 +10,8 @@ const CHECKLIST_ITEMS = [
 ];
 
 export default function ThankYouLead() {
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'PageView');
-      window.fbq('track', 'Lead');
-    }
-  }, []);
-
+  // No Lead/PageView here: the Lead already fired on the signup form, and root
+  // fires PageView on every route change. One completed signup = one conversion.
   return (
     <main className="tyl" dir="rtl">
 
@@ -79,8 +73,9 @@ export default function ThankYouLead() {
                 }
               }}
             >
-              לצפייה בהדרכה החינמית ← ₪197
+              לצפייה בהדרכה החינמית (ללא עלות)
             </a>
+            <p className="tyl-next-note">ההדרכה בווידאו חינמית. הקורס המלא עולה ₪197, ואפשר להחליט אחרי הצפייה.</p>
             <p className="tyl-next-note">
               יש שאלה לפני?{' '}
               <a

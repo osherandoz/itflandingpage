@@ -44,6 +44,7 @@ const Home = () => {
   return (
     <div dir={dir} className="app">
       <Navbar />
+      <main>
       <section id="hero">
         <HeroSection />
       </section>
@@ -77,6 +78,7 @@ const Home = () => {
           <ContactForm />
         </div>
       </section>
+      </main>
       <Footer />
       <FloatingWhatsApp />
       <StickyCtaBar />

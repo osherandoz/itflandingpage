@@ -26,8 +26,6 @@ export default [
   route("VSL-BMS-V2", "./routes/vsl-bms-v2.jsx"),
   route("תודה-קליסט", "./routes/thank-you-lead.jsx"),
   route("תודה-רכישה", "./routes/thank-you-purchase.jsx"),
-  // Internal — private tracking dashboard (noindex)
-  route("dashboard", "./routes/dashboard.jsx"),
 
   // ——— English site (/en/*) — mirrors the Hebrew pages with English slugs ———
   route("en", "./routes/en.home.jsx"),

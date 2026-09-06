@@ -19,7 +19,7 @@ const STR = {
       'כל התשובות לשאלות הנפוצות ביותר על שחזור חשבונות ברשתות החברתיות. לא מצאתם תשובה? צרו קשר ונשמח לעזור.',
     ctaTitle: 'עדיין יש לכם שאלות?',
     ctaText:
-      'אנחנו זמינים 24/6 לכל שאלה. שלחו לנו הודעה בוואטסאפ ונחזור אליכם תוך דקות. אבחון ראשוני, חינם לגמרי.',
+      'אנחנו זמינים ראשון עד שישי, 08:00–22:00, לכל שאלה. שלחו לנו הודעה בוואטסאפ ונחזור אליכם תוך דקות. אבחון ראשוני, חינם לגמרי.',
     ctaBtn: 'שלחו הודעה בוואטסאפ',
     whatsappMessage: 'היי, יש לי שאלה על שחזור חשבון',
   },
@@ -31,7 +31,7 @@ const STR = {
       "All the answers to the most common questions about social media account recovery. Didn't find an answer? Get in touch and we'll be happy to help.",
     ctaTitle: 'Still have questions?',
     ctaText:
-      "We're available 24/6 for any question. Send us a WhatsApp message and we'll get back to you within minutes. Initial diagnosis — completely free.",
+      "We're available Sunday to Friday, 08:00–22:00, for any question. Send us a WhatsApp message and we'll get back to you within minutes. Initial diagnosis — completely free.",
     ctaBtn: 'Send a WhatsApp Message',
     whatsappMessage: WHATSAPP_DEFAULT_MSG.en,
   },

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
 import { trackSiteEvent } from '../utils/track';
 import { useLang } from '../i18n';
 import Icon from './Icon';
@@ -19,6 +19,8 @@ const STR = {
     phonePlaceholder: 'הכנס את מספר הטלפון שלך',
     phoneRequired: 'מספר טלפון הוא שדה חובה',
     phoneInvalid: 'מספר טלפון לא תקין',
+    noteLabel: 'מה ההודעה שאתם רואים? (לא חובה)',
+    noteNone: 'לא בטוח/ה',
     consentLabel: 'אני מאשר/ת ליצור איתי קשר',
     consentRequired: 'עליך להסכים ליצירת קשר כדי לשלוח את הטופס',
     sending: 'שולח...',
@@ -39,6 +41,8 @@ const STR = {
     phonePlaceholder: 'Enter your phone number',
     phoneRequired: 'Phone number is required',
     phoneInvalid: 'Invalid phone number',
+    noteLabel: 'What message do you see? (optional)',
+    noteNone: 'Not sure',
     consentLabel: 'I agree to be contacted',
     consentRequired: 'You must agree to be contacted to send the form',
     sending: 'Sending...',
@@ -48,16 +52,18 @@ const STR = {
   },
 };
 
-const ContactForm = () => {
+/**
+ * Props (all optional):
+ *  heading / subheading / submitLabel — override copy (e.g. the WhatsApp callback hero)
+ *  noteOptions — array of strings; renders an optional "what do you see" select sent as `note`
+ *  location — CTA location name for analytics (default 'contact-form')
+ *  hideWhatsApp — omit the WhatsApp fallback line under the button
+ */
+const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location = 'contact-form', hideWhatsApp = false }) => {
   const { lang } = useLang();
   const t = STR[lang];
 
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    consent: false
-  });
-
+  const [formData, setFormData] = useState({ name: '', phone: '', note: '', consent: false });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -65,99 +71,76 @@ const ContactForm = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-
-    // Clear field error and submit error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
+    setFormData((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
     if (submitError) setSubmitError(false);
   };
 
   const validateForm = () => {
     const newErrors = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = t.nameRequired;
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = t.phoneRequired;
-    } else if (!/^[\d\s\-+()]+$/.test(formData.phone)) {
+    if (!formData.name.trim()) newErrors.name = t.nameRequired;
+    if (!formData.phone.trim()) newErrors.phone = t.phoneRequired;
+    else if (!/^[\d\s\-+()]+$/.test(formData.phone) || formData.phone.replace(/\D/g, '').length < 8) {
       newErrors.phone = t.phoneInvalid;
     }
-
-    if (!formData.consent) {
-      newErrors.consent = t.consentRequired;
-    }
-
+    if (!formData.consent) newErrors.consent = t.consentRequired;
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
+    setIsSubmitting(true);
+    trackSiteEvent('lead_form_submit', { cta_location: location });
 
-    if (validateForm()) {
-      setIsSubmitting(true);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10000);
+    try {
+      const r = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          phone: formData.phone.trim(),
+          consent: formData.consent,
+          note: formData.note || '',
+          source: 'contact',
+          lang,
+        }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok || !data.success) throw new Error('bad status');
 
-      try {
-        // Track Lead event in Meta Pixel immediately
-        if (typeof window !== 'undefined' && window.fbq) {
-          window.fbq('track', 'Lead');
-        }
-
-        // Track form submission in GA4
-        if (typeof window !== 'undefined' && window.gtag) {
-          window.gtag('event', 'generate_lead', {
-            event_category: 'Contact',
-            event_label: 'Contact Form',
-            value: 1,
-          });
-        }
-
-        const controller = new AbortController();
-        const timer = setTimeout(() => controller.abort(), 10000);
-        try {
-          const r = await fetch('/api/lead', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            signal: controller.signal,
-            body: JSON.stringify({
-              name: formData.name.trim(),
-              phone: formData.phone.trim(),
-              consent: formData.consent,
-              source: 'contact',
-              lang,
-            }),
-          });
-          if (!r.ok) throw new Error('bad status');
-          // Apps Script only stores name/phone — the CRM event carries the page
-          // path and UTMs, so a lead is attributable to the page it came from.
-          trackSiteEvent('lead_form_submit');
-          setIsSubmitting(false);
-          setIsSubmitted(true);
-          setSubmitError(false);
-          setFormData({ name: '', phone: '', consent: false });
-          setTimeout(() => setIsSubmitted(false), 5000);
-        } finally {
-          clearTimeout(timer);
-        }
-      } catch {
-        setIsSubmitting(false);
-        setSubmitError(true);
+      // Conversion events fire only after the server confirmed receipt.
+      // leadId lets the CRM join this click trail to the row in Sheets.
+      trackSiteEvent('lead_received', { leadId: data.leadId || null, cta_location: location });
+      if (typeof window !== 'undefined' && window.fbq) window.fbq('track', 'Lead', { content_name: location });
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'generate_lead', { event_category: 'Contact', event_label: location, value: 1 });
       }
+
+      setIsSubmitted(true);
+      setSubmitError(false);
+      setFormData({ name: '', phone: '', note: '', consent: false });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    } catch {
+      trackSiteEvent('lead_form_error', { cta_location: location });
+      setSubmitError(true);
+    } finally {
+      clearTimeout(timer);
+      setIsSubmitting(false);
     }
   };
 
+  const noteId = `note-${location}`;
+
   return (
-    <div className="contact-form-container" id="contact-form">
+    <div className="contact-form-container" id={location === 'contact-form' ? 'contact-form' : undefined}>
       <div className="contact-form-header">
-        <h2>{t.header}</h2>
-        <p>{t.subheader}</p>
+        <h2>{heading || t.header}</h2>
+        <p>{subheading || t.subheader}</p>
       </div>
 
       {isSubmitted && (
@@ -168,8 +151,9 @@ const ContactForm = () => {
 
       {submitError && (
         <div className="submit-error-message" role="alert">
-          <p>{t.submitErrorText}{' '}
-            <a className="form-whatsapp-link" href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}>
+          <p>
+            {t.submitErrorText}{' '}
+            <a className="form-whatsapp-link" href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick(`${location}-error`)}>
               <Icon name="whatsapp" aria-hidden="true" />
               {t.whatsappDirect}
             </a>
@@ -177,12 +161,13 @@ const ContactForm = () => {
         </div>
       )}
 
-      <form className="contact-form" onSubmit={handleSubmit}>
+      {/* data-clarity-mask: session replay never records what is typed here */}
+      <form className="contact-form" onSubmit={handleSubmit} data-clarity-mask="true">
         <div className="form-group">
-          <label htmlFor="name">{t.nameLabel}</label>
+          <label htmlFor={`name-${location}`}>{t.nameLabel}</label>
           <input
             type="text"
-            id="name"
+            id={`name-${location}`}
             name="name"
             autoComplete="name"
             value={formData.name}
@@ -196,10 +181,10 @@ const ContactForm = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="phone">{t.phoneLabel}</label>
+          <label htmlFor={`phone-${location}`}>{t.phoneLabel}</label>
           <input
             type="tel"
-            id="phone"
+            id={`phone-${location}`}
             name="phone"
             autoComplete="tel"
             inputMode="tel"
@@ -212,6 +197,18 @@ const ContactForm = () => {
           />
           {errors.phone && <span className="error-message">{errors.phone}</span>}
         </div>
+
+        {noteOptions && (
+          <div className="form-group">
+            <label htmlFor={noteId}>{t.noteLabel}</label>
+            <select id={noteId} name="note" value={formData.note} onChange={handleInputChange} disabled={isSubmitting}>
+              <option value="">{t.noteNone}</option>
+              {noteOptions.map((opt) => (
+                <option key={opt} value={opt}>{opt}</option>
+              ))}
+            </select>
+          </div>
+        )}
 
         <div className="form-group checkbox-group">
           <label className="checkbox-label">
@@ -237,23 +234,25 @@ const ContactForm = () => {
               {t.sending}
             </>
           ) : (
-            t.submit
+            submitLabel || t.submit
           )}
         </button>
 
-        <p className="form-whatsapp-note">
-          {t.whatsappNote}{' '}
-          <a
-            className="form-whatsapp-link"
-            href={getWhatsAppUrl(t.whatsappMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={trackWhatsAppClick}
-          >
-            <Icon name="whatsapp" aria-hidden="true" />
-            {t.whatsappDirect}
-          </a>
-        </p>
+        {!hideWhatsApp && (
+          <p className="form-whatsapp-note">
+            {t.whatsappNote}{' '}
+            <a
+              className="form-whatsapp-link"
+              href={getWhatsAppUrl(t.whatsappMessage)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={onWhatsAppClick(`${location}-note`)}
+            >
+              <Icon name="whatsapp" aria-hidden="true" />
+              {t.whatsappDirect}
+            </a>
+          </p>
+        )}
       </form>
     </div>
   );

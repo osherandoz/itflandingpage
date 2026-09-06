@@ -18,7 +18,7 @@ const STR = {
       },
       {
         question: 'האם השירות דיסקרטי ומאובטח?',
-        answer: 'בהחלט! כל הפרטים שאקבל ממך ישארו חסויים ומאובטחים ולא יועברו לאף גורם חיצוני. כל המידע נועד לטיפול בבעיה בלבד וימחק לאחר סיום הטיפול בהתאם לרצונך. לא יעלה שום תיעוד הצלחה לרשת ללא הסכמתך המפורשת כלקוח.'
+        answer: 'בהחלט! כל הפרטים שאקבל ממך ישארו חסויים ומאובטחים. הם נשמרים רק במערכות שמשמשות אותי לטיפול בפנייה (טופס לידים, דיוור וניתוח האתר) ולא נמכרים ולא מועברים לאף גורם אחר. כל המידע נועד לטיפול בבעיה בלבד וימחק לאחר סיום הטיפול בהתאם לרצונך. לא יעלה שום תיעוד הצלחה לרשת ללא הסכמתך המפורשת כלקוח.'
       },
       {
         question: 'כמה זמן לוקח תהליך שחזור החשבון?',
@@ -41,8 +41,8 @@ const STR = {
         answer: 'כן! אני מטפל בכל סוגי הבעיות הקשורות לחשבונות רשתות חברתיות: חשבונות חסומים, פרוצים, בעיות התחברות, בעיות פרסום, Business Manager, ועוד. יש לי ניסיון של שנים וכלים מתקדמים לפתרון בעיות מורכבות.'
       },
       {
-        question: 'האם אתה זמין 24/6?',
-        answer: 'אני זמין 24/6 (ראשון עד שישי) עם תמיכה מיידית. בשבת אני זמין למקרים דחופים בלבד. התמיכה שלי כוללת מענה מהיר, אבחון מקצועי, וטיפול מיידי בבעיות דחופות.'
+        question: 'באילו שעות אתה זמין?',
+        answer: 'אני זמין ראשון עד שישי, 08:00–22:00. בשבת אני זמין למקרים דחופים בלבד. התמיכה שלי כוללת מענה מהיר, אבחון מקצועי, וטיפול מיידי בבעיות דחופות.'
       }
     ],
   },
@@ -60,7 +60,7 @@ const STR = {
       },
       {
         question: 'Is the service discreet and secure?',
-        answer: 'Absolutely. Every detail you share with me stays confidential and secure, and is never passed to any third party. All information is used only to handle your case, and is deleted after the work is done if you wish. No success story goes online without your explicit consent as a client.'
+        answer: 'Absolutely. Every detail you share with me stays confidential and secure. It is stored only in the tools I use to handle your case (lead form, email, site analytics) and is never sold or passed to anyone else. All information is used only to handle your case, and is deleted after the work is done if you wish. No success story goes online without your explicit consent as a client.'
       },
       {
         question: 'How long does the account recovery process take?',
@@ -83,8 +83,8 @@ const STR = {
         answer: 'Yes. I handle every type of social-media account problem: blocked accounts, hacked accounts, login issues, advertising issues, Business Manager, and more. I have years of experience and advanced tools for solving complex problems.'
       },
       {
-        question: 'Are you available 24/6?',
-        answer: "I'm available 24/6 (Sunday through Friday) with immediate support. On Saturday I'm available for urgent cases only. My support includes fast responses, professional diagnosis, and immediate handling of urgent issues."
+        question: 'What are your hours?',
+        answer: "I'm available Sunday through Friday, 08:00–22:00. On Saturday I'm available for urgent cases only. My support includes fast responses, professional diagnosis, and immediate handling of urgent issues."
       }
     ],
   },

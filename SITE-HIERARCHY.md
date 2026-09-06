@@ -41,7 +41,7 @@
 │   └── /newsletter          (The Safety Signal → Smoove)
 │
 ├── /privacy
-└── /dashboard               פנימי, noindex, Disallow ב-robots
+(dashboard הוסר מהאתר הציבורי, 2026-09)
 ```
 
 ## 2. היררכיה — אנגלית (/en/*)
@@ -182,5 +182,5 @@ BOFU   /תודה-רכישה ──► אונבורדינג + הצעת שירות
 ## 7. עמודים חסרים בסייטמאפ / robots
 
 - Sitemap כולל 46 URL. חסרים: `/VSL-BMS-V2` (מכוון, noindex), thank-you (מכוון).
-- `robots.txt` חוסם: `/dashboard`, `/api/`, `/VSL-BMS-V2`, שני דפי התודה.
+- `robots.txt` חוסם: `/api/`, `/VSL-BMS-V2`, שני דפי התודה.
 - **`/bms-sm` ו-`/VSL-BMS` בסייטמאפ ללא מקבילה אנגלית** — אין hreflang עליהם.

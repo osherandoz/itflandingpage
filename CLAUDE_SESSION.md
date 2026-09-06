@@ -115,3 +115,21 @@
 - User speaks Hebrew — respond in **English** for code/technical, Hebrew ok for content
 - User wants to be asked what info is needed before implementing
 - No major unsolicited UI changes
+
+---
+
+## 2026-09-06 — Website audit fixes (branch `feature/audit-2026-09`)
+Implemented from `ITF-Website-Audit-2026-09-06.md` (P0/P1 + cheap P2). Key facts:
+- **New env vars (Vercel):** `LEAD_WEBHOOK_SECRET` (must equal Apps Script property `LEAD_SECRET`),
+  `KV_REST_API_URL` + `KV_REST_API_TOKEN` (Upstash Redis from Vercel Marketplace — durable rate-limit/idempotency;
+  without them `api/_lib/store.js` falls back to per-instance memory), optional `PAYMENT_OK_STATUSES`,
+  `BMS_PRICE_ILS` (default 197), `BMS_PRODUCT_MATCH`.
+- **Webhook is now strict:** only paid + 197 ILS events enroll; refunds/failed are acknowledged and ignored; replays
+  are no-ops. Verify with one real Green Invoice sandbox payload — if its field names differ, adjust `validatePayment()`.
+- **Apps Script must be redeployed** from `google-apps-script-code.js` (POST only, secret check, leadId column E,
+  source col F, note col G). Old script keeps working until then (proxy sends form-encoded POST).
+- **Dashboard route deleted** (was public). Build artifacts (`.react-router/`, `.vercel/`) untracked.
+- **Claims:** availability now "א׳–ו׳ 08:00–22:00" everywhere (from `src/data/businessFacts.js`, matches schema).
+  If the real schedule differs, change `businessFacts.js` + `schemas.js` + the literal copies flagged there.
+- Not done (needs content from Osher): author/about page, 3 case studies, newsletter sample/archive, homepage
+  portrait redesign, nav simplification, sitemap dateModified workflow, Meta CAPI server purchase event.

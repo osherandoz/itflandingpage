@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 import { useLang } from '../i18n';
 import './StickyCtaBar.css';
 
@@ -70,7 +70,7 @@ const StickyCtaBar = () => {
         href={getWhatsAppUrl(t.whatsappMessage)}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={trackWhatsAppClick}
+        onClick={onWhatsAppClick('sticky-bar')}
         tabIndex={visible ? 0 : -1}
       >
         {t.cta}

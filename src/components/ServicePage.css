@@ -624,3 +624,39 @@
   color: #93c5fd;
   text-decoration: underline;
 }
+
+/* ---- Reading width: prose stays in a comfortable column; grids keep full width ---- */
+.service-about-text,
+.service-faq-list,
+.service-cta-final p,
+.service-form-subtitle {
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---- WhatsApp callback-first hero ---- */
+.service-hero--callback .service-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 40px;
+  align-items: start;
+  text-align: start;
+}
+.service-hero--callback .service-hero-subtitle { margin-inline: 0; }
+.service-hero--callback .contact-form-container { margin: 0; }
+.service-hero--callback .contact-form-header h2 { font-size: 1.35rem; }
+.service-hero-alt {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  align-items: center;
+  margin-top: 10px;
+  color: #b0c4de;
+  font-size: 0.98rem;
+}
+.service-hero-alt a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.service-hero-alt .service-hero-wa { color: #4ade80; display: inline-flex; align-items: center; gap: 6px; }
+@media (max-width: 900px) {
+  .service-hero--callback .service-container { grid-template-columns: 1fr; gap: 28px; }
+}

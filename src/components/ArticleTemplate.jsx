@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router';
 import { useLang, togglePath, SERVICE_PATHS } from '../i18n';
-import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ArticleTemplate.css';
 
@@ -258,7 +258,7 @@ const ArticleTemplate = ({ article }) => {
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={trackWhatsAppClick}
+            onClick={onWhatsAppClick('article-inline')}
             style={{
               background: '#25D366',
               color: 'white',
@@ -420,7 +420,7 @@ const ArticleTemplate = ({ article }) => {
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={trackWhatsAppClick}
+                onClick={onWhatsAppClick('article-final')}
                 className="sticky-cta-button"
               >
                 <i className="fab fa-whatsapp"></i>

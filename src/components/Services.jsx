@@ -59,7 +59,7 @@ const STR = {
         tag: 'Instagram',
         title: 'שחזור חשבון אינסטגרם שהושבת',
         problem: <>איבדת גישה בגלל <b>דיווחי הטרדה שקריים</b>, זיהוי פנים שכשל, או חשבון שנעלם אחרי התחזות? אני מטפל בזה מול מטא ומשחזר את החשבון.</>,
-        bullets: ['שחזור מלא עם כל הפוסטים והעוקבים', 'ערעור דיווחי הטרדה וזכויות יוצרים', 'טיפול בחשבונות שהתחזו אליך', 'תמיכה 24/6 עד לסגירת הטיפול'],
+        bullets: ['שחזור מלא עם כל הפוסטים והעוקבים', 'ערעור דיווחי הטרדה וזכויות יוצרים', 'טיפול בחשבונות שהתחזו אליך', 'ליווי צמוד עד לסגירת הטיפול'],
         message: 'היי, החשבון אינסטגרם שלי הושבת, אשמח לעזרה',
       },
       {
@@ -97,14 +97,14 @@ const STR = {
     ],
     ctaLabel: 'קבל עזרה עכשיו',
     arrow: '←',
-    eyebrow: 'שירותי שחזור מקצועיים · פעיל 24/6',
+    eyebrow: 'שירותי שחזור מקצועיים · א׳–ו׳ 08:00–22:00',
     titleBefore: 'מחזיר לך את ',
     titleAccent: 'הדיגיטל',
     titleAfter: 'כשהכל קרס',
     subtitle: 'חשבון נפרץ, נחסם או נעלם? אני מתמחה בשחזור מהיר ושקט, עד שהחשבון חזר לידיים שלך.',
     stats: [
       { value: '95%+', label: 'הצלחה בשחזור' },
-      { value: '24/6', label: 'זמינות אישית' },
+      { value: 'א׳–ו׳', label: 'זמינות 08:00–22:00' },
       { value: '~48h', label: 'זמן ממוצע' },
     ],
     pagesAria: 'מדריכי שחזור מפורטים',
@@ -133,7 +133,7 @@ const STR = {
         tag: 'Instagram',
         title: 'Recover a Disabled Instagram Account',
         problem: <>Lost access because of <b>false harassment reports</b>, failed face verification, or an account that vanished after impersonation? I handle it directly with Meta and get your account back.</>,
-        bullets: ['Full recovery with all posts and followers', 'Appeal harassment and copyright reports', 'Deal with accounts impersonating you', '24/6 support until your case is closed'],
+        bullets: ['Full recovery with all posts and followers', 'Appeal harassment and copyright reports', 'Deal with accounts impersonating you', 'Close support until your case is closed'],
         message: 'Hi, my Instagram account was disabled, I need help',
       },
       {
@@ -171,14 +171,14 @@ const STR = {
     ],
     ctaLabel: 'Get Help Now',
     arrow: '→',
-    eyebrow: 'Professional recovery services · Active 24/6',
+    eyebrow: 'Professional recovery services · Sun–Fri 08:00–22:00',
     titleBefore: 'Getting your ',
     titleAccent: 'digital life',
     titleAfter: 'back when it all crashes',
     subtitle: 'Account hacked, blocked, or gone? I specialize in fast, discreet recovery - until the account is back in your hands.',
     stats: [
       { value: '95%+', label: 'Recovery success' },
-      { value: '24/6', label: 'Personal availability' },
+      { value: 'Sun–Fri', label: 'Available 08:00–22:00' },
       { value: '~48h', label: 'Average turnaround' },
     ],
     pagesAria: 'Detailed recovery guides',
@@ -249,7 +249,7 @@ const Services = () => {
   }, []);
 
   const trackClick = (title) => {
-    trackWhatsAppClick();
+    trackWhatsAppClick('services-card');
     if (typeof gtag !== 'undefined') {
       gtag('event', 'click', { event_category: 'Service', event_label: title, value: 1 });
     }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
 import { useLang } from '../i18n';
 import Icon from './Icon';
 import Modal from './Modal';
@@ -181,8 +181,8 @@ const STR = {
       { to: '/חשבון-פייסבוק-מושבת', label: 'חשבון פייסבוק מושבת' },
       { to: '/חשבון-אינסטגרם-נפרץ', label: 'חשבון אינסטגרם נפרץ' },
       { to: '/שחזור-מנהל-מודעות', label: 'שחזור מנהל מודעות' },
-      { to: '/bms-sm', label: 'קורס BMS, מניעת חסימות' },
-      { to: '/VSL-BMS', label: 'הדרכה: איך לא להיחסם' },
+      { to: '/bms-sm', label: 'צ׳קליסט סינון לקוחות (חינם)' },
+      { to: '/VSL-BMS', label: 'קורס BMS (₪197): איך לא להיחסם' },
     ],
     quickTitle: 'קישורים מהירים',
     quickFaq: 'שאלות נפוצות',
@@ -277,7 +277,7 @@ const Footer = () => {
               <p><Icon name="envelope" aria-hidden="true" /> osher@israeltechforce.com</p>
             </div>
             <div className="contact-buttons">
-              <a className="footer-cta" href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={trackWhatsAppClick}>
+              <a className="footer-cta" href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick('footer-cta')}>
                 <Icon name="whatsapp" aria-hidden="true" />
                 {t.whatsappCta}
               </a>
@@ -298,7 +298,7 @@ const Footer = () => {
               <a href="https://www.instagram.com/osher_revach_1/" className="social-link" aria-label={t.instagramAria}>
                 <Icon name="instagram" aria-hidden="true" />
               </a>
-              <a href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={t.whatsappAria} onClick={trackWhatsAppClick}>
+              <a href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={t.whatsappAria} onClick={onWhatsAppClick('footer-social')}>
                 <Icon name="whatsapp" aria-hidden="true" />
               </a>
               <a href="https://www.tiktok.com/@israeltechforce" className="social-link" aria-label={t.tiktokAria}>
