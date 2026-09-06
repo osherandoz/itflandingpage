@@ -33,7 +33,7 @@ export const LOCAL_BUSINESS_SCHEMA = {
   },
   areaServed: { '@type': 'Country', name: 'Israel' },
   priceRange: '₪₪',
-  openingHours: 'Su-Fr 08:00-22:00',
+  openingHours: 'Su-Fr 09:00-16:00',
   // aggregateRating removed: self-serving reviews on LocalBusiness are ineligible
   // for rich results per Google policy and risk a structured-data manual action.
   sameAs: [

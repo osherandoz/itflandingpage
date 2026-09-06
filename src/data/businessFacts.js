@@ -3,7 +3,7 @@
  * Every number the site shows should come from here, with its definition and
  * source, so hero / service pages / schema never disagree with each other.
  *
- * Last verified: 2026-09-06 — Osher to confirm each `source` line.
+ * Last verified: 2026-09-06. Hours confirmed by Osher (09:00–16:00); other `source` lines still TODO.
  */
 export const FACTS = {
   accountsRecovered: {
@@ -32,12 +32,12 @@ export const FACTS = {
     display: '24-48',
     definition: 'Typical hours for simple cases; complex cases (hacked, BM, permanent) take longer.',
   },
-  // Matches LocalBusiness.openingHours in src/data/schemas.js ('Su-Fr 08:00-22:00').
+  // Matches LocalBusiness.openingHours in src/data/schemas.js ('Su-Fr 09:00-16:00').
   // If the real schedule is different, change BOTH here and in schemas.js.
   hours: {
-    he: 'א׳–ו׳ 08:00–22:00',
-    en: 'Sun–Fri 08:00–22:00',
-    schema: 'Su-Fr 08:00-22:00',
+    he: 'א׳–ו׳ 09:00–16:00',
+    en: 'Sun–Fri 09:00–16:00',
+    schema: 'Su-Fr 09:00-16:00',
   },
   priceRange: {
     he: '₪500–3,000',

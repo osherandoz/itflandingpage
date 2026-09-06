@@ -58,7 +58,7 @@ export const FAQ_SCHEMA_EN = {
       name: 'What are your hours?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'I am available Sunday through Friday, 08:00–22:00. On Saturday I am available for urgent cases only.',
+        text: 'I am available Sunday through Friday, 09:00–16:00. On Saturday I am available for urgent cases only.',
       },
     },
   ],

@@ -12,7 +12,7 @@ const STR = {
     p2: 'עם למעלה מ-2,500 חשבונות ששוחזרו בהצלחה ו-95% אחוזי הצלחה, אני מביא איתי ניסיון עשיר, כלים מתקדמים וטכניקות ייחודיות שפותחו לאורך שנים. מתמחה בפתרון בעיות גם במקרים שמטא (Meta) טוענים שאין סיכוי.',
     features: [
       { icon: 'shield', label: 'מומחיות באבטחה מתקדמת' },
-      { icon: 'clock', label: 'זמינות א׳–ו׳ 08:00–22:00' },
+      { icon: 'clock', label: 'זמינות א׳–ו׳ 09:00–16:00' },
       { icon: 'users', label: 'אלפי לקוחות מרוצים בישראל' },
       { icon: 'certificate', label: 'הוכחות מקצועיות ורפרנסים' },
     ],
@@ -28,7 +28,7 @@ const STR = {
     p2: "With over 2,500 accounts successfully recovered and a 95% success rate, I bring years of experience, advanced tools, and unique techniques developed over time. I solve cases even when Meta says there's no chance.",
     features: [
       { icon: 'shield', label: 'Advanced security expertise' },
-      { icon: 'clock', label: 'Available Sun–Fri 08:00–22:00' },
+      { icon: 'clock', label: 'Available Sun–Fri 09:00–16:00' },
       { icon: 'users', label: 'Thousands of satisfied clients in Israel' },
       { icon: 'certificate', label: 'Professional proof and references' },
     ],

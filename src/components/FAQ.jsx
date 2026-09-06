@@ -42,7 +42,7 @@ const STR = {
       },
       {
         question: 'באילו שעות אתה זמין?',
-        answer: 'אני זמין ראשון עד שישי, 08:00–22:00. בשבת אני זמין למקרים דחופים בלבד. התמיכה שלי כוללת מענה מהיר, אבחון מקצועי, וטיפול מיידי בבעיות דחופות.'
+        answer: 'אני זמין ראשון עד שישי, 09:00–16:00. בשבת אני זמין למקרים דחופים בלבד. התמיכה שלי כוללת מענה מהיר, אבחון מקצועי, וטיפול מיידי בבעיות דחופות.'
       }
     ],
   },
@@ -84,7 +84,7 @@ const STR = {
       },
       {
         question: 'What are your hours?',
-        answer: "I'm available Sunday through Friday, 08:00–22:00. On Saturday I'm available for urgent cases only. My support includes fast responses, professional diagnosis, and immediate handling of urgent issues."
+        answer: "I'm available Sunday through Friday, 09:00–16:00. On Saturday I'm available for urgent cases only. My support includes fast responses, professional diagnosis, and immediate handling of urgent issues."
       }
     ],
   },

@@ -129,7 +129,7 @@ Implemented from `ITF-Website-Audit-2026-09-06.md` (P0/P1 + cheap P2). Key facts
 - **Apps Script must be redeployed** from `google-apps-script-code.js` (POST only, secret check, leadId column E,
   source col F, note col G). Old script keeps working until then (proxy sends form-encoded POST).
 - **Dashboard route deleted** (was public). Build artifacts (`.react-router/`, `.vercel/`) untracked.
-- **Claims:** availability now "א׳–ו׳ 08:00–22:00" everywhere (from `src/data/businessFacts.js`, matches schema).
+- **Claims:** availability now "א׳–ו׳ 09:00–16:00" everywhere (from `src/data/businessFacts.js`, matches schema).
   If the real schedule differs, change `businessFacts.js` + `schemas.js` + the literal copies flagged there.
 - Not done (needs content from Osher): author/about page, 3 case studies, newsletter sample/archive, homepage
   portrait redesign, nav simplification, sitemap dateModified workflow, Meta CAPI server purchase event.
