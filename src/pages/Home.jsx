@@ -49,14 +49,16 @@ const Home = () => {
         <HeroSection />
       </section>
       <PressSection />
-      <section id="about">
-        <AboutMe />
-      </section>
+      {/* Services + diagnosis before the About block (audit D1): let a visitor
+          find their own problem and see how this works before reading a bio. */}
       <section id="services">
         <Services />
       </section>
       <section id="how-it-works">
         <HowItWorks />
+      </section>
+      <section id="about">
+        <AboutMe />
       </section>
       <section id="testimonials">
         <Suspense fallback={null}>

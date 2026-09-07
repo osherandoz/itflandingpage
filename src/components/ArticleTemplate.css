@@ -127,6 +127,12 @@
   color: #3B82F6;
 }
 
+.article-author a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .article-meta-details {
   display: flex;
   gap: 20px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { useLang } from '../i18n';
 import Icon from './Icon';
 import './AboutMe.css';
@@ -19,6 +20,8 @@ const STR = {
     alt1: 'אושר רווח, מומחה שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ',
     alt2: 'IsraelTechForce, מומחים לשחזור חשבונות רשתות חברתיות',
     alt3: 'שחזור חשבונות, שירות מקצועי ואמין',
+    moreLink: 'הסיפור המלא, איך זה התחיל ←',
+    moreHref: '/אושר-רווח',
   },
   en: {
     title: 'Social Media Account Recovery Expert',
@@ -35,6 +38,8 @@ const STR = {
     alt1: 'Osher Revach, Facebook, Instagram and WhatsApp account recovery expert',
     alt2: 'IsraelTechForce, social media account recovery experts',
     alt3: 'Account recovery, professional and reliable service',
+    moreLink: 'The full story, how it started ←',
+    moreHref: '/en/osher-revach',
   },
 };
 
@@ -68,6 +73,8 @@ const AboutMe = () => {
                 </div>
               ))}
             </div>
+
+            <Link to={t.moreHref} className="about-more-link">{t.moreLink}</Link>
           </div>
 
           <div className="about-images">

@@ -50,7 +50,7 @@ export const PERSON_SCHEMA_EN = {
   jobTitle: 'Social Media Account Recovery Expert',
   description:
     'Israeli digital account recovery expert and founder of IsraelTechForce. Since 2020 has recovered over 2,500 Facebook, Instagram, and WhatsApp accounts for businesses and content creators.',
-  url: `${SITE_URL}/en`,
+  url: `${SITE_URL}/en/osher-revach`,
   image: `${SITE_URL}/images/osher-photo-1.jpg`,
   knowsAbout: [
     'Facebook account recovery',

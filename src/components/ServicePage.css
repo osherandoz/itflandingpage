@@ -660,3 +660,12 @@
 @media (max-width: 900px) {
   .service-hero--callback .service-container { grid-template-columns: 1fr; gap: 28px; }
 }
+
+.service-case-studies-link {
+  display: inline-block;
+  margin-top: 24px;
+  color: var(--color-primary, #3B82F6);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 0.98rem;
+}

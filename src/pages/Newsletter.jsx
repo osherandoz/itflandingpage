@@ -147,8 +147,8 @@ const STR = {
     faqs: FAQS,
     topLink: 'חשבון חסום עכשיו?',
     eyebrowSuffix: 'ניוזלטר חודשי',
-    h1a: 'מה שקורה אצל מטא מגיע אליך בסוף.',
-    h1b: ' עדיף שתדע חודש מראש.',
+    h1a: 'מה מטא משנה בפועל,',
+    h1b: ' ומה כדאי לבדוק אצלך בעקבות זה.',
     lead:
       'אחת לחודש אני שולח גיליון קצר: מה מטא שינתה במדיניות, אילו פיצ׳רים חדשים יצאו לפייסבוק ולאינסטגרם, ומה כדאי לבדוק בחשבון שלך כדי להישאר בצד הבטוח. חמש דקות קריאה. אם באותו חודש אין הרבה לדווח, הגיליון פשוט קצר יותר.',
     micro: ['גיליון אחד בחודש', 'הסרה בקליק אחד', 'הכתובת שלך לא נמכרת לאף אחד'],
@@ -156,6 +156,8 @@ const STR = {
     cardMeta: 'גיליון חודשי',
     cardFoot: 'זמן קריאה משוער: 5 דקות',
     insideTitle: 'מה נכנס לגיליון',
+    sampleLink: 'רוצים לראות גיליון אמיתי לפני שנרשמים? ←',
+    sampleHref: '/גיליונות-הניוזלטר',
     fitTitle: 'למי הגיליון הזה נכתב',
     fitYesTitle: 'מתאים לך אם',
     fitYes: [
@@ -201,8 +203,8 @@ const STR = {
     faqs: FAQS_EN,
     topLink: 'Account blocked right now?',
     eyebrowSuffix: 'Monthly newsletter',
-    h1a: "What happens at Meta eventually reaches you.",
-    h1b: ' Better to know a month ahead.',
+    h1a: "What Meta actually changes,",
+    h1b: ' and what to check on your own account because of it.',
     lead:
       "Once a month I send a short issue: what Meta changed in policy, which new features shipped for Facebook and Instagram, and what's worth checking in your account to stay on the safe side. Five minutes of reading. If there isn't much to report that month, the issue is simply shorter.",
     micro: ['One issue a month', 'One-click unsubscribe', 'Your address is never sold to anyone'],
@@ -210,6 +212,8 @@ const STR = {
     cardMeta: 'Monthly issue',
     cardFoot: 'Estimated reading time: 5 minutes',
     insideTitle: "What Goes Into an Issue",
+    sampleLink: 'Want to see a real issue before signing up? ←',
+    sampleHref: '/en/newsletter-issues',
     fitTitle: 'Who This Newsletter Is Written For',
     fitYesTitle: "It's for you if",
     fitYes: [
@@ -449,6 +453,7 @@ export default function Newsletter() {
             </article>
           ))}
         </div>
+        <Link to={t.sampleHref} className="tss-sample-link">{t.sampleLink}</Link>
       </section>
 
       {/* ── FIT / NOT FIT ───────────────────────────────────── */}

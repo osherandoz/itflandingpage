@@ -130,16 +130,33 @@
   color: rgba(255, 255, 255, 0.2);
 }
 
-/* ── Logo ── */
-.hero-logo {
-  margin: 0 auto 28px;
-  width: 130px;
+/* ── Identity (real portrait, not the navbar logo repeated) ── */
+.hero-identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto 24px;
 }
 
-.hero-logo img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
+.hero-photo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-primary, #3B82F6);
+}
+
+.hero-identity-text {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  color: #fff;
+  font-size: 0.92rem;
+}
+
+.hero-identity-text span {
+  color: #b0c4de;
+  font-size: 0.82rem;
 }
 
 /* ── Content ── */
@@ -246,8 +263,9 @@
   .hero-subtitle { font-size: 1.1rem; margin-bottom: 1.4rem; }
   .hero-trust-bar { font-size: 0.78rem; padding: 8px 14px; margin-bottom: 18px; }
   .hero-live-badge { font-size: 0.8rem; padding: 5px 12px; margin-bottom: 12px; }
-  /* Logo repeats the navbar mark and pushes the headline below the fold — drop it here */
-  .hero-logo { display: none; }
+  /* Smaller, not hidden — this is the real proof photo, not the repeated navbar logo */
+  .hero-identity { margin-bottom: 16px; }
+  .hero-photo { width: 44px; height: 44px; }
   .hero-cta {
     padding: 14px 32px;
     font-size: 1.05rem;

@@ -170,7 +170,7 @@ export const PERSON_SCHEMA = {
   jobTitle: 'מומחה שחזור חשבונות רשתות חברתיות',
   description:
     'מומחה ישראלי לשחזור חשבונות דיגיטליים, מייסד IsraelTechForce. מאז 2020 שחזר מעל 2,500 חשבונות פייסבוק, אינסטגרם ווואטסאפ לעסקים וליוצרי תוכן.',
-  url: SITE_URL,
+  url: `${SITE_URL}/אושר-רווח`,
   image: `${SITE_URL}/images/osher-photo-1.jpg`,
   knowsAbout: [
     'שחזור חשבונות פייסבוק',

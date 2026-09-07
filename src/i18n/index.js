@@ -49,6 +49,9 @@ export const PATH_PAIRS = [
   ['/press', '/en/press'],
   ['/newsletter', '/en/newsletter'],
   ['/privacy', '/en/privacy'],
+  ['/אושר-רווח', '/en/osher-revach'],
+  ['/מקרי-הצלחה', '/en/success-stories'],
+  ['/גיליונות-הניוזלטר', '/en/newsletter-issues'],
 ];
 
 // Returns the equivalent URL in the other language, or the other language's
