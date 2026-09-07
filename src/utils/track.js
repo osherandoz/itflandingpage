@@ -22,6 +22,16 @@ export function withCampaignParams(url) {
   }
 }
 
+// The visitor's own utm_source (e.g. 'facebook', 'instagram') — forwarded to
+// the CRM as lead source attribution. null when the visit has none (organic/direct).
+export function getUtmSource() {
+  try {
+    return new URLSearchParams(window.location.search).get('utm_source') || null;
+  } catch {
+    return null;
+  }
+}
+
 export function trackSiteEvent(event, extra = {}) {
   try {
     const params = new URLSearchParams(window.location.search);

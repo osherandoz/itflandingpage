@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
-import { trackSiteEvent } from '../utils/track';
+import { getUtmSource, trackSiteEvent } from '../utils/track';
 import { useLang } from '../i18n';
 import Icon from './Icon';
 import './ContactForm.css';
@@ -106,7 +106,9 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
           phone: formData.phone.trim(),
           consent: formData.consent,
           note: formData.note || '',
-          source: 'contact',
+          source: location,
+          src: getUtmSource(),
+          path: typeof window !== 'undefined' ? window.location.pathname : '',
           lang,
         }),
       });

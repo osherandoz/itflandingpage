@@ -205,12 +205,12 @@ describe('readJsonBody()', () => {
   });
 });
 
-describe('POST /api/lead', () => {
+describe('POST /api/lead (proxies to the CRM)', () => {
   let fetchMock;
   beforeEach(() => {
     _resetMemory();
     process.env.LEAD_WEBHOOK_SECRET = 's3cret';
-    fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, text: async () => '{"ok":true}' });
+    fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({ success: true, leadId: 'case-1' }) });
     vi.stubGlobal('fetch', fetchMock);
   });
   afterEach(() => vi.unstubAllGlobals());
@@ -218,32 +218,43 @@ describe('POST /api/lead', () => {
 
   it('requires consent on the server too', async () => {
     const res = mockRes();
-    await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: false, source: 'contact' }), res);
+    await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: false, source: 'contact-form' }), res);
     expect(res.statusCode).toBe(400);
     expect(fetchMock).not.toHaveBeenCalled();
   });
   it('rejects an implausible phone', async () => {
     const res = mockRes();
-    await leadHandler(req({ name: 'שרה', phone: '+-()+-(', consent: true, source: 'contact' }), res);
+    await leadHandler(req({ name: 'שרה', phone: '+-()+-(', consent: true, source: 'contact-form' }), res);
     expect(res.statusCode).toBe(400);
   });
-  it('POSTs a signed form body (no PII in the URL) and returns a leadId', async () => {
+  it('rejects an unknown source', async () => {
     const res = mockRes();
-    await leadHandler(req({ name: 'שרה', phone: '050-123-4567', consent: true, source: 'contact' }), res);
-    expect(res.statusCode).toBe(200);
-    expect(res.body.leadId).toMatch(/^[0-9a-f-]{36}$/);
-    const [url, opts] = fetchMock.mock.calls[0];
-    expect(url).not.toMatch(/0501234567/);
-    expect(opts.method).toBe('POST');
-    const form = new URLSearchParams(opts.body);
-    expect(form.get('secret')).toBe('s3cret');
-    expect(form.get('phone')).toBe('0501234567');
-    expect(form.get('leadId')).toBe(res.body.leadId);
+    await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: true, source: 'made-up' }), res);
+    expect(res.statusCode).toBe(400);
   });
-  it('treats a script-side rejection as failure, not success', async () => {
-    fetchMock.mockResolvedValueOnce({ ok: true, status: 200, text: async () => '{"ok":false,"error":"unauthorized"}' });
+  it('POSTs a signed request to the CRM and returns its leadId', async () => {
     const res = mockRes();
-    await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: true, source: 'contact' }), res);
+    await leadHandler(req({ name: 'שרה', phone: '050-123-4567', consent: true, source: 'contact-form', src: 'facebook' }), res);
+    expect(res.statusCode).toBe(200);
+    expect(res.body.leadId).toBe('case-1');
+    const [url, opts] = fetchMock.mock.calls[0];
+    expect(url).toMatch(/\/api\/public-lead$/);
+    expect(opts.headers.Authorization).toBe('Bearer s3cret');
+    const payload = JSON.parse(opts.body);
+    expect(payload.phone).toBe('0501234567');
+    expect(payload.source).toBe('facebook');
+    expect(payload.notes).toMatch(/contact-form/);
+  });
+  it('defaults source to "website" when the visit has no utm_source', async () => {
+    const res = mockRes();
+    await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: true, source: 'contact-form' }), res);
+    const payload = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(payload.source).toBe('website');
+  });
+  it('treats a CRM-side rejection as failure, not success', async () => {
+    fetchMock.mockResolvedValueOnce({ ok: true, status: 200, json: async () => ({ success: false, error: 'bad' }) });
+    const res = mockRes();
+    await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: true, source: 'contact-form' }), res);
     expect(res.statusCode).toBe(502);
   });
 });
