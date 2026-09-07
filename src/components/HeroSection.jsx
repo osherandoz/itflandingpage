@@ -1,32 +1,31 @@
 import React from 'react';
-import { getWhatsAppUrl, trackWhatsAppClick } from '../utils/whatsapp';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 import { useLang } from '../i18n';
+import { FACTS } from '../data/businessFacts';
 import Icon from './Icon';
 import './HeroSection.css';
 
 const STR = {
   he: {
-    liveBadgeAria: 'זמין עכשיו',
-    liveBadge: 'זמין עכשיו · מענה תוך דקות',
-    trust: ['✓ 2,500+ חשבונות שוחזרו', '⭐ דירוג 4.9/5', '✓ תשלום רק אחרי הצלחה', '✓ זמינות 24/6'],
+    hoursBadge: `מענה מהיר בשעות הפעילות · ${FACTS.hours.he}`,
+    trust: [`✓ ${FACTS.accountsRecovered.he}`, '⭐ דירוג 4.9/5', '✓ תשלום רק אחרי הצלחה', `✓ זמינות ${FACTS.hours.he}`],
     logoAlt: 'IsraelTechForce - מומחים לשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ',
     title: 'אחזיר לך את החשבון.',
     titleHighlight: 'לא הצלחתי, לא שילמת.',
     subtitle: 'מתמחה בחשבונות שמטא הכריזו עליהם כאבודים. פייסבוק, אינסטגרם, WhatsApp ופתרונות מלאים לביזנס מנג׳ר.',
-    cta: 'שלחו לי את המקרה בוואטסאפ · תשובה תוך דקות',
+    cta: 'שלחו לי את המקרה בוואטסאפ · אבחון ראשוני חינם',
     guaranteeStrong: '₪500–3,000 בממוצע.',
     guaranteeRest: ' בלי תשלום מראש, ללא סיכון.',
     whatsappMessage: 'היי, החשבון שלי חסום, אשמח לעזרה',
   },
   en: {
-    liveBadgeAria: 'Available now',
-    liveBadge: 'Available now · Replies within minutes',
-    trust: ['✓ 2,500+ accounts recovered', '⭐ Rated 4.9/5', '✓ Pay only after success', '✓ Available 24/6'],
+    hoursBadge: `Fast replies during business hours · ${FACTS.hours.en}`,
+    trust: [`✓ ${FACTS.accountsRecovered.en}`, '⭐ Rated 4.9/5', '✓ Pay only after success', `✓ Available ${FACTS.hours.en}`],
     logoAlt: 'IsraelTechForce - Facebook, Instagram and WhatsApp account recovery experts',
     title: "I'll get your account back.",
     titleHighlight: "No recovery, no fee.",
     subtitle: 'I specialize in accounts Meta has written off as lost. Facebook, Instagram, WhatsApp, and full Business Manager solutions.',
-    cta: 'Send me your case on WhatsApp · Reply within minutes',
+    cta: 'Send me your case on WhatsApp · Free initial diagnosis',
     guaranteeStrong: '₪500–3,000 (about $150–$900) on average.',
     guaranteeRest: ' No upfront payment, zero risk.',
     whatsappMessage: "Hi, my account is blocked and I'd love your help",
@@ -51,11 +50,8 @@ const HeroSection = () => {
 
       <div className="hero-container">
 
-        {/* LIVE availability badge */}
-        <div className="hero-live-badge" aria-label={t.liveBadgeAria}>
-          <span className="hero-live-dot" aria-hidden="true"></span>
-          {t.liveBadge}
-        </div>
+        {/* Real operating hours, not an always-on "live" dot (see businessFacts.js) */}
+        <div className="hero-live-badge">{t.hoursBadge}</div>
 
         {/* Trust bar — every proof point in one compact row */}
         <div className="hero-trust-bar">
@@ -95,7 +91,7 @@ const HeroSection = () => {
             href={getWhatsAppUrl(t.whatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={trackWhatsAppClick}
+            onClick={onWhatsAppClick('hero')}
           >
             <Icon name="whatsapp" aria-hidden="true" />
             {t.cta}

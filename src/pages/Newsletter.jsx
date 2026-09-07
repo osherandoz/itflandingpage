@@ -257,6 +257,7 @@ const STR = {
    SIGNUP FORM. Two fields only. Rendered twice (hero + closing).
    ============================================================ */
 function SignupForm({ location, t, isEn }) {
+  const { lang } = useLang();
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState(''); // honeypot, must stay empty
@@ -307,7 +308,7 @@ function SignupForm({ location, t, isEn }) {
   }
 
   return (
-    <form className="tss-form" onSubmit={handleSubmit} noValidate>
+    <form className="tss-form" onSubmit={handleSubmit} noValidate data-clarity-mask="true">
       {/* honeypot: hidden from humans, bots fill it */}
       <input
         type="text"

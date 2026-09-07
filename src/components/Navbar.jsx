@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
-import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
 import { useLang, togglePath } from '../i18n';
 import './Navbar.css';
 
@@ -112,7 +112,7 @@ const Navbar = () => {
             href={getWhatsAppUrl(t.whatsappMessage)}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={trackWhatsAppClick}
+            onClick={onWhatsAppClick('navbar')}
           >
             {t.cta}
           </a>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { withCampaignParams } from '../utils/track';
 import './VslBmsV2.css';
 
 /* ============================================================
@@ -71,6 +72,9 @@ function getPurchaseUrl() {
    ============================================================ */
 export default function VslBmsV2() {
   const [showStickyCta, setShowStickyCta] = useState(false);
+  // Client-only: carry the visitor's utm_source/medium/campaign into checkout
+  const [purchaseUrl, setPurchaseUrl] = useState(getPurchaseUrl());
+  useEffect(() => setPurchaseUrl(withCampaignParams(getPurchaseUrl())), []);
   const scroll50Fired = useRef(false);
   const videoPlayedFired = useRef(false);
 
@@ -117,8 +121,8 @@ export default function VslBmsV2() {
           </h1>
 
           <p className="v2-subhead">
-            ב-<span className="v2-num">2026</span>, מטא הסירה מעל <strong><span className="v2-num">10</span> מיליון חשבונות עסקיים</strong> בלי הודעה מראש.
-            רובם המכריע נחסמו בגלל טעות הגדרה אחת שאף אחד לא טרח לספר עליה.
+            מטא מסירה <strong>חשבונות עסקיים בלי הודעה מראש</strong>, וברוב המקרים שהגיעו אליי
+            הסיבה הייתה טעות הגדרה אחת שאף אחד לא טרח לספר עליה.
             ההדרכה הזו (<span className="v2-num">4</span> דקות) תראה לכם איך להימנע ממנה.
           </p>
 
@@ -157,7 +161,7 @@ export default function VslBmsV2() {
           {/* Primary CTA */}
           <div className="v2-cta-wrap">
             <a
-              href={getPurchaseUrl()}
+              href={purchaseUrl}
               className="v2-cta v2-cta-primary"
               onClick={trackPurchaseClick}
               aria-label={`הצטרף/י לקורס BMS ב-₪${PRICE}`}
@@ -210,7 +214,7 @@ export default function VslBmsV2() {
           </p>
 
           <div className="v2-cta-wrap">
-            <a href={getPurchaseUrl()} className="v2-cta" onClick={trackPurchaseClick}>
+            <a href={purchaseUrl} className="v2-cta" onClick={trackPurchaseClick}>
               <span>אני בפנים</span>
               <span className="v2-cta-arrow"><IconArrowLeft size={18} /></span>
             </a>
@@ -348,7 +352,7 @@ export default function VslBmsV2() {
           </div>
 
           <div className="v2-cta-wrap">
-            <a href={getPurchaseUrl()} className="v2-cta" onClick={trackPurchaseClick}>
+            <a href={purchaseUrl} className="v2-cta" onClick={trackPurchaseClick}>
               <span>אני רוצה את כל ה-3 שלבים ב-₪{PRICE}</span>
               <span className="v2-cta-arrow"><IconArrowLeft size={18} /></span>
             </a>
@@ -445,7 +449,7 @@ export default function VslBmsV2() {
           </p>
 
           <div className="v2-cta-wrap">
-            <a href={getPurchaseUrl()} className="v2-cta v2-cta-primary" onClick={trackPurchaseClick}>
+            <a href={purchaseUrl} className="v2-cta v2-cta-primary" onClick={trackPurchaseClick}>
               <span>אני רוצה את הכל ב-₪{PRICE}</span>
               <span className="v2-cta-arrow"><IconArrowLeft size={18} /></span>
             </a>
@@ -531,7 +535,7 @@ export default function VslBmsV2() {
             </ul>
 
             <div className="v2-price-foot">
-              <a href={getPurchaseUrl()} className="v2-cta v2-cta-mega" onClick={trackPurchaseClick}>
+              <a href={purchaseUrl} className="v2-cta v2-cta-mega" onClick={trackPurchaseClick}>
                 <span>כן, אני רוצה את הכל ב-₪{PRICE}</span>
               </a>
 
@@ -649,7 +653,7 @@ export default function VslBmsV2() {
             <span className="v2-sticky-price">₪{PRICE}</span>
           </div>
           <a
-            href={getPurchaseUrl()}
+            href={purchaseUrl}
             className="v2-sticky-btn"
             onClick={trackPurchaseClick}
             aria-label={`הצטרף/י עכשיו ב-₪${PRICE}`}

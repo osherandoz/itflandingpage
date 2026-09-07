@@ -96,7 +96,7 @@ function LeadForm() {
   }
 
   return (
-    <form className="lead-card" onSubmit={onSubmit} noValidate>
+    <form className="lead-card" onSubmit={onSubmit} noValidate data-clarity-mask="true">
       <span className="lead-ribbon" aria-hidden="true">חינמי לגמרי</span>
 
       {/* Honeypot */}
@@ -325,7 +325,7 @@ export default function BmsSm() {
             <div className="nav-meta">
               <span className="vbadge">
                 <i className="fa-solid fa-shield-halved" aria-hidden="true" />
-                {' '}מומחה תשתיות מאומת
+                {' '}מומחה תשתיות מטא · 2,500+ שחזורים
               </span>
               <span>
                 <i className="fa-solid fa-star" aria-hidden="true" style={{ color: 'var(--accent-light)' }} />
@@ -569,7 +569,7 @@ export default function BmsSm() {
             <div>
               <h4>אושר רווח · מומחה תשתיות מטא</h4>
               <p>
-                חמש שנים של טיפול בכל סוגי הלקוחות למעל 2,500 עסקים בישראל.
+                חמש שנים של טיפול בכל סוגי הלקוחות למעל 2,500 חשבונות של עסקים בישראל.
                 הצ׳קליסט הזה הוא תקציר של כל הטעויות שראיתי, ואיך אפשר למנוע
                 אותן עוד לפני שלוקחים את הלקוח.
               </p>

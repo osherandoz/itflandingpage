@@ -18,7 +18,7 @@ export const FAQ_SCHEMA_EN = {
       name: 'Is the service discreet and secure?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Absolutely. Everything you share stays confidential and secure and is never passed to any third party. All information is used solely to resolve your case and is deleted afterwards at your request.',
+        text: 'Absolutely. Everything you share stays confidential and secure. It is stored only in the tools I use to handle your case (lead form, email, site analytics) and is never sold or passed to anyone else. All information is used solely to resolve your case and is deleted afterwards at your request.',
       },
     },
     {
@@ -55,10 +55,10 @@ export const FAQ_SCHEMA_EN = {
     },
     {
       '@type': 'Question',
-      name: 'Are you available 24/6?',
+      name: 'What are your hours?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'I am available 24/6 (Sunday through Friday) with immediate support. On Saturday I am available for urgent cases only.',
+        text: 'I am available Sunday through Friday, 09:00–16:00. On Saturday I am available for urgent cases only.',
       },
     },
   ],

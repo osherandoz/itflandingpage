@@ -6,6 +6,32 @@ import { langFromPathname } from '../i18n/index.js';
 const TRACK_URL =
   import.meta.env.VITE_TRACK_URL || 'https://itf-crm.vercel.app/api/site-event';
 
+// Append the visitor's own utm_source/medium/campaign/term to an outbound URL
+// (checkout link) without overriding params the link already carries.
+export function withCampaignParams(url) {
+  try {
+    if (typeof window === 'undefined') return url;
+    const incoming = new URLSearchParams(window.location.search);
+    const out = new URL(url);
+    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term']) {
+      if (incoming.get(key) && !out.searchParams.has(key)) out.searchParams.set(key, incoming.get(key));
+    }
+    return out.toString();
+  } catch {
+    return url;
+  }
+}
+
+// The visitor's own utm_source (e.g. 'facebook', 'instagram') — forwarded to
+// the CRM as lead source attribution. null when the visit has none (organic/direct).
+export function getUtmSource() {
+  try {
+    return new URLSearchParams(window.location.search).get('utm_source') || null;
+  } catch {
+    return null;
+  }
+}
+
 export function trackSiteEvent(event, extra = {}) {
   try {
     const params = new URLSearchParams(window.location.search);

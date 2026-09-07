@@ -1,17 +1,17 @@
 import BmsSm from '../../src/pages/BmsSm';
 
 const URL = 'https://www.israeltechforce.com/bms-sm';
-const TITLE = 'קורס BMS למנהלות סושיאל — הגיעי מוכנה לכל לקוח | אושר רווח';
+const TITLE = 'צ׳קליסט סינון לקוחות חינמי למנהלות סושיאל | אושר רווח';
 const DESCRIPTION =
-  'קורס מקוון למנהלות סושיאל ופרילנסריות: איך לזהות תשתית פרסום בעייתית לפני האונבורדינג, לנהל הרשאות נכון ולדעת מה לעשות כשמשהו משתבש. 197₪ בלבד.';
+  'צ׳קליסט חינמי למנהלות סושיאל ופרילנסריות: חמש שאלות ששואלים לפני שחותמים על לקוח חדש, כדי לזהות תשתית פרסום בעייתית לפני האונבורדינג.';
 const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.png';
 
 export const meta = () => [
   { title: TITLE },
   { name: 'description', content: DESCRIPTION },
   { property: 'og:type', content: 'website' },
-  { property: 'og:title', content: 'קורס BMS — הגיעי מוכנה לכל לקוח חדש' },
-  { property: 'og:description', content: "הצ׳קליסט שכל מנהלת סושיאל צריכה לפני שהיא חותמת על לקוח. 197₪ בלבד." },
+  { property: 'og:title', content: 'צ׳קליסט סינון לקוחות (חינם) — הגיעי מוכנה לכל לקוח חדש' },
+  { property: 'og:description', content: 'הצ׳קליסט שכל מנהלת סושיאל צריכה לפני שהיא חותמת על לקוח. חינם, ישר למייל.' },
   { property: 'og:url', content: URL },
   { property: 'og:image', content: OG_IMAGE },
   { property: 'og:locale', content: 'he_IL' },

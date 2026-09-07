@@ -1,47 +1,23 @@
-import { useEffect } from 'react';
 import './thank-you-purchase.css';
 
-// Tracking helpers
-function trackFb(event, params) {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq(event === 'Purchase' ? 'track' : 'trackCustom', event, params);
-  }
-}
-function trackGa(event, params) {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', event, params);
-  }
-}
-
+// No Purchase pixel/GA event here on purpose: this page can be opened directly,
+// so a browser visit proves nothing. The verified purchase event is sent
+// server-side from api/webhook-payment.js after the provider confirmed payment.
 export default function ThankYouPurchase() {
-  // Fire purchase events once per browser session, survives StrictMode double-mount and refreshes
-  useEffect(() => {
-    if (sessionStorage.getItem('bmsPurchaseTracked')) return;
-    sessionStorage.setItem('bmsPurchaseTracked', '1');
-    // Stable transaction id per session so GA4 dedup works across refreshes
-    let txId = sessionStorage.getItem('bmsTxId');
-    if (!txId) {
-      txId = `bms-${Date.now()}`;
-      sessionStorage.setItem('bmsTxId', txId);
-    }
-    trackFb('Purchase', { value: 197, currency: 'ILS' });
-    trackGa('purchase', { value: 197, currency: 'ILS', transaction_id: txId });
-  }, []);
-
   return (
     <main className="ty-purchase-page" dir="rtl">
       <div className="ty-purchase-card">
         <span className="ty-purchase-icon" aria-hidden="true">🎉</span>
         <div className="ty-purchase-badge">
           <span aria-hidden="true">✓</span>
-          <span>הרכישה אושרה</span>
+          <span>התשלום בטיפול</span>
         </div>
 
-        <h1 className="ty-purchase-title">הרכישה אושרה, כל הכבוד שהחלטת ✓</h1>
+        <h1 className="ty-purchase-title">תודה! כל הכבוד שהחלטת ✓</h1>
         <p className="ty-purchase-subtitle">
-          פרטי הגישה לקורס בדרך אליך למייל, בדקי תוך 5 דקות.
+          ברגע שחשבונית ירוקה מאשרת את התשלום, פרטי הגישה לקורס נשלחים למייל (בדרך כלל תוך 5 דקות).
           <br />
-          לא קיבלת? בדקי בתיקיית הספאם.
+          לא קיבלת תוך 15 דקות? בדקי בתיקיית הספאם, ואם עדיין אין, כתבי לי.
         </p>
 
         <hr className="ty-purchase-divider" />
@@ -57,7 +33,7 @@ export default function ThankYouPurchase() {
             <span aria-hidden="true">📸</span>
             בינתיים, עקבי אחריי באינסטגרם לתכנים נוספים
           </a>
-          <a href="/bms-sm" className="ty-purchase-btn ty-purchase-btn--primary">
+          <a href="/VSL-BMS" className="ty-purchase-btn ty-purchase-btn--primary">
             לעמוד הקורס ←
           </a>
         </div>

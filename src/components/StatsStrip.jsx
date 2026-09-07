@@ -8,7 +8,7 @@ const STR = {
     stats: [
       { number: '2,500+', label: 'חשבונות שוחזרו' },
       { number: '95%', label: 'אחוזי הצלחה' },
-      { number: '24/6', label: 'זמינות שירות' },
+      { number: 'א׳–ו׳', label: 'זמינות 09:00–16:00' },
     ],
   },
   en: {
@@ -16,7 +16,7 @@ const STR = {
     stats: [
       { number: '2,500+', label: 'Accounts recovered' },
       { number: '95%', label: 'Success rate' },
-      { number: '24/6', label: 'Service availability' },
+      { number: 'Sun–Fri', label: 'Available 09:00–16:00' },
     ],
   },
 };

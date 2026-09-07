@@ -274,3 +274,9 @@
   .hero-cta { transition: none; }
   .hero-section::before { animation: none; }
 }
+
+/* Reduced motion: also stop the drifting gradient layer (transform animation) */
+@media (prefers-reduced-motion: reduce) {
+  .hero-section::after { animation: none; }
+  .hero-live-dot { animation: none; }
+}

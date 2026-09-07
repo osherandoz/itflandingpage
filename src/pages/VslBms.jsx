@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { withCampaignParams } from '../utils/track';
 // Heebo heading weights, self-hosted (400/700 already loaded in root)
 import '@fontsource/heebo/800.css';
 import '@fontsource/heebo/900.css';
@@ -71,6 +72,9 @@ export default function VslBms() {
   // has seen the price once, the sticky goes straight to checkout.
   const [finalCtaInView, setFinalCtaInView] = useState(false);
   const [passedFinalCta, setPassedFinalCta] = useState(false);
+  // Client-only: carry the visitor's utm_source/medium/campaign into checkout
+  const [purchaseUrl, setPurchaseUrl] = useState(PURCHASE_URL);
+  useEffect(() => setPurchaseUrl(withCampaignParams(PURCHASE_URL)), []);
 
   useEffect(() => {
     const finalCta = document.getElementById('final-cta');
@@ -217,7 +221,7 @@ export default function VslBms() {
 
           <div className="invitation-content">
             <p>
-              מעל <strong>2500 עסקים</strong> כבר עברו את הניסיון המר הזה. חלקם איתי ישרות, חלקם דרך הכלים שבניתי.
+              מעל <strong>2,500 חשבונות</strong> כבר עברו את הניסיון המר הזה. חלקם איתי ישרות, חלקם דרך הכלים שבניתי.
               הדבר המשותף לכולם? <strong>אין זמן טוב לאבד את הדיגיטל.</strong>
             </p>
 
@@ -265,7 +269,7 @@ export default function VslBms() {
 
             <p>
               <strong>מאז אני עושה את זה לאחרים.</strong>
-              {' '}מעל 2,500 עסקים שחזרו לפעול בדיגיטל. אבל עם הזמן החלטתי לחקור,
+              {' '}מעל 2,500 חשבונות שחזרו לפעול בדיגיטל. אבל עם הזמן החלטתי לחקור,
               אם אני פוגש את הלקוח רק אחרי, מה בעצם קורה שם לפני?
             </p>
 
@@ -336,7 +340,7 @@ export default function VslBms() {
           </div>
 
           <div className="cta-wrapper">
-            <a href={PURCHASE_URL} className="cta-btn" onClick={trackInitiateCheckout}>
+            <a href={purchaseUrl} className="cta-btn" onClick={trackInitiateCheckout}>
               <span>הצטרף לקורס עכשיו, 197 ש"ח בלבד</span>
               <span className="arrow"><IconArrowLeft size={18} /></span>
             </a>
@@ -703,7 +707,7 @@ export default function VslBms() {
           </div>
 
           <a
-            href={PURCHASE_URL}
+            href={purchaseUrl}
             className="cta-btn"
             onClick={trackInitiateCheckout}
             style={{ marginTop: 40 }}
@@ -801,7 +805,7 @@ export default function VslBms() {
             <details className="faq-item">
               <summary>מה ההבדל בין הקורס הזה לכל מה שיש בחינם ביוטיוב?</summary>
               <div className="faq-answer">
-                ביוטיוב יש "טיפים". כאן יש שיטה. הקורס בנוי על 5 שנים של עבודה עם מעל 2,500 עסקים אמיתיים שהושבתו או נפרצו,
+                ביוטיוב יש "טיפים". כאן יש שיטה. הקורס בנוי על 5 שנים של עבודה עם מעל 2,500 חשבונות אמיתיים שהושבתו או נפרצו,
                 והוא מתעדכן בהתאם לשינויים האחרונים של מטא. אין כפילויות, אין מילוי זמן, רק יישום.
               </div>
             </details>
@@ -835,7 +839,7 @@ export default function VslBms() {
       {/* STICKY MOBILE CTA, hidden while the purchase section is on screen */}
       <div className={`sticky-cta ${showStickyCta && !finalCtaInView ? 'visible' : ''}`} role="region" aria-label="קיצור דרך לרכישה">
         <a
-          href={passedFinalCta ? PURCHASE_URL : '#final-cta'}
+          href={passedFinalCta ? purchaseUrl : '#final-cta'}
           className="sticky-cta-btn"
           onClick={passedFinalCta ? trackInitiateCheckout : trackCtaClick}
           aria-label={`הצטרפו לקורס BMS ב-${PRICE} שקלים`}

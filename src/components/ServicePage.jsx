@@ -4,8 +4,9 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingWhatsApp from './FloatingWhatsApp';
 import ContactForm from './ContactForm';
-import { getWhatsAppUrl, trackWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
 import { useLang, SERVICE_PATHS } from '../i18n';
+import { FACTS } from '../data/businessFacts';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ServicePage.css';
 
@@ -33,6 +34,12 @@ const STR = {
     finalText: 'שלחו הודעת וואטסאפ עכשיו. אבחון ראשוני חינם, ותשלום רק אחרי שהחשבון חזר לידיכם.',
     ctaFinal: 'שלחו הודעה עכשיו',
     whatsappMessage: (keyword) => `היי, אני מעוניין/ת בשירות: ${keyword}`,
+    callbackTitle: 'בדקו את החסימה וחזרו אליי',
+    callbackSub: 'וואטסאפ חסום? השאירו שם ומספר לחזרה. אבחון ראשוני חינם, בלי התחייבות.',
+    callbackSubmit: 'בדקו את החסימה וחזרו אליי',
+    callbackAlt: 'או התקשרו:',
+    callbackWa: 'יש לכם מספר אחר עם וואטסאפ?',
+    callbackNotes: ['המספר שלך חסום מלהשתמש בוואטסאפ', 'הערעור נדחה (חסימה קבועה)', 'לא מצליח/ה לקבל קוד אימות', 'החשבון נפרץ / SIM הוחלף'],
   },
   en: {
     heroSubtitle: 'Fast, professional account recovery. Pay only after proven success',
@@ -57,6 +64,12 @@ const STR = {
     finalText: 'Send a WhatsApp message now. Free initial assessment, and payment only after your account is back in your hands.',
     ctaFinal: 'Message Us Now',
     whatsappMessage: () => WHATSAPP_DEFAULT_MSG.en,
+    callbackTitle: 'Check my block and call me back',
+    callbackSub: 'WhatsApp blocked? Leave a name and a number to call back. Free initial diagnosis, no commitment.',
+    callbackSubmit: 'Check my block and call me back',
+    callbackAlt: 'or call:',
+    callbackWa: 'Have another number with WhatsApp?',
+    callbackNotes: ['This number is blocked from using WhatsApp', 'Appeal rejected (permanent ban)', 'Cannot receive the verification code', 'Account hacked / SIM swapped'],
   },
 };
 
@@ -228,6 +241,7 @@ const ServicePage = ({ pageData }) => {
   // A real <a> — button + window.open() is blocked inside the Instagram and
   // Facebook in-app browsers, which is where most of this page's traffic lands.
   const whatsappHref = getWhatsAppUrl(t.whatsappMessage(pageData.keyword));
+  const isWhatsApp = pageData.slug === 'whatsapp-recovery';
 
   return (
     <div dir={dir} className="service-page">
@@ -249,41 +263,70 @@ const ServicePage = ({ pageData }) => {
         </nav>
 
         {/* ---- HERO ---- */}
-        <section className="service-hero">
-          <div className="service-container">
-            <h1>{pageData.title}</h1>
-            <p className="service-hero-subtitle">{t.heroSubtitle}</p>
-            <a
-              className="service-cta-btn"
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={trackWhatsAppClick}
-            >
-              <i className="fab fa-whatsapp" aria-hidden="true"></i>
-              {t.ctaHero}
-            </a>
-          </div>
-        </section>
+        {isWhatsApp ? (
+          /* Callback-first: a visitor whose WhatsApp is blocked cannot use a WhatsApp CTA */
+          <section className="service-hero service-hero--callback">
+            <div className="service-container">
+              <div>
+                <h1>{pageData.title}</h1>
+                <p className="service-hero-subtitle">{t.callbackSub}</p>
+                <p className="service-hero-alt">
+                  <span>{t.callbackAlt} <a href={`tel:${FACTS.phone}`} dir="ltr">{FACTS.phoneDisplay}</a> · {FACTS.hours[lang]}</span>
+                  <span>
+                    {t.callbackWa}{' '}
+                    <a className="service-hero-wa" href={whatsappHref} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick('service-hero')}>
+                      <i className="fab fa-whatsapp" aria-hidden="true"></i>{t.ctaHero}
+                    </a>
+                  </span>
+                </p>
+              </div>
+              <ContactForm
+                heading={t.callbackTitle}
+                subheading={t.formSubtitle}
+                submitLabel={t.callbackSubmit}
+                noteOptions={t.callbackNotes}
+                location="service-hero-callback"
+                hideWhatsApp
+              />
+            </div>
+          </section>
+        ) : (
+          <section className="service-hero">
+            <div className="service-container">
+              <h1>{pageData.title}</h1>
+              <p className="service-hero-subtitle">{t.heroSubtitle}</p>
+              <a
+                className="service-cta-btn"
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={onWhatsAppClick('service-hero')}
+              >
+                <i className="fab fa-whatsapp" aria-hidden="true"></i>
+                {t.ctaHero}
+              </a>
+            </div>
+          </section>
+        )}
 
         {/* ---- STATS STRIP ---- */}
         <section className="service-stats" aria-label={t.statsAria}>
           <div className="service-container">
             <div className="service-stats-inner">
               <div className="service-stat">
-                <span className="service-stat-value">2,500+</span>
+                <span className="service-stat-value">{FACTS.accountsRecovered.display}</span>
                 <span className="service-stat-label">{t.statAccounts}</span>
               </div>
               <div className="service-stat">
-                <span className="service-stat-value">95%+</span>
+                <span className="service-stat-value">{FACTS.successRate.display}</span>
                 <span className="service-stat-label">{t.statSuccess}</span>
               </div>
               <div className="service-stat">
-                <span className="service-stat-value">24-48</span>
+                <span className="service-stat-value">{FACTS.typicalTurnaround.display}</span>
                 <span className="service-stat-label">{t.statHours}</span>
               </div>
               <div className="service-stat">
-                <span className="service-stat-value">4.9★</span>
+                <span className="service-stat-value">{FACTS.rating.display}★</span>
                 <span className="service-stat-label">{t.statRating}</span>
               </div>
             </div>
@@ -404,7 +447,7 @@ const ServicePage = ({ pageData }) => {
           <div className="service-container">
             <h2>{t.formTitle}</h2>
             <p className="service-form-subtitle">{t.formSubtitle}</p>
-            <ContactForm />
+            <ContactForm location="service-form" />
           </div>
         </section>
 
@@ -418,7 +461,7 @@ const ServicePage = ({ pageData }) => {
               href={whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={trackWhatsAppClick}
+              onClick={onWhatsAppClick('service-final')}
             >
               <i className="fab fa-whatsapp" aria-hidden="true"></i>
               {t.ctaFinal}
