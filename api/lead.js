@@ -15,6 +15,9 @@
  * - Returns the CRM's own case id as leadId, so click events and the CRM
  *   record can be joined.
  * - Consent is required on the server too (the client already requires it).
+ * - CRM_PROTECTION_BYPASS (optional): only for testing against a Vercel-
+ *   protected CRM preview deployment. Never needed in production — the CRM's
+ *   production domain isn't behind Deployment Protection.
  */
 import { NAME_RE, normalizePhone, readJsonBody, sanitize } from './_lib/smoove.js';
 import { clientIp, rateLimit } from './_lib/store.js';
@@ -74,10 +77,13 @@ export default async function handler(req, res) {
   if (path) notesParts.push(`עמוד: ${path}`);
   if (note) notesParts.push(note);
 
+  const headers = { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` };
+  if (process.env.CRM_PROTECTION_BYPASS) headers['x-vercel-protection-bypass'] = process.env.CRM_PROTECTION_BYPASS;
+
   try {
     const r = await fetch(CRM_LEAD_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${secret}` },
+      headers,
       body: JSON.stringify({ fullName: name, phone, source: src, notes: notesParts.join(' · ') }),
       signal: AbortSignal.timeout(8000),
     });
