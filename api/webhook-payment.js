@@ -20,10 +20,13 @@
  *   REDIS_URL             — durable idempotency store, ioredis (see api/_lib/store.js)
  *   WEBHOOK_TEST_MODE     — "true" skips signature verification (never in production)
  *   SMOOVE_DRY_RUN        — "true" logs the payload but does not call Smoove
+ *   META_CAPI_ACCESS_TOKEN — optional; sends a server-side Purchase event to Meta
+ *                            (see api/_lib/metaCapi.js). Skipped silently if unset.
  */
 
 import crypto from 'crypto';
 import { claim, set, del, get } from './_lib/store.js';
+import { sendMetaPurchase } from './_lib/metaCapi.js';
 
 const BMS_PURCHASE_LIST_ID = 1123232;
 const DEDUP_TTL_SEC = 60 * 60 * 24 * 90; // 90 days
@@ -225,6 +228,7 @@ export default async function handler(req, res) {
     if (smooveRes.ok) {
       await set(key, 'done', DEDUP_TTL_SEC);
       trackPurchase(v);
+      sendMetaPurchase(v).catch(() => {}); // fire-and-forget: a Meta outage must never fail fulfillment
       console.log('[webhook-payment] buyer enrolled', { eventId: dedupId, listId: BMS_PURCHASE_LIST_ID });
       return res.status(200).json({ success: true });
     }

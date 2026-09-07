@@ -4,17 +4,17 @@ import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/
 import { useLang, togglePath } from '../i18n';
 import './Navbar.css';
 
+// Simplified per the 2026-09 audit (D2): services, results, about, resources,
+// and one contact action (the always-visible CTA button, not a nav item).
+// 'resources' points at /articles rather than a same-page anchor — most
+// navigation tasks shouldn't dead-end back on the homepage.
 const STR = {
   he: {
     navItems: [
-      { id: 'hero', label: 'בית' },
-      { id: 'about', label: 'מי אני' },
-      { id: 'services', label: 'שירותים' },
-      { id: 'how-it-works', label: 'איך זה עובד' },
-      { id: 'testimonials', label: 'המלצות' },
-      { id: 'articles', label: 'מאמרים' },
-      { id: 'faq', label: 'שאלות נפוצות' },
-      { id: 'contact', label: 'שליחת פרטים' },
+      { id: 'about', label: 'מי אני', anchor: true },
+      { id: 'services', label: 'שירותים', anchor: true },
+      { id: 'testimonials', label: 'תוצאות', anchor: true },
+      { id: 'resources', label: 'משאבים', anchor: false, href: '/articles' },
     ],
     cta: 'דבר/י איתי',
     logoAria: 'חזרה לדף הבית',
@@ -25,14 +25,10 @@ const STR = {
   },
   en: {
     navItems: [
-      { id: 'hero', label: 'Home' },
-      { id: 'about', label: 'About' },
-      { id: 'services', label: 'Services' },
-      { id: 'how-it-works', label: 'How It Works' },
-      { id: 'testimonials', label: 'Reviews' },
-      { id: 'articles', label: 'Articles' },
-      { id: 'faq', label: 'FAQ' },
-      { id: 'contact', label: 'Contact' },
+      { id: 'about', label: 'About', anchor: true },
+      { id: 'services', label: 'Services', anchor: true },
+      { id: 'testimonials', label: 'Results', anchor: true },
+      { id: 'resources', label: 'Resources', anchor: false, href: '/en/articles' },
     ],
     cta: 'Chat With Me',
     logoAria: 'Back to home page',
@@ -91,8 +87,8 @@ const Navbar = () => {
             <a
               key={item.id}
               className="nav-item"
-              href={`${homePath}#${item.id}`}
-              onClick={(e) => handleAnchorClick(e, item.id)}
+              href={item.anchor ? `${homePath}#${item.id}` : item.href}
+              onClick={item.anchor ? (e) => handleAnchorClick(e, item.id) : () => setIsMobileMenuOpen(false)}
             >
               {item.label}
             </a>
