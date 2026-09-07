@@ -17,7 +17,7 @@
  *   PAYMENT_OK_STATUSES   — comma list of provider status values that mean "paid"
  *                           (default: paid,success,succeeded,completed,approved,1,true)
  *   BMS_PRODUCT_MATCH     — optional substring that must appear in the item/description
- *   KV_REST_API_URL/TOKEN — durable idempotency store (see api/_lib/store.js)
+ *   REDIS_URL             — durable idempotency store, ioredis (see api/_lib/store.js)
  *   WEBHOOK_TEST_MODE     — "true" skips signature verification (never in production)
  *   SMOOVE_DRY_RUN        — "true" logs the payload but does not call Smoove
  */
