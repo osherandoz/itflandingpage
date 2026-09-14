@@ -280,3 +280,12 @@
     font-size: 0.85rem;
   }
 }
+
+.about-more-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--color-primary, #3B82F6);
+  font-weight: 600;
+  text-decoration: none;
+}
+.about-more-link:hover { text-decoration: underline; }

@@ -9,7 +9,9 @@ const STR = {
   he: {
     hoursBadge: `מענה מהיר בשעות הפעילות · ${FACTS.hours.he}`,
     trust: [`✓ ${FACTS.accountsRecovered.he}`, '⭐ דירוג 4.9/5', '✓ תשלום רק אחרי הצלחה', `✓ זמינות ${FACTS.hours.he}`],
-    logoAlt: 'IsraelTechForce - מומחים לשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ',
+    photoAlt: 'אושר רווח, מייסד IsraelTechForce',
+    photoName: 'אושר רווח',
+    photoRole: 'מייסד IsraelTechForce',
     title: 'אחזיר לך את החשבון.',
     titleHighlight: 'לא הצלחתי, לא שילמת.',
     subtitle: 'מתמחה בחשבונות שמטא הכריזו עליהם כאבודים. פייסבוק, אינסטגרם, WhatsApp ופתרונות מלאים לביזנס מנג׳ר.',
@@ -21,7 +23,9 @@ const STR = {
   en: {
     hoursBadge: `Fast replies during business hours · ${FACTS.hours.en}`,
     trust: [`✓ ${FACTS.accountsRecovered.en}`, '⭐ Rated 4.9/5', '✓ Pay only after success', `✓ Available ${FACTS.hours.en}`],
-    logoAlt: 'IsraelTechForce - Facebook, Instagram and WhatsApp account recovery experts',
+    photoAlt: 'Osher Revach, founder of IsraelTechForce',
+    photoName: 'Osher Revach',
+    photoRole: 'Founder, IsraelTechForce',
     title: "I'll get your account back.",
     titleHighlight: "No recovery, no fee.",
     subtitle: 'I specialize in accounts Meta has written off as lost. Facebook, Instagram, WhatsApp, and full Business Manager solutions.',
@@ -38,14 +42,12 @@ const HeroSection = () => {
 
   return (
     <section className="hero-section">
-      {/* Decorative floating social icons, background only */}
+      {/* Decorative floating social icons, background only — trimmed from 6 to
+          3 (audit D1: "reduce... floating platform icons") */}
       <div className="hero-bg-icons" aria-hidden="true">
         <Icon name="facebook" className="hero-bg-icon" style={{ top: '12%', right: '8%', fontSize: '5rem', animationDelay: '0s' }} />
-        <Icon name="instagram" className="hero-bg-icon" style={{ top: '55%', right: '4%', fontSize: '3.5rem', animationDelay: '1.4s' }} />
-        <Icon name="whatsapp" className="hero-bg-icon" style={{ top: '75%', right: '14%', fontSize: '4rem', animationDelay: '2.8s' }} />
-        <Icon name="facebook" className="hero-bg-icon" style={{ top: '80%', left: '6%', fontSize: '3rem', animationDelay: '0.7s' }} />
-        <Icon name="instagram" className="hero-bg-icon" style={{ top: '20%', left: '5%', fontSize: '4.5rem', animationDelay: '2.1s' }} />
-        <Icon name="whatsapp" className="hero-bg-icon" style={{ top: '42%', left: '10%', fontSize: '3rem', animationDelay: '3.5s' }} />
+        <Icon name="instagram" className="hero-bg-icon" style={{ top: '75%', right: '14%', fontSize: '4rem', animationDelay: '2.8s' }} />
+        <Icon name="whatsapp" className="hero-bg-icon" style={{ top: '20%', left: '5%', fontSize: '4.5rem', animationDelay: '2.1s' }} />
       </div>
 
       <div className="hero-container">
@@ -63,17 +65,23 @@ const HeroSection = () => {
           ))}
         </div>
 
-        {/* Logo — hidden on mobile so the headline lands sooner */}
-        <div className="hero-logo">
+        {/* Real portrait, not the logo already shown in the navbar (audit D1:
+            "an authentic portrait beside a compact problem-led introduction") */}
+        <div className="hero-identity">
           <img
-            src="/images/logo-hero.webp"
-            alt={t.logoAlt}
-            width="260"
-            height="192"
+            className="hero-photo"
+            src="/images/osher-photo-1.jpg"
+            alt={t.photoAlt}
+            width="72"
+            height="72"
             loading="eager"
             decoding="async"
             fetchPriority="high"
           />
+          <span className="hero-identity-text">
+            <strong>{t.photoName}</strong>
+            <span>{t.photoRole}</span>
+          </span>
         </div>
 
         <div className="hero-content">

@@ -22,6 +22,8 @@ const STR = {
     aboutTitle: 'מה זה ולמה זה קורה?',
     stepsTitle: 'הפתרון שלנו: 3 שלבים פשוטים',
     testimonialsTitle: 'מה הלקוחות שלנו אומרים',
+    caseStudiesLink: 'רוצים לראות מקרה מלא, כולל מה עשינו ובכמה זמן? ←',
+    caseStudiesHref: '/מקרי-הצלחה',
     faqTitle: (keyword) => `שאלות נפוצות על ${keyword}`,
     faqSubtitle: 'תשובות לשאלות שלקוחות שואלים אותנו הכי הרבה',
     relatedTitle: 'מאמרים קשורים',
@@ -52,6 +54,8 @@ const STR = {
     aboutTitle: 'What Is It and Why Does It Happen?',
     stepsTitle: 'Our Solution: 3 Simple Steps',
     testimonialsTitle: 'What Our Clients Say',
+    caseStudiesLink: 'Want to see a full case, including what we did and how long it took? ←',
+    caseStudiesHref: '/en/success-stories',
     faqTitle: (keyword) => `Frequently Asked Questions About ${keyword}`,
     faqSubtitle: 'Answers to the questions clients ask us most',
     relatedTitle: 'Related Articles',
@@ -392,6 +396,7 @@ const ServicePage = ({ pageData }) => {
                 </div>
               ))}
             </div>
+            <Link to={t.caseStudiesHref} className="service-case-studies-link">{t.caseStudiesLink}</Link>
           </div>
         </section>
 

@@ -502,3 +502,12 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+.tss-sample-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--tss-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 0.98rem;
+}

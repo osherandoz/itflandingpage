@@ -17,7 +17,7 @@ const STR = {
     breadcrumbHome: 'בית',
     breadcrumbArticles: 'מאמרים',
     authorLine: (
-      <span>נכתב ע"י <strong>אושר רווח</strong> | מומחה בשחזורי חשבונות</span>
+      <span>נכתב ע"י <Link to="/אושר-רווח"><strong>אושר רווח</strong></Link> | מומחה בשחזורי חשבונות</span>
     ),
     shortAnswerLabel: 'תשובה קצרה',
     tocTitle: 'תוכן עניינים',
@@ -43,7 +43,7 @@ const STR = {
     breadcrumbHome: 'Home',
     breadcrumbArticles: 'Articles',
     authorLine: (
-      <span>Written by <strong>Osher Revach</strong> | Account Recovery Expert</span>
+      <span>Written by <Link to="/en/osher-revach"><strong>Osher Revach</strong></Link> | Account Recovery Expert</span>
     ),
     shortAnswerLabel: 'Short Answer',
     tocTitle: 'Table of Contents',
