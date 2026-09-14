@@ -191,8 +191,6 @@ const STR = {
     quickNewsletter: 'ניוזלטר חודשי',
     quickAbout: 'עליי',
     aboutHref: '/אושר-רווח',
-    quickCaseStudies: 'סיפורי הצלחה',
-    caseStudiesHref: '/מקרי-הצלחה',
     privacyLink: 'מדיניות פרטיות',
     accessibilityLink: 'נגישות',
     termsLink: 'תנאי שימוש',
@@ -231,8 +229,6 @@ const STR = {
     quickNewsletter: 'Monthly Newsletter',
     quickAbout: 'About Me',
     aboutHref: '/en/osher-revach',
-    quickCaseStudies: 'Success Stories',
-    caseStudiesHref: '/en/success-stories',
     privacyLink: 'Privacy Policy',
     accessibilityLink: 'Accessibility',
     termsLink: 'Terms of Use',
@@ -360,10 +356,6 @@ const Footer = () => {
               <Link to={t.aboutHref} className="quick-link">
                 <Icon name="users" aria-hidden="true" />
                 {t.quickAbout}
-              </Link>
-              <Link to={t.caseStudiesHref} className="quick-link">
-                <Icon name="certificate" aria-hidden="true" />
-                {t.quickCaseStudies}
               </Link>
             </div>
           </div>

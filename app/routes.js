@@ -28,10 +28,6 @@ export default [
   route("תודה-רכישה", "./routes/thank-you-purchase.jsx"),
   // E3 — author/about page, linked from articles + schema
   route("אושר-רווח", "./routes/osher-revach.jsx"),
-  // E3 — real case studies
-  route("מקרי-הצלחה", "./routes/case-studies.jsx"),
-  // C3/D5 — newsletter sample issue + archive
-  route("גיליונות-הניוזלטר", "./routes/newsletter-issues.jsx"),
 
   // ——— English site (/en/*) — mirrors the Hebrew pages with English slugs ———
   route("en", "./routes/en.home.jsx"),
@@ -49,6 +45,4 @@ export default [
   route("en/faq", "./routes/en.faq.jsx"),
   route("en/testimonials", "./routes/en.testimonials.jsx"),
   route("en/osher-revach", "./routes/en.osher-revach.jsx"),
-  route("en/success-stories", "./routes/en.case-studies.jsx"),
-  route("en/newsletter-issues", "./routes/en.newsletter-issues.jsx"),
 ];

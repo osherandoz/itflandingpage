@@ -156,8 +156,6 @@ const STR = {
     cardMeta: 'גיליון חודשי',
     cardFoot: 'זמן קריאה משוער: 5 דקות',
     insideTitle: 'מה נכנס לגיליון',
-    sampleLink: 'רוצים לראות גיליון אמיתי לפני שנרשמים? ←',
-    sampleHref: '/גיליונות-הניוזלטר',
     fitTitle: 'למי הגיליון הזה נכתב',
     fitYesTitle: 'מתאים לך אם',
     fitYes: [
@@ -212,8 +210,6 @@ const STR = {
     cardMeta: 'Monthly issue',
     cardFoot: 'Estimated reading time: 5 minutes',
     insideTitle: "What Goes Into an Issue",
-    sampleLink: 'Want to see a real issue before signing up? ←',
-    sampleHref: '/en/newsletter-issues',
     fitTitle: 'Who This Newsletter Is Written For',
     fitYesTitle: "It's for you if",
     fitYes: [
@@ -455,7 +451,6 @@ export default function Newsletter() {
             </article>
           ))}
         </div>
-        <Link to={t.sampleHref} className="tss-sample-link">{t.sampleLink}</Link>
       </section>
 
       {/* ── FIT / NOT FIT ───────────────────────────────────── */}
