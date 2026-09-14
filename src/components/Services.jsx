@@ -105,7 +105,7 @@ const STR = {
     stats: [
       { value: '95%+', label: 'הצלחה בשחזור' },
       { value: 'א׳–ו׳', label: 'זמינות 09:00–16:00' },
-      { value: '~48h', label: 'זמן ממוצע' },
+      { value: 'תלוי מקרה', label: 'משך טיפול' },
     ],
     pagesAria: 'מדריכי שחזור מפורטים',
     pagesTitle: 'מדריכים מפורטים לפי מצב',
@@ -179,7 +179,7 @@ const STR = {
     stats: [
       { value: '95%+', label: 'Recovery success' },
       { value: 'Sun–Fri', label: 'Available 09:00–16:00' },
-      { value: '~48h', label: 'Average turnaround' },
+      { value: 'Varies', label: 'Time to resolve' },
     ],
     pagesAria: 'Detailed recovery guides',
     pagesTitle: 'Detailed guides by situation',

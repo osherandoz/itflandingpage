@@ -29,8 +29,9 @@ export const FACTS = {
     source: 'TODO: attach denominator + period',
   },
   typicalTurnaround: {
-    display: '24-48',
-    definition: 'Typical hours for simple cases; complex cases (hacked, BM, permanent) take longer.',
+    he: 'תלוי מקרה',
+    en: 'Depends on the case',
+    definition: 'Osher\'s call, 2026-09-14: turnaround varies too much by case type (simple report vs. hacked/BM/permanent) to quote one number anywhere on the site.',
   },
   // Matches LocalBusiness.openingHours in src/data/schemas.js ('Su-Fr 09:00-16:00').
   // If the real schedule is different, change BOTH here and in schemas.js.

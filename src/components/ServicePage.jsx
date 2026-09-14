@@ -16,8 +16,8 @@ const STR = {
     ctaHero: 'שלחו הודעה עכשיו, ללא עלות',
     statsAria: 'נתוני שירות',
     statAccounts: 'חשבונות שוחזרו',
+    statHours: 'משך טיפול',
     statSuccess: 'אחוז הצלחה',
-    statHours: 'שעות בממוצע',
     statRating: 'דירוג לקוחות',
     aboutTitle: 'מה זה ולמה זה קורה?',
     stepsTitle: 'הפתרון שלנו: 3 שלבים פשוטים',
@@ -46,8 +46,8 @@ const STR = {
     ctaHero: 'Message Us Now, Free of Charge',
     statsAria: 'Service statistics',
     statAccounts: 'Accounts Recovered',
+    statHours: 'Time to Resolve',
     statSuccess: 'Success Rate',
-    statHours: 'Hours on Average',
     statRating: 'Client Rating',
     aboutTitle: 'What Is It and Why Does It Happen?',
     stepsTitle: 'Our Solution: 3 Simple Steps',
@@ -322,7 +322,7 @@ const ServicePage = ({ pageData }) => {
                 <span className="service-stat-label">{t.statSuccess}</span>
               </div>
               <div className="service-stat">
-                <span className="service-stat-value">{FACTS.typicalTurnaround.display}</span>
+                <span className="service-stat-value">{FACTS.typicalTurnaround[lang]}</span>
                 <span className="service-stat-label">{t.statHours}</span>
               </div>
               <div className="service-stat">
