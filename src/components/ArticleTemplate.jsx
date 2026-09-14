@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router';
-import { useLang, togglePath, SERVICE_PATHS } from '../i18n';
+import { useLang, togglePath, SERVICE_PATHS, LANGUAGE_TOGGLE_ENABLED } from '../i18n';
 import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ArticleTemplate.css';
@@ -295,9 +295,11 @@ const ArticleTemplate = ({ article }) => {
           <Link to={`${homePath}#articles`}>{t.breadcrumbArticles}</Link>
           <span className="breadcrumb-separator">/</span>
           <span className="breadcrumb-current">{article.title}</span>
-          <Link className="breadcrumb-lang-toggle" to={togglePath(pathname)}>
-            {isEn ? 'עברית' : 'English'}
-          </Link>
+          {LANGUAGE_TOGGLE_ENABLED && (
+            <Link className="breadcrumb-lang-toggle" to={togglePath(pathname)}>
+              {isEn ? 'עברית' : 'English'}
+            </Link>
+          )}
         </nav>
 
         <div className="article-layout">

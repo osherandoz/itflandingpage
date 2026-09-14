@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router';
-import { useLang, togglePath } from '../i18n';
+import { useLang, togglePath, LANGUAGE_TOGGLE_ENABLED } from '../i18n';
 import './Privacy.css';
 
 const LAST_UPDATED_HE = 'מאי 2026';
@@ -660,9 +660,11 @@ const Privacy = () => {
         <Link to={prefix || '/'} className="privacy-back-link">
           <span aria-hidden="true">←</span> {isEn ? 'Back to home page' : 'חזרה לעמוד הראשי'}
         </Link>
-        <Link to={togglePath(pathname)} className="privacy-back-link privacy-lang-toggle">
-          {isEn ? 'עברית' : 'English'}
-        </Link>
+        {LANGUAGE_TOGGLE_ENABLED && (
+          <Link to={togglePath(pathname)} className="privacy-back-link privacy-lang-toggle">
+            {isEn ? 'עברית' : 'English'}
+          </Link>
+        )}
 
         {isEn ? <EnglishPrivacy /> : <HebrewPrivacy />}
       </div>

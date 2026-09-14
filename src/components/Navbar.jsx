@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
-import { useLang, togglePath } from '../i18n';
+import { useLang, togglePath, LANGUAGE_TOGGLE_ENABLED } from '../i18n';
 import './Navbar.css';
 
 const STR = {
@@ -97,13 +97,15 @@ const Navbar = () => {
               {item.label}
             </a>
           ))}
-          <a
-            className="nav-item nav-lang-toggle"
-            href={togglePath(location.pathname)}
-            aria-label={t.langToggleAria}
-          >
-            {t.langToggle}
-          </a>
+          {LANGUAGE_TOGGLE_ENABLED && (
+            <a
+              className="nav-item nav-lang-toggle"
+              href={togglePath(location.pathname)}
+              aria-label={t.langToggleAria}
+            >
+              {t.langToggle}
+            </a>
+          )}
         </div>
 
         <div className="navbar-cta">

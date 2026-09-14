@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router';
 import '@fontsource/heebo/800.css';
 import '@fontsource/heebo/900.css';
 import { subscribeToNewsletter, validateEmail } from '../utils/smoove';
-import { useLang, togglePath } from '../i18n';
+import { useLang, togglePath, LANGUAGE_TOGGLE_ENABLED } from '../i18n';
 import './Newsletter.css';
 
 /* ============================================================
@@ -381,9 +381,11 @@ export default function Newsletter() {
         <a className="tss-top-link" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
           {t.topLink}
         </a>
-        <Link className="tss-top-link tss-lang-toggle" to={togglePath(pathname)}>
-          {isEn ? 'עברית' : 'English'}
-        </Link>
+        {LANGUAGE_TOGGLE_ENABLED && (
+          <Link className="tss-top-link tss-lang-toggle" to={togglePath(pathname)}>
+            {isEn ? 'עברית' : 'English'}
+          </Link>
+        )}
       </header>
 
       {/* ── HERO ────────────────────────────────────────────── */}

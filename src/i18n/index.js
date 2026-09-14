@@ -4,6 +4,12 @@ import { useLocation } from 'react-router';
 
 export const SITE_ORIGIN = 'https://www.israeltechforce.com';
 
+// Osher, 2026-09-14: hide the language-switch link site-wide. The /en/* pages
+// stay live (existing links/SEO keep working), but nothing on the Hebrew site
+// invites a visitor to switch — the switch itself was pulling in foreign leads
+// with no time to handle. Flip back to true to restore the link.
+export const LANGUAGE_TOGGLE_ENABLED = false;
+
 export function langFromPathname(pathname) {
   return pathname === '/en' || pathname.startsWith('/en/') ? 'en' : 'he';
 }
