@@ -48,7 +48,7 @@ export default async function handler(req, res) {
   // Honeypot — bots fill every field
   if (body.company) return res.status(200).json({ success: true });
 
-  if (!(await rateLimit('lead', clientIp(req), 5, 60 * 60))) {
+  if (!(await rateLimit('lead', clientIp(req), 2, 60 * 60))) {
     return res.status(429).json({ error: 'Too many requests' });
   }
 
