@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useLang } from '../i18n';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import './Modal.css';
 
 const STR = {
