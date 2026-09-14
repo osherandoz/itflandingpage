@@ -22,6 +22,7 @@
   height: 168px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: 50% 12%;
   border: 3px solid var(--color-primary);
   margin: 0 auto 20px;
   display: block;

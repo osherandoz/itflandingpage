@@ -143,6 +143,7 @@
   height: 56px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: 50% 12%;
   border: 2px solid var(--color-primary, #3B82F6);
 }
 
