@@ -11,7 +11,7 @@ export const CENTRAL_FAQ_SCHEMA_EN = {
       name: 'How do I recover a disabled Facebook account?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: "Send us a WhatsApp message with the details of the disabled account and we'll diagnose the problem for free. After the diagnosis we file a professional appeal with Meta on your behalf, using the tools and experience we've built up. Simple cases are resolved within 24–48 hours, and more complex ones within 3–7 days. Payment is made only after the account has actually been released — no success, no payment.",
+        text: "Send us a WhatsApp message with the details of the disabled account and we'll diagnose the problem for free. After the diagnosis we file a professional appeal with Meta on your behalf, using the tools and experience we've built up. How long it takes depends on the case — a simple one resolves fast, a complex one takes longer. Payment is made only after the account has actually been released — no success, no payment.",
       },
     },
     {
@@ -27,7 +27,7 @@ export const CENTRAL_FAQ_SCHEMA_EN = {
       name: 'How long does Facebook account recovery take?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Simple cases — a temporary block or an advertising restriction — are usually resolved within 24–48 hours. More complex cases, such as hacked accounts, permanently disabled accounts, or business accounts with a history of violations, can take 3–7 days. Throughout the process we keep you updated and report every step of progress.',
+        text: 'It depends on the case. Simple cases — a temporary block or an advertising restriction — are usually resolved fast. More complex cases, such as hacked accounts, permanently disabled accounts, or business accounts with a history of violations, take longer. Throughout the process we keep you updated and report every step of progress.',
       },
     },
     {
@@ -167,7 +167,7 @@ export const CENTRAL_FAQ_SCHEMA_EN = {
       name: 'How long does the recovery process take?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Simple (temporary block): 24–48 hours. Medium (disabled account): 3–5 days. Complex (hacked account / permanent ruling / Business Manager): up to 7 days. Throughout the process we update you at every step and you can reach us with any question. Payment only after proven success — you take no risk at all.',
+        text: 'It depends on the case: a simple temporary block resolves fast, a disabled account takes longer, and a hacked account / permanent ruling / Business Manager can take the longest. Throughout the process we update you at every step and you can reach us with any question. Payment only after proven success — you take no risk at all.',
       },
     },
   ],

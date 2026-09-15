@@ -31,8 +31,8 @@ const STR = {
       {
         icon: 'rocket',
         title: 'יוצאים לדרך',
-        description: 'חתמת? אני יוצא לדרך. בדרך כלל תראה תוצאות תוך 24–48 שעות.',
-        time: '24–48 שעות',
+        description: 'חתמת? אני יוצא לדרך. משך הטיפול תלוי במקרה.',
+        time: 'תלוי מקרה',
         color: '#10B981',
       },
     ],
@@ -68,8 +68,8 @@ const STR = {
       {
         icon: 'rocket',
         title: 'We Get to Work',
-        description: "Signed off? I get to work. You'll usually see results within 24–48 hours.",
-        time: '24–48 hours',
+        description: "Signed off? I get to work. How long it takes depends on the case.",
+        time: 'Depends on the case',
         color: '#10B981',
       },
     ],

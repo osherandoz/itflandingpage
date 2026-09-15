@@ -22,7 +22,7 @@ const STR = {
       },
       {
         question: 'כמה זמן לוקח תהליך שחזור החשבון?',
-        answer: 'זמן הטיפול משתנה בהתאם לסוג הבעיה ומורכבותה. בעיות פשוטות כמו שחזור סיסמה או הסרת חסימה זמנית נפתרות תוך 24-48 שעות. בעיות מורכבות יותר כמו חשבונות שנפרצו או נחסמו לצמיתות יכולות לקחת מספר ימים עד שבוע. אני תמיד מעדכן אותך על התקדמות התהליך.'
+        answer: 'זה תלוי בסוג הבעיה ומורכבותה. בעיות פשוטות כמו שחזור סיסמה או הסרת חסימה זמנית נפתרות מהר. בעיות מורכבות יותר כמו חשבונות שנפרצו או נחסמו לצמיתות לוקחות יותר זמן. אני תמיד מעדכן אותך על התקדמות התהליך.'
       },
       {
         question: 'מה המחירים לשירותי שחזור חשבונות?',
@@ -64,7 +64,7 @@ const STR = {
       },
       {
         question: 'How long does the account recovery process take?',
-        answer: 'It depends on the type and complexity of the problem. Simple issues like password recovery or lifting a temporary block are resolved within 24-48 hours. More complex issues, like hacked or permanently disabled accounts, can take several days up to a week. I always keep you updated on the progress.'
+        answer: 'It depends on the type and complexity of the problem. Simple issues like password recovery or lifting a temporary block resolve fast. More complex issues, like hacked or permanently disabled accounts, take longer. I always keep you updated on the progress.'
       },
       {
         question: 'What are the prices for account recovery services?',

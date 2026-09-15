@@ -26,7 +26,7 @@ export const FAQ_SCHEMA_EN = {
       name: 'How long does account recovery take?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Turnaround depends on the type and complexity of the problem. Simple cases are resolved within 24–48 hours; complex cases can take several days up to a week. I keep you updated throughout the process.',
+        text: 'Turnaround depends on the type and complexity of the problem. Simple cases resolve fast; complex cases can take longer. I keep you updated throughout the process.',
       },
     },
     {
