@@ -6,11 +6,11 @@ export const SERVICE_PAGES_EN = [
     title: 'Facebook Account Recovery: Fast, Professional Help',
     metaTitle: 'Facebook Account Recovery | IsraelTechForce | 95%+ Success Rate',
     metaDescription:
-      'Facebook account disabled or hacked? IsraelTechForce recovers Facebook accounts within 24-48 hours. 2,500+ successful cases, pay only after success. Contact us now.',
+      'Facebook account disabled or hacked? IsraelTechForce recovers Facebook accounts. 2,500+ successful cases, pay only after success. Contact us now.',
     serviceType: 'Facebook account recovery',
     whatIsIt: `<p>It happened without warning. Your Facebook is suddenly locked. All the connections, the groups, the business page you built over years. One moment everything is there, and the next it is all behind an error screen. We understand that frustration. It has happened to 2,500 people who reached out to us, and we found a solution for every one of them.</p>
 <p>Meta blocks accounts for all kinds of reasons. Sometimes it is an algorithm that decided your activity "looked suspicious". Sometimes it is a report from someone in your audience. Sometimes it is an ad campaign flagged as violating policy, even when you violated nothing. And sometimes it is a hacker who took over the account, changed the password, and locked you out. Every case is different. Every case demands a different approach.</p>
-<p>That is exactly what we do. We know the right channels. The forms that actually work. The way to talk to Meta in a language that gets results. Your account comes back within 24-48 hours in most cases, and you do not pay a cent until you are logged back in.</p>`,
+<p>That is exactly what we do. We know the right channels. The forms that actually work. The way to talk to Meta in a language that gets results. Your account comes back fast in most cases, and you do not pay a cent until you are logged back in.</p>`,
     steps: [
       {
         icon: 'fas fa-search',
@@ -25,14 +25,14 @@ export const SERVICE_PAGES_EN = [
       {
         icon: 'fas fa-check-circle',
         title: 'Account Restored',
-        desc: 'In most cases the account is back within 24-48 hours. We stay with you through your first login and show you how to re-secure it.',
+        desc: 'How long it takes depends on the case. We stay with you through your first login and show you how to re-secure it.',
       },
     ],
     faqs: [
       {
         question: 'How long does Facebook account recovery take?',
         answer:
-          'In most cases we restore accounts within 24-48 hours. More complex cases, such as accounts hacked several months ago, can take up to a week.',
+          'It depends on the case. Simple blocks resolve fast, while more complex cases, such as accounts hacked several months ago, can take longer.',
       },
       {
         question: 'What happens if you cannot recover my account?',
@@ -77,7 +77,7 @@ export const SERVICE_PAGES_EN = [
     title: 'Instagram Account Recovery: Getting Your Profile Back',
     metaTitle: 'Instagram Account Recovery | IsraelTechForce | Pay After Success',
     metaDescription:
-      'Instagram account blocked, disabled, or restricted? IsraelTechForce specializes in Instagram account recovery. 95%+ success rate, 24-48 hours. Message us now.',
+      'Instagram account blocked, disabled, or restricted? IsraelTechForce specializes in Instagram account recovery. 95%+ success rate. Message us now.',
     serviceType: 'Instagram account recovery',
     whatIsIt: `<p>You built a profile. You grew an audience. You created content people loved. And then, with no explanation, it was all gone. The Instagram account is disabled. The connection with your followers is cut off. And the business you built through this app grinds to a halt. We know how much that hurts.</p>
 <p>Instagram can disable an account over hashtags it considers banned, activity that looks like spam, user reports, or an algorithm that simply got it wrong. Sometimes it is a partial restriction: you cannot follow, comment, or post, and the account is still open. Sometimes it is a full disabling that requires identity verification with Meta. If your password was changed and someone else is inside, that is a hack, and it has its own page and its own process.</p>
@@ -152,7 +152,7 @@ export const SERVICE_PAGES_EN = [
     serviceType: 'WhatsApp account recovery',
     whatIsIt: `<p>Customers send a message. You do not reply. Not because you did not want to, but because your WhatsApp is banned. Entire businesses run on WhatsApp. When the account gets banned, the whole line of communication collapses. It is not just inconvenient. It is urgent.</p>
 <p>Meta bans WhatsApp accounts for a range of reasons: sending marketing messages at a pace flagged as spam, multiple complaints from recipients, using unofficial versions of the app, or suspected automated activity. There is a difference between a temporary ban and a permanent one. The first allows for a quick release. The second requires a more complex appeal process. But even that, in most cases, can be resolved.</p>
-<p>IsraelTechForce handles WhatsApp bans for businesses and individuals alike. We identify the type of ban, file the right appeal, and show you how to prevent a repeat ban. Our average: 24-48 hours for a temporary ban, up to a week for a permanent one. Payment only once you are back in.</p>`,
+<p>IsraelTechForce handles WhatsApp bans for businesses and individuals alike. We identify the type of ban, file the right appeal, and show you how to prevent a repeat ban. How long it takes depends on the case: a temporary ban lifts much faster than a permanent one. Payment only once you are back in.</p>`,
     steps: [
       {
         icon: 'fas fa-diagnoses',
@@ -189,7 +189,7 @@ export const SERVICE_PAGES_EN = [
       {
         question: 'How long does lifting a WhatsApp ban take?',
         answer:
-          'Temporary bans are usually lifted within 24-48 hours. Permanent bans can take 3-7 days depending on Meta’s processing load.',
+          'It depends on the case. Temporary bans are usually lifted fast. Permanent bans take longer, depending on Meta’s processing load.',
       },
       {
         question: 'Will I be able to keep my old phone number?',
@@ -348,14 +348,14 @@ export const SERVICE_PAGES_EN = [
     slug: 'ads-manager',
     path: 'ads-manager-recovery',
     keyword: 'disabled Ads Manager',
-    title: 'Ads Manager or Business Manager Disabled? Back to Advertising Within 72 Hours',
+    title: 'Ads Manager or Business Manager Disabled? Back to Advertising Fast',
     metaTitle: 'Business Manager Disabled? Ads Manager Recovery | IsraelTechForce',
     metaDescription:
       'Meta Business Manager or ad account disabled? IsraelTechForce restores blocked Business Managers and Facebook ad accounts. Pay only after success. Reach out now.',
     serviceType: 'Disabled Facebook Ads Manager restoration',
     whatIsIt: `<p>Ads Manager is disabled. The advertising has stopped. The campaigns are not running. Every day the account stays disabled costs real money. Not just wasted budget. Revenue that never arrives. We understand how expensive that is, and we move fast.</p>
 <p>Meta disables ad accounts for a range of reasons: a declined credit card, a campaign flagged as misleading, actions that looked suspicious, or an alleged violation of advertising policy. The big problem is that Meta’s standard appeal mechanisms are slow and ineffective. You submit a form, wait weeks, and get an automated response. Meanwhile your business suffers.</p>
-<p>IsraelTechForce works with businesses and ad agencies whose ad accounts are disabled. We know Meta’s advertising policies inside out, we know how to write appeals that get heard, and we know what to fix in the account before and after the release. Our average: release within 24-72 hours.</p>
+<p>IsraelTechForce works with businesses and ad agencies whose ad accounts are disabled. We know Meta’s advertising policies inside out, we know how to write appeals that get heard, and we know what to fix in the account before and after the release. How long the release takes depends on the case, but we move fast.</p>
 <p><b>Want to prevent the next shutdown?</b> After the release, <a href="/bms-sm">our BMS course (₪197, about $60)</a> teaches you how to build a shutdown-resistant Business Manager, 15 recorded lessons built from 2,500+ recovery cases.</p>`,
     steps: [
       {
@@ -378,7 +378,7 @@ export const SERVICE_PAGES_EN = [
       {
         question: 'My Business Manager was disabled. What do I do?',
         answer:
-          'First of all, do not open a new Business Manager, that can make the restriction worse. Send us a message, we diagnose the cause of the shutdown for free, file a targeted appeal with Meta through the right channels, and in most cases the Business Manager is released within 24-72 hours. Payment only after success.',
+          'First of all, do not open a new Business Manager, that can make the restriction worse. Send us a message, we diagnose the cause of the shutdown for free, file a targeted appeal with Meta through the right channels, and how long the release takes depends on the case. Payment only after success.',
       },
       {
         question: 'My Ads Manager was disabled with no explanation. What do I do?',
