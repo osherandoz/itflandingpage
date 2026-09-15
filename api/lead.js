@@ -2,7 +2,7 @@
  * POST /api/lead
  * Proxies contact-form + WhatsApp-popup leads straight into the CRM (itf-crm),
  * which creates the client + case there. No Google Sheets / Apps Script anymore.
- * Body: { name, phone, consent, source: 'contact-form' | 'service-form' | 'service-hero-callback', platform?, note?, src?, path?, company?: honeypot }
+ * Body: { name, phone, consent, source: 'contact-form' | 'service-form' | 'service-hero-callback', platform?, altPhone?, note?, src?, path?, company?: honeypot }
  *
  * - Server-to-server POST with a shared secret (Authorization: Bearer) — never
  *   exposed to the browser. Set LEAD_WEBHOOK_SECRET here AND in the CRM project
@@ -13,10 +13,11 @@
  * - `platform` (which product the visitor's issue is about) maps to the CRM's
  *   own `platforms` field (lib/constants.ts PLATFORMS) — shown as its own line
  *   there, not mixed into notes.
- * - `notes` sent to the CRM is exactly what the visitor typed/selected — no
- *   internal routing info (which on-site form, which page) gets mixed in
- *   (Osher, 2026-09-15: that mix read as garbled noise in the CRM's "extra
- *   details"). `path` is accepted for forward-compatibility but unused.
+ * - `notes` sent to the CRM is built only from what the visitor actually
+ *   typed/selected (their note, their alt WhatsApp number) — no internal
+ *   routing info (which on-site form, which page) gets mixed in (Osher,
+ *   2026-09-15: that mix read as garbled noise in the CRM's "extra details").
+ *   `path` is accepted for forward-compatibility but unused.
  * - Returns the CRM's own case id as leadId, so click events and the CRM
  *   record can be joined.
  * - Consent is required on the server too (the client already requires it).
@@ -64,6 +65,9 @@ export default async function handler(req, res) {
   const consent = body.consent === true || body.consent === 'true';
   const source = String(body.source || 'contact-form');
   const platform = VALID_PLATFORMS.has(body.platform) ? body.platform : null;
+  // Optional: a number that can actually receive a WhatsApp reply, for the
+  // WhatsApp-recovery callback form where the visitor's own number can't.
+  const altPhone = body.altPhone ? normalizePhone(body.altPhone) : null;
   const note = sanitize(body.note || '').slice(0, 120);
   // Marketing attribution (utm_source read client-side from the URL). Free text
   // on the CRM side (lead_sources is a manageable list, not a fixed enum).
@@ -73,6 +77,8 @@ export default async function handler(req, res) {
   if (!NAME_RE.test(name)) return res.status(400).json({ error: 'Invalid name' });
   if (!phone) return res.status(400).json({ error: 'Invalid phone' });
   if (!consent) return res.status(400).json({ error: 'Consent required' });
+
+  const notes = [note, altPhone ? `וואטסאפ חלופי: ${altPhone}` : ''].filter(Boolean).join('\n') || null;
 
   const secret = process.env.LEAD_WEBHOOK_SECRET;
   if (!secret) {
@@ -92,7 +98,7 @@ export default async function handler(req, res) {
         phone,
         source: src,
         platforms: platform ? [platform] : [],
-        notes: note || null,
+        notes,
       }),
       signal: AbortSignal.timeout(8000),
     });

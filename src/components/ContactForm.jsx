@@ -38,6 +38,8 @@ const STR = {
     phoneInvalid: 'מספר טלפון לא תקין',
     noteLabel: 'מה ההודעה שאתם רואים? (לא חובה)',
     noteNone: 'לא בטוח/ה',
+    altPhoneLabel: 'מספר טלפון נוסף עם וואטסאפ (אם יש, לא חובה)',
+    altPhonePlaceholder: 'מספר שכן ליצור איתו קשר בוואטסאפ',
     consentLabel: 'אני מאשר/ת ליצור איתי קשר',
     consentRequired: 'עליך להסכים ליצירת קשר כדי לשלוח את הטופס',
     sending: 'שולח...',
@@ -62,6 +64,8 @@ const STR = {
     phoneInvalid: 'Invalid phone number',
     noteLabel: 'What message do you see? (optional)',
     noteNone: 'Not sure',
+    altPhoneLabel: 'Another number with WhatsApp (optional)',
+    altPhonePlaceholder: 'A number we can reach you on via WhatsApp',
     consentLabel: 'I agree to be contacted',
     consentRequired: 'You must agree to be contacted to send the form',
     sending: 'Sending...',
@@ -77,12 +81,15 @@ const STR = {
  *  noteOptions — array of strings; renders an optional "what do you see" select sent as `note`
  *  location — CTA location name for analytics (default 'contact-form')
  *  hideWhatsApp — omit the WhatsApp fallback line under the button
+ *  altPhoneField — renders an optional "another WhatsApp-reachable number" input,
+ *    for forms where the visitor's own number can't receive a WhatsApp reply
+ *    (the WhatsApp-recovery callback form)
  */
-const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location = 'contact-form', hideWhatsApp = false }) => {
+const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location = 'contact-form', hideWhatsApp = false, altPhoneField = false }) => {
   const { lang } = useLang();
   const t = STR[lang];
 
-  const [formData, setFormData] = useState({ name: '', phone: '', platform: '', note: '', consent: false });
+  const [formData, setFormData] = useState({ name: '', phone: '', platform: '', altPhone: '', note: '', consent: false });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -125,6 +132,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
           phone: formData.phone.trim(),
           consent: formData.consent,
           platform: formData.platform || '',
+          altPhone: formData.altPhone.trim(),
           note: formData.note || '',
           source: location,
           src: getUtmSource(),
@@ -145,7 +153,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
 
       setIsSubmitted(true);
       setSubmitError(false);
-      setFormData({ name: '', phone: '', platform: '', note: '', consent: false });
+      setFormData({ name: '', phone: '', platform: '', altPhone: '', note: '', consent: false });
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch {
       trackSiteEvent('lead_form_error', { cta_location: location });
@@ -235,6 +243,23 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
             ))}
           </select>
         </div>
+
+        {altPhoneField && (
+          <div className="form-group">
+            <label htmlFor={`alt-phone-${location}`}>{t.altPhoneLabel}</label>
+            <input
+              type="tel"
+              id={`alt-phone-${location}`}
+              name="altPhone"
+              autoComplete="tel"
+              inputMode="tel"
+              value={formData.altPhone}
+              onChange={handleInputChange}
+              placeholder={t.altPhonePlaceholder}
+              disabled={isSubmitting}
+            />
+          </div>
+        )}
 
         {noteOptions && (
           <div className="form-group">
