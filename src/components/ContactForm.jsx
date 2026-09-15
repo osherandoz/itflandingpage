@@ -5,11 +5,28 @@ import { useLang } from '../i18n';
 import Icon from './Icon';
 import './ContactForm.css';
 
+const PLATFORM_OPTIONS = {
+  he: [
+    { value: 'facebook', label: 'פייסבוק' },
+    { value: 'instagram', label: 'אינסטגרם' },
+    { value: 'whatsapp', label: 'וואטסאפ' },
+    { value: 'ads_manager', label: 'מנהל מודעות' },
+  ],
+  en: [
+    { value: 'facebook', label: 'Facebook' },
+    { value: 'instagram', label: 'Instagram' },
+    { value: 'whatsapp', label: 'WhatsApp' },
+    { value: 'ads_manager', label: 'Ads Manager' },
+  ],
+};
+
 const STR = {
   he: {
     header: 'צור קשר',
     subheader: 'מלא/י את הטופס למטה ואחזור אליך בהקדם האפשרי',
     success: 'תודה! הפרטים התקבלו',
+    platformLabel: 'באיזו פלטפורמה הבעיה? (לא חובה)',
+    platformNone: 'לא בטוח/ה',
     submitErrorText: 'משהו השתבש בשליחה. נסה/י שוב או',
     whatsappDirect: 'דבר/י איתי ישירות בוואטסאפ',
     nameLabel: 'שם מלא *',
@@ -32,6 +49,8 @@ const STR = {
     header: 'Contact Me',
     subheader: 'Fill in the form below and I will get back to you as soon as possible',
     success: 'Thank you! Your details were received',
+    platformLabel: 'Which platform is this about? (optional)',
+    platformNone: 'Not sure',
     submitErrorText: 'Something went wrong. Try again or',
     whatsappDirect: 'chat with me directly on WhatsApp',
     nameLabel: 'Full name *',
@@ -63,7 +82,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
   const { lang } = useLang();
   const t = STR[lang];
 
-  const [formData, setFormData] = useState({ name: '', phone: '', note: '', consent: false });
+  const [formData, setFormData] = useState({ name: '', phone: '', platform: '', note: '', consent: false });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -105,6 +124,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
           name: formData.name.trim(),
           phone: formData.phone.trim(),
           consent: formData.consent,
+          platform: formData.platform || '',
           note: formData.note || '',
           source: location,
           src: getUtmSource(),
@@ -125,7 +145,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
 
       setIsSubmitted(true);
       setSubmitError(false);
-      setFormData({ name: '', phone: '', note: '', consent: false });
+      setFormData({ name: '', phone: '', platform: '', note: '', consent: false });
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch {
       trackSiteEvent('lead_form_error', { cta_location: location });
@@ -198,6 +218,22 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
             required
           />
           {errors.phone && <span className="error-message">{errors.phone}</span>}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor={`platform-${location}`}>{t.platformLabel}</label>
+          <select
+            id={`platform-${location}`}
+            name="platform"
+            value={formData.platform}
+            onChange={handleInputChange}
+            disabled={isSubmitting}
+          >
+            <option value="">{t.platformNone}</option>
+            {PLATFORM_OPTIONS[lang].map((opt) => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
         </div>
 
         {noteOptions && (

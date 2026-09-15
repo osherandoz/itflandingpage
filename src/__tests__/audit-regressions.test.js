@@ -243,7 +243,23 @@ describe('POST /api/lead (proxies to the CRM)', () => {
     const payload = JSON.parse(opts.body);
     expect(payload.phone).toBe('0501234567');
     expect(payload.source).toBe('facebook');
-    expect(payload.notes).toMatch(/contact-form/);
+  });
+  it('sends the visitor-facing note as-is, with no internal form/page routing info mixed in', async () => {
+    const res = mockRes();
+    await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: true, source: 'contact-form', note: 'המספר שלי חסום', path: '/שחזור-חשבון-וואטסאפ' }), res);
+    const payload = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(payload.notes).toBe('המספר שלי חסום');
+    expect(payload.notes).not.toMatch(/contact-form|עמוד/);
+  });
+  it('forwards a known platform, and drops an unknown one', async () => {
+    const res = mockRes();
+    await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: true, source: 'contact-form', platform: 'whatsapp' }), res);
+    let payload = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(payload.platforms).toEqual(['whatsapp']);
+
+    await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: true, source: 'contact-form', platform: 'made-up' }), res);
+    payload = JSON.parse(fetchMock.mock.calls[1][1].body);
+    expect(payload.platforms).toEqual([]);
   });
   it('defaults source to "website" when the visit has no utm_source', async () => {
     const res = mockRes();
