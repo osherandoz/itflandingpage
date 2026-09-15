@@ -340,6 +340,64 @@
 .tss-row-text h3 { font-size: clamp(20px, 2.2vw, 25px); margin-bottom: 8px; color: var(--tss-text); }
 .tss-row-text p { color: var(--tss-text-3); max-width: 68ch; }
 
+/* ─── REAL SAMPLE FROM A PAST ISSUE ──────────────────────── */
+.tss-sample-eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--tss-accent-tint);
+  border: 1px solid var(--tss-accent-tint-border);
+  color: var(--tss-accent-glow);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.tss-sample-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 32px);
+  margin-bottom: clamp(28px, 4vw, 40px);
+}
+.tss-sample-item {
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--tss-surface);
+  border: 1px solid var(--tss-border);
+}
+.tss-sample-n {
+  display: block;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--tss-accent);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 10px;
+}
+.tss-sample-item h3 { font-size: 18px; margin-bottom: 8px; color: var(--tss-text); }
+.tss-sample-item p { color: var(--tss-text-3); font-size: 15.5px; }
+.tss-sample-quote {
+  margin: 0;
+  padding: 24px 28px;
+  border-inline-start: 3px solid var(--tss-accent);
+  background: var(--tss-accent-tint);
+  border-radius: 0 14px 14px 0;
+}
+.tss-sample-quote p {
+  margin: 0 0 10px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--tss-text);
+  font-style: italic;
+}
+.tss-sample-quote cite {
+  font-style: normal;
+  font-size: 14px;
+  color: var(--tss-text-mute);
+}
+@media (max-width: 620px) {
+  .tss-sample-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
 /* ─── FIT / NOT FIT ──────────────────────────────────────── */
 .tss-fit-grid {
   display: grid;

@@ -53,6 +53,33 @@ function trackSubscribe(location) {
 }
 
 /* ─── Copy ────────────────────────────────────────────────── */
+// Real excerpt from the August 2026 issue (Osher supplied the PDF) — swap
+// whenever a newer issue should headline the teaser instead.
+const SAMPLE_ITEMS_HE = [
+  {
+    n: '01',
+    title: 'בקרת הורים בוואטסאפ נכנסה לישראל',
+    body: 'הפיצ׳ר מיועד לילדים עד גיל 13: אישור קשר חדשים, בלי שהילד יכול להיכנס לערוצים, לשתף מיקום, או להיחשף לסטטוסים של זרים. לחיצה אחת על הכפתור, ואין דרך חזרה.',
+  },
+  {
+    n: '02',
+    title: 'שלושה שינויים באבטחה בוואטסאפ',
+    body: 'קוד הפין הקבוע באימות דו-שלבי הופך לאופציונלי לטובת סיסמה, מספר לא מוכר עכשיו מראה את המדינה שממנה הוא מתקשר, ואימות דו-שלבי זמין גם באנדרואיד וגם באייפון.',
+  },
+];
+const SAMPLE_ITEMS_EN = [
+  {
+    n: '01',
+    title: 'WhatsApp parental controls arrived in Israel',
+    body: "Built for kids under 13: approving new contacts, no access to channels, no location sharing, no exposure to strangers' statuses. One tap to turn it on, and no way back.",
+  },
+  {
+    n: '02',
+    title: 'Three WhatsApp security changes',
+    body: 'The fixed two-factor PIN is becoming optional in favor of a password, unknown numbers now show the country they’re calling from, and two-factor verification is rolling out on both Android and iPhone.',
+  },
+];
+
 const SEGMENTS_HE = [
   {
     n: '01',
@@ -156,6 +183,11 @@ const STR = {
     cardMeta: 'גיליון חודשי',
     cardFoot: 'זמן קריאה משוער: 5 דקות',
     insideTitle: 'מה נכנס לגיליון',
+    sampleEyebrow: 'גיליון אמיתי · אוגוסט 2026',
+    sampleTitle: 'טעימה מהגיליון האחרון',
+    sampleItems: SAMPLE_ITEMS_HE,
+    sampleQuoteLabel: 'ההמלצה של אושר מהגיליון',
+    sampleQuote: 'לחיצה על כפתור בקרת ההורים זו החלטה לשנים. אם הילד בן 10, ההחלטה הזו תהיה תקפה עד גיל 13 — תחשבו טוב לפני שאתם מפעילים את זה.',
     fitTitle: 'למי הגיליון הזה נכתב',
     fitYesTitle: 'מתאים לך אם',
     fitYes: [
@@ -210,6 +242,11 @@ const STR = {
     cardMeta: 'Monthly issue',
     cardFoot: 'Estimated reading time: 5 minutes',
     insideTitle: "What Goes Into an Issue",
+    sampleEyebrow: 'Real issue · August 2026',
+    sampleTitle: 'A taste of the latest issue',
+    sampleItems: SAMPLE_ITEMS_EN,
+    sampleQuoteLabel: "Osher's recommendation from the issue",
+    sampleQuote: "Tapping the parental-controls button is a years-long decision. If your kid is 10, that choice holds until they turn 13 — think it through before you turn it on.",
     fitTitle: 'Who This Newsletter Is Written For',
     fitYesTitle: "It's for you if",
     fitYes: [
@@ -451,6 +488,25 @@ export default function Newsletter() {
             </article>
           ))}
         </div>
+      </section>
+
+      {/* ── REAL SAMPLE FROM A PAST ISSUE ───────────────────── */}
+      <section className="tss-section tss-sample">
+        <span className="tss-sample-eyebrow">{t.sampleEyebrow}</span>
+        <h2 className="tss-h2">{t.sampleTitle}</h2>
+        <div className="tss-sample-grid">
+          {t.sampleItems.map((s) => (
+            <article className="tss-sample-item" key={s.n}>
+              <span className="tss-sample-n" dir="ltr">{s.n}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </article>
+          ))}
+        </div>
+        <blockquote className="tss-sample-quote">
+          <p>{t.sampleQuote}</p>
+          <cite>{t.sampleQuoteLabel}</cite>
+        </blockquote>
       </section>
 
       {/* ── FIT / NOT FIT ───────────────────────────────────── */}
