@@ -6,14 +6,14 @@ import { langFromPathname } from '../i18n/index.js';
 const TRACK_URL =
   import.meta.env.VITE_TRACK_URL || 'https://itf-crm.vercel.app/api/site-event';
 
-// Append the visitor's own utm_source/medium/campaign/term to an outbound URL
-// (checkout link) without overriding params the link already carries.
-export function withCampaignParams(url) {
+// Append the visitor's own utm_* (incl. utm_content = the ad creative) to an
+// outbound URL (checkout link) without overriding params the link already carries.
+// Landing-page variants tag themselves with a separate `variant` param, not utm_content.
+export function withCampaignParams(url, search = typeof window === 'undefined' ? '' : window.location.search) {
   try {
-    if (typeof window === 'undefined') return url;
-    const incoming = new URLSearchParams(window.location.search);
+    const incoming = new URLSearchParams(search);
     const out = new URL(url);
-    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term']) {
+    for (const key of ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']) {
       if (incoming.get(key) && !out.searchParams.has(key)) out.searchParams.set(key, incoming.get(key));
     }
     return out.toString();

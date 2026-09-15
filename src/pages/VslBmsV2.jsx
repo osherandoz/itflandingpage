@@ -36,7 +36,8 @@ const BASE_PURCHASE_URL = 'https://mrng.to/engo98ytvh';
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 const PRICE = 197;
 const ORIGINAL_VALUE = 638;
-const UTM = 'utm_content=v2-loss-headline';
+// Page-variant tag. Not utm_content, so the ad creative's own utm_content survives (same as V1).
+const UTM = 'variant=v2-loss-headline';
 
 const HERO_OSHER_IMAGE = '/images/vsl-bms/osher_with_laptop-md.webp';
 const STORY_IMG_1 = '/images/vsl-bms/account_disabled-sm.webp';

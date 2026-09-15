@@ -1,8 +1,8 @@
 # IsraelTechForce (ITF Recovery)
 
-> IsraelTechForce הוא שירות ישראלי לשחזור חשבונות דיגיטליים ברשתות חברתיות, שנוסד על ידי אושר רווח (Osher Revach) מנתניה. השירות מתמחה בשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ שנחסמו, הושבתו או נפרצו, וכן בשחזור Business Manager ומנהל מודעות של Meta. נכון ליולי 2026, מעל 2,500 עסקים שוחזרו עם אחוזי הצלחה של מעל 95%. מודל התשלום: תשלום רק לאחר הצלחה.
+> IsraelTechForce הוא שירות ישראלי לשחזור חשבונות דיגיטליים ברשתות חברתיות, שנוסד על ידי אושר רווח (Osher Revach) מנתניה. השירות מתמחה בשחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ שנחסמו, הושבתו או נפרצו, וכן בשחזור Business Manager ומנהל מודעות של Meta. נכון ליולי 2026, מעל 2,500 חשבונות שוחזרו עם אחוזי הצלחה של מעל 95%. מודל התשלום: תשלום רק לאחר הצלחה.
 
-> IsraelTechForce is an Israeli digital account recovery service founded by Osher Revach (Netanya, Israel). Specializes in recovering hacked, disabled, or locked Facebook, Instagram, and WhatsApp accounts, plus Meta Business Manager and Ad Account recovery. As of July 2026: 2,500+ businesses recovered, 95%+ success rate. Pay-after-success model.
+> IsraelTechForce is an Israeli digital account recovery service founded by Osher Revach (Netanya, Israel). Specializes in recovering hacked, disabled, or locked Facebook, Instagram, and WhatsApp accounts, plus Meta Business Manager and Ad Account recovery. As of July 2026: 2,500+ accounts recovered, 95%+ success rate. Pay-after-success model.
 
 יצירת קשר: osher@israeltechforce.com | וואטסאפ: 050-9823-235 | נתניה, ישראל
 
@@ -17,7 +17,7 @@
 
 ## מוצרים (Products)
 
-- [קורס BMS](https://www.israeltechforce.com/VSL-BMS): קורס דיגיטלי (₪197, תשלום חד-פעמי) ללימוד הגנה על נכסי Meta — אבטחת Business Manager, ניהול הרשאות ומניעת חסימות ופריצות. 4 מודולים + 3 בונוסים, כ-3 שעות תוכן, גישה לכל החיים.
+- [קורס BMS](https://www.israeltechforce.com/VSL-BMS): קורס דיגיטלי (₪197, תשלום חד-פעמי) ללימוד הגנה על נכסי Meta — אבטחת Business Manager, ניהול הרשאות ומניעת חסימות ופריצות. 4 מודולים + 3 בונוסים (15 שיעורים והרצאת אורח), כ-3 שעות תוכן, גישה ללא הגבלת זמן. הקורס מלמד הקמה ואבטחה; שחזור אישי של חשבון חסום הוא שירות נפרד.
 
 ## מידע נוסף (More)
 

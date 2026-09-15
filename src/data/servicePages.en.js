@@ -8,7 +8,7 @@ export const SERVICE_PAGES_EN = [
     metaDescription:
       'Facebook account disabled or hacked? IsraelTechForce recovers Facebook accounts. 2,500+ successful cases, pay only after success. Contact us now.',
     serviceType: 'Facebook account recovery',
-    whatIsIt: `<p>It happened without warning. Your Facebook is suddenly locked. All the connections, the groups, the business page you built over years. One moment everything is there, and the next it is all behind an error screen. We understand that frustration. It has happened to 2,500 people who reached out to us, and we found a solution for every one of them.</p>
+    whatIsIt: `<p>It happened without warning. Your Facebook is suddenly locked. All the connections, the groups, the business page you built over years. One moment everything is there, and the next it is all behind an error screen. We understand that frustration. It has happened to more than 2,500 accounts that reached out to us, and we found a solution for the vast majority of them.</p>
 <p>Meta blocks accounts for all kinds of reasons. Sometimes it is an algorithm that decided your activity "looked suspicious". Sometimes it is a report from someone in your audience. Sometimes it is an ad campaign flagged as violating policy, even when you violated nothing. And sometimes it is a hacker who took over the account, changed the password, and locked you out. Every case is different. Every case demands a different approach.</p>
 <p>That is exactly what we do. We know the right channels. The forms that actually work. The way to talk to Meta in a language that gets results. Your account comes back fast in most cases, and you do not pay a cent until you are logged back in.</p>`,
     steps: [

@@ -2153,3 +2153,89 @@
 .vsl-bms-page .anti-list li:nth-child(2) { transition-delay: 80ms; }
 .vsl-bms-page .anti-list li:nth-child(3) { transition-delay: 160ms; }
 .vsl-bms-page .anti-list li:nth-child(4) { transition-delay: 240ms; }
+
+/* ============================================================
+   2026-09-15 audit: product-first hero, lazy video, offer-head
+   ============================================================ */
+.vsl-bms-page .hero .hero-kicker {
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(96, 165, 250, 0.35);
+  background: rgba(37, 99, 235, 0.14);
+  color: var(--text-soft);
+  font-size: clamp(13px, 1.4vw, 15px);
+  font-weight: 700;
+}
+.vsl-bms-page .hero-secondary-link {
+  display: block;
+  margin-top: 14px;
+  color: var(--text-soft);
+  font-size: 15px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.vsl-bms-page .hero-secondary-link:hover { color: #fff; }
+
+/* YouTube facade: poster + play button, iframe loads on click */
+.vsl-bms-page .video-facade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vsl-bms-page .video-facade img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+.vsl-bms-page .video-facade-play {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: #2563eb;
+  color: #fff;
+  font-family: 'Heebo', 'Assistant', sans-serif;
+  font-weight: 800;
+  font-size: clamp(15px, 1.8vw, 19px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.vsl-bms-page .video-facade:hover .video-facade-play,
+.vsl-bms-page .video-facade:focus-visible .video-facade-play {
+  background: #1d4ed8;
+  transform: scale(1.04);
+}
+.vsl-bms-page .video-facade:focus-visible { outline: 3px solid #60a5fa; outline-offset: 2px; }
+
+/* Offer head: price + button first, value breakdown below */
+.vsl-bms-page .offer-head {
+  max-width: 640px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+.vsl-bms-page .offer-head .value-box-price {
+  border: 1px solid rgba(96, 165, 250, 0.18);
+  border-radius: 20px;
+}
+.vsl-bms-page .final-cta .offer-head .cta-btn { margin-top: 24px; }
+.vsl-bms-page .vsl-testimonials-note {
+  margin: 12px 0 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
