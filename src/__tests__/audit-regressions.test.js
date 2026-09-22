@@ -257,6 +257,12 @@ describe('POST /api/lead (proxies to the CRM)', () => {
     const payload = JSON.parse(fetchMock.mock.calls[0][1].body);
     expect(payload.notes).toBe('המספר שלי חסום\nוואטסאפ חלופי: 0521234567');
   });
+  it('folds the free-text message into notes after the note, stripped of markup', async () => {
+    const res = mockRes();
+    await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: true, source: 'contact-form', note: 'המספר שלי חסום', message: '  ניסיתי לערער <b>פעמיים</b>  ' }), res);
+    const payload = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(payload.notes).toBe('המספר שלי חסום\nניסיתי לערער bפעמיים/b');
+  });
   it('forwards a known platform, and drops an unknown one', async () => {
     const res = mockRes();
     await leadHandler(req({ name: 'שרה', phone: '0501234567', consent: true, source: 'contact-form', platform: 'whatsapp' }), res);

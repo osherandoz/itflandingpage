@@ -38,6 +38,8 @@ const STR = {
     phoneInvalid: 'מספר טלפון לא תקין',
     noteLabel: 'מה ההודעה שאתם רואים? (לא חובה)',
     noteNone: 'לא בטוח/ה',
+    messageLabel: 'ספר/י לי בקצרה מה קרה (לא חובה)',
+    messagePlaceholder: 'למשל: החשבון נחסם לפני יומיים, ניסיתי לערער ולא קיבלתי תשובה',
     altPhoneLabel: 'מספר טלפון נוסף עם וואטסאפ (אם יש, לא חובה)',
     altPhonePlaceholder: 'מספר שכן ליצור איתו קשר בוואטסאפ',
     consentLabel: 'אני מאשר/ת ליצור איתי קשר',
@@ -64,6 +66,8 @@ const STR = {
     phoneInvalid: 'Invalid phone number',
     noteLabel: 'What message do you see? (optional)',
     noteNone: 'Not sure',
+    messageLabel: 'Tell me briefly what happened (optional)',
+    messagePlaceholder: 'e.g. my account was locked two days ago, I appealed and got no reply',
     altPhoneLabel: 'Another number with WhatsApp (optional)',
     altPhonePlaceholder: 'A number we can reach you on via WhatsApp',
     consentLabel: 'I agree to be contacted',
@@ -89,7 +93,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
   const { lang } = useLang();
   const t = STR[lang];
 
-  const [formData, setFormData] = useState({ name: '', phone: '', platform: '', altPhone: '', note: '', consent: false });
+  const [formData, setFormData] = useState({ name: '', phone: '', platform: '', altPhone: '', note: '', message: '', consent: false });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -134,6 +138,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
           platform: formData.platform || '',
           altPhone: formData.altPhone.trim(),
           note: formData.note || '',
+          message: formData.message.trim(),
           source: location,
           src: getUtmSource(),
           path: typeof window !== 'undefined' ? window.location.pathname : '',
@@ -153,7 +158,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
 
       setIsSubmitted(true);
       setSubmitError(false);
-      setFormData({ name: '', phone: '', platform: '', altPhone: '', note: '', consent: false });
+      setFormData({ name: '', phone: '', platform: '', altPhone: '', note: '', message: '', consent: false });
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch {
       trackSiteEvent('lead_form_error', { cta_location: location });
@@ -272,6 +277,20 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
             </select>
           </div>
         )}
+
+        <div className="form-group">
+          <label htmlFor={`message-${location}`}>{t.messageLabel}</label>
+          <textarea
+            id={`message-${location}`}
+            name="message"
+            rows={3}
+            maxLength={500}
+            value={formData.message}
+            onChange={handleInputChange}
+            placeholder={t.messagePlaceholder}
+            disabled={isSubmitting}
+          />
+        </div>
 
         <div className="form-group checkbox-group">
           <label className="checkbox-label">

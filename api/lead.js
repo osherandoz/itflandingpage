@@ -2,7 +2,7 @@
  * POST /api/lead
  * Proxies contact-form + WhatsApp-popup leads straight into the CRM (itf-crm),
  * which creates the client + case there. No Google Sheets / Apps Script anymore.
- * Body: { name, phone, consent, source: 'contact-form' | 'service-form' | 'service-hero-callback', platform?, altPhone?, note?, src?, path?, company?: honeypot }
+ * Body: { name, phone, consent, source: 'contact-form' | 'service-form' | 'service-hero-callback', platform?, altPhone?, note?, message?, src?, path?, company?: honeypot }
  *
  * - Server-to-server POST with a shared secret (Authorization: Bearer) — never
  *   exposed to the browser. Set LEAD_WEBHOOK_SECRET here AND in the CRM project
@@ -14,7 +14,8 @@
  *   own `platforms` field (lib/constants.ts PLATFORMS) — shown as its own line
  *   there, not mixed into notes.
  * - `notes` sent to the CRM is built only from what the visitor actually
- *   typed/selected (their note, their alt WhatsApp number) — no internal
+ *   typed/selected (their note, their free-text message, their alt WhatsApp
+ *   number) — no internal
  *   routing info (which on-site form, which page) gets mixed in (Osher,
  *   2026-09-15: that mix read as garbled noise in the CRM's "extra details").
  *   `path` is accepted for forward-compatibility but unused.
@@ -69,6 +70,8 @@ export default async function handler(req, res) {
   // WhatsApp-recovery callback form where the visitor's own number can't.
   const altPhone = body.altPhone ? normalizePhone(body.altPhone) : null;
   const note = sanitize(body.note || '').slice(0, 120);
+  // Free-text "what happened" textarea (ContactForm, maxLength 500 client-side).
+  const message = String(body.message || '').trim().replace(/[<>"']/g, '').slice(0, 500);
   // Marketing attribution (utm_source read client-side from the URL). Free text
   // on the CRM side (lead_sources is a manageable list, not a fixed enum).
   const src = sanitize(body.src || '').slice(0, 60) || 'website';
@@ -78,7 +81,7 @@ export default async function handler(req, res) {
   if (!phone) return res.status(400).json({ error: 'Invalid phone' });
   if (!consent) return res.status(400).json({ error: 'Consent required' });
 
-  const notes = [note, altPhone ? `וואטסאפ חלופי: ${altPhone}` : ''].filter(Boolean).join('\n') || null;
+  const notes = [note, message, altPhone ? `וואטסאפ חלופי: ${altPhone}` : ''].filter(Boolean).join('\n') || null;
 
   const secret = process.env.LEAD_WEBHOOK_SECRET;
   if (!secret) {
