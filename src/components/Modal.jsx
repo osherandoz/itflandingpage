@@ -1,19 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { useLang } from '../i18n';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import './Modal.css';
-
-const STR = {
-  he: { closeAria: 'סגור חלון' },
-  en: { closeAria: 'Close window' },
-};
 
 const FOCUSABLE = 'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
 // Accessible dialog: role/aria, Escape closes, Tab stays inside, focus returns to the opener.
 const Modal = ({ isOpen, onClose, title, children }) => {
-  const { lang, dir } = useLang();
-  const t = STR[lang];
   const panelRef = useRef(null);
   const titleId = `modal-title-${React.useId()}`;
 
@@ -42,7 +33,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
     document.addEventListener('keydown', onKey);
     return () => {
       document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
       if (opener && typeof opener.focus === 'function') opener.focus();
     };
   }, [isOpen, onClose]);
@@ -50,9 +41,9 @@ const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal open" dir={dir} onClick={onClose}>
+    <div className="modal theme-paper" dir="rtl" onClick={onClose}>
       <div
-        className="modal-content"
+        className="modal__panel"
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -60,13 +51,14 @@ const Modal = ({ isOpen, onClose, title, children }) => {
         ref={panelRef}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="modal-header">
-          <h2 className="modal-title" id={titleId}>{title}</h2>
-          <button type="button" className="modal-close" onClick={onClose} aria-label={t.closeAria}>
-            <i className="fas fa-times" aria-hidden="true"></i>
+        <div className="modal__head">
+          <h2 className="h3" id={titleId}>{title}</h2>
+          <button type="button" className="modal__close" onClick={onClose} aria-label="סגור חלון">
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
           </button>
         </div>
-        <div className="modal-content-text">
+        <div className="modal__body">
           {children}
         </div>
       </div>

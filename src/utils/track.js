@@ -1,7 +1,6 @@
 // Site → CRM click-event wire. Fire-and-forget; must never break the page.
 // CRM endpoint expects POST JSON: { event, path, lang, referrer, utm, ts, ...extra }
 // Override the target with VITE_TRACK_URL (e.g. for a staging CRM).
-import { langFromPathname } from '../i18n/index.js';
 
 const TRACK_URL =
   import.meta.env.VITE_TRACK_URL || 'https://itf-crm.vercel.app/api/site-event';
@@ -42,7 +41,7 @@ export function trackSiteEvent(event, extra = {}) {
     const payload = JSON.stringify({
       event,
       path: window.location.pathname,
-      lang: langFromPathname(window.location.pathname),
+      lang: 'he', // site is Hebrew-only; the CRM still expects the field
       referrer: document.referrer || null,
       utm,
       ts: new Date().toISOString(),

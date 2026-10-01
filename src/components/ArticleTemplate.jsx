@@ -1,63 +1,35 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router';
-import { useLang, togglePath, SERVICE_PATHS, LANGUAGE_TOGGLE_ENABLED } from '../i18n';
-import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { Link } from 'react-router';
+import { SERVICE_PATHS } from '../i18n';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ArticleTemplate.css';
 
-const STR = {
-  he: {
-    notFoundTitle: 'מאמר לא נמצא',
-    notFoundText: 'המאמר שביקשתם לא נמצא.',
-    backHome: 'חזור לעמוד הבית',
-    placeholderTitle: 'המאמר בדרך...',
-    placeholderText: 'המאמר הזה עדיין בכתיבה. בינתיים, יש לך שאלה? נשמח לעזור ישירות.',
-    placeholderWhatsApp: 'דברו איתנו בוואטסאפ',
-    placeholderBack: '← חזרה לעמוד הבית',
-    breadcrumbHome: 'בית',
-    breadcrumbArticles: 'מאמרים',
-    authorLine: (
-      <span>נכתב ע"י <Link to="/אושר-רווח"><strong>אושר רווח</strong></Link> | מומחה בשחזורי חשבונות</span>
-    ),
-    shortAnswerLabel: 'תשובה קצרה',
-    tocTitle: 'תוכן עניינים',
-    ctaTitle: 'אל תשאיר את החשבון שלך חסום',
-    ctaDescription: 'הצטרף למאות לקוחות שכבר חזרו לפעילות מלאה. קבל ייעוץ מקצועי חינם וחזור לפעילות תוך זמן קצר.',
-    ctaButton: 'לשחרור מיידי - לחץ כאן',
-    stickyCtaTitle: 'זקוק לשחרור חסימה עכשיו?',
-    stickyCtaText: 'צור קשר עכשיו וקבל עזרה מקצועית',
-    stickyCtaButton: 'צור קשר בוואטסאפ',
-    serviceCardEyebrow: 'השירות שפותר את זה',
-    serviceCardText: 'עמוד השירות המלא: איך זה עובד, כמה זמן זה לוקח ומה לקוחות מספרים.',
-    serviceCardLink: (label) => `לעמוד ${label} ←`,
-    whatsappMessage: 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים',
-  },
-  en: {
-    notFoundTitle: 'Article Not Found',
-    notFoundText: 'The article you requested was not found.',
-    backHome: 'Back to Home',
-    placeholderTitle: 'This article is on its way...',
-    placeholderText: 'This article is still being written. In the meantime, have a question? We would be happy to help directly.',
-    placeholderWhatsApp: 'Talk to Us on WhatsApp',
-    placeholderBack: '← Back to Home',
-    breadcrumbHome: 'Home',
-    breadcrumbArticles: 'Articles',
-    authorLine: (
-      <span>Written by <Link to="/en/osher-revach"><strong>Osher Revach</strong></Link> | Account Recovery Expert</span>
-    ),
-    shortAnswerLabel: 'Short Answer',
-    tocTitle: 'Table of Contents',
-    ctaTitle: 'Don’t Leave Your Account Locked',
-    ctaDescription: 'Join hundreds of clients who are already back in full operation. Get free professional advice and get back online fast.',
-    ctaButton: 'Get Unblocked Now - Click Here',
-    stickyCtaTitle: 'Need Your Account Unblocked Now?',
-    stickyCtaText: 'Get in touch now for professional help',
-    stickyCtaButton: 'Contact Us on WhatsApp',
-    serviceCardEyebrow: 'The service that fixes this',
-    serviceCardText: 'The full service page: how it works, how long it takes, and what clients say.',
-    serviceCardLink: (label) => `Go to ${label} →`,
-    whatsappMessage: WHATSAPP_DEFAULT_MSG.en,
-  },
+const t = {
+  notFoundTitle: 'מאמר לא נמצא',
+  notFoundText: 'המאמר שביקשתם לא נמצא.',
+  backHome: 'חזור לעמוד הבית',
+  placeholderTitle: 'המאמר בדרך...',
+  placeholderText: 'המאמר הזה עדיין בכתיבה. בינתיים, יש לך שאלה? נשמח לעזור ישירות.',
+  placeholderWhatsApp: 'דברו איתנו בוואטסאפ',
+  placeholderBack: '← חזרה לעמוד הבית',
+  breadcrumbHome: 'בית',
+  breadcrumbArticles: 'מאמרים',
+  authorLine: (
+    <span>נכתב ע"י <Link to="/אושר-רווח"><strong>אושר רווח</strong></Link> | מומחה בשחזורי חשבונות</span>
+  ),
+  shortAnswerLabel: 'תשובה קצרה',
+  tocTitle: 'תוכן עניינים',
+  ctaTitle: 'אל תשאיר את החשבון שלך חסום',
+  ctaDescription: 'הצטרף למאות לקוחות שכבר חזרו לפעילות מלאה. קבל ייעוץ מקצועי חינם וחזור לפעילות תוך זמן קצר.',
+  ctaButton: 'לשחרור מיידי - לחץ כאן',
+  stickyCtaTitle: 'זקוק לשחרור חסימה עכשיו?',
+  stickyCtaText: 'צור קשר עכשיו וקבל עזרה מקצועית',
+  stickyCtaButton: 'צור קשר בוואטסאפ',
+  serviceCardEyebrow: 'השירות שפותר את זה',
+  serviceCardText: 'עמוד השירות המלא: איך זה עובד, כמה זמן זה לוקח ומה לקוחות מספרים.',
+  serviceCardLink: (label) => `לעמוד ${label} ←`,
+  whatsappMessage: 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים',
 };
 
 // Article slug → the service page that sells the fix it describes. Without this
@@ -76,42 +48,22 @@ const ARTICLE_SERVICE = {
 };
 
 const SERVICE_LABELS = {
-  he: {
-    'facebook-recovery': 'שחזור חשבון פייסבוק',
-    'instagram-recovery': 'שחזור חשבון אינסטגרם',
-    'whatsapp-recovery': 'שחזור חשבון וואטסאפ',
-    'facebook-disabled': 'חשבון פייסבוק מושבת',
-    'instagram-hacked': 'חשבון אינסטגרם נפרץ',
-    'ads-manager': 'שחזור מנהל מודעות',
-  },
-  en: {
-    'facebook-recovery': 'Facebook Account Recovery',
-    'instagram-recovery': 'Instagram Account Recovery',
-    'whatsapp-recovery': 'WhatsApp Account Recovery',
-    'facebook-disabled': 'Disabled Facebook Account',
-    'instagram-hacked': 'Hacked Instagram Account',
-    'ads-manager': 'Ads Manager Recovery',
-  },
+  'facebook-recovery': 'שחזור חשבון פייסבוק',
+  'instagram-recovery': 'שחזור חשבון אינסטגרם',
+  'whatsapp-recovery': 'שחזור חשבון וואטסאפ',
+  'facebook-disabled': 'חשבון פייסבוק מושבת',
+  'instagram-hacked': 'חשבון אינסטגרם נפרץ',
+  'ads-manager': 'שחזור מנהל מודעות',
 };
 
-const formatDate = (date, isEn) => {
-  if (!isEn) return date.split('-').reverse().join('/');
-  return new Date(`${date}T00:00:00`).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-};
+const formatDate = (date) => date.split('-').reverse().join('/');
 
 const ArticleTemplate = ({ article }) => {
-  const { lang, isEn, dir, prefix } = useLang();
-  const { pathname } = useLocation();
-  const t = STR[lang];
-  const homePath = prefix || '/';
+  const homePath = '/';
   const whatsappHref = getWhatsAppUrl(t.whatsappMessage);
   const serviceSlug = article ? ARTICLE_SERVICE[article.slug] : undefined;
   const serviceLink = serviceSlug
-    ? { to: SERVICE_PATHS[serviceSlug][lang], label: SERVICE_LABELS[lang][serviceSlug] }
+    ? { to: SERVICE_PATHS[serviceSlug], label: SERVICE_LABELS[serviceSlug] }
     : null;
   const [tableOfContents, setTableOfContents] = useState([]);
   const [activeHeading, setActiveHeading] = useState('');
@@ -235,7 +187,7 @@ const ArticleTemplate = ({ article }) => {
 
   if (!article) {
     return (
-      <div className="article-not-found" dir={dir}>
+      <div className="article-not-found" dir="rtl">
         <div className="container">
           <h1>{t.notFoundTitle}</h1>
           <p>{t.notFoundText}</p>
@@ -247,7 +199,7 @@ const ArticleTemplate = ({ article }) => {
 
   if (article.placeholder) {
     return (
-      <div dir={dir} style={{ minHeight: '100vh', background: '#0C0E1D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div dir="rtl" style={{ minHeight: '100vh', background: '#0C0E1D', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center', padding: '60px 20px', maxWidth: '480px' }}>
           <i className="fas fa-tools" style={{ fontSize: '3rem', color: '#3B82F6', display: 'block', marginBottom: '20px' }}></i>
           <h1 style={{ color: '#ffffff', marginBottom: '12px', fontSize: '1.8rem' }}>{t.placeholderTitle}</h1>
@@ -286,7 +238,7 @@ const ArticleTemplate = ({ article }) => {
   }
 
   return (
-    <div className="article-template" dir={dir}>
+    <div className="article-template" dir="rtl">
       <div className="article-container">
         {/* Breadcrumb */}
         <nav className="breadcrumb">
@@ -295,11 +247,6 @@ const ArticleTemplate = ({ article }) => {
           <Link to={`${homePath}#articles`}>{t.breadcrumbArticles}</Link>
           <span className="breadcrumb-separator">/</span>
           <span className="breadcrumb-current">{article.title}</span>
-          {LANGUAGE_TOGGLE_ENABLED && (
-            <Link className="breadcrumb-lang-toggle" to={togglePath(pathname)}>
-              {isEn ? 'עברית' : 'English'}
-            </Link>
-          )}
         </nav>
 
         <div className="article-layout">
@@ -320,7 +267,7 @@ const ArticleTemplate = ({ article }) => {
                 <div className="article-meta-details">
                   <span className="article-date">
                     <i className="far fa-calendar"></i>
-                    {formatDate(article.date, isEn)}
+                    {formatDate(article.date)}
                   </span>
                   <span className="article-read-time">
                     <i className="far fa-clock"></i>

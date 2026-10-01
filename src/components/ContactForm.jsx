@@ -1,82 +1,45 @@
 import React, { useState } from 'react';
-import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 import { getUtmSource, trackSiteEvent } from '../utils/track';
-import { useLang } from '../i18n';
 import Icon from './Icon';
+import { ArrowIcon } from './ui';
 import './ContactForm.css';
 
-const PLATFORM_OPTIONS = {
-  he: [
-    { value: 'facebook', label: 'פייסבוק' },
-    { value: 'instagram', label: 'אינסטגרם' },
-    { value: 'whatsapp', label: 'וואטסאפ' },
-    { value: 'ads_manager', label: 'מנהל מודעות' },
-  ],
-  en: [
-    { value: 'facebook', label: 'Facebook' },
-    { value: 'instagram', label: 'Instagram' },
-    { value: 'whatsapp', label: 'WhatsApp' },
-    { value: 'ads_manager', label: 'Ads Manager' },
-  ],
-};
+const PLATFORM_OPTIONS = [
+  { value: 'facebook', label: 'פייסבוק' },
+  { value: 'instagram', label: 'אינסטגרם' },
+  { value: 'whatsapp', label: 'וואטסאפ' },
+  { value: 'ads_manager', label: 'מנהל מודעות' },
+];
 
-const STR = {
-  he: {
-    header: 'צור קשר',
-    subheader: 'מלא/י את הטופס למטה ואחזור אליך בהקדם האפשרי',
-    success: 'תודה! הפרטים התקבלו',
-    platformLabel: 'באיזו פלטפורמה הבעיה? (לא חובה)',
-    platformNone: 'לא בטוח/ה',
-    submitErrorText: 'משהו השתבש בשליחה. נסה/י שוב או',
-    whatsappDirect: 'דבר/י איתי ישירות בוואטסאפ',
-    nameLabel: 'שם מלא *',
-    namePlaceholder: 'הכנס את שמך המלא',
-    nameRequired: 'שם מלא הוא שדה חובה',
-    phoneLabel: 'מספר טלפון *',
-    phonePlaceholder: 'הכנס את מספר הטלפון שלך',
-    phoneRequired: 'מספר טלפון הוא שדה חובה',
-    phoneInvalid: 'מספר טלפון לא תקין',
-    noteLabel: 'מה ההודעה שאתם רואים? (לא חובה)',
-    noteNone: 'לא בטוח/ה',
-    messageLabel: 'ספר/י לי בקצרה מה קרה (לא חובה)',
-    messagePlaceholder: 'למשל: החשבון נחסם לפני יומיים, ניסיתי לערער ולא קיבלתי תשובה',
-    altPhoneLabel: 'מספר טלפון נוסף עם וואטסאפ (אם יש, לא חובה)',
-    altPhonePlaceholder: 'מספר שכן ליצור איתו קשר בוואטסאפ',
-    consentLabel: 'אני מאשר/ת ליצור איתי קשר',
-    consentRequired: 'עליך להסכים ליצירת קשר כדי לשלוח את הטופס',
-    sending: 'שולח...',
-    submit: 'שלח/י הודעה, אחזור אליך תוך שעה',
-    whatsappNote: 'רוצה מענה מיידי?',
-    whatsappMessage: 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים',
-  },
-  en: {
-    header: 'Contact Me',
-    subheader: 'Fill in the form below and I will get back to you as soon as possible',
-    success: 'Thank you! Your details were received',
-    platformLabel: 'Which platform is this about? (optional)',
-    platformNone: 'Not sure',
-    submitErrorText: 'Something went wrong. Try again or',
-    whatsappDirect: 'chat with me directly on WhatsApp',
-    nameLabel: 'Full name *',
-    namePlaceholder: 'Enter your full name',
-    nameRequired: 'Full name is required',
-    phoneLabel: 'Phone number *',
-    phonePlaceholder: 'Enter your phone number',
-    phoneRequired: 'Phone number is required',
-    phoneInvalid: 'Invalid phone number',
-    noteLabel: 'What message do you see? (optional)',
-    noteNone: 'Not sure',
-    messageLabel: 'Tell me briefly what happened (optional)',
-    messagePlaceholder: 'e.g. my account was locked two days ago, I appealed and got no reply',
-    altPhoneLabel: 'Another number with WhatsApp (optional)',
-    altPhonePlaceholder: 'A number we can reach you on via WhatsApp',
-    consentLabel: 'I agree to be contacted',
-    consentRequired: 'You must agree to be contacted to send the form',
-    sending: 'Sending...',
-    submit: 'Send a message, I will get back to you within an hour',
-    whatsappNote: 'Want an immediate answer?',
-    whatsappMessage: WHATSAPP_DEFAULT_MSG.en,
-  },
+const t = {
+  header: 'צור קשר',
+  subheader: 'מלא/י את הטופס למטה ואחזור אליך בהקדם האפשרי',
+  success: 'תודה! הפרטים התקבלו',
+  platformLabel: 'באיזו פלטפורמה הבעיה?',
+  platformNone: 'לא בטוח/ה',
+  submitErrorText: 'משהו השתבש בשליחה. נסה/י שוב או',
+  whatsappDirect: 'דבר/י איתי ישירות בוואטסאפ',
+  nameLabel: 'שם מלא',
+  namePlaceholder: 'הכנס את שמך המלא',
+  nameRequired: 'שם מלא הוא שדה חובה',
+  phoneLabel: 'מספר טלפון',
+  phonePlaceholder: 'הכנס את מספר הטלפון שלך',
+  phoneRequired: 'מספר טלפון הוא שדה חובה',
+  phoneInvalid: 'מספר טלפון לא תקין',
+  noteLabel: 'מה ההודעה שאתם רואים?',
+  noteNone: 'לא בטוח/ה',
+  messageLabel: 'ספר/י לי בקצרה מה קרה',
+  messagePlaceholder: 'למשל: החשבון נחסם לפני יומיים, ניסיתי לערער ולא קיבלתי תשובה',
+  altPhoneLabel: 'מספר טלפון נוסף עם וואטסאפ',
+  altPhonePlaceholder: 'מספר שכן ליצור איתו קשר בוואטסאפ',
+  optional: '(לא חובה)',
+  consentLabel: 'אני מאשר/ת ליצור איתי קשר',
+  consentRequired: 'עליך להסכים ליצירת קשר כדי לשלוח את הטופס',
+  sending: 'שולח...',
+  submit: 'שלח/י הודעה, אחזור אליך תוך שעה',
+  whatsappNote: 'רוצה מענה מיידי?',
+  whatsappMessage: 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים',
 };
 
 /**
@@ -90,9 +53,6 @@ const STR = {
  *    (the WhatsApp-recovery callback form)
  */
 const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location = 'contact-form', hideWhatsApp = false, altPhoneField = false }) => {
-  const { lang } = useLang();
-  const t = STR[lang];
-
   const [formData, setFormData] = useState({ name: '', phone: '', platform: '', altPhone: '', note: '', message: '', consent: false });
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -120,7 +80,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    if (isSubmitting || !validateForm()) return;
     setIsSubmitting(true);
     trackSiteEvent('lead_form_submit', { cta_location: location });
 
@@ -142,7 +102,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
           source: location,
           src: getUtmSource(),
           path: typeof window !== 'undefined' ? window.location.pathname : '',
-          lang,
+          lang: 'he',
         }),
       });
       const data = await r.json().catch(() => ({}));
@@ -170,26 +130,26 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
   };
 
   const noteId = `note-${location}`;
+  const optional = <span className="field__hint"> {t.optional}</span>;
 
   return (
-    <div className="contact-form-container" id={location === 'contact-form' ? 'contact-form' : undefined}>
-      <div className="contact-form-header">
-        <h2>{heading || t.header}</h2>
-        <p>{subheading || t.subheader}</p>
+    <div className="cform" id={location === 'contact-form' ? 'contact-form' : undefined}>
+      <div className="cform__head">
+        <h2 className="h3">{heading || t.header}</h2>
+        <p className="muted">{subheading || t.subheader}</p>
       </div>
 
       {isSubmitted && (
-        <div className="success-message" role="alert">
+        <div className="cform__msg cform__msg--ok" role="alert">
           <p>{t.success}</p>
         </div>
       )}
 
       {submitError && (
-        <div className="submit-error-message" role="alert">
+        <div className="cform__msg cform__msg--err" role="alert">
           <p>
             {t.submitErrorText}{' '}
-            <a className="form-whatsapp-link" href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick(`${location}-error`)}>
-              <Icon name="whatsapp" aria-hidden="true" />
+            <a className="link" href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick(`${location}-error`)}>
               {t.whatsappDirect}
             </a>
           </p>
@@ -197,8 +157,8 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
       )}
 
       {/* data-clarity-mask: session replay never records what is typed here */}
-      <form className="contact-form" onSubmit={handleSubmit} data-clarity-mask="true">
-        <div className="form-group">
+      <form className="cform__form" onSubmit={handleSubmit} data-clarity-mask="true" noValidate>
+        <div className="field">
           <label htmlFor={`name-${location}`}>{t.nameLabel}</label>
           <input
             type="text"
@@ -210,12 +170,13 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
             className={errors.name ? 'error' : ''}
             placeholder={t.namePlaceholder}
             disabled={isSubmitting}
+            aria-invalid={!!errors.name}
             required
           />
-          {errors.name && <span className="error-message">{errors.name}</span>}
+          {errors.name && <span className="field__error">{errors.name}</span>}
         </div>
 
-        <div className="form-group">
+        <div className="field">
           <label htmlFor={`phone-${location}`}>{t.phoneLabel}</label>
           <input
             type="tel"
@@ -228,13 +189,14 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
             className={errors.phone ? 'error' : ''}
             placeholder={t.phonePlaceholder}
             disabled={isSubmitting}
+            aria-invalid={!!errors.phone}
             required
           />
-          {errors.phone && <span className="error-message">{errors.phone}</span>}
+          {errors.phone && <span className="field__error">{errors.phone}</span>}
         </div>
 
-        <div className="form-group">
-          <label htmlFor={`platform-${location}`}>{t.platformLabel}</label>
+        <div className="field">
+          <label htmlFor={`platform-${location}`}>{t.platformLabel}{optional}</label>
           <select
             id={`platform-${location}`}
             name="platform"
@@ -243,15 +205,15 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
             disabled={isSubmitting}
           >
             <option value="">{t.platformNone}</option>
-            {PLATFORM_OPTIONS[lang].map((opt) => (
+            {PLATFORM_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
             ))}
           </select>
         </div>
 
         {altPhoneField && (
-          <div className="form-group">
-            <label htmlFor={`alt-phone-${location}`}>{t.altPhoneLabel}</label>
+          <div className="field">
+            <label htmlFor={`alt-phone-${location}`}>{t.altPhoneLabel}{optional}</label>
             <input
               type="tel"
               id={`alt-phone-${location}`}
@@ -267,8 +229,8 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
         )}
 
         {noteOptions && (
-          <div className="form-group">
-            <label htmlFor={noteId}>{t.noteLabel}</label>
+          <div className="field">
+            <label htmlFor={noteId}>{t.noteLabel}{optional}</label>
             <select id={noteId} name="note" value={formData.note} onChange={handleInputChange} disabled={isSubmitting}>
               <option value="">{t.noteNone}</option>
               {noteOptions.map((opt) => (
@@ -278,8 +240,8 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
           </div>
         )}
 
-        <div className="form-group">
-          <label htmlFor={`message-${location}`}>{t.messageLabel}</label>
+        <div className="field cform__wide">
+          <label htmlFor={`message-${location}`}>{t.messageLabel}{optional}</label>
           <textarea
             id={`message-${location}`}
             name="message"
@@ -292,45 +254,39 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
           />
         </div>
 
-        <div className="form-group checkbox-group">
-          <label className="checkbox-label">
+        <div className="cform__wide">
+          <label className="check">
             <input
               type="checkbox"
               name="consent"
               checked={formData.consent}
               onChange={handleInputChange}
-              className={errors.consent ? 'error' : ''}
               disabled={isSubmitting}
+              aria-invalid={!!errors.consent}
               required
             />
-            <span className="checkmark"></span>
             {t.consentLabel}
           </label>
-          {errors.consent && <span className="error-message">{errors.consent}</span>}
+          {errors.consent && <span className="field__error">{errors.consent}</span>}
         </div>
 
-        <button type="submit" className="submit-btn" disabled={isSubmitting}>
-          {isSubmitting ? (
-            <>
-              <Icon name="spinner" spin aria-hidden="true" />
-              {t.sending}
-            </>
-          ) : (
-            submitLabel || t.submit
-          )}
+        <button type="submit" className="btn btn--signal btn--block cform__wide" disabled={isSubmitting}>
+          <span>{isSubmitting ? t.sending : submitLabel || t.submit}</span>
+          <span className="btn__arrow" aria-hidden="true">
+            {isSubmitting ? <Icon name="spinner" spin /> : <ArrowIcon />}
+          </span>
         </button>
 
         {!hideWhatsApp && (
-          <p className="form-whatsapp-note">
+          <p className="cform__alt small cform__wide">
             {t.whatsappNote}{' '}
             <a
-              className="form-whatsapp-link"
+              className="link"
               href={getWhatsAppUrl(t.whatsappMessage)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={onWhatsAppClick(`${location}-note`)}
             >
-              <Icon name="whatsapp" aria-hidden="true" />
               {t.whatsappDirect}
             </a>
           </p>

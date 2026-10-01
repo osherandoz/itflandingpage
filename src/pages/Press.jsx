@@ -2,62 +2,38 @@ import React from 'react';
 import { Link } from 'react-router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { pressItems, pressItemsEn, communityGroups, communityGroupsEn } from '../data/press';
-import { useLang } from '../i18n';
+import { pressItems, communityGroups } from '../data/press';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './Press.css';
 
-const STR = {
-  he: {
-    items: pressItems,
-    groups: communityGroups,
-    backLink: '← חזרה לעמוד הראשי',
-    title: 'IsraelTechForce בתקשורת',
-    subtitle: 'כתבות, סיקורים וקהילות שמדברים על שחזור חשבונות ברשתות החברתיות',
-    articlesHeading: 'כתבות וסיקורים',
-    videoBadge: 'סרטון',
-    articleBadge: 'כתבה',
-    videoLink: 'לצפייה בסרטון',
-    articleLink: 'לכתבה המלאה',
-    communityHeading: 'קהילות בניהולנו',
-    communityIntro: 'אנחנו מנהלים קהילות תמיכה פעילות ברשתות החברתיות עם אלפי חברים שחוו חסימות',
-    groupArrowIcon: 'fas fa-arrow-left press-group-arrow',
-    ctaText: 'יש לכם כתבה נוספת שסיקרה אותנו? נשמח לשמוע!',
-    ctaBtn: 'צרו קשר',
-  },
-  en: {
-    items: pressItemsEn,
-    groups: communityGroupsEn,
-    backLink: '← Back to home page',
-    title: 'IsraelTechForce in the Media',
-    subtitle: 'Articles, coverage, and communities talking about social media account recovery',
-    articlesHeading: 'Articles & Coverage',
-    videoBadge: 'Video',
-    articleBadge: 'Article',
-    videoLink: 'Watch the video',
-    articleLink: 'Read the full article',
-    groupArrowIcon: 'fas fa-arrow-right press-group-arrow',
-    communityHeading: 'Communities We Manage',
-    communityIntro:
-      'We run active support communities on social media with thousands of members who have experienced bans',
-    ctaText: "Know of another article that covered us? We'd love to hear!",
-    ctaBtn: 'Contact Us',
-  },
+const t = {
+  items: pressItems,
+  groups: communityGroups,
+  backLink: '← חזרה לעמוד הראשי',
+  title: 'IsraelTechForce בתקשורת',
+  subtitle: 'כתבות, סיקורים וקהילות שמדברים על שחזור חשבונות ברשתות החברתיות',
+  articlesHeading: 'כתבות וסיקורים',
+  videoBadge: 'סרטון',
+  articleBadge: 'כתבה',
+  videoLink: 'לצפייה בסרטון',
+  articleLink: 'לכתבה המלאה',
+  communityHeading: 'קהילות בניהולנו',
+  communityIntro: 'אנחנו מנהלים קהילות תמיכה פעילות ברשתות החברתיות עם אלפי חברים שחוו חסימות',
+  groupArrowIcon: 'fas fa-arrow-left press-group-arrow',
+  ctaText: 'יש לכם כתבה נוספת שסיקרה אותנו? נשמח לשמוע!',
+  ctaBtn: 'צרו קשר',
 };
 
 const Press = () => {
-  const { lang, dir, prefix } = useLang();
-  const t = STR[lang];
-
   return (
-    <div dir={dir} className="press-page">
+    <div dir="rtl" className="press-page">
       <Navbar />
 
       <main className="press-main">
         <div className="press-page-container">
 
           <div className="press-page-header">
-            <Link to={prefix || '/'} className="press-back-link">{t.backLink}</Link>
+            <Link to="/" className="press-back-link">{t.backLink}</Link>
             <h1 className="press-page-title">
               <i className="fas fa-newspaper" aria-hidden="true"></i>
               {t.title}
@@ -142,7 +118,7 @@ const Press = () => {
           {/* CTA */}
           <div className="press-cta-box">
             <p>{t.ctaText}</p>
-            <Link to={prefix ? `${prefix}#contact` : '/#contact'} className="press-cta-btn">
+            <Link to="/#contact" className="press-cta-btn">
               <i className="fas fa-envelope" aria-hidden="true"></i>
               {t.ctaBtn}
             </Link>

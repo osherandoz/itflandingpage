@@ -39,6 +39,24 @@
       ]
     }
   ],
+  "redirects": [
+    { "source": "/en/facebook-account-recovery", "destination": "/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7", "permanent": true },
+    { "source": "/en/instagram-account-recovery", "destination": "/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D", "permanent": true },
+    { "source": "/en/whatsapp-account-recovery", "destination": "/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%95%D7%95%D7%90%D7%98%D7%A1%D7%90%D7%A4", "permanent": true },
+    { "source": "/en/facebook-account-disabled", "destination": "/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7-%D7%9E%D7%95%D7%A9%D7%91%D7%AA", "permanent": true },
+    { "source": "/en/instagram-account-hacked", "destination": "/%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D-%D7%A0%D7%A4%D7%A8%D7%A5", "permanent": true },
+    { "source": "/en/ads-manager-recovery", "destination": "/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%9E%D7%A0%D7%94%D7%9C-%D7%9E%D7%95%D7%93%D7%A2%D7%95%D7%AA", "permanent": true },
+    { "source": "/en/faq", "destination": "/faq", "permanent": true },
+    { "source": "/en/testimonials", "destination": "/testimonials", "permanent": true },
+    { "source": "/en/articles", "destination": "/articles", "permanent": true },
+    { "source": "/en/press", "destination": "/press", "permanent": true },
+    { "source": "/en/newsletter", "destination": "/newsletter", "permanent": true },
+    { "source": "/en/privacy", "destination": "/privacy", "permanent": true },
+    { "source": "/en/osher-revach", "destination": "/%D7%90%D7%95%D7%A9%D7%A8-%D7%A8%D7%95%D7%95%D7%97", "permanent": true },
+    { "source": "/en/articles/:slug", "destination": "/articles/:slug", "permanent": true },
+    { "source": "/en", "destination": "/", "permanent": true },
+    { "source": "/en/:path*", "destination": "/", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/api/subscribe", "destination": "/api/subscribe" },
     { "source": "/api/lead", "destination": "/api/lead" },

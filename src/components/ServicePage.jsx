@@ -4,190 +4,100 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingWhatsApp from './FloatingWhatsApp';
 import ContactForm from './ContactForm';
-import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
-import { useLang, SERVICE_PATHS } from '../i18n';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
+import { SERVICE_PATHS } from '../i18n';
 import { FACTS } from '../data/businessFacts';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './ServicePage.css';
 
-const STR = {
-  he: {
-    heroSubtitle: 'שירות מקצועי ומהיר לשחזור חשבונות. תשלום רק אחרי הצלחה מוכחת',
-    ctaHero: 'שלחו הודעה עכשיו, ללא עלות',
-    statsAria: 'נתוני שירות',
-    statAccounts: 'חשבונות שוחזרו',
-    statHours: 'משך טיפול',
-    statSuccess: 'אחוז הצלחה',
-    statRating: 'דירוג לקוחות',
-    aboutTitle: 'מה זה ולמה זה קורה?',
-    stepsTitle: 'הפתרון שלנו: 3 שלבים פשוטים',
-    testimonialsTitle: 'מה הלקוחות שלנו אומרים',
-    faqTitle: (keyword) => `שאלות נפוצות על ${keyword}`,
-    faqSubtitle: 'תשובות לשאלות שלקוחות שואלים אותנו הכי הרבה',
-    relatedTitle: 'מאמרים קשורים',
-    crossTitle: 'זה לא בדיוק המקרה שלך?',
-    breadcrumbHome: 'בית',
-    breadcrumbAria: 'מסלול ניווט',
-    formTitle: 'מעדיפים שאחזור אליכם?',
-    formSubtitle: 'השאירו שם וטלפון ואחזור אליכם עם אבחון ראשוני, ללא עלות.',
-    finalTitle: 'מוכנים לפתור את הבעיה?',
-    finalText: 'שלחו הודעת וואטסאפ עכשיו. אבחון ראשוני חינם, ותשלום רק אחרי שהחשבון חזר לידיכם.',
-    ctaFinal: 'שלחו הודעה עכשיו',
-    whatsappMessage: (keyword) => `היי, אני מעוניין/ת בשירות: ${keyword}`,
-    callbackTitle: 'בדקו את החסימה וחזרו אליי',
-    callbackSub: 'וואטסאפ חסום? השאירו שם ומספר לחזרה. אבחון ראשוני חינם, בלי התחייבות.',
-    callbackSubmit: 'בדקו את החסימה וחזרו אליי',
-    callbackAlt: 'או התקשרו:',
-    callbackWa: 'יש לכם מספר אחר עם וואטסאפ?',
-    callbackNotes: ['המספר שלך חסום מלהשתמש בוואטסאפ', 'הערעור נדחה (חסימה קבועה)', 'לא מצליח/ה לקבל קוד אימות', 'החשבון נפרץ / SIM הוחלף'],
-  },
-  en: {
-    heroSubtitle: 'Fast, professional account recovery. Pay only after proven success',
-    ctaHero: 'Message Us Now, Free of Charge',
-    statsAria: 'Service statistics',
-    statAccounts: 'Accounts Recovered',
-    statHours: 'Time to Resolve',
-    statSuccess: 'Success Rate',
-    statRating: 'Client Rating',
-    aboutTitle: 'What Is It and Why Does It Happen?',
-    stepsTitle: 'Our Solution: 3 Simple Steps',
-    testimonialsTitle: 'What Our Clients Say',
-    faqTitle: (keyword) => `Frequently Asked Questions About ${keyword}`,
-    faqSubtitle: 'Answers to the questions clients ask us most',
-    relatedTitle: 'Related Articles',
-    crossTitle: 'Not quite your case?',
-    breadcrumbHome: 'Home',
-    breadcrumbAria: 'Breadcrumb',
-    formTitle: 'Prefer That I Call You Back?',
-    formSubtitle: 'Leave your name and phone number and I will get back to you with a free initial assessment.',
-    finalTitle: 'Ready to Solve the Problem?',
-    finalText: 'Send a WhatsApp message now. Free initial assessment, and payment only after your account is back in your hands.',
-    ctaFinal: 'Message Us Now',
-    whatsappMessage: () => WHATSAPP_DEFAULT_MSG.en,
-    callbackTitle: 'Check my block and call me back',
-    callbackSub: 'WhatsApp blocked? Leave a name and a number to call back. Free initial diagnosis, no commitment.',
-    callbackSubmit: 'Check my block and call me back',
-    callbackAlt: 'or call:',
-    callbackWa: 'Have another number with WhatsApp?',
-    callbackNotes: ['This number is blocked from using WhatsApp', 'Appeal rejected (permanent ban)', 'Cannot receive the verification code', 'Account hacked / SIM swapped'],
-  },
+const t = {
+  heroSubtitle: 'שירות מקצועי ומהיר לשחזור חשבונות. תשלום רק אחרי הצלחה מוכחת',
+  ctaHero: 'שלחו הודעה עכשיו, ללא עלות',
+  statsAria: 'נתוני שירות',
+  statAccounts: 'חשבונות שוחזרו',
+  statHours: 'משך טיפול',
+  statSuccess: 'אחוז הצלחה',
+  statRating: 'דירוג לקוחות',
+  aboutTitle: 'מה זה ולמה זה קורה?',
+  stepsTitle: 'הפתרון שלנו: 3 שלבים פשוטים',
+  testimonialsTitle: 'מה הלקוחות שלנו אומרים',
+  faqTitle: (keyword) => `שאלות נפוצות על ${keyword}`,
+  faqSubtitle: 'תשובות לשאלות שלקוחות שואלים אותנו הכי הרבה',
+  relatedTitle: 'מאמרים קשורים',
+  crossTitle: 'זה לא בדיוק המקרה שלך?',
+  breadcrumbHome: 'בית',
+  breadcrumbAria: 'מסלול ניווט',
+  formTitle: 'מעדיפים שאחזור אליכם?',
+  formSubtitle: 'השאירו שם וטלפון ואחזור אליכם עם אבחון ראשוני, ללא עלות.',
+  finalTitle: 'מוכנים לפתור את הבעיה?',
+  finalText: 'שלחו הודעת וואטסאפ עכשיו. אבחון ראשוני חינם, ותשלום רק אחרי שהחשבון חזר לידיכם.',
+  ctaFinal: 'שלחו הודעה עכשיו',
+  whatsappMessage: (keyword) => `היי, אני מעוניין/ת בשירות: ${keyword}`,
+  callbackTitle: 'בדקו את החסימה וחזרו אליי',
+  callbackSub: 'וואטסאפ חסום? השאירו שם ומספר לחזרה. אבחון ראשוני חינם, בלי התחייבות.',
+  callbackSubmit: 'בדקו את החסימה וחזרו אליי',
+  callbackAlt: 'או התקשרו:',
+  callbackWa: 'יש לכם מספר אחר עם וואטסאפ?',
+  callbackNotes: ['המספר שלך חסום מלהשתמש בוואטסאפ', 'הערעור נדחה (חסימה קבועה)', 'לא מצליח/ה לקבל קוד אימות', 'החשבון נפרץ / SIM הוחלף'],
 };
 
 // All 6 testimonials inlined so the template has no extra data dependency
-const ALL_TESTIMONIALS = {
-  he: [
-    {
-      id: 1,
-      name: 'מתנאל לייני',
-      role: 'יוצר תוכן ומשפיען',
-      image: '/images/matanel.jpg',
-      quote:
-        'מתחילת המלחמה אושר מלווה אותי בכל צרה, הצליח להחזיר לי את החשבון מחסימות שלא ברא השטן, רק תנו לו את ההזדמנות והוא יסדר.',
-      rating: 5,
-    },
-    {
-      id: 2,
-      name: 'חני אסור',
-      role: 'יוצרת תוכן בתחום הקולינריה',
-      image: '/images/hani.jpg',
-      quote:
-        'פרצו לי לאינסטגרם ולפייסבוק, ראיתי את מפעל חיי קורס. דיברתי עם עוד כמה אנשים שהלחיצו אותי, אושר בא - הרגיע וסידר.',
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: 'גל נמני',
-      role: 'מנכלית Go-Tech',
-      image: '/images/gal.jpg',
-      quote:
-        'לאחר שנעקצתי על ידי חברה אחרת, פניתי לאושר ובמסירות הוא החזיר לי את העסק לחיים. ממש ככה!',
-      rating: 5,
-    },
-    {
-      id: 4,
-      name: 'אופירה יחיא',
-      role: 'קונדיטורית ויוצרת תוכן',
-      image: '/images/ofira.jpg',
-      quote:
-        'פרצו לי אנשים מטורקיה, השביתו את החשבון והמצב היה כמעט בלתי הפיך - לאחר כשבועיים אושר החזיר לי את החשבון בנחת וברוגע לא אופייניים.',
-      rating: 5,
-    },
-    {
-      id: 5,
-      name: 'יש עתיד',
-      role: 'מפלגת יש עתיד - לקהילה הערבית',
-      image: '/images/yeshatid.jpg',
-      quote:
-        'ביום בהיר אחד ירד עלינו המסך מסיבה הזויה לחלוטין, אושר איבחן מהר את הבעיה ובפעילות יסודית החזיר אותנו לפעילות אחרי יומיים',
-      rating: 5,
-    },
-    {
-      id: 6,
-      name: 'ליראק ישראל',
-      role: 'הברנד הישראלי לחברת הטיפוח המובילה',
-      image: '/images/lierac.jpg',
-      quote:
-        'תמיכה מעולה בפתרון בעיות פרסום. אושר מקצועי, זמין ועוזר בכל בעיה. מאוד מרוצה מהשירות!',
-      rating: 5,
-    },
-  ],
-  en: [
-    {
-      id: 1,
-      name: 'Matanel Layani',
-      role: 'Content Creator and Influencer',
-      image: '/images/matanel.jpg',
-      quote:
-        'Since the start of the war Osher has been with me through every crisis. He managed to get my account back from blocks you would not believe. Just give him the chance and he will sort it out.',
-      rating: 5,
-    },
-    {
-      id: 2,
-      name: 'Hani Asor',
-      role: 'Culinary Content Creator',
-      image: '/images/hani.jpg',
-      quote:
-        "My Instagram and Facebook were hacked, and I watched my life's work collapse. I spoke with a few other people who only stressed me out. Osher came in, calmed things down, and fixed it.",
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: 'Gal Nimni',
-      role: 'CEO of Go-Tech',
-      image: '/images/gal.jpg',
-      quote:
-        'After getting burned by another company, I turned to Osher and with real dedication he brought my business back to life. Just like that!',
-      rating: 5,
-    },
-    {
-      id: 4,
-      name: 'Ofira Yahya',
-      role: 'Pastry Chef and Content Creator',
-      image: '/images/ofira.jpg',
-      quote:
-        'People from Turkey hacked me, the account was disabled and the situation was almost irreversible. After about two weeks, Osher got my account back with uncommon calm and composure.',
-      rating: 5,
-    },
-    {
-      id: 5,
-      name: 'Yesh Atid',
-      role: 'Yesh Atid Party - Arab Community Outreach',
-      image: '/images/yeshatid.jpg',
-      quote:
-        'One bright day everything went dark on us for a completely absurd reason. Osher diagnosed the problem fast, and with thorough work had us back up and running after two days.',
-      rating: 5,
-    },
-    {
-      id: 6,
-      name: 'Lierac Israel',
-      role: "The Israeli Brand of the Leading Skincare Company",
-      image: '/images/lierac.jpg',
-      quote:
-        'Excellent support in solving advertising problems. Osher is professional, available, and helps with every issue. Very happy with the service!',
-      rating: 5,
-    },
-  ],
-};
+const ALL_TESTIMONIALS = [
+  {
+    id: 1,
+    name: 'מתנאל לייני',
+    role: 'יוצר תוכן ומשפיען',
+    image: '/images/matanel.jpg',
+    quote:
+      'מתחילת המלחמה אושר מלווה אותי בכל צרה, הצליח להחזיר לי את החשבון מחסימות שלא ברא השטן, רק תנו לו את ההזדמנות והוא יסדר.',
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: 'חני אסור',
+    role: 'יוצרת תוכן בתחום הקולינריה',
+    image: '/images/hani.jpg',
+    quote:
+      'פרצו לי לאינסטגרם ולפייסבוק, ראיתי את מפעל חיי קורס. דיברתי עם עוד כמה אנשים שהלחיצו אותי, אושר בא - הרגיע וסידר.',
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: 'גל נמני',
+    role: 'מנכלית Go-Tech',
+    image: '/images/gal.jpg',
+    quote:
+      'לאחר שנעקצתי על ידי חברה אחרת, פניתי לאושר ובמסירות הוא החזיר לי את העסק לחיים. ממש ככה!',
+    rating: 5,
+  },
+  {
+    id: 4,
+    name: 'אופירה יחיא',
+    role: 'קונדיטורית ויוצרת תוכן',
+    image: '/images/ofira.jpg',
+    quote:
+      'פרצו לי אנשים מטורקיה, השביתו את החשבון והמצב היה כמעט בלתי הפיך - לאחר כשבועיים אושר החזיר לי את החשבון בנחת וברוגע לא אופייניים.',
+    rating: 5,
+  },
+  {
+    id: 5,
+    name: 'יש עתיד',
+    role: 'מפלגת יש עתיד - לקהילה הערבית',
+    image: '/images/yeshatid.jpg',
+    quote:
+      'ביום בהיר אחד ירד עלינו המסך מסיבה הזויה לחלוטין, אושר איבחן מהר את הבעיה ובפעילות יסודית החזיר אותנו לפעילות אחרי יומיים',
+    rating: 5,
+  },
+  {
+    id: 6,
+    name: 'ליראק ישראל',
+    role: 'הברנד הישראלי לחברת הטיפוח המובילה',
+    image: '/images/lierac.jpg',
+    quote:
+      'תמיכה מעולה בפתרון בעיות פרסום. אושר מקצועי, זמין ועוזר בכל בעיה. מאוד מרוצה מהשירות!',
+    rating: 5,
+  },
+];
 
 function Stars({ count }) {
   return (
@@ -231,11 +141,8 @@ function ServiceFAQ({ faqs }) {
 }
 
 const ServicePage = ({ pageData }) => {
-  const { lang, dir, prefix, home } = useLang();
-  const t = STR[lang];
-
   const visibleTestimonials = pageData.testimonialIds
-    .map((id) => ALL_TESTIMONIALS[lang].find((tm) => tm.id === id))
+    .map((id) => ALL_TESTIMONIALS.find((tm) => tm.id === id))
     .filter(Boolean);
 
   // A real <a> — button + window.open() is blocked inside the Instagram and
@@ -244,7 +151,7 @@ const ServicePage = ({ pageData }) => {
   const isWhatsApp = pageData.slug === 'whatsapp-recovery';
 
   return (
-    <div dir={dir} className="service-page">
+    <div dir="rtl" className="service-page">
       <Navbar />
 
       <main>
@@ -255,7 +162,7 @@ const ServicePage = ({ pageData }) => {
           <div className="service-container">
             <ol>
               <li>
-                <Link to={home}>{t.breadcrumbHome}</Link>
+                <Link to="/">{t.breadcrumbHome}</Link>
               </li>
               <li aria-current="page">{pageData.title}</li>
             </ol>
@@ -271,7 +178,7 @@ const ServicePage = ({ pageData }) => {
                 <h1>{pageData.title}</h1>
                 <p className="service-hero-subtitle">{t.callbackSub}</p>
                 <p className="service-hero-alt">
-                  <span>{t.callbackAlt} <a href={`tel:${FACTS.phone}`} dir="ltr">{FACTS.phoneDisplay}</a> · {FACTS.hours[lang]}</span>
+                  <span>{t.callbackAlt} <a href={`tel:${FACTS.phone}`} dir="ltr">{FACTS.phoneDisplay}</a> · {FACTS.hours.he}</span>
                   <span>
                     {t.callbackWa}{' '}
                     <a className="service-hero-wa" href={whatsappHref} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick('service-hero')}>
@@ -323,7 +230,7 @@ const ServicePage = ({ pageData }) => {
                 <span className="service-stat-label">{t.statSuccess}</span>
               </div>
               <div className="service-stat">
-                <span className="service-stat-value">{FACTS.typicalTurnaround[lang]}</span>
+                <span className="service-stat-value">{FACTS.typicalTurnaround.he}</span>
                 <span className="service-stat-label">{t.statHours}</span>
               </div>
               <div className="service-stat">
@@ -414,7 +321,7 @@ const ServicePage = ({ pageData }) => {
               <h2>{t.crossTitle}</h2>
               <div className="service-cross-grid">
                 {pageData.crossLinks.map((c) => (
-                  <Link key={c.slug} to={SERVICE_PATHS[c.slug][lang]} className="service-cross-card">
+                  <Link key={c.slug} to={SERVICE_PATHS[c.slug]} className="service-cross-card">
                     <span className="service-cross-label">{c.label}</span>
                     <span className="service-cross-note">{c.note}</span>
                   </Link>
@@ -432,7 +339,7 @@ const ServicePage = ({ pageData }) => {
               <ul className="service-related-list">
                 {pageData.relatedArticles.map((a) => (
                   <li key={a.slug}>
-                    <Link to={`${prefix}/articles/${a.slug}`} className="service-related-link">
+                    <Link to={`/articles/${a.slug}`} className="service-related-link">
                       <i className="fas fa-file-alt" aria-hidden="true"></i>
                       {a.title}
                     </Link>

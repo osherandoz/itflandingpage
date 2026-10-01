@@ -1,119 +1,87 @@
 import React from 'react';
-import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
-import { useLang } from '../i18n';
 import { FACTS } from '../data/businessFacts';
-import Icon from './Icon';
+import { WaBtn } from './ui';
 import './HeroSection.css';
 
-const STR = {
-  he: {
-    hoursBadge: `מענה מהיר בשעות הפעילות · ${FACTS.hours.he}`,
-    trust: [`✓ ${FACTS.accountsRecovered.he}`, '⭐ דירוג 4.9/5', '✓ תשלום רק אחרי הצלחה', `✓ זמינות ${FACTS.hours.he}`],
-    photoAlt: 'אושר רווח, מייסד IsraelTechForce',
-    photoName: 'אושר רווח',
-    photoRole: 'מייסד IsraelTechForce',
-    title: 'אחזיר לך את החשבון.',
-    titleHighlight: 'לא הצלחתי, לא שילמת.',
-    subtitle: 'מתמחה בחשבונות שמטא הכריזו עליהם כאבודים. פייסבוק, אינסטגרם, WhatsApp ופתרונות מלאים לביזנס מנג׳ר.',
-    cta: 'שלחו לי את המקרה בוואטסאפ · אבחון ראשוני חינם',
-    guaranteeStrong: '₪500–3,000 בממוצע.',
-    guaranteeRest: ' בלי תשלום מראש, ללא סיכון.',
-    whatsappMessage: 'היי, החשבון שלי חסום, אשמח לעזרה',
-  },
-  en: {
-    hoursBadge: `Fast replies during business hours · ${FACTS.hours.en}`,
-    trust: [`✓ ${FACTS.accountsRecovered.en}`, '⭐ Rated 4.9/5', '✓ Pay only after success', `✓ Available ${FACTS.hours.en}`],
-    photoAlt: 'Osher Revach, founder of IsraelTechForce',
-    photoName: 'Osher Revach',
-    photoRole: 'Founder, IsraelTechForce',
-    title: "I'll get your account back.",
-    titleHighlight: "No recovery, no fee.",
-    subtitle: 'I specialize in accounts Meta has written off as lost. Facebook, Instagram, WhatsApp, and full Business Manager solutions.',
-    cta: 'Send me your case on WhatsApp · Free initial diagnosis',
-    guaranteeStrong: '₪500–3,000 (about $150–$900) on average.',
-    guaranteeRest: ' No upfront payment, zero risk.',
-    whatsappMessage: "Hi, my account is blocked and I'd love your help",
-  },
-};
+const WHATSAPP_MESSAGE = 'היי, החשבון שלי חסום, אשמח לעזרה';
 
-const HeroSection = () => {
-  const { lang } = useLang();
-  const t = STR[lang];
+// Every number here comes from the evidence register (businessFacts.js)
+const PROOF = [
+  { value: FACTS.accountsRecovered.display, label: 'חשבונות שוחזרו' },
+  { value: FACTS.successRate.display, label: 'הצלחה בשחזור' },
+  { value: `${FACTS.rating.display}/5`, label: 'דירוג לקוחות' },
+  { value: 'א׳–ו׳', label: 'זמינות 09:00–16:00' },
+];
 
-  return (
-    <section className="hero-section">
-      {/* Decorative floating social icons, background only — trimmed from 6 to
-          3 (audit D1: "reduce... floating platform icons") */}
-      <div className="hero-bg-icons" aria-hidden="true">
-        <Icon name="facebook" className="hero-bg-icon" style={{ top: '12%', right: '8%', fontSize: '5rem', animationDelay: '0s' }} />
-        <Icon name="instagram" className="hero-bg-icon" style={{ top: '75%', right: '14%', fontSize: '4rem', animationDelay: '2.8s' }} />
-        <Icon name="whatsapp" className="hero-bg-icon" style={{ top: '20%', left: '5%', fontSize: '4.5rem', animationDelay: '2.1s' }} />
+const HeroSection = () => (
+  <div className="hero bg-grid">
+    <div className="container hero__grid">
+      <div className="hero__copy">
+        <p className="hero__eyebrow">( שחזור חשבונות פייסבוק · אינסטגרם · וואטסאפ )</p>
+
+        <h1 className="hero__title display">
+          <span className="lt hero__title-line">אחזיר לך את החשבון.</span>{' '}
+          <span className="hero__title-line">לא הצלחתי, <span className="mk">לא שילמת.</span></span>
+        </h1>
+
+        <p className="hero__sub lead">
+          מתמחה בחשבונות שמטא הכריזו עליהם כאבודים. פייסבוק, אינסטגרם, WhatsApp ופתרונות מלאים לביזנס מנג׳ר.
+        </p>
+
+        <div className="hero__actions">
+          <WaBtn message={WHATSAPP_MESSAGE} location="hero">שלחו לי את המקרה בוואטסאפ</WaBtn>
+          <p className="hero__terms small">
+            <b>אבחון ראשוני חינם.</b> <bdi>{FACTS.priceRange.he}</bdi> בממוצע, בלי תשלום מראש וללא סיכון.
+          </p>
+        </div>
       </div>
 
-      <div className="hero-container">
-
-        {/* Real operating hours, not an always-on "live" dot (see businessFacts.js) */}
-        <div className="hero-live-badge">{t.hoursBadge}</div>
-
-        {/* Trust bar — every proof point in one compact row */}
-        <div className="hero-trust-bar">
-          {t.trust.map((item, i) => (
-            <React.Fragment key={i}>
-              {i > 0 && <span className="trust-divider" aria-hidden="true">|</span>}
-              <span>{item}</span>
-            </React.Fragment>
-          ))}
-        </div>
-
-        {/* Real portrait, not the logo already shown in the navbar (audit D1:
-            "an authentic portrait beside a compact problem-led introduction") */}
-        <div className="hero-identity">
+      {/* Real portrait, not the logo already shown in the navbar (audit D1:
+          "an authentic portrait beside a compact problem-led introduction") */}
+      <div className="hero__visual">
+        <div className="hero__photo">
           <img
-            className="hero-photo"
-            src="/images/osher-photo-1.jpg"
-            alt={t.photoAlt}
-            width="72"
-            height="72"
+            src="/images/brand/osher-stand-800.webp"
+            srcSet="/images/brand/osher-stand-480.webp 480w, /images/brand/osher-stand-800.webp 800w"
+            sizes="(min-width: 960px) 460px, 82vw"
+            alt="אושר רווח, מייסד IsraelTechForce"
+            width="800"
+            height="1000"
             loading="eager"
             decoding="async"
             fetchPriority="high"
           />
-          <span className="hero-identity-text">
-            <strong>{t.photoName}</strong>
-            <span>{t.photoRole}</span>
-          </span>
         </div>
 
-        <div className="hero-content">
-          <h1 className="hero-title">
-            {t.title}{' '}
-            <span className="hero-highlight">{t.titleHighlight}</span>
-          </h1>
-
-          <p className="hero-subtitle">
-            {t.subtitle}
-          </p>
-
-          <a
-            className="hero-cta hero-cta-pulse"
-            href={getWhatsAppUrl(t.whatsappMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={onWhatsAppClick('hero')}
-          >
-            <Icon name="whatsapp" aria-hidden="true" />
-            {t.cta}
-          </a>
-
-          <p className="hero-guarantee">
-            <Icon name="shield" aria-hidden="true" />
-            <strong>{t.guaranteeStrong}</strong>{t.guaranteeRest}
-          </p>
+        {/* Illustration of the moment the service exists for */}
+        <div className="hero__chip hero__chip--blocked" aria-hidden="true">
+          <span className="hero__chip-dot" />
+          <span>החשבון שלך הושבת</span>
+        </div>
+        <div className="hero__chip hero__chip--back" aria-hidden="true">
+          <span className="hero__chip-dot" />
+          <span>הגישה חזרה אליך</span>
         </div>
 
+        <p className="hero__name sticker sticker--paper">
+          אושר רווח
+          <span className="hero__name-role">מייסד IsraelTechForce</span>
+        </p>
       </div>
-    </section>
-  );
-};
+    </div>
+
+    <div className="container">
+      <dl className="hero__proof">
+        {PROOF.map((item, i) => (
+          <div className="hero__proof-item" key={item.label}>
+            <span className="hero__proof-num num" aria-hidden="true">0{i + 1}</span>
+            <dd className="hero__proof-value"><bdi>{item.value}</bdi></dd>
+            <dt className="hero__proof-label">{item.label}</dt>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </div>
+);
 
 export default HeroSection;

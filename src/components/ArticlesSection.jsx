@@ -1,114 +1,66 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
-import { useLang } from '../i18n';
-import Icon from './Icon';
+import { getRecentArticles } from '../data/articles';
+import { formatDate } from '../i18n';
+import { Eyebrow, ArrowIcon } from './ui';
 import './ArticlesSection.css';
 
-// article.icon is a Font Awesome class used on the article detail page
-// (a separate route that still loads Font Awesome). Map the handful of
-// values that appear in the 3 homepage preview cards to our SVG set so the
-// homepage itself never triggers a webfont download.
-const ICON_MAP = {
-  'fab fa-whatsapp': 'whatsapp',
-  'fab fa-facebook': 'facebook',
-  'fab fa-instagram': 'instagram',
-};
-
-const STR = {
-  he: {
-    title: 'הגנה מתחילה בידע',
-    subtitle: 'מדריכים פרקטיים שמסבירים איך להגן על החשבונות לפני שהבעיה מתחילה.',
-    readMore: 'קרא עוד',
-    viewAll: 'צפה בכל המאמרים',
-  },
-  en: {
-    title: 'Protection Starts with Knowledge',
-    subtitle: 'Practical guides that explain how to protect your accounts before the problem starts.',
-    readMore: 'Read More',
-    viewAll: 'View All Articles',
-  },
-};
-
-const formatDate = (date, isEn) => {
-  if (!isEn) return date.split('-').reverse().join('/');
-  return new Date(`${date}T00:00:00`).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-};
-
+// This whole component is lazy-loaded by Home, so the article data stays out
+// of the initial bundle.
 const ArticlesSection = () => {
-  const { lang, isEn, prefix } = useLang();
-  const t = STR[lang];
-  // Loaded per-language so this below-fold, lazy-loaded section never ships
-  // both languages' full article data — only the visitor's own language.
-  const [articles, setArticles] = useState([]);
-
-  useEffect(() => {
-    let cancelled = false;
-    const load = isEn
-      ? import('../data/articles.en').then((m) => m.getRecentArticlesEn(3))
-      : import('../data/articles').then((m) => m.getRecentArticles(3));
-    load.then((list) => {
-      if (!cancelled) setArticles(list);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [isEn]);
-
+  const articles = getRecentArticles(3);
   if (articles.length === 0) return null;
+  const [lead, ...rest] = articles;
 
   return (
-    <section className="articles-section" id="articles">
+    <div className="arts section theme-mist">
       <div className="container">
-        <div className="section-header">
-          <h2 className="section-title">{t.title}</h2>
-          <p className="section-subtitle">
-            {t.subtitle}
-          </p>
-        </div>
+        <header className="sec-head sec-head--split m-reveal">
+          <div>
+            <Eyebrow num="05">מדריכים</Eyebrow>
+            <h2 className="h1">
+              <span className="lt">הגנה מתחילה</span> בידע
+            </h2>
+          </div>
+          <p className="lead">מדריכים פרקטיים שמסבירים איך להגן על החשבונות לפני שהבעיה מתחילה.</p>
+        </header>
 
-        <div className="articles-grid">
-          {articles.map((article, index) => (
-            <Link
-              key={article.id}
-              to={`${prefix}/articles/${article.slug}`}
-              className={`article-card ${index === 0 ? 'featured' : ''}`}
-            >
-              <div className="article-icon">
-                <Icon name={ICON_MAP[article.icon] || 'newspaper'} aria-hidden="true" />
-              </div>
-              <div className="article-category">{article.category}</div>
-              <h3 className="article-title">{article.displayTitle || article.title}</h3>
-              <p className="article-excerpt">{article.excerpt}</p>
-              <div className="article-meta">
-                <span className="article-date">
-                  <Icon name="calendar" aria-hidden="true" />
-                  {formatDate(article.date, isEn)}
-                </span>
-                <span className="article-read-time">
-                  <Icon name="clock" aria-hidden="true" />
-                  {article.readTime}
-                </span>
-              </div>
-              <span className="article-read-more">
-                {t.readMore}
-                <Icon name="arrowLeft" aria-hidden="true" />
-              </span>
-            </Link>
-          ))}
-        </div>
-
-        <div className="articles-cta">
-          <Link to={`${prefix}/articles`} className="view-all-articles-btn">
-            <Icon name="book" aria-hidden="true" />
-            {t.viewAll}
+        <div className="arts__grid">
+          <Link to={`/articles/${lead.slug}`} className="arts__lead m-reveal">
+            <span className="tag tag--solid">{lead.category}</span>
+            <h3 className="h2">{lead.displayTitle || lead.title}</h3>
+            <p className="arts__excerpt">{lead.excerpt}</p>
+            <span className="arts__meta small">
+              <span className="num">{formatDate(lead.date)}</span>
+              <span aria-hidden="true">·</span>
+              <span>{lead.readTime} קריאה</span>
+            </span>
+            <span className="arts__go" aria-hidden="true"><ArrowIcon /></span>
           </Link>
+
+          <div className="arts__side m-stagger">
+            {rest.map((article, i) => (
+              <Link key={article.id} to={`/articles/${article.slug}`} className="arts__row">
+                <span className="arts__row-num num" aria-hidden="true">0{i + 2}</span>
+                <span>
+                  <h3 className="arts__row-title">{article.displayTitle || article.title}</h3>
+                  <span className="arts__meta small">
+                    <span className="num">{formatDate(article.date)}</span>
+                    <span aria-hidden="true">·</span>
+                    <span>{article.readTime} קריאה</span>
+                  </span>
+                </span>
+                <span className="arts__go" aria-hidden="true"><ArrowIcon /></span>
+              </Link>
+            ))}
+            <Link to="/articles" className="btn btn--ink arts__all">
+              <span>צפה בכל המאמרים</span>
+              <span className="btn__arrow" aria-hidden="true"><ArrowIcon /></span>
+            </Link>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

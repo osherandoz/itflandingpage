@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router';
+import { Link } from 'react-router';
 import '@fontsource/heebo/800.css';
 import '@fontsource/heebo/900.css';
 import { subscribeToNewsletter, validateEmail } from '../utils/smoove';
-import { useLang, togglePath, LANGUAGE_TOGGLE_ENABLED } from '../i18n';
 import './Newsletter.css';
 
 /* ============================================================
@@ -39,8 +38,6 @@ const Icon = ({ children, size = 20, ...rest }) => (
 const IconCheck = (p) => (<Icon {...p}><polyline points="20 6 9 17 4 12" /></Icon>);
 const IconX = (p) => (<Icon {...p}><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></Icon>);
 const IconArrowRtl = (p) => (<Icon {...p}><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" /></Icon>);
-const IconArrowLtr = (p) => (<Icon {...p}><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></Icon>);
-
 /* ─── Tracking ────────────────────────────────────────────── */
 function trackSubscribe(location) {
   if (typeof window === 'undefined') return;
@@ -67,19 +64,6 @@ const SAMPLE_ITEMS_HE = [
     body: 'קוד הפין הקבוע באימות דו-שלבי הופך לאופציונלי לטובת סיסמה, מספר לא מוכר עכשיו מראה את המדינה שממנה הוא מתקשר, ואימות דו-שלבי זמין גם באנדרואיד וגם באייפון.',
   },
 ];
-const SAMPLE_ITEMS_EN = [
-  {
-    n: '01',
-    title: 'WhatsApp parental controls arrived in Israel',
-    body: "Built for kids under 13: approving new contacts, no access to channels, no location sharing, no exposure to strangers' statuses. One tap to turn it on, and no way back.",
-  },
-  {
-    n: '02',
-    title: 'Three WhatsApp security changes',
-    body: 'The fixed two-factor PIN is becoming optional in favor of a password, unknown numbers now show the country they’re calling from, and two-factor verification is rolling out on both Android and iPhone.',
-  },
-];
-
 const SEGMENTS_HE = [
   {
     n: '01',
@@ -98,27 +82,6 @@ const SEGMENTS_HE = [
     title: 'בדיקה אחת',
     short: 'פעולה שלוקחת פחות מעשר דקות',
     body: 'משהו קטן שאפשר לעשות באותו יום ומוריד סיכון בפועל. הרשאה שנשארה פתוחה, אימות דו-שלבי שמעולם לא הופעל, מנהל שיצא מהחברה לפני שנתיים ועדיין רשום בנכס.',
-  },
-];
-
-const SEGMENTS_EN = [
-  {
-    n: '01',
-    title: 'Meta Update',
-    short: 'Policy, enforcement, and new features',
-    body: "Meta changes the rules and ships new features without properly announcing them. I follow what happens in the advertiser interfaces, in policy, and in product updates, and translate it into what actually matters to anyone running a page, a campaign, or a business profile from Israel.",
-  },
-  {
-    n: '02',
-    title: 'Case of the Month',
-    short: 'A real case: what happened, what we did, how long it took',
-    body: "One case from the past few weeks. Which account got blocked, what the real reason was (almost never the one written in Meta's notice), what we did, and how many days it took. Names hidden, details not.",
-  },
-  {
-    n: '03',
-    title: 'One Check',
-    short: 'An action that takes less than ten minutes',
-    body: 'Something small you can do the same day that genuinely lowers risk. A permission left open, two-factor authentication that was never enabled, an admin who left the company two years ago and is still listed on the asset.',
   },
 ];
 
@@ -145,156 +108,70 @@ export const FAQS = [
   },
 ];
 
-export const FAQS_EN = [
-  {
-    q: 'How many emails am I going to get?',
-    a: "One a month, at the start of the month. If something truly urgent comes up, like an active ban wave, an extra email goes out. That happened twice in the past year.",
-  },
-  {
-    q: 'Does it cost money?',
-    a: "No. The issue is free. Sometimes there's a pointer at the end to our course or service, but most of the issue is information you can apply without paying for anything.",
-  },
-  {
-    q: 'What happens with my email address?',
-    a: 'It is stored with our email provider and used only to send the issue. It is not sold, not rented, and not passed to any third party.',
-  },
-  {
-    q: 'Can I unsubscribe?',
-    a: 'Yes, via the link at the bottom of every email. One click, no forms, and no asking why.',
-  },
-  {
-    q: 'My account is blocked right now. Will the issue help?',
-    a: "Not in real time. The issue is built for prevention. If you're in the middle of a block, write to us on WhatsApp and we'll tell you if there's something to do.",
-  },
-];
-
-const STR = {
-  he: {
-    segments: SEGMENTS_HE,
-    faqs: FAQS,
-    topLink: 'חשבון חסום עכשיו?',
-    eyebrowSuffix: 'ניוזלטר חודשי',
-    h1a: 'מה מטא משנה בפועל,',
-    h1b: ' ומה כדאי לבדוק אצלך בעקבות זה.',
-    lead:
-      'אחת לחודש אני שולח גיליון קצר: מה מטא שינתה במדיניות, אילו פיצ׳רים חדשים יצאו לפייסבוק ולאינסטגרם, ומה כדאי לבדוק בחשבון שלך כדי להישאר בצד הבטוח. חמש דקות קריאה. אם באותו חודש אין הרבה לדווח, הגיליון פשוט קצר יותר.',
-    micro: ['גיליון אחד בחודש', 'הסרה בקליק אחד', 'הכתובת שלך לא נמכרת לאף אחד'],
-    cardAria: 'מבנה הגיליון',
-    cardMeta: 'גיליון חודשי',
-    cardFoot: 'זמן קריאה משוער: 5 דקות',
-    insideTitle: 'מה נכנס לגיליון',
-    sampleEyebrow: 'גיליון אמיתי · אוגוסט 2026',
-    sampleTitle: 'טעימה מהגיליון האחרון',
-    sampleItems: SAMPLE_ITEMS_HE,
-    sampleQuoteLabel: 'ההמלצה של אושר מהגיליון',
-    sampleQuote: 'לחיצה על כפתור בקרת ההורים זו החלטה לשנים. אם הילד בן 10, ההחלטה הזו תהיה תקפה עד גיל 13 — תחשבו טוב לפני שאתם מפעילים את זה.',
-    fitTitle: 'למי הגיליון הזה נכתב',
-    fitYesTitle: 'מתאים לך אם',
-    fitYes: [
-      'אתה מנהל חשבונות מודעות של לקוחות ואחראי עליהם',
-      'כל הלידים של העסק שלך מגיעים מפייסבוק או מאינסטגרם',
-      'כבר חטפת חסימה פעם אחת ואתה לא רוצה עוד אחת',
-      'יש לך גישה לנכסים של אנשים אחרים ואתה רוצה לישון בשקט',
-    ],
-    fitNoTitle: 'פחות מתאים לך אם',
-    fitNo: [
-      'אתה מחפש דרכים לעקוף את מטא. אני לא כותב על זה.',
-      'אתה רוצה מייל כל בוקר. זה מגיע פעם בחודש.',
-      'אתה לא נוגע בפרסום ממומן ואין לך נכסים לנהל',
-    ],
-    authorPhotoAlt: 'אושר רווח, מומחה אבטחת רשתות חברתיות',
-    authorTitle: 'מי כותב את זה',
-    authorP1:
-      'אני אושר רווח. טיפלתי ביותר מ־2,500 חשבונות פייסבוק, אינסטגרם וואטסאפ שנחסמו, נפרצו או הושבתו, וחלק גדול מהם היה אפשר למנוע בחמש דקות עבודה חודשים קודם.',
-    authorP2a: 'כשגל החסימות של יולי 2026 פגע בישראל, ',
-    authorP2b: ' ו־',
-    authorP2c: ' פנו אליי לניתוח מה קורה. הגיליון הזה הוא מה שאני רואה מהצד השני של החסימה, לפני שזה מגיע אליך כמשבר בזמן אמת.',
-    authorLinkPress: 'כל הכתבות',
-    authorLinkTestimonials: 'מה לקוחות אומרים',
-    faqTitle: 'לפני שאתה משאיר מייל',
-    closeTitle: 'הגיליון הבא יוצא בתחילת החודש',
-    closeSub: 'תשאיר שם וכתובת ותקבל אותו כשהוא יוצא. אם הוא לא שווה את חמש הדקות, ההסרה בתחתית המייל.',
-    footPrivacy: 'מדיניות פרטיות',
-    footWhatsapp: 'וואטסאפ',
-    formNameError: 'צריך שם פרטי כדי לפנות אליך בשם',
-    formEmailError: 'כתובת המייל לא נראית תקינה',
-    formDoneTitle: 'נרשמת. הגיליון הבא יגיע אליך בתחילת החודש.',
-    formDoneNote:
-      'אם המייל לא מופיע בתיבה הראשית, תבדוק בלשונית קידומים או בספאם ותסמן אותו כ"לא ספאם". ככה הגיליונות הבאים יגיעו למקום הנכון.',
-    formNameLabel: 'שם פרטי',
-    formNamePlaceholder: 'אושר',
-    formEmailLabel: 'כתובת מייל',
-    formEmailPlaceholder: 'you@company.co.il',
-    formBusy: 'רגע…',
-    formSubmit: 'שלחו לי את הגיליון הבא',
-  },
-  en: {
-    segments: SEGMENTS_EN,
-    faqs: FAQS_EN,
-    topLink: 'Account blocked right now?',
-    eyebrowSuffix: 'Monthly newsletter',
-    h1a: "What Meta actually changes,",
-    h1b: ' and what to check on your own account because of it.',
-    lead:
-      "Once a month I send a short issue: what Meta changed in policy, which new features shipped for Facebook and Instagram, and what's worth checking in your account to stay on the safe side. Five minutes of reading. If there isn't much to report that month, the issue is simply shorter.",
-    micro: ['One issue a month', 'One-click unsubscribe', 'Your address is never sold to anyone'],
-    cardAria: 'Issue structure',
-    cardMeta: 'Monthly issue',
-    cardFoot: 'Estimated reading time: 5 minutes',
-    insideTitle: "What Goes Into an Issue",
-    sampleEyebrow: 'Real issue · August 2026',
-    sampleTitle: 'A taste of the latest issue',
-    sampleItems: SAMPLE_ITEMS_EN,
-    sampleQuoteLabel: "Osher's recommendation from the issue",
-    sampleQuote: "Tapping the parental-controls button is a years-long decision. If your kid is 10, that choice holds until they turn 13 — think it through before you turn it on.",
-    fitTitle: 'Who This Newsletter Is Written For',
-    fitYesTitle: "It's for you if",
-    fitYes: [
-      "You manage clients' ad accounts and are responsible for them",
-      'All of your business leads come from Facebook or Instagram',
-      "You've already been hit by a ban once and don't want another",
-      "You have access to other people's assets and want to sleep well at night",
-    ],
-    fitNoTitle: "It's less for you if",
-    fitNo: [
-      "You're looking for ways to bypass Meta. I don't write about that.",
-      'You want an email every morning. This arrives once a month.',
-      "You don't touch paid advertising and have no assets to manage",
-    ],
-    authorPhotoAlt: 'Osher Revach, social media security expert',
-    authorTitle: 'Who Writes This',
-    authorP1:
-      "I'm Osher Revach. I've handled more than 2,500 Facebook, Instagram, and WhatsApp accounts that were blocked, hacked, or disabled — and a large share of them could have been prevented with five minutes of work months earlier.",
-    authorP2a: 'When the ban wave of July 2026 hit Israel, ',
-    authorP2b: ' and ',
-    authorP2c: " reached out to me to analyze what was happening. This newsletter is what I see from the other side of the ban, before it reaches you as a real-time crisis.",
-    authorLinkPress: 'All the articles',
-    authorLinkTestimonials: 'What customers say',
-    faqTitle: 'Before You Leave Your Email',
-    closeTitle: 'The next issue goes out at the start of the month',
-    closeSub:
-      "Leave a name and an address and you'll get it when it comes out. If it isn't worth the five minutes, the unsubscribe link is at the bottom of the email.",
-    footPrivacy: 'Privacy Policy',
-    footWhatsapp: 'WhatsApp',
-    formNameError: 'We need a first name so we can address you by name',
-    formEmailError: "That email address doesn't look valid",
-    formDoneTitle: "You're in. The next issue will reach you at the start of the month.",
-    formDoneNote:
-      'If the email doesn\'t show up in your primary inbox, check the Promotions tab or spam and mark it as "not spam". That way the next issues land in the right place.',
-    formNameLabel: 'First name',
-    formNamePlaceholder: 'Osher',
-    formEmailLabel: 'Email address',
-    formEmailPlaceholder: 'you@company.com',
-    formBusy: 'One moment…',
-    formSubmit: 'Send me the next issue',
-  },
+const t = {
+  segments: SEGMENTS_HE,
+  faqs: FAQS,
+  topLink: 'חשבון חסום עכשיו?',
+  eyebrowSuffix: 'ניוזלטר חודשי',
+  h1a: 'מה מטא משנה בפועל,',
+  h1b: ' ומה כדאי לבדוק אצלך בעקבות זה.',
+  lead:
+    'אחת לחודש אני שולח גיליון קצר: מה מטא שינתה במדיניות, אילו פיצ׳רים חדשים יצאו לפייסבוק ולאינסטגרם, ומה כדאי לבדוק בחשבון שלך כדי להישאר בצד הבטוח. חמש דקות קריאה. אם באותו חודש אין הרבה לדווח, הגיליון פשוט קצר יותר.',
+  micro: ['גיליון אחד בחודש', 'הסרה בקליק אחד', 'הכתובת שלך לא נמכרת לאף אחד'],
+  cardAria: 'מבנה הגיליון',
+  cardMeta: 'גיליון חודשי',
+  cardFoot: 'זמן קריאה משוער: 5 דקות',
+  insideTitle: 'מה נכנס לגיליון',
+  sampleEyebrow: 'גיליון אמיתי · אוגוסט 2026',
+  sampleTitle: 'טעימה מהגיליון האחרון',
+  sampleItems: SAMPLE_ITEMS_HE,
+  sampleQuoteLabel: 'ההמלצה של אושר מהגיליון',
+  sampleQuote: 'לחיצה על כפתור בקרת ההורים זו החלטה לשנים. אם הילד בן 10, ההחלטה הזו תהיה תקפה עד גיל 13 — תחשבו טוב לפני שאתם מפעילים את זה.',
+  fitTitle: 'למי הגיליון הזה נכתב',
+  fitYesTitle: 'מתאים לך אם',
+  fitYes: [
+    'אתה מנהל חשבונות מודעות של לקוחות ואחראי עליהם',
+    'כל הלידים של העסק שלך מגיעים מפייסבוק או מאינסטגרם',
+    'כבר חטפת חסימה פעם אחת ואתה לא רוצה עוד אחת',
+    'יש לך גישה לנכסים של אנשים אחרים ואתה רוצה לישון בשקט',
+  ],
+  fitNoTitle: 'פחות מתאים לך אם',
+  fitNo: [
+    'אתה מחפש דרכים לעקוף את מטא. אני לא כותב על זה.',
+    'אתה רוצה מייל כל בוקר. זה מגיע פעם בחודש.',
+    'אתה לא נוגע בפרסום ממומן ואין לך נכסים לנהל',
+  ],
+  authorPhotoAlt: 'אושר רווח, מומחה אבטחת רשתות חברתיות',
+  authorTitle: 'מי כותב את זה',
+  authorP1:
+    'אני אושר רווח. טיפלתי ביותר מ־2,500 חשבונות פייסבוק, אינסטגרם וואטסאפ שנחסמו, נפרצו או הושבתו, וחלק גדול מהם היה אפשר למנוע בחמש דקות עבודה חודשים קודם.',
+  authorP2a: 'כשגל החסימות של יולי 2026 פגע בישראל, ',
+  authorP2b: ' ו־',
+  authorP2c: ' פנו אליי לניתוח מה קורה. הגיליון הזה הוא מה שאני רואה מהצד השני של החסימה, לפני שזה מגיע אליך כמשבר בזמן אמת.',
+  authorLinkPress: 'כל הכתבות',
+  authorLinkTestimonials: 'מה לקוחות אומרים',
+  faqTitle: 'לפני שאתה משאיר מייל',
+  closeTitle: 'הגיליון הבא יוצא בתחילת החודש',
+  closeSub: 'תשאיר שם וכתובת ותקבל אותו כשהוא יוצא. אם הוא לא שווה את חמש הדקות, ההסרה בתחתית המייל.',
+  footPrivacy: 'מדיניות פרטיות',
+  footWhatsapp: 'וואטסאפ',
+  formNameError: 'צריך שם פרטי כדי לפנות אליך בשם',
+  formEmailError: 'כתובת המייל לא נראית תקינה',
+  formDoneTitle: 'נרשמת. הגיליון הבא יגיע אליך בתחילת החודש.',
+  formDoneNote:
+    'אם המייל לא מופיע בתיבה הראשית, תבדוק בלשונית קידומים או בספאם ותסמן אותו כ"לא ספאם". ככה הגיליונות הבאים יגיעו למקום הנכון.',
+  formNameLabel: 'שם פרטי',
+  formNamePlaceholder: 'אושר',
+  formEmailLabel: 'כתובת מייל',
+  formEmailPlaceholder: 'you@company.co.il',
+  formBusy: 'רגע…',
+  formSubmit: 'שלחו לי את הגיליון הבא',
 };
 
 /* ============================================================
    SIGNUP FORM. Two fields only. Rendered twice (hero + closing).
    ============================================================ */
-function SignupForm({ location, t, isEn }) {
-  const { lang } = useLang();
+function SignupForm({ location }) {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState(''); // honeypot, must stay empty
@@ -302,7 +179,7 @@ function SignupForm({ location, t, isEn }) {
   const [error, setError] = useState('');
   const [done, setDone] = useState(false);
 
-  const IconArrow = isEn ? IconArrowLtr : IconArrowRtl;
+  const IconArrow = IconArrowRtl;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -320,7 +197,7 @@ function SignupForm({ location, t, isEn }) {
     setBusy(true);
     setError('');
 
-    const result = await subscribeToNewsletter(firstName, '', email, website, lang);
+    const result = await subscribeToNewsletter(firstName, '', email, website);
 
     setBusy(false);
     if (result.success) {
@@ -404,25 +281,16 @@ function SignupForm({ location, t, isEn }) {
    PAGE
    ============================================================ */
 export default function Newsletter() {
-  const { lang, isEn, dir, prefix } = useLang();
-  const { pathname } = useLocation();
-  const t = STR[lang];
-
   return (
-    <div className="tss" dir={dir}>
+    <div className="tss" dir="rtl">
       {/* ── Minimal header. No site nav: this page has one job ── */}
       <header className="tss-top">
-        <Link to={prefix || '/'} className="tss-top-logo">
+        <Link to="/" className="tss-top-logo">
           <img src="/images/israeltechforce-logo-white.png" alt="IsraelTechForce" width="150" height="34" />
         </Link>
         <a className="tss-top-link" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
           {t.topLink}
         </a>
-        {LANGUAGE_TOGGLE_ENABLED && (
-          <Link className="tss-top-link tss-lang-toggle" to={togglePath(pathname)}>
-            {isEn ? 'עברית' : 'English'}
-          </Link>
-        )}
       </header>
 
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -443,7 +311,7 @@ export default function Newsletter() {
 
             <p className="tss-lead">{t.lead}</p>
 
-            <SignupForm location="hero" t={t} isEn={isEn} />
+            <SignupForm location="hero" />
 
             <ul className="tss-micro">
               {t.micro.map((m) => (
@@ -552,9 +420,9 @@ export default function Newsletter() {
               {t.authorP2c}
             </p>
             <p className="tss-author-links">
-              <Link to={`${prefix}/press`}>{t.authorLinkPress}</Link>
+              <Link to="/press">{t.authorLinkPress}</Link>
               <span aria-hidden="true">·</span>
-              <Link to={`${prefix}/testimonials`}>{t.authorLinkTestimonials}</Link>
+              <Link to="/testimonials">{t.authorLinkTestimonials}</Link>
             </p>
           </div>
         </div>
@@ -578,13 +446,13 @@ export default function Newsletter() {
         <div className="tss-close-inner">
           <h2 className="tss-close-h">{t.closeTitle}</h2>
           <p className="tss-close-sub">{t.closeSub}</p>
-          <SignupForm location="closing" t={t} isEn={isEn} />
+          <SignupForm location="closing" />
         </div>
       </section>
 
       <footer className="tss-foot">
-        <Link to={prefix || '/'}>IsraelTechForce</Link>
-        <Link to={`${prefix}/privacy`}>{t.footPrivacy}</Link>
+        <Link to="/">IsraelTechForce</Link>
+        <Link to="/privacy">{t.footPrivacy}</Link>
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">{t.footWhatsapp}</a>
       </footer>
     </div>

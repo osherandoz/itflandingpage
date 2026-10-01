@@ -1,6 +1,5 @@
 import Home from '../../src/pages/Home';
 import { FAQ_SCHEMA } from '../../src/data/faqSchema.js';
-import { hreflangLinks } from '../../src/i18n/index.js';
 
 export const meta = () => [
   {
@@ -43,9 +42,7 @@ export const meta = () => [
     name: 'twitter:image',
     content: 'https://www.israeltechforce.com/images/og-card.png',
   },
-  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/' },
-  ...hreflangLinks('/', '/en'),
-];
+  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/' },];
 
 export default function HomeRoute() {
   return (
