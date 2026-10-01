@@ -15,7 +15,7 @@
   line-height: 1.3;
   max-width: 24em;
 }
-.about__manifesto span { transition: opacity 0.2s linear; }
+.about__manifesto span:not(.sr-only) { transition: opacity 0.2s linear; }
 
 .about__text { margin-block-start: 32px; color: var(--fg-2); max-width: 56ch; }
 .about__more { margin-block-start: 24px; color: var(--wave); }

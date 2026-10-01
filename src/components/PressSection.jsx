@@ -43,7 +43,6 @@ const PressSection = () => (
               target="_blank"
               rel="noopener noreferrer"
               className="press__row"
-              aria-label={`${item.siteName}: ${item.headline}`}
             >
               <span className="press__date num">{item.date}</span>
               <span className="press__site">{item.siteName}</span>

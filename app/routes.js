@@ -28,4 +28,6 @@ export default [
   route("תודה-רכישה", "./routes/thank-you-purchase.jsx"),
   // E3 — author/about page, linked from articles + schema
   route("אושר-רווח", "./routes/osher-revach.jsx"),
+  // Everything else: a designed page with a real 404 status
+  route("*", "./routes/not-found.jsx"),
 ];

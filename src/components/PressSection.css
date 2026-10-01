@@ -3,6 +3,7 @@
 .press { padding-block-end: clamp(48px, 6vw, 80px); }
 
 .press__marquee {
+  background: var(--bg);
   padding-block: 24px;
   border-block-end: 1px solid var(--line);
   --marquee-dur: 46s;

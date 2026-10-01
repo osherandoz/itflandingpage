@@ -121,6 +121,7 @@ Engine: `useMotion()` mounted once in `app/root.jsx`. Components only add classe
 
 Rules:
 - Above the fold uses CSS keyframes, never `.m-reveal`: the LCP element must not wait for JS.
+- The LCP element (the page's H1) may slide in but never starts at `opacity: 0`: Chrome does not count a transparent element, so the fade itself becomes the LCP delay.
 - Hidden start states exist only under `html.js`; without JS, or with reduced motion, the final state renders.
 - Animate `transform`, `opacity`, `background-size`, `stroke-dashoffset`. Nothing that lays out.
 - Sticky/pinned layouts only at `(min-width: 1024px) and (min-height: 800px)`.

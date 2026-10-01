@@ -60,7 +60,8 @@ export const FillText = ({ text, as = 'p', className = '', scrub = '0.8 0.5' }) 
   const Tag = as;
   const words = text.split(' ');
   return (
-    <Tag className={`m-fill ${className}`} data-scrub={scrub} style={{ '--n': words.length }} aria-label={text}>
+    <Tag className={`m-fill ${className}`} data-scrub={scrub} style={{ '--n': words.length }}>
+      <span className="sr-only">{text}</span>
       {words.map((w, i) => (
         <span key={i} style={{ '--i': i }} aria-hidden="true">
           {w}{i < words.length - 1 ? ' ' : ''}

@@ -64,8 +64,9 @@ export function useMotion() {
       const vh = window.innerHeight;
       for (const el of scrubbing) {
         const r = el.getBoundingClientRect();
-        const [start, end] = (el.dataset.scrub || '').split(' ').map(Number);
-        const p = scrubProgress(r.top, r.height, vh, start || undefined, end || undefined);
+        // "start end" as viewport fractions; a missing or non-numeric part keeps the default
+        const [start, end] = (el.dataset.scrub || '').split(' ').map((v) => (v === '' || Number.isNaN(Number(v)) ? undefined : Number(v)));
+        const p = scrubProgress(r.top, r.height, vh, start, end);
         el.style.setProperty('--p', p.toFixed(3));
       }
     };

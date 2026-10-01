@@ -7,15 +7,19 @@ const DEFAULT_MESSAGE = 'היי, הגעתי דרך האתר שלך אשמח לק
 
 // The always-reachable action. A pill in the corner on desktop; on phones a
 // bar across the bottom, under the thumb. It appears once the page's own
-// first CTA has scrolled away, so there is never more than one on screen.
+// first CTA has scrolled away and leaves when the footer's CTA arrives, so
+// there is never more than one on screen.
 const FloatingWhatsApp = ({ message = DEFAULT_MESSAGE, label = 'דבר/י איתי', note = 'אבחון חינם, תשובה תוך דקות', location = 'floating' }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     let frame = 0;
+    const footer = document.querySelector('footer');
     const update = () => {
       frame = 0;
-      setVisible(window.scrollY > 520);
+      // gone again once the footer (which opens with its own CTA) is on screen
+      const atFooter = footer && footer.getBoundingClientRect().top < window.innerHeight - 120;
+      setVisible(window.scrollY > 520 && !atFooter);
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);

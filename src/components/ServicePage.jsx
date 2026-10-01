@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingWhatsApp from './FloatingWhatsApp';
 import ContactForm from './ContactForm';
+import Icon from './Icon';
+import { Eyebrow, WaBtn, ArrowIcon } from './ui';
 import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 import { SERVICE_PATHS } from '../i18n';
 import { FACTS } from '../data/businessFacts';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import './FAQ.css';
 import './ServicePage.css';
 
 const t = {
@@ -18,18 +20,12 @@ const t = {
   statHours: 'משך טיפול',
   statSuccess: 'אחוז הצלחה',
   statRating: 'דירוג לקוחות',
-  aboutTitle: 'מה זה ולמה זה קורה?',
-  stepsTitle: 'הפתרון שלנו: 3 שלבים פשוטים',
-  testimonialsTitle: 'מה הלקוחות שלנו אומרים',
-  faqTitle: (keyword) => `שאלות נפוצות על ${keyword}`,
   faqSubtitle: 'תשובות לשאלות שלקוחות שואלים אותנו הכי הרבה',
   relatedTitle: 'מאמרים קשורים',
   crossTitle: 'זה לא בדיוק המקרה שלך?',
   breadcrumbHome: 'בית',
   breadcrumbAria: 'מסלול ניווט',
-  formTitle: 'מעדיפים שאחזור אליכם?',
   formSubtitle: 'השאירו שם וטלפון ואחזור אליכם עם אבחון ראשוני, ללא עלות.',
-  finalTitle: 'מוכנים לפתור את הבעיה?',
   finalText: 'שלחו הודעת וואטסאפ עכשיו. אבחון ראשוני חינם, ותשלום רק אחרי שהחשבון חזר לידיכם.',
   ctaFinal: 'שלחו הודעה עכשיו',
   whatsappMessage: (keyword) => `היי, אני מעוניין/ת בשירות: ${keyword}`,
@@ -39,7 +35,24 @@ const t = {
   callbackAlt: 'או התקשרו:',
   callbackWa: 'יש לכם מספר אחר עם וואטסאפ?',
   callbackNotes: ['המספר שלך חסום מלהשתמש בוואטסאפ', 'הערעור נדחה (חסימה קבועה)', 'לא מצליח/ה לקבל קוד אימות', 'החשבון נפרץ / SIM הוחלף'],
+  // Section labels (eyebrows) and link labels, shared with the home page
+  labelSteps: 'איך זה עובד',
+  labelResults: 'תוצאות',
+  labelFaq: 'שאלות נפוצות',
+  labelGuides: 'מדריכים',
+  labelContact: 'יצירת קשר',
+  allTestimonials: 'כל ההמלצות',
+  allFaq: 'לכל השאלות והתשובות',
+  ratingAria: (n) => `דירוג ${n} מתוך 5`,
 };
+
+// Every number comes from the evidence register (businessFacts.js)
+const PROOF = [
+  { value: FACTS.accountsRecovered.display, label: t.statAccounts },
+  { value: FACTS.successRate.display, label: t.statSuccess },
+  { value: FACTS.rating.display, label: t.statRating, star: true },
+  { value: FACTS.typicalTurnaround.he, label: t.statHours, words: true },
+];
 
 // All 6 testimonials inlined so the template has no extra data dependency
 const ALL_TESTIMONIALS = [
@@ -99,283 +112,326 @@ const ALL_TESTIMONIALS = [
   },
 ];
 
-function Stars({ count }) {
-  return (
-    <div className="service-testimonial-stars">
-      {Array.from({ length: 5 }, (_, i) => (
-        <i key={i} className={`fas fa-star${i < count ? '' : ' empty'}`} aria-hidden="true"></i>
-      ))}
-    </div>
-  );
-}
+// "keyword: promise" / "problem? promise" → the light part and the black part
+// of the headline. The rendered text stays exactly pageData.title.
+const splitTitle = (title) => {
+  const m = title.match(/^(.+?[:?])\s+(.+)$/);
+  return m ? [m[1], m[2]] : ['', title];
+};
 
-function ServiceFAQ({ faqs }) {
-  const [openIndex, setOpenIndex] = useState(null);
-
-  const toggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
-  return (
-    <div className="service-faq-list">
-      {faqs.map((faq, index) => (
-        <div key={index} className="faq-item">
-          <button
-            className={`faq-question${openIndex === index ? ' active' : ''}`}
-            onClick={() => toggle(index)}
-            aria-expanded={openIndex === index}
-          >
-            <span>{faq.question}</span>
-            <i
-              className={`fas fa-chevron-down${openIndex === index ? ' rotated' : ''}`}
-              aria-hidden="true"
-            ></i>
-          </button>
-          <div className={`faq-answer${openIndex === index ? ' open' : ''}`}>
-            <p>{faq.answer}</p>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
+const pad = (n) => String(n).padStart(2, '0');
 
 const ServicePage = ({ pageData }) => {
   const visibleTestimonials = pageData.testimonialIds
     .map((id) => ALL_TESTIMONIALS.find((tm) => tm.id === id))
     .filter(Boolean);
 
-  // A real <a> — button + window.open() is blocked inside the Instagram and
-  // Facebook in-app browsers, which is where most of this page's traffic lands.
-  const whatsappHref = getWhatsAppUrl(t.whatsappMessage(pageData.keyword));
+  const waMessage = t.whatsappMessage(pageData.keyword);
   const isWhatsApp = pageData.slug === 'whatsapp-recovery';
+  const [titleLead, titleMain] = splitTitle(pageData.title);
+  const related = pageData.relatedArticles || [];
+  const cross = pageData.crossLinks || [];
 
   return (
-    <div dir="rtl" className="service-page">
+    <div dir="rtl" className="svcp">
       <Navbar />
 
-      <main>
-        {/* ---- BREADCRUMB ---- */}
-        {/* Visible counterpart to the BreadcrumbList schema, which until now
-            described a trail the page never actually showed. */}
-        <nav className="service-breadcrumb" aria-label={t.breadcrumbAria}>
-          <div className="service-container">
-            <ol>
-              <li>
-                <Link to="/">{t.breadcrumbHome}</Link>
-              </li>
-              <li aria-current="page">{pageData.title}</li>
-            </ol>
-          </div>
-        </nav>
-
+      <main id="main">
         {/* ---- HERO ---- */}
-        {isWhatsApp ? (
-          /* Callback-first: a visitor whose WhatsApp is blocked cannot use a WhatsApp CTA */
-          <section className="service-hero service-hero--callback">
-            <div className="service-container">
-              <div>
-                <h1>{pageData.title}</h1>
-                <p className="service-hero-subtitle">{t.callbackSub}</p>
-                <p className="service-hero-alt">
-                  <span>{t.callbackAlt} <a href={`tel:${FACTS.phone}`} dir="ltr">{FACTS.phoneDisplay}</a> · {FACTS.hours.he}</span>
-                  <span>
-                    {t.callbackWa}{' '}
-                    <a className="service-hero-wa" href={whatsappHref} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick('service-hero')}>
-                      <i className="fab fa-whatsapp" aria-hidden="true"></i>{t.ctaHero}
-                    </a>
-                  </span>
-                </p>
-              </div>
-              <ContactForm
-                heading={t.callbackTitle}
-                subheading={t.formSubtitle}
-                submitLabel={t.callbackSubmit}
-                noteOptions={t.callbackNotes}
-                location="service-hero-callback"
-                hideWhatsApp
-                altPhoneField
-              />
-            </div>
-          </section>
-        ) : (
-          <section className="service-hero">
-            <div className="service-container">
-              <h1>{pageData.title}</h1>
-              <p className="service-hero-subtitle">{t.heroSubtitle}</p>
-              <a
-                className="service-cta-btn"
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={onWhatsAppClick('service-hero')}
-              >
-                <i className="fab fa-whatsapp" aria-hidden="true"></i>
-                {t.ctaHero}
-              </a>
-            </div>
-          </section>
-        )}
+        <section className={`svcp__hero bg-grid${isWhatsApp ? ' svcp__hero--callback' : ''}`}>
+          <div className="container">
+            {/* Visible counterpart to the BreadcrumbList schema */}
+            <nav className="svcp__crumbs" aria-label={t.breadcrumbAria}>
+              <ol>
+                <li>
+                  <Link to="/">{t.breadcrumbHome}</Link>
+                </li>
+                <li aria-current="page">{pageData.title}</li>
+              </ol>
+            </nav>
 
-        {/* ---- STATS STRIP ---- */}
-        <section className="service-stats" aria-label={t.statsAria}>
-          <div className="service-container">
-            <div className="service-stats-inner">
-              <div className="service-stat">
-                <span className="service-stat-value">{FACTS.accountsRecovered.display}</span>
-                <span className="service-stat-label">{t.statAccounts}</span>
+            <div className="svcp__hero-grid">
+              <div className="svcp__hero-copy">
+                <p className="svcp__kicker">( {pageData.keyword} )</p>
+
+                <h1 className="svcp__title display">
+                  {titleLead && <><span className="lt svcp__title-line">{titleLead}</span>{' '}</>}
+                  <span className="svcp__title-line"><span className="mk">{titleMain}</span></span>
+                </h1>
+
+                {isWhatsApp ? (
+                  /* Callback-first: a visitor whose WhatsApp is blocked cannot use a WhatsApp CTA */
+                  <>
+                    <p className="svcp__sub lead">{t.callbackSub}</p>
+                    <ul className="svcp__alt">
+                      <li>
+                        <Icon name="phone" />
+                        <span>
+                          {t.callbackAlt}{' '}
+                          <a className="link" href={`tel:${FACTS.phone}`} dir="ltr">{FACTS.phoneDisplay}</a>
+                          {' · '}{FACTS.hours.he}
+                        </span>
+                      </li>
+                      <li>
+                        <Icon name="whatsapp" />
+                        <span>
+                          {t.callbackWa}{' '}
+                          <a
+                            className="link"
+                            href={getWhatsAppUrl(waMessage)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={onWhatsAppClick('service-hero')}
+                          >
+                            {t.ctaHero}
+                          </a>
+                        </span>
+                      </li>
+                    </ul>
+                  </>
+                ) : (
+                  <>
+                    <p className="svcp__sub lead">{t.heroSubtitle}</p>
+                    <div className="svcp__actions">
+                      <WaBtn message={waMessage} location="service-hero">{t.ctaHero}</WaBtn>
+                      <p className="svcp__terms small">
+                        <b>אבחון ראשוני חינם.</b> <bdi>{FACTS.priceRange.he}</bdi> בממוצע, בלי תשלום מראש וללא סיכון.
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
-              <div className="service-stat">
-                <span className="service-stat-value">{FACTS.successRate.display}</span>
-                <span className="service-stat-label">{t.statSuccess}</span>
-              </div>
-              <div className="service-stat">
-                <span className="service-stat-value">{FACTS.typicalTurnaround.he}</span>
-                <span className="service-stat-label">{t.statHours}</span>
-              </div>
-              <div className="service-stat">
-                <span className="service-stat-value">{FACTS.rating.display}★</span>
-                <span className="service-stat-label">{t.statRating}</span>
+
+              {isWhatsApp && (
+                <div className="svcp__hero-form card">
+                  <ContactForm
+                    heading={t.callbackTitle}
+                    subheading={t.formSubtitle}
+                    submitLabel={t.callbackSubmit}
+                    noteOptions={t.callbackNotes}
+                    location="service-hero-callback"
+                    hideWhatsApp
+                    altPhoneField
+                  />
+                </div>
+              )}
+
+              {/* Proof instead of a decorative image: the four facts, set large */}
+              <div className="svcp__proof" role="group" aria-label={t.statsAria}>
+                <p className="svcp__proof-head" aria-hidden="true">( {t.statsAria} )</p>
+                <dl className="svcp__proof-list">
+                  {PROOF.map((item, i) => (
+                    <div className="svcp__proof-item" key={item.label}>
+                      <span className="svcp__proof-num num" aria-hidden="true">{pad(i + 1)}</span>
+                      <dt className="svcp__proof-label">{item.label}</dt>
+                      <dd className={`svcp__proof-value${item.words ? ' svcp__proof-value--words' : ''}`}>
+                        <bdi>{item.value}</bdi>
+                        {item.star && <Icon name="star" className="svcp__proof-star" />}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ---- ABOUT ---- */}
-        <section className="service-about">
-          <div className="service-container">
-            <h2>{t.aboutTitle}</h2>
+        {/* ---- WHAT IS IT ---- */}
+        <section className="svcp__about section">
+          <div className="container svcp__about-grid">
+            <header className="svcp__about-head">
+              <div className="svcp__sticky m-reveal">
+                <Eyebrow num="01">{pageData.keyword}</Eyebrow>
+                <h2 className="h1">
+                  <span className="lt">מה זה</span> ולמה זה קורה?
+                </h2>
+              </div>
+            </header>
             <div
-              className="service-about-text"
+              className="svcp__prose m-reveal"
               dangerouslySetInnerHTML={{ __html: pageData.whatIsIt }}
             />
           </div>
         </section>
 
         {/* ---- STEPS ---- */}
-        <section className="service-steps">
-          <div className="service-container">
-            <h2>{t.stepsTitle}</h2>
-            <div className="service-steps-grid">
+        <section className="svcp__steps section theme-ink">
+          <div className="container">
+            <header className="sec-head m-reveal">
+              <Eyebrow num="02">{t.labelSteps}</Eyebrow>
+              <h2 className="h1">
+                <span className="lt">הפתרון שלנו:</span> 3 שלבים פשוטים
+              </h2>
+            </header>
+
+            {/* The top rule fills as the list scrolls through the viewport */}
+            <ol className="svcp__steps-list" data-scrub="0.85 0.5">
               {pageData.steps.map((step, index) => (
-                <div key={index} className="service-step-card">
-                  <div className="service-step-icon">
-                    <i className={step.icon} aria-hidden="true"></i>
-                  </div>
-                  <h3>{step.title}</h3>
-                  <p>{step.desc}</p>
-                </div>
+                <li key={step.title} className="svcp__step m-reveal">
+                  <span className="svcp__step-num num" aria-hidden="true">{pad(index + 1)}</span>
+                  <h3 className="svcp__step-title h3">{step.title}</h3>
+                  <p className="svcp__step-desc">{step.desc}</p>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
         {/* ---- TESTIMONIALS ---- */}
-        <section className="service-testimonials">
-          <div className="service-container">
-            <h2>{t.testimonialsTitle}</h2>
-            <div className="service-testimonials-grid">
+        <section className="svcp__tst section">
+          <div className="container">
+            <header className="sec-head sec-head--split m-reveal">
+              <div>
+                <Eyebrow num="03">{t.labelResults}</Eyebrow>
+                <h2 className="h1">
+                  <span className="lt">מה הלקוחות שלנו</span> אומרים
+                </h2>
+              </div>
+              <Link to="/testimonials" className="link link--arrow svcp__tst-all">
+                {t.allTestimonials}
+                <ArrowIcon />
+              </Link>
+            </header>
+
+            {/* One lead quote, two smaller beside it */}
+            <div className="svcp__tst-grid m-stagger">
               {visibleTestimonials.map((tm) => (
-                <div key={tm.id} className="service-testimonial-card">
-                  <div className="service-testimonial-header">
+                <figure key={tm.id} className="svcp-quote">
+                  <div className="svcp-quote__stars" role="img" aria-label={t.ratingAria(tm.rating)}>
+                    {Array.from({ length: tm.rating }, (_, i) => <Icon key={i} name="star" />)}
+                  </div>
+                  <blockquote className="svcp-quote__text">{tm.quote}</blockquote>
+                  <figcaption className="svcp-quote__who">
                     <img
                       src={tm.image}
                       alt={`${tm.name}, ${tm.role}`}
-                      className="service-testimonial-img"
-                      width="56"
-                      height="56"
+                      width="48"
+                      height="48"
                       loading="lazy"
                       decoding="async"
                       onError={(e) => {
                         e.target.src = '/images/default-avatar.png';
                       }}
                     />
-                    <div>
-                      <p className="service-testimonial-name">{tm.name}</p>
-                      <p className="service-testimonial-role">{tm.role}</p>
-                      <Stars count={tm.rating} />
-                    </div>
-                  </div>
-                  <p className="service-testimonial-quote">"{tm.quote}"</p>
-                </div>
+                    <span>
+                      <b>{tm.name}</b>
+                      <span className="svcp-quote__role">{tm.role}</span>
+                    </span>
+                  </figcaption>
+                </figure>
               ))}
             </div>
           </div>
         </section>
 
         {/* ---- FAQ ---- */}
-        <section className="service-faq">
-          <div className="service-container">
-            <h2>{t.faqTitle(pageData.keyword)}</h2>
-            <p className="service-faq-subtitle">{t.faqSubtitle}</p>
-            <ServiceFAQ faqs={pageData.faqs} />
-          </div>
-        </section>
-
-        {/* ---- SIBLING SERVICE ---- */}
-        {/* Sends each specific intent to the page that owns it, so the two
-            near-neighbour pages stop competing for the same query. */}
-        {pageData.crossLinks && pageData.crossLinks.length > 0 && (
-          <section className="service-cross-links">
-            <div className="service-container">
-              <h2>{t.crossTitle}</h2>
-              <div className="service-cross-grid">
-                {pageData.crossLinks.map((c) => (
-                  <Link key={c.slug} to={SERVICE_PATHS[c.slug]} className="service-cross-card">
-                    <span className="service-cross-label">{c.label}</span>
-                    <span className="service-cross-note">{c.note}</span>
-                  </Link>
-                ))}
+        <section className="svcp__faq section theme-mist">
+          <div className="container svcp__faq-grid">
+            <header className="svcp__faq-head">
+              <div className="svcp__sticky m-reveal">
+                <Eyebrow num="04">{t.labelFaq}</Eyebrow>
+                <h2 className="h1">
+                  <span className="lt">שאלות נפוצות על</span> {pageData.keyword}
+                </h2>
+                <p className="lead">{t.faqSubtitle}</p>
+                <Link to="/faq" className="link link--arrow small svcp__faq-all">
+                  {t.allFaq}
+                  <ArrowIcon />
+                </Link>
               </div>
-            </div>
-          </section>
-        )}
+            </header>
 
-        {/* ---- RELATED ARTICLES ---- */}
-        {pageData.relatedArticles && pageData.relatedArticles.length > 0 && (
-          <section className="service-related-articles">
-            <div className="service-container">
-              <h2>{t.relatedTitle}</h2>
-              <ul className="service-related-list">
-                {pageData.relatedArticles.map((a) => (
-                  <li key={a.slug}>
-                    <Link to={`/articles/${a.slug}`} className="service-related-link">
-                      <i className="fas fa-file-alt" aria-hidden="true"></i>
-                      {a.title}
+            {/* Native <details>: answers stay in the HTML, no state to hydrate */}
+            <div className="faq-list">
+              {pageData.faqs.map((faq, i) => (
+                <details key={faq.question} className="faq-item" name={`svc-faq-${pageData.slug}`}>
+                  <summary>
+                    <span className="faq-item__num num" aria-hidden="true">{pad(i + 1)}</span>
+                    <span className="faq-item__q">{faq.question}</span>
+                    <span className="faq-item__icon" aria-hidden="true" />
+                  </summary>
+                  <p className="faq-item__a">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ---- RELATED ARTICLES + SIBLING SERVICE ---- */}
+        {/* The cross link sends each specific intent to the page that owns it,
+            so the two near-neighbour pages stop competing for the same query. */}
+        {(related.length > 0 || cross.length > 0) && (
+          <section className="svcp__more section">
+            <div className={`container svcp__more-grid${related.length > 0 ? '' : ' svcp__more-grid--solo'}`}>
+              {related.length > 0 && (
+                <header className="svcp__more-head m-reveal">
+                  <Eyebrow num="05">{t.labelGuides}</Eyebrow>
+                  <h2 className="h1">
+                    <span className="lt">מאמרים</span> קשורים
+                  </h2>
+                </header>
+              )}
+
+              {related.length > 0 && (
+                <ul className="svcp__arts m-stagger">
+                  {related.map((a, i) => (
+                    <li key={a.slug}>
+                      <Link to={`/articles/${a.slug}`} className="svcp__art">
+                        <span className="svcp__art-num num" aria-hidden="true">{pad(i + 1)}</span>
+                        <span className="svcp__art-title">{a.title}</span>
+                        <span className="svcp__go" aria-hidden="true"><ArrowIcon /></span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {cross.length > 0 && (
+                <div className="svcp__cross m-reveal">
+                  <h2 className="svcp__cross-title">{t.crossTitle}</h2>
+                  {cross.map((c) => (
+                    <Link key={c.slug} to={SERVICE_PATHS[c.slug]} className="svcp__cross-link">
+                      <span className="svcp__cross-label">{c.label}</span>
+                      <span className="svcp__cross-note">{c.note}</span>
+                      <span className="svcp__go" aria-hidden="true"><ArrowIcon /></span>
                     </Link>
-                  </li>
-                ))}
-              </ul>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
         )}
 
+        {/* ---- CTA BAND ---- */}
+        {/* Sits before the callback form, not after it: the shared footer opens
+            with its own WhatsApp band, and two ink CTA bands in a row read as a repeat. */}
+        <section className="svcp__final section theme-ink bg-grid bg-grid--full">
+          <div className="container svcp__final-grid">
+            <h2 className="svcp__final-title display m-reveal">
+              <span className="lt">מוכנים לפתור</span> <span className="mk m-in">את הבעיה?</span>
+            </h2>
+            <div className="svcp__final-side m-reveal">
+              <p className="lead">{t.finalText}</p>
+              <WaBtn message={waMessage} location="service-final">{t.ctaFinal}</WaBtn>
+            </div>
+          </div>
+        </section>
         {/* ---- LEAD FORM ---- */}
-        <section className="service-lead-form">
-          <div className="service-container">
-            <h2>{t.formTitle}</h2>
-            <p className="service-form-subtitle">{t.formSubtitle}</p>
-            <ContactForm location="service-form" />
+        <section className="svcp__form section theme-mist">
+          <div className="container svcp__form-grid">
+            <div className="svcp__form-copy m-reveal">
+              <Eyebrow num="06">{t.labelContact}</Eyebrow>
+              <h2 className="h1">
+                <span className="lt">מעדיפים שאחזור</span> אליכם?
+              </h2>
+              <p className="lead">{t.formSubtitle}</p>
+            </div>
+            <div className="card svcp__form-card m-reveal">
+              <ContactForm location="service-form" />
+            </div>
           </div>
         </section>
 
-        {/* ---- FINAL CTA ---- */}
-        <section className="service-cta-final">
-          <div className="service-container">
-            <h2>{t.finalTitle}</h2>
-            <p>{t.finalText}</p>
-            <a
-              className="service-cta-btn"
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={onWhatsAppClick('service-final')}
-            >
-              <i className="fab fa-whatsapp" aria-hidden="true"></i>
-              {t.ctaFinal}
-            </a>
-          </div>
-        </section>
       </main>
 
       <Footer />

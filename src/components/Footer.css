@@ -92,8 +92,3 @@
   .footer__cta { grid-template-columns: 1fr auto; align-items: end; }
   .footer__cols { grid-template-columns: 1.2fr 1fr 1fr 1.4fr; }
 }
-
-/* Leave room for the fixed mobile action bar */
-@media (max-width: 767px) {
-  .footer { padding-block-end: calc(96px + env(safe-area-inset-bottom)); }
-}

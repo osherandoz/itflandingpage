@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from 'react-router';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation, useRouteError, isRouteErrorResponse } from 'react-router';
 import { Analytics } from "@vercel/analytics/react";
 import { LOCAL_BUSINESS_SCHEMA, PERSON_SCHEMA } from '../src/data/schemas.js';
 import { useMotion } from '../src/motion/useMotion.js';
+import NotFound from '../src/pages/NotFound';
 // Self-hosted variable font, preloaded below: text paints in the brand face
 // on first render with no third-party round-trip.
 import heeboHebrew from '@fontsource-variable/heebo/files/heebo-hebrew-wght-normal.woff2?url';
@@ -49,9 +50,16 @@ export function Layout({ children }) {
         {/* Google Search Console verification */}
         <meta name="google-site-verification" content="aE9CLpD9QGwjrSkACJUNpS8Ps8vCkLxMuP9jRl3v_aM" />
 
-        {/* Meta Pixel base code — loads on every route, including SPA navigations */}
+        {/* Meta Pixel. The fbq queue exists from the first byte, so PageView and
+            every later event are recorded; the 250KB library itself is fetched
+            once the document is parsed and the browser is idle, instead of
+            competing with the CSS, font and hero image. */}
         <script dangerouslySetInnerHTML={{ __html: `
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+!function(f,b){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+function load(){var t=b.createElement('script');t.async=!0;t.src='https://connect.facebook.net/en_US/fbevents.js';b.head.appendChild(t)}
+function idle(){(f.requestIdleCallback||function(c){setTimeout(c,1)})(load,{timeout:2000})}
+if(b.readyState==='loading')b.addEventListener('DOMContentLoaded',idle,{once:true});else idle();
+}(window,document);
 fbq('init','1911202046942044');
 fbq('track','PageView');
 ` }} />
@@ -117,4 +125,11 @@ export default function Root() {
       <Analytics />
     </>
   );
+}
+
+// Render and loader failures land on the same designed screen as a 404.
+export function ErrorBoundary() {
+  const error = useRouteError();
+  useMotion();
+  return <NotFound code={isRouteErrorResponse(error) ? error.status : 500} />;
 }

@@ -7,7 +7,7 @@ export const articles = [
     displayTitle: 'חשבון וואטסאפ נחסם? כך משחררים חסימת וואטסאפ בצורה בטוחה ומהירה', // Title without emoji for cards
     excerpt: 'מדריך מקצועי מקיף לשחרור חסימת וואטסאפ. סוגי החסימות, בקשת Request a Review מתוך האפליקציה, דרכי פעולה מול Meta, וטיפים מקצועיים לשחזור חשבון מהיר.',
     featured: true,
-    icon: 'fab fa-whatsapp',
+    icon: 'whatsapp',
     category: 'שחזור חשבונות',
     date: '2026-08-10',
     author: 'אושר רווח',
@@ -18,7 +18,6 @@ export const articles = [
     content: `
       <div class="trust-header-box">
         <div class="trust-header-content">
-          <i class="fas fa-shield-alt"></i>
           <p class="trust-header-text">אל תשלמו לאף אחד מראש. השבת חשבון אמיתית נעשית רק לפי הצלחה ובזמן קצוב.</p>
         </div>
       </div>
@@ -139,7 +138,7 @@ export const articles = [
     displayTitle: 'חשבון פייסבוק הושבת: מה עושים עכשיו? מדריך שלם 2026',
     excerpt: 'מדריך מקצועי לכל מי שחשבון הפייסבוק שלו הושבת. מה הסיבות, מה עושים מיד, ואיך לשחזר את החשבון בצורה מהירה ומקצועית.',
     featured: false,
-    icon: 'fab fa-facebook',
+    icon: 'facebook',
     category: 'שחזור חשבונות',
     date: '2026-08-10',
     author: 'אושר רווח',
@@ -148,7 +147,7 @@ export const articles = [
     metaDescription: 'חשבון הפייסבוק שלך הושבת? למד מה הסיבות, מה עושים עכשיו, ואיך לשחזר אותו בצורה מקצועית. IsraelTechForce. תשלום רק אחרי הצלחה.',
     shortAnswer: 'כשחשבון פייסבוק הושעה או הושבת יש להגיש ערעור דרך מסך הכניסה ("We\'ve suspended your account"), וקריטי לדעת שלפי מדיניות מטא הרשמית יש 180 יום בלבד להגשת הערעור; אחרי 180 יום, או אם הערעור נדחה, ההשבתה הופכת סופית. לעיתים נדרש אימות זהות באמצעות תעודה רשמית, והשם בתעודה חייב להתאים לשם בחשבון. אסור לנסות להתחבר שוב ושוב ואסור לפתוח חשבון חדש, תנאי השימוש של מטא אוסרים יצירת חשבון חדש אחרי השבתה, וחשבון כזה יוסר. אם הערעור נדחה או שאין התקדמות, מומלץ לפנות לגורם מקצועי המתמחה בשחזור חשבונות.',
     content: `
-      <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
+      <div class="trust-header-box"><div class="trust-header-content"><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
 
       <h2>מה זה חשבון פייסבוק מושבת?</h2>
       <p>חשבון פייסבוק מושבת הוא חשבון שמטא חסמה אותו באופן מלא, לא ניתן להתחבר אליו, לראות את הפיד, לשלוח הודעות, או לגשת לאף תוכן. במנגנון הנוכחי של מטא התהליך מדורג: קודם <strong>השעיה (Suspension)</strong>: מופיעה ההודעה "We've suspended your account" עם אפשרות לערער, ורק אם הערעור נדחה או שלא הוגש בזמן, החשבון <strong>מושבת לצמיתות (Disabled)</strong>.</p>
@@ -213,7 +212,7 @@ export const articles = [
         <h3>צריכים עזרה מקצועית?</h3>
         <p>אל תחכו, כל יום שעובר מקשה על השחזור. צרו קשר עכשיו וקבלו ייעוץ חינם.</p>
         <a href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer" class="cta-button">
-          <i class="fab fa-whatsapp"></i> צרו קשר בוואטסאפ
+          צרו קשר בוואטסאפ
         </a>
       </div>
     `
@@ -225,7 +224,7 @@ export const articles = [
     displayTitle: 'פרצו לי לאינסטגרם: צעדים ראשונים לשחזור 2026',
     excerpt: 'חשבון האינסטגרם שלך נפרץ? מדריך מקצועי לכל הצעדים הראשונים שצריך לעשות עכשיו כדי לשחזר ולאבטח את החשבון.',
     featured: false,
-    icon: 'fab fa-instagram',
+    icon: 'instagram',
     category: 'שחזור חשבונות',
     date: '2026-08-10',
     author: 'אושר רווח',
@@ -234,7 +233,7 @@ export const articles = [
     metaDescription: 'חשבון האינסטגרם שלך נפרץ? כל הצעדים הראשונים שצריך לעשות עכשיו כדי לשחזר ולאבטח את החשבון. IsraelTechForce. 95%+ הצלחה.',
     shortAnswer: 'כשחשבון אינסטגרם נפרץ הצעד הראשון הוא ניתוק הפורץ: יציאה מכל המכשירים, שינוי סיסמה והפעלת אימות דו-שלבי, ולאחר מכן אבטחת חשבון המייל. אם הפורץ שינה את הסיסמה, נכנסים לכתובת הרשמית instagram.com/hacked ובוחרים "My account was hacked", אינסטגרם שולחת קוד אימות למייל או לטלפון הרשומים. אם גם הם שונו, עוברים לאימות זהות שיכול לכלול וידאו-סלפי שמושווה לתמונות שלכם בחשבון. בדקו גם את המייל: אינסטגרם שולחת התראה מ-security@mail.instagram.com עם קישור לביטול השינוי. לפי נתוני מטא מדצמבר 2025, שיעור ההצלחה בשחזור חשבונות פרוצים עלה בלמעלה מ-30%.',
     content: `
-      <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
+      <div class="trust-header-box"><div class="trust-header-content"><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
 
       <h2>איך יודעים שפרצו לחשבון?</h2>
       <p>פריצה לחשבון אינסטגרם היא תופעה נפוצה מאוד, ולעיתים קשה לזהות אותה מיד. הסימנים המובהקים לפריצה:</p>
@@ -301,7 +300,7 @@ export const articles = [
         <h3>צריכים עזרה מקצועית?</h3>
         <p>אל תחכו, כל יום שעובר מקשה על השחזור. צרו קשר עכשיו וקבלו ייעוץ חינם.</p>
         <a href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer" class="cta-button">
-          <i class="fab fa-whatsapp"></i> צרו קשר בוואטסאפ
+          צרו קשר בוואטסאפ
         </a>
       </div>
     `
@@ -313,7 +312,7 @@ export const articles = [
     displayTitle: 'מה זה Shadowban ואיך יוצאים ממנו בישראל 2026',
     excerpt: 'מה זה שאדובאן באינסטגרם, איך מזהים אותו ואיך יוצאים ממנו. מדריך מקצועי מ-IsraelTechForce.',
     featured: false,
-    icon: 'fab fa-instagram',
+    icon: 'instagram',
     category: 'שחזור חשבונות',
     date: '2026-08-10',
     author: 'אושר רווח',
@@ -322,7 +321,7 @@ export const articles = [
     metaDescription: 'מה זה שאדובאן באינסטגרם, איך מזהים אותו ואיך יוצאים ממנו. מדריך מקצועי מ-IsraelTechForce.',
     shortAnswer: 'שאדובאן (Shadowban) באינסטגרם הוא הכינוי להגבלת חשיפה שקטה שבה התוכן לא מופיע ב-Explore, בחיפוש ובהמלצות. הדרך הרשמית לבדוק אותו: הגדרות ← Account Status (סטטוס חשבון), הכלי הרשמי של אינסטגרם שמראה אם החשבון או תוכן ממנו אינו מומלץ, ומאפשר להגיש ערעור בלחיצת "Request a Review". הסיבות הרשמיות לירידת הפצה הן הפרת Recommendation Guidelines: תוכן גבולי, engagement bait, רילס עם סימני מים, ותוכן שהוסר בעבר. אינסטגרם לא מפרסמת משך זמן רשמי, ההגדרה הרשמית היא שמפרים חוזרים אינם מומלצים "לתקופה מסוימת".',
     content: `
-      <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
+      <div class="trust-header-box"><div class="trust-header-content"><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
 
       <h2>מה זה Shadowban?</h2>
       <p>Shadowban (שאדובאן, או "חסימה שקטה") הוא מצב שבו אינסטגרם מגבילה את החשיפה של החשבון שלכם, מבלי להודיע לכם על כך. החשבון ממשיך לפעול כרגיל מבחינתכם, אבל הפוסטים שלכם לא מופיעים בחיפושים, לא ב-Explore, ולעיתים אפילו לא בפידים של עוקבים שלא עוקבים אחריכם פעילית.</p>
@@ -378,7 +377,7 @@ export const articles = [
         <h3>צריכים עזרה מקצועית?</h3>
         <p>אל תחכו, כל יום שעובר מקשה על השחזור. צרו קשר עכשיו וקבלו ייעוץ חינם.</p>
         <a href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer" class="cta-button">
-          <i class="fab fa-whatsapp"></i> צרו קשר בוואטסאפ
+          צרו קשר בוואטסאפ
         </a>
       </div>
     `
@@ -390,7 +389,7 @@ export const articles = [
     displayTitle: 'שחזור חשבון וואטסאפ: המדריך המלא 2026',
     excerpt: 'מדריך מקיף לשחזור חשבון וואטסאפ, מה לעשות כשהחשבון נחסם, נגנב, או אבד הגישה אליו.',
     featured: false,
-    icon: 'fab fa-whatsapp',
+    icon: 'whatsapp',
     category: 'שחזור חשבונות',
     date: '2026-08-10',
     author: 'אושר רווח',
@@ -399,7 +398,7 @@ export const articles = [
     metaDescription: 'מדריך מקיף לשחזור חשבון וואטסאפ. מה לעשות כשהחשבון נחסם, נגנב, או אבד הגישה אליו. IsraelTechForce. תשלום רק אחרי הצלחה.',
     shortAnswer: 'שחזור חשבון וואטסאפ מתחיל בזיהוי סוג הבעיה: חסימה זמנית (עם טיימר) חולפת לאחר הסרת גרסאות לא רשמיות, חסימה קבועה מחייבת בקשת Request a Review מתוך האפליקציה, ובמקרה של גניבת מספר (SIM Swap) יש להתקשר מיד לחברת הסלולר לחסימת ה-SIM ולשלוח מייל ל-support@whatsapp.com עם הכיתוב "Lost/Stolen: Please deactivate my account". לפי מדיניות WhatsApp הרשמית, חשבון שהושבת כך נמחק סופית אחרי 30 יום אם לא הופעל מחדש, לכן חובה להשלים את השחזור בתוך חלון הזמן הזה. שיחות משוחזרות מגיבוי Google Drive באנדרואיד או iCloud באייפון.',
     content: `
-      <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
+      <div class="trust-header-box"><div class="trust-header-content"><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
 
       <h2>מה קורה כשחשבון וואטסאפ נחסם?</h2>
       <p>כשחשבון וואטסאפ נחסם, מופיעה הודעה שאומרת שהחשבון שלכם נחסם, עם טיימר (חסימה זמנית) או עם אפשרות לבקש בדיקה מחודשת (חסימה קבועה). על פי <a href="https://faq.whatsapp.com/1848531392146538" target="_blank" rel="noopener noreferrer">מרכז העזרה של WhatsApp</a>, הסיבות כוללות שימוש בגרסאות לא רשמיות (GB WhatsApp, WhatsApp Plus), שליחת הודעות ספאם, ותלונות מרובות מאנשים.</p>
@@ -452,7 +451,7 @@ export const articles = [
         <h3>צריכים עזרה מקצועית?</h3>
         <p>אל תחכו, כל יום שעובר מקשה על השחזור. צרו קשר עכשיו וקבלו ייעוץ חינם.</p>
         <a href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer" class="cta-button">
-          <i class="fab fa-whatsapp"></i> צרו קשר בוואטסאפ
+          צרו קשר בוואטסאפ
         </a>
       </div>
     `
@@ -464,7 +463,7 @@ export const articles = [
     displayTitle: 'מנהל המודעות נחסם: כל מה שצריך לדעת 2026',
     excerpt: 'מנהל המודעות שלך נחסם? למד מה הסיבות ואיך לשחזר אותו. מומחים ל-Business Manager.',
     featured: false,
-    icon: 'fab fa-facebook',
+    icon: 'facebook',
     category: 'שחזור חשבונות',
     date: '2026-08-10',
     author: 'אושר רווח',
@@ -473,7 +472,7 @@ export const articles = [
     metaDescription: 'מנהל המודעות שלך נחסם? למד מה הסיבות ואיך לשחזר אותו. IsraelTechForce. מומחים לשחזור Business Manager.',
     shortAnswer: 'כשמנהל המודעות נחסם, השלב הראשון הוא אבחון מדויק של סוג החסימה מתוך ארבע רמות אפשריות: חשבון מודעות בודד, תיק עסקי שלם (Business Portfolio, לשעבר Business Manager), עמוד פייסבוק או החשבון האישי של המנהל, כי לכל סוג יש נתיב ערעור שונה. את הערעור מגישים דרך Business Support Home של מטא בכתובת facebook.com/business-support-home בלחיצה על "Request review". קריטי לדעת: יש חלון של 180 יום בלבד להגשת ערעור, אחריו החסימה הופכת סופית. רוב הבדיקות מסתיימות תוך 48 שעות. אם הסיבה היא חוב פתוח, משלמים אותו מיד ומפעילים מחדש את החשבון דרך הגדרות התשלומים.',
     content: `
-      <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
+      <div class="trust-header-box"><div class="trust-header-content"><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
 
       <h2>מה זה מנהל מודעות ולמה הוא נחסם?</h2>
       <p>מנהל המודעות (Ads Manager) של מטא הוא הכלי המרכזי לניהול קמפיינים פרסומיים בפייסבוק ואינסטגרם. חסימה של מנהל המודעות, או של התיק העסקי כולו (Business Portfolio, השם הרשמי החדש של Business Manager), עלולה לעצור את כל הפעילות השיווקית של עסק תוך שניות. על פי <a href="https://transparency.meta.com/policies/ad-standards/" target="_blank" rel="noopener noreferrer">תקני הפרסום של מטא (Meta Advertising Standards)</a>, האכיפה נעשית "בבדיקה אוטומטית, ובמקרים מסוימים בבדיקה ידנית". הסיבות הנפוצות לחסימה:</p>
@@ -540,7 +539,7 @@ export const articles = [
         <h3>צריכים עזרה מקצועית?</h3>
         <p>אל תחכו, כל יום שעובר מקשה על השחזור. צרו קשר עכשיו וקבלו ייעוץ חינם.</p>
         <a href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer" class="cta-button">
-          <i class="fab fa-whatsapp"></i> צרו קשר בוואטסאפ
+          צרו קשר בוואטסאפ
         </a>
       </div>
     `
@@ -552,7 +551,7 @@ export const articles = [
     displayTitle: 'ההבדל בין חשבון פייסבוק מושבת לחשבון מוגבל 2026',
     excerpt: 'מה ההבדל בין חשבון פייסבוק מושבת לחשבון מוגבל? ואיך מתמודדים עם כל מצב?',
     featured: false,
-    icon: 'fab fa-facebook',
+    icon: 'facebook',
     category: 'שחזור חשבונות',
     date: '2026-08-10',
     author: 'אושר רווח',
@@ -561,7 +560,7 @@ export const articles = [
     metaDescription: 'מה ההבדל בין חשבון פייסבוק מושבת לחשבון מוגבל? ואיך מתמודדים עם כל מצב? IsraelTechForce מסביר.',
     shortAnswer: 'ההבדל בין חשבון פייסבוק מושבת לחשבון מוגבל הוא רמת הגישה: בחשבון מושבת (Disabled) אין גישה כלל וההשבתה דורשת ערעור פעיל בתוך 180 יום, בעוד שבחשבון מוגבל (Restricted) יש גישה אך חלק מהיכולות חסומות לתקופה קצובה. לפי מדרגות הסטרייקים הרשמיות של מטא: 7 סטרייקים גוררים הגבלה של יום, 8 סטרייקים, 3 ימים, 9, שבוע, ו-10 ומעלה, 30 יום, כאשר סטרייק פג אחרי שנה. בחשבון מושבת מערערים דרך מסך הכניסה; בחשבון מוגבל בודקים את סטטוס החשבון ב-Account Status בהגדרות או ב-Account Quality, ומערערים משם על ההגבלה הספציפית.',
     content: `
-      <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
+      <div class="trust-header-box"><div class="trust-header-content"><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
 
       <h2>מה זה חשבון מושבת?</h2>
       <p>חשבון פייסבוק מושבת (Disabled) הוא חשבון שמטא ביטלה את הגישה אליו לחלוטין. המשתמש לא יכול להתחבר, לצפות בתוכן, לשלוח הודעות, או לבצע כל פעולה. בדף הכניסה מופיעה הודעה ברורה: "החשבון שלך הושבת".</p>
@@ -624,7 +623,7 @@ export const articles = [
         <h3>צריכים עזרה מקצועית?</h3>
         <p>אל תחכו, כל יום שעובר מקשה על השחזור. צרו קשר עכשיו וקבלו ייעוץ חינם.</p>
         <a href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer" class="cta-button">
-          <i class="fab fa-whatsapp"></i> צרו קשר בוואטסאפ
+          צרו קשר בוואטסאפ
         </a>
       </div>
     `
@@ -636,7 +635,7 @@ export const articles = [
     displayTitle: 'איך להגן על חשבון האינסטגרם שלך: 7 כללים 2026',
     excerpt: '7 כללים פשוטים להגנה על חשבון האינסטגרם שלך מפני פריצות וחסימות.',
     featured: false,
-    icon: 'fab fa-instagram',
+    icon: 'instagram',
     category: 'שחזור חשבונות',
     date: '2026-08-10',
     author: 'אושר רווח',
@@ -645,7 +644,7 @@ export const articles = [
     metaDescription: '7 כללים פשוטים להגנה על חשבון האינסטגרם שלך מפני פריצות וחסימות. מדריך מ-IsraelTechForce.',
     shortAnswer: 'הגנה על חשבון אינסטגרם מתבססת על 7 כללים: סיסמה ייחודית וחזקה עם אימות דו-שלבי (עדיף אפליקציית אימות, Passkey או וואטסאפ, לא רק SMS), זהירות מקישורי פישינג, ניקוי הרשאות של אפליקציות צד שלישי, אבטחת מייל הגיבוי, שמירה על תנאי השימוש, הרצת Security Checkup הרשמי וגיבוי תקופתי של הנתונים דרך מרכז החשבונות. כלל הזהב הרשמי של אינסטגרם: "אינסטגרם לעולם לא תשלח לכם DM", וכל מייל אפשר לאמת בהגדרות תחת "Emails from Instagram". לפי נתוני מטא מדצמבר 2025, פריצות לחשבונות ירדו בלמעלה מ-30% בזכות כלי ההגנה החדשים.',
     content: `
-      <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
+      <div class="trust-header-box"><div class="trust-header-content"><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
 
       <h2>למה חשוב להגן על החשבון?</h2>
       <p>חשבון אינסטגרם עם אלפי עוקבים, תוכן שנבנה במשך שנים, ולקוחות שמגיעים דרכו, הוא נכס עסקי לכל דבר. פריצה או חסימה לא צפויה יכולות לגרום לנזק כספי ומוניטיני רציני. ההגנה הכי טובה היא מניעה. 7 הכללים הבאים הם המינימום שכל בעל חשבון חייב ליישם.</p>
@@ -690,7 +689,7 @@ export const articles = [
         <h3>צריכים עזרה מקצועית?</h3>
         <p>אל תחכו, כל יום שעובר מקשה על השחזור. צרו קשר עכשיו וקבלו ייעוץ חינם.</p>
         <a href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer" class="cta-button">
-          <i class="fab fa-whatsapp"></i> צרו קשר בוואטסאפ
+          צרו קשר בוואטסאפ
         </a>
       </div>
     `
@@ -702,7 +701,7 @@ export const articles = [
     displayTitle: 'שחזור חשבון פייסבוק ללא מייל וללא טלפון: אפשרי? 2026',
     excerpt: 'האם ניתן לשחזר חשבון פייסבוק ללא גישה למייל ולטלפון? IsraelTechForce, פתרונות מתקדמים.',
     featured: false,
-    icon: 'fab fa-facebook',
+    icon: 'facebook',
     category: 'שחזור חשבונות',
     date: '2026-08-10',
     author: 'אושר רווח',
@@ -711,7 +710,7 @@ export const articles = [
     metaDescription: 'האם ניתן לשחזר חשבון פייסבוק ללא גישה למייל ולטלפון? IsraelTechForce. פתרונות מתקדמים לשחזור חשבונות.',
     shortAnswer: 'שחזור חשבון פייסבוק ללא גישה למייל ולטלפון מתחיל בדף החיפוש הרשמי facebook.com/login/identify, רצוי ממכשיר או דפדפן שכבר התחברתם ממנו בעבר, כי פייסבוק מזהה מכשירים מוכרים. משם עוברים לאימות זהות באמצעות תעודה רשמית (תעודת זהות, דרכון או רישיון נהיגה), כשהשם בתעודה חייב להתאים לשם בחשבון. אם פורץ שינה את המייל והטלפון, משתמשים בכתובת facebook.com/hacked ומדווחים "My login info was changed". שימו לב: פיצ\'ר "אנשי הקשר המהימנים" (Trusted Contacts) הוסר ב-2023 ואינו קיים יותר. חשבון שנמחק לצמיתות ועברו 30 יום, אינו ניתן לשחזור.',
     content: `
-      <div class="trust-header-box"><div class="trust-header-content"><i class="fas fa-shield-alt"></i><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
+      <div class="trust-header-box"><div class="trust-header-content"><p class="trust-header-text">אל תשלמו לאף אחד מראש. שחזור אמיתי נעשה רק לפי הצלחה ובזמן קצוב.</p></div></div>
 
       <h2>למה מאבדים גישה למייל ולטלפון?</h2>
       <p>מצב שבו אין גישה לא למייל ולא לטלפון הרשומים בחשבון הפייסבוק הוא יחסית נפוץ. הסיבות:</p>
@@ -777,7 +776,7 @@ export const articles = [
         <h3>צריכים עזרה מקצועית?</h3>
         <p>אל תחכו, כל יום שעובר מקשה על השחזור. צרו קשר עכשיו וקבלו ייעוץ חינם.</p>
         <a href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer" class="cta-button">
-          <i class="fab fa-whatsapp"></i> צרו קשר בוואטסאפ
+          צרו קשר בוואטסאפ
         </a>
       </div>
     `
