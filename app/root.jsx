@@ -7,10 +7,14 @@ import NotFound from '../src/pages/NotFound';
 // Self-hosted variable font, preloaded below: text paints in the brand face
 // on first render with no third-party round-trip.
 import heeboHebrew from '@fontsource-variable/heebo/files/heebo-hebrew-wght-normal.woff2?url';
+// Punctuation and digits live in the Latin file: without it the headline is
+// repainted when it arrives, and that repaint is what LCP records.
+import heeboLatin from '@fontsource-variable/heebo/files/heebo-latin-wght-normal.woff2?url';
 import '../src/styles/system.css';
 
 export const links = () => [
   { rel: 'preload', href: heeboHebrew, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+  { rel: 'preload', href: heeboLatin, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
 ];
 
 export function Layout({ children }) {

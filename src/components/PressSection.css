@@ -19,6 +19,7 @@
   line-height: 1;
   white-space: nowrap;
   color: var(--fg);
+  background: var(--bg);
 }
 .press__outlet:nth-child(even) { font-weight: 300; color: var(--fg-2); }
 .press__diamond {

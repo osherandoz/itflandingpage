@@ -1,251 +1,133 @@
-/* ══════════════════════════════════════════════
-   Thank You Lead — Checklist confirmation
-   Dark navy · RTL · Mobile-first
-   ══════════════════════════════════════════════ */
-
+/* /תודה-קליסט: one calm screen. Confirmation, what is inside the checklist
+   as a rail, and one ink card with the next step. Scoped to .tyl. */
 .tyl {
-  --bg:         #0D1128;
-  --bg-2:       #131729;
-  --accent:     #3B82F6;
-  --text:       #e8eaf2;
-  --muted:      #8b90a7;
-  --green:      #25d366;
-  --border:     rgba(255,255,255,0.08);
-
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Heebo', 'Assistant', sans-serif;
-  direction: rtl;
-  min-height: 100vh;
-}
-
-.tyl-container {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* ── Confirmation bar ──────────────────────────── */
-.tyl-confirm {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: rgba(37, 211, 102, .1);
-  border-bottom: 1px solid rgba(37, 211, 102, .2);
-  color: #a7f3d0;
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 14px 20px;
-  text-align: center;
-}
-
-.tyl-confirm i {
-  color: var(--green);
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-/* ── Hero ──────────────────────────────────────── */
-.tyl-hero {
-  padding: 64px 0 48px;
-  text-align: center;
-}
-
-.tyl-h1 {
-  font-size: clamp(1.8rem, 5vw, 2.6rem);
-  font-weight: 900;
-  line-height: 1.35;
-  margin: 0 0 20px;
-  color: #fff;
-}
-
-.tyl-sub {
-  font-size: 1.05rem;
-  color: var(--muted);
-  line-height: 1.75;
-  max-width: 520px;
-  margin: 0 auto;
-}
-
-/* ── Checklist section ─────────────────────────── */
-.tyl-list-section {
-  padding: 0 0 64px;
-}
-
-.tyl-section-title {
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0 0 24px;
-  text-align: center;
-}
-
-.tyl-list {
-  list-style: none;
-  margin: 0 0 24px;
-  padding: 0;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--paper);
 }
+.tyl__top .container { display: flex; align-items: center; height: var(--nav-h); }
+.tyl__logo { display: block; }
+.tyl__logo img { height: 40px; width: auto; filter: invert(1); }
 
-.tyl-item {
-  display: flex;
+.tyl__main { flex: 1 0 auto; padding-block: clamp(16px, 4vw, 56px) clamp(48px, 7vw, 96px); }
+.tyl__grid { display: grid; gap: 48px; align-items: start; }
+
+/* ---- Confirmation ---- */
+.tyl__confirm {
+  display: inline-flex;
   align-items: center;
-  gap: 20px;
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-2);
-  transition: background .15s;
+  gap: 12px;
+  padding: 8px;
+  padding-inline-end: 16px;
+  margin-block-end: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--white);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  line-height: 1.35;
 }
-
-.tyl-item:last-child { border-bottom: none; }
-
-.tyl-item:hover { background: rgba(59, 130, 246, .06); }
-
-.tyl-num {
-  font-size: 1.4rem;
-  font-weight: 900;
-  color: rgba(59, 130, 246, .3);
-  font-variant-numeric: tabular-nums;
-  min-width: 2.5ch;
-  flex-shrink: 0;
-  line-height: 1;
+.tyl__confirm-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ok);
+  color: #fff;
+  font-size: 15px;
 }
+.tyl__title-line { display: block; }
+.tyl__sub { margin-block-start: 24px; max-width: 46ch; }
 
-.tyl-item-text {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.4;
+/* ---- What is inside: numbered rail ---- */
+.tyl__inside { margin-block-start: clamp(40px, 6vw, 64px); }
+.tyl__label {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--fg-2);
+  margin-block-end: 20px;
 }
-
-.tyl-list-note {
-  text-align: center;
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin: 0;
+.tyl__steps {
+  --node: 44px;
+  position: relative;
+  display: grid;
+  gap: 12px;
+  max-width: 520px;
 }
+.tyl__rail {
+  position: absolute;
+  inset-block: calc(var(--node) / 2);
+  inset-inline-start: calc(var(--node) / 2 - 1px);
+  width: 2px;
+  background: var(--line);
+}
+.tyl__rail span {
+  position: absolute;
+  inset: 0;
+  background: var(--signal);
+  transform-origin: top;
+  transform: scaleY(var(--p, 1));
+}
+.tyl__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--node) 1fr;
+  gap: 16px;
+  align-items: center;
+}
+.tyl__node {
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  height: var(--node);
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: var(--fs-small);
+  font-weight: 800;
+}
+.tyl__step-text {
+  padding-block: 12px;
+  border-block-end: 1px solid var(--line);
+  font-size: var(--fs-lead);
+  font-weight: 700;
+  line-height: 1.35;
+}
+.tyl__note { margin-block-start: 24px; color: var(--fg-2); max-width: 46ch; }
 
-/* ── Footer ────────────────────────────────────── */
-.tyl-footer {
+/* ---- Next step: the one ink card ---- */
+.tyl__next { display: grid; gap: 16px; padding: clamp(24px, 4vw, 40px); }
+.tyl__next .eyebrow { margin-block-end: 0; color: var(--wave); }
+.tyl__next-text { color: var(--fg-2); }
+.tyl__next-btn { margin-block-start: 8px; }
+.tyl__next-note { color: var(--fg-2); }
+.tyl__next-note .link { color: var(--fg); }
+
+.tyl__footer { border-block-start: 1px solid var(--line); }
+.tyl__footer-bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 24px;
-  max-width: 700px;
-  margin: 0 auto;
-  font-size: 0.8rem;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
+  gap: 8px 24px;
+  padding-block: 20px;
+  color: var(--fg-2);
 }
+.tyl__footer-bar .link { padding-block: 8px; }
 
-.tyl-footer a {
-  color: var(--muted);
-  text-decoration: none;
-}
+/* Entrance: CSS only */
+@keyframes tyl-rise { from { opacity: 0; transform: translateY(16px); } }
+@keyframes tyl-mark { from { background-size: 0% 0.92em; } }
+.tyl__hero, .tyl__inside, .tyl__next { animation: tyl-rise 0.7s var(--ease-out) both; }
+.tyl__inside { animation-delay: 0.1s; }
+.tyl__next { animation-delay: 0.2s; }
+.tyl__title .mk { animation: tyl-mark 0.9s var(--ease-out) 0.5s both; }
 
-.tyl-footer a:hover { color: var(--text); }
-
-/* ── Next step (upsell) ────────────────────────── */
-.tyl-next {
-  padding: 56px 0 72px;
-  background: var(--bg-2);
-  border-top: 1px solid var(--border);
-}
-
-.tyl-next-card {
-  border: 1px solid rgba(59, 130, 246, 0.35);
-  background: rgba(59, 130, 246, 0.07);
-  border-radius: 18px;
-  padding: 38px 34px;
-  text-align: center;
-}
-
-.tyl-next-eyebrow {
-  display: block;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-.tyl-next-title {
-  font-size: clamp(1.35rem, 3.4vw, 1.9rem);
-  font-weight: 800;
-  line-height: 1.35;
-  color: var(--text);
-  margin: 0 0 16px;
-}
-
-.tyl-next-text {
-  font-size: 1.02rem;
-  line-height: 1.7;
-  color: var(--muted);
-  max-width: 560px;
-  margin: 0 auto 28px;
-}
-
-.tyl-next-btn {
-  display: inline-block;
-  background: var(--accent);
-  color: #ffffff;
-  font-size: 1.05rem;
-  font-weight: 700;
-  padding: 15px 34px;
-  border-radius: 50px;
-  text-decoration: none;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.tyl-next-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 26px rgba(59, 130, 246, 0.5);
-}
-
-.tyl-next-note {
-  margin: 20px 0 0;
-  font-size: 0.92rem;
-  color: var(--muted);
-}
-
-.tyl-next-note a {
-  color: var(--green);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.tyl-next-note a:hover { text-decoration: underline; }
-
-/* ── Mobile ────────────────────────────────────── */
-@media (max-width: 600px) {
-  .tyl-hero { padding: 48px 0 36px; }
-
-  .tyl-next-card { padding: 30px 20px; }
-
-  .tyl-item {
-    padding: 16px 18px;
-    gap: 14px;
-  }
-
-  .tyl-num { font-size: 1.1rem; }
-
-  .tyl-footer {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tyl-item { transition: none; }
-  .tyl-link { transition: none; }
-  .tyl-next-btn { transition: none; }
+@media (min-width: 960px) {
+  .tyl__grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 96px; }
+  .tyl__next { position: sticky; top: 32px; margin-block-start: 64px; }
 }

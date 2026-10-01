@@ -6,13 +6,6 @@ const DESCRIPTION =
   'ב-2026, מטא הסירה מעל 10 מיליון חשבונות עסקיים. רובם בגלל טעות הגדרה אחת. ההדרכה הזו (4 דקות) תראה לך איך להימנע ממנה. קורס BMS ב-₪197.';
 const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.webp';
 
-export const links = () => [
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap',
-  },
-];
-
 export const meta = () => [
   { title: TITLE },
   { name: 'description', content: DESCRIPTION },

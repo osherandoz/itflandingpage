@@ -1,4 +1,5 @@
-import Newsletter, { FAQS } from '../../src/pages/Newsletter';
+import Newsletter from '../../src/pages/Newsletter';
+import { FAQS } from '../../src/data/newsletterFaqs.js';
 
 const URL = 'https://www.israeltechforce.com/newsletter';
 const TITLE = 'The Safety Signal - ניוזלטר חודשי על אבטחת חשבונות מטא | IsraelTechForce';
@@ -15,7 +16,8 @@ export const meta = () => [
   { property: 'og:locale', content: 'he_IL' },
   { property: 'og:image', content: 'https://www.israeltechforce.com/images/og-card.png' },
   { name: 'twitter:card', content: 'summary_large_image' },
-  { tagName: 'link', rel: 'canonical', href: URL },];
+  { tagName: 'link', rel: 'canonical', href: URL },
+];
 
 const FAQ_SCHEMA = {
   '@context': 'https://schema.org',

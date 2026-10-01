@@ -64,7 +64,7 @@ Rules:
   and `--go` are for emphasis and action. No full section in signal or green.
 - One primary (green) CTA per view.
 - No gradients on text. No glows. Shadows are tinted and rare.
-- `--fg-3` is the lightest text allowed (contrast AA on paper and on ink).
+- `--fg-3` is the lightest text allowed (contrast AA on paper, mist and ink).
 
 ## 3. Type
 

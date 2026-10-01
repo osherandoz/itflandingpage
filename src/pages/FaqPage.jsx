@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Btn, Eyebrow } from '../components/ui';
+import '../components/FAQ.css';
 import './FaqPage.css';
 
 const WHATSAPP_NUMBER = '972547274750';
 
 const t = {
   backLink: 'חזרה לעמוד הראשי',
-  backIcon: 'fas fa-arrow-right',
-  title: 'שאלות נפוצות: שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ',
+  eyebrow: 'שאלות ותשובות',
+  indexLabel: 'נושאים',
+  titleLight: 'שאלות נפוצות:',
+  titleBold: 'שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ',
   subtitle:
     'כל התשובות לשאלות הנפוצות ביותר על שחזור חשבונות ברשתות החברתיות. לא מצאתם תשובה? צרו קשר ונשמח לעזור.',
   ctaTitle: 'עדיין יש לכם שאלות?',
@@ -21,79 +24,101 @@ const t = {
   whatsappMessage: 'היי, יש לי שאלה על שחזור חשבון',
 };
 
-const CategoryAccordion = ({ category }) => {
-  const [openIndex, setOpenIndex] = useState(null);
+const pad = (n) => String(n).padStart(2, '0');
 
-  const toggle = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+// "Back" in an RTL layout points to the right.
+const BackIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M5 12h14" />
+    <path d="M13 6l6 6-6 6" />
+  </svg>
+);
 
-  return (
-    <section className="faq-category" aria-labelledby={`cat-${category.id}`}>
-      <h2 className="faq-category-title" id={`cat-${category.id}`}>
-        <i className={category.icon} aria-hidden="true"></i>
-        {category.title}
-      </h2>
-      <div className="faq-container">
-        {category.faqs.map((faq, index) => (
-          <div key={index} className="faq-item">
-            <button
-              className={`faq-question${openIndex === index ? ' active' : ''}`}
-              onClick={() => toggle(index)}
-              aria-expanded={openIndex === index}
-            >
-              <span>{faq.question}</span>
-              <i
-                className={`fas fa-chevron-down${openIndex === index ? ' rotated' : ''}`}
-                aria-hidden="true"
-              ></i>
-            </button>
-            <div className={`faq-answer${openIndex === index ? ' open' : ''}`}>
-              <p>{faq.answer}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
+// One category: a numbered eyebrow, the category name, and a native accordion.
+// The shared `name` keeps one answer open per category, as before.
+const CategoryGroup = ({ category, index }) => (
+  <section className="faqp__group m-reveal" aria-labelledby={`cat-${category.id}`}>
+    <header className="faqp__group-head">
+      <Eyebrow num={pad(index + 1)}>{category.faqs.length} שאלות</Eyebrow>
+      <h2 className="h2 faqp__group-title" id={`cat-${category.id}`}>{category.title}</h2>
+    </header>
+    <div className="faq-list">
+      {category.faqs.map((faq, i) => (
+        <details key={faq.question} className="faq-item" name={`faq-${category.id}`}>
+          <summary>
+            <span className="faq-item__num num" aria-hidden="true">{pad(i + 1)}</span>
+            <span className="faq-item__q">{faq.question}</span>
+            <span className="faq-item__icon" aria-hidden="true" />
+          </summary>
+          <p className="faq-item__a">{faq.answer}</p>
+        </details>
+      ))}
+    </div>
+  </section>
+);
 
 const FaqPage = ({ categories }) => {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.whatsappMessage)}`;
 
   return (
-    <div dir="rtl" className="faq-page">
+    <div dir="rtl" className="faqp">
       <Navbar />
 
-      <main className="faq-main">
-        <div className="container">
-          <div className="faq-page-header">
-            <Link to="/" className="faq-back-link">
-              <i className={t.backIcon} aria-hidden="true"></i>
+      <main id="main">
+        <header className="faqp__hero bg-grid">
+          <div className="container">
+            <Link to="/" className="faqp__back link link--arrow small">
+              <BackIcon />
               {t.backLink}
             </Link>
-            <h1 className="faq-page-title">{t.title}</h1>
-            <p className="faq-page-subtitle">{t.subtitle}</p>
+            <Eyebrow className="faqp__eyebrow">{t.eyebrow}</Eyebrow>
+            <h1 className="h1 faqp__title">
+              <span className="lt">{t.titleLight}</span> {t.titleBold}
+            </h1>
+            <p className="lead faqp__sub">{t.subtitle}</p>
           </div>
+        </header>
 
-          {categories.map((category) => (
-            <CategoryAccordion key={category.id} category={category} />
-          ))}
+        <div className="faqp__body">
+          <div className="container faqp__grid">
+            <nav className="faqp__index" aria-label={t.indexLabel}>
+              <div className="faqp__index-inner">
+                <p className="faqp__index-label">( {t.indexLabel} )</p>
+                <ol className="faqp__index-list">
+                  {categories.map((category, i) => (
+                    <li key={category.id}>
+                      <a href={`#cat-${category.id}`} className="faqp__index-link">
+                        <span className="faqp__index-num num" aria-hidden="true">{pad(i + 1)}</span>
+                        <span className="faqp__index-name">{category.title}</span>
+                        <span className="faqp__index-count num" aria-hidden="true">{category.faqs.length}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </nav>
 
-          <div className="faq-page-cta">
-            <h2 className="faq-cta-title">{t.ctaTitle}</h2>
-            <p className="faq-cta-text">{t.ctaText}</p>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="faq-cta-btn"
-            >
-              <i className="fab fa-whatsapp" aria-hidden="true"></i>
-              {t.ctaBtn}
-            </a>
+            <div className="faqp__groups">
+              {categories.map((category, i) => (
+                <CategoryGroup key={category.id} category={category} index={i} />
+              ))}
+            </div>
           </div>
         </div>
+
+        <section className="faqp__cta" aria-labelledby="faqp-cta-title">
+          <div className="container">
+          <div className="faqp__cta-card theme-ink m-reveal">
+            <h2 className="h1" id="faqp-cta-title">{t.ctaTitle}</h2>
+            <div className="faqp__cta-side">
+              <p className="lead">{t.ctaText}</p>
+              <Btn variant="go" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                {t.ctaBtn}
+              </Btn>
+            </div>
+          </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

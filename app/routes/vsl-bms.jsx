@@ -7,16 +7,6 @@ const DESCRIPTION =
   'קורס מוקלט בעברית (כ-3 שעות, ₪197) להקמה ואבטחה של Business Manager, חשבון מודעות והרשאות ב-Meta. הדרכה חינמית של 10 דקות בראש הדף. אושר רווח, IsraelTechForce.';
 const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.png';
 
-export const links = () => [
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
-  {
-    rel: 'stylesheet',
-    // Heebo is self-hosted via @fontsource (root + page imports) — only Assistant + Frank Ruhl Libre from Google
-    href: 'https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;700;800&family=Frank+Ruhl+Libre:wght@500;700&display=swap',
-  },
-];
-
 export const meta = () => [
   { title: TITLE },
   { name: 'description', content: DESCRIPTION },

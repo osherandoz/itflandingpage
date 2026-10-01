@@ -59,7 +59,7 @@
   --surface: var(--white);
   --fg: var(--ink);
   --fg-2: #3c4a60;
-  --fg-3: #5d6a80;
+  --fg-3: #536075;
   --line: rgba(11, 21, 36, 0.14);
   --line-soft: rgba(11, 21, 36, 0.07);
   --mk: var(--signal-soft);
@@ -133,7 +133,7 @@
   --surface: var(--white);
   --fg: var(--ink);
   --fg-2: #3c4a60;
-  --fg-3: #5d6a80;
+  --fg-3: #536075;
   --line: rgba(11, 21, 36, 0.14);
   --line-soft: rgba(11, 21, 36, 0.07);
   --mk: var(--signal-soft);
@@ -465,7 +465,8 @@ html.js .sticker.m-in.is-in {
   border-color: var(--signal);
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--signal) 22%, transparent);
 }
-.field input.error, .field select.error, .field textarea.error { border-color: var(--alert); }
+.field input.error:not([type='checkbox']):not([type='radio']), .field select.error, .field textarea.error,
+.field input[aria-invalid='true']:not([type='checkbox']):not([type='radio']) { border-color: var(--alert); }
 .field__error, .error-message { color: var(--alert); font-size: var(--fs-small); font-weight: 600; }
 .theme-ink .field__error, .theme-ink .error-message { color: #ff8f93; }
 /* Chrome autofill paints its own pale blue and hides our text colour */

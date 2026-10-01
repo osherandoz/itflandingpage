@@ -3,7 +3,8 @@ import { Link } from 'react-router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import Icon from '../components/Icon';
+import { Btn, Eyebrow } from '../components/ui';
 import './TestimonialsPage.css';
 
 const WHATSAPP_NUMBER = '972547274750';
@@ -68,7 +69,7 @@ const TESTIMONIALS_HE = [
 const t = {
   testimonials: TESTIMONIALS_HE,
   backLink: 'חזרה לעמוד הראשי',
-  backIcon: 'fas fa-arrow-right',
+  eyebrow: 'תוצאות',
   title: 'ביקורות לקוחות',
   subtitle:
     '2,500+ לקוחות בחרו ב-IsraelTechForce לשחזור חשבונות הרשתות החברתיות שלהם. הנה מה שהם אומרים.',
@@ -80,98 +81,103 @@ const t = {
   whatsappMessage: 'היי, אני רוצה לשמוע עוד על השירות',
 };
 
-const renderStars = (rating) =>
-  Array.from({ length: 5 }, (_, i) => (
-    <i
-      key={i}
-      className={`fas fa-star ${i < rating ? 'filled' : 'empty'}`}
-      aria-hidden="true"
-    ></i>
-  ));
+// Numbers that carry a sign ("2,500+", "95%+") are isolated so RTL does not
+// move the sign to the other side. The copy itself is untouched.
+const SIGNED_NUMBER = /(\d[\d,.]*[%+]+)/;
+const withBdi = (text) =>
+  text.split(SIGNED_NUMBER).map((part, i) => (i % 2 ? <bdi key={i} dir="ltr">{part}</bdi> : part));
+
+// "Back" in an RTL layout points to the right.
+const BackIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M5 12h14" />
+    <path d="M13 6l6 6-6 6" />
+  </svg>
+);
+
+const Stars = ({ rating, label }) => (
+  <div className="tstp__stars" role="img" aria-label={label}>
+    {Array.from({ length: rating }, (_, i) => <Icon key={i} name="star" />)}
+  </div>
+);
 
 const TestimonialsPage = () => {
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.whatsappMessage)}`;
 
   return (
-    <div dir="rtl" className="testimonials-page">
+    <div dir="rtl" className="tstp">
       <Navbar />
 
-      <main className="testimonials-main">
-        <div className="container">
+      <main id="main">
+        <header className="tstp__hero bg-grid">
+          <div className="container tstp__hero-grid">
+            <div className="tstp__hero-copy">
+              <Link to="/" className="tstp__back link link--arrow small">
+                <BackIcon />
+                {t.backLink}
+              </Link>
+              <Eyebrow className="tstp__eyebrow">{t.eyebrow}</Eyebrow>
+              <h1 className="display tstp__title">
+                <span className="lt">ביקורות</span> <span className="mk">לקוחות</span>
+              </h1>
+              <p className="lead tstp__sub">{withBdi(t.subtitle)}</p>
+            </div>
 
-          {/* Page header */}
-          <div className="testimonials-page-header">
-            <Link to="/" className="testimonials-back-link">
-              <i className={t.backIcon} aria-hidden="true"></i>
-              {t.backLink}
-            </Link>
-            <h1 className="testimonials-page-title">{t.title}</h1>
-            <p className="testimonials-page-subtitle">{t.subtitle}</p>
-
-            {/* Aggregate rating display */}
-            <div className="testimonials-aggregate">
-              <div className="aggregate-score">4.9</div>
-              <div className="aggregate-details">
-                <div className="aggregate-stars" aria-label={t.aggregateAria}>
-                  <i className="fas fa-star filled" aria-hidden="true"></i>
-                  <i className="fas fa-star filled" aria-hidden="true"></i>
-                  <i className="fas fa-star filled" aria-hidden="true"></i>
-                  <i className="fas fa-star filled" aria-hidden="true"></i>
-                  <i className="fas fa-star filled" aria-hidden="true"></i>
-                </div>
-                <span className="aggregate-count">{t.aggregateCount}</span>
+            {/* Aggregate rating */}
+            <div className="tstp__score">
+              <p className="tstp__score-value num"><bdi dir="ltr">4.9</bdi></p>
+              <div className="tstp__score-side">
+                <Stars rating={5} label={t.aggregateAria} />
+                <p className="tstp__score-count">{withBdi(t.aggregateCount)}</p>
               </div>
             </div>
           </div>
+        </header>
 
-          {/* Testimonials grid */}
-          <div className="testimonials-grid">
-            {t.testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="testimonial-card">
-                <div className="testimonial-header">
-                  <div className="testimonial-image">
+        {/* Mosaic: one lead quote, then two more sizes */}
+        <section className="tstp__wall theme-mist section" aria-label={t.title}>
+          <div className="container">
+            <div className="tstp__mosaic m-stagger">
+              {t.testimonials.map((testimonial) => (
+                <figure key={testimonial.id} className="tstp__card">
+                  <Stars rating={testimonial.rating} label={`דירוג ${testimonial.rating} מתוך 5`} />
+                  <blockquote className="tstp__quote">{testimonial.quote}</blockquote>
+                  <figcaption className="tstp__who">
                     <img
                       src={testimonial.image}
                       alt={`${testimonial.name} - ${testimonial.role}`}
+                      width="150"
+                      height="150"
+                      loading="lazy"
+                      decoding="async"
                       onError={(e) => {
                         e.target.src = '/images/default-avatar.png';
                       }}
                     />
-                  </div>
-                  <div className="testimonial-info">
-                    <h2 className="testimonial-name">{testimonial.name}</h2>
-                    <p className="testimonial-role">{testimonial.role}</p>
-                    <div className="testimonial-rating">
-                      {renderStars(testimonial.rating)}
-                    </div>
-                  </div>
-                </div>
-                <div className="testimonial-content">
-                  <div className="quote-icon">
-                    <i className="fas fa-quote-right" aria-hidden="true"></i>
-                  </div>
-                  <p className="testimonial-quote">{testimonial.quote}</p>
-                </div>
-              </div>
-            ))}
+                    <span>
+                      <b className="tstp__name">{testimonial.name}</b>
+                      <span className="tstp__role">{testimonial.role}</span>
+                    </span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
+        </section>
 
-          {/* CTA */}
-          <div className="testimonials-page-cta">
-            <h2 className="testimonials-cta-title">{t.ctaTitle}</h2>
-            <p className="testimonials-cta-text">{t.ctaText}</p>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="testimonials-cta-btn"
-            >
-              <i className="fab fa-whatsapp" aria-hidden="true"></i>
-              {t.ctaBtn}
-            </a>
+        <section className="tstp__cta" aria-labelledby="tstp-cta-title">
+          <div className="container">
+          <div className="tstp__cta-card theme-ink m-reveal">
+            <h2 className="h1" id="tstp-cta-title">{t.ctaTitle}</h2>
+            <div className="tstp__cta-side">
+              <p className="lead">{withBdi(t.ctaText)}</p>
+              <Btn variant="go" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                {t.ctaBtn}
+              </Btn>
+            </div>
           </div>
-
-        </div>
+          </div>
+        </section>
       </main>
 
       <Footer />
