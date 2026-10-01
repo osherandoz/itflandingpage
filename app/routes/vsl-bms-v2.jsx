@@ -3,7 +3,7 @@ import VslBmsV2 from '../../src/pages/VslBmsV2';
 const URL = 'https://www.israeltechforce.com/VSL-BMS-V2';
 const TITLE = 'חשבון פרסום נחסם = ₪150,000 לאיבוד בין לילה. השיטה שמונעת את זה. | אושר רווח';
 const DESCRIPTION =
-  'ב-2026, מטא הסירה מעל 10 מיליון חשבונות עסקיים. רובם בגלל טעות הגדרה אחת. ההדרכה הזו (4 דקות) תראה לך איך להימנע ממנה. קורס BMS ב-₪197.';
+  'ב-2026, מטא הסירה מעל 10 מיליון חשבונות עסקיים. רובם בגלל טעות הגדרה אחת. ההדרכה הזו (10 דקות) תראה לך איך להימנע ממנה. קורס BMS ב-₪197.';
 const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.webp';
 
 export const meta = () => [

@@ -6,8 +6,8 @@ import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import { Btn, Eyebrow } from '../components/ui';
 import '../components/FAQ.css';
 import './FaqPage.css';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 
-const WHATSAPP_NUMBER = '972547274750';
 
 const t = {
   backLink: 'חזרה לעמוד הראשי',
@@ -58,7 +58,7 @@ const CategoryGroup = ({ category, index }) => (
 );
 
 const FaqPage = ({ categories }) => {
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.whatsappMessage)}`;
+  const whatsappUrl = getWhatsAppUrl(t.whatsappMessage);
 
   return (
     <div dir="rtl" className="faqp">
@@ -112,7 +112,7 @@ const FaqPage = ({ categories }) => {
             <h2 className="h1" id="faqp-cta-title">{t.ctaTitle}</h2>
             <div className="faqp__cta-side">
               <p className="lead">{t.ctaText}</p>
-              <Btn variant="go" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <Btn variant="go" href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick('faq-page')}>
                 {t.ctaBtn}
               </Btn>
             </div>

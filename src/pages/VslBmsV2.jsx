@@ -314,7 +314,7 @@ export default function VslBmsV2() {
             <p className="vsl-hero__sub">
               מטא מסירה <strong>חשבונות עסקיים בלי הודעה מראש</strong>, וברוב המקרים שהגיעו אליי
               הסיבה הייתה טעות הגדרה אחת שאף אחד לא טרח לספר עליה.
-              ההדרכה הזו (<span className="num">4</span> דקות) תראה לכם איך להימנע ממנה.
+              ההדרכה הזו (<span className="num">10</span> דקות) תראה לכם איך להימנע ממנה.
             </p>
 
             {/* Trust bar */}
@@ -330,7 +330,7 @@ export default function VslBmsV2() {
           <figure className="vsl-video">
             <figcaption className="vsl-video__cap">
               <span className="vsl-video__cap-line">
-                <IconPlay /><span><span className="num">4</span> דקות שיכולות להציל לך <bdi className="num">₪150,000</bdi></span>
+                <IconPlay /><span><span className="num">10</span> דקות שיכולות להציל לך <bdi className="num">₪150,000</bdi></span>
               </span>
             </figcaption>
             <div className="vsl-video__frame">
@@ -355,7 +355,7 @@ export default function VslBmsV2() {
                 </button>
               ) : (
                 <div className="vsl-video__facade">
-                  <span className="vsl-video__play"><IconPlay />4 דקות שיכולות להציל לך ₪150,000</span>
+                  <span className="vsl-video__play"><IconPlay />10 דקות שיכולות להציל לך ₪150,000</span>
                 </div>
               )}
             </div>

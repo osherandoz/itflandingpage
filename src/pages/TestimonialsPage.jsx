@@ -6,8 +6,8 @@ import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import Icon from '../components/Icon';
 import { Btn, Eyebrow } from '../components/ui';
 import './TestimonialsPage.css';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 
-const WHATSAPP_NUMBER = '972547274750';
 
 const TESTIMONIALS_HE = [
   {
@@ -102,7 +102,7 @@ const Stars = ({ rating, label }) => (
 );
 
 const TestimonialsPage = () => {
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.whatsappMessage)}`;
+  const whatsappUrl = getWhatsAppUrl(t.whatsappMessage);
 
   return (
     <div dir="rtl" className="tstp">
@@ -171,7 +171,7 @@ const TestimonialsPage = () => {
             <h2 className="h1" id="tstp-cta-title">{t.ctaTitle}</h2>
             <div className="tstp__cta-side">
               <p className="lead">{withBdi(t.ctaText)}</p>
-              <Btn variant="go" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <Btn variant="go" href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick('testimonials-page')}>
                 {t.ctaBtn}
               </Btn>
             </div>

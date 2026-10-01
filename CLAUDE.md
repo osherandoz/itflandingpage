@@ -67,14 +67,13 @@ IsraelTechForce - ITF Recovery · Osher Revach · Netanya · +972509823235 ·
 osher@israeltechforce.com · hours א׳–ו׳ 09:00–16:00 · GA4 `G-M2TYTNN02X` ·
 Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 
+## Decided (2026-10-01)
+- The only WhatsApp number is `972509823235`, always through `getWhatsAppUrl` + `onWhatsAppClick('<location>')`. Never hard-code a number in a page.
+- The VSL video is 10 minutes, on both variants.
+- `/bms-sm` author stats come from `businessFacts.js` (2,500+ / 95%+ / 4.9).
+- V2 uses system markers (numbers, check discs, stickers), no emoji.
+
 ## Open (needs Osher)
-- `/faq` and `/testimonials` CTAs open WhatsApp on `972547274750`, hard-coded and
-  untracked; the rest of the site uses `972509823235` via `getWhatsAppUrl`. Which is right?
-- `/VSL-BMS-V2` says the video is "4 דקות" in three places; it embeds the same
-  10-minute video as V1.
-- `/bms-sm` author strip: the old "2,500+ עסקים / 5 שנות ניסיון / 0 חשבונות שאבדו"
-  were not in the evidence register (and "0 lost" contradicts 95%); it now shows
-  2,500+ / 95%+ / 4.9 from `businessFacts.js`. Revert in `STATS` if the old ones are sourced.
 - Em-dashes remain in FAQ answers and schema text (`faqCategories.js`,
   `centralFaqSchema.js`, a few route titles): copy decision.
 - `businessFacts.js` still has `source: TODO` on the 2,500 / 95% / 4.9 claims.
