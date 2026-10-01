@@ -69,6 +69,18 @@ const Navbar = () => {
     if (!element) return;
     e.preventDefault();
     element.scrollIntoView({ behavior: 'smooth' });
+    // Sections below the fold have estimated heights until they first render
+    // (content-visibility in Home.css), so the first jump can land short.
+    // Re-aim until the section is actually parked under the header.
+    let tries = 0;
+    const settle = () => {
+      const top = element.getBoundingClientRect().top;
+      if ((top < -8 || top > 120) && ++tries <= 4) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(settle, 500);
+      }
+    };
+    setTimeout(settle, 700);
   };
 
   const cls = ['navbar', isScrolled && 'is-scrolled', isHidden && !isOpen && 'is-hidden'].filter(Boolean).join(' ');

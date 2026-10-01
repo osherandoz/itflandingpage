@@ -1,4 +1,13 @@
 /* Home: only the contact block lives here; every other section owns its CSS. */
+
+/* The page is long. Sections far below the fold skip layout and paint until
+   the reader gets near them; the intrinsic size keeps the scrollbar honest
+   (and `auto` remembers the real height once a section has rendered).
+   Not on #services: its cards pin and stack. */
+#how-it-works, #about, #testimonials, #articles, #faq, #contact {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
 .home-contact__grid { display: grid; gap: 40px; align-items: start; }
 .home-contact__copy .lead { margin-block-start: 16px; }
 

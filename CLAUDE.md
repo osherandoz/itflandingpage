@@ -24,6 +24,7 @@ to the Hebrew pages (`vercel.json`).
 | `npm test` | Vitest (schemas, redirects, funnel pages, payment webhook) |
 | `npm run lint` / `npm run build` | ESLint / production build |
 | `node scripts/brand-images.mjs` | Regenerate `public/images/brand/*` from the originals |
+| `node scripts/build-article-index.mjs` | Regenerate `src/data/articleIndex.js` after adding or editing an article (a test fails if it is stale) |
 
 ## Design: the "Signal" system (2026-10)
 - Rules and rationale: `DESIGN.md`. Tokens and primitives: `src/styles/system.css`.
@@ -54,6 +55,11 @@ to the Hebrew pages (`vercel.json`).
 - A sentence listing Latin brand names reorders itself in RTL; write them in Hebrew.
 - `overflow-x: hidden` on `body` breaks `position: sticky`; use `clip`.
 - All CSS is global: prefix selectors with the page/component block name.
+- Home sections below the fold use `content-visibility: auto` (`Home.css`). Their heights are
+  estimates until first render, so any new in-page jump must re-aim after scrolling, the way
+  `Navbar.jsx` does. Do not put it on a section with a pinned stack.
+- The home page reads article cards from the generated `articleIndex.js`, never from `articles.js`
+  (that file carries every article body, 85KB).
 - The repo lives in OneDrive: the Vite watcher occasionally misses a write. If the
   dev client shows stale markup (hydration mismatch), `touch` the file or restart the server.
 - In this shell, two heredocs in one Bash call fail silently. Write files with the editor tools.

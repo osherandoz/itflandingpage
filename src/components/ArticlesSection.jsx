@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { getRecentArticles } from '../data/articles';
+import { getRecentArticleCards } from '../data/articleIndex';
 import { formatDate } from '../i18n';
 import { Eyebrow, ArrowIcon } from './ui';
 import './ArticlesSection.css';
 
-// This whole component is lazy-loaded by Home, so the article data stays out
-// of the initial bundle.
+// Reads the generated card index, not articles.js: three preview cards must
+// not pull in every article body.
 const ArticlesSection = () => {
-  const articles = getRecentArticles(3);
+  const articles = getRecentArticleCards(3);
   if (articles.length === 0) return null;
   const [lead, ...rest] = articles;
 
