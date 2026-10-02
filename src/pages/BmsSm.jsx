@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
-import '@fontsource/heebo/400.css';
-import '@fontsource/heebo/700.css';
-import '@fontsource/heebo/800.css';
-import '@fontsource/heebo/900.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import { FACTS } from '../data/businessFacts';
+import { Eyebrow, ArrowIcon, SlotNumber } from '../components/ui';
+import Icon from '../components/Icon';
+import '../components/FAQ.css';
 import './BmsSm.css';
 
 function trackFb(event, params) {
@@ -24,7 +23,19 @@ const DOMAIN_TYPOS = {
   'walla.com': 'walla.co.il', 'wala.co.il': 'walla.co.il',
 };
 
-function LeadForm() {
+/* Small local icons (the shared Icon set has no lock / bolt / alert / close) */
+const svg = (children, props) => (
+  <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false" {...props}>
+    {children}
+  </svg>
+);
+const IconLock = (p) => svg(<><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></>, p);
+const IconBolt = (p) => svg(<path d="M13 3L5 13.5h6L10 21l8-10.5h-6L13 3z" />, p);
+const IconAlert = (p) => svg(<><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5" /><circle cx="12" cy="16.2" r="0.4" fill="currentColor" /></>, p);
+const IconClose = (p) => svg(<path d="M18 6L6 18M6 6l12 12" />, p);
+
+// Rendered twice (hero + closing); `where` keeps the field ids unique.
+function LeadForm({ where }) {
   const navigate = useNavigate();
   const [firstName, setFirstName]             = useState('');
   const [email, setEmail]                     = useState('');
@@ -38,6 +49,10 @@ function LeadForm() {
   const emailOk       = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
   const showEmailErr  = emailBlurred && email.length > 0 && !emailOk;
   const showEmailOk   = emailBlurred && emailOk;
+
+  const nameId = `bms-fname-${where}`;
+  const emailId = `bms-email-${where}`;
+  const emailErrId = `bms-email-err-${where}`;
 
   const handleEmailBlur = () => {
     setEmailBlurred(true);
@@ -84,24 +99,22 @@ function LeadForm() {
 
   if (success) {
     return (
-      <div className="lead-success" role="status" aria-live="polite">
-        <i className="fa-solid fa-circle-check lead-success-icon" aria-hidden="true" />
-        <div className="lead-success-text">הצ׳קליסט בדרך!</div>
-        <div className="lead-success-sub">מעבירים אותך בעוד כמה שניות...</div>
-        <div className="lead-success-bar" aria-hidden="true">
-          <div className="lead-success-fill" />
-        </div>
+      <div className="card theme-paper bmsm__form bmsm__success" role="status" aria-live="polite">
+        <span className="bmsm__success-icon" aria-hidden="true"><Icon name="check" /></span>
+        <p className="bmsm__success-title">הצ׳קליסט בדרך!</p>
+        <p className="bmsm__success-sub">מעבירים אותך בעוד כמה שניות...</p>
+        <div className="bmsm__success-bar" aria-hidden="true"><span /></div>
       </div>
     );
   }
 
   return (
-    <form className="lead-card" onSubmit={onSubmit} noValidate data-clarity-mask="true">
-      <span className="lead-ribbon" aria-hidden="true">חינמי לגמרי</span>
+    <form className="card theme-paper bmsm__form" onSubmit={onSubmit} noValidate data-clarity-mask="true">
+      <span className="sticker sticker--paper bmsm__form-sticker" aria-hidden="true">חינמי לגמרי</span>
 
       {/* Honeypot */}
       <input
-        className="honeypot"
+        className="bmsm__honeypot"
         type="text"
         name="website"
         value={website}
@@ -111,12 +124,11 @@ function LeadForm() {
         aria-hidden="true"
       />
 
-      <div className="form-grid">
+      <div className="bmsm__fields">
         <div className="field">
-          <label htmlFor="bms-fname">שם פרטי</label>
+          <label htmlFor={nameId}>שם פרטי</label>
           <input
-            className="finput"
-            id="bms-fname"
+            id={nameId}
             type="text"
             placeholder="לדוגמה: מאיה"
             value={firstName}
@@ -126,40 +138,39 @@ function LeadForm() {
             maxLength={60}
             autoComplete="given-name"
           />
-          <i className="fic fa-regular fa-user" aria-hidden="true" />
         </div>
-        <div className={`field${showEmailErr ? ' field-err' : showEmailOk ? ' field-ok' : ''}`}>
-          <label htmlFor="bms-email">כתובת מייל</label>
-          <input
-            className="finput"
-            id="bms-email"
-            type="email"
-            placeholder="you@agency.co.il"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            onBlur={handleEmailBlur}
-            required
-            maxLength={254}
-            autoComplete="email"
-            aria-invalid={showEmailErr || undefined}
-            aria-describedby={showEmailErr ? 'bms-email-err' : undefined}
-          />
-          {showEmailErr
-            ? <i className="fic fa-solid fa-circle-exclamation fic-err" aria-hidden="true" />
-            : showEmailOk
-            ? <i className="fic fa-solid fa-circle-check fic-ok" aria-hidden="true" />
-            : <i className="fic fa-regular fa-envelope" aria-hidden="true" />
-          }
+        <div className={`field bmsm__email${showEmailErr ? ' is-err' : showEmailOk ? ' is-ok' : ''}`}>
+          <label htmlFor={emailId}>כתובת מייל</label>
+          <div className="bmsm__email-wrap">
+            <input
+              id={emailId}
+              className={showEmailErr ? 'error' : undefined}
+              type="email"
+              inputMode="email"
+              dir="ltr"
+              placeholder="you@agency.co.il"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              onBlur={handleEmailBlur}
+              required
+              maxLength={254}
+              autoComplete="email"
+              aria-invalid={showEmailErr || undefined}
+              aria-describedby={showEmailErr ? emailErrId : undefined}
+            />
+            {showEmailErr && <IconAlert className="bmsm__email-state bmsm__email-state--err" />}
+            {showEmailOk && <Icon name="check" className="bmsm__email-state bmsm__email-state--ok" />}
+          </div>
           {showEmailErr && (
-            <span id="bms-email-err" className="field-hint-err" role="alert">
+            <span id={emailErrId} className="field__error" role="alert">
               נראה שהמייל לא תקין
             </span>
           )}
           {emailSuggestion && !showEmailErr && (
-            <span className="field-hint-suggest">
+            <span className="bmsm__suggest small">
               האם התכוונת ל-
-              <button type="button" className="field-suggest-btn" onClick={acceptSuggestion}>
-                {emailSuggestion}
+              <button type="button" className="link" onClick={acceptSuggestion}>
+                <bdi>{emailSuggestion}</bdi>
               </button>
               ?
             </span>
@@ -167,32 +178,32 @@ function LeadForm() {
         </div>
       </div>
 
-      <button className="cta-gold" type="submit" disabled={loading} aria-busy={loading}>
+      <button className={`btn btn--signal btn--block bmsm__submit${loading ? ' btn--plain' : ''}`} type="submit" disabled={loading} aria-busy={loading}>
         {loading ? (
-          <>
-            <i className="fa-solid fa-circle-notch fa-spin" aria-hidden="true" />
+          <span className="bmsm__submit-busy">
+            <Icon name="spinner" spin />
             שולחת...
-          </>
+          </span>
         ) : (
           <>
-            אני רוצה את הצ׳קליסט
-            <i className="fa-solid fa-arrow-left" aria-hidden="true" />
+            <span>אני רוצה את הצ׳קליסט</span>
+            <span className="btn__arrow" aria-hidden="true"><ArrowIcon /></span>
           </>
         )}
       </button>
 
       {error && (
-        <div className="form-err" role="alert">
-          <i className="fa-solid fa-triangle-exclamation" aria-hidden="true" />
-          {' '}{error}
+        <div className="bmsm__form-err" role="alert">
+          <IconAlert />
+          <span>{error}</span>
         </div>
       )}
 
-      <div className="form-trust">
-        <span><i className="fa-solid fa-lock" aria-hidden="true" /> הפרטים מוצפנים</span>
-        <span><i className="fa-solid fa-circle-check" aria-hidden="true" /> ללא ספאם</span>
-        <span><i className="fa-solid fa-bolt" aria-hidden="true" /> במייל בתוך דקה</span>
-      </div>
+      <ul className="bmsm__trust">
+        <li><IconLock /> הפרטים מוצפנים</li>
+        <li><Icon name="check" /> ללא ספאם</li>
+        <li><IconBolt /> במייל בתוך דקה</li>
+      </ul>
     </form>
   );
 }
@@ -220,56 +231,57 @@ const BMS_FAQS = [
   },
 ];
 
+const BENEFITS = [
+  {
+    title: 'הפרדה מהתקלות של הלקוח',
+    body: 'הצ׳קליסט מראה בדיוק איך לשמור את החשבון הפרטי שלך מחוץ לבלגן של הלקוח, כך שהתקלות שלו לא הופכות לבעיה שלך.',
+  },
+  {
+    title: 'ביטחון בשיחת המכירה',
+    body: 'תדעי בדיוק מה המצב של החשבון לפני שסיכמת על מחיר. את נכנסת לשיחה כשאת יודעת מה שווה ומה לא, ויוצאת ממנה עם הצעה ריאלית, לא הבטחת שווא.',
+  },
+  {
+    title: 'תיעוד שמכסה אותך לפני הבעיה',
+    body: 'תיעוד מסודר של מצב החשבון ביום שאת מתחילה. זה מה שמפריד בין ״זה לא הייתי אני״ לבין ״אין לי איך להוכיח את זה״.',
+  },
+];
+
+// Every number comes from the evidence register (businessFacts.js)
+const STATS = [
+  { value: FACTS.accountsRecovered.display, label: 'חשבונות שוחזרו' },
+  { value: FACTS.successRate.display, label: 'הצלחה בשחזור' },
+  { value: FACTS.rating.display, label: 'דירוג לקוחות מתוך 5' },
+];
+
 function FaqSection() {
-  const [open, setOpen] = useState(0);
-  const toggle = (i) => setOpen(prev => prev === i ? -1 : i);
-
   return (
-    <section className="faq-section" id="faq" aria-labelledby="faqHead">
-      <div className="wrap">
-        <div className="faq-shell">
-          <div className="sec-head">
-            <h2 id="faqHead">
-              שאלות שמנהלות <span className="gold">תמיד שואלות</span>
-            </h2>
-            <p>תשובות ישירות לכל מה שעולה לפני שלוחצים להוריד.</p>
-          </div>
-
-          <div className="faq-list" role="list">
-            {BMS_FAQS.map((item, i) => (
-              <div
-                key={i}
-                className={`faq-item${open === i ? ' is-open' : ''}`}
-                role="listitem"
-              >
-                <button
-                  className="faq-q"
-                  onClick={() => toggle(i)}
-                  aria-expanded={open === i}
-                  aria-controls={`faq-answer-${i}`}
-                >
-                  <span>{item.q}</span>
-                  <i className="fa-solid fa-chevron-down faq-chevron" aria-hidden="true" />
-                </button>
-                <div
-                  className="faq-a"
-                  id={`faq-answer-${i}`}
-                  aria-hidden={open !== i}
-                >
-                  <div className="faq-a-inner">
-                    <p>{item.a}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="faq-cta-nudge">
+    <section className="bmsm__faq section" id="faq" aria-labelledby="faqHead">
+      <div className="container bmsm__split">
+        <header className="bmsm__split-head m-reveal">
+          <Eyebrow num="03">שאלות נפוצות</Eyebrow>
+          <h2 className="h1" id="faqHead">
+            <span className="lt">שאלות שמנהלות</span> <span className="mk m-in">תמיד שואלות</span>
+          </h2>
+          <p className="lead">תשובות ישירות לכל מה שעולה לפני שלוחצים להוריד.</p>
+          <p className="bmsm__nudge">
             עוד שאלות?{' '}
-            <a href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer">
+            <a className="link" href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer">
               שלחי הודעה בוואטסאפ
             </a>
           </p>
+        </header>
+
+        <div className="faq-list">
+          {BMS_FAQS.map((item, i) => (
+            <details key={item.q} className="faq-item" name="bmsm-faq" open={i === 0 || undefined}>
+              <summary>
+                <span className="faq-item__num num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <span className="faq-item__q">{item.q}</span>
+                <span className="faq-item__icon" aria-hidden="true" />
+              </summary>
+              <p className="faq-item__a">{item.a}</p>
+            </details>
+          ))}
         </div>
       </div>
     </section>
@@ -278,7 +290,9 @@ function FaqSection() {
 
 export default function BmsSm() {
   const firedRef = useRef(false);
+  const finalRef = useRef(null);
   const [stickyClosed, setStickyClosed] = useState(false);
+  const [stickyShown, setStickyShown] = useState(false);
 
   useEffect(() => {
     if (firedRef.current) return;
@@ -290,321 +304,240 @@ export default function BmsSm() {
   useEffect(() => {
     try {
       if (sessionStorage.getItem('bmsm-sticky-dismissed') === '1') setStickyClosed(true);
-    } catch {}
+    } catch { /* storage blocked, ignore */ }
+  }, []);
+
+  // The bar appears once the hero form has scrolled away and steps aside
+  // again when the closing form is on screen: never two forms' CTAs at once.
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const end = finalRef.current;
+      const atEnd = end ? end.getBoundingClientRect().top < window.innerHeight * 0.85 : false;
+      setStickyShown(window.scrollY > 640 && !atEnd);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
   }, []);
 
   const dismissSticky = () => {
     setStickyClosed(true);
-    try { sessionStorage.setItem('bmsm-sticky-dismissed', '1'); } catch {}
+    try { sessionStorage.setItem('bmsm-sticky-dismissed', '1'); } catch { /* ignore */ }
   };
 
   return (
-    <div className="bmsm-v2" dir="rtl">
-      <a href="#getit" className="bmsm-skip-link">דלגי לטופס</a>
+    <div className="bmsm" dir="rtl">
+      <a href="#getit" className="skip-link bmsm__skip">דלגי לטופס</a>
 
       {/* ── TOPBAR ──────────────────────────────────────────── */}
-      <div className="topbar">
-        <span className="dot" aria-hidden="true" />
-        <span>צ׳קליסט סינון לקוחות 2026</span>
-        <span className="pill">לכל מנהלת סושיאל</span>
+      <div className="bmsm__topbar theme-ink">
+        <div className="container bmsm__topbar-in">
+          <span className="bmsm__dot" aria-hidden="true" />
+          <span>צ׳קליסט סינון לקוחות 2026</span>
+          <span className="bmsm__pill">לכל מנהלת סושיאל</span>
+        </div>
       </div>
 
-      {/* ── HERO ────────────────────────────────────────────── */}
-      <div className="hero">
-        <div className="wrap">
+      {/* ── BRAND ROW ───────────────────────────────────────── */}
+      <header className="bmsm__nav theme-ink">
+        <div className="container bmsm__nav-in">
+          <div className="bmsm__brand">
+            <span className="bmsm__brand-mark" aria-hidden="true">או</span>
+            <span className="bmsm__brand-text">
+              אושר רווח
+              <small>BMS · מומחה תשתיות מטא</small>
+            </span>
+          </div>
+          <p className="bmsm__nav-meta small">
+            <span>
+              <Icon name="shield" />
+              מומחה תשתיות מטא · <bdi>{FACTS.accountsRecovered.display}</bdi> שחזורים
+            </span>
+            <span>
+              <Icon name="star" />
+              <bdi>{FACTS.rating.display}</bdi>
+            </span>
+          </p>
+        </div>
+      </header>
 
-          {/* NAV */}
-          <nav className="nav" aria-label="ראשי">
-            <div className="brand">
-              <div className="brand-mark" aria-hidden="true">או</div>
-              <div className="brand-text">
-                אושר רווח
-                <small>BMS · מומחה תשתיות מטא</small>
-              </div>
-            </div>
-            <div className="nav-meta">
-              <span className="vbadge">
-                <i className="fa-solid fa-shield-halved" aria-hidden="true" />
-                {' '}מומחה תשתיות מטא · 2,500+ שחזורים
-              </span>
-              <span>
-                <i className="fa-solid fa-star" aria-hidden="true" style={{ color: 'var(--accent-light)' }} />
-                {' '}4.9
-              </span>
-            </div>
-          </nav>
-
-          {/* HERO GRID */}
-          <div className="hero-grid">
-
-            {/* RIGHT: Copy */}
-            <div className="hero-copy">
-              <span className="eyebrow">
-                <span className="ldot" aria-hidden="true" />
-                {' '}צ׳קליסט סינון לקוחות · עדכון 2026
-              </span>
-
-              <h1>
-                תפסיקי לשלם בזמן ובאנרגיה<br />
-                על <span className="accent">הבלאגן</span> של הלקוחות שלך.
+      <main id="main">
+        {/* ── HERO: headline, then the form ───────────────────── */}
+        <section className="bmsm__hero theme-ink bg-grid">
+          <div className="container bmsm__hero-grid">
+            <div className="bmsm__hero-head">
+              <p className="bmsm__kicker">( צ׳קליסט סינון לקוחות · עדכון 2026 )</p>
+              <h1 className="bmsm__title h1">
+                <span className="lt">תפסיקי לשלם בזמן ובאנרגיה</span>{' '}
+                על <span className="mk">הבלאגן</span> של הלקוחות שלך.
               </h1>
+            </div>
 
-              <p className="lede">
+            <div className="bmsm__hero-form" id="getit" aria-label="קבלי את הצ׳קליסט" role="region">
+              <LeadForm where="hero" />
+            </div>
+
+            <div className="bmsm__hero-lede">
+              <p className="lead">
                 צ׳קליסט הסינון המעודכן ל‑2026:{' '}
                 <b>איך להבין מה קורה מאחורי הקלעים</b> של החשבון
                 ב‑5 דקות, ולהגן על המוניטין המקצועי שלך לפני שאת בכלל מסכימה לקחת את הלקוח.
               </p>
-
-              <div className="meta-row">
-                <span className="chip">
-                  <i className="fa-solid fa-file-pdf" aria-hidden="true" />
-                  5 בדיקות קריטיות
-                </span>
-                <span className="chip">
-                  <i className="fa-solid fa-clock" aria-hidden="true" />
-                  ‏5 דקות קריאה
-                </span>
-              </div>
-
-              <div className="anchor-cta">
-                <a href="#getit" className="btn-gold">
-                  <i className="fa-solid fa-arrow-down" aria-hidden="true" />
-                  קבלי את הצ׳קליסט עכשיו
-                </a>
-                <a href="#how" className="btn-ghost">
-                  <i className="fa-regular fa-circle-play" aria-hidden="true" />
-                  {' '}ראי מה כלול
-                </a>
-              </div>
+              <ul className="bmsm__chips">
+                <li className="tag">5 בדיקות קריטיות</li>
+                <li className="tag">‏5 דקות קריאה</li>
+                <li>
+                  <a href="#how" className="link link--arrow small">
+                    ראי מה כלול
+                    <ArrowIcon />
+                  </a>
+                </li>
+              </ul>
             </div>
 
-            {/* LEFT: PDF on iPad */}
-            <div className="visual-stage" aria-hidden="true">
-              <div className="ipad">
-                <div className="ipad-screen">
-                  <div className="pdf">
-                    <div className="pdf-toolbar">
-                      <div className="tb-left">
-                        <i className="fa-solid fa-file-pdf" />
-                        <span>BMS_Client_Screening_2026.pdf</span>
-                      </div>
-                      <div className="tb-right">
-                        <span className="pgs">
-                          <i className="fa-solid fa-bookmark" style={{ fontSize: '.55rem' }} />
-                          {' '}03 / 14
-                        </span>
-                      </div>
-                    </div>
+            {/* The checklist itself, as a document lying on the page */}
+            <figure className="bmsm__doc">
+              <img
+                src="/images/newchecklist.webp"
+                alt="צ׳קליסט סינון לקוחות 2026 פתוח על טאבלט ועל טלפון"
+                width="819"
+                height="1024"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption className="sticker bmsm__doc-sticker bmsm__doc-sticker--a">
+                PDF מלא · 2026
+                <small>עם כל שאלות הסינון</small>
+              </figcaption>
+              <span className="sticker sticker--paper bmsm__doc-sticker bmsm__doc-sticker--b" aria-hidden="true">
+                5 בדיקות
+                <small>לפני כל לקוח חדש</small>
+              </span>
+            </figure>
+          </div>
+        </section>
 
-                    <div className="pdf-stage">
-                      <div className="pdf-tabs">
-                        <div className="pdf-tab" />
-                        <div className="pdf-tab" />
-                        <div className="pdf-tab active" />
-                        <div className="pdf-tab" />
-                        <div className="pdf-tab" />
-                      </div>
+        {/* ── WHAT'S INSIDE ───────────────────────────────────── */}
+        <section className="bmsm__inside section theme-mist" id="how" aria-labelledby="benefitsHead">
+          <div className="container bmsm__split">
+            <header className="bmsm__split-head m-reveal">
+              <Eyebrow num="01">מה כלול</Eyebrow>
+              <h2 className="h1" id="benefitsHead">
+                <span className="lt">3 שכבות שמגנות על</span>{' '}
+                <span className="mk m-in">המוניטין, הכסף, והזמן</span> שלך
+              </h2>
+              <p className="lead">
+                נבנה אחרי חמש שנים של ראיית אותן טעויות שוב ושוב.
+                אפשר לא לחזור עליהן.
+              </p>
+              <a href="#getit" className="btn btn--ink bmsm__inside-cta">
+                <span>קבלי את הצ׳קליסט עכשיו</span>
+                <span className="btn__arrow" aria-hidden="true"><ArrowIcon /></span>
+              </a>
+            </header>
 
-                      <div className="page-stack">
-                        <div className="page behind-2" />
-                        <div className="page behind-1" />
-                        <div className="page front">
-                          <div className="pdf-h-row">
-                            <div className="doc">צ׳קליסט סינון לקוחות 2026</div>
-                            <div className="pg">עמ׳ 03</div>
-                          </div>
-                          <h2 className="pdf-title">
-                            חלק א׳: בדיקת <span className="gold">בעלות הנכסים</span>
-                          </h2>
-                          <div className="pdf-sub">
-                            לפני שאת מסכימה על מחיר: תוודאי שאת יודעת מי הבעלים האמיתי של
-                            החשבון, של הפיקסל, ושל מנהל העסקים.
-                          </div>
-                          <div className="pdf-section">
-                            <h4>‏01 · בדיקת בעלות חשבון פרסום <span>4 בדיקות</span></h4>
-                            <div className="pdf-li">
-                              <span className="num done">✓</span>
-                              <div><b>הלקוחה</b> רשומה כבעלים, לא העובד הקודם.</div>
-                              <span className="tag">תקין</span>
-                            </div>
-                            <div className="pdf-li">
-                              <span className="num done">✓</span>
-                              <div>אמצעי תשלום מחובר ל<b>חשבון העסק</b>.</div>
-                              <span className="tag">תקין</span>
-                            </div>
-                            <div className="pdf-li">
-                              <span className="num">3</span>
-                              <div>הפיקסל לא משויך לסוכנות הקודמת.</div>
-                              <span className="tag warn">לבדוק</span>
-                            </div>
-                            <div className="pdf-li">
-                              <span className="num">4</span>
-                              <div>קטלוג המוצרים מחובר לדומיין הנכון.</div>
-                              <span className="tag warn">לבדוק</span>
-                            </div>
-                          </div>
-                          <div className="pdf-section">
-                            <h4>‏02 · הרשאות גישה <span>3 בדיקות</span></h4>
-                            <div className="pdf-li">
-                              <span className="num">5</span>
-                              <div>אין משתמשים <b>לא מזוהים</b> ברמת מנהל.</div>
-                              <span className="tag">סטטוס</span>
-                            </div>
-                            <div className="pdf-li">
-                              <span className="num">6</span>
-                              <div>הוסרו עובדים לשעבר ושותפים ישנים.</div>
-                              <span className="tag">סטטוס</span>
-                            </div>
-                          </div>
-                          <div className="pdf-foot">
-                            <span>‏© 2026 · אושר רווח</span>
-                            <span className="stamp">
-                              <i className="fa-solid fa-shield-halved" style={{ fontSize: '.55rem' }} />
-                              {' '}BMS Verified
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+            <ol className="rows bmsm__rows m-stagger">
+              {BENEFITS.map((b, i) => (
+                <li className="row bmsm__row" key={b.title}>
+                  <span className="bmsm__row-num num" aria-hidden="true">0{i + 1}</span>
+                  <div className="bmsm__row-text">
+                    <h3 className="h3">{b.title}</h3>
+                    <p className="muted">{b.body}</p>
                   </div>
-                </div>
-              </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
 
-              <div className="float-badge fb-1">
-                <span className="b-ic"><i className="fa-solid fa-file-lines" /></span>
-                <div>
-                  PDF מלא · 2026
-                  <small>עם כל שאלות הסינון</small>
-                </div>
-              </div>
-              <div className="float-badge fb-2">
-                <span className="b-ic"><i className="fa-solid fa-shield-halved" /></span>
-                <div>
-                  5 בדיקות
-                  <small>לפני כל לקוח חדש</small>
-                </div>
+        {/* ── ABOUT ───────────────────────────────────────────── */}
+        <section className="bmsm__about section theme-ink" aria-label="על אושר רווח">
+          <div className="container">
+            <div className="bmsm__about-grid">
+              <figure className="bmsm__about-photo m-reveal">
+                <img
+                  src="/images/brand/osher-portrait-400.webp"
+                  srcSet="/images/brand/osher-portrait-400.webp 400w, /images/brand/osher-portrait-800.webp 800w"
+                  sizes="(min-width: 960px) 280px, 160px"
+                  alt="אושר רווח"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <div className="bmsm__about-text m-reveal">
+                <Eyebrow num="02">מי מאחורי הצ׳קליסט</Eyebrow>
+                <h2 className="h2">אושר רווח · <span className="lt">מומחה תשתיות מטא</span></h2>
+                <p className="lead">
+                  חמש שנים של טיפול בכל סוגי הלקוחות למעל 2,500 חשבונות של עסקים בישראל.
+                  הצ׳קליסט הזה הוא תקציר של כל הטעויות שראיתי, ואיך אפשר למנוע
+                  אותן עוד לפני שלוקחים את הלקוח.
+                </p>
               </div>
             </div>
+            <dl className="bmsm__stats">
+              {STATS.map((s) => (
+                <div className="bmsm__stat" key={s.label}>
+                  <dd><SlotNumber value={s.value} /></dd>
+                  <dt>{s.label}</dt>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
 
-          </div>{/* /hero-grid */}
-        </div>
-      </div>
+        {/* ── FAQ ─────────────────────────────────────────────── */}
+        <FaqSection />
 
-      {/* ── FORM SECTION ────────────────────────────────────── */}
-      <section className="form-section" id="getit" aria-label="קבלי את הצ׳קליסט">
-        <div className="wrap">
-          <div className="form-shell">
-            <div className="head">
-              <h2>
-                תשלח לי את הצ׳קליסט,{' '}
-                <span className="gold">זה לוקח שניה</span>
+        {/* ── FORM, AGAIN ─────────────────────────────────────── */}
+        <section className="bmsm__final section theme-mist" ref={finalRef} aria-labelledby="finalHead">
+          <div className="container bmsm__final-grid">
+            <div className="m-reveal">
+              <Eyebrow num="04">חינם, ישר למייל</Eyebrow>
+              <h2 className="h1" id="finalHead">
+                <span className="lt">תשלח לי את הצ׳קליסט,</span>{' '}
+                <span className="mk m-in">זה לוקח שניה</span>
               </h2>
             </div>
-            <LeadForm />
-          </div>
-        </div>
-      </section>
-
-      {/* ── BENEFITS ────────────────────────────────────────── */}
-      <section className="benefits" id="how" aria-labelledby="benefitsHead">
-        <div className="wrap">
-          <div className="sec-head">
-            <h2 id="benefitsHead">
-              3 שכבות שמגנות על <span className="gold">המוניטין, הכסף, והזמן</span> שלך
-            </h2>
-            <p>
-              נבנה אחרי חמש שנים של ראיית אותן טעויות שוב ושוב.
-              אפשר לא לחזור עליהן.
-            </p>
-          </div>
-
-          <div className="benefit-grid">
-            <article className="benefit">
-              <div className="benefit-num" aria-hidden="true">01</div>
-              <div className="benefit-icon">
-                <i className="fa-solid fa-user-shield" aria-hidden="true" />
-              </div>
-              <h3>הפרדה מהתקלות של הלקוח</h3>
-              <p>
-                הצ׳קליסט מראה בדיוק איך לשמור את החשבון הפרטי שלך מחוץ לבלגן של הלקוח,
-                כך שהתקלות שלו לא הופכות לבעיה שלך.
-              </p>
-            </article>
-
-            <article className="benefit">
-              <div className="benefit-num" aria-hidden="true">02</div>
-              <div className="benefit-icon">
-                <i className="fa-solid fa-handshake" aria-hidden="true" />
-              </div>
-              <h3>ביטחון בשיחת המכירה</h3>
-              <p>
-                תדעי בדיוק מה המצב של החשבון לפני שסיכמת על מחיר. את נכנסת לשיחה כשאת
-                יודעת מה שווה ומה לא, ויוצאת ממנה עם הצעה ריאלית, לא הבטחת שווא.
-              </p>
-            </article>
-
-            <article className="benefit">
-              <div className="benefit-num" aria-hidden="true">03</div>
-              <div className="benefit-icon">
-                <i className="fa-solid fa-shield-halved" aria-hidden="true" />
-              </div>
-              <h3>תיעוד שמכסה אותך לפני הבעיה</h3>
-              <p>
-                תיעוד מסודר של מצב החשבון ביום שאת מתחילה. זה מה שמפריד בין
-                ״זה לא הייתי אני״ לבין ״אין לי איך להוכיח את זה״.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FAQ ─────────────────────────────────────────────── */}
-      <FaqSection />
-
-      {/* ── ABOUT ───────────────────────────────────────────── */}
-      <section className="about-strip" aria-label="על אושר רווח">
-        <div className="wrap">
-          <div className="about-card">
-            <div className="about-photo" aria-hidden="true">או</div>
-            <div>
-              <h4>אושר רווח · מומחה תשתיות מטא</h4>
-              <p>
-                חמש שנים של טיפול בכל סוגי הלקוחות למעל 2,500 חשבונות של עסקים בישראל.
-                הצ׳קליסט הזה הוא תקציר של כל הטעויות שראיתי, ואיך אפשר למנוע
-                אותן עוד לפני שלוקחים את הלקוח.
-              </p>
-            </div>
-            <div className="about-stats">
-              <div className="stat"><b>2,500+</b><span>עסקים</span></div>
-              <div className="stat"><b>5</b><span>שנות ניסיון</span></div>
-              <div className="stat"><b>0</b><span>חשבונות שאבדו</span></div>
+            <div className="bmsm__final-form m-reveal">
+              <LeadForm where="final" />
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
       {/* ── FOOTER ──────────────────────────────────────────── */}
-      <footer className="footer">
-        <div className="wrap">
+      <footer className="bmsm__footer theme-ink">
+        <div className="container small">
           © {new Date().getFullYear()} Israel Tech Force · אושר רווח · כל הזכויות שמורות
           {' '}·{' '}
-          <a href="/privacy">פרטיות</a>
+          <a className="link" href="/privacy">פרטיות</a>
         </div>
       </footer>
 
       {/* ── STICKY MOBILE CTA ───────────────────────────────── */}
       {!stickyClosed && (
-        <div className="sticky-cta" aria-label="קבלי את הצ׳קליסט">
-          <div className="txt">צ׳קליסט סינון לקוחות · 2026</div>
-          <a href="#getit">קבלי את הצ׳קליסט</a>
+        <div className={`bmsm__sticky${stickyShown ? ' is-visible' : ''}`} aria-label="קבלי את הצ׳קליסט" aria-hidden={!stickyShown}>
           <button
-            className="sticky-dismiss"
+            className="bmsm__sticky-close"
             onClick={dismissSticky}
             aria-label="סגרי פס זה"
             type="button"
+            tabIndex={stickyShown ? 0 : -1}
           >
-            <i className="fa-solid fa-xmark" aria-hidden="true" />
+            <IconClose />
           </button>
+          <p className="bmsm__sticky-note">צ׳קליסט סינון לקוחות · 2026</p>
+          <a className="bmsm__sticky-btn" href="#getit" tabIndex={stickyShown ? 0 : -1}>קבלי את הצ׳קליסט</a>
         </div>
       )}
 

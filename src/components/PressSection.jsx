@@ -1,82 +1,59 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { pressItems, pressItemsEn } from '../data/press';
-import { useLang } from '../i18n';
-import Icon from './Icon';
+import { pressItems } from '../data/press';
+import { ArrowIcon } from './ui';
 import './PressSection.css';
 
-const STR = {
-  he: {
-    items: pressItems,
-    sectionAria: 'כפי שסוקרנו בתקשורת',
-    label: 'כפי שסוקרנו בתקשורת',
-    moreLink: '← צפייה בכל הכתבות',
-  },
-  en: {
-    items: pressItemsEn,
-    sectionAria: 'As covered in the media',
-    label: 'As covered in the media',
-    moreLink: 'View all articles →',
-  },
-};
+// Outlets that actually covered the work, in order of first appearance
+const OUTLETS = [...new Set(pressItems.map((item) => item.siteName))];
 
-const SiteLogo = ({ item }) => {
-  if (item.siteShortName === 'ynet') {
-    return <span className="press-logo-text press-logo-ynet">ynet</span>;
-  }
-  if (item.siteShortName === 'facebook') {
-    return (
-      <span className="press-logo-text" style={{ color: item.siteColor }}>
-        <Icon name="facebook" aria-hidden="true" /> {item.siteName}
-      </span>
-    );
-  }
-  return (
-    <span className="press-logo-text" style={item.siteColor ? { color: item.siteColor } : undefined}>
-      {item.siteName}
-    </span>
-  );
-};
+const PressSection = () => (
+  <section className="press theme-ink" aria-label="כפי שסוקרנו בתקשורת">
+    {/* Outlet names drift past in one direction; two copies make the loop seamless */}
+    <div className="press__marquee m-marquee" aria-hidden="true">
+      <div className="m-marquee__track">
+        {[0, 1].map((copy) => (
+          <div className="press__marquee-set" key={copy}>
+            {[...OUTLETS, ...OUTLETS].map((name, i) => (
+              <span className="press__outlet" key={`${copy}-${i}`}>
+                {name}
+                <span className="press__diamond" />
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
 
-const PressSection = () => {
-  const { lang, prefix } = useLang();
-  const t = STR[lang];
+    <div className="container press__body">
+      <div className="press__head">
+        <p className="press__label">( כפי שסוקרנו בתקשורת )</p>
+        <Link to="/press" className="link link--arrow small">
+          כל הכתבות
+          <ArrowIcon />
+        </Link>
+      </div>
 
-  return (
-    <section className="press-section" aria-label={t.sectionAria}>
-      <div className="press-container">
-
-        <div className="press-header">
-          <span className="press-divider" aria-hidden="true"></span>
-          <p className="press-label">{t.label}</p>
-          <span className="press-divider" aria-hidden="true"></span>
-        </div>
-
-        <div className="press-items">
-          {/* Homepage strip shows the 4 most recent; full list lives at /press */}
-          {t.items.slice(0, 4).map((item) => (
+      {/* Homepage shows the 4 most recent; full list lives at /press */}
+      <ol className="press__list">
+        {pressItems.slice(0, 4).map((item) => (
+          <li key={item.id}>
             <a
-              key={item.id}
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="press-item"
-              aria-label={`${item.siteName}: ${item.headline}`}
+              className="press__row"
             >
-              <SiteLogo item={item} />
-              <span className="press-headline">"{item.headline}"</span>
-              <span className="press-date">{item.date}</span>
+              <span className="press__date num">{item.date}</span>
+              <span className="press__site">{item.siteName}</span>
+              <span className="press__headline">{item.headline}</span>
+              <span className="press__go" aria-hidden="true"><ArrowIcon /></span>
             </a>
-          ))}
-        </div>
-
-        <Link to={`${prefix}/press`} className="press-more-link">
-          {t.moreLink}
-        </Link>
-
-      </div>
-    </section>
-  );
-};
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+);
 
 export default PressSection;

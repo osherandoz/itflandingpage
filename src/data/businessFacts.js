@@ -10,7 +10,6 @@ export const FACTS = {
     value: 2500,
     display: '2,500+',
     he: '2,500+ חשבונות שוחזרו',
-    en: '2,500+ accounts recovered',
     definition: 'Accounts (not businesses) recovered since 2020. One business can be several accounts.',
     source: 'Internal case log — TODO: attach count + date range',
   },
@@ -18,7 +17,6 @@ export const FACTS = {
     value: 4.9,
     display: '4.9',
     he: 'דירוג 4.9/5',
-    en: 'Rated 4.9/5',
     definition: 'Average client rating.',
     source: 'TODO: link the review source + review count before quoting a count',
   },
@@ -30,19 +28,16 @@ export const FACTS = {
   },
   typicalTurnaround: {
     he: 'תלוי מקרה',
-    en: 'Depends on the case',
     definition: 'Osher\'s call, 2026-09-14: turnaround varies too much by case type (simple report vs. hacked/BM/permanent) to quote one number anywhere on the site.',
   },
   // Matches LocalBusiness.openingHours in src/data/schemas.js ('Su-Fr 09:00-16:00').
   // If the real schedule is different, change BOTH here and in schemas.js.
   hours: {
     he: 'א׳–ו׳ 09:00–16:00',
-    en: 'Sun–Fri 09:00–16:00',
     schema: 'Su-Fr 09:00-16:00',
   },
   priceRange: {
     he: '₪500–3,000',
-    en: '₪500–3,000 (about $150–$900)',
     definition: 'Typical fee range; exact quote after free diagnosis; paid only after success.',
   },
   phone: '+972509823235',

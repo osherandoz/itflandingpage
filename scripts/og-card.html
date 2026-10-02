@@ -1,0 +1,71 @@
+<!doctype html>
+<!-- Template for every share card. With no query string it is the home card
+     (public/images/og-card.png); scripts/og-cards.mjs passes ?k= (kicker),
+     ?l= (light line) and ?t= (bold title) for the per-page cards in public/images/og/. -->
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face {
+    font-family: 'Heebo';
+    font-weight: 100 900;
+    src: url('../node_modules/@fontsource-variable/heebo/files/heebo-hebrew-wght-normal.woff2') format('woff2-variations');
+    unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+FB1D-FB4F;
+  }
+  @font-face {
+    font-family: 'Heebo';
+    font-weight: 100 900;
+    src: url('../node_modules/@fontsource-variable/heebo/files/heebo-latin-wght-normal.woff2') format('woff2-variations');
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    font-family: 'Heebo', sans-serif; color: #0b1524; background: #f5f2ea;
+    background-image:
+      linear-gradient(rgba(11,21,36,.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11,21,36,.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+    display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 48px; padding: 64px 72px;
+  }
+  .copy { display: flex; flex-direction: column; justify-content: space-between; }
+  .kicker { font-size: 24px; font-weight: 500; color: #3c4a60; }
+  h1 { font-size: 62px; line-height: 1.1; font-weight: 900; white-space: nowrap; }
+  h1 .lt { font-weight: 300; display: block; }
+  h1.fit { white-space: normal; text-wrap: balance; }
+  h1.fit .mk { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .mk { background: linear-gradient(#c9d6ff, #c9d6ff) no-repeat 100% 82% / 100% .92em; padding-inline: .14em; border-radius: .1em; }
+  .facts { display: flex; gap: 40px; border-top: 2px solid #0b1524; padding-top: 20px; font-size: 26px; font-weight: 500; color: #3c4a60; }
+  .facts b { display: block; font-size: 44px; font-weight: 900; color: #0b1524; line-height: 1.1; }
+  .photo { position: relative; align-self: stretch; border-radius: 32px; background: #dce7f7; overflow: hidden; }
+  .sticker { position: absolute; right: -14px; bottom: 28px; padding: 10px 18px; border-radius: 12px; background: #1f4dff; color: #fff; font-size: 24px; font-weight: 800; box-shadow: 5px 5px 0 #0b1524; rotate: -4deg; }
+  .photo-wrap { position: relative; align-self: stretch; display: grid; }
+  .photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; mix-blend-mode: multiply; }
+</style>
+</head>
+<body>
+  <div class="copy">
+    <p class="kicker">( שחזור חשבונות פייסבוק · אינסטגרם · וואטסאפ )</p>
+    <h1><span class="lt">אחזיר לך את החשבון.</span>לא הצלחתי, <span class="mk">לא שילמת.</span></h1>
+    <div class="facts">
+      <div><b><bdi>2,500+</bdi></b>חשבונות שוחזרו</div>
+      <div><b><bdi>95%+</bdi></b>הצלחה בשחזור</div>
+      <div><b>תשלום</b>רק אחרי הצלחה</div>
+    </div>
+  </div>
+  <div class="photo-wrap"><div class="photo"><img src="../public/images/brand/osher-stand-800.webp" alt=""></div><span class="sticker" dir="ltr">IsraelTechForce</span></div>
+<script>
+  const q = new URLSearchParams(location.search);
+  if (q.get('t')) {
+    const t = q.get('t'), l = q.get('l') || '';
+    const h1 = document.querySelector('h1');
+    const n = t.length + l.length;
+    h1.className = 'fit';
+    h1.style.fontSize = (n <= 30 ? 62 : n <= 48 ? 52 : 44) + 'px';
+    h1.innerHTML = '';
+    if (l) h1.append(Object.assign(document.createElement('span'), { className: 'lt', textContent: l }));
+    h1.append(Object.assign(document.createElement('span'), { className: 'mk', textContent: t }));
+    document.querySelector('.kicker').textContent = '( ' + q.get('k') + ' )';
+  }
+</script>
+</body>
+</html>

@@ -1,871 +1,731 @@
 import { useEffect, useState } from 'react';
 import { withCampaignParams } from '../utils/track';
-// Heebo heading weights, self-hosted (400/700 already loaded in root)
-import '@fontsource/heebo/800.css';
-import '@fontsource/heebo/900.css';
+import { Btn, Eyebrow, FillText, SlotNumber } from '../components/ui';
+import Icon from '../components/Icon';
+import '../components/FAQ.css';
+// Shared by both VSL variants (V2 imports this file too): one visual system,
+// so the A/B test compares the offers, not the paint.
 import './VslBms.css';
 
-/* ============================================================
-   ICONS. Lucide-style monoline SVG, currentColor
-   ============================================================ */
-const Icon = ({ children, size = 20, strokeWidth = 2, ...rest }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={strokeWidth}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-    {...rest}
-  >
-    {children}
-  </svg>
-);
+/* Local icons that the shared Icon set does not carry */
+const svg = { viewBox: '0 0 24 24', 'aria-hidden': true, focusable: 'false' };
+const line = { ...svg, fill: 'none', stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round' };
+const IconPlay = () => (<svg {...svg} fill="currentColor"><path d="M7 4l13 8-13 8z" /></svg>);
+const IconVolume = () => (<svg {...line}><path d="M11 5L6 9H2v6h4l5 4z" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" /></svg>);
+const IconLock = () => (<svg {...line}><rect x="3" y="11" width="18" height="11" rx="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>);
+const IconZap = () => (<svg {...line}><path d="M13 2L3 14h9l-1 8 10-12h-9z" /></svg>);
 
-const IconArrowLeft = (p) => (<Icon {...p}><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" /></Icon>);
-const IconShield = (p) => (<Icon {...p}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></Icon>);
-const IconReceipt = (p) => (<Icon {...p}><path d="M4 2v20l3-2 3 2 3-2 3 2 3-2 3 2V2" /><path d="M8 7h8M8 11h8M8 15h5" /></Icon>);
-const IconZap = (p) => (<Icon {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></Icon>);
-const IconVolume = (p) => (<Icon {...p}><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" /></Icon>);
-const IconCheck = (p) => (<Icon {...p} strokeWidth={3}><polyline points="20 6 9 17 4 12" /></Icon>);
-const IconWhatsApp = (p) => (<Icon {...p}><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></Icon>);
-const IconLock = (p) => (<Icon {...p}><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" /></Icon>);
-const IconTarget = (p) => (<Icon {...p}><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></Icon>);
-
-// TODO: החלף בערכים אמיתיים לפני העלאה לאוויר
-const VIDEO_EMBED_URL = 'https://www.youtube.com/embed/7Ac7-Kdl1-c';
-// Tagged like the V2 variant tags its own link — without this the two VSL
-// variants are indistinguishable at the payment provider and the A/B test
-// cannot be read.
-const PURCHASE_URL = 'https://mrng.to/engo98ytvh?utm_content=v1-mistake-headline';
-// Optimized WebPs (94% smaller than original PNGs). See public/images/vsl-bms/.
-const HERO_IMAGE = '/images/vsl-bms/section_invitation-md.webp';
-const STORY_IMG_1 = '/images/vsl-bms/account_disabled-sm.webp';
-const STORY_IMG_2 = '/images/vsl-bms/business_manager-sm.webp';
-const STORY_IMG_3 = '/images/vsl-bms/osher_auth-sm.webp';
-const AUTHOR_IMAGE = '/images/vsl-bms/osher_with_laptop-md.webp';
+const VIDEO_ID = '7Ac7-Kdl1-c';
+// 606s on YouTube, checked 2026-09-15. Update if the video is replaced.
+const VIDEO_MINUTES = 10;
+const VIDEO_TITLE = 'השיטה שתצמצם לכם את הסיכוי להיחסם או להיפרץ בפייסבוק ובאינסטגרם';
+// Landing-page variant tag. Kept OUT of utm_content so the ad creative's own
+// utm_content survives into checkout (creative attribution and page variant
+// are separate dimensions). V2 tags itself the same way.
+const LP_VARIANT = 'v1-mistake-headline';
+const PURCHASE_URL = `https://mrng.to/engo98ytvh?variant=${LP_VARIANT}`;
+// Optimized WebPs. See public/images/vsl-bms/. The originals (osher_with_laptop
+// is 5504x8256) are never referenced: only the -sm / -md variants.
+const IMG = '/images/vsl-bms';
 
 const PRICE = 197;
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 
-// In-page CTA scroll clicks, custom event, NOT Lead (Lead fires only on thank-you-lead)
+// In-page anchor clicks, custom event, NOT Lead (Lead fires only on thank-you-lead)
 function trackCtaClick() {
   if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
     window.fbq('trackCustom', 'CTAClick');
   }
 }
 
-// Click on checkout link, InitiateCheckout. Purchase fires only on thank-you-purchase.
-function trackInitiateCheckout() {
-  if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-    window.fbq('track', 'InitiateCheckout', { value: PRICE, currency: 'ILS' });
+// Click on a checkout link. `cta` = which button (hero / author / pricing / sticky).
+// Purchase itself fires server-side from the payment webhook, never here.
+function trackInitiateCheckout(cta) {
+  if (typeof window === 'undefined') return;
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', 'InitiateCheckout', { value: PRICE, currency: 'ILS', content_name: 'BMS Course', cta, lp_variant: LP_VARIANT });
+  }
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'begin_checkout', {
+      currency: 'ILS',
+      value: PRICE,
+      cta,
+      lp_variant: LP_VARIANT,
+      items: [{ item_id: 'bms-course', item_name: 'BMS Course', price: PRICE, quantity: 1 }],
+    });
   }
 }
 
+/* ============================================================
+   CONTENT
+   ============================================================ */
+const SUMMARY = [
+  ['מה זה:', 'קורס מוקלט בעברית על הקמה ואבטחה של נכסי Meta: Business Manager, חשבון מודעות, אנשים והרשאות. BMS הוא השם של הקורס והשיטה, לא כלי של מטא.'],
+  ['למי:', 'בעלי עסקים שמפרסמים, מנהלי סושיאל עם חשבונות של לקוחות, וקמפיינרים.'],
+  ['מה מיישמים:', 'בדיקת בעלות על הנכסים, סידור הרשאות, הגנה על הפרופיל והחשבון, ותוכנית פעולה ליום שמשהו משתבש.'],
+  ['כמה זמן:', 'כ-3 שעות. 15 שיעורים והרצאת אורח. את היישום עושים תוך כדי צפייה.'],
+  ['מה זה לא:', 'שחזור אישי של חשבון שכבר נחסם. זה שירות נפרד, ואפשר לשאול עליו בוואטסאפ.'],
+];
+
+const CASES = [
+  {
+    name: 'לילך,',
+    role: 'יועצת עסקית ומנהלת דיגיטל:',
+    story: 'קמפיין ב-150,000 ש"ח שירדו לה מהאשראי בין לילה, עסק ששותק ולקוחות שעזבו. ולא רק זה, גם נעקצה על ידי "מקצוען" שהבטיח לסייע.',
+    risk: 'חשבון מודעות ואמצעי תשלום שלא היו מוגדרים תחת תיק עסקי מסודר.',
+  },
+  {
+    name: 'דליה אגם,',
+    role: 'בעלת עסק:',
+    story: 'חצי שנה היא חיפשה מי מחזיקה בדף העסקי של החברה שלה. פניות לתמיכה ופניות למחלקה המשפטית של מטא לא עזרו.',
+    risk: 'אף אחד לא ידע מי הבעלים של הנכסים. בדיקת בעלות והרשאות, שנלמדת בקורס, מגלה את זה בדקות.',
+  },
+  {
+    name: 'מאיה,',
+    role: 'קמפיינרית:',
+    story: 'החשבון של הלקוח שלה נחסם לא באשמתה, והיא נשאה בעלויות התיקון (אלפי שקלים).',
+    risk: 'אין הסכם הרשאות ואין תוכנית תגובה. שני הדברים שמכינים מראש בקורס.',
+  },
+];
+
+const STEPS = [
+  { title: 'בנייה נכונה', body: 'תשתית שתוכננה מהיום הראשון. הרשאות, admin גיבוי, חיבורים נכונים.', who: 'לילך' },
+  { title: 'הגנה שוטפת', body: 'בדיקות חודשיות, התראות, סדר. אתם יודעים בכל רגע מי מחזיק במה.', who: 'דליה' },
+  { title: 'תגובה לתקלה', body: 'כשמשהו משתבש, יש סדר פעולות: מה בודקים בשעה הראשונה, איפה מגישים ערעור, ומתי מסלימים.', who: 'מאיה' },
+];
+
+const MODULES = [
+  {
+    label: 'מודול 01',
+    lessons: '3 שיעורים',
+    title: 'פרופיל אישי, היסוד של הכל',
+    body: 'כל BMS בנוי על פרופיל אישי אחד. אם הוא חשוף, הכל חשוף. פותחים מהיסודות: תקנות, ותק, סטטוס חשבון, פרטים ואבטחה.',
+    punch: 'הבסיס שאם הוא לא יציב, שום דבר אחר לא יחזיק.',
+  },
+  {
+    label: 'מודול 02',
+    lessons: 'שיעור 1',
+    title: 'הפרדה בין הפרטי לעסקי',
+    body: 'ההפרדה בין הפרטי לעסקי היא ההבדל בין עסק שמוגן לבין עסק שתלוי בכם אישית.',
+    punch: 'למה זה קריטי, איך עושים את זה נכון, ואיך שומרים על זה כשהעסק גדל.',
+  },
+  {
+    label: 'מודול 03',
+    lessons: '2 שיעורים',
+    title: 'הקמת Business Manager ואיסוף הנכסים',
+    body: "ההבדל בין מרכז החשבונות לביזנס מנג'ר. איך מקימים תיק עסקי נכון, ואיך אוספים את כל הנכסים שלכם תחת קורת גג אחת.",
+    punch: 'הצעד הטכני שלילך לא ידעה לעשות, וזה עלה לה ביוקר.',
+  },
+  {
+    label: 'מודול 04',
+    lessons: '3 שיעורים',
+    title: 'חשבון מודעות, תשלום, אנשים והרשאות',
+    body: 'חשבון המודעות, הגדרתו ואמצעי התשלום. אנשים, שותפים, הרשאות. מידע על העסק ואבטחה.',
+    punch: 'כאן הטעויות הכי יקרות נולדות. כאן גם נמנעות.',
+  },
+];
+
+const BONUSES = [
+  {
+    label: 'בונוס 01',
+    lessons: '3 שיעורים',
+    title: 'פריצות וחסימות, מה לעשות כשמשהו קורה',
+    body: 'הגדרות בסיסיות שחשוב לדעת בעולמות הפריצה. מה זו פריצה, איך היא נראית, ומה ההשלכות. מה זו חסימה, ולמה היא קורית.',
+    punch: 'הידע שדליה לא הייתה צריכה לחפש במשך חצי שנה.',
+  },
+  {
+    label: 'בונוס 02',
+    lessons: '3 שיעורים',
+    title: 'אימות דו-שלבי, אישורי פעילות והחזרת גישה דרך אינסטגרם',
+    body: "אישור פעילות לרישום בביזנס מנג'ר. אימות דו-שלבי בכניסה. והחזרת גישה לנכסים דרך האינסטגרם, אם בכל זאת משהו השתבש.",
+    punch: 'הקטנים שעושים את ההבדל בין שעה של פאניקה ל-5 דקות של תיקון.',
+  },
+  {
+    label: 'בונוס 03',
+    lessons: 'הרצאת אורח',
+    title: 'בר שלג: הוקים (Hooks)',
+    body: 'שיעור אורח מבר שלג על איך לכתוב Hooks שמושכים תשומת לב.',
+    punch: 'תוספת מעבר לליבת הקורס: תשתית טובה זה חצי מהמשחק, והחצי השני הוא תוכן שגורם לאנשים לעצור.',
+  },
+];
+
+const INCLUDED = [
+  { label: '4 מודולי יסוד, 9 שיעורים מוקלטים (הקלטת מסך מלאה)', value: 'ערך ₪297' },
+  { bonus: 'בונוס 01', label: 'מודול פריצות וחסימות', value: 'ערך ₪97' },
+  { bonus: 'בונוס 02', label: 'מודול אימות ואישורי פעילות', value: 'ערך ₪97' },
+  { bonus: 'בונוס 03', label: 'הרצאת אורח של בר שלג', value: 'ערך ₪147' },
+  { label: 'גישה ללא הגבלת זמן, כולל כל עדכון עתידי של הקורס', value: 'ללא הגבלה' },
+];
+
+const FOR_YOU = [
+  'אתם מנהלים סושיאל עם חשבונות של לקוחות',
+  'אתם קמפיינרים שעובדים עם חשבונות מודעות',
+  'אתם בעלי עסק שמפרסם בפייסבוק ואינסטגרם',
+  'אתם רוצים להגן על הנכסים הדיגיטליים שלכם',
+];
+
+// Recovery-service clients, labelled as such on the page (not course students)
+const TESTIMONIALS = [
+  { img: '/images/matanel.jpg', name: 'מתנאל לייני', role: 'יוצר תוכן ומשפיען', quote: '"הצליח להחזיר לי את החשבון מחסימות שלא ברא השטן, רק תנו לו את ההזדמנות והוא יסדר."' },
+  { img: '/images/gal.jpg', name: 'גל נמני', role: 'מנכ"לית Go-Tech', quote: '"לאחר שנעקצתי על ידי חברה אחרת, פניתי לאושר ובמסירות הוא החזיר לי את העסק לחיים. ממש ככה!"' },
+  { img: '/images/ofira.jpg', name: 'אופירה יחיא', role: 'קונדיטורית ויוצרת תוכן', quote: '"המצב היה כמעט בלתי הפיך - לאחר כשבועיים אושר החזיר לי את החשבון בנחת וברוגע לא אופייניים."' },
+];
+
+const FAQS = [
+  ['למי הקורס מתאים?', 'לבעלי עסקים שמפרסמים בפייסבוק ובאינסטגרם, למנהלי סושיאל שמנהלים חשבונות של לקוחות, ולקמפיינרים/ות שמריצים תקציבי פרסום. בקיצור, לכל מי שיש לו נכס דיגיטלי שהוא לא יכול להרשות לעצמו לאבד.'],
+  ['מה ההבדל בין הקורס לשירות השחזור?', 'הקורס מלמד אתכם להקים ולאבטח את הנכסים בעצמכם, מראש. שירות השחזור הוא טיפול אישי שלי בחשבון שכבר נחסם או נפרץ, בתשלום נפרד ורק אחרי הצלחה. אם החשבון שלכם חסום עכשיו, כתבו לי בוואטסאפ לפני שאתם קונים את הקורס.'],
+  ['אני לא טכנולוגי. אני יכול בכלל להתמודד עם זה?', 'בהחלט. הקורס בנוי בהקלטות מסך עם הנחיה צעד-אחר-צעד. אין הנחה של ידע מוקדם. אם אתם יודעים להפעיל פייסבוק ולהיכנס לחשבון, אתם יודעים מספיק.'],
+  ['כמה זמן ייקח לי לסיים את הקורס?', 'בערך 3 שעות מצטברות של תוכן. אפשר לעבור הכל בערב אחד, או לפזר על פני שבוע. את היישום עצמו אפשר לעשות תוך כדי, מסך אחרי מסך.'],
+  ['מה אני מקבל אחרי הרכישה?', 'גישה מיידית ל-LMS עם כל המודולים והבונוסים. שולחים לכם מייל עם שם משתמש וסיסמה תוך דקות. גישה ללא הגבלת זמן, כולל כל עדכון עתידי של הקורס. לא הגיע מייל? כתבו בוואטסאפ ונסדר.'],
+  ['האם יש החזר כספי אם הקורס לא מתאים לי?', 'לפני שאתם מתלבטים: הסילבוס המלא מפורט כאן בדף (4 מודולים + 3 בונוסים, כ-3 שעות), הגישה היא ללא הגבלת זמן כולל עדכונים, ואני זמין בוואטסאפ לכל שאלה, גם לפני הרכישה. מכיוון שמדובר בתוכן דיגיטלי עם גישה מיידית, לא ניתן החזר לאחר הרכישה, בהתאם לחוק הגנת הצרכן. יש ספק? שלחו לי הודעה ואענה אישית.'],
+  ['מה ההבדל בין הקורס הזה לכל מה שיש בחינם ביוטיוב?', 'ביוטיוב יש "טיפים". כאן יש שיטה. הקורס בנוי על עבודה מאז 2020 עם מעל 2,500 חשבונות אמיתיים שהושבתו או נפרצו, והוא מתעדכן בהתאם לשינויים האחרונים של מטא. אין כפילויות, אין מילוי זמן, רק יישום.'],
+  ['האם הקורס מתעדכן?', 'כן. כשמטא משנה משהו, אני מעדכן. הגישה שלכם אוטומטית כוללת את כל העדכונים העתידיים, ללא תוספת תשלום.'],
+  ['אפשר לדבר איתך אם נתקעתי תוך כדי?', 'התלמידים שלי יכולים לפנות אליי בוואטסאפ בשאלות על יישום החומר מהקורס. זו לא תמיכה אישית מלאה, ולא שחזור של חשבון חסום (זה שירות נפרד), אבל על שאלות יישום אני עונה בפועל לכולם.'],
+];
+
+const RailItem = ({ item, node, bonus }) => (
+  <li className={`vsl-rail__item m-reveal${bonus ? ' vsl-rail__item--bonus' : ''}`}>
+    <span className="vsl-rail__node num" aria-hidden="true">{node}</span>
+    <div className="vsl-rail__card">
+      <p className="vsl-rail__meta">
+        {bonus
+          ? <span className="sticker sticker--paper m-in">{item.label}</span>
+          : <span className="vsl-rail__label">{item.label}</span>}
+        <span className="tag">{item.lessons}</span>
+      </p>
+      <h3 className="h3">{item.title}</h3>
+      <p className="muted">{item.body} <strong>{item.punch}</strong></p>
+    </div>
+  </li>
+);
+
 export default function VslBms() {
   const [showStickyCta, setShowStickyCta] = useState(false);
-  const [heroAnimating, setHeroAnimating] = useState(false);
-  // Sticky retires while the real purchase section is on screen; after the user
-  // has seen the price once, the sticky goes straight to checkout.
+  // Sticky retires while the real purchase section is on screen.
   const [finalCtaInView, setFinalCtaInView] = useState(false);
-  const [passedFinalCta, setPassedFinalCta] = useState(false);
-  // Client-only: carry the visitor's utm_source/medium/campaign into checkout
+  // YouTube player is only loaded after the visitor presses play (keeps the
+  // third-party script out of the initial load).
+  const [videoStarted, setVideoStarted] = useState(false);
+  // Client-only: carry the visitor's utm_* into checkout
   const [purchaseUrl, setPurchaseUrl] = useState(PURCHASE_URL);
   useEffect(() => setPurchaseUrl(withCampaignParams(PURCHASE_URL)), []);
+  const checkout = (cta) => `${purchaseUrl}&cta=${cta}`;
+
+  function startVideo() {
+    setVideoStarted(true);
+    if (typeof window.gtag === 'function') window.gtag('event', 'video_start', { video_title: 'VSL BMS' });
+  }
 
   useEffect(() => {
     const finalCta = document.getElementById('final-cta');
     if (!finalCta) return;
     const ctaObserver = new IntersectionObserver(
-      ([entry]) => {
-        setFinalCtaInView(entry.isIntersecting);
-        if (entry.isIntersecting) setPassedFinalCta(true);
-      },
+      ([entry]) => setFinalCtaInView(entry.isIntersecting),
       { threshold: 0.15 }
     );
     ctaObserver.observe(finalCta);
     return () => ctaObserver.disconnect();
   }, []);
 
+  // Scroll reveals come from the shared motion engine (app/root.jsx); the page
+  // only tracks when the sticky purchase bar should show.
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (!prefersReducedMotion) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('revealed');
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      requestAnimationFrame(() => setHeroAnimating(true));
-
-      const els = document.querySelectorAll(
-        [
-          '.vsl-bms-page .deliverable-item',
-          '.vsl-bms-page .black-card',
-          '.vsl-bms-page .authority-strip',
-          '.vsl-bms-page .author-quote-card',
-          '.vsl-bms-page .framework-step',
-          '.vsl-bms-page .proof-bullets li',
-          '.vsl-bms-page .anti-list li',
-          '.vsl-bms-page .cinematic h2',
-          '.vsl-bms-page .cinematic .question-prompt',
-          '.vsl-bms-page .cinematic .anti-pill',
-        ].join(', ')
-      );
-      els.forEach((el) => {
-        el.classList.add('reveal-on-scroll');
-        observer.observe(el);
-      });
-
-      const onScroll = () => setShowStickyCta(window.scrollY > 600);
-      window.addEventListener('scroll', onScroll, { passive: true });
-
-      return () => {
-        observer.disconnect();
-        window.removeEventListener('scroll', onScroll);
-      };
-    }
-
     const onScroll = () => setShowStickyCta(window.scrollY > 600);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const stickyVisible = showStickyCta && !finalCtaInView;
+
   return (
-    <div className={`vsl-bms-page${heroAnimating ? ' hero-animate' : ''}`}>
+    <div className="vsl">
       {/* TOP BANNER */}
-      <div className="top-banner" role="banner">
-        <span>הדרכה חינמית: למה נכסי הפרסום שלכם חשופים ואיך מערכת BMS מגינה עליהם</span>
+      <div className="vsl__strip" role="banner">
+        <p className="container">הדרכה חינמית ({VIDEO_MINUTES} דקות): למה נכסי הפרסום שלכם חשופים, ואיך קורס BMS (Business Manager Setup) מצמצם את הסיכון</p>
       </div>
 
-      <main>
+      <main id="main">
 
       {/* HERO + VSL */}
-      <section className="hero">
-        <h1>
-          הטעויות שעולות לעסקים<br />
-          <span className="gradient-text">אלפי שקלים בשנה</span>
-        </h1>
-        <p className="hero-sub">חשבון פייסבוק פרוץ, אינסטגרם חסום, Business Manager קפוא. ואתם לא יודעים למה.</p>
+      <section className="vsl-hero theme-ink bg-grid">
+        <div className="container vsl-hero__grid">
+          <div className="vsl-hero__copy">
+            <p className="vsl-hero__kicker">קורס מוקלט בעברית · כ-3 שעות · <bdi>₪{PRICE}</bdi> תשלום אחד</p>
+            <h1 className="vsl-hero__title">
+              <span className="lt">קורס BMS: מגדירים Business Manager נכון,</span>{' '}
+              <span>לפני <span className="mk">שהעסק נחסם</span></span>
+            </h1>
+            <p className="vsl-hero__sub">
+              חשבון פייסבוק פרוץ, אינסטגרם חסום, Business Manager קפוא.
+              ברוב המקרים שאני פוגש זו הגדרה או הרשאה שאפשר היה לבדוק מראש. כאן לומדים לבדוק.
+            </p>
+          </div>
 
-        <div className="container">
-          <div className="video-wrapper">
-            <div className="video-banner">
-              <div className="vb-line"><IconVolume size={18} />תפעילו רמקולים, הניחו את הטלפונים בצד</div>
-              <div>ותצפו בהדרכה הזו עד הסוף. היא תחסוך לכם אלפי שקלים</div>
-            </div>
-            <div className="video-player">
-              {VIDEO_EMBED_URL ? (
+          <figure className="vsl-video">
+            <figcaption className="vsl-video__cap">
+              <span className="vsl-video__cap-line"><IconVolume />הדרכה חינמית, {VIDEO_MINUTES} דקות, עם כתוביות</span>
+              <span>{VIDEO_TITLE}</span>
+            </figcaption>
+            <div className="vsl-video__frame">
+              {videoStarted ? (
                 <iframe
-                  src={VIDEO_EMBED_URL}
-                  title="VSL BMS"
+                  src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0&cc_load_policy=1&cc_lang_pref=he`}
+                  title={VIDEO_TITLE}
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
                 />
               ) : (
-                <div className="video-placeholder" aria-label="הדרכה בטעינה">
-                  <IconVolume size={36} aria-hidden="true" />
-                  <span>ההדרכה תהיה זמינה בקרוב</span>
-                </div>
+                <button type="button" className="vsl-video__facade" onClick={startVideo}>
+                  <img
+                    src={`https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`}
+                    alt=""
+                    width="1280"
+                    height="720"
+                    fetchPriority="high"
+                    decoding="async"
+                  />
+                  <span className="vsl-video__play"><IconPlay />הפעילו את ההדרכה · {VIDEO_MINUTES} דקות</span>
+                </button>
               )}
             </div>
-          </div>
+          </figure>
 
-          <div className="video-summary">
-            <p className="video-summary-title">מה תלמדו בקורס:</p>
-            <ul>
-              <li>איך לאבטח את חשבונות המטא שלכם לפני שקורה משהו.</li>
-              <li>איך להחזיר גישה לחשבון חסום או פרוץ.</li>
-              <li>איך לבנות תשתית דיגיטלית שלא קורסת.</li>
-            </ul>
-            <p className="video-summary-price">197 ש"ח. פעם אחת. ללא מנוי.</p>
-          </div>
-
-          <div className="cta-wrapper">
-            <a href="#final-cta" className="cta-btn cta-btn-glow" onClick={trackCtaClick}>
-              <span>אני רוצה לשמור על החשבונות שלי</span>
-              <span className="arrow"><IconArrowLeft size={18} /></span>
+          <div className="vsl-hero__cta">
+            <Btn variant="signal" href={checkout('hero')} onClick={() => trackInitiateCheckout('hero')}>
+              הצטרפו לקורס ב-₪{PRICE}
+            </Btn>
+            <p className="vsl-hero__terms small"><bdi>₪{PRICE}</bdi>. תשלום אחד, כולל מע"מ. אחרי התשלום מגיע מייל עם פרטי הגישה, ומתחילים.</p>
+            <a href="#deliverables" className="link small" onClick={trackCtaClick}>
+              מה בדיוק יש בקורס? לסילבוס המלא
             </a>
           </div>
         </div>
       </section>
 
-      {/* INVITATION + BLACK CARD */}
-      <section className="invitation">
-        <div className="container text-center">
-          <h2>מוכנים לצעד הבא?</h2>
+      {/* THE COURSE IN ONE LINE PER QUESTION */}
+      <section className="section section--tight theme-mist">
+        <div className="container vsl-sum">
+          <h2 className="h3 vsl-sum__title">הקורס בשורה לכל שאלה:</h2>
+          <dl className="vsl-sum__rows m-stagger">
+            {SUMMARY.map(([term, text]) => (
+              <div className="vsl-sum__row" key={term}>
+                <dt>{term}</dt>
+                <dd>{text}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
 
-          <p className="subtitle">
-            יש לכם הזדמנות לצמצם את הסיכון, לסגור את הפירצות,<br />
-            לבנות נכון ומדויק. אחת ולתמיד.
+      {/* INVITATION + WHO IT FITS */}
+      <section className="section theme-paper">
+        <div className="container">
+          <header className="sec-head m-reveal">
+            <h2 className="h1"><span className="lt">מוכנים</span> לצעד הבא?</h2>
+            <p className="lead">
+              יש לכם הזדמנות לצמצם את הסיכון, לסגור את הפרצות,
+              לבנות נכון ומדויק, ולתחזק את זה בשגרה.
+            </p>
+          </header>
+
+          <div className="vsl-duo">
+            <div className="vsl-prose m-reveal">
+              <p>
+                מעל <strong>2,500 חשבונות</strong> כבר עברו את הניסיון המר הזה. חלקם איתי ישירות, חלקם דרך הכלים שבניתי.
+                הדבר המשותף לכולם? <strong>אין זמן טוב לאבד את הדיגיטל.</strong>
+              </p>
+              <p>
+                דף עסקי שנחסם, חשבון אישי שהלך לעזאזל או ביזנס מנג'ר שנפרץ ולוקח איתו את כל הנכסים.
+                בכל פעם שאני מקבל פנייה כזו, אני שואל אותה שאלה:{' '}
+                <strong>הגדרתם את ה-BMS שלכם נכון?</strong>
+              </p>
+              <p>התשובה, כמעט תמיד, היא לא.</p>
+              <p>
+                <strong>BMS זה לא רק הגדרה טכנית. זה הסדר שמאחורי כל קמפיין.</strong>{' '}
+                ובקורס הזה אני בונה את התשתית איתכם, מסך אחרי מסך, עד שיש לכם סדר, גיבוי ותוכנית ליום שמשהו משתבש.
+              </p>
+            </div>
+
+            <img
+              src={`${IMG}/section_invitation-md.webp`}
+              srcSet={`${IMG}/section_invitation-sm.webp 480w, ${IMG}/section_invitation-md.webp 960w`}
+              sizes="(min-width: 960px) 520px, 92vw"
+              alt="קורס BMS, Business Manager Setup"
+              className="vsl-duo__img m-reveal"
+              width="960"
+              height="640"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div className="vsl-fit card card--ink theme-ink m-reveal">
+            <h2 className="h3">הקורס מתאים לכם אם:</h2>
+            <ul className="vsl-fit__list">
+              <li><Icon name="check" /><p>אתם מנהלים סושיאל ומנהלים חשבונות של לקוחות, ורוצים לישון בשקט בלילה.</p></li>
+              <li><Icon name="check" /><p>אתם קמפיינרים שמריצים תקציבי פרסום, ויודעים שהסיכון שחשבון יישבת הוא אמיתי.</p></li>
+              <li><Icon name="check" /><p>אתם בעלי עסק שכל הלידים מגיעים מהדיגיטל, ולא מוכנים לסמוך על "יהיה בסדר".</p></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* NUMBERS, the 3 cases */}
+      <section className="section theme-mist">
+        <div className="container">
+          <header className="sec-head sec-head--split m-reveal">
+            <h2 className="h1"><span className="lt">3 מקרים. 3 שיעורים.</span> כולם יכלו להסתיים אחרת.</h2>
+            <p className="lead">המקרים אמיתיים. השמות בדויים לשמירה על חיסיון.</p>
+          </header>
+
+          <ol className="vsl-rows">
+            {CASES.map((c, i) => (
+              <li className="vsl-row m-reveal" key={c.name}>
+                <span className="vsl-row__num num" aria-hidden="true">0{i + 1}</span>
+                <h3 className="vsl-row__title">{c.name} <span className="lt">{c.role}</span></h3>
+                <div className="vsl-row__body">
+                  <p>{c.story}</p>
+                  <p className="vsl-row__risk"><b>הסיכון:</b> {c.risk}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <p className="vsl-note m-reveal">
+            <strong>התירוץ של כולן היה:</strong> "זה עבד לי ככה עד עכשיו".
+            וכשמשהו השתבש? הן לא ידעו מה לעשות ולמי לפנות. זה הסיפור שקורה יום יום.
           </p>
 
-          <img
-            src={HERO_IMAGE}
-            alt="קורס BMS, Business Manager Setup"
-            className="invitation-image"
-            width="960"
-            height="640"
-            loading="lazy"
-            decoding="async"
-          />
-
-          <div className="invitation-content">
-            <p>
-              מעל <strong>2,500 חשבונות</strong> כבר עברו את הניסיון המר הזה. חלקם איתי ישרות, חלקם דרך הכלים שבניתי.
-              הדבר המשותף לכולם? <strong>אין זמן טוב לאבד את הדיגיטל.</strong>
-            </p>
-
-            <p>
-              דף עסקי שנחסם, חשבון אישי שהלך לעזאזל או ביזנס מנג'ר שנפרץ ולוקח איתו את כל הנכסים.
-              בכל פעם שאני מקבל פנייה כזו, אני שואל אותה שאלה:{' '}
-              <strong>הגדרתם את ה-BMS שלכם נכון?</strong>
-            </p>
-
-            <p>התשובה, כמעט תמיד, היא לא.</p>
-
-            <p>
-              <strong>BMS זה לא הגדרה טכנית. זה השקט הנפשי שמאחורי כל קמפיין.</strong><br />
-              ובקורס הזה אני בונה את התשתית איתכם, מסך אחרי מסך, עד שלא תצטרכו לדאוג יותר.
-            </p>
-          </div>
-
-          <div className="black-card">
-            <h2>הקורס מתאים לכם אם:</h2>
-            <p>אתם מנהלים סושיאל ומנהלים חשבונות של לקוחות, ורוצים לישון בשקט בלילה.</p>
-            <p>אתם קמפיינרים שמריצים תקציבי פרסום, ויודעים שהסיכון שחשבון יישבת הוא אמיתי.</p>
-            <p>אתם בעלי עסק שכל הלידים מגיעים מהדיגיטל, ולא מוכנים לסמוך על "יהיה בסדר".</p>
-          </div>
+          <dl className="vsl-nums">
+            <div className="vsl-nums__item">
+              <dd><SlotNumber value="2,500+" /></dd>
+              <dt>חשבונות שחזרו לפעול בדיגיטל, מאז 2020</dt>
+            </div>
+            <div className="vsl-nums__item">
+              <dd><SlotNumber value="95%+" /></dd>
+              <dt>מהמקרים שקיבלתי לטיפול אחרי אבחון הסתיימו בשחזור</dt>
+            </div>
+          </dl>
         </div>
       </section>
 
-      <div className="gradient-divider" aria-hidden="true" />
-
-      {/* STORY, also acts as authority section, moved up for visibility */}
-      <section className="story-section">
+      {/* THE COMMON DENOMINATOR */}
+      <section className="section theme-ink vsl-state">
         <div className="container">
-          <h2 className="story-headline">למה לסמוך עליי?</h2>
+          <p className="vsl-state__q">מה המכנה המשותף לכל שלושת המקרים?</p>
+          <FillText
+            as="h2"
+            className="vsl-state__title"
+            text="הם לא נפרצו בגלל מזל רע. הם נפלו בגלל הגדרות והרשאות שאף אחד לא בדק."
+          />
+          <p className="sticker sticker--paper m-in vsl-state__tag">ומה שכולם מחפשים, זה לא מה שהם צריכים</p>
+        </div>
+      </section>
 
-          <div className="story-text">
-            <p>
-              אני אושר רווח, בן 31 מנתניה. <strong>5 שנים אני עוסק בהצלת עסקים דיגיטליים.</strong>
-              {' '}לפני זה הייתי מתכנת בהייטק. אבל לא התחלתי מתוך תשוקה לטכנולוגיה. התחלתי מתוך מצוקה.
-            </p>
+      {/* FRAMEWORK, 3-step methodology */}
+      <section className="section theme-paper">
+        <div className="container">
+          <header className="sec-head m-reveal">
+            <Eyebrow num="01">המתודולוגיה</Eyebrow>
+            <h2 className="h2 vsl-h-wide">
+              <span className="lt">BMS נכון הוא שלושה שלבים,</span>{' '}
+              וכל אחד מהם מטפל בסיכון שהפיל את אחד המקרים.
+            </h2>
+            <p className="lead">לא תיאוריה. לא רעיון מופשט. תהליך מדויק שאתם עוברים איתי בקורס.</p>
+          </header>
 
-            <p>
-              שנת 2020. אשתי בר, שהייתה בשיא שלה כיוצרת תוכן. <strong>נחסמה.</strong>
-              {' '}הגישה לחשבון פשוט נסגרה. ברגע אחד. לא היה שום דבר שהיא עשתה לא בסדר.
-              ניסיתי, חקרתי, ולא הפסקתי עד שהחשבון חזר.
-            </p>
+          <ol className="vsl-rows vsl-rows--tagged">
+            {STEPS.map((s, i) => (
+              <li className="vsl-row m-reveal" key={s.title}>
+                <span className="vsl-row__num num" aria-hidden="true">0{i + 1}</span>
+                <h3 className="vsl-row__title">{s.title}</h3>
+                <p className="vsl-row__body">{s.body}</p>
+                <p className="vsl-row__tag tag">הסיכון שהפיל את <strong>{s.who}</strong></p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
 
-            <p>
-              <strong>מאז אני עושה את זה לאחרים.</strong>
-              {' '}מעל 2,500 חשבונות שחזרו לפעול בדיגיטל. אבל עם הזמן החלטתי לחקור,
-              אם אני פוגש את הלקוח רק אחרי, מה בעצם קורה שם לפני?
-            </p>
+      {/* DELIVERABLES. 4 modules + 3 bonuses on a rail that fills with scroll */}
+      <section className="section theme-mist" id="deliverables">
+        <div className="container vsl-split">
+          <header className="vsl-split__side">
+            <div className="vsl-split__sticky m-reveal">
+              <Eyebrow num="02">מה בפנים</Eyebrow>
+              <h2 className="h2">
+                <span className="lt">בקורס BMS יוצאים עם</span>{' '}
+                תשתית מסודרת ותוכנית ליום שמשהו משתבש.
+              </h2>
+              <div className="vsl-callout">
+                <p><strong>לא מצגות. לא תיאוריה.</strong></p>
+                <p className="vsl-callout__main">הדרכות ישירות, הקלטת מסך, יישום מיידי.</p>
+                <p>אחרי הקורס אתם מוכנים. גם אם לא נגעתם ב-Business Manager מעולם.</p>
+              </div>
+            </div>
+          </header>
 
-            <p>
-              הצלחתי ליצור שיטה מדויקת שתצמצם באופן משמעותי את אחוזי החסימות והפריצות.
-              {' '}<strong>כי אנשים לא נחסמים סתם. מדובר בנוסחה ברורה.</strong>
-            </p>
+          <ol className="vsl-rail" data-scrub="0.7 0.55">
+            <li className="vsl-rail__line" aria-hidden="true"><span /></li>
+            {MODULES.map((m, i) => <RailItem key={m.label} item={m} node={`0${i + 1}`} />)}
+            <li className="vsl-rail__break m-reveal">
+              <span className="vsl-rail__node vsl-rail__node--plus" aria-hidden="true">+</span>
+              <p>ובחבילה גם, 3 בונוסים מתנה</p>
+            </li>
+            {BONUSES.map((b) => <RailItem key={b.label} item={b} node="+" bonus />)}
+          </ol>
+        </div>
 
-            <p className="photo-caption">
+        <div className="container vsl-pack m-reveal">
+          <h3 className="h2">הכל בחבילה אחת.</h3>
+          <ul className="vsl-pack__stats">
+            <li><strong className="num">4</strong> מודולי יסוד</li>
+            <li><strong className="num">3</strong> בונוסים</li>
+            <li><strong className="num">15</strong> שיעורים + הרצאת אורח</li>
+          </ul>
+          <p className="lead">מה שלמדתי מ-2,500 מקרים, ארוז בצורה שתיישמו מחר בבוקר.</p>
+        </div>
+      </section>
+
+      {/* STORY, founder, told once */}
+      <section className="section theme-paper">
+        <div className="container vsl-duo vsl-duo--story">
+          <div>
+            <h2 className="h1 vsl-duo__title m-reveal"><span className="lt">למה</span> לסמוך עליי?</h2>
+            <div className="vsl-prose m-reveal">
+              <p>
+                אני אושר רווח, בן 31 מנתניה. <strong>מאז 2020 אני עוסק בהצלת עסקים דיגיטליים.</strong>
+                {' '}לפני זה הייתי מתכנת בהייטק. אבל לא התחלתי מתוך תשוקה לטכנולוגיה. התחלתי מתוך מצוקה.
+              </p>
+              <p>
+                שנת 2020. אשתי בר, שהייתה בשיא שלה כיוצרת תוכן. <strong>נחסמה.</strong>
+                {' '}הגישה לחשבון פשוט נסגרה. ברגע אחד. לא היה שום דבר שהיא עשתה לא בסדר.
+                ניסיתי, חקרתי, ולא הפסקתי עד שהחשבון חזר.
+              </p>
+              <p>
+                <strong>מאז אני עושה את זה לאחרים.</strong>
+                {' '}מעל 2,500 חשבונות שחזרו לפעול בדיגיטל. אבל עם הזמן החלטתי לחקור,
+                אם אני פוגש את הלקוח רק אחרי, מה בעצם קורה שם לפני?
+              </p>
+              <p>
+                בניתי רשימת בדיקות מסודרת שמצמצמת באופן משמעותי את הסיכון לחסימות ופריצות.
+                {' '}<strong>כי אנשים לא נחסמים סתם. ברוב המקרים יש הגדרה או הרשאה שאפשר היה לבדוק מראש.</strong>
+              </p>
+            </div>
+          </div>
+
+          <figure className="vsl-photos m-reveal">
+            <div className="vsl-photos__grid">
+              <img src={`${IMG}/account_disabled-sm.webp`} srcSet={`${IMG}/account_disabled-sm.webp 480w, ${IMG}/account_disabled-md.webp 960w`} sizes="(min-width: 960px) 460px, 92vw" alt="צילום מסך של חשבון פייסבוק מושבת" width="480" height="480" loading="lazy" decoding="async" />
+              <img src={`${IMG}/business_manager-sm.webp`} alt="Business Manager ריק ללא נכסים" width="480" height="480" loading="lazy" decoding="async" />
+              <img src={`${IMG}/osher_auth-sm.webp`} alt="אושר רווח עובד על שחזור חשבון לקוח" width="480" height="480" loading="lazy" decoding="async" />
+            </div>
+            <span className="sticker m-in vsl-photos__tag">מ-2020 ועד היום</span>
+            <figcaption className="vsl-photos__cap">
               לילות כימים עם אלפי בעלי עסקים עם BM (ביזנס מנג'ר) מושבת,
               ואלפי שקלים שהם יכלו להרוויח. לא חבל?
-            </p>
-
-            <div className="photo-grid">
-              <img src={STORY_IMG_1} alt="צילום מסך של חשבון פייסבוק מושבת" width="480" height="480" loading="lazy" decoding="async" />
-              <img src={STORY_IMG_2} alt="Business Manager ריק ללא נכסים" width="480" height="480" loading="lazy" decoding="async" />
-              <img src={STORY_IMG_3} alt="אושר רווח עובד על שחזור חשבון לקוח" width="480" height="480" loading="lazy" decoding="async" />
-            </div>
-            <span className="photo-tag">מ-2020 ועד היום</span>
-          </div>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
-      <div className="gradient-divider" aria-hidden="true" />
-
-      {/* AUTHORITY, moved up for visibility right after personal story */}
-      <section className="authority-section">
-        <div className="container">
+      {/* AUTHORITY, quote + mid-page purchase button */}
+      <section className="section theme-ink">
+        <div className="container vsl-author">
           <img
-            src={AUTHOR_IMAGE}
+            src={`${IMG}/osher_with_laptop-md.webp`}
+            srcSet={`${IMG}/osher_with_laptop-sm.webp 480w, ${IMG}/osher_with_laptop-md.webp 960w`}
+            sizes="(min-width: 960px) 420px, 80vw"
             alt="אושר רווח, IsraelTechForce"
-            className="authority-image"
+            className="vsl-author__img m-reveal"
             width="960"
             height="1440"
             loading="lazy"
             decoding="async"
           />
 
-          <div className="author-quote-card">
-            <h2 className="small-label">למה אני כאן בכלל?</h2>
+          <div className="vsl-author__body">
+            <h2 className="vsl-author__label">למה אני כאן בכלל?</h2>
 
-            <div className="big-quote">
-              לא רציתי להיות מי שמחזיר את החשבונות.<br />
-              רציתי להיות מי שמלמד איך לא להגיע לשם.
+            <blockquote className="vsl-author__quote serif m-reveal">
+              <span>לא רציתי להיות מי שמחזיר את החשבונות.</span>{' '}
+              <span>רציתי להיות מי שמלמד איך לא להגיע לשם.</span>
+            </blockquote>
+
+            <div className="vsl-prose m-reveal">
+              <p><strong>כולם מחפשים פתרון אחרי. אני רוצה לתת את הכלים לא להגיע לשם.</strong></p>
+              <p>
+                אני לא קוסם. אני לא לוחם סייבר עם טריקים מסתוריים.
+                אני פשוט יודע איך המערכת עובדת, ואיך לבנות נכון מההתחלה.
+              </p>
+              <p><strong>זה לא שיווק. זה מה שאני עושה בפועל, כל יום.</strong></p>
             </div>
 
-            <p className="small-text">כשאשתי בר נחסמה ב-2020 לא הייתה לי ברירה. ניסיתי. טעיתי. ניסיתי שוב.</p>
-            <p className="small-text">ואחרי שהצלחתי, אנשים התחילו לפנות. ואחרי שהם פנו, הבנתי משהו חשוב:</p>
-            <p className="small-text-bold">כולם מחפשים פתרון אחרי. אני רוצה לתת את הכלים לא להגיע לשם.</p>
-
-            <p className="italic">
-              אני לא קוסם. אני לא לוחם סייבר עם טריקים מסתוריים.<br />
-              אני פשוט יודע איך המערכת עובדת, ואיך לבנות נכון מההתחלה.
-            </p>
-
-            <p className="small-text-bold">זה לא שיווק. זה מה שאני עושה בפועל, כל יום.</p>
-
-            <div className="closing-line">
-              <span className="you-chant">BMS</span>
-              <p className="small-text">לא עוד כלי. לא עוד קורס.</p>
-              <p className="small-text-bold">הבסיס שיתן לכם לישון בשקט.</p>
+            <div className="vsl-author__close m-reveal">
+              <span className="vsl-author__chant">BMS</span>
+              <div>
+                <p>לא עוד כלי. לא עוד קורס.</p>
+                <p><strong>הבסיס שמסדר את הנכסים ומכין אתכם ליום רע.</strong></p>
+              </div>
             </div>
 
-            <div className="stage-note">
-              <strong>מה שתלמד בקורס הזה</strong> הוא בדיוק מה שהיה מציל את לילך, את דליה ואת מאיה,
+            <p className="vsl-author__note">
+              <strong>מה שתלמד בקורס הזה</strong> מטפל בדיוק בסיכונים שהפילו את לילך, את דליה ואת מאיה,
               לפני שהן בכלל הגיעו אליי.
-            </div>
-          </div>
+            </p>
 
-          <div className="cta-wrapper">
-            <a href={purchaseUrl} className="cta-btn" onClick={trackInitiateCheckout}>
-              <span>הצטרף לקורס עכשיו, 197 ש"ח בלבד</span>
-              <span className="arrow"><IconArrowLeft size={18} /></span>
-            </a>
+            <div className="vsl-cta">
+              <Btn variant="signal" href={checkout('author')} onClick={() => trackInitiateCheckout('author')}>
+                הצטרף לקורס עכשיו, {PRICE} ש"ח בלבד
+              </Btn>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="gradient-divider" aria-hidden="true" />
-
-      {/* CINEMATIC */}
-      <section className="cinematic">
-        <div className="cinematic-bg" style={{ backgroundImage: "url('/images/vsl-bms/cinematic_background-md.webp')" }} />
+      {/* FINAL CTA. Price + button first, value breakdown and proof underneath */}
+      <section className="section theme-paper" id="final-cta">
         <div className="container">
-          <p className="question-prompt">מה המכנה המשותף לכל שלושת המקרים?</p>
+          <header className="sec-head m-reveal">
+            <h2 className="h1">
+              <span className="lt">מוכנים לבנות</span>{' '}
+              <span className="mk m-in">תשתית שמחזיקה</span> גם ביום רע?
+            </h2>
+          </header>
 
-          <h2>
-            הם לא נפרצו בגלל מזל רע.<br />
-            הם נפלו בגלל נוסחה שאף אחד לא סיפר להם.
-          </h2>
-
-          <div className="text-center" style={{ marginTop: 40 }}>
-            <span className="anti-pill">ומה שכולם מחפשים, זה לא מה שהם צריכים</span>
-          </div>
-        </div>
-      </section>
-
-      {/* NUMBERS */}
-      <section className="numbers-section">
-        <div className="container">
-          <h2>3 מקרים. 3 שיעורים. כולם יכלו להסתיים אחרת.</h2>
-          <p className="disclaimer-note">המקרים אמיתיים. השמות בדויים לשמירה על חיסיון.</p>
-
-          <ul className="proof-bullets">
-            <li>
-              <span className="bullet-icon" aria-hidden="true"><IconArrowLeft size={16} /></span>
-              <span>
-                <strong>לילך, יועצת עסקית ומנהלת דיגיטל:</strong> קמפיין ב-150,000 ש"ח שירדו לה מהאשראי בין לילה,
-                עסק ששותק ולקוחות שעזבו. ולא רק זה, גם נעקצה על ידי "מקצוען" שהבטיח לסייע.
-              </span>
-            </li>
-            <li>
-              <span className="bullet-icon" aria-hidden="true"><IconArrowLeft size={16} /></span>
-              <span>
-                <strong>דליה אגם, בעלת עסק:</strong> חצי שנה היא חיפשה מי מחזיקה בדף העסקי של החברה שלה.
-                פניות לתמיכה ופניות למחלקה המשפטית של מטא לא עזרו.
-                עם הכלים של BMS היא לא הייתה מגיעה למצב הזה.
-              </span>
-            </li>
-            <li>
-              <span className="bullet-icon" aria-hidden="true"><IconArrowLeft size={16} /></span>
-              <span>
-                <strong>מאיה, קמפיינרית:</strong> החשבון של הלקוח שלה נחסם לא באשמתה,
-                והיא נשאה בעלויות התיקון (אלפי שקלים).
-                כל זה היה נמנע בעזרת הכנה מוקדמת עם BMS.
-              </span>
-            </li>
-            <li className="proof-summary">
-              <span className="bullet-icon" aria-hidden="true"><IconTarget size={16} /></span>
-              <span>
-                <strong>התירוץ של כולן היה:</strong> "זה עבד לי ככה עד עכשיו".
-                וכשמשהו השתבש? הן לא ידעו מה לעשות ולמי לפנות. זה הסיפור שקורה יום יום.
-              </span>
-            </li>
-          </ul>
-
-          <div className="authority-strip">
-            <div className="authority-statement">
-              <span className="authority-number">2,500+</span>
-              <span className="authority-text">עסקים שחזרו לפעול בדיגיטל, בחמש שנים</span>
+          <div className="vsl-offer card card--ink theme-ink m-reveal">
+            <div className="vsl-offer__head">
+              <p className="vsl-offer__was">שווי אמיתי: <s><bdi>₪638</bdi></s></p>
+              <p className="vsl-offer__today">המחיר שלך היום:</p>
+              <p className="vsl-offer__price num"><bdi>₪{PRICE}</bdi></p>
+              <p className="small muted">תשלום חד-פעמי · כולל מע"מ · פרטי הגישה נשלחים למייל תוך דקות</p>
             </div>
-            <div className="authority-statement">
-              <span className="authority-number">95%+</span>
-              <span className="authority-text">אחוז הצלחה במקרים שטיפלתי</span>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <div className="gradient-divider" aria-hidden="true" />
-
-      {/* FRAMEWORK, 3-step methodology */}
-      <section className="framework">
-        <div className="container-wide">
-          <div className="text-center">
-            <span className="label-pill">המתודולוגיה</span>
-          </div>
-          <h2 className="text-center">
-            BMS נכון הוא שלושה שלבים<br />
-            שכל אחד מהם היה מונע את אחד המקרים.
-          </h2>
-
-          <p className="lead">לא תיאוריה. לא רעיון מופשט. תהליך מדויק שאתם עוברים איתי בקורס.</p>
-
-          <div className="framework-steps">
-            <div className="framework-step">
-              <div className="step-num-pill">01</div>
-              <div className="step-icon-wrap"><IconTarget size={26} /></div>
-              <h3 className="step-title">בנייה נכונה</h3>
-              <p className="step-body">
-                תשתית שתוכננה מהיום הראשון. הרשאות, admin גיבוי, חיבורים נכונים.
+            <div className="vsl-offer__foot">
+              <Btn variant="signal" block href={checkout('pricing')} onClick={() => trackInitiateCheckout('pricing')}>
+                הצטרפו לקורס ב-₪{PRICE}
+              </Btn>
+              <p className="small dim">
+                אחרי הרכישה תקבלו למייל את פרטי הגישה ועדכונים על הקורס. ניתן להסיר דיוור בכל עת.
               </p>
-              <div className="step-link-back">
-                <span className="step-link-label">היה מציל את</span>
-                <strong>לילך</strong>
-              </div>
+              <ul className="vsl-offer__trust">
+                <li><IconLock />תשלום מאובטח</li>
+                <li><Icon name="invoice" />חשבונית מס מיידית</li>
+                <li><IconZap />גישה מיידית</li>
+              </ul>
             </div>
 
-            <div className="step-connector" aria-hidden="true">
-              <IconArrowLeft size={24} />
-            </div>
-
-            <div className="framework-step">
-              <div className="step-num-pill">02</div>
-              <div className="step-icon-wrap"><IconShield size={26} /></div>
-              <h3 className="step-title">הגנה שוטפת</h3>
-              <p className="step-body">
-                בדיקות חודשיות, התראות, סדר. אתם יודעים בכל רגע מי מחזיק במה.
-              </p>
-              <div className="step-link-back">
-                <span className="step-link-label">היה מציל את</span>
-                <strong>דליה</strong>
-              </div>
-            </div>
-
-            <div className="step-connector" aria-hidden="true">
-              <IconArrowLeft size={24} />
-            </div>
-
-            <div className="framework-step">
-              <div className="step-num-pill">03</div>
-              <div className="step-icon-wrap"><IconZap size={26} /></div>
-              <h3 className="step-title">שחזור מהיר</h3>
-              <p className="step-body">
-                כשמשהו משתבש, יש תוכנית. תבניות, ערוצים, סדר פעולות שעובד.
-              </p>
-              <div className="step-link-back">
-                <span className="step-link-label">היה מציל את</span>
-                <strong>מאיה</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* DELIVERABLES. 7 modules */}
-      <section className="deliverables">
-        <div className="container">
-          <div className="text-center">
-            <span className="section-label">מה בפנים</span>
-          </div>
-
-          <h2>
-            בקורס BMS תצא עם<br />
-            תשתית מוכנה<br />
-            שעומדת בכל סיטואציה.
-          </h2>
-
-          <div className="featured-callout">
-            <div className="featured-callout-line"><strong>לא מצגות. לא תיאוריה.</strong></div>
-            <div className="featured-callout-main">הדרכות ישירות, הקלטת מסך, יישום מיידי.</div>
-            <div className="featured-callout-line">אחרי הקורס אתם מוכנים. גם אם לא נגעתם ב-Business Manager מעולם.</div>
-          </div>
-
-          <div className="deliverable-item">
-            <div className="deliverable-head">
-              <span className="deliverable-num">מודול 01</span>
-              <span className="deliverable-lessons">3 שיעורים</span>
-            </div>
-            <h3 className="deliverable-title">פרופיל אישי, היסוד של הכל</h3>
-            <p className="deliverable-body">
-              כל BMS בנוי על פרופיל אישי אחד. אם הוא חשוף, הכל חשוף.
-              פותחים מהיסודות: תקנות, ותק, סטטוס חשבון, פרטים ואבטחה.{' '}
-              <strong>הבסיס שאם הוא לא יציב, שום דבר אחר לא יחזיק.</strong>
-            </p>
-          </div>
-
-          <div className="deliverable-item">
-            <div className="deliverable-head">
-              <span className="deliverable-num">מודול 02</span>
-              <span className="deliverable-lessons">שיעור 1</span>
-            </div>
-            <h3 className="deliverable-title">הבידול העסקי</h3>
-            <p className="deliverable-body">
-              ההפרדה בין הפרטי לעסקי היא ההבדל בין עסק שמוגן לבין עסק שתלוי בכם אישית.{' '}
-              <strong>למה זה קריטי, ואיך עושים את זה נכון, פעם אחת ולתמיד.</strong>
-            </p>
-          </div>
-
-          <div className="deliverable-item">
-            <div className="deliverable-head">
-              <span className="deliverable-num">מודול 03</span>
-              <span className="deliverable-lessons">2 שיעורים</span>
-            </div>
-            <h3 className="deliverable-title">מדברים ביזנס</h3>
-            <p className="deliverable-body">
-              ההבדל בין מרכז החשבונות לביזנס מנג'ר. איך מקימים תיק עסקי נכון,
-              ואיך אוספים את כל הנכסים שלכם תחת קורת גג אחת.{' '}
-              <strong>הצעד הטכני שלילך לא ידעה לעשות, וזה עלה לה ביוקר.</strong>
-            </p>
-          </div>
-
-          <div className="deliverable-item">
-            <div className="deliverable-head">
-              <span className="deliverable-num">מודול 04</span>
-              <span className="deliverable-lessons">3 שיעורים</span>
-            </div>
-            <h3 className="deliverable-title">ביזנס ופלד'ר</h3>
-            <p className="deliverable-body">
-              חשבון המודעות, הגדרתו ואמצעי התשלום. אנשים, שותפים, הרשאות. מידע על העסק ואבטחה.{' '}
-              <strong>כאן הטעויות הכי יקרות נולדות. כאן גם נמנעות.</strong>
-            </p>
-          </div>
-
-          {/* BONUS DIVIDER */}
-          <div className="bonus-divider">
-            <span className="bonus-divider-line" aria-hidden="true" />
-            <span className="bonus-divider-text">
-              <IconZap size={16} />
-              ובחבילה גם, 3 בונוסים מתנה
-            </span>
-            <span className="bonus-divider-line" aria-hidden="true" />
-          </div>
-
-          <div className="deliverable-item bonus-item">
-            <div className="deliverable-head">
-              <span className="deliverable-num bonus-pill">בונוס 01</span>
-              <span className="deliverable-lessons">3 שיעורים</span>
-            </div>
-            <h3 className="deliverable-title">פריצות וחסימות, מה לעשות כשמשהו קורה</h3>
-            <p className="deliverable-body">
-              הגדרות בסיסיות שחשוב לדעת בעולמות הפריצה.
-              מה זו פריצה, איך היא נראית, ומה ההשלכות. מה זו חסימה, ולמה היא קורית.{' '}
-              <strong>הידע שדליה לא הייתה צריכה לחפש במשך חצי שנה.</strong>
-            </p>
-          </div>
-
-          <div className="deliverable-item bonus-item">
-            <div className="deliverable-head">
-              <span className="deliverable-num bonus-pill">בונוס 02</span>
-              <span className="deliverable-lessons">3 שיעורים</span>
-            </div>
-            <h3 className="deliverable-title">טיפים וטריקים מבפנים</h3>
-            <p className="deliverable-body">
-              אישור פעילות לרישום בביזנס מנג'ר. אימות דו-שלבי בכניסה.
-              והחזרת גישה לנכסים דרך האינסטגרם, אם בכל זאת משהו השתבש.{' '}
-              <strong>הקטנים שעושים את ההבדל בין שעה של פאניקה ל-5 דקות של תיקון.</strong>
-            </p>
-          </div>
-
-          <div className="deliverable-item bonus-item">
-            <div className="deliverable-head">
-              <span className="deliverable-num bonus-pill">בונוס 03</span>
-              <span className="deliverable-lessons">הרצאת אורח</span>
-            </div>
-            <h3 className="deliverable-title">בר שלג: הוקים (Hooks)</h3>
-            <p className="deliverable-body">
-              שיעור אורח בלעדי מבר שלג על איך לכתוב Hooks שבאמת מושכים תשומת לב.{' '}
-              <strong>כי תשתית טובה זה חצי מהמשחק. החצי השני הוא תוכן שגורם לאנשים לעצור.</strong>
-            </p>
-          </div>
-
-          <div className="text-center" style={{ marginTop: 60 }}>
-            <h3>הכל בחבילה אחת.</h3>
-            <div className="course-stats">
-              <span className="course-stat"><strong>4</strong> מודולי יסוד</span>
-              <span className="course-stat-divider" aria-hidden="true">·</span>
-              <span className="course-stat"><strong>3</strong> בונוסים</span>
-              <span className="course-stat-divider" aria-hidden="true">·</span>
-              <span className="course-stat"><strong>15</strong> שיעורים</span>
-            </div>
-            <p style={{ marginTop: 16, color: 'var(--text-soft)' }}>
-              מה שלמדתי מ-2,500 מקרים, ארוז בצורה שתיישמו מחר בבוקר.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <div className="gradient-divider" aria-hidden="true" />
-
-      {/* FINAL CTA */}
-      <section className="final-cta" id="final-cta">
-        <div className="container">
-          <h2>
-            מוכנים לבנות<br />
-            <span className="gradient-text">תשתית שאי אפשר לשבור</span>?
-          </h2>
-
-          <div className="value-box">
-            <div className="value-box-header">
-              <p>מה שלוקחים הביתה</p>
-            </div>
-
-            <div className="value-box-rows">
-              <div className="value-row">
-                <span className="label">4 מודולי יסוד, 9 שיעורים מוקלטים (הקלטת מסך מלאה)</span>
-                <span className="value">ערך ₪297</span>
-              </div>
-              <div className="value-row value-bonus">
-                <span className="label"><span className="bonus-tag">בונוס 01</span> מודול פריצות וחסימות</span>
-                <span className="value">ערך ₪97</span>
-              </div>
-              <div className="value-row value-bonus">
-                <span className="label"><span className="bonus-tag">בונוס 02</span> מודול טיפים וטריקים</span>
-                <span className="value">ערך ₪97</span>
-              </div>
-              <div className="value-row value-bonus">
-                <span className="label"><span className="bonus-tag">בונוס 03</span> הרצאת אורח של בר שלג</span>
-                <span className="value">ערך ₪147</span>
-              </div>
-              <div className="value-row">
-                <span className="label">גישה לכל עדכון עתידי בקורס, לנצח</span>
-                <span className="value">ללא הגבלה</span>
-              </div>
-            </div>
-
-            <div className="value-box-price">
-              <p className="strike-real-value">
-                <span className="strike-label">שווי אמיתי:</span>
-                <span className="strike-amount">
-                  <span className="strike-amount-text">₪638</span>
-                  <span className="strike-x" aria-hidden="true">✕</span>
-                </span>
-              </p>
-              <p className="today-label">המחיר שלך היום:</p>
-              <div className="price-num">₪{PRICE}</div>
-              <p className="micro">תשלום חד-פעמי · כולל מע"מ · גישה מיידית</p>
-              <p className="urgency-note">המחיר עולה ל-297 ש"ח ב-1.8.2026</p>
+            <div className="value-box">
+              <p className="vsl-incl__title">מה שלוקחים הביתה</p>
+              <ul className="vsl-incl">
+                {INCLUDED.map((row) => (
+                  <li key={row.label}>
+                    <Icon name="check" />
+                    <span>{row.bonus && <span className="tag">{row.bonus}</span>} {row.label}</span>
+                    <bdi className="vsl-incl__val num">{row.value}</bdi>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          <div className="checklist">
-            <div className="checklist-title">זה בשבילכם אם:</div>
-            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>אתם מנהלים סושיאל עם חשבונות של לקוחות</span></div>
-            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>אתם קמפיינרים שעובדים עם חשבונות מודעות</span></div>
-            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>אתם בעלי עסק שמפרסם בפייסבוק ואינסטגרם</span></div>
-            <div className="checklist-item"><span className="check-icon" aria-hidden="true"><IconCheck size={14} /></span><span>אתם רוצים להגן על הנכסים הדיגיטליים שלכם</span></div>
-          </div>
+          <div className="vsl-proof">
+            <div className="vsl-foryou card m-reveal">
+              <h3 className="h3">זה בשבילכם אם:</h3>
+              <ul className="vsl-checks">
+                {FOR_YOU.map((text) => (
+                  <li key={text}><Icon name="check" /><span>{text}</span></li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Social proof, real recovery clients, framed as expertise proof */}
-          <div className="vsl-testimonials" aria-label="המלצות לקוחות">
-            <p className="vsl-testimonials-title">מי שכבר עבד עם אושר:</p>
-            <div className="vsl-testimonial">
-              <img src="/images/matanel.jpg" alt="מתנאל לייני" width="48" height="48" loading="lazy" decoding="async" />
-              <blockquote>
-                <p>"הצליח להחזיר לי את החשבון מחסימות שלא ברא השטן, רק תנו לו את ההזדמנות והוא יסדר."</p>
-                <footer>מתנאל לייני · יוצר תוכן ומשפיען</footer>
-              </blockquote>
-            </div>
-            <div className="vsl-testimonial">
-              <img src="/images/gal.jpg" alt="גל נמני" width="48" height="48" loading="lazy" decoding="async" />
-              <blockquote>
-                <p>"לאחר שנעקצתי על ידי חברה אחרת, פניתי לאושר ובמסירות הוא החזיר לי את העסק לחיים. ממש ככה!"</p>
-                <footer>גל נמני · מנכ"לית Go-Tech</footer>
-              </blockquote>
-            </div>
-            <div className="vsl-testimonial">
-              <img src="/images/ofira.jpg" alt="אופירה יחיא" width="48" height="48" loading="lazy" decoding="async" />
-              <blockquote>
-                <p>"המצב היה כמעט בלתי הפיך - לאחר כשבועיים אושר החזיר לי את החשבון בנחת וברוגע לא אופייניים."</p>
-                <footer>אופירה יחיא · קונדיטורית ויוצרת תוכן</footer>
-              </blockquote>
-            </div>
-            <a href="/testimonials" className="vsl-testimonials-more">לכל ההמלצות ←</a>
-          </div>
-
-          <a
-            href={purchaseUrl}
-            className="cta-btn"
-            onClick={trackInitiateCheckout}
-            style={{ marginTop: 40 }}
-          >
-            <span>הצטרפו לקורס ב-₪{PRICE}</span>
-            <span className="arrow"><IconArrowLeft size={18} /></span>
-          </a>
-
-          <p className="cta-consent-note">
-            ברכישה אתם מסכימים לקבל עדכונים שיווקיים מאיתנו. ניתן להסיר בכל עת.
-          </p>
-
-          <div className="trust-bar">
-            <div className="trust-item">
-              <IconLock size={18} />
-              <span>תשלום מאובטח</span>
-            </div>
-            <div className="trust-divider" aria-hidden="true" />
-            <div className="trust-item">
-              <IconReceipt size={18} />
-              <span>חשבונית מס מיידית</span>
-            </div>
-            <div className="trust-divider" aria-hidden="true" />
-            <div className="trust-item">
-              <IconZap size={18} />
-              <span>גישה מיידית</span>
+            {/* Social proof: recovery-service clients, labeled as such (not course students) */}
+            <div className="vsl-quotes m-reveal" aria-label="המלצות לקוחות" role="group">
+              <p className="vsl-quotes__title">לקוחות שירות השחזור על העבודה עם אושר:</p>
+              {TESTIMONIALS.map((t) => (
+                <div className="vsl-quote" key={t.name}>
+                  <img src={t.img} alt={t.name} width="48" height="48" loading="lazy" decoding="async" />
+                  <blockquote>
+                    <p>{t.quote}</p>
+                    <footer>{t.name} · {t.role}</footer>
+                  </blockquote>
+                </div>
+              ))}
+              <p className="small dim">ההמלצות כאן הן על שירות השחזור, לא על הקורס עצמו.</p>
+              <a href="/testimonials" className="link small">לכל ההמלצות ←</a>
             </div>
           </div>
 
-          <div className="whatsapp-cta-wrapper">
-            <p className="whatsapp-prompt">יש שאלה לפני שמצטרפים?</p>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="whatsapp-cta" aria-label="פתח שיחה בוואטסאפ">
-              <IconWhatsApp size={20} />
+          <div className="vsl-wa">
+            <p className="vsl-wa__q">יש שאלה לפני שמצטרפים?</p>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn--ghost btn--plain vsl-wa__btn" aria-label="פתח שיחה בוואטסאפ">
+              <Icon name="whatsapp" />
               <span>שלחו הודעה. אושר עונה אישית</span>
             </a>
           </div>
         </div>
       </section>
 
-      <div className="gradient-divider" aria-hidden="true" />
-
       {/* FAQ, placed after Final CTA so the price reveal stays the peak */}
-      <section className="faq-section" aria-labelledby="faq-heading">
-        <div className="container">
-          <div className="text-center">
-            <span className="section-label">שאלות נפוצות</span>
-          </div>
-          <h2 id="faq-heading" className="text-center">
-            יש לכם שאלה? סביר להניח שהתשובה כאן.
-          </h2>
+      <section className="section theme-mist" aria-labelledby="faq-heading">
+        <div className="container vsl-split">
+          <header className="vsl-split__side">
+            <div className="vsl-split__sticky m-reveal">
+              <Eyebrow num="03">שאלות נפוצות</Eyebrow>
+              <h2 id="faq-heading" className="h2">
+                <span className="lt">יש לכם שאלה?</span> סביר להניח שהתשובה כאן.
+              </h2>
+              <p className="vsl-faq-foot">
+                יש שאלה שלא מצאתם פה?{' '}
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="link">שלחו הודעה בוואטסאפ</a>.
+                {' '}אני עונה אישית.
+              </p>
+            </div>
+          </header>
 
           <div className="faq-list">
-            <details className="faq-item">
-              <summary>למי הקורס מתאים?</summary>
-              <div className="faq-answer">
-                לבעלי עסקים שמפרסמים בפייסבוק ובאינסטגרם, למנהלי סושיאל שמנהלים חשבונות של לקוחות,
-                ולקמפיינרים/ות שמריצים תקציבי פרסום. בקיצור, לכל מי שיש לו נכס דיגיטלי שהוא לא יכול להרשות לעצמו לאבד.
-              </div>
-            </details>
-
-            <details className="faq-item">
-              <summary>אני לא טכנולוגי. אני יכול בכלל להתמודד עם זה?</summary>
-              <div className="faq-answer">
-                בהחלט. הקורס בנוי בהקלטות מסך עם הנחיה צעד-אחר-צעד. אין הנחה של ידע מוקדם.
-                אם אתם יודעים להפעיל פייסבוק ולהיכנס לחשבון, אתם יודעים מספיק.
-              </div>
-            </details>
-
-            <details className="faq-item">
-              <summary>כמה זמן ייקח לי לסיים את הקורס?</summary>
-              <div className="faq-answer">
-                בערך 3 שעות מצטברות של תוכן. אפשר לעבור הכל בערב אחד, או לפזר על פני שבוע.
-                את היישום עצמו אפשר לעשות תוך כדי, מסך אחרי מסך.
-              </div>
-            </details>
-
-            <details className="faq-item">
-              <summary>מה אני מקבל אחרי הרכישה?</summary>
-              <div className="faq-answer">
-                גישה מיידית ל-LMS עם כל המודולים והבונוסים. שולחים לכם מייל עם שם משתמש וסיסמה תוך דקות.
-                גישה לכל החיים, כולל עדכונים עתידיים.
-              </div>
-            </details>
-
-            <details className="faq-item">
-              <summary>האם יש החזר כספי אם הקורס לא מתאים לי?</summary>
-              <div className="faq-answer">
-                לפני שאתם מתלבטים: הסילבוס המלא מפורט כאן בדף (4 מודולים + 3 בונוסים, כ-3 שעות),
-                הגישה היא לכל החיים כולל עדכונים, ואני זמין בוואטסאפ לכל שאלה, גם לפני הרכישה.
-                מכיוון שמדובר בתוכן דיגיטלי עם גישה מיידית, לא ניתן החזר לאחר הרכישה, בהתאם לחוק הגנת הצרכן.
-                יש ספק? שלחו לי הודעה ואענה אישית.
-              </div>
-            </details>
-
-            <details className="faq-item">
-              <summary>מה ההבדל בין הקורס הזה לכל מה שיש בחינם ביוטיוב?</summary>
-              <div className="faq-answer">
-                ביוטיוב יש "טיפים". כאן יש שיטה. הקורס בנוי על 5 שנים של עבודה עם מעל 2,500 חשבונות אמיתיים שהושבתו או נפרצו,
-                והוא מתעדכן בהתאם לשינויים האחרונים של מטא. אין כפילויות, אין מילוי זמן, רק יישום.
-              </div>
-            </details>
-
-            <details className="faq-item">
-              <summary>האם הקורס מתעדכן?</summary>
-              <div className="faq-answer">
-                כן. כשמטא משנה משהו, אני מעדכן. הגישה שלכם אוטומטית כוללת את כל העדכונים העתידיים, ללא תוספת תשלום.
-              </div>
-            </details>
-
-            <details className="faq-item">
-              <summary>אפשר לדבר איתך אם נתקעתי תוך כדי?</summary>
-              <div className="faq-answer">
-                התלמידים שלי יכולים לפנות אליי בוואטסאפ אם משהו לא ברור. לא הבטחה לתמיכה אישית מלאה,
-                אבל אני עונה בפועל לכולם.
-              </div>
-            </details>
+            {FAQS.map(([q, a], i) => (
+              <details className="faq-item" name="vsl-faq" key={q}>
+                <summary>
+                  <span className="faq-item__num num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="faq-item__q">{q}</span>
+                  <span className="faq-item__icon" aria-hidden="true" />
+                </summary>
+                <p className="faq-item__a">{a}</p>
+              </details>
+            ))}
           </div>
-
-          <p className="faq-foot">
-            יש שאלה שלא מצאתם פה?{' '}
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="faq-foot-link">שלחו הודעה בוואטסאפ</a>.
-            {' '}אני עונה אישית.
-          </p>
         </div>
       </section>
 
       </main>
 
-      {/* STICKY MOBILE CTA, hidden while the purchase section is on screen */}
-      <div className={`sticky-cta ${showStickyCta && !finalCtaInView ? 'visible' : ''}`} role="region" aria-label="קיצור דרך לרכישה">
+      {/* STICKY MOBILE CTA, always straight to checkout, hidden while the purchase section is on screen */}
+      <div className={`vsl-bar${stickyVisible ? ' is-visible' : ''}`} role="region" aria-label="קיצור דרך לרכישה">
         <a
-          href={passedFinalCta ? purchaseUrl : '#final-cta'}
-          className="sticky-cta-btn"
-          onClick={passedFinalCta ? trackInitiateCheckout : trackCtaClick}
-          aria-label={`הצטרפו לקורס BMS ב-${PRICE} שקלים`}
+          href={checkout('sticky')}
+          className="vsl-bar__btn vsl-bar__btn--wide"
+          onClick={() => trackInitiateCheckout('sticky')}
+          aria-label={`לתשלום, קורס BMS ב-${PRICE} שקלים`}
         >
-          <span>הצטרפו ב-₪{PRICE}</span>
-          <IconArrowLeft size={16} />
+          <span>לתשלום · ₪{PRICE}</span>
         </a>
       </div>
 
       {/* FOOTER */}
-      <footer className="vsl-footer">
-        <p className="disclaimer">
-          התוצאות המוצגות בדף זה מבוססות על מקרים אמיתיים. השמות בוידאו בדויים לשמירה על פרטיות.
-          התוצאות שלך עשויות להיות שונות בהתאם לנסיבות, לניסיון ולמאמץ שתשקיע.
-          <br /><br />
-          אין קשר לפייסבוק (Meta Platforms, Inc.). דף זה אינו מאושר, מנוהל, או קשור בשום דרך למטא.
-        </p>
-
-        <div className="legal-links">
-          <a href="/privacy">מדיניות פרטיות</a>
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">צור קשר</a>
+      <footer className="vsl-foot theme-ink">
+        <div className="container">
+          <p>
+            התוצאות המוצגות בדף זה מבוססות על מקרים אמיתיים. השמות בוידאו בדויים לשמירה על פרטיות.
+            התוצאות שלך עשויות להיות שונות בהתאם לנסיבות, לניסיון ולמאמץ שתשקיע.
+          </p>
+          <p>אין קשר לפייסבוק (<span dir="ltr">Meta Platforms, Inc.</span>). דף זה אינו מאושר, מנוהל, או קשור בשום דרך למטא.</p>
+          <div className="vsl-foot__links">
+            <a href="/privacy" className="link">מדיניות פרטיות</a>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="link">צור קשר</a>
+          </div>
+          <p>© 2026 IsraelTechForce | נתניה, ישראל | osher@israeltechforce.com</p>
         </div>
-
-        <p className="copyright">
-          © 2026 IsraelTechForce | נתניה, ישראל | osher@israeltechforce.com
-        </p>
       </footer>
     </div>
   );

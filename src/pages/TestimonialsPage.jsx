@@ -3,12 +3,11 @@ import { Link } from 'react-router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
-import { useLang } from '../i18n';
-import { WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import Icon from '../components/Icon';
+import { Btn, Eyebrow } from '../components/ui';
 import './TestimonialsPage.css';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 
-const WHATSAPP_NUMBER = '972547274750';
 
 const TESTIMONIALS_HE = [
   {
@@ -67,188 +66,118 @@ const TESTIMONIALS_HE = [
   },
 ];
 
-const TESTIMONIALS_EN = [
-  {
-    id: 1,
-    name: 'Matanel Layani',
-    role: 'Content creator and influencer',
-    image: '/images/matanel.jpg',
-    quote:
-      "Since the start of the war, Osher has been there for me through every crisis. He managed to get my account back from bans you wouldn't believe. Just give him the chance and he'll sort it out.",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: 'Hani Asor',
-    role: 'Culinary content creator',
-    image: '/images/hani.jpg',
-    quote:
-      "My Instagram and Facebook were hacked, and I watched my life's work collapse. I spoke with a few other people who only stressed me out — then Osher came along, calmed everything down, and fixed it.",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: 'Gal Nimni',
-    role: 'CEO of Go-Tech',
-    image: '/images/gal.jpg',
-    quote:
-      'After getting burned by another company, I turned to Osher, and with real dedication he brought my business back to life. Just like that!',
-    rating: 5,
-  },
-  {
-    id: 4,
-    name: 'Ofira Yahya',
-    role: 'Pastry chef and content creator',
-    image: '/images/ofira.jpg',
-    quote:
-      "Hackers from Turkey broke in and disabled my account — the situation was almost irreversible. Within about two weeks, Osher got my account back with an unusual calm and composure.",
-    rating: 5,
-  },
-  {
-    id: 5,
-    name: 'Yesh Atid',
-    role: 'The Yesh Atid party — Arab community outreach',
-    image: '/images/yeshatid.jpg',
-    quote:
-      'One bright day everything went dark on us for a completely absurd reason. Osher quickly diagnosed the problem and, with thorough work, had us back up and running within two days.',
-    rating: 5,
-  },
-  {
-    id: 6,
-    name: 'Lierac Israel',
-    role: 'The Israeli branch of the leading skincare brand',
-    image: '/images/lierac.jpg',
-    quote:
-      'Excellent support in resolving advertising issues. Osher is professional, available, and helps with every problem. Very satisfied with the service!',
-    rating: 5,
-  },
-];
-
-const STR = {
-  he: {
-    testimonials: TESTIMONIALS_HE,
-    backLink: 'חזרה לעמוד הראשי',
-    backIcon: 'fas fa-arrow-right',
-    title: 'ביקורות לקוחות',
-    subtitle:
-      '2,500+ לקוחות בחרו ב-IsraelTechForce לשחזור חשבונות הרשתות החברתיות שלהם. הנה מה שהם אומרים.',
-    aggregateAria: 'דירוג 4.9 מתוך 5',
-    aggregateCount: 'מ-2,500+ לקוחות מרוצים',
-    ctaTitle: 'רוצים להצטרף לאלפי הלקוחות המרוצים?',
-    ctaText: 'תשלום רק אחרי הצלחה מוכחת. אבחון ראשוני חינמי. 95%+ הצלחה.',
-    ctaBtn: 'צרו קשר בוואטסאפ',
-    whatsappMessage: 'היי, אני רוצה לשמוע עוד על השירות',
-  },
-  en: {
-    testimonials: TESTIMONIALS_EN,
-    backLink: 'Back to home page',
-    backIcon: 'fas fa-arrow-left',
-    title: 'Customer Reviews',
-    subtitle:
-      "2,500+ customers chose IsraelTechForce to recover their social media accounts. Here's what they say.",
-    aggregateAria: 'Rated 4.9 out of 5',
-    aggregateCount: 'from 2,500+ satisfied customers',
-    ctaTitle: 'Want to join thousands of satisfied customers?',
-    ctaText: 'Payment only after proven success. Free initial diagnosis. 95%+ success rate.',
-    ctaBtn: 'Contact Us on WhatsApp',
-    whatsappMessage: WHATSAPP_DEFAULT_MSG.en,
-  },
+const t = {
+  testimonials: TESTIMONIALS_HE,
+  backLink: 'חזרה לעמוד הראשי',
+  eyebrow: 'תוצאות',
+  title: 'ביקורות לקוחות',
+  subtitle:
+    '2,500+ לקוחות בחרו ב-IsraelTechForce לשחזור חשבונות הרשתות החברתיות שלהם. הנה מה שהם אומרים.',
+  aggregateAria: 'דירוג 4.9 מתוך 5',
+  aggregateCount: 'מ-2,500+ לקוחות מרוצים',
+  ctaTitle: 'רוצים להצטרף לאלפי הלקוחות המרוצים?',
+  ctaText: 'תשלום רק אחרי הצלחה מוכחת. אבחון ראשוני חינמי. 95%+ הצלחה.',
+  ctaBtn: 'צרו קשר בוואטסאפ',
+  whatsappMessage: 'היי, אני רוצה לשמוע עוד על השירות',
 };
 
-const renderStars = (rating) =>
-  Array.from({ length: 5 }, (_, i) => (
-    <i
-      key={i}
-      className={`fas fa-star ${i < rating ? 'filled' : 'empty'}`}
-      aria-hidden="true"
-    ></i>
-  ));
+// Numbers that carry a sign ("2,500+", "95%+") are isolated so RTL does not
+// move the sign to the other side. The copy itself is untouched.
+const SIGNED_NUMBER = /(\d[\d,.]*[%+]+)/;
+const withBdi = (text) =>
+  text.split(SIGNED_NUMBER).map((part, i) => (i % 2 ? <bdi key={i} dir="ltr">{part}</bdi> : part));
+
+// "Back" in an RTL layout points to the right.
+const BackIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    <path d="M5 12h14" />
+    <path d="M13 6l6 6-6 6" />
+  </svg>
+);
+
+const Stars = ({ rating, label }) => (
+  <div className="tstp__stars" role="img" aria-label={label}>
+    {Array.from({ length: rating }, (_, i) => <Icon key={i} name="star" />)}
+  </div>
+);
 
 const TestimonialsPage = () => {
-  const { lang, dir, prefix } = useLang();
-  const t = STR[lang];
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.whatsappMessage)}`;
+  const whatsappUrl = getWhatsAppUrl(t.whatsappMessage);
 
   return (
-    <div dir={dir} className="testimonials-page">
+    <div dir="rtl" className="tstp">
       <Navbar />
 
-      <main className="testimonials-main">
-        <div className="container">
+      <main id="main">
+        <header className="tstp__hero theme-ink bg-grid">
+          <div className="container tstp__hero-grid">
+            <div className="tstp__hero-copy">
+              <Link to="/" className="tstp__back link link--arrow small">
+                <BackIcon />
+                {t.backLink}
+              </Link>
+              <Eyebrow className="tstp__eyebrow">{t.eyebrow}</Eyebrow>
+              <h1 className="display tstp__title">
+                <span className="lt">ביקורות</span> <span className="mk">לקוחות</span>
+              </h1>
+              <p className="lead tstp__sub">{withBdi(t.subtitle)}</p>
+            </div>
 
-          {/* Page header */}
-          <div className="testimonials-page-header">
-            <Link to={prefix || '/'} className="testimonials-back-link">
-              <i className={t.backIcon} aria-hidden="true"></i>
-              {t.backLink}
-            </Link>
-            <h1 className="testimonials-page-title">{t.title}</h1>
-            <p className="testimonials-page-subtitle">{t.subtitle}</p>
-
-            {/* Aggregate rating display */}
-            <div className="testimonials-aggregate">
-              <div className="aggregate-score">4.9</div>
-              <div className="aggregate-details">
-                <div className="aggregate-stars" aria-label={t.aggregateAria}>
-                  <i className="fas fa-star filled" aria-hidden="true"></i>
-                  <i className="fas fa-star filled" aria-hidden="true"></i>
-                  <i className="fas fa-star filled" aria-hidden="true"></i>
-                  <i className="fas fa-star filled" aria-hidden="true"></i>
-                  <i className="fas fa-star filled" aria-hidden="true"></i>
-                </div>
-                <span className="aggregate-count">{t.aggregateCount}</span>
+            {/* Aggregate rating */}
+            <div className="tstp__score">
+              <p className="tstp__score-value num"><bdi dir="ltr">4.9</bdi></p>
+              <div className="tstp__score-side">
+                <Stars rating={5} label={t.aggregateAria} />
+                <p className="tstp__score-count">{withBdi(t.aggregateCount)}</p>
               </div>
             </div>
           </div>
+        </header>
 
-          {/* Testimonials grid */}
-          <div className="testimonials-grid">
-            {t.testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="testimonial-card">
-                <div className="testimonial-header">
-                  <div className="testimonial-image">
+        {/* Mosaic: one lead quote, then two more sizes */}
+        <section className="tstp__wall theme-mist section" aria-label={t.title}>
+          <div className="container">
+            <div className="tstp__mosaic m-stagger">
+              {t.testimonials.map((testimonial) => (
+                <figure key={testimonial.id} className="tstp__card">
+                  <Stars rating={testimonial.rating} label={`דירוג ${testimonial.rating} מתוך 5`} />
+                  <blockquote className="tstp__quote">{testimonial.quote}</blockquote>
+                  <figcaption className="tstp__who">
                     <img
                       src={testimonial.image}
                       alt={`${testimonial.name} - ${testimonial.role}`}
+                      width="150"
+                      height="150"
+                      loading="lazy"
+                      decoding="async"
                       onError={(e) => {
                         e.target.src = '/images/default-avatar.png';
                       }}
                     />
-                  </div>
-                  <div className="testimonial-info">
-                    <h2 className="testimonial-name">{testimonial.name}</h2>
-                    <p className="testimonial-role">{testimonial.role}</p>
-                    <div className="testimonial-rating">
-                      {renderStars(testimonial.rating)}
-                    </div>
-                  </div>
-                </div>
-                <div className="testimonial-content">
-                  <div className="quote-icon">
-                    <i className="fas fa-quote-right" aria-hidden="true"></i>
-                  </div>
-                  <p className="testimonial-quote">{testimonial.quote}</p>
-                </div>
-              </div>
-            ))}
+                    <span>
+                      <b className="tstp__name">{testimonial.name}</b>
+                      <span className="tstp__role">{testimonial.role}</span>
+                    </span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
+        </section>
 
-          {/* CTA */}
-          <div className="testimonials-page-cta">
-            <h2 className="testimonials-cta-title">{t.ctaTitle}</h2>
-            <p className="testimonials-cta-text">{t.ctaText}</p>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="testimonials-cta-btn"
-            >
-              <i className="fab fa-whatsapp" aria-hidden="true"></i>
-              {t.ctaBtn}
-            </a>
+        <section className="tstp__cta" aria-labelledby="tstp-cta-title">
+          <div className="container">
+          <div className="tstp__cta-card theme-ink m-reveal">
+            <h2 className="h1" id="tstp-cta-title">{t.ctaTitle}</h2>
+            <div className="tstp__cta-side">
+              <p className="lead">{withBdi(t.ctaText)}</p>
+              <Btn variant="go" href={whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick('testimonials-page')}>
+                {t.ctaBtn}
+              </Btn>
+            </div>
           </div>
-
-        </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

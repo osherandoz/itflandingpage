@@ -24,25 +24,11 @@ export default [
   route("VSL-BMS", "./routes/vsl-bms.jsx"),
   // VSL-BMS-V2 — A/B test variant (noindex)
   route("VSL-BMS-V2", "./routes/vsl-bms-v2.jsx"),
+  route("תודה", "./routes/thank-you.jsx"),
   route("תודה-קליסט", "./routes/thank-you-lead.jsx"),
   route("תודה-רכישה", "./routes/thank-you-purchase.jsx"),
   // E3 — author/about page, linked from articles + schema
   route("אושר-רווח", "./routes/osher-revach.jsx"),
-
-  // ——— English site (/en/*) — mirrors the Hebrew pages with English slugs ———
-  route("en", "./routes/en.home.jsx"),
-  route("en/privacy", "./routes/en.privacy.jsx"),
-  route("en/press", "./routes/en.press.jsx"),
-  route("en/articles", "./routes/en.articles.jsx"),
-  route("en/articles/:slug", "./routes/en.articles.$slug.jsx"),
-  route("en/facebook-account-recovery", "./routes/en.facebook-recovery.jsx"),
-  route("en/instagram-account-recovery", "./routes/en.instagram-recovery.jsx"),
-  route("en/whatsapp-account-recovery", "./routes/en.whatsapp-recovery.jsx"),
-  route("en/facebook-account-disabled", "./routes/en.facebook-disabled.jsx"),
-  route("en/instagram-account-hacked", "./routes/en.instagram-hacked.jsx"),
-  route("en/ads-manager-recovery", "./routes/en.ads-manager.jsx"),
-  route("en/newsletter", "./routes/en.newsletter.jsx"),
-  route("en/faq", "./routes/en.faq.jsx"),
-  route("en/testimonials", "./routes/en.testimonials.jsx"),
-  route("en/osher-revach", "./routes/en.osher-revach.jsx"),
+  // Everything else: a designed page with a real 404 status
+  route("*", "./routes/not-found.jsx"),
 ];

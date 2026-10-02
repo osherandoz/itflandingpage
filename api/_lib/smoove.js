@@ -43,7 +43,7 @@ export function normalizePhone(raw) {
   if (/^05\d{8}$/.test(digits)) return digits;
   if (/^\+9725\d{8}$/.test(digits)) return '0' + digits.slice(4);
   if (/^9725\d{8}$/.test(digits)) return '0' + digits.slice(3);
-  // Non-Israeli (English site): plain international number, 8-15 digits, optional +
+  // Non-Israeli: plain international number, 8-15 digits, optional +
   if (/^\+?\d{8,15}$/.test(digits)) return digits;
   return null;
 }

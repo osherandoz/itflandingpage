@@ -1,5 +1,4 @@
 import TestimonialsPage from '../../src/pages/TestimonialsPage';
-import { hreflangLinks } from '../../src/i18n/index.js';
 
 const REVIEWS_SCHEMA = [
   {
@@ -110,11 +109,10 @@ export const meta = () => [
   { property: 'og:locale', content: 'he_IL' },
   {
     property: 'og:image',
-    content: 'https://www.israeltechforce.com/images/og-card.png',
+    content: 'https://www.israeltechforce.com/images/og/testimonials.png',
   },
   { name: 'twitter:card', content: 'summary_large_image' },
   { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/testimonials' },
-  ...hreflangLinks('/testimonials', '/en/testimonials'),
 ];
 
 export default function TestimonialsRoute() {

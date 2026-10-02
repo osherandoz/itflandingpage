@@ -1,5 +1,4 @@
 import React, { useEffect, lazy, Suspense } from 'react';
-import { useLang } from '../i18n';
 import Navbar from '../components/Navbar';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import PressSection from '../components/PressSection';
@@ -9,7 +8,9 @@ import Services from '../components/Services';
 import HowItWorks from '../components/HowItWorks';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
-import StickyCtaBar from '../components/StickyCtaBar';
+import { Eyebrow } from '../components/ui';
+import { FACTS } from '../data/businessFacts';
+import './Home.css';
 
 // Below-fold, non-critical for first paint — split out of the initial bundle
 const Testimonials = lazy(() => import('../components/Testimonials'));
@@ -17,7 +18,6 @@ const ArticlesSection = lazy(() => import('../components/ArticlesSection'));
 const FAQ = lazy(() => import('../components/FAQ'));
 
 const Home = () => {
-  const { dir } = useLang();
   useEffect(() => {
     // Hash-based scrolling for links arriving from another page (navbar, article
     // CTAs). The native jump misses #testimonials/#articles/#faq because those
@@ -31,10 +31,9 @@ const Home = () => {
     let tries = 0;
     const timer = setInterval(() => {
       const el = document.getElementById(id);
-      const aligned = el && Math.abs(el.getBoundingClientRect().top) < 8;
-      // 'instant' on purpose: this is an arrival from another page, where a jump
-      // is the expected behaviour, and it overrides the global smooth scroll that
-      // would otherwise animate against ScrollRestoration.
+      const top = el ? el.getBoundingClientRect().top : 0;
+      // scroll-padding-top parks sections just below the fixed header
+      const aligned = el && top > -8 && top < 120;
       if (el && !aligned) el.scrollIntoView({ block: 'start', behavior: 'instant' });
       if (aligned || ++tries > 25) clearInterval(timer);
     }, 100);
@@ -42,48 +41,61 @@ const Home = () => {
   }, []);
 
   return (
-    <div dir={dir} className="app">
+    <div className="app">
       <Navbar />
-      <main>
-      <section id="hero">
-        <HeroSection />
-      </section>
-      <PressSection />
-      {/* Services + diagnosis before the About block (audit D1): let a visitor
-          find their own problem and see how this works before reading a bio. */}
-      <section id="services">
-        <Services />
-      </section>
-      <section id="how-it-works">
-        <HowItWorks />
-      </section>
-      <section id="about">
-        <AboutMe />
-      </section>
-      <section id="testimonials">
-        <Suspense fallback={null}>
-          <Testimonials />
-        </Suspense>
-      </section>
-      <section id="articles">
-        <Suspense fallback={null}>
-          <ArticlesSection />
-        </Suspense>
-      </section>
-      <section id="faq">
-        <Suspense fallback={null}>
-          <FAQ />
-        </Suspense>
-      </section>
-      <section id="contact" style={{ background: 'var(--color-bg-section)', padding: '80px 0' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <ContactForm />
-        </div>
-      </section>
+      <main id="main">
+        <section id="hero">
+          <HeroSection />
+        </section>
+        <PressSection />
+        {/* Services + diagnosis before the About block (audit D1): let a visitor
+            find their own problem and see how this works before reading a bio. */}
+        <section id="services">
+          <Services />
+        </section>
+        <section id="how-it-works">
+          <HowItWorks />
+        </section>
+        <section id="about">
+          <AboutMe />
+        </section>
+        <section id="testimonials">
+          <Suspense fallback={null}>
+            <Testimonials />
+          </Suspense>
+        </section>
+        <section id="articles">
+          <Suspense fallback={null}>
+            <ArticlesSection />
+          </Suspense>
+        </section>
+        <section id="faq">
+          <Suspense fallback={null}>
+            <FAQ />
+          </Suspense>
+        </section>
+        <section id="contact" className="home-contact section theme-mist">
+          <div className="container home-contact__grid">
+            <div className="home-contact__copy m-reveal">
+              <Eyebrow num="07">יצירת קשר</Eyebrow>
+              <h2 className="h1">
+                <span className="lt">מעדיפים שאחזור</span> אליכם?
+              </h2>
+              <p className="lead">משאירים פרטים, מספרים בקצרה מה קרה, ואני חוזר עם אבחון ראשוני. בלי תשלום מראש.</p>
+              <ul className="home-contact__points">
+                <li>אבחון ראשוני חינם</li>
+                <li>תשלום רק אחרי הצלחה</li>
+                <li>זמינות {FACTS.hours.he}</li>
+              </ul>
+            </div>
+            <div className="card home-contact__card m-reveal">
+              <ContactForm />
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
-      <FloatingWhatsApp />
-      <StickyCtaBar />
+      <FloatingWhatsApp message="היי, החשבון שלי חסום, אשמח לעזרה" label="קבל עזרה עכשיו" />
     </div>
   );
 };

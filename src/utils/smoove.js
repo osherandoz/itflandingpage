@@ -9,27 +9,21 @@ export const validateEmail = (email) => {
 };
 
 const MESSAGES = {
-  he: {
-    success: 'הרשמה לניוזלטר בוצעה בהצלחה! תודה על ההרשמה.',
-    error: 'שגיאה בהרשמה לניוזלטר. אנא נסו שוב מאוחר יותר.',
-  },
-  en: {
-    success: 'You\'re subscribed! Thanks for signing up.',
-    error: 'Something went wrong subscribing you. Please try again shortly.',
-  },
+  success: 'הרשמה לניוזלטר בוצעה בהצלחה! תודה על ההרשמה.',
+  error: 'שגיאה בהרשמה לניוזלטר. אנא נסו שוב מאוחר יותר.',
 };
 
 /**
  * Subscribe a user to the newsletter.
  * Sends to /api/subscribe which proxies to Smoove server-side.
  */
-export const subscribeToNewsletter = async (firstName, lastName, email, website = '', lang = 'he') => {
-  const m = MESSAGES[lang] || MESSAGES.he;
+export const subscribeToNewsletter = async (firstName, lastName, email, website = '') => {
+  const m = MESSAGES;
   try {
     const response = await fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ firstName, lastName, email, website, lang }),
+      body: JSON.stringify({ firstName, lastName, email, website, lang: 'he' }),
     });
 
     const data = await response.json().catch(() => ({}));

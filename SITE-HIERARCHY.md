@@ -44,27 +44,32 @@
 (dashboard הוסר מהאתר הציבורי, 2026-09)
 ```
 
-## 2. היררכיה — אנגלית (/en/*)
+## 2. אנגלית (/en/*) — הוסר
 
-מראה מלאה של 6 דפי המוצר + תוכן. **אין** מקבילה אנגלית ל-bms-sm / VSL / thank-you.
+**האתר האנגלי הוסר ב-2026-10-01.** האתר בעברית בלבד (RTL): אין routes של `/en/*`, אין מתג שפה, אין hreflang, ואין כתובות `/en` בסייטמאפ.
+
+כל כתובת `/en/*` ישנה מפנה בהפניה קבועה (308) למקבילה העברית — מוגדר ב-`redirects` בתוך `vercel.json`:
 
 ```
-/en
-├── /en/facebook-account-recovery
-├── /en/instagram-account-recovery
-├── /en/whatsapp-account-recovery
-├── /en/facebook-account-disabled
-├── /en/instagram-account-hacked
-├── /en/ads-manager-recovery
-├── /en/articles  (+ 9 slugs זהים לעברית)
-├── /en/faq
-├── /en/testimonials
-├── /en/press
-├── /en/newsletter
-└── /en/privacy
+/en                              → /
+/en/facebook-account-recovery    → /שחזור-חשבון-פייסבוק
+/en/instagram-account-recovery   → /שחזור-חשבון-אינסטגרם
+/en/whatsapp-account-recovery    → /שחזור-חשבון-וואטסאפ
+/en/facebook-account-disabled    → /חשבון-פייסבוק-מושבת
+/en/instagram-account-hacked     → /חשבון-אינסטגרם-נפרץ
+/en/ads-manager-recovery         → /שחזור-מנהל-מודעות
+/en/articles                     → /articles
+/en/articles/:slug               → /articles/:slug
+/en/faq                          → /faq
+/en/testimonials                 → /testimonials
+/en/press                        → /press
+/en/newsletter                   → /newsletter
+/en/privacy                      → /privacy
+/en/osher-revach                 → /אושר-רווח
+/en/* (כל השאר)                  → /
 ```
 
-hreflang: he ↔ en ↔ x-default(he) — מוגדר ב-`src/i18n/index.js`, מוזרק בכל route.
+יעדים בעברית נשמרים ב-`vercel.json` כשהם percent-encoded. בדיקה: `src/__tests__/en-redirects.test.js`.
 
 ---
 
@@ -141,7 +146,7 @@ StickyCTA    (בלבד)                                          │
 3. **/תודה-קליסט → כלום**: אין אפסייל ל-₪197, אין VSL, אין וואטסאפ.
 4. **דף שירות → לכידת ליד**: אין טופס. וואטסאפ או כלום. אין רשימת רימרקטינג.
 5. **bms-sm → VSL-BMS**: הליד מגנט לא מוביל לדף המכירה של אותו מוצר.
-6. **/en/* → מוצר הקורס**: אין. תנועה אנגלית מגיעה רק לשירות ידני.
+6. ~~**/en/* → מוצר הקורס**~~: לא רלוונטי — האתר האנגלי הוסר ב-2026-10-01 (ראו סעיף 2).
 
 ---
 
@@ -181,6 +186,5 @@ BOFU   /תודה-רכישה ──► אונבורדינג + הצעת שירות
 
 ## 7. עמודים חסרים בסייטמאפ / robots
 
-- Sitemap כולל 46 URL. חסרים: `/VSL-BMS-V2` (מכוון, noindex), thank-you (מכוון).
+- Sitemap כולל 24 URL (עברית בלבד מאז 2026-10-01; 22 כתובות `/en` הוסרו). חסרים: `/VSL-BMS-V2` (מכוון, noindex), thank-you (מכוון).
 - `robots.txt` חוסם: `/api/`, `/VSL-BMS-V2`, שני דפי התודה.
-- **`/bms-sm` ו-`/VSL-BMS` בסייטמאפ ללא מקבילה אנגלית** — אין hreflang עליהם.
