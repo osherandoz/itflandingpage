@@ -16,10 +16,11 @@ export const meta = () => [
   { property: 'og:locale', content: 'he_IL' },
   {
     property: 'og:image',
-    content: 'https://www.israeltechforce.com/images/og-card.png',
+    content: 'https://www.israeltechforce.com/images/og/faq.png',
   },
   { name: 'twitter:card', content: 'summary_large_image' },
-  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/faq' },];
+  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/faq' },
+];
 
 export default function FaqRoute() {
   return (

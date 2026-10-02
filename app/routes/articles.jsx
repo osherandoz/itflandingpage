@@ -18,10 +18,11 @@ export const meta = () => [
   { property: 'og:locale', content: 'he_IL' },
   {
     property: 'og:image',
-    content: 'https://www.israeltechforce.com/images/og-card.png',
+    content: 'https://www.israeltechforce.com/images/og/articles.png',
   },
   { name: 'twitter:card', content: 'summary_large_image' },
-  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/articles' },];
+  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/articles' },
+];
 
 export default function ArticlesRoute() {
   return <ArticlesPage articles={articles} />;

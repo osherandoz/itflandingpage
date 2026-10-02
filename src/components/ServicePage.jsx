@@ -245,6 +245,20 @@ const ServicePage = ({ pageData }) => {
                 <h2 className="h1">
                   <span className="lt">מה זה</span> ולמה זה קורה?
                 </h2>
+                {pageData.notice && (
+                  <figure className="svcp-notice">
+                    <div className="svcp-notice__card">
+                      <p className="svcp-notice__app">
+                        <Icon name={pageData.notice.icon} />
+                        {pageData.notice.app}
+                      </p>
+                      <p className="svcp-notice__title">{pageData.notice.title}</p>
+                      <p className="svcp-notice__text">{pageData.notice.text}</p>
+                      <span className="sticker svcp-notice__sticker">נשמע מוכר?</span>
+                    </div>
+                    <figcaption className="small dim">המחשה. הנוסח המדויק משתנה ממקרה למקרה.</figcaption>
+                  </figure>
+                )}
               </div>
             </header>
             <div

@@ -193,6 +193,22 @@
   .svcp__sticky { position: sticky; top: calc(var(--nav-h) + 48px); }
 }
 
+/* The message the visitor already saw, drawn as a system notice (no image) */
+.svcp-notice { margin-block-start: 32px; max-width: 380px; }
+.svcp-notice__card {
+  position: relative;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-inline-start: 4px solid var(--alert);
+  border-radius: var(--r-md);
+  background: var(--white);
+}
+.svcp-notice__app { display: flex; align-items: center; gap: 8px; font-size: var(--fs-small); font-weight: 700; color: var(--fg-2); }
+.svcp-notice__title { margin-block-start: 12px; font-size: var(--fs-h3); font-weight: 800; line-height: 1.2; }
+.svcp-notice__text { margin-block-start: 8px; color: var(--fg-2); }
+.svcp-notice__sticker { position: absolute; inset-block-end: -16px; inset-inline-end: 16px; }
+.svcp-notice figcaption { margin-block-start: 28px; }
+
 /* Arrow disc used by the article rows and the cross link */
 .svcp__go {
   display: grid;

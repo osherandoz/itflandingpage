@@ -14,7 +14,6 @@ import { SERVICE_PAGES } from './servicePages';
 import { buildBreadcrumbSchema } from './schemas';
 import { SERVICE_PATHS, SITE_ORIGIN } from '../i18n/index.js';
 
-const OG_IMAGE = `${SITE_ORIGIN}/images/og-card.png`;
 const PROVIDER = {
   '@type': 'LocalBusiness',
   '@id': `${SITE_ORIGIN}/#business`,
@@ -37,7 +36,7 @@ export function serviceRoute(slug) {
     { property: 'og:description', content: pageData.metaDescription },
     { property: 'og:url', content: url },
     { property: 'og:locale', content: 'he_IL' },
-    { property: 'og:image', content: OG_IMAGE },
+    { property: 'og:image', content: `${SITE_ORIGIN}/images/og/${slug}.png` },
     { name: 'twitter:card', content: 'summary_large_image' },
     { tagName: 'link', rel: 'canonical', href: url },
   ];

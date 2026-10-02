@@ -24,6 +24,7 @@ to the Hebrew pages (`vercel.json`).
 | `npm test` | Vitest (schemas, redirects, funnel pages, payment webhook) |
 | `npm run lint` / `npm run build` | ESLint / production build |
 | `node scripts/brand-images.mjs` | Regenerate `public/images/brand/*` from the originals |
+| `node scripts/og-cards.mjs` | Regenerate the share cards (`public/images/og/*`, one per page) after adding a page or article (a test fails if one is missing). Needs Chrome + global `@playwright/cli` |
 | `node scripts/build-article-index.mjs` | Regenerate `src/data/articleIndex.js` after adding or editing an article (a test fails if it is stale) |
 
 ## Design: the "Signal" system (2026-10)
@@ -44,6 +45,8 @@ to the Hebrew pages (`vercel.json`).
 - Routes: `app/routes.js`. Page hierarchy and funnel: `SITE-HIERARCHY.md`.
 - Shared chrome: `Navbar`, `Footer`, `FloatingWhatsApp`, `Modal`, `ContactForm` (lead form → `/api/lead`).
 - Six service pages share `src/components/ServicePage.jsx` + `src/data/servicePages.js`.
+  Each carries a `notice`: the block message drawn in CSS (an illustration, labelled as one, not a screenshot).
+- Every lead form (`ContactForm`) lands on `/תודה` (noindex) once the server confirms; the Lead event still fires in the form.
 - BMS course funnel: `/bms-sm` (free checklist) → `/תודה-קליסט`; `/VSL-BMS` and
   `/VSL-BMS-V2` (A/B, noindex) → external checkout → `/תודה-רכישה`.
   Product brief for these pages: `PRODUCT.md`.
@@ -87,4 +90,6 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
   `centralFaqSchema.js`, a few route titles): copy decision.
 - `businessFacts.js` still has `source: TODO` on the 2,500 / 95% / 4.9 claims.
 - `brand-guidelines.html` predates the Signal system (the `.md` is current).
-- Lead-form and newsletter success states have no dedicated thank-you pages.
+- The newsletter success state has no dedicated thank-you page (the lead form has `/תודה` since 2026-10-02).
+- Service-page `notice` wording is from the site's own copy, not verified against Meta's current Hebrew UI: Osher to correct.
+- Waiting on Osher: client proof screenshots (Instagram highlights), photo originals (Drive folder "אושר רווח - צילומי תדמית", too large for the Drive connector), press logos (download permission + sources).

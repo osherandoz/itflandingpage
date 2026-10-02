@@ -30,8 +30,7 @@ export const meta = ({ params }) => {
   }
 
   const canonicalUrl = `https://www.israeltechforce.com/articles/${params.slug}`;
-  const ogImage =
-    'https://www.israeltechforce.com/images/og-card.png';
+  const ogImage = `https://www.israeltechforce.com/images/og/a-${params.slug}.png`;
 
   return [
     { title: article.metaTitle || `${article.title} | IsraelTechForce` },
@@ -52,7 +51,8 @@ export const meta = ({ params }) => {
     { name: 'twitter:title', content: article.title },
     { name: 'twitter:description', content: article.excerpt },
     { name: 'twitter:image', content: ogImage },
-    { tagName: 'link', rel: 'canonical', href: canonicalUrl },  ];
+    { tagName: 'link', rel: 'canonical', href: canonicalUrl },
+  ];
 };
 
 export default function ArticleRoute() {

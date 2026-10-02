@@ -18,9 +18,10 @@ export const meta = () => [
   { property: 'og:type', content: 'website' },
   {
     property: 'og:image',
-    content: 'https://www.israeltechforce.com/images/og-card.png',
+    content: 'https://www.israeltechforce.com/images/og/press.png',
   },
-  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/press' },];
+  { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/press' },
+];
 
 export default function PressRoute() {
   return (

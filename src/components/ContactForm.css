@@ -15,7 +15,6 @@
   border-radius: 16px;
   font-weight: 600;
 }
-.cform__msg--ok { background: color-mix(in srgb, var(--go) 22%, var(--surface)); color: var(--fg); }
 .cform__msg--err { background: color-mix(in srgb, var(--alert) 14%, var(--surface)); color: var(--fg); }
 
 .cform__alt { color: var(--fg-2); text-align: center; }

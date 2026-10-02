@@ -24,6 +24,7 @@ export default [
   route("VSL-BMS", "./routes/vsl-bms.jsx"),
   // VSL-BMS-V2 — A/B test variant (noindex)
   route("VSL-BMS-V2", "./routes/vsl-bms-v2.jsx"),
+  route("תודה", "./routes/thank-you.jsx"),
   route("תודה-קליסט", "./routes/thank-you-lead.jsx"),
   route("תודה-רכישה", "./routes/thank-you-purchase.jsx"),
   // E3 — author/about page, linked from articles + schema

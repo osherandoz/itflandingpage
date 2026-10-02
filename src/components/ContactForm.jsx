@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 import { getUtmSource, trackSiteEvent } from '../utils/track';
 import Icon from './Icon';
@@ -15,7 +16,6 @@ const PLATFORM_OPTIONS = [
 const t = {
   header: 'צור קשר',
   subheader: 'מלא/י את הטופס למטה ואחזור אליך בהקדם האפשרי',
-  success: 'תודה! הפרטים התקבלו',
   platformLabel: 'באיזו פלטפורמה הבעיה?',
   platformNone: 'לא בטוח/ה',
   submitErrorText: 'משהו השתבש בשליחה. נסה/י שוב או',
@@ -55,9 +55,9 @@ const t = {
 const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location = 'contact-form', hideWhatsApp = false, altPhoneField = false }) => {
   const [formData, setFormData] = useState({ name: '', phone: '', platform: '', altPhone: '', note: '', message: '', consent: false });
   const [errors, setErrors] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -116,10 +116,8 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
         window.gtag('event', 'generate_lead', { event_category: 'Contact', event_label: location, value: 1 });
       }
 
-      setIsSubmitted(true);
-      setSubmitError(false);
-      setFormData({ name: '', phone: '', platform: '', altPhone: '', note: '', message: '', consent: false });
-      setTimeout(() => setIsSubmitted(false), 5000);
+      // A real page for the success state: clean URL-based conversion + next steps
+      navigate('/תודה');
     } catch {
       trackSiteEvent('lead_form_error', { cta_location: location });
       setSubmitError(true);
@@ -138,12 +136,6 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
         <h2 className="h3">{heading || t.header}</h2>
         <p className="muted">{subheading || t.subheader}</p>
       </div>
-
-      {isSubmitted && (
-        <div className="cform__msg cform__msg--ok" role="alert">
-          <p>{t.success}</p>
-        </div>
-      )}
 
       {submitError && (
         <div className="cform__msg cform__msg--err" role="alert">

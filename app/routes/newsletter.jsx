@@ -14,7 +14,7 @@ export const meta = () => [
   { property: 'og:description', content: DESCRIPTION },
   { property: 'og:url', content: URL },
   { property: 'og:locale', content: 'he_IL' },
-  { property: 'og:image', content: 'https://www.israeltechforce.com/images/og-card.png' },
+  { property: 'og:image', content: 'https://www.israeltechforce.com/images/og/newsletter.png' },
   { name: 'twitter:card', content: 'summary_large_image' },
   { tagName: 'link', rel: 'canonical', href: URL },
 ];

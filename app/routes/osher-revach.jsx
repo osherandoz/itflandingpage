@@ -13,9 +13,10 @@ export const meta = () => [
   { property: 'og:title', content: TITLE },
   { property: 'og:description', content: DESCRIPTION },
   { property: 'og:url', content: URL },
-  { property: 'og:image', content: `${SITE_URL}/images/osher-photo-1.jpg` },
+  { property: 'og:image', content: `${SITE_URL}/images/og/author.png` },
   { name: 'twitter:card', content: 'summary_large_image' },
-  { tagName: 'link', rel: 'canonical', href: encodeURI(URL) },];
+  { tagName: 'link', rel: 'canonical', href: encodeURI(URL) },
+];
 
 export default function AuthorRoute() {
   return (
