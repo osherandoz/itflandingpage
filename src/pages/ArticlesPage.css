@@ -3,7 +3,7 @@
 
 .artl__hero {
   padding-block: calc(var(--nav-h) + clamp(32px, 6vw, 72px)) clamp(48px, 7vw, 96px);
-  background: var(--paper);
+  background: var(--bg);
 }
 
 .artl__hero-grid { display: grid; gap: 24px; align-items: end; }
@@ -18,8 +18,9 @@
   align-content: start;
   margin-block-start: clamp(32px, 5vw, 56px);
   padding: clamp(24px, 4vw, 56px);
-  background: var(--ink);
+  background: var(--ink-2);
   color: #f5f2ea;
+  border: 1px solid var(--ink-3);
   border-radius: var(--r-lg);
 }
 .artl__lead-head { display: flex; align-items: center; gap: 16px; }

@@ -99,7 +99,7 @@ function LeadForm({ where }) {
 
   if (success) {
     return (
-      <div className="card bmsm__form bmsm__success" role="status" aria-live="polite">
+      <div className="card theme-paper bmsm__form bmsm__success" role="status" aria-live="polite">
         <span className="bmsm__success-icon" aria-hidden="true"><Icon name="check" /></span>
         <p className="bmsm__success-title">הצ׳קליסט בדרך!</p>
         <p className="bmsm__success-sub">מעבירים אותך בעוד כמה שניות...</p>
@@ -109,7 +109,7 @@ function LeadForm({ where }) {
   }
 
   return (
-    <form className="card bmsm__form" onSubmit={onSubmit} noValidate data-clarity-mask="true">
+    <form className="card theme-paper bmsm__form" onSubmit={onSubmit} noValidate data-clarity-mask="true">
       <span className="sticker sticker--paper bmsm__form-sticker" aria-hidden="true">חינמי לגמרי</span>
 
       {/* Honeypot */}
@@ -347,7 +347,7 @@ export default function BmsSm() {
       </div>
 
       {/* ── BRAND ROW ───────────────────────────────────────── */}
-      <header className="bmsm__nav">
+      <header className="bmsm__nav theme-ink">
         <div className="container bmsm__nav-in">
           <div className="bmsm__brand">
             <span className="bmsm__brand-mark" aria-hidden="true">או</span>
@@ -371,7 +371,7 @@ export default function BmsSm() {
 
       <main id="main">
         {/* ── HERO: headline, then the form ───────────────────── */}
-        <section className="bmsm__hero bg-grid">
+        <section className="bmsm__hero theme-ink bg-grid">
           <div className="container bmsm__hero-grid">
             <div className="bmsm__hero-head">
               <p className="bmsm__kicker">( צ׳קליסט סינון לקוחות · עדכון 2026 )</p>

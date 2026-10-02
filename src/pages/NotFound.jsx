@@ -20,7 +20,7 @@ const NotFound = ({ code = 404 }) => {
   return (
     <div className="app">
       <Navbar />
-      <main id="main" className="nf bg-grid">
+      <main id="main" className="nf theme-ink bg-grid">
         <div className="container nf__grid">
           <div>
             <p className="nf__kicker">( שגיאה {code} )</p>

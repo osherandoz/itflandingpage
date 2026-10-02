@@ -6,7 +6,7 @@
 /* ---- Hero ---- */
 .pressp__hero {
   padding-block: calc(var(--nav-h) + clamp(32px, 6vw, 72px)) clamp(40px, 6vw, 72px);
-  background: var(--paper);
+  background: var(--bg);
 }
 .pressp__back { color: var(--fg-2); min-height: 44px; margin-block-end: clamp(16px, 3vw, 28px); }
 .pressp__sub { margin-block-start: 24px; }
@@ -18,7 +18,7 @@
   gap: 8px 24px;
   margin-block-start: clamp(32px, 5vw, 56px);
   padding-block-start: 20px;
-  border-block-start: 1px solid var(--ink);
+  border-block-start: 1px solid var(--fg);
   font-size: var(--fs-h3);
   line-height: 1.2;
 }

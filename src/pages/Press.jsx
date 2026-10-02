@@ -47,7 +47,7 @@ const Press = () => {
       <Navbar />
 
       <main id="main">
-        <header className="pressp__hero bg-grid">
+        <header className="pressp__hero theme-ink bg-grid">
           <div className="container">
             <Link to="/" className="pressp__back link link--arrow small">
               <BackIcon />

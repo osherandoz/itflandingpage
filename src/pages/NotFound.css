@@ -1,7 +1,7 @@
 /* 404 / error screen */
 .nf {
   padding-block: calc(var(--nav-h) + clamp(40px, 8vw, 96px)) var(--section);
-  background: var(--paper);
+  background: var(--bg);
 }
 .nf__grid { display: grid; gap: 48px; align-items: end; }
 .nf__kicker { font-size: var(--fs-small); font-weight: 500; color: var(--fg-2); margin-block-end: 24px; }
@@ -9,7 +9,7 @@
 .nf__lead { margin-block-start: 24px; max-width: 44ch; }
 .nf__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-block-start: 32px; }
 
-.nf__links ul { border-block-start: 1px solid var(--ink); }
+.nf__links ul { border-block-start: 1px solid var(--fg); }
 .nf__links a {
   display: grid;
   grid-template-columns: auto 1fr auto;

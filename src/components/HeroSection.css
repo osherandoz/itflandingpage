@@ -2,7 +2,7 @@
    CSS keyframes so the headline (LCP) never waits for JavaScript. */
 .hero {
   padding-block: calc(var(--nav-h) + clamp(24px, 5vw, 64px)) clamp(32px, 5vw, 64px);
-  background: var(--paper);
+  background: var(--bg);
   overflow: clip;
 }
 
@@ -43,7 +43,7 @@
   border-radius: var(--r-lg);
   background: var(--mist);
   overflow: hidden;
-  box-shadow: 0 1px 0 rgba(11, 21, 36, 0.05), 0 32px 48px -32px rgba(31, 77, 255, 0.45);
+  box-shadow: 0 32px 48px -32px rgba(31, 77, 255, 0.7);
 }
 .hero__photo img {
   width: 100%;
@@ -81,9 +81,9 @@
 .hero__chip--back {
   inset-block-start: calc(16% + 52px);
   inset-inline-end: 24px;
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
 }
 .hero__chip--back .hero__chip-dot { background: var(--go); }
 
@@ -103,7 +103,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-block-start: clamp(40px, 6vw, 72px);
-  border-block-start: 1px solid var(--ink);
+  border-block-start: 1px solid var(--fg);
 }
 .hero__proof-item {
   display: grid;

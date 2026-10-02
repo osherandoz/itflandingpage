@@ -280,7 +280,7 @@ export default function Newsletter() {
 
       <main id="main">
         {/* ── HERO ────────────────────────────────────────────── */}
-        <section className="nls__hero bg-grid">
+        <section className="nls__hero theme-ink bg-grid">
           <div className="container nls__hero-grid">
             <div className="nls__hero-copy">
               <p className="nls__kicker">

@@ -5,7 +5,7 @@
 /* ---- Hero ---- */
 .tstp__hero {
   padding-block: calc(var(--nav-h) + clamp(32px, 6vw, 72px)) clamp(48px, 7vw, 88px);
-  background: var(--paper);
+  background: var(--bg);
 }
 .tstp__hero-grid { display: grid; gap: 40px; align-items: end; }
 .tstp__back { color: var(--fg-2); min-height: 44px; margin-block-end: clamp(16px, 3vw, 28px); }
@@ -16,7 +16,7 @@
   align-items: center;
   gap: 20px;
   padding-block-start: 24px;
-  border-block-start: 1px solid var(--ink);
+  border-block-start: 1px solid var(--fg);
 }
 .tstp__score-value {
   font-size: clamp(4rem, 2.9rem + 4.7vw, 7rem);

@@ -6,7 +6,7 @@
 /* ---- Hero ---- */
 .authp__hero {
   padding-block: calc(var(--nav-h) + clamp(24px, 5vw, 64px)) clamp(48px, 6vw, 80px);
-  background: var(--paper);
+  background: var(--bg);
   overflow: clip;
 }
 .authp__hero-grid { display: grid; gap: 48px; align-items: center; }

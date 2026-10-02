@@ -297,7 +297,7 @@ const ArticleTemplate = ({ article }) => {
   return (
     <Shell>
       <article>
-        <header className="artp__head bg-grid">
+        <header className="artp__head theme-ink bg-grid">
           <div className="container">
             <nav className="artp__crumbs" aria-label={t.breadcrumbLabel}>
               <Link to={homePath}>{t.breadcrumbHome}</Link>

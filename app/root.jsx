@@ -25,7 +25,7 @@ export function Layout({ children }) {
         {/* Marks the document as scripted so scroll reveals may start hidden.
             If the app never boots, the class is dropped and everything shows. */}
         <script dangerouslySetInnerHTML={{ __html: `(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('motion-ready'))d.classList.remove('js')},4000)})(document.documentElement)` }} />
-        <meta name="theme-color" content="#f5f2ea" />
+        <meta name="theme-color" content="#0b1524" />
         <link rel="icon" type="image/png" sizes="64x64" href="/images/favicon-64.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

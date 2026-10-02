@@ -7,7 +7,7 @@
 /* ---------- Header ---------- */
 .artp__head {
   padding-block: calc(var(--nav-h) + clamp(16px, 3vw, 40px)) clamp(24px, 4vw, 40px);
-  background: var(--paper);
+  background: var(--bg);
 }
 
 .artp__crumbs {
@@ -35,7 +35,7 @@
 @media (hover: hover) { .artp__crumbs a:hover { color: var(--signal-deep); } }
 
 .artp__kicker { margin-block-end: 16px; }
-.artp__cat { background: var(--white); }
+.artp__cat { background: var(--surface); }
 .artp__cat svg { width: 14px; height: 14px; }
 
 .artp__title {
@@ -53,7 +53,7 @@
   gap: 12px 24px;
   margin-block-start: clamp(24px, 4vw, 40px);
   padding-block-start: 16px;
-  border-block-start: 1px solid var(--ink);
+  border-block-start: 1px solid var(--fg);
   font-size: var(--fs-small);
   color: var(--fg-2);
 }

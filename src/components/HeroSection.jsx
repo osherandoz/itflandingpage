@@ -14,7 +14,7 @@ const PROOF = [
 ];
 
 const HeroSection = () => (
-  <div className="hero bg-grid">
+  <div className="hero theme-ink bg-grid">
     <div className="container hero__grid">
       <div className="hero__copy">
         <p className="hero__eyebrow">( שחזור חשבונות פייסבוק · אינסטגרם · וואטסאפ )</p>
@@ -54,7 +54,7 @@ const HeroSection = () => (
         </div>
 
         {/* Illustration of the moment the service exists for */}
-        <div className="hero__chip hero__chip--blocked" aria-hidden="true">
+        <div className="hero__chip hero__chip--blocked theme-paper" aria-hidden="true">
           <span className="hero__chip-dot" />
           <span>החשבון שלך הושבת</span>
         </div>
@@ -63,7 +63,7 @@ const HeroSection = () => (
           <span>הגישה חזרה אליך</span>
         </div>
 
-        <p className="hero__name sticker sticker--paper">
+        <p className="hero__name sticker sticker--paper theme-paper">
           אושר רווח
           <span className="hero__name-role">מייסד IsraelTechForce</span>
         </p>

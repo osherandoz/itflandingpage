@@ -5,7 +5,7 @@
 /* ---------- Hero: copy on the start side, proof panel on the end side ---------- */
 .svcp__hero {
   padding-block: calc(var(--nav-h) + clamp(12px, 2.5vw, 32px)) clamp(48px, 6vw, 88px);
-  background: var(--paper);
+  background: var(--bg);
   overflow: clip;
 }
 
@@ -65,7 +65,7 @@
 .svcp__proof-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-block-start: 1px solid var(--ink);
+  border-block-start: 1px solid var(--fg);
 }
 .svcp__proof-item {
   display: grid;
@@ -119,6 +119,8 @@
   /* Default hero: the proof becomes a panel of numbered rows */
   .svcp__hero:not(.svcp__hero--callback) .svcp__proof {
     padding: 24px 32px 8px;
+    --fg: var(--ink); --fg-2: #3c4a60; --fg-3: #536075; --line: rgba(11, 21, 36, 0.14); --line-soft: rgba(11, 21, 36, 0.07); --mk: var(--signal-soft); --accent: var(--signal);
+    color: var(--fg);
     background: var(--white);
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
@@ -358,7 +360,7 @@
 .svcp__more { background: var(--paper); }
 .svcp__more-grid { display: grid; gap: 32px; }
 
-.svcp__arts { border-block-start: 1px solid var(--ink); }
+.svcp__arts { border-block-start: 1px solid var(--fg); }
 .svcp__art {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;

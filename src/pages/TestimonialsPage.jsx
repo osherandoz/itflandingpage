@@ -109,7 +109,7 @@ const TestimonialsPage = () => {
       <Navbar />
 
       <main id="main">
-        <header className="tstp__hero bg-grid">
+        <header className="tstp__hero theme-ink bg-grid">
           <div className="container tstp__hero-grid">
             <div className="tstp__hero-copy">
               <Link to="/" className="tstp__back link link--arrow small">

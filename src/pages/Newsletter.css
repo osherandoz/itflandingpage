@@ -19,15 +19,13 @@
 .nls__logo img {
   height: 40px;
   width: auto;
-  /* one white asset; inverted to ink on paper */
-  filter: invert(1);
 }
-.nls__top-link { color: var(--fg-2); padding-block: 12px; }
+.nls__top-link { color: #c2ccdc; padding-block: 12px; }
 
 /* ---- Hero ---- */
 .nls__hero {
   padding-block: calc(var(--nav-h) + clamp(24px, 5vw, 64px)) clamp(48px, 7vw, 96px);
-  background: var(--paper);
+  background: var(--bg);
   overflow: clip;
 }
 .nls__hero-grid { display: grid; gap: 48px; }

@@ -59,6 +59,11 @@ Components never use palette tokens for text and surfaces directly. They use the
 semantic set `--bg --surface --fg --fg-2 --fg-3 --line --line-soft --mk --accent`,
 and a section flips all of them by adding `theme-ink`, `theme-mist` or `theme-paper`.
 
+Rhythm: every page opens dark. The header and the first screen (hero) are
+`theme-ink`; below that, sections alternate paper, mist and ink. Light cards
+inside a dark hero (forms, proof panels, chips) carry `theme-paper` so their
+text tokens flip back. Reading pages without a hero (privacy, thank-you) stay on paper.
+
 Rules:
 - Too dark and too loud both fail. Big surfaces are paper, mist or ink; `--signal`
   and `--go` are for emphasis and action. No full section in signal or green.
@@ -104,7 +109,7 @@ once per page at most, for an emotional quote (`.serif`).
 - **Rows** instead of card grids for lists (press, articles, FAQ): number, title, meta, arrow disc.
 - **FAQ** native `<details class="faq-item">` (styles in `FAQ.css`), exclusive via `name`.
 - **Form** `.field` wrapper; the lead form is `<ContactForm>`.
-- **Navbar / Footer / FloatingWhatsApp / Modal** are shared; pages do not restyle them.
+- **Navbar / Footer / FloatingWhatsApp / Modal** are shared; pages do not restyle them. The navbar is light-on-dark and expects an ink hero under it.
 
 ## 6. Motion
 

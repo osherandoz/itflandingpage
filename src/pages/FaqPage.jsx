@@ -65,7 +65,7 @@ const FaqPage = ({ categories }) => {
       <Navbar />
 
       <main id="main">
-        <header className="faqp__hero bg-grid">
+        <header className="faqp__hero theme-ink bg-grid">
           <div className="container">
             <Link to="/" className="faqp__back link link--arrow small">
               <BackIcon />

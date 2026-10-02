@@ -61,7 +61,7 @@ export default function Author() {
     <div dir="rtl" className="authp">
       <Navbar />
       <main id="main">
-        <section className="authp__hero bg-grid">
+        <section className="authp__hero theme-ink bg-grid">
           <div className="container authp__hero-grid">
             <div className="authp__hero-copy">
               <Eyebrow className="authp__eyebrow">{t.eyebrow}</Eyebrow>

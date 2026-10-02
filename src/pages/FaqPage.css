@@ -6,7 +6,7 @@
 /* ---- Hero ---- */
 .faqp__hero {
   padding-block: calc(var(--nav-h) + clamp(32px, 6vw, 72px)) clamp(40px, 6vw, 72px);
-  background: var(--paper);
+  background: var(--bg);
 }
 .faqp__back { color: var(--fg-2); min-height: 44px; margin-block-end: clamp(16px, 3vw, 28px); }
 .faqp__title { max-width: 18em; }

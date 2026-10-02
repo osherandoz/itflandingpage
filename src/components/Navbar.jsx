@@ -116,7 +116,7 @@ const Navbar = () => {
         </nav>
 
         <a
-          className="btn btn--ink btn--sm btn--plain navbar__cta"
+          className="btn btn--paper btn--sm btn--plain navbar__cta"
           href={getWhatsAppUrl(WHATSAPP_MESSAGE)}
           target="_blank"
           rel="noopener noreferrer"

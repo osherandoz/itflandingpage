@@ -138,7 +138,7 @@ const ServicePage = ({ pageData }) => {
 
       <main id="main">
         {/* ---- HERO ---- */}
-        <section className={`svcp__hero bg-grid${isWhatsApp ? ' svcp__hero--callback' : ''}`}>
+        <section className={`svcp__hero theme-ink bg-grid${isWhatsApp ? ' svcp__hero--callback' : ''}`}>
           <div className="container">
             {/* Visible counterpart to the BreadcrumbList schema */}
             <nav className="svcp__crumbs" aria-label={t.breadcrumbAria}>
@@ -203,7 +203,7 @@ const ServicePage = ({ pageData }) => {
               </div>
 
               {isWhatsApp && (
-                <div className="svcp__hero-form card">
+                <div className="theme-paper svcp__hero-form card">
                   <ContactForm
                     heading={t.callbackTitle}
                     subheading={t.formSubtitle}

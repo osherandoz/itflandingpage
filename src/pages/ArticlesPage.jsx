@@ -43,7 +43,7 @@ export default function ArticlesPage({ articles }) {
       <Navbar />
 
       <main id="main">
-        <header className="artl__hero bg-grid">
+        <header className="artl__hero theme-ink bg-grid">
           <div className="container">
             <div className="artl__hero-grid">
               <div className="artl__hero-copy">
