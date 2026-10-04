@@ -54,35 +54,29 @@ export function Layout({ children }) {
         {/* Google Search Console verification */}
         <meta name="google-site-verification" content="aE9CLpD9QGwjrSkACJUNpS8Ps8vCkLxMuP9jRl3v_aM" />
 
-        {/* Meta Pixel. The fbq queue exists from the first byte, so PageView and
-            every later event are recorded; the 250KB library itself is fetched
-            once the document is parsed and the browser is idle, instead of
-            competing with the CSS, font and hero image. */}
+        {/* Meta Pixel, GA4 and Clarity. The fbq / gtag / clarity queues exist from
+            the first byte, so PageView and every later event are recorded in
+            order. The libraries themselves (about 450KB of script) are fetched on
+            the visitor's first touch, scroll or key press, or 4 seconds after
+            load, whichever comes first, so they never compete with the first
+            paint or with hydration. */}
         <script dangerouslySetInnerHTML={{ __html: `
-!function(f,b){if(f.fbq)return;var n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
-function load(){var t=b.createElement('script');t.async=!0;t.src='https://connect.facebook.net/en_US/fbevents.js';b.head.appendChild(t)}
-function idle(){(f.requestIdleCallback||function(c){setTimeout(c,1)})(load,{timeout:2000})}
-if(b.readyState==='loading')b.addEventListener('DOMContentLoaded',idle,{once:true});else idle();
+!function(w,d){
+var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments)};
+w.clarity=w.clarity||function(){(w.clarity.q=w.clarity.q||[]).push(arguments)};
+var done=0,ev=['pointerdown','touchstart','keydown','scroll'];
+function add(src){var s=d.createElement('script');s.async=1;s.src=src;d.head.appendChild(s)}
+function boot(){if(done)return;done=1;ev.forEach(function(e){w.removeEventListener(e,boot)});
+add('https://connect.facebook.net/en_US/fbevents.js');add('https://www.googletagmanager.com/gtag/js?id=G-M2TYTNN02X');add('https://www.clarity.ms/tag/x8uz4h0y6b')}
+ev.forEach(function(e){w.addEventListener(e,boot,{passive:true})});
+function timer(){setTimeout(boot,4000)}
+if(d.readyState==='complete')timer();else w.addEventListener('load',timer,{once:true});
 }(window,document);
 fbq('init','1911202046942044');
 fbq('track','PageView');
-` }} />
-
-        {/* Analytics that do not gate rendering: the gtag queue exists
-            immediately (events are never lost), the libraries themselves
-            download once the page has loaded. */}
-        <script dangerouslySetInnerHTML={{ __html: `
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-M2TYTNN02X');
-(function(w,d){
-  w.clarity=w.clarity||function(){(w.clarity.q=w.clarity.q||[]).push(arguments)};
-  function add(src){var s=d.createElement('script');s.async=1;s.src=src;d.head.appendChild(s)}
-  function boot(){add('https://www.googletagmanager.com/gtag/js?id=G-M2TYTNN02X');add('https://www.clarity.ms/tag/x8uz4h0y6b')}
-  function idle(){(w.requestIdleCallback||function(f){setTimeout(f,1200)})(boot,{timeout:3000})}
-  if(d.readyState==='complete')idle();else w.addEventListener('load',idle,{once:true});
-})(window,document);
 ` }} />
 
         {/* Route-injected CSS/links */}

@@ -50,8 +50,8 @@ to the Hebrew pages (`vercel.json`).
 - BMS course funnel: `/bms-sm` (free checklist) → `/תודה-קליסט`; `/VSL-BMS` and
   `/VSL-BMS-V2` (A/B, noindex) → external checkout → `/תודה-רכישה`.
   Product brief for these pages: `PRODUCT.md`.
-- Analytics: Meta Pixel in `<head>`; GA4 and Clarity load after the page is idle
-  (`app/root.jsx`); CRM click events via `src/utils/track.js`. WhatsApp CTAs carry a
+- Analytics: the fbq / gtag / clarity queues are created in `<head>`; the three libraries load on the
+  visitor's first touch, scroll or key press, or 4s after load (`app/root.jsx`). Events queue and fire in order; CRM click events via `src/utils/track.js`. WhatsApp CTAs carry a
   `location` name via `onWhatsAppClick('<location>')` — keep names stable, reports depend on them.
 
 ## Lessons (each one cost time)
@@ -74,6 +74,11 @@ to the Hebrew pages (`vercel.json`).
 - Vite inlines only what is imported: importing `@fontsource/*` or Font Awesome in
   one page ships those files site-wide after client navigation. Do not add them back.
 
+- PageSpeed (lab) estimates LCP from everything that started before the first paint it observed. The
+  Meta Pixel used to start within 2s and inflated mobile LCP to 6.9s on a page whose text paints at
+  first paint. Third-party scripts must not start before interaction / 4s after load.
+- An animated `background-size` repaints its text; the hero marker animates a pseudo-element's transform instead.
+
 ## Business facts
 IsraelTechForce - ITF Recovery · Osher Revach · Netanya · +972509823235 ·
 osher@israeltechforce.com · hours א׳–ו׳ 09:00–16:00 · GA4 `G-M2TYTNN02X` ·
@@ -86,6 +91,11 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 - V2 uses system markers (numbers, check discs, stickers), no emoji.
 
 ## Open (needs Osher)
+- The pixel's config tries to POST events to two gateway hosts (`*.us-central1.run.app/events`,
+  `*.ecs.us-west-2.on.aws/events`) and the CSP blocks them (it did before the redesign too). Unknown
+  whether Osher set up a Conversions API gateway: do not allow-list hosts nobody can identify.
+- In a headless browser no request to `facebook.com/tr` was seen on the live site (old or new loader):
+  confirm in Events Manager > Test Events that PageView and Lead arrive.
 - Em-dashes remain in FAQ answers and schema text (`faqCategories.js`,
   `centralFaqSchema.js`, a few route titles): copy decision.
 - `businessFacts.js` still has `source: TODO` on the 2,500 / 95% / 4.9 claims.
