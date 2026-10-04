@@ -1,117 +1,81 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { useLang } from '../i18n';
+import { FACTS } from '../data/businessFacts';
+import { Eyebrow, FillText, SlotNumber, ArrowIcon } from './ui';
 import Icon from './Icon';
 import './AboutMe.css';
 
-const STR = {
-  he: {
-    title: 'מומחה שחזור חשבונות רשתות חברתיות',
-    subtitle: 'אחד מחלוצי תחום השחזור בישראל, עם למעלה מ-2,500 הצלחות מוכחות מאחוריו.',
-    heading: 'שלום, אני אושר, מומחה שחזור חשבונות',
-    p1: 'מומחה מוביל בישראל לשחזור חשבונות רשתות חברתיות ואחד מחלוצי התחום בארץ. מתמחה בפתרון בעיות מורכבות של חשבונות פייסבוק, אינסטגרם ווואטסאפ שנחסמו או נפרצו.',
-    p2: 'עם למעלה מ-2,500 חשבונות ששוחזרו בהצלחה ו-95% אחוזי הצלחה, אני מביא איתי ניסיון עשיר, כלים מתקדמים וטכניקות ייחודיות שפותחו לאורך שנים. מתמחה בפתרון בעיות גם במקרים שמטא (Meta) טוענים שאין סיכוי.',
-    features: [
-      { icon: 'shield', label: 'מומחיות באבטחה מתקדמת' },
-      { icon: 'clock', label: 'זמינות א׳–ו׳ 09:00–16:00' },
-      { icon: 'users', label: 'אלפי לקוחות מרוצים בישראל' },
-      { icon: 'certificate', label: 'הוכחות מקצועיות ורפרנסים' },
-    ],
-    alt1: 'אושר רווח, מומחה שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ',
-    alt2: 'IsraelTechForce, מומחים לשחזור חשבונות רשתות חברתיות',
-    alt3: 'שחזור חשבונות, שירות מקצועי ואמין',
-    moreLink: 'הסיפור המלא, איך זה התחיל ←',
-    moreHref: '/אושר-רווח',
-  },
-  en: {
-    title: 'Social Media Account Recovery Expert',
-    subtitle: "One of Israel's pioneers in account recovery, with over 2,500 proven successes behind him.",
-    heading: "Hi, I'm Osher, an account recovery expert",
-    p1: "A leading account recovery expert in Israel and one of the field's pioneers. I specialize in solving complex cases of Facebook, Instagram, and WhatsApp accounts that got blocked or hacked.",
-    p2: "With over 2,500 accounts successfully recovered and a 95% success rate, I bring years of experience, advanced tools, and unique techniques developed over time. I solve cases even when Meta says there's no chance.",
-    features: [
-      { icon: 'shield', label: 'Advanced security expertise' },
-      { icon: 'clock', label: 'Available Sun–Fri 09:00–16:00' },
-      { icon: 'users', label: 'Thousands of satisfied clients in Israel' },
-      { icon: 'certificate', label: 'Professional proof and references' },
-    ],
-    alt1: 'Osher Revach, Facebook, Instagram and WhatsApp account recovery expert',
-    alt2: 'IsraelTechForce, social media account recovery experts',
-    alt3: 'Account recovery, professional and reliable service',
-    moreLink: 'The full story, how it started ←',
-    moreHref: '/en/osher-revach',
-  },
-};
+const NUMBERS = [
+  { value: FACTS.accountsRecovered.display, label: 'חשבונות שוחזרו בהצלחה' },
+  { value: FACTS.successRate.display, label: 'אחוזי הצלחה' },
+  { value: FACTS.rating.display, label: 'דירוג לקוחות מתוך 5' },
+];
 
-const AboutMe = () => {
-  const { lang } = useLang();
-  const t = STR[lang];
+const FEATURES = [
+  { icon: 'shield', label: 'מומחיות באבטחה מתקדמת' },
+  { icon: 'clock', label: 'זמינות א׳–ו׳ 09:00–16:00' },
+  { icon: 'users', label: 'אלפי לקוחות מרוצים בישראל' },
+  { icon: 'certificate', label: 'הוכחות מקצועיות ורפרנסים' },
+];
 
-  return (
-    <section className="about-me">
-      <div className="container">
-        <h2 className="section-title">{t.title}</h2>
-        <p className="section-subtitle">
-          {t.subtitle}
-        </p>
+const AboutMe = () => (
+  <div className="about section theme-ink bg-grid bg-grid--full">
+    <div className="container">
+      <div className="about__top">
+        <div className="about__copy">
+          <Eyebrow num="03">מי אני</Eyebrow>
+          <h2 className="about__title">מומחה שחזור חשבונות רשתות חברתיות</h2>
 
-        <div className="about-content">
-          <div className="about-text">
-            <h3>{t.heading}</h3>
-            <p>
-              {t.p1}
-            </p>
-            <p>
-              {t.p2}
-            </p>
+          {/* The statement fills in word by word while it scrolls past */}
+          <FillText
+            className="about__manifesto"
+            text="שלום, אני אושר. אחד מחלוצי תחום השחזור בישראל, עם למעלה מ-2,500 הצלחות מוכחות. מתמחה בפתרון בעיות גם במקרים שמטא טוענים שאין סיכוי."
+          />
 
-            <div className="about-features">
-              {t.features.map((feature) => (
-                <div className="feature" key={feature.icon}>
-                  <Icon name={feature.icon} aria-hidden="true" />
-                  <span>{feature.label}</span>
-                </div>
-              ))}
-            </div>
+          <p className="about__text m-reveal">
+            מומחה מוביל בישראל לשחזור חשבונות רשתות חברתיות ואחד מחלוצי התחום בארץ. מתמחה בפתרון בעיות מורכבות של חשבונות פייסבוק, אינסטגרם ווואטסאפ שנחסמו או נפרצו. אני מביא איתי ניסיון עשיר, כלים מתקדמים וטכניקות ייחודיות שפותחו לאורך שנים.
+          </p>
 
-            <Link to={t.moreHref} className="about-more-link">{t.moreLink}</Link>
-          </div>
-
-          <div className="about-images">
-            <div className="image-grid">
-              <div className="image-item main-image">
-                <img
-                  src="/images/osher-photo-1.jpg"
-                  alt={t.alt1}
-                  width={600}
-                  height={800}
-                  loading="lazy"
-                />
-              </div>
-              <div className="image-item">
-                <img
-                  src="/images/osher-photo-2.jpg"
-                  alt={t.alt2}
-                  width={600}
-                  height={800}
-                  loading="lazy"
-                />
-              </div>
-              <div className="image-item">
-                <img
-                  src="/images/osher-photo-3.jpg"
-                  alt={t.alt3}
-                  width={600}
-                  height={800}
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
+          <Link to="/אושר-רווח" className="link link--arrow about__more">
+            הסיפור המלא, איך זה התחיל
+            <ArrowIcon />
+          </Link>
         </div>
+
+        <figure className="about__figure m-reveal">
+          <img
+            src="/images/brand/osher-portrait-800.webp"
+            srcSet="/images/brand/osher-portrait-400.webp 400w, /images/brand/osher-portrait-800.webp 800w"
+            sizes="(min-width: 960px) 400px, 80vw"
+            alt="אושר רווח, מומחה שחזור חשבונות פייסבוק, אינסטגרם ווואטסאפ"
+            width="800"
+            height="800"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption className="sticker m-in about__sticker">אושר רווח · מייסד ITF</figcaption>
+        </figure>
       </div>
-    </section>
-  );
-};
+
+      <dl className="about__numbers">
+        {NUMBERS.map((n) => (
+          <div className="about__number" key={n.label}>
+            <dd><SlotNumber value={n.value} /></dd>
+            <dt>{n.label}</dt>
+          </div>
+        ))}
+      </dl>
+
+      <ul className="about__features m-stagger">
+        {FEATURES.map((feature) => (
+          <li key={feature.icon}>
+            <Icon name={feature.icon} />
+            <span>{feature.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+);
 
 export default AboutMe;

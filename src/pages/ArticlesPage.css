@@ -1,64 +1,151 @@
-.articles-page {
-  background: #0C0E1D;
-  min-height: 100vh;
-  color: white;
+/* Articles index ("artl"): a paper hero with the lead story as an ink card,
+   then every other guide as a numbered editorial row on mist. */
+
+.artl__hero {
+  padding-block: calc(var(--nav-h) + clamp(32px, 6vw, 72px)) clamp(48px, 7vw, 96px);
+  background: var(--bg);
 }
 
-.articles-page-header {
-  background: linear-gradient(135deg, #0C0E1D 0%, #1a1f3a 100%);
-  padding: 60px 0 40px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
+.artl__hero-grid { display: grid; gap: 24px; align-items: end; }
+.artl__hero-side { display: grid; gap: 16px; justify-items: start; }
+.artl__back { color: var(--fg-2); }
 
-.articles-back-link {
-  display: inline-block;
-  color: #3B82F6;
-  text-decoration: none;
-  font-size: 0.95rem;
-  margin-bottom: 20px;
-  transition: opacity 0.2s;
-}
-
-.articles-back-link:hover {
-  opacity: 0.75;
-}
-
-.articles-page-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
+/* ---- Lead story ---- */
+.artl__lead {
+  position: relative;
+  display: grid;
   gap: 16px;
+  align-content: start;
+  margin-block-start: clamp(32px, 5vw, 56px);
+  padding: clamp(24px, 4vw, 56px);
+  background: var(--ink-2);
+  color: #f5f2ea;
+  border: 1px solid var(--ink-3);
+  border-radius: var(--r-lg);
 }
-
-.articles-page-title i {
-  color: #3B82F6;
-  font-size: 2rem;
+.artl__lead-head { display: flex; align-items: center; gap: 16px; }
+.artl__lead .artl__num { color: #93a0b6; }
+.artl__lead .tag--solid { background: var(--signal); color: #fff; }
+.artl__lead-title {
+  font-size: var(--fs-h2);
+  line-height: 1.18;
+  font-weight: 900;
+  max-width: 22ch;
+  padding-inline-end: 56px;
 }
-
-.articles-page-subtitle {
-  font-size: 1.1rem;
-  color: #b0b0b0;
-  max-width: 560px;
+.artl__lead-body { display: grid; gap: 16px; align-content: start; }
+.artl__lead-excerpt { color: #c2ccdc; max-width: 52ch; }
+.artl__lead .artl__meta { color: #93a0b6; }
+.artl__lead .artl__go {
+  position: absolute;
+  inset-block-start: clamp(24px, 4vw, 56px);
+  inset-inline-end: clamp(24px, 4vw, 56px);
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
 }
+.artl__lead:focus-visible { outline-color: var(--signal); border-radius: var(--r-lg); }
 
-.articles-page-body {
-  padding: 60px 0 80px;
-  background: #1a1f3a;
+/* ---- Shared bits ---- */
+.artl__tag svg { width: 14px; height: 14px; }
+.artl__num { font-size: var(--fs-small); font-weight: 700; color: var(--fg-3); }
+.artl__meta { display: inline-flex; flex-wrap: wrap; gap: 4px 8px; color: var(--fg-3); }
+.artl__go {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  transition: background-color 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out;
 }
+.artl__go svg { width: 18px; height: 18px; }
 
-@media (max-width: 768px) {
-  .articles-page-title {
-    font-size: 1.8rem;
+/* ---- Rows ---- */
+.artl__rows { border-block-start: 1px solid var(--fg); }
+.artl__row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'num title go'
+    '.   excerpt excerpt'
+    '.   meta meta';
+  gap: 12px 16px;
+  align-items: start;
+  padding-block: 24px;
+  border-block-end: 1px solid var(--line);
+}
+.artl__row .artl__num { grid-area: num; padding-block-start: 6px; }
+.artl__row-title {
+  grid-area: title;
+  font-size: var(--fs-lead);
+  font-weight: 800;
+  line-height: 1.3;
+}
+.artl__row-excerpt {
+  grid-area: excerpt;
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  color: var(--fg-2);
+  max-width: 60ch;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  overflow: hidden;
+}
+.artl__row-meta {
+  grid-area: meta;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+.artl__row .artl__go { grid-area: go; }
+
+@media (hover: hover) {
+  .artl__row:hover .artl__go { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .artl__row:hover .artl__row-title { color: var(--signal-deep); }
+  .artl__lead:hover .artl__go { background: var(--signal); color: #fff; border-color: var(--signal); }
+}
+.artl__row-title { transition: color 0.2s ease-out; }
+
+/* ---- Entrance: CSS only, the headline is the LCP ---- */
+@keyframes artl-rise { from { opacity: 0; transform: translateY(20px); } }
+.artl__hero-copy, .artl__hero-side, .artl__lead { animation: artl-rise 0.8s var(--ease-out) both; }
+.artl__hero-side { animation-delay: 0.08s; }
+.artl__lead { animation-delay: 0.16s; }
+
+@media (min-width: 900px) {
+  .artl__hero-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; }
+  .artl__hero-copy .eyebrow { margin-block-end: 32px; }
+  .artl__hero-side { padding-block-end: 12px; }
+
+  .artl__lead {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    grid-template-areas:
+      'head head'
+      'title body';
+    gap: 32px 48px;
+    align-items: end;
   }
+  .artl__lead-head { grid-area: head; }
+  .artl__lead-title { grid-area: title; font-size: var(--fs-h1); line-height: 1.12; max-width: 18ch; padding-inline-end: 0; }
+  .artl__lead-body { grid-area: body; padding-block-end: 8px; }
+  .artl__lead .artl__go { width: 56px; height: 56px; }
+  .artl__lead .artl__go svg { width: 22px; height: 22px; }
 
-  .articles-page-header {
-    padding: 40px 0 30px;
+  .artl__row {
+    grid-template-columns: 48px minmax(0, 1.1fr) minmax(0, 1fr) auto;
+    grid-template-areas:
+      'num title excerpt go'
+      'num meta  excerpt go';
+    gap: 12px 32px;
+    padding-block: 32px;
   }
-
-  .articles-page-body {
-    padding: 40px 0 60px;
-  }
+  .artl__row-title { font-size: var(--fs-h3); line-height: 1.25; max-width: 24ch; }
+  .artl__row-excerpt { font-size: var(--fs-body); align-self: start; padding-block-start: 4px; }
+  .artl__row .artl__go { align-self: center; }
+  .artl__row .artl__num { padding-block-start: 10px; }
 }

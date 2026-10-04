@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
-import { useLang } from '../i18n';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
+import { FACTS } from '../data/businessFacts';
 import Icon from './Icon';
 import Modal from './Modal';
 import ContactForm from './ContactForm';
+import { WaBtn, ArrowIcon } from './ui';
 import './Footer.css';
 
-const ACCESSIBILITY_CONTENT = {
-  he: (
-    <div className="modal-content-text">
+const ACCESSIBILITY_CONTENT = (
+  <div className="legal">
       <p>ב־ITF Recovery אני מאמין בזכותם של כלל המשתמשים, לרבות אנשים עם מוגבלות, ליהנות משירות נגיש ושוויוני.</p>
 
       <h4>מצב הנגישות באתר</h4>
@@ -29,34 +29,10 @@ const ACCESSIBILITY_CONTENT = {
 
       <p>אשתדל לטפל בכל פנייה במהירות האפשרית ובאופן המקצועי ביותר.</p>
     </div>
-  ),
-  en: (
-    <div className="modal-content-text">
-      <p>At ITF Recovery I believe every user, including people with disabilities, has the right to an accessible and equal experience.</p>
+  );
 
-      <h4>Accessibility on this site</h4>
-      <p>The site was designed with a comfortable, accessible experience in mind. It includes:</p>
-      <ul>
-        <li>A clear, simple structure that makes navigation easy.</li>
-        <li>Text that can be enlarged through your browser.</li>
-        <li>Colors and contrast tuned for readability.</li>
-      </ul>
-
-      <h4>Assistive technologies</h4>
-      <p>The site works with screen readers and all common browsers.</p>
-
-      <h4>Accessibility feedback</h4>
-      <p>If you run into any difficulty using the site, or have a suggestion for improving accessibility, I would love to hear from you:</p>
-      <p>📧 <a href="mailto:accessability@itf-recovery.co.il" className="modal-link">accessability@itf-recovery.co.il</a></p>
-
-      <p>I will do my best to handle every request quickly and professionally.</p>
-    </div>
-  ),
-};
-
-const TERMS_CONTENT = {
-  he: (
-    <div className="modal-content-text">
+const TERMS_CONTENT = (
+  <div className="legal">
       <p><strong>עדכון אחרון: 19/08/2025</strong></p>
 
       <p>ברוך הבא לאתר ITF Recovery (להלן: "האתר"). השימוש באתר כפוף לתנאי שימוש אלה. אנא קרא אותם בעיון לפני השימוש.</p>
@@ -105,303 +81,150 @@ const TERMS_CONTENT = {
       <p>לשאלות או הבהרות ניתן לפנות אליי בכתובת:</p>
       <p>📧 <a href="mailto:osher@israeltechforce.com" className="modal-link">osher@israeltechforce.com</a></p>
     </div>
-  ),
-  en: (
-    <div className="modal-content-text">
-      <p><strong>Last updated: 19/08/2025</strong></p>
+  );
 
-      <p>Welcome to the ITF Recovery website (the "Site"). Use of the Site is subject to these Terms of Use. Please read them carefully before using the Site.</p>
+const WHATSAPP_MESSAGE = 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים';
 
-      <h4>1. General</h4>
-      <ul>
-        <li>1.1. Using the Site constitutes your full acceptance of these terms.</li>
-        <li>1.2. If you do not agree to any of these terms, please stop using the Site.</li>
-      </ul>
+const SERVICE_LINKS = [
+  { to: '/שחזור-חשבון-פייסבוק', label: 'שחזור חשבון פייסבוק' },
+  { to: '/שחזור-חשבון-אינסטגרם', label: 'שחזור חשבון אינסטגרם' },
+  { to: '/שחזור-חשבון-וואטסאפ', label: 'שחזור חשבון וואטסאפ' },
+  { to: '/חשבון-פייסבוק-מושבת', label: 'חשבון פייסבוק מושבת' },
+  { to: '/חשבון-אינסטגרם-נפרץ', label: 'חשבון אינסטגרם נפרץ' },
+  { to: '/שחזור-מנהל-מודעות', label: 'שחזור מנהל מודעות' },
+];
 
-      <h4>2. Services on the Site</h4>
-      <ul>
-        <li>2.1. The Site provides general information about the company's social-media account recovery services.</li>
-        <li>2.2. The Site allows newsletter signup by providing an email address only.</li>
-      </ul>
+const COURSE_LINKS = [
+  { to: '/bms-sm', label: 'צ׳קליסט סינון לקוחות (חינם)' },
+  { to: '/VSL-BMS', label: 'קורס BMS (₪197): איך לא להיחסם' },
+];
 
-      <h4>3. User Responsibility</h4>
-      <ul>
-        <li>3.1. The user agrees to use the Site and the services offered on it for lawful purposes only.</li>
-        <li>3.2. Submitting false details, or details of others without their permission, is prohibited.</li>
-      </ul>
+const QUICK_LINKS = [
+  { to: '/faq', label: 'שאלות נפוצות' },
+  { to: '/testimonials', label: 'המלצות לקוחות' },
+  { to: '/articles', label: 'מאמרים' },
+  { to: '/press', label: 'בתקשורת' },
+  { to: '/newsletter', label: 'ניוזלטר חודשי' },
+  { to: '/אושר-רווח', label: 'עליי' },
+];
 
-      <h4>4. Company Responsibility</h4>
-      <ul>
-        <li>4.1. The content on the Site is provided AS IS, without any warranty or representation by the company.</li>
-        <li>4.2. The company is not liable for any direct or indirect damage caused by using the Site or relying on information it contains.</li>
-        <li>4.3. The content on the Site does not constitute professional or legal advice, but general information only.</li>
-      </ul>
-
-      <h4>5. Intellectual Property</h4>
-      <ul>
-        <li>5.1. All copyrights and intellectual property in the Site and its content, including texts, designs, images and logo, belong exclusively to ITF Recovery or to parties that have licensed their use.</li>
-        <li>5.2. Copying, distributing, reproducing, publishing or making any other use of the Site's content without prior written approval from the company is prohibited.</li>
-      </ul>
-
-      <h4>6. Changes to These Terms</h4>
-      <ul>
-        <li>6.1. The company reserves the right to change these terms at any time, at its sole discretion.</li>
-        <li>6.2. Continued use of the Site after changes are published constitutes acceptance of the updated terms.</li>
-      </ul>
-
-      <h4>7. Jurisdiction</h4>
-      <p>These Terms of Use are governed by the laws of the State of Israel. Any dispute will fall under the exclusive jurisdiction of the competent courts of the Tel Aviv district.</p>
-
-      <h4>Contact</h4>
-      <p>For questions or clarifications you can reach me at:</p>
-      <p>📧 <a href="mailto:osher@israeltechforce.com" className="modal-link">osher@israeltechforce.com</a></p>
-    </div>
-  ),
-};
-
-const STR = {
-  he: {
-    contactTitle: 'פרטי קשר',
-    location: 'נתניה, ישראל',
-    whatsappCta: 'דבר/י איתי בוואטסאפ',
-    contactFormBtn: 'טופס יצירת קשר',
-    followTitle: 'עקוב/י אחריי',
-    facebookAria: 'עמוד פייסבוק',
-    instagramAria: 'עמוד אינסטגרם',
-    whatsappAria: 'שלח הודעת וואטסאפ',
-    tiktokAria: 'ערוץ טיקטוק',
-    newsletterTitle: 'The Safety Signal',
-    newsletterText: 'הניוזלטר החודשי שלי: מה מטא שינתה, מקרה חסימה אמיתי מהחודש האחרון, ובדיקה אחת שמורידה סיכון. חמש דקות קריאה.',
-    newsletterBtn: 'הצטרף/י לניוזלטר',
-    servicesTitle: 'השירותים שלי',
-    serviceLinks: [
-      { to: '/שחזור-חשבון-פייסבוק', label: 'שחזור חשבון פייסבוק' },
-      { to: '/שחזור-חשבון-אינסטגרם', label: 'שחזור חשבון אינסטגרם' },
-      { to: '/שחזור-חשבון-וואטסאפ', label: 'שחזור חשבון וואטסאפ' },
-      { to: '/חשבון-פייסבוק-מושבת', label: 'חשבון פייסבוק מושבת' },
-      { to: '/חשבון-אינסטגרם-נפרץ', label: 'חשבון אינסטגרם נפרץ' },
-      { to: '/שחזור-מנהל-מודעות', label: 'שחזור מנהל מודעות' },
-      { to: '/bms-sm', label: 'צ׳קליסט סינון לקוחות (חינם)' },
-      { to: '/VSL-BMS', label: 'קורס BMS (₪197): איך לא להיחסם' },
-    ],
-    quickTitle: 'קישורים מהירים',
-    quickFaq: 'שאלות נפוצות',
-    quickTestimonials: 'המלצות לקוחות',
-    quickArticles: 'מאמרים',
-    quickNewsletter: 'ניוזלטר חודשי',
-    quickAbout: 'עליי',
-    aboutHref: '/אושר-רווח',
-    privacyLink: 'מדיניות פרטיות',
-    accessibilityLink: 'נגישות',
-    termsLink: 'תנאי שימוש',
-    copyright: '© 2026 IsraelTechForce. כל הזכויות שמורות',
-    accessibilityTitle: 'נגישות',
-    termsTitle: 'תנאי שימוש',
-    contactModalTitle: 'טופס יצירת קשר',
-    whatsappMessage: 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים',
-  },
-  en: {
-    contactTitle: 'Contact',
-    location: 'Netanya, Israel',
-    whatsappCta: 'Chat with me on WhatsApp',
-    contactFormBtn: 'Contact form',
-    followTitle: 'Follow me',
-    facebookAria: 'Facebook page',
-    instagramAria: 'Instagram page',
-    whatsappAria: 'Send a WhatsApp message',
-    tiktokAria: 'TikTok channel',
-    newsletterTitle: 'The Safety Signal',
-    newsletterText: 'My monthly newsletter: what Meta changed, a real ban case from the past month, and one check that lowers your risk. A five-minute read.',
-    newsletterBtn: 'Join the newsletter',
-    servicesTitle: 'My Services',
-    serviceLinks: [
-      { to: '/en/facebook-account-recovery', label: 'Facebook Account Recovery' },
-      { to: '/en/instagram-account-recovery', label: 'Instagram Account Recovery' },
-      { to: '/en/whatsapp-account-recovery', label: 'WhatsApp Account Recovery' },
-      { to: '/en/facebook-account-disabled', label: 'Disabled Facebook Account' },
-      { to: '/en/instagram-account-hacked', label: 'Hacked Instagram Account' },
-      { to: '/en/ads-manager-recovery', label: 'Ads Manager Recovery' },
-    ],
-    quickTitle: 'Quick Links',
-    quickFaq: 'FAQ',
-    quickTestimonials: 'Client Reviews',
-    quickArticles: 'Articles',
-    quickNewsletter: 'Monthly Newsletter',
-    quickAbout: 'About Me',
-    aboutHref: '/en/osher-revach',
-    privacyLink: 'Privacy Policy',
-    accessibilityLink: 'Accessibility',
-    termsLink: 'Terms of Use',
-    copyright: '© 2026 IsraelTechForce. All rights reserved',
-    accessibilityTitle: 'Accessibility',
-    termsTitle: 'Terms of Use',
-    contactModalTitle: 'Contact Form',
-    whatsappMessage: WHATSAPP_DEFAULT_MSG.en,
-  },
-};
+const SOCIAL = [
+  { href: 'https://www.facebook.com/OsheRevach23', icon: 'facebook', label: 'עמוד פייסבוק' },
+  { href: 'https://www.instagram.com/osher_revach_1/', icon: 'instagram', label: 'עמוד אינסטגרם' },
+  { href: 'https://www.tiktok.com/@israeltechforce', icon: 'tiktok', label: 'ערוץ טיקטוק' },
+];
 
 const Footer = () => {
   const [activeModal, setActiveModal] = useState(null);
-  const { lang, prefix } = useLang();
-  const t = STR[lang];
-
-  const openModal = (modalType) => {
-    setActiveModal(modalType);
-  };
-
-  const closeModal = () => {
-    setActiveModal(null);
-  };
-
-  const modalContent = {
-    accessibility: {
-      title: t.accessibilityTitle,
-      content: ACCESSIBILITY_CONTENT[lang]
-    },
-    terms: {
-      title: t.termsTitle,
-      content: TERMS_CONTENT[lang]
-    },
-    contact: {
-      title: t.contactModalTitle,
-      content: <ContactForm />
-    }
-  };
+  const closeModal = () => setActiveModal(null);
 
   return (
-    <footer className="footer">
+    <footer className="footer theme-ink">
       <div className="container">
-        <div className="footer-content">
-          {/* Column 1: Contact Info */}
-          <div className="footer-section">
-            <h3>{t.contactTitle}</h3>
-            <div className="contact-info">
-              <p><Icon name="mapPin" aria-hidden="true" /> {t.location}</p>
-              <p><Icon name="phone" aria-hidden="true" /> 050-9823-235</p>
-              <p><Icon name="envelope" aria-hidden="true" /> osher@israeltechforce.com</p>
-            </div>
-            <div className="contact-buttons">
-              <a className="footer-cta" href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={onWhatsAppClick('footer-cta')}>
-                <Icon name="whatsapp" aria-hidden="true" />
-                {t.whatsappCta}
-              </a>
-              <button className="footer-cta contact-form-btn" onClick={() => openModal('contact')}>
-                <Icon name="envelope" aria-hidden="true" />
-                {t.contactFormBtn}
-              </button>
-            </div>
-          </div>
-
-          {/* Column 2: Social Media */}
-          <div className="footer-section">
-            <h3>{t.followTitle}</h3>
-            <div className="social-links">
-              <a href="https://www.facebook.com/OsheRevach23" className="social-link" aria-label={t.facebookAria}>
-                <Icon name="facebook" aria-hidden="true" />
-              </a>
-              <a href="https://www.instagram.com/osher_revach_1/" className="social-link" aria-label={t.instagramAria}>
-                <Icon name="instagram" aria-hidden="true" />
-              </a>
-              <a href={getWhatsAppUrl(t.whatsappMessage)} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={t.whatsappAria} onClick={onWhatsAppClick('footer-social')}>
-                <Icon name="whatsapp" aria-hidden="true" />
-              </a>
-              <a href="https://www.tiktok.com/@israeltechforce" className="social-link" aria-label={t.tiktokAria}>
-                <Icon name="tiktok" aria-hidden="true" />
-              </a>
-            </div>
-          </div>
-
-          {/* Column 3: Newsletter */}
-          <div className="footer-section">
-            <h3>{t.newsletterTitle}</h3>
-            <p style={{ marginBottom: '1rem', fontSize: '0.95rem', lineHeight: '1.6' }}>
-              {t.newsletterText}
-            </p>
-            <Link to={`${prefix}/newsletter`} className="newsletter-link-btn">
-              <Icon name="envelope" aria-hidden="true" />
-              {t.newsletterBtn}
-            </Link>
-          </div>
-
-          {/* Column 4: Services, internal links for SEO (money pages were orphaned) */}
-          <div className="footer-section">
-            <h3>{t.servicesTitle}</h3>
-            <div className="quick-links">
-              {t.serviceLinks.map((link) => (
-                <Link key={link.to} to={link.to} className="quick-link">{link.label}</Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Column 5: Quick Links */}
-          <div className="footer-section">
-            <h3>{t.quickTitle}</h3>
-            <div className="quick-links">
-              <Link to={`${prefix}/faq`} className="quick-link">
-                <Icon name="questionCircle" aria-hidden="true" />
-                {t.quickFaq}
-              </Link>
-              <Link to={`${prefix}/testimonials`} className="quick-link">
-                <Icon name="star" aria-hidden="true" />
-                {t.quickTestimonials}
-              </Link>
-              <Link to={`${prefix}/articles`} className="quick-link">
-                <Icon name="newspaper" aria-hidden="true" />
-                {t.quickArticles}
-              </Link>
-              <Link to={`${prefix}/newsletter`} className="quick-link">
-                <Icon name="envelopeOpen" aria-hidden="true" />
-                {t.quickNewsletter}
-              </Link>
-              <Link to={t.aboutHref} className="quick-link">
-                <Icon name="users" aria-hidden="true" />
-                {t.quickAbout}
-              </Link>
-            </div>
+        {/* Closing call to action */}
+        <div className="footer__cta">
+          <p className="footer__cta-title display">
+            <span className="lt">החשבון נחסם?</span> שלחו לי את המקרה.
+          </p>
+          <div className="footer__cta-actions">
+            <WaBtn message={WHATSAPP_MESSAGE} location="footer-cta">דבר/י איתי בוואטסאפ</WaBtn>
+            <button className="btn btn--ghost btn--plain" onClick={() => setActiveModal('contact')}>
+              טופס יצירת קשר
+            </button>
           </div>
         </div>
 
-        <div className="footer-bottom">
-          <div className="footer-links">
-            <Link to={`${prefix}/privacy`} className="footer-link">
-              {t.privacyLink}
-            </Link>
-            <button onClick={() => openModal('accessibility')} className="footer-link">
-              {t.accessibilityLink}
-            </button>
-            <button onClick={() => openModal('terms')} className="footer-link">
-              {t.termsLink}
-            </button>
+        <div className="footer__cols">
+          <div className="footer__col">
+            <h3>פרטי קשר</h3>
+            <ul className="footer__contact">
+              <li><Icon name="mapPin" /> נתניה, ישראל</li>
+              <li><Icon name="phone" /> <a href="tel:+972509823235" dir="ltr">050-9823-235</a></li>
+              <li><Icon name="envelope" /> <a href="mailto:osher@israeltechforce.com">osher@israeltechforce.com</a></li>
+              <li><Icon name="clock" /> {FACTS.hours.he}</li>
+            </ul>
+            <div className="footer__social">
+              {SOCIAL.map((s) => (
+                <a key={s.icon} href={s.href} aria-label={s.label} target="_blank" rel="noopener noreferrer">
+                  <Icon name={s.icon} />
+                </a>
+              ))}
+              <a
+                href={getWhatsAppUrl(WHATSAPP_MESSAGE)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="שלח הודעת וואטסאפ"
+                onClick={onWhatsAppClick('footer-social')}
+              >
+                <Icon name="whatsapp" />
+              </a>
+            </div>
           </div>
-          <div className="copyright">
-            <p>{t.copyright}</p>
+
+          {/* Services: internal links for SEO (money pages were orphaned) */}
+          <nav className="footer__col" aria-label="השירותים שלי">
+            <h3>השירותים שלי</h3>
+            <ul>
+              {SERVICE_LINKS.map((link) => (
+                <li key={link.to}><Link to={link.to}>{link.label}</Link></li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav className="footer__col" aria-label="קישורים מהירים">
+            <h3>קישורים מהירים</h3>
+            <ul>
+              {QUICK_LINKS.map((link) => (
+                <li key={link.to}><Link to={link.to}>{link.label}</Link></li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="footer__col footer__col--wide">
+            <h3>The Safety Signal</h3>
+            <p className="footer__text">
+              הניוזלטר החודשי שלי: מה מטא שינתה, מקרה חסימה אמיתי מהחודש האחרון, ובדיקה אחת שמורידה סיכון. חמש דקות קריאה.
+            </p>
+            <Link to="/newsletter" className="btn btn--paper btn--sm">
+              <span>הצטרף/י לניוזלטר</span>
+              <span className="btn__arrow" aria-hidden="true"><ArrowIcon /></span>
+            </Link>
+            <ul className="footer__course">
+              {COURSE_LINKS.map((link) => (
+                <li key={link.to}><Link to={link.to}>{link.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <img
+          className="footer__mark"
+          src="/images/brand/logo-white-960.webp"
+          alt=""
+          width="960"
+          height="708"
+          loading="lazy"
+          decoding="async"
+        />
+
+        <div className="footer__bottom">
+          <p>© 2026 IsraelTechForce. כל הזכויות שמורות</p>
+          <div className="footer__legal">
+            <Link to="/privacy">מדיניות פרטיות</Link>
+            <button onClick={() => setActiveModal('accessibility')}>נגישות</button>
+            <button onClick={() => setActiveModal('terms')}>תנאי שימוש</button>
           </div>
         </div>
       </div>
 
-      {/* Modals */}
-      <Modal
-        isOpen={activeModal === 'accessibility'}
-        onClose={closeModal}
-        title={modalContent.accessibility.title}
-      >
-        {modalContent.accessibility.content}
+      <Modal isOpen={activeModal === 'accessibility'} onClose={closeModal} title="נגישות">
+        {ACCESSIBILITY_CONTENT}
       </Modal>
-
-      <Modal
-        isOpen={activeModal === 'terms'}
-        onClose={closeModal}
-        title={modalContent.terms.title}
-      >
-        {modalContent.terms.content}
+      <Modal isOpen={activeModal === 'terms'} onClose={closeModal} title="תנאי שימוש">
+        {TERMS_CONTENT}
       </Modal>
-
-      <Modal
-        isOpen={activeModal === 'contact'}
-        onClose={closeModal}
-        title={modalContent.contact.title}
-      >
-        {modalContent.contact.content}
+      <Modal isOpen={activeModal === 'contact'} onClose={closeModal} title="טופס יצירת קשר">
+        <ContactForm location="footer-form" />
       </Modal>
     </footer>
   );

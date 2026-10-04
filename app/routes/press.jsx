@@ -1,7 +1,6 @@
 import Press from '../../src/pages/Press';
 import { pressItems } from '../../src/data/press';
 import { buildNewsArticleSchema } from '../../src/data/pressSchemas.js';
-import { hreflangLinks } from '../../src/i18n/index.js';
 
 export const meta = () => [
   { title: 'כפי שסוקרנו בתקשורת | IsraelTechForce' },
@@ -19,10 +18,9 @@ export const meta = () => [
   { property: 'og:type', content: 'website' },
   {
     property: 'og:image',
-    content: 'https://www.israeltechforce.com/images/og-card.png',
+    content: 'https://www.israeltechforce.com/images/og/press.png',
   },
   { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/press' },
-  ...hreflangLinks('/press', '/en/press'),
 ];
 
 export default function PressRoute() {

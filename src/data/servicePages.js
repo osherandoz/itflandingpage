@@ -1,6 +1,8 @@
 export const SERVICE_PAGES = [
   {
     slug: 'facebook-recovery',
+    // Illustration of the message the visitor already saw (not a verbatim screenshot)
+    notice: { icon: 'facebook', app: 'פייסבוק', title: 'החשבון שלך הושבת', text: 'אי אפשר להתחבר, לפרסם או להגיע לעמודים ולקבוצות שלך.' },
     path: 'שחזור-חשבון-פייסבוק',
     keyword: 'שחזור חשבון פייסבוק',
     title: 'שחזור חשבון פייסבוק: פתרון מהיר ומקצועי',
@@ -8,7 +10,7 @@ export const SERVICE_PAGES = [
     metaDescription:
       'חשבון הפייסבוק שלך נחסם או נפרץ? IsraelTechForce מחזירה חשבונות פייסבוק. 2,500+ מקרים מוצלחים, תשלום רק אחרי הצלחה. התקשרו עכשיו.',
     serviceType: 'שחזור חשבון פייסבוק',
-    whatIsIt: `<p>זה קרה בלי אזהרה. הפייסבוק שלך פתאום חסום. כל הקשרים, הקבוצות, העמוד העסקי שבניית במשך שנים. רגע אחד הכל שם, ורגע אחר כך הכל מאחורי מסך שגיאה. אנחנו מבינים את התסכול הזה. זה קרה ל-2,500 אנשים שפנו אלינו, ולכולם הגענו לפתרון.</p>
+    whatIsIt: `<p>זה קרה בלי אזהרה. הפייסבוק שלך פתאום חסום. כל הקשרים, הקבוצות, העמוד העסקי שבניית במשך שנים. רגע אחד הכל שם, ורגע אחר כך הכל מאחורי מסך שגיאה. אנחנו מבינים את התסכול הזה. זה קרה ביותר מ-2,500 חשבונות שפנו אלינו, ולרובם המכריע הגענו לפתרון.</p>
 <p>מטא חוסמת חשבונות ממגוון סיבות. לפעמים זה אלגוריתם שהחליט שהתנהגות "נראית חשודה". לפעמים זו תלונה מהקהל. לפעמים זה קמפיין פרסום שנתפס כמפר הנחיות, גם כשאתם לא הפרתם דבר. ולפעמים זה האקר שהשתלט על החשבון, שינה את הסיסמה, ונעל אתכם בחוץ. כל מקרה שונה. כל מקרה דורש גישה אחרת.</p>
 <p>זה בדיוק מה שאנחנו עושים. אנחנו מכירים את הערוצים הנכונים. את הטפסים שעובדים. את הדרך לדבר עם מטא בשפה שמביאה תוצאות. החשבון שלך חוזר ברוב המקרים מהר, ואתם לא משלמים אגורה אלא אחרי שנכנסתם בחזרה.</p>`,
     steps: [
@@ -72,6 +74,8 @@ export const SERVICE_PAGES = [
 
   {
     slug: 'instagram-recovery',
+    // Illustration of the message the visitor already saw (not a verbatim screenshot)
+    notice: { icon: 'instagram', app: 'אינסטגרם', title: 'החשבון שלך הושעה', text: 'הפרופיל, התמונות והעוקבים אינם זמינים עד לסיום הבדיקה.' },
     path: 'שחזור-חשבון-אינסטגרם',
     keyword: 'שחזור חשבון אינסטגרם',
     title: 'שחזור חשבון אינסטגרם: מחזירים לך את הפרופיל',
@@ -143,6 +147,8 @@ export const SERVICE_PAGES = [
 
   {
     slug: 'whatsapp-recovery',
+    // Illustration of the message the visitor already saw (not a verbatim screenshot)
+    notice: { icon: 'whatsapp', app: 'וואטסאפ', title: 'חשבון זה אינו מורשה להשתמש בוואטסאפ', text: 'המספר שלך חסום מלהשתמש בוואטסאפ.' },
     path: 'שחזור-חשבון-וואטסאפ',
     keyword: 'שחזור חשבון וואטסאפ',
     title: 'שחזור חשבון וואטסאפ: פתיחת חסימה מהירה',
@@ -206,6 +212,8 @@ export const SERVICE_PAGES = [
 
   {
     slug: 'facebook-disabled',
+    // Illustration of the message the visitor already saw (not a verbatim screenshot)
+    notice: { icon: 'facebook', app: 'פייסבוק', title: 'חשבונך הושבת', text: 'אין לך גישה לחשבון, לעמודים ולמודעות שמחוברים אליו.' },
     path: 'חשבון-פייסבוק-מושבת',
     keyword: 'חשבון פייסבוק מושבת',
     title: 'חשבון פייסבוק מושבת? נחזיר אותו',
@@ -276,6 +284,8 @@ export const SERVICE_PAGES = [
 
   {
     slug: 'instagram-hacked',
+    // Illustration of the message the visitor already saw (not a verbatim screenshot)
+    notice: { icon: 'instagram', app: 'אינסטגרם', title: 'כתובת המייל בחשבון שלך שונתה', text: 'לא ביצעת את השינוי? צריך לאבטח את החשבון מיד.' },
     path: 'חשבון-אינסטגרם-נפרץ',
     keyword: 'אינסטגרם נפרץ',
     title: 'חשבון אינסטגרם נפרץ? נשחזר ונאבטח',
@@ -346,6 +356,8 @@ export const SERVICE_PAGES = [
 
   {
     slug: 'ads-manager',
+    // Illustration of the message the visitor already saw (not a verbatim screenshot)
+    notice: { icon: 'facebook', app: 'מנהל המודעות', title: 'חשבון המודעות שלך הושבת', text: 'אי אפשר להריץ מודעות או ליצור קמפיינים חדשים.' },
     path: 'שחזור-מנהל-מודעות',
     keyword: 'מנהל מודעות חסום',
     title: 'מנהל מודעות או ביזנס מנג\'ר נחסם? חוזרים לפרסם מהר',

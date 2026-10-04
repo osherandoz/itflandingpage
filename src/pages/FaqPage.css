@@ -1,263 +1,99 @@
-/* ===========================
-   FAQ Page — full-page styles
-   =========================== */
+/* FAQ page: paper hero, a category index beside the question groups, and an
+   ink band that sends the unanswered question to WhatsApp.
+   The accordion itself (.faq-item, .faq-list) comes from components/FAQ.css. */
+.faqp { background: var(--paper); }
 
-.faq-page {
-  background: #0C0E1D;
-  min-height: 100vh;
-  color: #ffffff;
+/* ---- Hero ---- */
+.faqp__hero {
+  padding-block: calc(var(--nav-h) + clamp(32px, 6vw, 72px)) clamp(40px, 6vw, 72px);
+  background: var(--bg);
 }
+.faqp__back { color: var(--fg-2); min-height: 44px; margin-block-end: clamp(16px, 3vw, 28px); }
+.faqp__title { max-width: 18em; }
+.faqp__sub { margin-block-start: 24px; }
 
-.faq-main {
-  padding: 60px 0 80px;
+@keyframes faqp-rise { from { opacity: 0; transform: translateY(20px); } }
+.faqp__back, .faqp__eyebrow, .faqp__title, .faqp__sub { animation: faqp-rise 0.8s var(--ease-out) both; }
+.faqp__title { animation-delay: 0.05s; }
+.faqp__sub { animation-delay: 0.12s; }
+
+/* ---- Index + groups ---- */
+.faqp__body { padding-block-end: clamp(56px, 8vw, 96px); }
+.faqp__grid { display: grid; gap: 40px; }
+
+.faqp__index-label {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--fg-2);
+  margin-block-end: 12px;
 }
-
-.faq-main .container {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-/* ————— Page header ————— */
-
-.faq-page-header {
-  margin-bottom: 56px;
-  text-align: center;
-}
-
-.faq-back-link {
+/* Phone and tablet: the index is a row of pills that jump to a group */
+.faqp__index-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.faqp__index-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #3B82F6;
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  margin-bottom: 24px;
-  transition: color 0.2s ease;
-}
-
-.faq-back-link:hover {
-  color: #60A5FA;
-}
-
-.faq-page-title {
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: #ffffff;
-  line-height: 1.3;
-  margin: 0 0 16px;
-}
-
-.faq-page-subtitle {
-  font-size: 1.15rem;
-  color: #b0b8cc;
-  max-width: 620px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
-/* ————— Category sections ————— */
-
-.faq-category {
-  margin-bottom: 48px;
-}
-
-.faq-category-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #3B82F6;
-  margin: 0 0 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(59, 130, 246, 0.25);
-}
-
-.faq-category-title i {
-  font-size: 1.2rem;
-  opacity: 0.9;
-}
-
-/* ————— Accordion (reuse FAQ component classes) ————— */
-
-.faq-page .faq-container {
-  max-width: 100%;
-  margin: 0;
-}
-
-.faq-page .faq-item {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-}
-
-.faq-page .faq-question {
-  width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border: none;
-  padding: 18px 22px;
-  text-align: start;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
   min-height: 44px;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #ffffff;
-  transition: background 0.25s ease, color 0.25s ease;
-  font-family: inherit;
-}
-
-.faq-page .faq-question:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.faq-page .faq-question.active {
-  background: #3B82F6;
-  color: #ffffff;
-}
-
-.faq-page .faq-question i {
-  font-size: 0.9rem;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-}
-
-.faq-page .faq-question i.rotated {
-  transform: rotate(180deg);
-}
-
-.faq-page .faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease, padding 0.3s ease;
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.faq-page .faq-answer.open {
-  max-height: 400px;
-  padding: 18px 22px;
-}
-
-.faq-page .faq-answer p {
-  margin: 0;
-  color: #d0d8e8;
-  line-height: 1.75;
-  font-size: 0.98rem;
-}
-
-/* ————— CTA section ————— */
-
-.faq-page-cta {
-  margin-top: 64px;
-  background: rgba(59, 130, 246, 0.08);
-  border: 1px solid rgba(59, 130, 246, 0.25);
-  border-radius: 16px;
-  padding: 48px 40px;
-  text-align: center;
-}
-
-.faq-cta-title {
-  font-size: 1.7rem;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--white);
+  font-size: var(--fs-small);
   font-weight: 700;
-  color: #ffffff;
-  margin: 0 0 12px;
+  transition: background-color 0.2s ease-out, color 0.2s ease-out, border-color 0.2s ease-out;
+}
+.faqp__index-num { color: var(--fg-3); font-weight: 700; }
+.faqp__index-count { display: none; }
+@media (hover: hover) {
+  .faqp__index-link:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .faqp__index-link:hover .faqp__index-num,
+  .faqp__index-link:hover .faqp__index-count { color: var(--wave); }
 }
 
-.faq-cta-text {
-  font-size: 1.05rem;
-  color: #b0b8cc;
-  line-height: 1.7;
-  max-width: 520px;
-  margin: 0 auto 28px;
+.faqp__groups { display: grid; gap: clamp(56px, 8vw, 96px); min-width: 0; }
+.faqp__group-head { margin-block-end: 24px; }
+.faqp__group-head .eyebrow { margin-block-end: 12px; }
+/* anchor target: leave room for the fixed navbar and the eyebrow above the title */
+.faqp__group-title { scroll-margin-top: calc(var(--nav-h) + 64px); }
+
+/* ---- Closing band ---- */
+/* An ink card on paper, so it does not melt into the ink footer below it */
+.faqp__cta { padding-block-end: var(--section); }
+.faqp__cta-card {
+  display: grid;
+  gap: 24px;
+  align-items: end;
+  padding: clamp(32px, 6vw, 80px) clamp(24px, 6vw, 80px);
+  border-radius: var(--r-lg);
 }
+.faqp__cta-side { display: grid; gap: 24px; justify-items: start; }
 
-.faq-cta-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #25D366;
-  color: #ffffff;
-  font-size: 1.05rem;
-  font-weight: 700;
-  padding: 14px 32px;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+@media (min-width: 960px) {
+  .faqp__grid { grid-template-columns: 260px minmax(0, 1fr); gap: 96px; align-items: start; }
+  /* the column stretches to the full height of the groups so the index can stick */
+  .faqp__index { align-self: stretch; }
+  .faqp__index-inner { position: sticky; top: calc(var(--nav-h) + 32px); }
+
+  /* Desktop: the index becomes a ruled column */
+  .faqp__index-list { display: block; border-block-start: 1px solid var(--fg); }
+  .faqp__index-link {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 16px;
+    min-height: 56px;
+    padding: 12px 0;
+    border: 0;
+    border-block-end: 1px solid var(--line);
+    border-radius: 0;
+    background: none;
+    font-size: var(--fs-body);
+  }
+  .faqp__index-count { display: block; color: var(--fg-3); font-size: var(--fs-small); }
+
+  .faqp__cta-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 80px; }
 }
-
-.faq-cta-btn:hover {
-  background: #1ebe5d;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.4);
-}
-
-.faq-cta-btn i {
-  font-size: 1.2rem;
-}
-
-/* ————— Responsive ————— */
-
-@media (max-width: 768px) {
-  .faq-main {
-    padding: 40px 0 60px;
-  }
-
-  .faq-page-title {
-    font-size: 1.75rem;
-  }
-
-  .faq-page-subtitle {
-    font-size: 1rem;
-  }
-
-  .faq-category-title {
-    font-size: 1.2rem;
-  }
-
-  .faq-page-cta {
-    padding: 36px 24px;
-  }
-
-  .faq-cta-title {
-    font-size: 1.4rem;
-  }
-
-  .faq-cta-btn {
-    font-size: 1rem;
-    padding: 13px 26px;
-  }
-}
-
-@media (max-width: 480px) {
-  .faq-page-title {
-    font-size: 1.5rem;
-  }
-
-  .faq-page .faq-question {
-    padding: 15px 16px;
-    font-size: 0.95rem;
-  }
-
-  .faq-page .faq-answer.open {
-    padding: 14px 16px;
-  }
-
-  .faq-page .faq-answer p {
-    font-size: 0.9rem;
-  }
-
-  .faq-page-cta {
-    padding: 28px 18px;
-    margin-top: 48px;
-  }
+@media (min-width: 960px) and (hover: hover) {
+  .faqp__index-link:hover { background: none; color: var(--signal); }
+  .faqp__index-link:hover .faqp__index-num,
+  .faqp__index-link:hover .faqp__index-count { color: var(--signal); }
 }

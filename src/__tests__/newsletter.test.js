@@ -6,7 +6,7 @@
  */
 import { describe, it, expect } from 'vitest';
 import { validateInputs } from '../../api/subscribe.js';
-import { FAQS } from '../pages/Newsletter.jsx';
+import { FAQS } from '../data/newsletterFaqs.js';
 
 describe('subscribe validator', () => {
   it('accepts a first name and email with no last name', () => {

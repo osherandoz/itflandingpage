@@ -1,26 +1,17 @@
 import VslBms from '../../src/pages/VslBms';
 
 const URL = 'https://www.israeltechforce.com/VSL-BMS';
-const TITLE = 'הטעות שעולה לעסקים אלפי שקלים בשנה | אושר רווח';
+const SITE = 'https://www.israeltechforce.com';
+const TITLE = 'קורס BMS: הקמה ואבטחה של Business Manager | אושר רווח';
 const DESCRIPTION =
-  '3 מקרים אמיתיים. 3 עסקים שיכלו להימנע מהנפילה. הדרכה חינמית עם אושר רווח, מומחה לשחזור נכסים דיגיטליים. קורס BMS ב-₪197.';
+  'קורס מוקלט בעברית (כ-3 שעות, ₪197) להקמה ואבטחה של Business Manager, חשבון מודעות והרשאות ב-Meta. הדרכה חינמית של 10 דקות בראש הדף. אושר רווח, IsraelTechForce.';
 const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.png';
-
-export const links = () => [
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
-  {
-    rel: 'stylesheet',
-    // Heebo is self-hosted via @fontsource (root + page imports) — only Assistant + Frank Ruhl Libre from Google
-    href: 'https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;700;800&family=Frank+Ruhl+Libre:wght@500;700&display=swap',
-  },
-];
 
 export const meta = () => [
   { title: TITLE },
   { name: 'description', content: DESCRIPTION },
   { property: 'og:type', content: 'website' },
-  { property: 'og:title', content: 'הטעות שעולה לעסקים ישראלים אלפי שקלים בשנה. איך מונעים אותה' },
+  { property: 'og:title', content: 'קורס BMS: מגדירים Business Manager נכון, לפני שהעסק נחסם' },
   { property: 'og:description', content: DESCRIPTION },
   { property: 'og:url', content: URL },
   { property: 'og:image', content: OG_IMAGE },
@@ -36,15 +27,22 @@ const COURSE_SCHEMA = {
   '@type': 'Course',
   // Same @id as the one emitted on /bms-sm — one course, two pages
   '@id': `${URL}#course`,
-  name: 'קורס BMS, Business Manager Setup',
+  name: 'קורס BMS (Business Manager Setup)',
   description:
-    'קורס מקוון להגנה על נכסים דיגיטליים: בנייה נכונה של Business Manager, ניהול הרשאות, גיבוי ותכנית חירום.',
+    'קורס מוקלט בעברית, כ-3 שעות, 15 שיעורים והרצאת אורח: הקמה ואבטחה של Business Manager, חשבון מודעות, אנשים והרשאות, ותוכנית פעולה לחסימה או פריצה. הקורס מלמד ומעניק כלים; שחזור אישי של חשבון הוא שירות נפרד.',
   url: URL,
   inLanguage: 'he',
-  provider: {
-    '@type': 'Person',
-    name: 'אושר רווח',
-    url: 'https://www.israeltechforce.com',
+  // Same entities the site emits globally (app/root.jsx): #business, #author
+  provider: { '@id': `${SITE}/#business` },
+  teaches: [
+    'הקמת Business Manager ואיסוף נכסים',
+    'ניהול אנשים, שותפים והרשאות',
+    'אבטחת פרופיל אישי וחשבון מודעות',
+    'תוכנית תגובה לחסימה או פריצה',
+  ],
+  audience: {
+    '@type': 'Audience',
+    audienceType: 'בעלי עסקים, מנהלי סושיאל וקמפיינרים',
   },
   offers: {
     '@type': 'Offer',
@@ -57,6 +55,7 @@ const COURSE_SCHEMA = {
     '@type': 'CourseInstance',
     courseMode: 'online',
     courseWorkload: 'PT3H',
+    instructor: { '@id': `${SITE}/#author` },
   },
 };
 

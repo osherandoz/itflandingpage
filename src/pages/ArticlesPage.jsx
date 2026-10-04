@@ -2,84 +2,102 @@ import { Link } from 'react-router';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
-import { useLang } from '../i18n';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import '../components/ArticlesSection.css';
+import Icon from '../components/Icon';
+import { Eyebrow, ArrowIcon } from '../components/ui';
+import { formatDate } from '../i18n';
 import './ArticlesPage.css';
 
-const STR = {
-  he: {
-    backLink: 'חזרה לדף הבית',
-    backArrow: 'fas fa-arrow-right',
-    title: 'מאמרים ומדריכים',
-    subtitle: 'מדריכים מקצועיים לשחזור חשבונות פייסבוק, אינסטגרם, וואטסאפ ומנהל מודעות.',
-  },
-  en: {
-    backLink: 'Back to Home',
-    backArrow: 'fas fa-arrow-left',
-    title: 'Articles & Guides',
-    subtitle: 'Professional guides to recovering Facebook, Instagram, WhatsApp, and Ads Manager accounts.',
-  },
+const t = {
+  backLink: 'חזרה לדף הבית',
+  eyebrow: 'מרכז הידע',
+  titleLight: 'מאמרים',
+  titleBold: 'ומדריכים',
+  subtitle: 'מדריכים מקצועיים לשחזור חשבונות פייסבוק, אינסטגרם, וואטסאפ ומנהל מודעות.',
+  listEyebrow: 'כל המדריכים',
+  readSuffix: 'קריאה',
 };
 
-const formatDate = (date, isEn) => {
-  if (!isEn) return date.split('-').reverse().join('/');
-  return new Date(`${date}T00:00:00`).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-};
+const pad = (n) => String(n).padStart(2, '0');
+
+const Meta = ({ article }) => (
+  <span className="artl__meta small">
+    <bdi className="num">{formatDate(article.date)}</bdi>
+    <span aria-hidden="true">·</span>
+    <span>{article.readTime} {t.readSuffix}</span>
+  </span>
+);
+
+const Category = ({ article, solid }) => (
+  <span className={`tag${solid ? ' tag--solid' : ''} artl__tag`}>
+    <Icon name={article.icon} />
+    {article.category}
+  </span>
+);
 
 export default function ArticlesPage({ articles }) {
-  const { lang, isEn, dir, prefix } = useLang();
-  const t = STR[lang];
-  const realArticles = articles.filter(a => !a.placeholder);
+  const realArticles = articles.filter((a) => !a.placeholder);
+  const [lead, ...rest] = realArticles;
 
   return (
-    <div className="articles-page" dir={dir}>
+    <div className="artl" dir="rtl">
       <Navbar />
 
-      <header className="articles-page-header">
-        <div className="container">
-          <Link to={prefix || '/'} className="articles-back-link">
-            <i className={t.backArrow}></i> {t.backLink}
-          </Link>
-          <h1 className="articles-page-title">
-            <i className="fas fa-book-open"></i>
-            {t.title}
-          </h1>
-          <p className="articles-page-subtitle">
-            {t.subtitle}
-          </p>
-        </div>
-      </header>
+      <main id="main">
+        <header className="artl__hero theme-ink bg-grid">
+          <div className="container">
+            <div className="artl__hero-grid">
+              <div className="artl__hero-copy">
+                <Eyebrow num="01">{t.eyebrow}</Eyebrow>
+                <h1 className="display artl__title">
+                  <span className="lt">{t.titleLight}</span> {t.titleBold}
+                </h1>
+              </div>
+              <div className="artl__hero-side">
+                <p className="lead">{t.subtitle}</p>
+                <Link to="/" className="link small artl__back">
+                  {t.backLink}
+                </Link>
+              </div>
+            </div>
 
-      <main className="articles-page-body">
-        <div className="container">
-          <div className="articles-grid">
-            {realArticles.map(article => (
-              <Link
-                key={article.id}
-                to={`${prefix}/articles/${article.slug}`}
-                className="article-card"
-              >
-                <div className="article-card-icon">
-                  <i className={article.icon}></i>
-                </div>
-                <div className="article-card-content">
-                  <span className="article-card-category">{article.category}</span>
-                  <h2 className="article-card-title">{article.displayTitle || article.title}</h2>
-                  <p className="article-card-excerpt">{article.excerpt}</p>
-                  <div className="article-card-meta">
-                    <span><i className="fas fa-clock"></i> {article.readTime}</span>
-                    <span><i className="fas fa-calendar"></i> {formatDate(article.date, isEn)}</span>
-                  </div>
-                </div>
+            {lead && (
+              <Link to={`/articles/${lead.slug}`} className="artl__lead">
+                <span className="artl__lead-head">
+                  <Category article={lead} solid />
+                  <span className="artl__num num" aria-hidden="true">01</span>
+                </span>
+                <h2 className="artl__lead-title">{lead.displayTitle || lead.title}</h2>
+                <span className="artl__lead-body">
+                  <span className="artl__lead-excerpt">{lead.excerpt}</span>
+                  <Meta article={lead} />
+                </span>
+                <span className="artl__go" aria-hidden="true"><ArrowIcon /></span>
               </Link>
-            ))}
+            )}
           </div>
-        </div>
+        </header>
+
+        {rest.length > 0 && (
+          <section className="artl__list section theme-mist">
+            <div className="container">
+              <Eyebrow num="02" className="m-reveal">{t.listEyebrow}</Eyebrow>
+              <div className="artl__rows">
+                {rest.map((article, i) => (
+                  <Link key={article.id} to={`/articles/${article.slug}`} className="artl__row m-reveal">
+                    <span className="artl__num num" aria-hidden="true">{pad(i + 2)}</span>
+                    <h2 className="artl__row-title">{article.displayTitle || article.title}</h2>
+                    <span className="artl__row-excerpt">{article.excerpt}</span>
+                    <span className="artl__row-meta">
+                      <Category article={article} />
+                      <Meta article={article} />
+                    </span>
+                    <span className="artl__go" aria-hidden="true"><ArrowIcon /></span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer />

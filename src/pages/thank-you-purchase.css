@@ -1,131 +1,142 @@
-/* ══════════════════════════════════════
-   Thank You — Purchase Page
-   RTL | Dark Theme
-   ══════════════════════════════════════ */
-
-.ty-purchase-page {
-  --red: #E63329;
-  --dark: #0f0f0f;
-  --gray: #1a1a1a;
-  --gray-light: #252525;
-  --white: #ffffff;
-  --green: #27ae60;
-  --text-muted: #9a9a9a;
-  --border: rgba(255, 255, 255, 0.1);
-
-  background: var(--dark);
-  color: var(--white);
-  font-family: 'Heebo', 'Assistant', sans-serif;
-  direction: rtl;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-}
-
-.ty-purchase-card {
-  max-width: 540px;
-  width: 100%;
-  background: var(--gray);
-  border: 2px solid rgba(39, 174, 96, 0.25);
-  border-radius: 20px;
-  padding: 48px 36px;
-  text-align: center;
-}
-
-.ty-purchase-icon {
-  font-size: 3.5rem;
-  margin-bottom: 16px;
-  display: block;
-}
-
-.ty-purchase-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(39, 174, 96, 0.12);
-  border: 1px solid rgba(39, 174, 96, 0.3);
-  border-radius: 50px;
-  padding: 6px 18px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #6fcf97;
-  margin-bottom: 20px;
-}
-
-.ty-purchase-title {
-  font-size: clamp(1.5rem, 4vw, 2rem);
-  font-weight: 900;
-  margin: 0 0 12px;
-  color: var(--white);
-  line-height: 1.3;
-}
-
-.ty-purchase-subtitle {
-  font-size: 1rem;
-  color: #b0b0b0;
-  line-height: 1.7;
-  margin: 0 0 32px;
-}
-
-.ty-purchase-divider {
-  border: none;
-  border-top: 1px solid var(--border);
-  margin: 0 0 28px;
-}
-
-.ty-purchase-actions {
+/* /תודה-רכישה: one calm screen. Confirmation, what happens now as a rail,
+   and the two next actions. Scoped to .typ. */
+.typ {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--paper);
 }
+.typ__top .container { display: flex; align-items: center; height: var(--nav-h); }
+.typ__logo { display: block; }
+.typ__logo img { height: 40px; width: auto; filter: invert(1); }
 
-.ty-purchase-btn {
-  display: flex;
+.typ__main {
+  flex: 1 0 auto;
+  display: grid;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 16px 24px;
-  border-radius: 12px;
-  font-family: inherit;
-  font-size: 1rem;
+  padding-block: clamp(16px, 4vw, 48px) clamp(48px, 7vw, 96px);
+}
+.typ__grid { display: grid; gap: 40px; align-items: center; }
+
+/* ---- Confirmation ---- */
+.typ__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  padding-inline-end: 16px;
+  margin-block-end: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--white);
+  font-size: var(--fs-small);
   font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
-  text-decoration: none;
-  border: none;
 }
-
-.ty-purchase-btn--primary {
-  background: var(--red);
+.typ__badge-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ok);
   color: #fff;
+  font-size: 15px;
+}
+.typ__title-line { display: block; }
+
+.typ__actions { display: grid; gap: 12px; justify-items: start; }
+.typ__insta { min-height: 64px; }
+.typ__insta-label { display: inline-flex; align-items: center; gap: 12px; }
+.typ__insta-label svg { flex: 0 0 auto; width: 22px; height: 22px; }
+
+/* ---- What happens now: numbered rail ---- */
+.typ__steps {
+  --node: 48px;
+  position: relative;
+  display: grid;
+  gap: 16px;
+}
+.typ__rail {
+  position: absolute;
+  inset-block: calc(var(--node) / 2);
+  inset-inline-start: calc(var(--node) / 2 - 1px);
+  width: 2px;
+  background: var(--line);
+}
+.typ__rail span {
+  position: absolute;
+  inset: 0;
+  background: var(--signal);
+  transform-origin: top;
+  transform: scaleY(var(--p, 1));
+}
+.typ__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--node) 1fr;
+  gap: 16px;
+  align-items: start;
+}
+/* the rail stops at the last node */
+.typ__step:last-of-type::before {
+  content: '';
+  position: absolute;
+  inset-block: var(--node) 0;
+  inset-inline-start: calc(var(--node) / 2 - 2px);
+  width: 4px;
+  background: var(--paper);
+}
+.typ__node {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  height: var(--node);
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: var(--fs-small);
+  font-weight: 800;
+}
+.typ__step-text {
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--white);
+  font-weight: 500;
+}
+.typ__note {
+  margin-block-start: 24px;
+  padding-inline-start: calc(48px + 16px);
+  color: var(--fg-2);
+}
+.typ__note .link { color: var(--fg); overflow-wrap: anywhere; }
+
+/* Entrance: CSS only */
+@keyframes typ-rise { from { opacity: 0; transform: translateY(16px); } }
+@keyframes typ-mark { from { background-size: 0% 0.92em; } }
+.typ__hero, .typ__now, .typ__actions { animation: typ-rise 0.7s var(--ease-out) both; }
+.typ__now { animation-delay: 0.12s; }
+.typ__actions { animation-delay: 0.2s; }
+.typ__title .mk { animation: typ-mark 0.9s var(--ease-out) 0.5s both; }
+
+@media (max-width: 479px) {
+  .typ__actions .btn { display: flex; width: 100%; }
 }
 
-.ty-purchase-btn--primary:hover {
-  background: #c82b22;
-  transform: translateY(-1px);
-}
-
-.ty-purchase-btn--instagram {
-  background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  color: #fff;
-}
-
-.ty-purchase-btn--instagram:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
-.ty-purchase-note {
-  margin-top: 24px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-@media (max-width: 480px) {
-  .ty-purchase-card {
-    padding: 32px 20px;
+@media (min-width: 960px) {
+  .typ__grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-areas:
+      'hero now'
+      'actions now';
+    gap: 40px 96px;
   }
+  .typ__hero { grid-area: hero; align-self: end; }
+  .typ__actions { grid-area: actions; align-self: start; }
+  .typ__now { grid-area: now; }
+  .typ__steps { --node: 56px; gap: 24px; }
+  .typ__step { gap: 24px; }
+  .typ__note { padding-inline-start: calc(56px + 24px); }
 }

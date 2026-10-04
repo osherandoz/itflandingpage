@@ -1,41 +1,53 @@
-import React from 'react';
-import { getWhatsAppUrl, onWhatsAppClick, WHATSAPP_DEFAULT_MSG } from '../utils/whatsapp';
-import { useLang } from '../i18n';
+import React, { useEffect, useState } from 'react';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 import Icon from './Icon';
 import './FloatingWhatsApp.css';
 
-const STR = {
-  he: {
-    aria: 'פתח שיחת WhatsApp',
-    title: 'דבר/י איתי בוואטסאפ',
-    label: 'דבר/י איתי',
-    whatsappMessage: 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים',
-  },
-  en: {
-    aria: 'Open a WhatsApp chat',
-    title: 'Chat with me on WhatsApp',
-    label: 'Chat with me',
-    whatsappMessage: WHATSAPP_DEFAULT_MSG.en,
-  },
-};
+const DEFAULT_MESSAGE = 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים';
 
-const FloatingWhatsApp = () => {
-  const { lang } = useLang();
-  const t = STR[lang];
+// The always-reachable action. A pill in the corner on desktop; on phones a
+// bar across the bottom, under the thumb. It appears once the page's own
+// first CTA has scrolled away and leaves when the footer's CTA arrives, so
+// there is never more than one on screen.
+const FloatingWhatsApp = ({ message = DEFAULT_MESSAGE, label = 'דבר/י איתי', note = 'אבחון חינם, תשובה תוך דקות', location = 'floating' }) => {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    let frame = 0;
+    const footer = document.querySelector('footer');
+    const update = () => {
+      frame = 0;
+      // gone again once the footer (which opens with its own CTA) is on screen
+      const atFooter = footer && footer.getBoundingClientRect().top < window.innerHeight - 120;
+      setVisible(window.scrollY > 520 && !atFooter);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
 
   return (
-    <a
-      className="floating-whatsapp"
-      href={getWhatsAppUrl(t.whatsappMessage)}
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={onWhatsAppClick('floating')}
-      aria-label={t.aria}
-      title={t.title}
-    >
-      <Icon name="whatsapp" />
-      <span className="floating-whatsapp-label">{t.label}</span>
-    </a>
+    <div className={`fab${visible ? ' is-visible' : ''}`} aria-hidden={!visible}>
+      <p className="fab__note">{note}</p>
+      <a
+        className="fab__btn"
+        href={getWhatsAppUrl(message)}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={onWhatsAppClick(location)}
+        aria-label="פתח שיחת WhatsApp"
+        tabIndex={visible ? 0 : -1}
+      >
+        <Icon name="whatsapp" />
+        <span>{label}</span>
+      </a>
+    </div>
   );
 };
 

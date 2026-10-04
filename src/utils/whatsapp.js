@@ -1,11 +1,8 @@
 // WhatsApp utility functions
 import { trackSiteEvent } from './track.js';
 
-// Default first-contact message per language — the one place to edit it.
-export const WHATSAPP_DEFAULT_MSG = {
-  he: "היי, הגעתי דרך האתר שלך אשמח לקבל פרטים",
-  en: "Hi, I found you through your website and I'd love to get more details",
-};
+// Default first-contact message — the one place to edit it.
+export const WHATSAPP_DEFAULT_MSG = "היי, הגעתי דרך האתר שלך אשמח לקבל פרטים";
 
 // A WhatsApp click is a click, not a received message and not a lead.
 // `location` names the CTA that was clicked (hero, navbar, sticky-bar, ...).
@@ -22,7 +19,7 @@ export const trackWhatsAppClick = (location = 'unknown') => {
 // button + window.open().
 export const onWhatsAppClick = (location) => () => trackWhatsAppClick(location);
 
-export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MSG.he) => {
+export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MSG) => {
   const phoneNumber = "972509823235";
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
