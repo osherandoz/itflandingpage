@@ -30,14 +30,14 @@ export default function ThankYouLead() {
             <section className="tyl__hero">
               <p className="tyl__confirm">
                 <span className="tyl__confirm-icon" aria-hidden="true"><Icon name="check" /></span>
-                <span>הצ׳קליסט בדרך אלייך. בדקי גם את תיקיית הספאם.</span>
+                <span>הצ׳קליסט בדרך אליכם. בדקו גם את תיקיית הספאם.</span>
               </p>
               <h1 className="tyl__title h1">
-                <span className="lt">קיבלת את הצ׳קליסט.</span>{' '}
-                <span className="tyl__title-line">עכשיו תדעי <span className="mk">מה לחפש.</span></span>
+                <span className="lt">קיבלתם את הצ׳קליסט.</span>{' '}
+                <span className="tyl__title-line">עכשיו תדעו <span className="mk">מה לחפש.</span></span>
               </h1>
               <p className="tyl__sub lead">
-                "צ׳קליסט סינון לקוחות 2026" כולל חמש שאלות שאת שואלת לפני כל לקוח חדש.
+                "צ׳קליסט סינון לקוחות 2026" כולל חמש שאלות ששואלים לפני כל לקוח חדש.
                 לא מסכימים בלי תשובות.
               </p>
             </section>
@@ -54,7 +54,7 @@ export default function ThankYouLead() {
                   </li>
                 ))}
               </ol>
-              <p className="tyl__note">חמש דקות מול הלקוח. חוסכת לעצמך שבועות של בעיות.</p>
+              <p className="tyl__note">חמש דקות מול הלקוח. חוסכות לכם שבועות של בעיות.</p>
             </section>
           </div>
 
@@ -62,12 +62,12 @@ export default function ThankYouLead() {
           <section className="tyl__next card card--ink theme-ink" aria-labelledby="tylNextHead">
             <Eyebrow>השלב הבא</Eyebrow>
             <h2 className="h2" id="tylNextHead">
-              <span className="lt">הצ׳קליסט אומר לך מה לבדוק.</span>{' '}
-              <span className="tyl__title-line">הקורס אומר לך מה לעשות עם התשובות.</span>
+              <span className="lt">הצ׳קליסט אומר לכם מה לבדוק.</span>{' '}
+              <span className="tyl__title-line">הקורס אומר לכם מה לעשות עם התשובות.</span>
             </h2>
             <p className="tyl__next-text">
               קורס BMS הוא ההמשך הישיר: איך בונים תשתית פרסום שלא נשברת, איך מנהלים
-              הרשאות בלי להיות תלויה בלקוח, ומה עושים ברגע שמשהו כן משתבש.
+              הרשאות בלי להיות תלויים בלקוח, ומה עושים ברגע שמשהו כן משתבש.
             </p>
             <a
               href="/VSL-BMS"
@@ -90,7 +90,7 @@ export default function ThankYouLead() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                שלחי לי הודעה בוואטסאפ
+                שלחו לי הודעה בוואטסאפ
               </a>
             </p>
           </section>
