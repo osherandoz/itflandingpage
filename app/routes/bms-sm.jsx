@@ -42,7 +42,7 @@ const COURSE_SCHEMA = {
   },
   offers: {
     '@type': 'Offer',
-    price: '197',
+    price: '297',
     priceCurrency: 'ILS',
     availability: 'https://schema.org/InStock',
     url: 'https://www.israeltechforce.com/VSL-BMS',

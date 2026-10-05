@@ -96,7 +96,7 @@ const SERVICE_LINKS = [
 
 const COURSE_LINKS = [
   { to: '/bms-sm', label: 'צ׳קליסט סינון לקוחות (חינם)' },
-  { to: '/VSL-BMS', label: 'קורס BMS (₪197): איך לא להיחסם' },
+  { to: '/VSL-BMS', label: 'קורס BMS (₪297): איך לא להיחסם' },
 ];
 
 const QUICK_LINKS = [

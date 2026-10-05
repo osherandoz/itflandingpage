@@ -17,12 +17,12 @@
 │   ├── /חשבון-אינסטגרם-נפרץ        slug: instagram-hacked     kw: אינסטגרם נפרץ
 │   └── /שחזור-מנהל-מודעות          slug: ads-manager          kw: מנהל מודעות חסום
 │
-├── מוצר דיגיטלי (קורס BMS, ₪197)
+├── מוצר דיגיטלי (קורס BMS, ₪297)
 │   ├── /bms-sm          לא דף מכירה — דף לכידת ליד (צ׳קליסט חינם)
 │   ├── /VSL-BMS         דף מכירה VSL (indexed)
 │   ├── /VSL-BMS-V2      וריאנט A/B (noindex, nofollow)
 │   ├── /תודה-קליסט      thank-you ליד   (noindex) — fbq: Lead
-│   └── /תודה-רכישה      thank-you רכישה (noindex) — fbq: Purchase ₪197
+│   └── /תודה-רכישה      thank-you רכישה (noindex) — fbq: Purchase ₪297
 │
 ├── תוכן / אמון (Support layer)
 │   ├── /articles                 (9 מאמרים)
@@ -115,7 +115,7 @@ Schema לכל דף מוצר: `Service` + `FAQPage` + `HowTo` + `BreadcrumbList` 
    │          │                       └─ CTA → וואטסאפ בלבד  │
    │          │                          (אין חזרה לדף מוצר) │
    ▼          ▼                                              ▼
-ContactForm  WhatsApp                                  mrng.to (₪197)
+ContactForm  WhatsApp                                  mrng.to (₪297)
 StickyCTA    (בלבד)                                          │
    │            │                                            ▼
    ▼            ▼                                      /תודה-רכישה
@@ -143,7 +143,7 @@ StickyCTA    (בלבד)                                          │
 ### קצוות שחסרים (חורי משפך)
 1. **מאמר → דף שירות**: אפס. כל מאמר קופץ לוואטסאפ ומדלג על דף המכירה.
 2. **דף שירות → דף שירות**: אין קישור בגוף התוכן (רק Footer).
-3. **/תודה-קליסט → כלום**: אין אפסייל ל-₪197, אין VSL, אין וואטסאפ.
+3. **/תודה-קליסט → כלום**: אין אפסייל ל-₪297, אין VSL, אין וואטסאפ.
 4. **דף שירות → לכידת ליד**: אין טופס. וואטסאפ או כלום. אין רשימת רימרקטינג.
 5. **bms-sm → VSL-BMS**: הליד מגנט לא מוביל לדף המכירה של אותו מוצר.
 6. ~~**/en/* → מוצר הקורס**~~: לא רלוונטי — האתר האנגלי הוסר ב-2026-10-01 (ראו סעיף 2).
@@ -157,9 +157,9 @@ StickyCTA    (בלבד)                                          │
 | `whatsapp_click` | כל CTA וואטסאפ | GA + CRM (`trackSiteEvent`) |
 | `ViewContent` / `page_view_bms` | bms-sm | fbq + gtag |
 | `CTAClick` | VSL-BMS (גלילה ל-CTA) | fbq custom |
-| `InitiateCheckout` ₪197 | לחיצה על רכישה | fbq |
+| `InitiateCheckout` ₪297 | לחיצה על רכישה | fbq |
 | `Lead` | /תודה-קליסט, /newsletter | fbq |
-| `Purchase` ₪197 | /תודה-רכישה | fbq + gtag (`transaction_id`) |
+| `Purchase` ₪297 | /תודה-רכישה | fbq + gtag (`transaction_id`) |
 
 חסר: אירועי CRM (`trackSiteEvent`) בדפי BMS/VSL — הם מדווחים רק ל-Meta/GA.
 
@@ -177,7 +177,7 @@ BOFU   שיחה → הצעה → תשלום
 
 מסלול מוצר דיגיטלי:
 TOFU   רילס / קהילה → /bms-sm (צ׳קליסט)
-       └─► /תודה-קליסט ──► הצעת ₪197 + כפתור ל-/VSL-BMS  ← להוסיף
+       └─► /תודה-קליסט ──► הצעת ₪297 + כפתור ל-/VSL-BMS  ← להוסיף
 MOFU   /VSL-BMS → mrng.to
 BOFU   /תודה-רכישה ──► אונבורדינג + הצעת שירות שחזור      ← להוסיף
 ```

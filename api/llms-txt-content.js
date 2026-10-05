@@ -21,7 +21,7 @@ export const LLMS_TXT = `# IsraelTechForce (ITF Recovery)
 
 ## מוצרים (Products)
 
-- [קורס BMS](https://www.israeltechforce.com/VSL-BMS): קורס דיגיטלי (₪197, תשלום חד-פעמי) ללימוד הגנה על נכסי Meta — אבטחת Business Manager, ניהול הרשאות ומניעת חסימות ופריצות. 4 מודולים + 3 בונוסים, כ-3 שעות תוכן, גישה לכל החיים.
+- [קורס BMS](https://www.israeltechforce.com/VSL-BMS): קורס דיגיטלי (₪297, תשלום חד-פעמי) ללימוד הגנה על נכסי Meta — אבטחת Business Manager, ניהול הרשאות ומניעת חסימות ופריצות. 4 מודולים + 3 בונוסים, כ-3 שעות תוכן, גישה לכל החיים.
 
 ## מידע נוסף (More)
 

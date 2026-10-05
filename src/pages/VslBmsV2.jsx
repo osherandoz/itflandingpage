@@ -16,7 +16,7 @@ const IconPlay = () => (<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden
 const VIDEO_EMBED_URL = 'https://www.youtube.com/embed/7Ac7-Kdl1-c';
 const BASE_PURCHASE_URL = 'https://mrng.to/engo98ytvh';
 const WHATSAPP_URL = 'https://wa.me/972509823235';
-const PRICE = 197;
+const PRICE = 297;
 const ORIGINAL_VALUE = 638;
 // Page-variant tag. Not utm_content, so the ad creative's own utm_content survives (same as V1).
 const UTM = 'variant=v2-loss-headline';
@@ -194,7 +194,7 @@ const PACK = ['4 מודולים', '3 בונוסים', '15 שיעורים', '~3 �
 
 const OBJECTIONS = [
   ['אני לא טכנולוגי/ת. זה לא יהיה מסובך לי?', 'הקורס בנוי בהקלטות מסך. אתם רואים בדיוק מה אני עושה ועושים אחריי. אם אתם יודעים להפעיל פייסבוק, אתם יודעים מספיק.'],
-  [`₪${PRICE} זה לא יותר מדי בשביל קורס דיגיטלי?`, 'חסימה ממוצעת עולה ₪3,500. זה פי 18 מהקורס. אם הקורס יחסוך לכם חסימה אחת ב-5 השנים הקרובות, הוא משלם את עצמו 18 פעמים.'],
+  [`₪${PRICE} זה לא יותר מדי בשביל קורס דיגיטלי?`, 'חסימה ממוצעת עולה ₪3,500. זה כמעט פי 12 מהקורס. אם הקורס יחסוך לכם חסימה אחת ב-5 השנים הקרובות, הוא משלם את עצמו 18 פעמים.'],
   ['אני יכול/ה ללמוד את זה ביוטיוב בחינם, לא?', 'ביוטיוב יש "טיפים". כאן יש שיטה. יוטיוב לא מתעדכן כשמטא משנה משהו. אני כן.'],
   ['אם אקנה ולא יעבוד לי, מה אז?', 'תשלח/י לי הודעה. אני עונה אישית. לא הבטחתי תמיכה אישית מלאה. אבל בפועל אני עונה לכל תלמיד.'],
 ];
@@ -396,7 +396,7 @@ export default function VslBmsV2() {
           </ol>
 
           <p className="vsl-note m-reveal">
-            הקורס עולה <strong><bdi className="num">₪{PRICE}</bdi></strong>. חסימה אחת ממוצעת עולה <strong>פי <span className="num">18</span></strong> מזה.{' '}
+            הקורס עולה <strong><bdi className="num">₪{PRICE}</bdi></strong>. חסימה אחת ממוצעת עולה <strong>כמעט פי <span className="num">12</span></strong> מזה.{' '}
             הוא משלם את עצמו עוד לפני שלמדתם את המודול הראשון.
           </p>
 

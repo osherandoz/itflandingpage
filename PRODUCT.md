@@ -10,7 +10,7 @@ Israeli social media managers, Facebook/Instagram campaign runners (קמפיינ
 
 ## Product Purpose
 
-BMS is a ₪197 course teaching the correct setup and ongoing protection of Meta Business Manager: 4 core modules, 3 bonuses, 15 recorded lessons. The course exists because people don't get blocked randomly — there's a formula, and this course teaches how to stay outside it. The author (Osher Ravach / IsraelTechForce) built his reputation recovering 2,500+ accounts; the course is the next step, prevention instead of rescue. Success means a user who finishes the page thinks: "I need this now, and I trust this person to teach it."
+BMS is a ₪297 course teaching the correct setup and ongoing protection of Meta Business Manager: 4 core modules, 3 bonuses, 15 recorded lessons. The course exists because people don't get blocked randomly — there's a formula, and this course teaches how to stay outside it. The author (Osher Ravach / IsraelTechForce) built his reputation recovering 2,500+ accounts; the course is the next step, prevention instead of rescue. Success means a user who finishes the page thinks: "I need this now, and I trust this person to teach it."
 
 ## Brand Personality
 

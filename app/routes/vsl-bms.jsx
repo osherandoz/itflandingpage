@@ -4,7 +4,7 @@ const URL = 'https://www.israeltechforce.com/VSL-BMS';
 const SITE = 'https://www.israeltechforce.com';
 const TITLE = 'קורס BMS: הקמה ואבטחה של Business Manager | אושר רווח';
 const DESCRIPTION =
-  'קורס מוקלט בעברית (כ-3 שעות, ₪197) להקמה ואבטחה של Business Manager, חשבון מודעות והרשאות ב-Meta. הדרכה חינמית של 10 דקות בראש הדף. אושר רווח, IsraelTechForce.';
+  'קורס מוקלט בעברית (כ-3 שעות, ₪297) להקמה ואבטחה של Business Manager, חשבון מודעות והרשאות ב-Meta. הדרכה חינמית של 10 דקות בראש הדף. אושר רווח, IsraelTechForce.';
 const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.png';
 
 export const meta = () => [
@@ -46,7 +46,7 @@ const COURSE_SCHEMA = {
   },
   offers: {
     '@type': 'Offer',
-    price: '197',
+    price: '297',
     priceCurrency: 'ILS',
     availability: 'https://schema.org/InStock',
     url: URL,

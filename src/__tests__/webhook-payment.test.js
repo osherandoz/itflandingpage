@@ -73,13 +73,13 @@ describe('verifySignature()', () => {
   const SECRET = 'test-webhook-secret';
 
   it('returns true for a valid signature on a string body', () => {
-    const body = '{"amount":197,"currency":"ILS"}';
+    const body = '{"amount":297,"currency":"ILS"}';
     const sig = makeSignature(body, SECRET);
     expect(verifySignature(body, sig, SECRET)).toBe(true);
   });
 
   it('returns true for a valid signature on an object body', () => {
-    const body = { amount: 197, currency: 'ILS' };
+    const body = { amount: 297, currency: 'ILS' };
     const sig = makeSignature(body, SECRET);
     expect(verifySignature(body, sig, SECRET)).toBe(true);
   });
@@ -91,13 +91,13 @@ describe('verifySignature()', () => {
   });
 
   it('returns false for a tampered body', () => {
-    const body = '{"amount":197}';
+    const body = '{"amount":297}';
     const sig = makeSignature(body, SECRET);
     expect(verifySignature('{"amount":999}', sig, SECRET)).toBe(false);
   });
 
   it('returns false for a wrong secret', () => {
-    const body = '{"amount":197}';
+    const body = '{"amount":297}';
     const sig = makeSignature(body, SECRET);
     expect(verifySignature(body, sig, 'wrong-secret')).toBe(false);
   });
