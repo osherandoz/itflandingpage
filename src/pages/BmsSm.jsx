@@ -88,10 +88,10 @@ function LeadForm({ where }) {
         trackGa('generate_lead', { page: 'bms-sm' });
         setTimeout(() => navigate('/תודה-קליסט'), 3000);
       } else {
-        setError(data.error || 'משהו השתבש. בדקי את הפרטים ונסי שוב.');
+        setError(data.error || 'משהו השתבש. בדקו את הפרטים ונסו שוב.');
       }
     } catch {
-      setError('לא הצלחנו להתחבר לשרת. בדקי חיבור לאינטרנט ולחצי שוב על הכפתור.');
+      setError('לא הצלחנו להתחבר לשרת. בדקו חיבור לאינטרנט ולחצו שוב על הכפתור.');
     } finally {
       setLoading(false);
     }
@@ -102,7 +102,7 @@ function LeadForm({ where }) {
       <div className="card theme-paper bmsm__form bmsm__success" role="status" aria-live="polite">
         <span className="bmsm__success-icon" aria-hidden="true"><Icon name="check" /></span>
         <p className="bmsm__success-title">הצ׳קליסט בדרך!</p>
-        <p className="bmsm__success-sub">מעבירים אותך בעוד כמה שניות...</p>
+        <p className="bmsm__success-sub">מעבירים אתכם בעוד כמה שניות...</p>
         <div className="bmsm__success-bar" aria-hidden="true"><span /></div>
       </div>
     );
@@ -130,7 +130,7 @@ function LeadForm({ where }) {
           <input
             id={nameId}
             type="text"
-            placeholder="לדוגמה: מאיה"
+            placeholder="לדוגמה: נועם"
             value={firstName}
             onChange={e => setFirstName(e.target.value)}
             required
@@ -168,7 +168,7 @@ function LeadForm({ where }) {
           )}
           {emailSuggestion && !showEmailErr && (
             <span className="bmsm__suggest small">
-              האם התכוונת ל-
+              האם התכוונתם ל-
               <button type="button" className="link" onClick={acceptSuggestion}>
                 <bdi>{emailSuggestion}</bdi>
               </button>
@@ -182,7 +182,7 @@ function LeadForm({ where }) {
         {loading ? (
           <span className="bmsm__submit-busy">
             <Icon name="spinner" spin />
-            שולחת...
+            שולחים...
           </span>
         ) : (
           <>
@@ -210,39 +210,39 @@ function LeadForm({ where }) {
 
 const BMS_FAQS = [
   {
-    q: 'אני כבר עובדת שנים עם ביזנס מנג׳ר, זה רלוונטי אליי?',
-    a: 'דווקא כן. ניסיון לא מחסן מבעיות בסיסיות: הרשאות שנשארו פתוחות מעובד ישן, פיקסל שמשויך לסוכנות הקודמת, חשבון שהבעלות עליו לא ברורה. הצ׳קליסט מארגן את כל הבדיקות שחשבת שאת כבר יודעת לעשות.',
+    q: 'יש לי כבר שנים של ניסיון עם ביזנס מנג׳ר, זה רלוונטי אליי?',
+    a: 'דווקא כן. ניסיון לא מחסן מבעיות בסיסיות: הרשאות שנשארו פתוחות מעובד ישן, פיקסל שמשויך לסוכנות הקודמת, חשבון שהבעלות עליו לא ברורה. הצ׳קליסט מארגן את כל הבדיקות שחשבתם שאתם כבר יודעים לעשות.',
   },
   {
     q: 'מה קורה אם הלקוח שלי הוא שגרם לבעיה? זה עוזר גם בדיעבד?',
-    a: 'הצ׳קליסט בנוי בעיקר למניעה, לפני שמסכימים ללקוח חדש. אם כבר יש בעיה, הוא עוזר להבין מה קרה ולאסוף תיעוד שמוכיח שהמצב היה כך לפני שהגעת. זה לא מחליף ייעוץ, אבל זה הגנה ראשונית טובה.',
+    a: 'הצ׳קליסט בנוי בעיקר למניעה, לפני שמסכימים ללקוח חדש. אם כבר יש בעיה, הוא עוזר להבין מה קרה ולאסוף תיעוד שמוכיח שהמצב היה כך לפני שהגעתם. זה לא מחליף ייעוץ, אבל זה הגנה ראשונית טובה.',
   },
   {
     q: 'כמה זמן לוקח למלא אותו עם לקוח חדש?',
-    a: 'חמש דקות אם הלקוח מסופק ויודע לענות. עשר דקות אם הוא לא בטוח מה קורה בחשבון שלו. שמרי אותו כ-PDF ומלאי אותו לפני כל אונבורדינג.',
+    a: 'חמש דקות אם הלקוח מסופק ויודע לענות. עשר דקות אם הוא לא בטוח מה קורה בחשבון שלו. שמרו אותו כ-PDF ומלאו אותו לפני כל אונבורדינג.',
   },
   {
     q: 'הצ׳קליסט מבטיח שלא יהיו בעיות?',
-    a: 'לא. אין מסמך שמבטיח את זה. אבל מנהלת שנכנסת ללקוח עם תיעוד מסודר יודעת לאן להצביע כשמשהו משתבש, ולא נשאלת "מה עשית לנו?" בלי תשובה.',
+    a: 'לא. אין מסמך שמבטיח את זה. אבל מי שנכנס ללקוח עם תיעוד מסודר יודע לאן להצביע כשמשהו משתבש, ולא נשאל "מה עשית לנו?" בלי תשובה.',
   },
   {
-    q: 'זה מתאים גם למי שרק מתחילה בתחום?',
-    a: 'כן. אם את בתחילת הדרך, הצ׳קליסט ילמד אותך מה בכלל צריך לבדוק לפני שחותמים על לקוח. אם את ותיקה, הוא ייתן לך פורמט עקבי שתוכלי לסמוך עליו.',
+    q: 'זה מתאים גם למי שרק מתחיל בתחום?',
+    a: 'כן. אם אתם בתחילת הדרך, הצ׳קליסט ילמד אתכם מה בכלל צריך לבדוק לפני שחותמים על לקוח. אם אתם ותיקים, הוא ייתן לכם פורמט עקבי שתוכלו לסמוך עליו.',
   },
 ];
 
 const BENEFITS = [
   {
     title: 'הפרדה מהתקלות של הלקוח',
-    body: 'הצ׳קליסט מראה בדיוק איך לשמור את החשבון הפרטי שלך מחוץ לבלגן של הלקוח, כך שהתקלות שלו לא הופכות לבעיה שלך.',
+    body: 'הצ׳קליסט מראה בדיוק איך לשמור את החשבון הפרטי שלכם מחוץ לבלגן של הלקוח, כך שהתקלות שלו לא הופכות לבעיה שלכם.',
   },
   {
     title: 'ביטחון בשיחת המכירה',
-    body: 'תדעי בדיוק מה המצב של החשבון לפני שסיכמת על מחיר. את נכנסת לשיחה כשאת יודעת מה שווה ומה לא, ויוצאת ממנה עם הצעה ריאלית, לא הבטחת שווא.',
+    body: 'תדעו בדיוק מה המצב של החשבון לפני שסיכמתם על מחיר. אתם נכנסים לשיחה כשאתם יודעים מה שווה ומה לא, ויוצאים ממנה עם הצעה ריאלית, לא הבטחת שווא.',
   },
   {
-    title: 'תיעוד שמכסה אותך לפני הבעיה',
-    body: 'תיעוד מסודר של מצב החשבון ביום שאת מתחילה. זה מה שמפריד בין ״זה לא הייתי אני״ לבין ״אין לי איך להוכיח את זה״.',
+    title: 'תיעוד שמכסה אתכם לפני הבעיה',
+    body: 'תיעוד מסודר של מצב החשבון ביום שאתם מתחילים. זה מה שמפריד בין ״זה לא הייתי אני״ לבין ״אין לי איך להוכיח את זה״.',
   },
 ];
 
@@ -260,13 +260,13 @@ function FaqSection() {
         <header className="bmsm__split-head m-reveal">
           <Eyebrow num="03">שאלות נפוצות</Eyebrow>
           <h2 className="h1" id="faqHead">
-            <span className="lt">שאלות שמנהלות</span> <span className="mk m-in">תמיד שואלות</span>
+            <span className="lt">שאלות שכולם</span> <span className="mk m-in">תמיד שואלים</span>
           </h2>
           <p className="lead">תשובות ישירות לכל מה שעולה לפני שלוחצים להוריד.</p>
           <p className="bmsm__nudge">
             עוד שאלות?{' '}
             <a className="link" href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer">
-              שלחי הודעה בוואטסאפ
+              שלחו הודעה בוואטסאפ
             </a>
           </p>
         </header>
@@ -335,14 +335,14 @@ export default function BmsSm() {
 
   return (
     <div className="bmsm" dir="rtl">
-      <a href="#getit" className="skip-link bmsm__skip">דלגי לטופס</a>
+      <a href="#getit" className="skip-link bmsm__skip">דלגו לטופס</a>
 
       {/* ── TOPBAR ──────────────────────────────────────────── */}
       <div className="bmsm__topbar theme-ink">
         <div className="container bmsm__topbar-in">
           <span className="bmsm__dot" aria-hidden="true" />
           <span>צ׳קליסט סינון לקוחות 2026</span>
-          <span className="bmsm__pill">לכל מנהלת סושיאל</span>
+          <span className="bmsm__pill">לכל מי שמנהל סושיאל</span>
         </div>
       </div>
 
@@ -376,12 +376,12 @@ export default function BmsSm() {
             <div className="bmsm__hero-head">
               <p className="bmsm__kicker">( צ׳קליסט סינון לקוחות · עדכון 2026 )</p>
               <h1 className="bmsm__title h1">
-                <span className="lt">תפסיקי לשלם בזמן ובאנרגיה</span>{' '}
-                על <span className="mk">הבלאגן</span> של הלקוחות שלך.
+                <span className="lt">תפסיקו לשלם בזמן ובאנרגיה</span>{' '}
+                על <span className="mk">הבלאגן</span> של הלקוחות שלכם.
               </h1>
             </div>
 
-            <div className="bmsm__hero-form" id="getit" aria-label="קבלי את הצ׳קליסט" role="region">
+            <div className="bmsm__hero-form" id="getit" aria-label="קבלו את הצ׳קליסט" role="region">
               <LeadForm where="hero" />
             </div>
 
@@ -389,14 +389,14 @@ export default function BmsSm() {
               <p className="lead">
                 צ׳קליסט הסינון המעודכן ל‑2026:{' '}
                 <b>איך להבין מה קורה מאחורי הקלעים</b> של החשבון
-                ב‑5 דקות, ולהגן על המוניטין המקצועי שלך לפני שאת בכלל מסכימה לקחת את הלקוח.
+                ב‑5 דקות, ולהגן על המוניטין המקצועי שלכם לפני שאתם בכלל מסכימים לקחת את הלקוח.
               </p>
               <ul className="bmsm__chips">
                 <li className="tag">5 בדיקות קריטיות</li>
                 <li className="tag">‏5 דקות קריאה</li>
                 <li>
                   <a href="#how" className="link link--arrow small">
-                    ראי מה כלול
+                    ראו מה כלול
                     <ArrowIcon />
                   </a>
                 </li>
@@ -432,14 +432,14 @@ export default function BmsSm() {
               <Eyebrow num="01">מה כלול</Eyebrow>
               <h2 className="h1" id="benefitsHead">
                 <span className="lt">3 שכבות שמגנות על</span>{' '}
-                <span className="mk m-in">המוניטין, הכסף, והזמן</span> שלך
+                <span className="mk m-in">המוניטין, הכסף, והזמן</span> שלכם
               </h2>
               <p className="lead">
                 נבנה אחרי חמש שנים של ראיית אותן טעויות שוב ושוב.
                 אפשר לא לחזור עליהן.
               </p>
               <a href="#getit" className="btn btn--ink bmsm__inside-cta">
-                <span>קבלי את הצ׳קליסט עכשיו</span>
+                <span>קבלו את הצ׳קליסט עכשיו</span>
                 <span className="btn__arrow" aria-hidden="true"><ArrowIcon /></span>
               </a>
             </header>
@@ -526,18 +526,18 @@ export default function BmsSm() {
 
       {/* ── STICKY MOBILE CTA ───────────────────────────────── */}
       {!stickyClosed && (
-        <div className={`bmsm__sticky${stickyShown ? ' is-visible' : ''}`} aria-label="קבלי את הצ׳קליסט" aria-hidden={!stickyShown}>
+        <div className={`bmsm__sticky${stickyShown ? ' is-visible' : ''}`} aria-label="קבלו את הצ׳קליסט" aria-hidden={!stickyShown}>
           <button
             className="bmsm__sticky-close"
             onClick={dismissSticky}
-            aria-label="סגרי פס זה"
+            aria-label="סגרו פס זה"
             type="button"
             tabIndex={stickyShown ? 0 : -1}
           >
             <IconClose />
           </button>
           <p className="bmsm__sticky-note">צ׳קליסט סינון לקוחות · 2026</p>
-          <a className="bmsm__sticky-btn" href="#getit" tabIndex={stickyShown ? 0 : -1}>קבלי את הצ׳קליסט</a>
+          <a className="bmsm__sticky-btn" href="#getit" tabIndex={stickyShown ? 0 : -1}>קבלו את הצ׳קליסט</a>
         </div>
       )}
 
