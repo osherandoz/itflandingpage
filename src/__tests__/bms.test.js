@@ -309,7 +309,7 @@ describe('BMS-SM Course schema', () => {
     inLanguage: 'he',
     offers: {
       '@type': 'Offer',
-      price: '197',
+      price: '297',
       priceCurrency: 'ILS',
       availability: 'https://schema.org/InStock',
       url: 'https://www.israeltechforce.com/checkout/bms',
@@ -337,9 +337,9 @@ describe('BMS-SM Course schema', () => {
     expect(schema.provider.name).toContain('Israel Tech Force');
   });
 
-  it('has offer with ILS currency and price 197', () => {
+  it('has offer with ILS currency and price 297', () => {
     expect(schema.offers.priceCurrency).toBe('ILS');
-    expect(schema.offers.price).toBe('197');
+    expect(schema.offers.price).toBe('297');
   });
 
   it('has inLanguage he', () => {

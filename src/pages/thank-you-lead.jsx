@@ -81,7 +81,7 @@ export default function ThankYouLead() {
               <span>לצפייה בהדרכה החינמית (ללא עלות)</span>
               <span className="btn__arrow" aria-hidden="true"><ArrowIcon /></span>
             </a>
-            <p className="tyl__next-note small">ההדרכה בווידאו חינמית. הקורס המלא עולה <bdi>₪197</bdi>, ואפשר להחליט אחרי הצפייה.</p>
+            <p className="tyl__next-note small">ההדרכה בווידאו חינמית. הקורס המלא עולה <bdi>₪297</bdi>, ואפשר להחליט אחרי הצפייה.</p>
             <p className="tyl__next-note small">
               יש שאלה לפני?{' '}
               <a

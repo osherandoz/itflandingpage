@@ -28,7 +28,7 @@ const PURCHASE_URL = `https://mrng.to/engo98ytvh?variant=${LP_VARIANT}`;
 // is 5504x8256) are never referenced: only the -sm / -md variants.
 const IMG = '/images/vsl-bms';
 
-const PRICE = 197;
+const PRICE = 297;
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 
 // In-page anchor clicks, custom event, NOT Lead (Lead fires only on thank-you-lead)

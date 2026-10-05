@@ -24,7 +24,7 @@ function mockRes() {
 const SECRET = 'test-secret';
 const sign = (body) => crypto.createHmac('sha256', SECRET).update(JSON.stringify(body)).digest('hex');
 const paidEvent = (over = {}) => ({
-  id: 'tx-1', status: 'paid', amount: 197, currency: 'ILS',
+  id: 'tx-1', status: 'paid', amount: 297, currency: 'ILS',
   payer: { name: 'שרה כהן', email: 'sarah@example.com', phone: '0501234567' }, ...over,
 });
 function webhookReq(body) {
@@ -33,7 +33,7 @@ function webhookReq(body) {
 
 // ─── S1: payment validation ───────────────────────────────────────────────
 describe('validatePayment()', () => {
-  it('accepts a paid 197 ILS event', () => {
+  it('accepts a paid 297 ILS event', () => {
     expect(validatePayment(paidEvent()).ok).toBe(true);
   });
   it('ignores failed / pending status (acknowledge, do not enroll)', () => {

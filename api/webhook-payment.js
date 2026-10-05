@@ -13,7 +13,7 @@
  * Env vars:
  *   SMOOVE_API_KEY        — Smoove REST API key (required)
  *   WEBHOOK_SECRET        — Green Invoice webhook signing secret (required)
- *   BMS_PRICE_ILS         — expected charge, default 197
+ *   BMS_PRICE_ILS         — expected charge, default 297
  *   PAYMENT_OK_STATUSES   — comma list of provider status values that mean "paid"
  *                           (default: paid,success,succeeded,completed,approved,1,true)
  *   BMS_PRODUCT_MATCH     — optional substring that must appear in the item/description
@@ -66,7 +66,7 @@ export function validatePayment(body, env = process.env) {
     .split(',')
     .map((s) => s.trim().toLowerCase())
     .filter(Boolean);
-  const expectedAmount = Number(env.BMS_PRICE_ILS || 197);
+  const expectedAmount = Number(env.BMS_PRICE_ILS || 297);
   const productMatch = (env.BMS_PRODUCT_MATCH || '').trim().toLowerCase();
 
   const eventId = pick(
