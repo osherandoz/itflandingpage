@@ -5,7 +5,7 @@ import './thank-you-purchase.css';
 // What happens now, in the order it happens.
 const STEPS = [
   'ברגע שחשבונית ירוקה מאשרת את התשלום, פרטי הגישה לקורס נשלחים למייל (בדרך כלל תוך 5 דקות).',
-  'לא קיבלת תוך 15 דקות? בדקי בתיקיית הספאם, ואם עדיין אין, כתבי לי.',
+  'לא קיבלתם תוך 15 דקות? בדקו בתיקיית הספאם, ואם עדיין אין, כתבו לי.',
 ];
 
 // No Purchase pixel/GA event here on purpose: this page can be opened directly,
@@ -32,7 +32,8 @@ export default function ThankYouPurchase() {
 
             <h1 className="typ__title display">
               <span className="lt">תודה!</span>{' '}
-              <span className="typ__title-line"><span className="mk">כל הכבוד</span> שהחלטת</span>
+              <span className="typ__title-line"><span className="mk">כל הכבוד</span> שהחלטת</span>{' '}
+              <span className="typ__title-line">לעשות סדר</span>
             </h1>
           </section>
 
@@ -49,7 +50,7 @@ export default function ThankYouPurchase() {
             </ol>
 
             <p className="typ__note small">
-              יש שאלה? שלחי הודעה ישירות דרך אינסטגרם או למייל{' '}
+              יש שאלה? שלחו הודעה ישירות דרך אינסטגרם או למייל{' '}
               <a className="link" href="mailto:osher@israeltechforce.com"><bdi>osher@israeltechforce.com</bdi></a>
             </p>
           </section>
@@ -60,15 +61,15 @@ export default function ThankYouPurchase() {
               <span className="btn__arrow" aria-hidden="true"><ArrowIcon /></span>
             </a>
             <a
-              href="https://www.instagram.com/osherrevach"
+              href="https://www.instagram.com/osher_revach_1/"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn--ghost typ__insta"
-              aria-label="עקבי אחריי באינסטגרם"
+              aria-label="עקבו אחריי באינסטגרם"
             >
               <span className="typ__insta-label">
                 <Icon name="instagram" />
-                בינתיים, עקבי אחריי באינסטגרם לתכנים נוספים
+                בינתיים, עקבו אחריי באינסטגרם לתכנים נוספים
               </span>
               <span className="btn__arrow" aria-hidden="true"><ArrowIcon /></span>
             </a>
