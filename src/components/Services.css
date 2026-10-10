@@ -30,7 +30,8 @@
   min-height: var(--head-h);
   padding: 16px 24px;
 }
-.svc-card__num { font-size: var(--fs-small); font-weight: 700; color: var(--fg-3); }
+.svc-card__num { font-size: var(--fs-h3); font-weight: 900; line-height: 1; color: var(--accent); }
+.svc-card--all .svc-card__num { color: var(--wave); }
 .svc-card__title { font-size: var(--fs-h3); font-weight: 800; line-height: 1.2; }
 .svc-card__tag { grid-column: 2; justify-self: start; }
 

@@ -1,13 +1,14 @@
 /* Footer: closing CTA, four columns, the mark set huge, then the fine print. */
 .footer { padding-block: var(--section) 24px; overflow: clip; }
 
+/* The closing call is a cobalt panel: the last loud thing on every page */
 .footer__cta {
   display: grid;
   gap: 32px;
-  padding-block-end: clamp(48px, 6vw, 80px);
-  border-block-end: 1px solid var(--line);
+  padding: clamp(32px, 6vw, 80px) clamp(24px, 5vw, 64px);
+  border-radius: var(--r-lg);
 }
-.footer__cta-title { max-width: 16ch; }
+.footer__cta-title { max-width: 14ch; }
 .footer__cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
 
 .footer__cols {

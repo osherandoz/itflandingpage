@@ -2,10 +2,19 @@
    editorial rows instead of four identical cards. */
 .press { padding-block-end: clamp(48px, 6vw, 80px); }
 
+.press { overflow-x: clip; }
+/* The outlets run on a strip of cobalt tape laid slightly off-level across
+   the page: the one loud stripe between the hero and the reading sections. */
 .press__marquee {
+  --bg: var(--signal);
+  --fg: #fff;
+  --fg-2: var(--signal-soft);
   background: var(--bg);
-  padding-block: 24px;
-  border-block-end: 1px solid var(--line);
+  padding-block: 20px;
+  width: 104%;
+  margin-inline: -2%;
+  rotate: -1.5deg;
+  box-shadow: 0 24px 40px -24px rgba(0, 0, 0, 0.6);
   --marquee-dur: 46s;
 }
 .press__marquee-set { display: flex; align-items: center; }
@@ -25,7 +34,7 @@
 .press__diamond {
   width: 10px;
   height: 10px;
-  background: var(--signal);
+  background: var(--ink);
   rotate: 45deg;
 }
 

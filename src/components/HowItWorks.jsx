@@ -26,7 +26,7 @@ const STEPS = [
 ];
 
 const HowItWorks = () => (
-  <div className="hiw section theme-mist">
+  <div className="hiw section theme-signal">
     <div className="container hiw__grid">
       <header className="hiw__head">
         <div className="hiw__head-inner m-reveal">
@@ -50,7 +50,7 @@ const HowItWorks = () => (
         {STEPS.map((step, i) => (
           <li className="hiw__step m-reveal" key={step.title}>
             <span className="hiw__node num" aria-hidden="true">0{i + 1}</span>
-            <div className="hiw__card">
+            <div className="hiw__card theme-paper">
               <span className="tag">{step.time}</span>
               <h3 className="h3">{step.title}</h3>
               <p className="muted">{step.description}</p>

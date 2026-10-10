@@ -90,6 +90,14 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 - `/bms-sm` author stats come from `businessFacts.js` (2,500+ / 95%+ / 4.9).
 - V2 uses system markers (numbers, check discs, stickers), no emoji.
 
+## Decided (2026-10-10, branch `redesign/banger-2026-10`)
+- Home hero rebuilt: oversized promise, case picker that prefills the WhatsApp message, one-shot
+  "disabled → restored" entrance, cobalt press tape. Details in `DESIGN.md` 6b.
+- Site-wide: heading scale raised (`.display` 96, `.h1` 76, `.h2` 48 at 1440), new `theme-signal`
+  (cobalt-drenched sections), footer closing CTA is a cobalt panel on every page.
+- BMS funnel (Osher asked, same day): `/bms-sm` final form section, V1 "the statement" and V2
+  `#final-cta` are `theme-signal`; VSL hero title 32-60. Applied to both VSL variants alike.
+
 ## Open (needs Osher)
 - The pixel's config tries to POST events to two gateway hosts (`*.us-central1.run.app/events`,
   `*.ecs.us-west-2.on.aws/events`) and the CSP blocks them (it did before the redesign too). Unknown

@@ -46,7 +46,7 @@
   margin-block-end: 16px;
 }
 
-.svcp .svcp__title { font-size: clamp(2.25rem, 1.722rem + 2.254vw, 3.75rem); } /* 36 → 60: the titles are long */
+.svcp .svcp__title { font-size: clamp(2.25rem, 1.458rem + 3.38vw, 4.5rem); } /* 36 → 72: the titles are long */
 .svcp__title-line { display: block; }
 
 .svcp__sub { margin-block-start: 24px; max-width: 40ch; }
@@ -268,7 +268,7 @@
   inset-block-start: -2px;
   inset-inline: 0;
   height: 3px;
-  background: var(--signal);
+  background: var(--mk);
   transform-origin: 100% 50%;
   transform: scaleX(var(--p, 1));
 }

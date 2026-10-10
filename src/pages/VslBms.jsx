@@ -410,7 +410,7 @@ export default function VslBms() {
       </section>
 
       {/* THE COMMON DENOMINATOR */}
-      <section className="section theme-ink vsl-state">
+      <section className="section theme-signal vsl-state">
         <div className="container">
           <p className="vsl-state__q">מה המכנה המשותף לכל שלושת המקרים?</p>
           <FillText

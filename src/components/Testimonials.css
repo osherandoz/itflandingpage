@@ -31,13 +31,14 @@
 
 /* Lead quote: ink card, serif voice */
 .tst-card:first-child {
-  --fg-2: #c2ccdc;
-  --line: rgba(220, 231, 247, 0.18);
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #f5f2ea;
+  --fg-2: #e3e9ff;
+  --line: rgba(255, 255, 255, 0.3);
+  background: var(--signal);
+  border-color: var(--signal);
+  color: #fff;
+  box-shadow: 8px 8px 0 var(--ink);
 }
-.tst-card:first-child .tst-card__stars { color: var(--wave); }
+.tst-card:first-child .tst-card__stars { color: #fff; }
 .tst-card:first-child .tst-card__quote {
   font-family: var(--font-serif);
   font-size: var(--fs-h2);

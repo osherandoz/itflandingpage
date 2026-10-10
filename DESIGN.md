@@ -65,8 +65,10 @@ inside a dark hero (forms, proof panels, chips) carry `theme-paper` so their
 text tokens flip back. Reading pages without a hero (privacy, thank-you) stay on paper.
 
 Rules:
-- Too dark and too loud both fail. Big surfaces are paper, mist or ink; `--signal`
-  and `--go` are for emphasis and action. No full section in signal or green.
+- Big surfaces are paper, mist or ink. `theme-signal` drenches a section in cobalt
+  (Osher, 2026-10-10: make it loud): at most two per page, never two in a row, for the moment
+  that should hit (home "how it works", service-page steps, author numbers, newsletter close,
+  the footer's closing panel). Light cards inside carry `theme-paper`. No section in green.
 - One primary (green) CTA per view.
 - No gradients on text. No glows. Shadows are tinted and rare.
 - `--fg-3` is the lightest text allowed (contrast AA on paper, mist and ink).
@@ -78,9 +80,9 @@ once per page at most, for an emotional quote (`.serif`).
 
 | Class | Size (375 → 1440) | Weight | Line height |
 |---|---|---|---|
-| `.display` | 40 → 72 | 900 | 1.08 |
-| `.h1` | 34 → 56 | 900 | 1.12 |
-| `.h2` | 28 → 40 | 900 | 1.18 |
+| `.display` | 44 → 96 | 900 | 1.04 |
+| `.h1` | 36 → 76 | 900 | 1.08 |
+| `.h2` | 28 → 48 | 900 | 1.18 |
 | `.h3` | 22 → 28 | 800 | 1.25 |
 | `.lead` | 18 → 22 | 400 | 1.55 |
 | body | 17 → 19 | 400 | 1.6 |
@@ -105,7 +107,7 @@ once per page at most, for an emotional quote (`.serif`).
 - **Eyebrow** `<Eyebrow num="01">label</Eyebrow>`. **Section head** `.sec-head` (+ `--split` to put the lead beside the title).
 - **Marker** `.mk` (+ `.m-in` to wipe in on scroll). One per heading, two or three words at most.
 - **Sticker** `.sticker` (+ `--paper`, `--go`): rotated label with a hard shadow.
-- **Tag** `.tag`, **card** `.card` (+ `--flat`, `--ink`).
+- **Tag** `.tag`, **card** `.card` (+ `--flat`, `--ink`, `--lift`: ink border and hard shadow, one per section at most).
 - **Rows** instead of card grids for lists (press, articles, FAQ): number, title, meta, arrow disc.
 - **FAQ** native `<details class="faq-item">` (styles in `FAQ.css`), exclusive via `name`.
 - **Form** `.field` wrapper; the lead form is `<ContactForm>`.
@@ -131,6 +133,19 @@ Rules:
 - Animate `transform`, `opacity`, `background-size`, `stroke-dashoffset`. Nothing that lays out.
 - Sticky/pinned layouts only at `(min-width: 1024px) and (min-height: 800px)`.
 - No transform on hover. No `transition: all`. No `backdrop-filter`. No looping decorative animation.
+
+## 6b. Home hero (2026-10-10)
+
+The home hero is the one place that goes past the scale above, on purpose:
+- The promise is set at 44 → 104px across the full container (`.hero__title`), not `.display`.
+- **Case picker** (`.hero-case`): two radio groups (where / what happened) write the WhatsApp
+  message (`caseMessage` in `utils/whatsapp.js`). Nothing picked keeps the generic message.
+  The CTA keeps `location="hero"`. On phones the picker and button come before the paragraph.
+- **Entrance, played once**: "account disabled" chip on a colour-drained portrait, colour sweeps
+  back (`.hero__drain`, a `mix-blend-mode: saturation` layer moved by transform), signal rings go
+  out, "access is back" chip lands.
+- **Press tape**: the outlet marquee runs on a cobalt strip rotated -1.5deg. It is the only
+  signal-coloured band on the page; do not add a second one.
 
 ## 7. Before a page ships
 

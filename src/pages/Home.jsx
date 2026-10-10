@@ -88,7 +88,7 @@ const Home = () => {
                 <li>זמינות {FACTS.hours.he}</li>
               </ul>
             </div>
-            <div className="card home-contact__card m-reveal">
+            <div className="card card--lift home-contact__card m-reveal">
               <ContactForm />
             </div>
           </div>

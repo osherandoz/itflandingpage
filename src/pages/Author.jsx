@@ -93,7 +93,7 @@ export default function Author() {
           </div>
         </section>
 
-        <div className="authp__numbers theme-ink">
+        <div className="authp__numbers theme-signal">
           <div className="container">
             <dl className="authp__stats">
               {t.stats.map((s) => (
