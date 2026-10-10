@@ -90,6 +90,10 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 - `/bms-sm` author stats come from `businessFacts.js` (2,500+ / 95%+ / 4.9).
 - V2 uses system markers (numbers, check discs, stickers), no emoji.
 
+## Decided (2026-10-10, branch `redesign/banger-2026-10`)
+- Home hero rebuilt: oversized promise, case picker that prefills the WhatsApp message, one-shot
+  "disabled → restored" entrance, cobalt press tape. Details in `DESIGN.md` 6b. Tokens unchanged.
+
 ## Open (needs Osher)
 - The pixel's config tries to POST events to two gateway hosts (`*.us-central1.run.app/events`,
   `*.ecs.us-west-2.on.aws/events`) and the CSP blocks them (it did before the redesign too). Unknown

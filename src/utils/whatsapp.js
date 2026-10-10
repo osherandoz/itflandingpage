@@ -24,3 +24,8 @@ export const getWhatsAppUrl = (message = WHATSAPP_DEFAULT_MSG) => {
   const encodedMessage = encodeURIComponent(message);
   return `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 };
+
+// Message written by the hero case picker: each choice carries `say`, the way
+// it reads inside the sentence. Nothing picked gives the generic message.
+export const caseMessage = (where, what) =>
+  `היי, ${where?.say || 'החשבון שלי'} ${what?.say || 'חסום'}, אשמח ${where || what ? 'לאבחון' : 'לעזרה'}`;

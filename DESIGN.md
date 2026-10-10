@@ -132,6 +132,19 @@ Rules:
 - Sticky/pinned layouts only at `(min-width: 1024px) and (min-height: 800px)`.
 - No transform on hover. No `transition: all`. No `backdrop-filter`. No looping decorative animation.
 
+## 6b. Home hero (2026-10-10)
+
+The home hero is the one place that goes past the scale above, on purpose:
+- The promise is set at 44 → 104px across the full container (`.hero__title`), not `.display`.
+- **Case picker** (`.hero-case`): two radio groups (where / what happened) write the WhatsApp
+  message (`caseMessage` in `utils/whatsapp.js`). Nothing picked keeps the generic message.
+  The CTA keeps `location="hero"`. On phones the picker and button come before the paragraph.
+- **Entrance, played once**: "account disabled" chip on a colour-drained portrait, colour sweeps
+  back (`.hero__drain`, a `mix-blend-mode: saturation` layer moved by transform), signal rings go
+  out, "access is back" chip lands.
+- **Press tape**: the outlet marquee runs on a cobalt strip rotated -1.5deg. It is the only
+  signal-coloured band on the page; do not add a second one.
+
 ## 7. Before a page ships
 
 1. One `<h1>`, visible. `<main id="main">`.
