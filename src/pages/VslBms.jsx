@@ -248,13 +248,16 @@ export default function VslBms() {
 
       {/* HERO + VSL */}
       <section className="vsl-hero theme-ink bg-grid">
-        <div className="container vsl-hero__grid">
-          <div className="vsl-hero__copy">
+        <div className="container vsl-hero__grid vsl-hero__grid--wide">
+          {/* The title runs the full width so each phrase stays on one line */}
+          <header className="vsl-hero__head">
             <p className="vsl-hero__kicker">קורס מוקלט בעברית · כ-3 שעות · <bdi>₪{PRICE}</bdi> תשלום אחד</p>
             <h1 className="vsl-hero__title">
               <span className="lt">קורס BMS: מגדירים Business Manager נכון,</span>{' '}
               <span>לפני <span className="mk">שהעסק נחסם</span></span>
             </h1>
+          </header>
+          <div className="vsl-hero__copy">
             <p className="vsl-hero__sub">
               חשבון פייסבוק פרוץ, אינסטגרם חסום, Business Manager קפוא.
               ברוב המקרים שאני פוגש זו הגדרה או הרשאה שאפשר היה לבדוק מראש. כאן לומדים לבדוק.
