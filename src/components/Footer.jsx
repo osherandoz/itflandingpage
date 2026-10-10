@@ -122,7 +122,7 @@ const Footer = () => {
     <footer className="footer theme-ink">
       <div className="container">
         {/* Closing call to action */}
-        <div className="footer__cta">
+        <div className="footer__cta theme-signal m-reveal">
           <p className="footer__cta-title display">
             <span className="lt">החשבון נחסם?</span> שלחו לי את המקרה.
           </p>

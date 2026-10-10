@@ -468,7 +468,7 @@ export default function Newsletter() {
         </section>
 
         {/* ── CLOSING CTA ─────────────────────────────────────── */}
-        <section className="nls__close section theme-ink bg-grid bg-grid--full">
+        <section className="nls__close section theme-signal bg-grid bg-grid--full">
           <div className="container nls__close-grid">
             <div className="m-reveal">
               <Eyebrow num="06">{t.labelClose}</Eyebrow>

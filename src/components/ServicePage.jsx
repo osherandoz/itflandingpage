@@ -269,7 +269,7 @@ const ServicePage = ({ pageData }) => {
         </section>
 
         {/* ---- STEPS ---- */}
-        <section className="svcp__steps section theme-ink">
+        <section className="svcp__steps section theme-signal">
           <div className="container">
             <header className="sec-head m-reveal">
               <Eyebrow num="02">{t.labelSteps}</Eyebrow>

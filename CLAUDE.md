@@ -92,7 +92,11 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 
 ## Decided (2026-10-10, branch `redesign/banger-2026-10`)
 - Home hero rebuilt: oversized promise, case picker that prefills the WhatsApp message, one-shot
-  "disabled → restored" entrance, cobalt press tape. Details in `DESIGN.md` 6b. Tokens unchanged.
+  "disabled → restored" entrance, cobalt press tape. Details in `DESIGN.md` 6b.
+- Site-wide: heading scale raised (`.display` 96, `.h1` 76, `.h2` 48 at 1440), new `theme-signal`
+  (cobalt-drenched sections), footer closing CTA is a cobalt panel on every page.
+- The BMS funnel pages (`/bms-sm`, both VSLs, thank-you pages) got the type scale only: they are
+  in an A/B test and `PRODUCT.md` asks for calm there.
 
 ## Open (needs Osher)
 - The pixel's config tries to POST events to two gateway hosts (`*.us-central1.run.app/events`,
