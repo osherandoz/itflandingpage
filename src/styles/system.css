@@ -334,7 +334,7 @@ html.js .mk.m-in.is-in { background-size: 100% 0.92em; }
 .sticker--paper { background: var(--white); color: var(--ink); border: 1.5px solid var(--ink); }
 .sticker--go { background: var(--go); color: var(--ink); }
 .theme-ink .sticker { box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.55); }
-.theme-signal .sticker { background: var(--ink); }
+.theme-signal .sticker:not(.sticker--paper):not(.sticker--go) { background: var(--ink); }
 /* Hard shadow for the one object in a section that should feel picked up */
 .card.card--lift { border: 1.5px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); }
 html.js .sticker.m-in { opacity: 0; translate: 0 -28px; scale: 1.15; }

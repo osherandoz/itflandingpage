@@ -499,7 +499,7 @@ export default function BmsSm() {
         <FaqSection />
 
         {/* ── FORM, AGAIN ─────────────────────────────────────── */}
-        <section className="bmsm__final section theme-mist" ref={finalRef} aria-labelledby="finalHead">
+        <section className="bmsm__final section theme-signal" ref={finalRef} aria-labelledby="finalHead">
           <div className="container bmsm__final-grid">
             <div className="m-reveal">
               <Eyebrow num="04">חינם, ישר למייל</Eyebrow>

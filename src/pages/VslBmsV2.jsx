@@ -548,7 +548,7 @@ export default function VslBmsV2() {
       </section>
 
       {/* ─── 9. FINAL CTA / PRICING ─── */}
-      <section className="section theme-mist" id="final-cta">
+      <section className="section theme-signal" id="final-cta">
         <div className="container">
           <header className="sec-head m-reveal">
             <h2 className="h1">
@@ -585,7 +585,7 @@ export default function VslBmsV2() {
           </div>
 
           {/* Honest risk-reduction block (replaces brief's 7-day guarantee) */}
-          <div className="vsl-promise card m-reveal">
+          <div className="vsl-promise card theme-paper m-reveal">
             <h3 className="h3">ההבטחה שלי האמיתית:</h3>
             <p className="vsl-promise__no serif">
               הקורס הזה <strong>לא מבטיח</strong> שלעולם לא תיחסמו או תיפרצו.{' '}

@@ -18,7 +18,7 @@
 .vsl-hero { padding-block: clamp(20px, 4vw, 64px) clamp(48px, 7vw, 96px); overflow: clip; }
 .vsl-hero__grid { display: grid; gap: 20px; }
 .vsl-hero__kicker { margin-block-end: 12px; font-size: var(--fs-small); font-weight: 500; color: var(--fg-2); }
-.vsl-hero__title { font-size: clamp(1.875rem, 1.5rem + 1.6vw, 2.75rem); line-height: 1.14; }
+.vsl-hero__title { font-size: clamp(2rem, 1.384rem + 2.629vw, 3.75rem); line-height: 1.1; } /* 32 → 60 */
 .vsl-hero__title > span { display: block; }
 .vsl-hero__sub { margin-block-start: 16px; max-width: 36em; color: var(--fg-2); line-height: 1.55; }
 .vsl-hero__sub strong { color: var(--fg); }
@@ -180,8 +180,8 @@
 }
 
 /* ---- The statement (ink): fills in word by word with scroll ---- */
-.vsl-state__q { margin-block-end: 24px; font-weight: 700; color: var(--wave); }
-.vsl-state__title { max-width: 17em; font-size: clamp(1.875rem, 1.3rem + 2.6vw, 3.75rem); line-height: 1.18; }
+.vsl-state__q { margin-block-end: 24px; font-weight: 700; color: var(--accent); }
+.vsl-state__title { max-width: 17em; font-size: clamp(1.875rem, 0.85rem + 4.3vw, 4.75rem); line-height: 1.12; }
 .vsl-state__title span { transition: opacity 0.2s linear; }
 .vsl-state__tag { margin-block-start: 40px; rotate: -2deg; }
 
