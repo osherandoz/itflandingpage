@@ -20,6 +20,14 @@
 .vsl-hero__kicker { margin-block-end: 12px; font-size: var(--fs-small); font-weight: 500; color: var(--fg-2); }
 .vsl-hero__title { font-size: clamp(2rem, 1.384rem + 2.629vw, 3.75rem); line-height: 1.1; } /* 32 → 60 */
 .vsl-hero__title > span { display: block; }
+/* V1: title above both columns, sized so its two phrases fit on two lines */
+.vsl-hero__grid--wide .vsl-hero__title { font-size: min(8vw, 2.25rem); }
+@media (min-width: 720px) {
+  /* 4.6vw keeps the long first phrase inside the container at every width */
+  .vsl-hero__grid--wide .vsl-hero__title { font-size: min(4.6vw, 3.75rem); }
+  .vsl-hero__grid--wide .vsl-hero__title > span { white-space: nowrap; }
+}
+.vsl-hero__grid--wide .vsl-hero__sub { margin-block-start: 0; }
 .vsl-hero__sub { margin-block-start: 16px; max-width: 36em; color: var(--fg-2); line-height: 1.55; }
 .vsl-hero__sub strong { color: var(--fg); }
 
@@ -80,6 +88,11 @@
     gap: 32px 64px;
     align-items: start;
   }
+  .vsl-hero__grid--wide {
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas: 'head head' 'copy video' 'cta video';
+  }
+  .vsl-hero__head { grid-area: head; }
   .vsl-hero__copy { grid-area: copy; }
   .vsl-video { grid-area: video; align-self: center; }
   .vsl-hero__cta { grid-area: cta; }
