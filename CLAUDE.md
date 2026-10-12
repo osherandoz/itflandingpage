@@ -115,6 +115,13 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
   InitiateCheckout on VSL checkout links; Contact on every WhatsApp click (`trackWhatsAppClick`);
   Purchase only server-side from the payment webhook (needs `META_CAPI_ACCESS_TOKEN` in Vercel).
 
+## Decided (2026-10-12, ideas taken from benady.co.il at Osher's request)
+- Service cards open with the visitor's own sentence (`say`), the service name sits under it.
+  The six `say` lines are mine, derived from each card's existing copy: Osher to approve.
+- About: three checkable credentials (`CREDENTIALS`) replaced the four generic icon claims.
+- How it works carries a "what this is not" note (no promised date; matches `typicalTurnaround`).
+- The services stack pins only at min-height 860px now (card heads are 80px).
+
 ## Open (needs Osher)
 - The pixel's config also tries two Meta-run hosts (`*.us-central1.run.app/events`,
   `*.ecs.us-west-2.on.aws/events`); the CSP blocks them. Meta reports the dataset's gateway as

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { FACTS } from '../data/businessFacts';
 import { Eyebrow, FillText, SlotNumber, ArrowIcon } from './ui';
-import Icon from './Icon';
+import { pressItems } from '../data/press';
 import './AboutMe.css';
 
 const NUMBERS = [
@@ -11,11 +11,13 @@ const NUMBERS = [
   { value: FACTS.rating.display, label: 'דירוג לקוחות מתוך 5' },
 ];
 
-const FEATURES = [
-  { icon: 'shield', label: 'מומחיות באבטחה מתקדמת' },
-  { icon: 'clock', label: 'זמינות א׳–ו׳ 09:00–16:00' },
-  { icon: 'users', label: 'אלפי לקוחות מרוצים בישראל' },
-  { icon: 'certificate', label: 'הוכחות מקצועיות ורפרנסים' },
+const OUTLETS = [...new Set(pressItems.map((item) => item.siteName))];
+
+// Who handles the case: three things that can be checked, not adjectives
+const CREDENTIALS = [
+  { title: 'משחזר חשבונות מאז 2020', text: 'פייסבוק, אינסטגרם, וואטסאפ, חשבונות מודעות וביזנס מנג׳ר.' },
+  { title: 'סוקר בתקשורת', text: OUTLETS.join(' · ') },
+  { title: 'תשלום רק אחרי הצלחה', text: <>אבחון ראשוני חינם. <bdi>{FACTS.priceRange.he}</bdi> בממוצע, בלי תשלום מראש.</> },
 ];
 
 const AboutMe = () => (
@@ -66,14 +68,18 @@ const AboutMe = () => (
         ))}
       </dl>
 
-      <ul className="about__features m-stagger">
-        {FEATURES.map((feature) => (
-          <li key={feature.icon}>
-            <Icon name={feature.icon} />
-            <span>{feature.label}</span>
-          </li>
-        ))}
-      </ul>
+      <div className="about__creds">
+        <p className="about__creds-label">( מי מטפל בחשבון שלך )</p>
+        <ol className="about__creds-list m-stagger">
+          {CREDENTIALS.map((c, i) => (
+            <li key={c.title}>
+              <span className="about__creds-num num" aria-hidden="true">0{i + 1}</span>
+              <b>{c.title}</b>
+              <span className="about__creds-text">{c.text}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   </div>
 );

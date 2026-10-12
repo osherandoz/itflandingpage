@@ -5,6 +5,17 @@
 .hiw__head .lead { margin-block-start: 16px; }
 .hiw__cta { display: grid; gap: 12px; justify-items: start; margin-block-start: 32px; }
 
+.hiw__not {
+  margin-block-start: 32px;
+  padding: 16px 24px;
+  max-width: 44ch;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  font-size: var(--fs-small);
+  color: var(--fg-2);
+}
+.hiw__not b { color: var(--fg); }
+
 .hiw__steps {
   --node: 48px;
   position: relative;
