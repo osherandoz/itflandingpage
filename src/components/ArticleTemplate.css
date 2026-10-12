@@ -303,7 +303,7 @@
   color: #c2ccdc;
 }
 .artp__body .article-cta-box > * { margin-block-start: 0; }
-.artp__body .article-cta-box h3 { font-size: var(--fs-h3); line-height: 1.25; font-weight: 900; color: #f5f2ea; }
+.artp__body .article-cta-box h3 { font-size: var(--fs-h3); line-height: 1.25; font-weight: 900; color: #ffffff; }
 .artp__body .cta-button {
   display: inline-flex;
   align-items: center;

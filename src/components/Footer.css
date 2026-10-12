@@ -1,12 +1,14 @@
 /* Footer: closing CTA, four columns, the mark set huge, then the fine print. */
 .footer { padding-block: var(--section) 24px; overflow: clip; }
 
-/* The closing call is a cobalt panel: the last loud thing on every page */
+/* The closing call sits in a raised ink panel */
 .footer__cta {
   display: grid;
   gap: 32px;
   padding: clamp(32px, 6vw, 80px) clamp(24px, 5vw, 64px);
   border-radius: var(--r-lg);
+  background: var(--ink-2);
+  border: 1px solid var(--line);
 }
 .footer__cta-title { max-width: 14ch; }
 .footer__cta-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }

@@ -31,9 +31,9 @@ to the Hebrew pages (`vercel.json`).
 - Rules and rationale: `DESIGN.md`. Tokens and primitives: `src/styles/system.css`.
   Atoms: `src/components/ui.jsx`. Motion engine: `src/motion/useMotion.js`.
   Reference implementation: the home page.
-- Paper + ink + one cobalt accent; WhatsApp green only for the WhatsApp action.
+- White + ink + one cobalt accent ("Midnight" palette); WhatsApp green only for the WhatsApp action.
   Every page opens dark: ink header + ink hero (Osher, 2026-10-02: the all-light version was too light).
-  Heebo variable (300 beside 900 in headings); Frank Ruhl Libre for one quote per page.
+  Rubik variable (300 beside 900 in headings; replaced Heebo 2026-10-12, Osher wanted a livelier face); Frank Ruhl Libre for one quote per page.
 - Motion is scroll-driven. Hover changes colour only. No hover transforms, no
   custom cursor, no animated backgrounds, no `backdrop-filter`, no smooth-scroll library.
 - No "three equal cards with an icon". Lists are numbered rows; layouts are asymmetric.
@@ -97,6 +97,12 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
   (cobalt-drenched sections), footer closing CTA is a cobalt panel on every page.
 - BMS funnel (Osher asked, same day): `/bms-sm` final form section, V1 "the statement" and V2
   `#final-cta` are `theme-signal`; VSL hero title 32-60. Applied to both VSL variants alike.
+
+## Decided (2026-10-12, branch `rebrand/midnight`)
+- Palette is "Midnight": ink `#0a1128`, ink-2 `#14213d`, cobalt `#1f4dff`, mist `#dce7f7`, white.
+  The cream paper is gone (`--paper` and `--white` are both `#ffffff`). Osher found the site too colourful.
+- One cobalt-drenched section per page. Footer CTA panel and the lead testimonial are ink again.
+- Share cards regenerated with `node scripts/og-cards.mjs`.
 
 ## Open (needs Osher)
 - The pixel's config tries to POST events to two gateway hosts (`*.us-central1.run.app/events`,

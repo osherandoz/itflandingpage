@@ -13,7 +13,7 @@
 .svc-card:nth-child(even) { background: var(--mist); }
 /* The catch-all card closes the list in ink */
 .svc-card--all {
-  --fg: #f5f2ea;
+  --fg: #ffffff;
   --fg-2: #c2ccdc;
   --fg-3: #93a0b6;
   --line: rgba(220, 231, 247, 0.18);
@@ -103,7 +103,7 @@
     position: sticky;
     top: calc(var(--nav-h) + 8px + var(--n) * var(--head-h));
     margin-block-end: 24px;
-    box-shadow: 0 -16px 32px -24px rgba(11, 21, 36, 0.35);
+    box-shadow: 0 -16px 32px -24px rgba(10, 17, 40, 0.35);
   }
   .svc-card__body {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

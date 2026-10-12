@@ -73,7 +73,7 @@
   --line: rgba(220, 231, 247, 0.18);
   background: var(--ink);
   border-color: var(--ink);
-  color: #f5f2ea;
+  color: #ffffff;
 }
 .tstp__card:first-child .tstp__stars { color: var(--wave); }
 .tstp__card:first-child .tstp__quote {

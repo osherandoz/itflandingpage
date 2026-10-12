@@ -5,7 +5,7 @@
   z-index: 1000;
   display: grid;
   align-items: end;
-  background: rgba(11, 21, 36, 0.6);
+  background: rgba(10, 17, 40, 0.6);
   animation: modal-fade 0.2s ease-out;
 }
 .modal__panel {
@@ -63,5 +63,5 @@
 
 @media (min-width: 720px) {
   .modal { align-items: center; justify-items: center; padding: 24px; }
-  .modal__panel { max-width: 640px; padding: 32px; border-radius: var(--r-lg); box-shadow: 0 32px 64px -24px rgba(11, 21, 36, 0.6); }
+  .modal__panel { max-width: 640px; padding: 32px; border-radius: var(--r-lg); box-shadow: 0 32px 64px -24px rgba(10, 17, 40, 0.6); }
 }

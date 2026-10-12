@@ -156,7 +156,7 @@
   font-size: 0.8125rem;
   font-weight: 700;
   white-space: nowrap;
-  box-shadow: 0 16px 24px -16px rgba(11, 21, 36, 0.4);
+  box-shadow: 0 16px 24px -16px rgba(10, 17, 40, 0.4);
 }
 .hero__chip-dot { width: 8px; height: 8px; border-radius: 50%; }
 .hero__chip--blocked {

@@ -9,7 +9,7 @@
   align-content: start;
   padding: clamp(24px, 4vw, 48px);
   background: var(--ink);
-  color: #f5f2ea;
+  color: #ffffff;
   border-radius: var(--r-lg);
 }
 .arts__lead .tag--solid { background: var(--signal); color: #fff; }

@@ -40,14 +40,14 @@ reference implementation. When in doubt, copy what it does.
 
 ## 2. Colour
 
-Paper and ink, one cobalt accent, WhatsApp green for the one action.
+"Midnight" palette (Osher, 2026-10-12: the site felt too colourful): blue only, dark to light, on white. Ink `0A1128`, ink-2 `14213D`, cobalt `1F4DFF`, mist `DCE7F7`, white `FFFFFF`. No cream. WhatsApp green for the one action.
 
 | Token | Value | Use |
 |---|---|---|
-| `--ink` | `#0b1524` | Text, dark sections |
-| `--ink-2` / `--ink-3` | `#13233b` / `#1d3454` | Cards and borders on ink |
-| `--paper` | `#f5f2ea` | Page background |
-| `--white` | `#fffdf8` | Card surface on paper |
+| `--ink` | `#0a1128` | Text, dark sections |
+| `--ink-2` / `--ink-3` | `#14213d` / `#1f3157` | Cards and borders on ink |
+| `--paper` | `#ffffff` | Page background |
+| `--white` | `#ffffff` | Card surface on paper |
 | `--mist` | `#dce7f7` | Pale blue section or card |
 | `--wave` | `#b9cdf2` | Accent text on ink |
 | `--signal` | `#1f4dff` | The accent: markers, active states, form submit |
@@ -66,16 +66,16 @@ text tokens flip back. Reading pages without a hero (privacy, thank-you) stay on
 
 Rules:
 - Big surfaces are paper, mist or ink. `theme-signal` drenches a section in cobalt
-  (Osher, 2026-10-10: make it loud): at most two per page, never two in a row, for the moment
-  that should hit (home "how it works", service-page steps, author numbers, newsletter close,
-  the footer's closing panel). Light cards inside carry `theme-paper`. No section in green.
+  (Osher, 2026-10-10: make it loud): one per page, for the moment
+  that should hit (home "how it works", service-page steps, author numbers, newsletter close).
+  The footer's closing panel is ink-2, not cobalt. Light cards inside carry `theme-paper`. No section in green.
 - One primary (green) CTA per view.
 - No gradients on text. No glows. Shadows are tinted and rare.
 - `--fg-3` is the lightest text allowed (contrast AA on paper, mist and ink).
 
 ## 3. Type
 
-One family, Heebo variable (self-hosted, preloaded). Frank Ruhl Libre appears
+One family, Rubik variable (self-hosted, preloaded). Frank Ruhl Libre appears
 once per page at most, for an emotional quote (`.serif`).
 
 | Class | Size (375 → 1440) | Weight | Line height |
