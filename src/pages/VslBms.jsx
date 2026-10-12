@@ -279,14 +279,18 @@ export default function VslBms() {
                 />
               ) : (
                 <button type="button" className="vsl-video__facade" onClick={startVideo}>
-                  <img
-                    src={`https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`}
-                    alt=""
-                    width="1280"
-                    height="720"
-                    fetchPriority="high"
-                    decoding="async"
-                  />
+                  {/* WebP poster is half the JPEG's weight. No fetchPriority: the
+                      headline is the LCP element, the poster must not race it. */}
+                  <picture>
+                    <source type="image/webp" srcSet={`https://i.ytimg.com/vi_webp/${VIDEO_ID}/maxresdefault.webp`} />
+                    <img
+                      src={`https://i.ytimg.com/vi/${VIDEO_ID}/maxresdefault.jpg`}
+                      alt=""
+                      width="1280"
+                      height="720"
+                      decoding="async"
+                    />
+                  </picture>
                   <span className="vsl-video__play"><IconPlay />הפעילו את ההדרכה · {VIDEO_MINUTES} דקות</span>
                 </button>
               )}

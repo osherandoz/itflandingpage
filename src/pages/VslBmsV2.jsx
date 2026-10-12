@@ -343,14 +343,18 @@ export default function VslBmsV2() {
                 />
               ) : VIDEO_EMBED_URL ? (
                 <button type="button" className="vsl-video__facade" onClick={startVideo}>
-                  <img
-                    src={`https://i.ytimg.com/vi/${VIDEO_EMBED_URL.split('/').pop()}/maxresdefault.jpg`}
-                    alt=""
-                    width="1280"
-                    height="720"
-                    fetchPriority="high"
-                    decoding="async"
-                  />
+                  {/* WebP poster is half the JPEG's weight. No fetchPriority: the
+                      headline is the LCP element, the poster must not race it. */}
+                  <picture>
+                    <source type="image/webp" srcSet={`https://i.ytimg.com/vi_webp/${VIDEO_EMBED_URL.split('/').pop()}/maxresdefault.webp`} />
+                    <img
+                      src={`https://i.ytimg.com/vi/${VIDEO_EMBED_URL.split('/').pop()}/maxresdefault.jpg`}
+                      alt=""
+                      width="1280"
+                      height="720"
+                      decoding="async"
+                    />
+                  </picture>
                   <span className="vsl-video__play"><IconPlay />הפעילו את ההדרכה</span>
                 </button>
               ) : (
