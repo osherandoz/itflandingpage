@@ -209,6 +209,9 @@ export default function VslBms() {
   // Client-only: carry the visitor's utm_* into checkout
   const [purchaseUrl, setPurchaseUrl] = useState(PURCHASE_URL);
   useEffect(() => setPurchaseUrl(withCampaignParams(PURCHASE_URL)), []);
+  useEffect(() => {
+    if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'VSL-BMS' });
+  }, []);
   const checkout = (cta) => `${purchaseUrl}&cta=${cta}`;
 
   function startVideo() {

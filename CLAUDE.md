@@ -104,12 +104,21 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 - One cobalt-drenched section per page. Footer CTA panel and the lead testimonial are ink again.
 - Share cards regenerated with `node scripts/og-cards.mjs`.
 
+## Decided (2026-10-12, tracking)
+- The Meta pixel posts events to `https://www.facebook.com/tr/` as a form. `form-action 'self'`
+  (added 2026-08-09) blocked every event in desktop Chrome; `form-action` now allows facebook.com.
+  Verified in headed Chrome against production with the header rewritten: PageView and ViewContent
+  return 200. Headless Chrome never sends pixel events, so test tracking headed.
+- One Clarity project site-wide: `x8uz4h0y6b` (root.jsx). The page-only `y6a94mrf1u` tag on
+  `/VSL-BMS` is removed; filter by URL inside Clarity instead.
+- Pixel events: PageView everywhere; Lead on the three forms; ViewContent on `/bms-sm` and both VSLs;
+  InitiateCheckout on VSL checkout links; Contact on every WhatsApp click (`trackWhatsAppClick`);
+  Purchase only server-side from the payment webhook (needs `META_CAPI_ACCESS_TOKEN` in Vercel).
+
 ## Open (needs Osher)
-- The pixel's config tries to POST events to two gateway hosts (`*.us-central1.run.app/events`,
-  `*.ecs.us-west-2.on.aws/events`) and the CSP blocks them (it did before the redesign too). Unknown
-  whether Osher set up a Conversions API gateway: do not allow-list hosts nobody can identify.
-- In a headless browser no request to `facebook.com/tr` was seen on the live site (old or new loader):
-  confirm in Events Manager > Test Events that PageView and Lead arrive.
+- The pixel's config also tries two Meta-run hosts (`*.us-central1.run.app/events`,
+  `*.ecs.us-west-2.on.aws/events`); the CSP blocks them. Meta reports the dataset's gateway as
+  NOT_ONBOARDED, so they are not Osher's: leave them blocked.
 - Em-dashes remain in FAQ answers and schema text (`faqCategories.js`,
   `centralFaqSchema.js`, a few route titles): copy decision.
 - `businessFacts.js` still has `source: TODO` on the 2,500 / 95% / 4.9 claims.

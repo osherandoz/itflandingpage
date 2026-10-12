@@ -11,6 +11,7 @@ export const trackWhatsAppClick = (location = 'unknown') => {
   if (typeof gtag !== 'undefined') {
     gtag('event', 'contact_click', { channel: 'whatsapp', cta_location: loc });
   }
+  if (typeof fbq !== 'undefined') fbq('track', 'Contact', { content_name: loc });
   trackSiteEvent('whatsapp_click', { channel: 'whatsapp', cta_location: loc, intent: 'contact' });
 };
 
