@@ -1,6 +1,7 @@
 /* ==========================================================================
    ITF "Signal" design system — the single source of truth for every page.
-   Paper + ink + one cobalt accent. WhatsApp green is reserved for the one
+   "Midnight" palette (2026-10): blue only, dark to light, on white.
+   Ink + white + one cobalt accent. WhatsApp green is reserved for the one
    action we want (send the case). Editorial type: Heebo 300 next to 900.
    Motion is scroll-driven only (see src/motion/useMotion.js); hover changes
    colour, never position.
@@ -38,12 +39,12 @@
 /* ---------- Tokens ---------- */
 :root {
   /* Palette */
-  --ink: #0b1524;          /* Midnight: text, dark sections */
-  --ink-2: #13233b;        /* cards on ink */
-  --ink-3: #1d3454;        /* borders / raised on ink */
-  --paper: #f5f2ea;        /* warm page background */
-  --paper-2: #ebe6d9;      /* sunk paper */
-  --white: #fffdf8;        /* card surface on paper */
+  --ink: #0a1128;          /* Midnight: text, dark sections */
+  --ink-2: #14213d;        /* cards on ink */
+  --ink-3: #1f3157;        /* borders / raised on ink */
+  --paper: #ffffff;        /* page background */
+  --paper-2: #eef3fb;      /* sunk paper */
+  --white: #ffffff;        /* card surface on paper */
   --mist: #dce7f7;         /* pale blue surface */
   --wave: #b9cdf2;         /* light blue accents on ink */
   --signal: #1f4dff;       /* the accent. CTAs, markers, active states */
@@ -60,11 +61,11 @@
   --fg: var(--ink);
   --fg-2: #3c4a60;
   --fg-3: #536075;
-  --line: rgba(11, 21, 36, 0.14);
-  --line-soft: rgba(11, 21, 36, 0.07);
+  --line: rgba(10, 17, 40, 0.14);
+  --line-soft: rgba(10, 17, 40, 0.07);
   --mk: var(--signal-soft);
   --accent: var(--signal);
-  --shadow-rgb: 11, 21, 36;
+  --shadow-rgb: 10, 17, 40;
 
   /* Type: fluid between 375 and 1440 */
   --font: 'Heebo', -apple-system, 'Segoe UI', Arial, sans-serif;
@@ -113,7 +114,7 @@
 .theme-ink {
   --bg: var(--ink);
   --surface: var(--ink-2);
-  --fg: #f5f2ea;
+  --fg: #ffffff;
   --fg-2: #c2ccdc;
   --fg-3: #93a0b6;
   --line: rgba(220, 231, 247, 0.18);
@@ -126,7 +127,7 @@
   --bg: var(--mist);
   --surface: var(--white);
   --mk: #a9c0ff;
-  --line: rgba(11, 21, 36, 0.16);
+  --line: rgba(10, 17, 40, 0.16);
 }
 /* Drenched: the section IS the accent. One or two per page, for the moment
    that should hit. Light cards inside carry .theme-paper. */
@@ -148,11 +149,11 @@
   --fg: var(--ink);
   --fg-2: #3c4a60;
   --fg-3: #536075;
-  --line: rgba(11, 21, 36, 0.14);
-  --line-soft: rgba(11, 21, 36, 0.07);
+  --line: rgba(10, 17, 40, 0.14);
+  --line-soft: rgba(10, 17, 40, 0.07);
   --mk: var(--signal-soft);
   --accent: var(--signal);
-  --shadow-rgb: 11, 21, 36;
+  --shadow-rgb: 10, 17, 40;
 }
 .theme-ink, .theme-mist, .theme-paper, .theme-signal {
   background-color: var(--bg);
@@ -439,7 +440,7 @@ html.js .sticker.m-in.is-in {
   box-shadow: 0 1px 0 rgba(var(--shadow-rgb), 0.04), 0 16px 32px -24px rgba(var(--shadow-rgb), 0.28);
 }
 .card--flat { box-shadow: none; }
-.card--ink { background: var(--ink); color: #f5f2ea; border-color: var(--ink-3); }
+.card--ink { background: var(--ink); color: #ffffff; border-color: var(--ink-3); }
 
 .rule { height: 1px; background: var(--line); border: 0; }
 

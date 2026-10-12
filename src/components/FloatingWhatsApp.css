@@ -49,7 +49,7 @@
   }
   .fab.is-visible { opacity: 1; }
   .fab__note { display: none; }
-  .fab__btn { min-height: 56px; padding-inline: 24px; box-shadow: 0 16px 32px -12px rgba(11, 21, 36, 0.5); }
+  .fab__btn { min-height: 56px; padding-inline: 24px; box-shadow: 0 16px 32px -12px rgba(10, 17, 40, 0.5); }
 }
 
 @media print { .fab { display: none; } }
