@@ -4,7 +4,7 @@
 .svc__stack { display: grid; gap: 16px; }
 
 .svc-card {
-  --head-h: 72px;
+  --head-h: 80px;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
@@ -28,11 +28,13 @@
   align-items: center;
   gap: 4px 16px;
   min-height: var(--head-h);
-  padding: 16px 24px;
+  padding: 12px 24px;
 }
 .svc-card__num { font-size: var(--fs-h3); font-weight: 900; line-height: 1; color: var(--accent); }
 .svc-card--all .svc-card__num { color: var(--wave); }
-.svc-card__title { font-size: var(--fs-h3); font-weight: 800; line-height: 1.2; }
+.svc-card__titles { display: grid; gap: 2px; min-width: 0; }
+.svc-card__say { font-size: var(--fs-h3); font-weight: 900; line-height: 1.2; }
+.svc-card__title { font-size: var(--fs-small); font-weight: 500; line-height: 1.35; color: var(--fg-2); }
 .svc-card__tag { grid-column: 2; justify-self: start; }
 
 .svc-card__body {
@@ -97,7 +99,7 @@
 
 /* Pin + stack only where the whole pile fits: wide and tall viewports.
    On phones a pinned stack makes the page endless and hides the buttons. */
-@media (min-width: 1024px) and (min-height: 800px) {
+@media (min-width: 1024px) and (min-height: 860px) {
   .svc__stack { gap: 0; padding-block-end: 8px; }
   .svc-card {
     position: sticky;

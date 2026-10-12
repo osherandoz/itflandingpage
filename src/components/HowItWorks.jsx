@@ -41,6 +41,9 @@ const HowItWorks = () => (
             </WaBtn>
             <p className="small muted">מוכן להתחיל? אבחון ראשוני, חינמי לחלוטין</p>
           </div>
+          <p className="hiw__not">
+            <b>מה זה לא:</b> הבטחה לתאריך. משך הטיפול תלוי במקרה, ואני אומר את זה מראש.
+          </p>
         </div>
       </header>
 

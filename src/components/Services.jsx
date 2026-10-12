@@ -5,9 +5,11 @@ import { Eyebrow, ArrowIcon } from './ui';
 import Icon from './Icon';
 import './Services.css';
 
+// `say` is how the visitor would put it; the service name follows as the answer.
 const CARDS = [
   {
     type: 'fb',
+    say: 'התחברתי, והחשבון נעלם',
     tag: 'Facebook',
     title: 'שחזור חשבון פייסבוק שנחסם או נפרץ',
     problem: <>התחברת והחשבון נעלם? קיבלת התראה על <b>פעילות חשודה</b>, מישהו שינה את הסיסמה, או העלית תוכן שסומן בטעות? אני מחזיר גישה מלאה - גם כשהתמיכה של פייסבוק עונה באוטומט.</>,
@@ -17,6 +19,7 @@ const CARDS = [
   },
   {
     type: 'ig',
+    say: 'דיווחו עליי, והחשבון הושבת',
     tag: 'Instagram',
     title: 'שחזור חשבון אינסטגרם שהושבת',
     problem: <>איבדת גישה בגלל <b>דיווחי הטרדה שקריים</b>, זיהוי פנים שכשל, או חשבון שנעלם אחרי התחזות? אני מטפל בזה מול מטא ומשחזר את החשבון.</>,
@@ -26,6 +29,7 @@ const CARDS = [
   },
   {
     type: 'wa',
+    say: 'מישהו שולח הודעות מהמספר שלי',
     tag: 'WhatsApp',
     title: 'שחזור מספר וואטסאפ שנחטף',
     problem: <>קיבלת הודעה <b>"הוסף את קוד ה-SMS"</b> והחשבון נעלם? זרים שולחים הודעות מהמספר שלך? אני עוצר את החטיפה ומחזיר לך שליטה תוך שעות.</>,
@@ -35,6 +39,7 @@ const CARDS = [
   },
   {
     type: 'ad',
+    say: 'הקמפיין רץ, ואז חשבון המודעות נחסם',
     tag: 'Ads Manager',
     title: 'חשבון מודעות שהושעה או נחסם',
     problem: <>הקמפיין החם שלך קרס כי <b>מטא החליטה?</b> אמצעי תשלום נדחה או החשבון דווח? אני יודע איך לערער, להחזיר הרצה, ולמנוע חסימה חוזרת.</>,
@@ -44,6 +49,7 @@ const CARDS = [
   },
   {
     type: 'bm',
+    say: 'ננעלתי מחוץ לביזנס מנג׳ר שלי',
     tag: 'Business Manager',
     title: 'תקיעה ב-Business Manager',
     problem: <>איבדת גישה למרכז העסקים, משתמש-על נעלם או הדומיין שלך הועבר? אני <b>מחזיר בעלות</b> על הנכסים ומחבר מחדש דפים, פיקסלים וקטלוגים.</>,
@@ -52,6 +58,7 @@ const CARDS = [
   },
   {
     type: 'all',
+    say: 'איבדתי גישה, ולא ברור לי למה',
     tag: 'כל הפלטפורמות',
     title: 'לא יודע איפה הבעיה? אני מאתר',
     problem: <>גישה שנעלמה ולא ברור היכן? טוויטר, טיקטוק, לינקדאין, גוגל ביזנס? <b>אבחון חינם</b> בתוך שעה. אם יש פתרון, אציע אותו עוד באותה שיחה.</>,
@@ -99,7 +106,10 @@ const Services = () => (
           <article key={card.type} className={`svc-card svc-card--${card.type}`} style={{ '--n': i }}>
             <header className="svc-card__head">
               <span className="svc-card__num num">0{i + 1}</span>
-              <h3 className="svc-card__title">{card.title}</h3>
+              <div className="svc-card__titles">
+                <p className="svc-card__say">״{card.say}״</p>
+                <h3 className="svc-card__title">{card.title}</h3>
+              </div>
               <span className="tag svc-card__tag">{card.tag}</span>
             </header>
 
