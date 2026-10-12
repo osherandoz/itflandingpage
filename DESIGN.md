@@ -75,7 +75,7 @@ Rules:
 
 ## 3. Type
 
-One family, Heebo variable (self-hosted, preloaded). Frank Ruhl Libre appears
+One family, Rubik variable (self-hosted, preloaded). Frank Ruhl Libre appears
 once per page at most, for an emotional quote (`.serif`).
 
 | Class | Size (375 → 1440) | Weight | Line height |

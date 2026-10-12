@@ -33,7 +33,7 @@ to the Hebrew pages (`vercel.json`).
   Reference implementation: the home page.
 - White + ink + one cobalt accent ("Midnight" palette); WhatsApp green only for the WhatsApp action.
   Every page opens dark: ink header + ink hero (Osher, 2026-10-02: the all-light version was too light).
-  Heebo variable (300 beside 900 in headings); Frank Ruhl Libre for one quote per page.
+  Rubik variable (300 beside 900 in headings; replaced Heebo 2026-10-12, Osher wanted a livelier face); Frank Ruhl Libre for one quote per page.
 - Motion is scroll-driven. Hover changes colour only. No hover transforms, no
   custom cursor, no animated backgrounds, no `backdrop-filter`, no smooth-scroll library.
 - No "three equal cards with an icon". Lists are numbered rows; layouts are asymmetric.
