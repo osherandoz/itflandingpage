@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import './Privacy.css';
 
-const LAST_UPDATED_HE = 'מאי 2026';
+const LAST_UPDATED_HE = 'אוקטובר 2026';
 
 const TOC_SECTIONS_HE = [
   { id: 'who-we-are', label: 'מי אנחנו' },
@@ -16,6 +16,7 @@ const TOC_SECTIONS_HE = [
   { id: 'international', label: 'העברת מידע מחוץ לישראל' },
   { id: 'minors', label: 'משתמשים מתחת לגיל 18' },
   { id: 'changes', label: 'שינויים במדיניות' },
+  { id: 'instagram', label: 'אינסטגרם ואוטומציית ההודעות שלנו' },
   { id: 'contact', label: 'יצירת קשר' },
 ];
 
@@ -105,6 +106,11 @@ const HebrewPrivacy = () => (
               <td data-th="איפה נשמר">Meta / Facebook (ארה״ב, אירלנד)</td>
             </tr>
             <tr>
+              <td data-th="סוג מידע">מזהה משתמש ושם משתמש באינסטגרם, ותוכן תגובה שתאמה מילת מפתח</td>
+              <td data-th="מתי נאסף">כשהגבת בפוסט שלנו במילת מפתח של כלל אוטומציה (פירוט בסעיף 12)</td>
+              <td data-th="איפה נשמר">Supabase (הודו)</td>
+            </tr>
+            <tr>
               <td data-th="סוג מידע">תוכן הודעות וואטסאפ</td>
               <td data-th="מתי נאסף">פניות יזומות בלבד מצידך</td>
               <td data-th="איפה נשמר">WhatsApp / Meta</td>
@@ -165,8 +171,23 @@ const HebrewPrivacy = () => (
           <a href="https://www.greeninvoice.co.il/privacy" target="_blank" rel="noopener noreferrer" className="privp__link"> מדיניות פרטיות</a>
         </li>
         <li>
-          <strong>Vercel</strong> (ארה״ב), אחסון ושירותי ענן עבור האתר. רואה: לוגי שרת אנונימיים.
+          <strong>Vercel</strong> (ארה״ב, שרתים באזור פרנקפורט), אחסון ושירותי ענן עבור האתר והשרת. רואה: לוגי שרת אנונימיים.
           <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="privp__link"> מדיניות פרטיות</a>
+        </li>
+        <li>
+          <strong>Supabase</strong> (הודו, ap-south-1), בסיס הנתונים של מערכת הניהול והאוטומציה שלנו. רואה: מזהה
+          משתמש באינסטגרם, שם משתמש ותגובות שתאמו כלל, ופרטי לידים.
+          <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" className="privp__link"> מדיניות פרטיות</a>
+        </li>
+        <li>
+          <strong>Resend</strong>, שליחת מיילים. רואה: כתובת מייל ותוכן ההודעה, רק כשיש לך הרשמה למייל. אינו חלק
+          מאוטומציית האינסטגרם.
+          <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className="privp__link"> מדיניות פרטיות</a>
+        </li>
+        <li>
+          <strong>Meta / Instagram</strong> (ארה״ב, אירלנד), פלטפורמת התגובות וההודעות באינסטגרם. כפופה למדיניות
+          הפרטיות של Meta.
+          <a href="https://privacycenter.instagram.com/policy" target="_blank" rel="noopener noreferrer" className="privp__link"> מדיניות פרטיות</a>
         </li>
         <li>
           <strong>Meta / Facebook</strong> (ארה״ב, אירלנד), פיקסל לפרסום ממוקד. רואה: התנהגות גלישה אנונימית, רק אם
@@ -277,7 +298,7 @@ const HebrewPrivacy = () => (
       <p>
         כדי לממש כל אחת מהזכויות האלו, פשוט שלח/י מייל ל־
         <a href="mailto:osher@israeltechforce.com" className="privp__link">osher@israeltechforce.com</a>. נחזיר תשובה
-        תוך 14 יום.
+        בדרך כלל תוך 14 יום, ולכל היותר תוך 30 יום.
       </p>
     </section>
 
@@ -285,7 +306,7 @@ const HebrewPrivacy = () => (
     <section id="international" className="privp__section">
       <h2>9. העברת מידע מחוץ לישראל</h2>
       <p>
-        חלק מהספקים שלנו (Vercel, Meta) פועלים בארה״ב ובאיחוד האירופי. כשמידע עובר אליהם, ההעברה מתבצעת תחת הסכמים
+        חלק מהספקים שלנו (Vercel, Meta) פועלים בארה״ב ובאיחוד האירופי, ובסיס הנתונים שלנו (Supabase) מאוחסן בהודו. כשמידע עובר אליהם, ההעברה מתבצעת תחת הסכמים
         המבטיחים רמת הגנה זהה או גבוהה יותר מהדין הישראלי, לרבות סעיפי SCC (Standard Contractual Clauses) של
         האיחוד האירופי.
       </p>
@@ -309,9 +330,98 @@ const HebrewPrivacy = () => (
       </p>
     </section>
 
-    {/* 12. Contact */}
+    {/* 12. Instagram */}
+    <section id="instagram" className="privp__section">
+      <h2>12. אינסטגרם ואוטומציית ההודעות שלנו</h2>
+
+      <h3>מה האוטומציה עושה</h3>
+      <p>
+        כשאת/ה מגיב/ה בפוסט שלנו באינסטגרם במילה מסוימת (למשל "ניוזלטר" או "מייל"), אנחנו יכולים לענות לך בתגובה
+        ובהודעה פרטית עם קישור למשאב שביקשת. האפליקציה פועלת על חשבון האינסטגרם העסקי של IsraelTechForce בלבד
+        (<bdi dir="ltr">osher_revach_1</bdi>), ולא על חשבונות של אחרים.
+      </p>
+
+      <h3>איזה מידע נשמר</h3>
+      <div className="privp__table-wrapper">
+        <table className="privp__table">
+          <thead>
+            <tr>
+              <th>מידע</th>
+              <th>מתי</th>
+              <th>למה</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-th="מידע">מזהה המשתמש שלך באינסטגרם ושם המשתמש</td>
+              <td data-th="מתי">כשתגובה שלך תאמה מילת מפתח של כלל</td>
+              <td data-th="למה">כדי לשלוח לך את ההודעה, ולא לשלוח פעמיים</td>
+            </tr>
+            <tr>
+              <td data-th="מידע">תוכן התגובה</td>
+              <td data-th="מתי">רק כשהיא תאמה כלל. תגובות שלא תאמו אינן נשמרות</td>
+              <td data-th="למה">כדי להבין איזה כלל הופעל</td>
+            </tr>
+            <tr>
+              <td data-th="מידע">מזהה התגובה והפוסט, וזמן</td>
+              <td data-th="מתי">כנ״ל</td>
+              <td data-th="למה">מניעת כפילות ותיעוד</td>
+            </tr>
+            <tr>
+              <td data-th="מידע">לחיצה על הכפתור בהודעה או על הקישור (ספירה בלבד)</td>
+              <td data-th="מתי">כשלחצת</td>
+              <td data-th="למה">למדוד אילו הודעות עובדות</td>
+            </tr>
+            <tr>
+              <td data-th="מידע">ההודעות ששלחנו אליך</td>
+              <td data-th="מתי">תמיד</td>
+              <td data-th="למה">תיעוד השירות</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p className="privp__note">
+        <strong>לא נשמרים:</strong> סיסמאות, תוכן שיחות פרטיות שלא קשורות להודעות שלנו, ומידע פיננסי. אנחנו לא
+        מוכרים את המידע ולא מעבירים אותו לצרכי פרסום של צד שלישי.
+      </p>
+
+      <h3>למה אנחנו משתמשים בו</h3>
+      <p>
+        לשלוח לך את מה שביקשת, למנוע שליחה כפולה, למדוד ביצועים של תוכן, ולתת מענה לבקשות שלך. הבסיס הוא הסכמה
+        שנגזרת מפעולה יזומה שלך (תגובה בפוסט שמזמינה אוטומציה), ואינטרס לגיטימי לתפעול השירות.
+      </p>
+
+      <h3>מי עוד רואה את המידע</h3>
+      <p>
+        Meta (Instagram) כפלטפורמת התגובות וההודעות, ו־Supabase כבסיס הנתונים שבו המידע נשמר (בהודו). פירוט בסעיפים
+        4 ו־9.
+      </p>
+
+      <h3>כמה זמן</h3>
+      <p>המידע נשמר רק כל עוד הוא נדרש לשירות.</p>
+
+      <h3>זכויות וביטול</h3>
+      <ul>
+        <li>
+          לראות, לתקן ולמחוק את המידע: שלח/י מייל ל־
+          <a href="mailto:osher@israeltechforce.com" className="privp__link">osher@israeltechforce.com</a> עם שם
+          המשתמש שלך באינסטגרם. נחזיר מענה ונמחק בדרך כלל תוך 14 יום, ולכל היותר תוך 30 יום. הוראות מחיקה:{' '}
+          <a href="https://marketing.israeltechforce.com/data-deletion" className="privp__link">
+            marketing.israeltechforce.com/data-deletion
+          </a>.
+        </li>
+        <li>
+          להפסיק לקבל הודעות: כתוב/י לנו "הסר" בהודעה הפרטית או במייל, ונטפל בכך ידנית.
+        </li>
+        <li>
+          אפשר גם לבטל הרשאות מצד אינסטגרם: הגדרות ← אתרים ואפליקציות.
+        </li>
+      </ul>
+    </section>
+
+    {/* 13. Contact */}
     <section id="contact" className="privp__section privp__contact-section">
-      <h2>12. יצירת קשר</h2>
+      <h2>13. יצירת קשר</h2>
       <p>שאלות, בקשות או תלונות בנושא פרטיות:</p>
       <p>
         <strong>אושר רווח</strong>
@@ -320,7 +430,7 @@ const HebrewPrivacy = () => (
         <br />
         <a href="mailto:osher@israeltechforce.com" className="privp__link">osher@israeltechforce.com</a>
       </p>
-      <p className="privp__response-time">זמן מענה: עד 14 יום (בדרך כלל הרבה יותר מהר).</p>
+      <p className="privp__response-time">זמן מענה: בדרך כלל עד 14 יום, ולכל היותר 30 יום.</p>
     </section>
     </div>
     </div>
