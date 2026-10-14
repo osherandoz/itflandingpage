@@ -3,6 +3,7 @@ import { route, index } from "@react-router/dev/routes";
 export default [
   index("./routes/home.jsx"),
   route("privacy", "./routes/privacy.jsx"),
+  route("terms", "./routes/terms.jsx"),
   route("press", "./routes/press.jsx"),
   route("articles", "./routes/articles.jsx"),
   route("articles/:slug", "./routes/articles.$slug.jsx"),

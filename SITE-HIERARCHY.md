@@ -41,6 +41,7 @@
 │   └── /newsletter          (The Safety Signal → Smoove)
 │
 ├── /privacy
+├── /terms
 (dashboard הוסר מהאתר הציבורי, 2026-09)
 ```
 
