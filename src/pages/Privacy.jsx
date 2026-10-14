@@ -406,8 +406,8 @@ const HebrewPrivacy = () => (
           לראות, לתקן ולמחוק את המידע: שלח/י מייל ל־
           <a href="mailto:osher@israeltechforce.com" className="privp__link">osher@israeltechforce.com</a> עם שם
           המשתמש שלך באינסטגרם. נחזיר מענה ונמחק בדרך כלל תוך 14 יום, ולכל היותר תוך 30 יום. הוראות מחיקה:{' '}
-          <a href="https://marketing.israeltechforce.com/data-deletion" className="privp__link">
-            marketing.israeltechforce.com/data-deletion
+          <a href="/data-deletion" className="privp__link">
+            israeltechforce.com/data-deletion
           </a>.
         </li>
         <li>
