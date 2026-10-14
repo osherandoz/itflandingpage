@@ -298,7 +298,7 @@ const HebrewPrivacy = () => (
       <p>
         כדי לממש כל אחת מהזכויות האלו, פשוט שלח/י מייל ל־
         <a href="mailto:osher@israeltechforce.com" className="privp__link">osher@israeltechforce.com</a>. נחזיר תשובה
-        תוך 14 יום.
+        בדרך כלל תוך 14 יום, ולכל היותר תוך 30 יום.
       </p>
     </section>
 
@@ -405,7 +405,7 @@ const HebrewPrivacy = () => (
         <li>
           לראות, לתקן ולמחוק את המידע: שלח/י מייל ל־
           <a href="mailto:osher@israeltechforce.com" className="privp__link">osher@israeltechforce.com</a> עם שם
-          המשתמש שלך באינסטגרם. נחזיר מענה ונמחק בדרך כלל תוך 30 יום. הוראות מחיקה:{' '}
+          המשתמש שלך באינסטגרם. נחזיר מענה ונמחק בדרך כלל תוך 14 יום, ולכל היותר תוך 30 יום. הוראות מחיקה:{' '}
           <a href="https://marketing.israeltechforce.com/data-deletion" className="privp__link">
             marketing.israeltechforce.com/data-deletion
           </a>.
@@ -430,7 +430,7 @@ const HebrewPrivacy = () => (
         <br />
         <a href="mailto:osher@israeltechforce.com" className="privp__link">osher@israeltechforce.com</a>
       </p>
-      <p className="privp__response-time">זמן מענה: עד 14 יום (בדרך כלל הרבה יותר מהר).</p>
+      <p className="privp__response-time">זמן מענה: בדרך כלל עד 14 יום, ולכל היותר 30 יום.</p>
     </section>
     </div>
     </div>
