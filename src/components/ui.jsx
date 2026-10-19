@@ -76,10 +76,15 @@ const DIGITS = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 // Slot-machine number: every digit is a strip that rolls to its value when the
 // number enters the viewport. Non-digits ("," "+" "%" ".") stay put.
 export const SlotNumber = ({ value, className = '' }) => {
+  // The server (and no-JS crawlers) get the final number as plain text; the
+  // digit strips exist only once hydrated, so the markup never reads "0123456789".
+  const [rolling, setRolling] = React.useState(false);
+  React.useEffect(() => setRolling(true), []);
   let col = 0;
   return (
     <span className={`slot m-in ${className}`} role="img" aria-label={value}>
-      {String(value).split('').map((ch, i) => {
+      {!rolling && <span aria-hidden="true">{value}</span>}
+      {rolling && String(value).split('').map((ch, i) => {
         if (!/\d/.test(ch)) return <span key={i} aria-hidden="true">{ch}</span>;
         const c = col++;
         return (

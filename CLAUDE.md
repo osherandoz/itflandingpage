@@ -47,8 +47,10 @@ to the Hebrew pages (`vercel.json`).
 - Six service pages share `src/components/ServicePage.jsx` + `src/data/servicePages.js`.
   Each carries a `notice`: the block message drawn in CSS (an illustration, labelled as one, not a screenshot).
 - Every lead form (`ContactForm`) lands on `/תודה` (noindex) once the server confirms; the Lead event still fires in the form.
-- BMS course funnel: `/bms-sm` (free checklist) → `/תודה-קליסט`; `/VSL-BMS` and
-  `/VSL-BMS-V2` (A/B, noindex) → external checkout → `/תודה-רכישה`.
+- BMS course funnel: `/bms-sm` (free checklist; `/bms-sm-v2` = feminine-plural variant, noindex) → `/תודה-קליסט`;
+  `/VSL-BMS` and `/VSL-BMS-V2` (A/B, noindex) → external checkout → `/תודה-רכישה`.
+  Both pairs are one component with a `variant` prop (`VslBms`, `BmsSm`). `/akamol` = 19.90 ILS PDF bundle
+  (`src/pages/Akamol.jsx`; Grow link, covers, chat proof live in `src/data/akamol.js`).
   Product brief for these pages: `PRODUCT.md`.
 - Analytics: the fbq / gtag / clarity queues are created in `<head>`; the three libraries load on the
   visitor's first touch, scroll or key press, or 4s after load (`app/root.jsx`). Events queue and fire in order; CRM click events via `src/utils/track.js`. WhatsApp CTAs carry a
@@ -87,7 +89,7 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 ## Decided (2026-10-01)
 - The only WhatsApp number is `972509823235`, always through `getWhatsAppUrl` + `onWhatsAppClick('<location>')`. Never hard-code a number in a page.
 - The VSL video is 10 minutes, on both variants.
-- `/bms-sm` author stats come from `businessFacts.js` (2,500+ / 95%+ / 4.9).
+- `/bms-sm` author stats come from `businessFacts.js` (2,500+ / 95%+). The 4.9 rating was removed from `/bms-sm` on 2026-10-19: no review source.
 - V2 uses system markers (numbers, check discs, stickers), no emoji.
 
 ## Decided (2026-10-10, branch `redesign/banger-2026-10`)
@@ -122,7 +124,15 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 - How it works carries a "what this is not" note (no promised date; matches `typicalTurnaround`).
 - The services stack pins only at min-height 860px now (card heads are 80px).
 
+## Decided (2026-10-19, brief `itf-landing-pages-brief.md`)
+- `/VSL-BMS` lost the "שווי אמיתי ₪638" line and all "ערך ₪" labels; a Lilach line sits above the price. `SlotNumber`
+  renders the final number as plain text on the server (digit strips mount after hydration).
+- `/VSL-BMS-V2` is now the outcome-headline variant (`variant=v2-outcome-headline`); the old loss-headline V2 is gone (git history).
+- `/akamol` ships with the Grow link empty: buy buttons open WhatsApp until `GROW_AKAMOL_URL` is set. Covers and
+  the chat-proof screenshot stay unrendered until supplied (the screenshot also needs the client's consent).
+
 ## Open (needs Osher)
+- `/akamol`: `GROW_AKAMOL_URL`, three PDF covers (hero + og:image), WhatsApp screenshot + client consent. Do not send paid traffic before the link is in.
 - The pixel's config also tries two Meta-run hosts (`*.us-central1.run.app/events`,
   `*.ecs.us-west-2.on.aws/events`); the CSP blocks them. Meta reports the dataset's gateway as
   NOT_ONBOARDED, so they are not Osher's: leave them blocked.

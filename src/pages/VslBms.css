@@ -367,8 +367,7 @@
 /* ---- The offer: an ink card, the price set large ---- */
 .vsl-offer { display: grid; gap: 32px; padding: clamp(24px, 4vw, 56px); }
 .vsl-offer__head { display: grid; gap: 4px; }
-.vsl-offer__was { color: var(--fg-2); }
-.vsl-offer__was s { text-decoration-thickness: 2px; text-decoration-color: #ff8f93; }
+.vsl-offer__lilach { max-width: 28em; font-size: var(--fs-lead); font-weight: 800; line-height: 1.4; color: var(--fg); }
 .vsl-offer__today { margin-block-start: 12px; font-weight: 700; color: var(--wave); }
 .vsl-offer__price { font-size: clamp(4.5rem, 3.4rem + 5vw, 7.5rem); font-weight: 900; line-height: 1; margin-block-end: 8px; }
 .vsl-offer__foot { display: grid; gap: 16px; align-content: start; }
@@ -473,3 +472,20 @@
 .vsl-foot__links { display: flex; flex-wrap: wrap; gap: 8px 24px; color: var(--fg-2); }
 .vsl-foot__links a { display: inline-flex; align-items: center; min-height: 44px; }
 @media (min-width: 768px) { .vsl-foot { padding-block-end: 48px; } }
+
+/* ---- V2 (outcome headline) ---- */
+.vsl-hero__eyebrow { margin-block-end: 8px; font-size: var(--fs-small); font-weight: 700; color: var(--wave); }
+.vsl-after__list { border-block-start: 1px solid var(--fg); margin-block-start: 8px; }
+.vsl-after__item {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 16px;
+  padding-block: 24px;
+  border-block-end: 1px solid var(--line);
+}
+.vsl-after__num { font-size: var(--fs-h3); font-weight: 300; line-height: 1.25; color: var(--fg-3); }
+.vsl-after__item p { max-width: var(--measure); color: var(--fg-2); }
+.vsl-after__close { margin-block-start: 32px; max-width: 40em; font-size: var(--fs-lead); font-weight: 800; line-height: 1.4; }
+.vsl-obj { display: grid; gap: 12px; margin-block-start: 8px; padding-block-start: 20px; border-block-start: 1px solid var(--line); color: var(--fg-2); }
+.vsl-obj strong { color: var(--fg); }
+.vsl-closing__text { max-width: 40em; font-size: var(--fs-lead); line-height: 1.5; color: var(--fg-2); }

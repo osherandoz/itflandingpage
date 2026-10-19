@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { withCampaignParams } from '../utils/track';
 import { Btn, Eyebrow, FillText, SlotNumber } from '../components/ui';
 import Icon from '../components/Icon';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 import '../components/FAQ.css';
-// Shared by both VSL variants (V2 imports this file too): one visual system,
-// so the A/B test compares the offers, not the paint.
+// Both VSL variants render this component (`variant` prop): one visual system,
+// so the A/B test compares the copy, not the paint.
 import './VslBms.css';
 
 /* Local icons that the shared Icon set does not carry */
@@ -21,9 +22,9 @@ const VIDEO_MINUTES = 10;
 const VIDEO_TITLE = 'השיטה שתצמצם לכם את הסיכוי להיחסם או להיפרץ בפייסבוק ובאינסטגרם';
 // Landing-page variant tag. Kept OUT of utm_content so the ad creative's own
 // utm_content survives into checkout (creative attribution and page variant
-// are separate dimensions). V2 tags itself the same way.
-const LP_VARIANT = 'v1-mistake-headline';
-const PURCHASE_URL = `https://mrng.to/engo98ytvh?variant=${LP_VARIANT}`;
+// are separate dimensions).
+const LP_VARIANTS = { v1: 'v1-mistake-headline', v2: 'v2-outcome-headline' };
+const purchaseUrlFor = (lpVariant) => `https://mrng.to/engo98ytvh?variant=${lpVariant}`;
 // Optimized WebPs. See public/images/vsl-bms/. The originals (osher_with_laptop
 // is 5504x8256) are never referenced: only the -sm / -md variants.
 const IMG = '/images/vsl-bms';
@@ -40,17 +41,17 @@ function trackCtaClick() {
 
 // Click on a checkout link. `cta` = which button (hero / author / pricing / sticky).
 // Purchase itself fires server-side from the payment webhook, never here.
-function trackInitiateCheckout(cta) {
+function trackInitiateCheckout(cta, lpVariant) {
   if (typeof window === 'undefined') return;
   if (typeof window.fbq === 'function') {
-    window.fbq('track', 'InitiateCheckout', { value: PRICE, currency: 'ILS', content_name: 'BMS Course', cta, lp_variant: LP_VARIANT });
+    window.fbq('track', 'InitiateCheckout', { value: PRICE, currency: 'ILS', content_name: 'BMS Course', cta, lp_variant: lpVariant });
   }
   if (typeof window.gtag === 'function') {
     window.gtag('event', 'begin_checkout', {
       currency: 'ILS',
       value: PRICE,
       cta,
-      lp_variant: LP_VARIANT,
+      lp_variant: lpVariant,
       items: [{ item_id: 'bms-course', item_name: 'BMS Course', price: PRICE, quantity: 1 }],
     });
   }
@@ -150,10 +151,10 @@ const BONUSES = [
 ];
 
 const INCLUDED = [
-  { label: '4 מודולי יסוד, 9 שיעורים מוקלטים (הקלטת מסך מלאה)', value: 'ערך ₪297' },
-  { bonus: 'בונוס 01', label: 'מודול פריצות וחסימות', value: 'ערך ₪97' },
-  { bonus: 'בונוס 02', label: 'מודול אימות ואישורי פעילות', value: 'ערך ₪97' },
-  { bonus: 'בונוס 03', label: 'הרצאת אורח של בר שלג', value: 'ערך ₪147' },
+  { label: '4 מודולי יסוד, 9 שיעורים מוקלטים (הקלטת מסך מלאה)' },
+  { bonus: 'בונוס 01', label: 'מודול פריצות וחסימות' },
+  { bonus: 'בונוס 02', label: 'מודול אימות ואישורי פעילות' },
+  { bonus: 'בונוס 03', label: 'הרצאת אורח של בר שלג' },
   { label: 'גישה ללא הגבלת זמן, כולל כל עדכון עתידי של הקורס', value: 'ללא הגבלה' },
 ];
 
@@ -183,6 +184,23 @@ const FAQS = [
   ['אפשר לדבר איתך אם נתקעתי תוך כדי?', 'התלמידים שלי יכולים לפנות אליי בוואטסאפ בשאלות על יישום החומר מהקורס. זו לא תמיכה אישית מלאה, ולא שחזור של חשבון חסום (זה שירות נפרד), אבל על שאלות יישום אני עונה בפועל לכולם.'],
 ];
 
+/* ============================================================
+   V2 (outcome headline): the only copy that differs from V1
+   ============================================================ */
+const V2_AFTER = [
+  'שבת בבוקר. הפרופיל שלכם קיבל השבתה. ה-admin הגיבוי נכנס לביזנס מנג׳ר, הנכסים במקום, ואתם פותחים ערעור בלי להתנשם.',
+  'לקוחה שואלת ״מי בעצם מחזיק בדף שלנו?״. אתם שולחים צילום מסך תוך שתי דקות.',
+  'מגיעה ״הודעה ממטא״ עם לינק דחוף. אתם יודעים מה זה, ומוחקים.',
+];
+
+const V2_CTA = {
+  hero: 'אני רוצה תשתית שלא נופלת · ₪297',
+  author: 'בוא נבנה את זה · ₪297',
+  pricing: 'אני רוצה תשתית שלא נופלת · ₪297',
+  sticky: '₪297 · להתחיל עכשיו',
+  closing: 'אני רוצה תשתית שלא נופלת · ₪297',
+};
+
 const RailItem = ({ item, node, bonus }) => (
   <li className={`vsl-rail__item m-reveal${bonus ? ' vsl-rail__item--bonus' : ''}`}>
     <span className="vsl-rail__node num" aria-hidden="true">{node}</span>
@@ -199,7 +217,11 @@ const RailItem = ({ item, node, bonus }) => (
   </li>
 );
 
-export default function VslBms() {
+export default function VslBms({ variant = 'v1' }) {
+  const v2 = variant === 'v2';
+  const lpVariant = LP_VARIANTS[variant];
+  const PURCHASE_URL = purchaseUrlFor(lpVariant);
+  const cta = (where, v1Text) => (v2 ? V2_CTA[where] : v1Text);
   const [showStickyCta, setShowStickyCta] = useState(false);
   // Sticky retires while the real purchase section is on screen.
   const [finalCtaInView, setFinalCtaInView] = useState(false);
@@ -208,10 +230,11 @@ export default function VslBms() {
   const [videoStarted, setVideoStarted] = useState(false);
   // Client-only: carry the visitor's utm_* into checkout
   const [purchaseUrl, setPurchaseUrl] = useState(PURCHASE_URL);
-  useEffect(() => setPurchaseUrl(withCampaignParams(PURCHASE_URL)), []);
+  useEffect(() => setPurchaseUrl(withCampaignParams(PURCHASE_URL)), [PURCHASE_URL]);
   useEffect(() => {
     if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'VSL-BMS' });
   }, []);
+  const trackCheckout = (where) => () => trackInitiateCheckout(where, lpVariant);
   const checkout = (cta) => `${purchaseUrl}&cta=${cta}`;
 
   function startVideo() {
@@ -254,11 +277,19 @@ export default function VslBms() {
         <div className="container vsl-hero__grid vsl-hero__grid--wide">
           {/* The title runs the full width so each phrase stays on one line */}
           <header className="vsl-hero__head">
+            {v2 && <p className="vsl-hero__eyebrow">קורס BMS · Business Manager Setup</p>}
             <p className="vsl-hero__kicker">קורס מוקלט בעברית · כ-3 שעות · <bdi>₪{PRICE}</bdi> תשלום אחד</p>
-            <h1 className="vsl-hero__title">
-              <span className="lt">קורס BMS: מגדירים Business Manager נכון,</span>{' '}
-              <span>לפני <span className="mk">שהעסק נחסם</span></span>
-            </h1>
+            {v2 ? (
+              <h1 className="vsl-hero__title">
+                <span className="lt">העסק שלכם לא אמור</span>{' '}
+                <span>ליפול בגלל <span className="mk">פרופיל אחד.</span></span>
+              </h1>
+            ) : (
+              <h1 className="vsl-hero__title">
+                <span className="lt">קורס BMS: מגדירים Business Manager נכון,</span>{' '}
+                <span>לפני <span className="mk">שהעסק נחסם</span></span>
+              </h1>
+            )}
           </header>
           <div className="vsl-hero__copy">
             <p className="vsl-hero__sub">
@@ -301,8 +332,8 @@ export default function VslBms() {
           </figure>
 
           <div className="vsl-hero__cta">
-            <Btn variant="signal" href={checkout('hero')} onClick={() => trackInitiateCheckout('hero')}>
-              הצטרפו לקורס ב-₪{PRICE}
+            <Btn variant="signal" href={checkout('hero')} onClick={trackCheckout('hero')}>
+              {cta('hero', `הצטרפו לקורס ב-₪${PRICE}`)}
             </Btn>
             <p className="vsl-hero__terms small"><bdi>₪{PRICE}</bdi>. תשלום אחד, כולל מע"מ. אחרי התשלום מגיע מייל עם פרטי הגישה, ומתחילים.</p>
             <a href="#deliverables" className="link small" onClick={trackCtaClick}>
@@ -401,10 +432,16 @@ export default function VslBms() {
             ))}
           </ol>
 
-          <p className="vsl-note m-reveal">
-            <strong>התירוץ של כולן היה:</strong> "זה עבד לי ככה עד עכשיו".
-            וכשמשהו השתבש? הן לא ידעו מה לעשות ולמי לפנות. זה הסיפור שקורה יום יום.
-          </p>
+          {v2 ? (
+            <p className="vsl-note m-reveal">
+              אף אחת מהן לא עשתה משהו טיפשי. הן עבדו כמו שכולם עובדים, כי אף אחד לא מלמד שיש דבר כזה admin גיבוי, או שצריך לבדוק מי בעצם הבעלים של הדף. זה הפער שהקורס סוגר.
+            </p>
+          ) : (
+            <p className="vsl-note m-reveal">
+              <strong>התירוץ של כולן היה:</strong> "זה עבד לי ככה עד עכשיו".
+              וכשמשהו השתבש? הן לא ידעו מה לעשות ולמי לפנות. זה הסיפור שקורה יום יום.
+            </p>
+          )}
 
           <dl className="vsl-nums">
             <div className="vsl-nums__item">
@@ -456,6 +493,26 @@ export default function VslBms() {
           </ol>
         </div>
       </section>
+
+      {/* V2 only: what the setup looks like on the day it matters */}
+      {v2 && (
+        <section className="section theme-paper vsl-after">
+          <div className="container">
+            <header className="sec-head m-reveal">
+              <h2 className="h2">איך זה נראה אחרי</h2>
+            </header>
+            <ol className="vsl-after__list">
+              {V2_AFTER.map((text, i) => (
+                <li className="vsl-after__item m-reveal" key={text}>
+                  <span className="vsl-after__num num" aria-hidden="true">0{i + 1}</span>
+                  <p>{text}</p>
+                </li>
+              ))}
+            </ol>
+            <p className="vsl-after__close m-reveal">זה לא ביטוח מפני כל תקלה. זה ההבדל בין שבוע של פאניקה לשעה של סדר.</p>
+          </div>
+        </section>
+      )}
 
       {/* DELIVERABLES. 4 modules + 3 bonuses on a rail that fills with scroll */}
       <section className="section theme-mist" id="deliverables">
@@ -585,8 +642,8 @@ export default function VslBms() {
             </p>
 
             <div className="vsl-cta">
-              <Btn variant="signal" href={checkout('author')} onClick={() => trackInitiateCheckout('author')}>
-                הצטרפו לקורס עכשיו, {PRICE} ש"ח בלבד
+              <Btn variant="signal" href={checkout('author')} onClick={trackCheckout('author')}>
+                {cta('author', `הצטרפו לקורס עכשיו, ${PRICE} ש"ח בלבד`)}
               </Btn>
             </div>
           </div>
@@ -605,15 +662,15 @@ export default function VslBms() {
 
           <div className="vsl-offer card card--ink theme-ink m-reveal">
             <div className="vsl-offer__head">
-              <p className="vsl-offer__was">שווי אמיתי: <s><bdi>₪638</bdi></s></p>
+              <p className="vsl-offer__lilach">אצל לילך, אמצעי תשלום אחד שלא היה במקום הנכון עלה 150,000 ש״ח. הקורס עולה 297.</p>
               <p className="vsl-offer__today">המחיר שלכם היום:</p>
               <p className="vsl-offer__price num"><bdi>₪{PRICE}</bdi></p>
               <p className="small muted">תשלום חד-פעמי · כולל מע"מ · פרטי הגישה נשלחים למייל תוך דקות</p>
             </div>
 
             <div className="vsl-offer__foot">
-              <Btn variant="signal" block href={checkout('pricing')} onClick={() => trackInitiateCheckout('pricing')}>
-                הצטרפו לקורס ב-₪{PRICE}
+              <Btn variant="signal" block href={checkout('pricing')} onClick={trackCheckout('pricing')}>
+                {cta('pricing', `הצטרפו לקורס ב-₪${PRICE}`)}
               </Btn>
               <p className="small dim">
                 אחרי הרכישה תקבלו למייל את פרטי הגישה ועדכונים על הקורס. ניתן להסיר דיוור בכל עת.
@@ -623,6 +680,23 @@ export default function VslBms() {
                 <li><Icon name="invoice" />חשבונית מס מיידית</li>
                 <li><IconZap />גישה מיידית</li>
               </ul>
+              {v2 && (
+                <div className="vsl-obj">
+                  <p><strong>״זה עבד לי ככה עד עכשיו.״</strong> גם ללילך. עד הלילה שזה הפסיק.</p>
+                  <p>
+                    <strong>״אין לי 3 שעות.״</strong> זה ערב אחד, ואת היישום עושים תוך כדי צפייה. אין גם ערב? בהקמה מוגנת אני עושה את זה איתכם בזום, בשעה אחת.{' '}
+                    <a
+                      href={getWhatsAppUrl('היי אושר, אשמח לפרטים על הקמה מוגנת')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link"
+                      onClick={onWhatsAppClick('vsl-v2-protected-setup')}
+                    >
+                      לפרטים בוואטסאפ
+                    </a>
+                  </p>
+                </div>
+              )}
             </div>
 
             <div className="value-box">
@@ -632,7 +706,7 @@ export default function VslBms() {
                   <li key={row.label}>
                     <Icon name="check" />
                     <span>{row.bonus && <span className="tag">{row.bonus}</span>} {row.label}</span>
-                    <bdi className="vsl-incl__val num">{row.value}</bdi>
+                    {row.value && <bdi className="vsl-incl__val num">{row.value}</bdi>}
                   </li>
                 ))}
               </ul>
@@ -708,6 +782,21 @@ export default function VslBms() {
         </div>
       </section>
 
+      {v2 && (
+        <section className="section theme-paper vsl-closing">
+          <div className="container">
+            <p className="vsl-closing__text m-reveal">
+              אם משהו כבר נפל לכם פעם, זה לא כי עשיתם משהו לא בסדר. אף אחד לא סיפר לכם שכל העסק יושב על פרופיל אחד. עכשיו אתם יודעים, ומה שעושים עם זה כבר בידיים שלכם.
+            </p>
+            <div className="vsl-cta">
+              <Btn variant="signal" href={checkout('closing')} onClick={trackCheckout('closing')}>
+                {V2_CTA.closing}
+              </Btn>
+            </div>
+          </div>
+        </section>
+      )}
+
       </main>
 
       {/* STICKY MOBILE CTA, always straight to checkout, hidden while the purchase section is on screen */}
@@ -715,10 +804,10 @@ export default function VslBms() {
         <a
           href={checkout('sticky')}
           className="vsl-bar__btn vsl-bar__btn--wide"
-          onClick={() => trackInitiateCheckout('sticky')}
+          onClick={trackCheckout('sticky')}
           aria-label={`לתשלום, קורס BMS ב-${PRICE} שקלים`}
         >
-          <span>לתשלום · ₪{PRICE}</span>
+          <span>{cta('sticky', `לתשלום · ₪${PRICE}`)}</span>
         </a>
       </div>
 

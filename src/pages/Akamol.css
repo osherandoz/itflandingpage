@@ -1,0 +1,82 @@
+/* /akamol: first-aid guide bundle. Tokens, themes, buttons and motion come
+   from system.css; the sticky bar, footer and testimonial rows are borrowed
+   from VslBms.css. Every selector here starts with .ak. */
+
+/* ---- Hero ---- */
+.ak-hero { padding-block: clamp(32px, 6vw, 88px) clamp(48px, 7vw, 96px); overflow: clip; }
+.ak-hero__grid { display: grid; gap: 40px; align-items: center; }
+.ak-hero__eyebrow { margin-block-end: 12px; font-size: var(--fs-small); font-weight: 700; color: var(--wave); }
+.ak-hero__title { font-size: clamp(2rem, 1.384rem + 2.629vw, 3.75rem); line-height: 1.1; } /* 32 → 60 */
+.ak-hero__title > span { display: block; }
+.ak-hero__sub { margin-block-start: 20px; max-width: var(--measure); font-size: var(--fs-lead); line-height: 1.5; color: var(--fg-2); }
+.ak-hero__cta { display: grid; gap: 12px; justify-items: start; margin-block-start: 32px; }
+.ak-hero__terms { color: var(--fg-3); }
+@media (min-width: 960px) {
+  .ak-hero__grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 72px; }
+}
+
+/* The three covers, staggered. Rendered only when AKAMOL_COVERS has entries. */
+.ak-covers { position: relative; aspect-ratio: 1 / 1; }
+.ak-covers__img { position: absolute; width: 56%; height: auto; border-radius: 8px; box-shadow: 0 24px 48px rgb(0 0 0 / 0.35); }
+.ak-covers__img--1 { inset-block-start: 0; inset-inline-start: 0; rotate: -4deg; }
+.ak-covers__img--2 { inset-block-start: 18%; inset-inline-start: 22%; z-index: 1; }
+.ak-covers__img--3 { inset-block-start: 36%; inset-inline-start: 44%; z-index: 2; rotate: 4deg; }
+
+/* ---- Prose blocks ---- */
+.ak-prose { max-width: 40em; }
+.ak-lead { font-size: var(--fs-lead); font-weight: 700; line-height: 1.45; color: var(--fg); }
+
+/* ---- Solution: heading beside a callout with a colour bar ---- */
+.ak-split { display: grid; gap: 40px; align-items: start; }
+.ak-callout {
+  padding: clamp(20px, 3vw, 32px);
+  border-inline-start: 6px solid var(--signal);
+  background: var(--surface, var(--mist));
+  font-size: var(--fs-lead);
+  font-weight: 700;
+  line-height: 1.45;
+}
+@media (min-width: 960px) {
+  .ak-split { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 96px; }
+}
+
+/* ---- Proof ---- */
+.ak-chat { display: grid; gap: 12px; justify-items: start; margin-block-end: 40px; max-width: 420px; }
+.ak-chat img { width: 100%; height: auto; border-radius: 12px; }
+.ak-chat figcaption { color: var(--fg-2); }
+.ak-number { margin-block-end: 32px; font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem); font-weight: 900; line-height: 1.2; }
+.ak-quotes { max-width: 720px; }
+.ak-press { display: flex; flex-wrap: wrap; gap: 12px; margin-block-start: 32px; }
+.ak-press a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 20px;
+  border: 2px solid var(--ak-press, var(--fg));
+  border-radius: var(--r-pill);
+  color: var(--ak-press, var(--fg));
+  font-weight: 900;
+}
+
+/* ---- What is inside: one row per platform ---- */
+.ak-guides { border-block-start: 1px solid var(--fg); margin-block-start: 8px; }
+.ak-guide { display: grid; gap: 16px; padding-block: 32px; border-block-end: 1px solid var(--line); }
+.ak-guide__name { display: flex; align-items: baseline; gap: 16px; font-size: var(--fs-h3); font-weight: 900; line-height: 1.25; }
+.ak-guide__num { font-weight: 300; color: var(--fg-3); }
+.ak-guide__list { display: grid; gap: 12px; max-width: var(--measure); }
+.ak-guide__list li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 12px; color: var(--fg-2); line-height: 1.5; }
+.ak-guide__list svg { width: 20px; height: 20px; margin-block-start: 3px; color: var(--signal); }
+@media (min-width: 960px) {
+  .ak-guide { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.4fr); gap: 32px; }
+}
+.ak-bundle { margin-block-start: 32px; max-width: 44em; font-size: var(--fs-lead); line-height: 1.5; color: var(--fg-2); }
+
+/* ---- Main CTA (cobalt) and closing ---- */
+.ak-cta__in { display: grid; gap: 12px; justify-items: start; }
+.ak-cta__terms { color: inherit; opacity: 0.85; }
+.ak-closing { max-width: 36em; font-size: clamp(1.25rem, 1rem + 1.2vw, 1.875rem); font-weight: 800; line-height: 1.35; }
+.ak-blocked { max-width: var(--measure); color: var(--fg-2); }
+
+/* The sticky bar label holds a price: keep the bidi run intact */
+.ak .vsl-bar__btn span { white-space: nowrap; }
+.ak bdi { white-space: nowrap; }

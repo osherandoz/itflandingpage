@@ -7,7 +7,6 @@ import { readFileSync } from 'node:fs';
 import { withCampaignParams } from '../utils/track.js';
 
 const page = readFileSync(new URL('../pages/VslBms.jsx', import.meta.url), 'utf8');
-const v2 = readFileSync(new URL('../pages/VslBmsV2.jsx', import.meta.url), 'utf8');
 
 describe('checkout attribution', () => {
   it('forwards the ad creative utm_content and keeps the page variant separate', () => {
@@ -25,8 +24,8 @@ describe('checkout attribution', () => {
   it('both VSL variants tag themselves with variant=, not utm_content=', () => {
     expect(page).toMatch(/mrng\.to\/engo98ytvh\?variant=/);
     expect(page).not.toMatch(/utm_content=v1/);
-    expect(v2).toMatch(/variant=v2-loss-headline/);
-    expect(v2).not.toMatch(/utm_content=v2/);
+    expect(page).toMatch(/v2: 'v2-outcome-headline'/);
+    expect(page).not.toMatch(/utm_content=v2/);
   });
 });
 
