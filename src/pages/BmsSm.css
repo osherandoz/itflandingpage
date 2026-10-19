@@ -352,3 +352,7 @@
   .bmsm__about-photo { width: 280px; }
   .bmsm__final-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 96px; }
 }
+
+/* V2 (feminine copy) additions */
+.bmsm__bold { margin-block-start: 32px; max-width: 40em; font-size: var(--fs-lead); font-weight: 800; line-height: 1.4; }
+.bmsm__final-note { margin-block-end: 16px; font-weight: 600; }

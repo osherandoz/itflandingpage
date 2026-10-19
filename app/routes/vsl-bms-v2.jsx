@@ -1,18 +1,18 @@
-import VslBmsV2 from '../../src/pages/VslBmsV2';
+import VslBms from '../../src/pages/VslBms';
 
 const URL = 'https://www.israeltechforce.com/VSL-BMS-V2';
-const TITLE = 'חשבון פרסום נחסם = ₪150,000 לאיבוד בין לילה. השיטה שמונעת את זה. | אושר רווח';
+const TITLE = 'קורס BMS: הקמה ואבטחה של Business Manager | אושר רווח';
 const DESCRIPTION =
-  'ב-2026, מטא הסירה מעל 10 מיליון חשבונות עסקיים. רובם בגלל טעות הגדרה אחת. ההדרכה הזו (10 דקות) תראה לכם איך להימנע ממנה. קורס BMS ב-₪297.';
-const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.webp';
+  'קורס מוקלט בעברית (כ-3 שעות, ₪297) להקמה ואבטחה של Business Manager, חשבון מודעות והרשאות ב-Meta. הדרכה חינמית של 10 דקות בראש הדף. אושר רווח, IsraelTechForce.';
+const OG_IMAGE = 'https://www.israeltechforce.com/images/vsl-bms/og_image.png';
 
 export const meta = () => [
   { title: TITLE },
   { name: 'description', content: DESCRIPTION },
-  // Prevent indexing of A/B test variant. Avoids duplicate-content penalty.
+  // A/B variant: kept out of the index, canonical points at the original page.
   { name: 'robots', content: 'noindex, nofollow' },
   { property: 'og:type', content: 'website' },
-  { property: 'og:title', content: 'חשבון פרסום נחסם = ₪150,000 לאיבוד בין לילה. יש שיטה אחת שמונעת את זה.' },
+  { property: 'og:title', content: 'העסק שלכם לא אמור ליפול בגלל פרופיל אחד' },
   { property: 'og:description', content: DESCRIPTION },
   { property: 'og:url', content: URL },
   { property: 'og:image', content: OG_IMAGE },
@@ -20,10 +20,9 @@ export const meta = () => [
   { name: 'twitter:card', content: 'summary_large_image' },
   { name: 'twitter:title', content: TITLE },
   { name: 'twitter:description', content: DESCRIPTION },
-  // A/B variant: canonical points to the primary V1 page; no duplicate Course schema here
   { tagName: 'link', rel: 'canonical', href: 'https://www.israeltechforce.com/VSL-BMS' },
 ];
 
 export default function VslBmsV2Route() {
-  return <VslBmsV2 />;
+  return <VslBms variant="v2" />;
 }

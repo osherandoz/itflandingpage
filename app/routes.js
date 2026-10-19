@@ -22,10 +22,14 @@ export default [
   route("testimonials", "./routes/testimonials.jsx"),
   // BMS-SM — Course landing page + thank-you pages
   route("bms-sm", "./routes/bms-sm.jsx"),
+  // BMS-SM-V2 — feminine-plural variant for the women-targeted campaign (noindex)
+  route("bms-sm-v2", "./routes/bms-sm-v2.jsx"),
   // VSL-BMS — Video sales letter for BMS course
   route("VSL-BMS", "./routes/vsl-bms.jsx"),
   // VSL-BMS-V2 — A/B test variant (noindex)
   route("VSL-BMS-V2", "./routes/vsl-bms-v2.jsx"),
+  // Akamol — first-aid PDF bundle, 19.90 ILS
+  route("akamol", "./routes/akamol.jsx"),
   route("תודה", "./routes/thank-you.jsx"),
   route("תודה-קליסט", "./routes/thank-you-lead.jsx"),
   route("תודה-רכישה", "./routes/thank-you-purchase.jsx"),
