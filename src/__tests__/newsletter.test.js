@@ -18,8 +18,9 @@ describe('subscribe validator', () => {
     expect(validateInputs('אושר', '<script>', 'osher@example.co.il')).toBe('שם משפחה לא תקין');
   });
 
-  it('rejects a missing first name and a malformed email', () => {
-    expect(validateInputs('', '', 'osher@example.co.il')).toBe('שם פרטי לא תקין');
+  it('accepts an email with no names (squeeze page) and rejects a bad name or email', () => {
+    expect(validateInputs('', '', 'osher@example.co.il')).toBeNull();
+    expect(validateInputs('<b>', '', 'osher@example.co.il')).toBe('שם פרטי לא תקין');
     expect(validateInputs('אושר', '', 'not-an-email')).toBe('כתובת מייל לא תקינה');
   });
 });

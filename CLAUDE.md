@@ -125,6 +125,12 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 - `/akamol` ships with the Grow link empty: buy buttons open WhatsApp until `GROW_AKAMOL_URL` is set. Covers and
   the chat-proof screenshot stay unrendered until supplied (the screenshot also needs the client's consent).
 
+## Decided (2026-10-21, brief `Instagram-to-Email-CRO-Agent-Brief.md`)
+- `/newsletter` is a squeeze page: no nav, no outbound links, one email field, everything on the first 375x667 screen.
+  `/api/subscribe` takes an email with no names (names omitted from the Smoove upsert when empty). utm_* are copied into the Lead / `newsletter_subscribe` events.
+  The social proof is the 2,500+ figure and N12/ice (no subscriber count exists: do not invent one). `newsletterFaqs.js` is kept only for its test.
+- Not built (outside the page): the ManyChat DM flow and the welcome email sequence from the brief.
+
 ## Open (needs Osher)
 - `/akamol`: `GROW_AKAMOL_URL`, three PDF covers (hero + og:image), WhatsApp screenshot + client consent. Do not send paid traffic before the link is in.
 - The pixel's config also tries two Meta-run hosts (`*.us-central1.run.app/events`,

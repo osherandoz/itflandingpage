@@ -1,10 +1,9 @@
 import Newsletter from '../../src/pages/Newsletter';
-import { FAQS } from '../../src/data/newsletterFaqs.js';
 
 const URL = 'https://www.israeltechforce.com/newsletter';
 const TITLE = 'The Safety Signal - ניוזלטר חודשי על אבטחת חשבונות מטא | IsraelTechForce';
 const DESCRIPTION =
-  'פעם בחודש: מה מטא שינתה במדיניות ובפיצ׳רים, מקרה אמיתי מהשבועות האחרונים, ובדיקה אחת שמורידה סיכון. חמש דקות קריאה, בחינם.';
+  'פעם בחודש: מה מטא שינתה, מקרה חסימה אמיתי ובדיקה אחת שמורידה סיכון. חמש דקות קריאה, בחינם.';
 
 export const meta = () => [
   { title: TITLE },
@@ -19,24 +18,6 @@ export const meta = () => [
   { tagName: 'link', rel: 'canonical', href: URL },
 ];
 
-const FAQ_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQS.map((f) => ({
-    '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
-  })),
-};
-
 export default function NewsletterRoute() {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_SCHEMA) }}
-      />
-      <Newsletter />
-    </>
-  );
+  return <Newsletter />;
 }

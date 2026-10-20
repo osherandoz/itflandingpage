@@ -13,8 +13,8 @@ import { claim, clientIp, del, rateLimit, set } from './_lib/store.js';
 const HOUR = 60 * 60;
 
 export function validateInputs(firstName, lastName, email) {
-  if (!NAME_RE.test(firstName.trim())) return 'שם פרטי לא תקין';
-  // lastName is optional: /newsletter asks for first name only to cut form friction
+  // Both names are optional: /newsletter is an email-only squeeze page.
+  if (firstName.trim() && !NAME_RE.test(firstName.trim())) return 'שם פרטי לא תקין';
   if (lastName.trim() && !NAME_RE.test(lastName.trim())) return 'שם משפחה לא תקין';
   if (!EMAIL_RE.test(email.trim()) || email.length > 254) return 'כתובת מייל לא תקינה';
   return null;
@@ -50,8 +50,9 @@ export default async function handler(req, res) {
   try {
     const r = await upsertContact({
       email: safeEmail,
-      firstName: safeFirst,
-      lastName: safeLast,
+      // empty names are omitted: updateIfExists must not blank a known contact's name
+      ...(safeFirst && { firstName: safeFirst }),
+      ...(safeLast && { lastName: safeLast }),
       lists_ToSubscribe: [listId],
     });
     if (r.ok) {

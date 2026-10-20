@@ -1,318 +1,58 @@
-/* The Safety Signal (/newsletter). One job: the signup.
-   Everything is scoped to .nls and built from system.css tokens. */
-
-/* ---- Minimal header (no site nav here) ---- */
-.nls__top {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline: 0;
-  z-index: 2;
-}
-.nls__top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  height: var(--nav-h);
-}
-.nls__logo { display: block; flex: 0 0 auto; }
-.nls__logo img {
-  height: 40px;
-  width: auto;
-}
-.nls__top-link { color: #c2ccdc; padding-block: 12px; }
-
-/* ---- Hero ---- */
-.nls__hero {
-  padding-block: calc(var(--nav-h) + clamp(24px, 5vw, 64px)) clamp(48px, 7vw, 96px);
-  background: var(--bg);
-  overflow: clip;
-}
-.nls__hero-grid { display: grid; gap: 48px; }
-
-.nls__kicker {
-  font-size: var(--fs-small);
-  font-weight: 500;
-  color: var(--fg-2);
-  margin-block-end: 24px;
-}
-.nls__title { max-width: 17em; }
-.nls__title .lt { display: block; }
-.nls__title .mk { white-space: nowrap; }
-.nls__lead { margin-block-start: 24px; max-width: 56ch; }
-.nls__hero-form { margin-block-start: 32px; }
-
-.nls__micro {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 20px;
-  margin-block-start: 16px;
-  font-size: var(--fs-small);
-  color: var(--fg-2);
-}
-.nls__micro li { display: inline-flex; align-items: center; gap: 8px; }
-.nls__micro li::before {
-  content: '';
-  flex: 0 0 auto;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--signal);
-}
-
-/* What you get: numbered rows beside the form */
-/* phones go straight from the form to the full version in the next section */
-.nls__brief { display: none; align-self: end; }
-.nls__brief-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding-block-end: 16px;
-  border-block-end: 1px solid var(--fg);
-}
-.nls__mark {
-  font-size: 0.8125rem;
-  font-weight: 800;
-  letter-spacing: 0.14em; /* Latin wordmark only */
-  color: var(--fg);
-}
-.nls__brief-rows li {
-  display: grid;
-  grid-template-columns: 40px 1fr;
-  gap: 12px;
-  align-items: baseline;
-  padding-block: 20px;
-  border-block-end: 1px solid var(--line);
-}
-.nls__n { font-size: var(--fs-small); font-weight: 700; color: var(--accent); }
-.nls__n--lg { font-size: var(--fs-h3); font-weight: 900; line-height: 1.25; }
-.nls__brief-text { display: grid; gap: 4px; }
-.nls__brief-text strong { font-size: var(--fs-lead); font-weight: 800; line-height: 1.3; }
-.nls__brief-text span { font-size: var(--fs-small); color: var(--fg-2); }
-.nls__brief-foot { margin-block-start: 16px; color: var(--fg-3); }
-
-/* Entrance: CSS only, the headline never waits for JS */
-@keyframes nls-rise { from { opacity: 0; transform: translateY(20px); } }
-@keyframes nls-mark { from { background-size: 0% 0.92em; } }
-.nls__kicker, .nls__title, .nls__lead, .nls__hero-form, .nls__brief {
-  animation: nls-rise 0.8s var(--ease-out) both;
-}
-.nls__title { animation-delay: 0.05s; }
-.nls__lead { animation-delay: 0.12s; }
-.nls__hero-form { animation-delay: 0.18s; }
-.nls__brief { animation-delay: 0.26s; }
-.nls__title .mk { animation: nls-mark 0.9s var(--ease-out) 0.55s both; }
-
-/* ---- Signup: two fields and the submit read as one component ---- */
-.nls__form { max-width: 560px; }
-.nls__honeypot {
-  position: absolute;
-  inset-inline-start: -9999px;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-.nls__group {
-  display: grid;
-  gap: 8px;
-  padding: 8px;
-  border: 1.5px solid var(--fg);
-  border-radius: 28px;
-  background: var(--surface);
-  transition: border-color 0.2s ease-out;
-}
-.nls__group.has-error { border-color: var(--alert); }
-.nls__fields { display: grid; }
-.nls__cell {
-  position: relative;
-  display: grid;
-  gap: 2px;
-  padding: 10px 16px 8px;
-  border-radius: 20px;
-  cursor: text;
-  transition: background-color 0.2s ease-out, box-shadow 0.2s ease-out;
-}
-/* hairline between the two fields: straight, inside the rounded cell */
-.nls__cell + .nls__cell::before {
-  content: '';
-  position: absolute;
-  inset-block-start: -1px;
-  inset-inline: 16px;
-  height: 1px;
-  background: var(--line);
-}
-.nls__cell:focus-within {
-  background: color-mix(in srgb, var(--accent) 9%, var(--surface));
-  box-shadow: inset 0 0 0 2px var(--accent);
-}
-.nls__cell-label { font-size: 0.8125rem; font-weight: 700; color: var(--fg-2); }
-.nls__cell input {
+/* /newsletter: squeeze page. Everything fits the first screen at 375x667. */
+.nls { min-height: 100vh; min-height: 100svh; display: grid; align-items: center; }
+.nls__main {
   width: 100%;
-  min-height: 32px;
-  padding: 0;
-  border: 0;
-  outline: none;
-  background: none;
-  color: var(--fg);
-  font-size: 1.0625rem; /* ≥16px: iOS does not zoom on focus */
-  line-height: 1.4;
-}
-.nls__cell input[dir='ltr'] { text-align: right; }
-.nls__cell input::placeholder { color: var(--fg-3); opacity: 1; }
-.nls__cell input:-webkit-autofill {
-  -webkit-text-fill-color: var(--fg) !important;
-  box-shadow: 0 0 0 1000px var(--surface) inset !important;
-  caret-color: var(--fg);
-}
-.nls__error { margin-block-start: 12px; color: var(--alert); font-size: var(--fs-small); font-weight: 700; }
-.theme-ink .nls__error { color: #ff8f93; }
-.theme-ink .nls__group.has-error { border-color: #ff8f93; }
-
-.nls__done {
+  max-width: 560px;
+  margin-inline: auto;
+  padding: 20px var(--gutter);
   display: grid;
-  gap: 8px;
+  gap: 14px;
   justify-items: start;
-  padding: 24px;
-  border: 1.5px solid var(--fg);
-  border-radius: 28px;
-  background: var(--surface);
-}
-.nls__done-icon {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--ok);
-  color: #fff;
-  font-size: 20px;
-}
-.nls__done-title { font-size: var(--fs-lead); font-weight: 800; line-height: 1.35; }
-.nls__done-note { font-size: var(--fs-small); color: var(--fg-2); }
-
-@media (min-width: 520px) {
-  .nls__fields { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); }
-  .nls__cell + .nls__cell::before {
-    inset-block: 12px;
-    inset-inline: 0 auto;
-    width: 1px;
-    height: auto;
-  }
 }
 
-/* ---- Split sections: heading on the start side, content beside it ---- */
-.nls__split { display: grid; gap: 40px; align-items: start; }
+.nls__logo { width: 64px; height: auto; }
+.nls__kicker { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; color: var(--fg-3); }
 
-.nls__row { grid-template-columns: 48px 1fr; align-items: start; padding-block: 28px; }
-.nls__row-text { display: grid; gap: 8px; max-width: 60ch; }
-.nls__rows { border-block-start-color: var(--fg); }
+.nls__title {
+  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 2.75rem);
+  line-height: 1.12;
+  font-weight: 900;
+  text-wrap: balance;
+}
+.nls__sub { color: var(--fg-2); line-height: 1.55; font-size: 1rem; }
 
-/* ---- The letter: a real issue, on paper ---- */
-.nls__letter {
-  position: relative;
-  padding: clamp(24px, 4vw, 48px);
-  padding-block-start: clamp(40px, 5vw, 56px);
-  rotate: -0.6deg;
-}
-.nls__letter-sticker {
-  position: absolute;
-  inset-block-start: -16px;
-  inset-inline-end: 16px;
-}
-.nls__letter-head {
-  padding-block-end: 16px;
-  border-block-end: 1px solid var(--fg);
-}
-.nls__letter-item {
-  display: grid;
-  grid-template-columns: 32px 1fr;
-  gap: 12px;
-  align-items: baseline;
-  padding-block: 24px;
-  border-block-end: 1px solid var(--line);
-}
-.nls__letter-item h3 { margin-block-end: 8px; }
-.nls__quote { margin-block-start: 32px; padding-inline-start: 20px; border-inline-start: 3px solid var(--signal); }
-.nls__quote p {
-  font-size: clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem);
-  font-weight: 500;
-  line-height: 1.4;
-}
-.nls__quote cite {
-  display: block;
-  margin-block-start: 12px;
-  font-style: normal;
-  font-size: var(--fs-small);
-  font-weight: 700;
-  color: var(--fg-2);
-}
-
-/* ---- Fit: a paper card against an ink card ---- */
-.nls__fit-grid { display: grid; gap: 16px; align-items: start; }
-.nls__fit-card ul { display: grid; margin-block-start: 16px; }
-.nls__fit-card li {
-  display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 12px;
-  align-items: start;
-  padding-block: 16px;
-  border-block-start: 1px solid var(--line);
-  font-weight: 500;
-}
-.nls__fit-card--no li { color: var(--fg-2); }
-.nls__fit-icon {
-  display: grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  color: var(--fg-3);
-  font-size: 14px;
-}
-.nls__fit-icon--yes { background: var(--signal); border-color: var(--signal); color: var(--on-signal); }
-
-/* ---- Author ---- */
-.nls__author { background: var(--bg); }
-.nls__author-grid { display: grid; gap: 40px; align-items: center; }
-.nls__author-photo { width: min(70%, 360px); }
-.nls__author-photo img {
+/* ---- form: one field, one button ---- */
+.nls__form { display: grid; gap: 10px; width: 100%; }
+.nls__field input {
   width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: var(--r-lg);
+  min-height: 56px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 16px;
+  background: var(--ink-2);
+  color: var(--fg);
+  font-size: 1.0625rem; /* 16px+: no iOS zoom on focus */
+  text-align: start;
 }
-.nls__author-text .lead { margin-block-start: 24px; }
-.nls__author-text .muted { margin-block-start: 16px; max-width: var(--measure); }
-.nls__author-links { display: flex; flex-wrap: wrap; gap: 12px 32px; margin-block-start: 32px; }
+.nls__field input::placeholder { color: var(--fg-3); opacity: 1; }
+.nls__field input:focus { outline: none; border-color: var(--signal); box-shadow: 0 0 0 4px color-mix(in srgb, var(--signal) 28%, transparent); }
+.nls__field input[aria-invalid='true'] { border-color: var(--alert); }
+.nls__submit { min-height: 56px; }
+.nls__error { color: #ff8f93; font-size: var(--fs-small); font-weight: 600; }
+.nls__honeypot { position: absolute; inset-inline-start: -9999px; width: 1px; height: 1px; opacity: 0; }
 
-/* ---- Closing signup ---- */
-.nls__close-grid { display: grid; gap: 40px; align-items: end; }
-.nls__close .lead { margin-block-start: 16px; }
+.nls__proof { display: flex; align-items: flex-start; gap: 10px; font-size: 0.875rem; color: var(--fg-2); line-height: 1.45; }
+.nls__proof svg { flex: 0 0 auto; width: 20px; height: 20px; padding: 4px; border-radius: 50%; background: var(--signal); color: var(--on-signal); }
 
-.nls__foot { border-block-start: 1px solid var(--line); }
-.nls__foot-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 32px;
-  padding-block: 24px;
-  color: var(--fg-2);
-}
-.nls__foot-bar a { padding-block: 8px; transition: color 0.2s ease-out; }
-@media (hover: hover) { .nls__foot-bar a:hover { color: var(--fg); } }
+/* ---- success ---- */
+.nls__done { display: grid; gap: 10px; padding: 20px; border: 1px solid var(--signal); border-radius: var(--r-md); background: rgba(16, 185, 129, 0.08); width: 100%; }
+.nls__done-icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: var(--signal); color: var(--on-signal); }
+.nls__done-icon svg { width: 20px; height: 20px; }
+.nls__done-title { font-weight: 800; font-size: 1.125rem; }
+.nls__done-note { color: var(--fg-2); font-size: var(--fs-small); }
 
-@media (min-width: 960px) {
-  .nls__hero-grid { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 96px; }
-  .nls__brief { display: block; }
-  .nls__split { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 96px; }
-  .nls__split-head { position: sticky; top: 48px; }
-  .nls__split--letter { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.35fr); }
-  .nls__row { grid-template-columns: 72px 1fr; padding-block: 32px; }
-  .nls__fit-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; }
-  .nls__fit-card--no { margin-block-start: 64px; }
-  .nls__author-grid { grid-template-columns: 360px minmax(0, 1fr); gap: 96px; }
-  .nls__author-photo { width: 100%; }
-  .nls__close-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 96px; }
+@media (min-width: 768px) {
+  .nls__main { gap: 20px; padding-block: 48px; }
+  .nls__logo { width: 84px; }
+  .nls__sub { font-size: 1.125rem; }
 }
