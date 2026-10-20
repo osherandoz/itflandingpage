@@ -48,11 +48,12 @@ const t = {
  *  noteOptions — array of strings; renders an optional "what do you see" select sent as `note`
  *  location — CTA location name for analytics (default 'contact-form')
  *  hideWhatsApp — omit the WhatsApp fallback line under the button
+ *  compact — the three-field version: name, phone, platform (no free-text message)
  *  altPhoneField — renders an optional "another WhatsApp-reachable number" input,
  *    for forms where the visitor's own number can't receive a WhatsApp reply
  *    (the WhatsApp-recovery callback form)
  */
-const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location = 'contact-form', hideWhatsApp = false, altPhoneField = false }) => {
+const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location = 'contact-form', hideWhatsApp = false, altPhoneField = false, compact = false }) => {
   const [formData, setFormData] = useState({ name: '', phone: '', platform: '', altPhone: '', note: '', message: '', consent: false });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -188,7 +189,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
         </div>
 
         <div className="field">
-          <label htmlFor={`platform-${location}`}>{t.platformLabel}{optional}</label>
+          <label htmlFor={`platform-${location}`}>{t.platformLabel}{compact ? null : optional}</label>
           <select
             id={`platform-${location}`}
             name="platform"
@@ -232,6 +233,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
           </div>
         )}
 
+        {!compact && (
         <div className="field cform__wide">
           <label htmlFor={`message-${location}`}>{t.messageLabel}{optional}</label>
           <textarea
@@ -245,6 +247,7 @@ const ContactForm = ({ heading, subheading, submitLabel, noteOptions, location =
             disabled={isSubmitting}
           />
         </div>
+        )}
 
         <div className="cform__wide">
           <label className="check">

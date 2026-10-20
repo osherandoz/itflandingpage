@@ -2,7 +2,7 @@
    (VslBms.jsx) and V2 (VslBmsV2.jsx) share every component below, so the
    test compares the offers. Tokens, themes, buttons, cards, stickers and
    motion come from system.css; the accordion from components/FAQ.css. */
-.vsl { background: var(--paper); }
+.vsl { background: var(--bg); }
 
 /* ---- Announcement strip ---- */
 .vsl__strip {
@@ -24,8 +24,7 @@
 .vsl-hero__grid--wide .vsl-hero__title { font-size: min(8vw, 2.25rem); }
 @media (min-width: 720px) {
   /* 4.6vw keeps the long first phrase inside the container at every width */
-  .vsl-hero__grid--wide .vsl-hero__title { font-size: min(4.6vw, 3.75rem); }
-  .vsl-hero__grid--wide .vsl-hero__title > span { white-space: nowrap; }
+  .vsl-hero__grid--wide .vsl-hero__title { font-size: min(3.4vw, 3.25rem); max-width: 26em; text-wrap: balance; }
 }
 .vsl-hero__grid--wide .vsl-hero__sub { margin-block-start: 0; }
 .vsl-hero__sub { margin-block-start: 16px; max-width: 36em; color: var(--fg-2); line-height: 1.55; }
@@ -36,7 +35,7 @@
   border-radius: var(--r-lg);
   background: var(--ink-2);
   overflow: hidden;
-  box-shadow: 0 32px 56px -32px rgba(31, 77, 255, 0.6);
+  box-shadow: 0 32px 56px -32px rgba(16, 185, 129, 0.6);
 }
 .vsl-video__cap { display: grid; gap: 2px; padding: 12px 16px; font-size: var(--fs-small); font-weight: 700; line-height: 1.4; }
 .vsl-video__cap-line { display: flex; align-items: center; gap: 8px; font-weight: 500; color: var(--wave); }
@@ -134,7 +133,7 @@
   order: -1;
   width: 100%;
   border-radius: var(--r-lg);
-  box-shadow: 0 32px 48px -32px rgba(31, 77, 255, 0.45);
+  box-shadow: 0 32px 48px -32px rgba(16, 185, 129, 0.45);
 }
 @media (min-width: 960px) {
   .vsl-duo { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 80px; }
@@ -489,3 +488,43 @@
 .vsl-obj { display: grid; gap: 12px; margin-block-start: 8px; padding-block-start: 20px; border-block-start: 1px solid var(--line); color: var(--fg-2); }
 .vsl-obj strong { color: var(--fg); }
 .vsl-closing__text { max-width: 40em; font-size: var(--fs-lead); line-height: 1.5; color: var(--fg-2); }
+
+/* ---- Spec 5: scan-friendly points beside the video, syllabus bento, offer details ---- */
+.vsl-hero__points { display: grid; gap: 10px; max-width: 62ch; }
+.vsl-hero__points li { display: flex; align-items: flex-start; gap: 12px; color: var(--fg-2); line-height: 1.5; }
+.vsl-hero__points svg {
+  flex: 0 0 auto; width: 22px; height: 22px; padding: 4px; border-radius: 50%;
+  background: var(--signal); color: var(--on-signal);
+}
+.vsl-hero__terms del, .vsl-offer__today del { color: var(--fg-3); text-decoration-color: var(--alert); text-decoration-thickness: 2px; }
+
+.vsl-bento { display: grid; gap: 12px; }
+.vsl-bento__cell {
+  display: grid; align-content: start; gap: 10px;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--ink-2);
+}
+.vsl-bento__meta { display: flex; align-items: center; gap: 10px; font-size: 0.8125rem; font-weight: 600; color: var(--fg-3); }
+.vsl-bento__meta .num { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--signal); color: var(--signal); font-weight: 800; }
+.vsl-bento__cell--bonus { background: var(--bg); border-style: dashed; border-color: var(--line-strong); }
+.vsl-bento__cell--bonus ul { display: grid; gap: 8px; }
+.vsl-bento__cell--bonus li { padding-inline-start: 14px; position: relative; color: var(--fg-2); line-height: 1.45; }
+.vsl-bento__cell--bonus li::before { content: ''; position: absolute; inset-inline-start: 0; inset-block-start: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--signal); }
+@media (min-width: 720px) {
+  .vsl-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vsl-bento__cell:first-child { grid-column: 1 / -1; }
+  .vsl-bento__cell--bonus { grid-column: 1 / -1; }
+}
+
+.vsl-offer__wallets { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.vsl-offer__wallets span {
+  padding: 6px 14px; border: 1px solid var(--line-strong); border-radius: var(--r-pill);
+  font-size: 0.875rem; font-weight: 700; color: var(--fg-2);
+}
+.vsl-offer__wallets .vsl-offer__wallets-note { border: 0; padding-inline: 4px; font-weight: 500; color: var(--fg-3); }
+.vsl-offer__guarantee {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px; border: 1px solid var(--signal); border-radius: var(--r-md);
+  background: rgba(16, 185, 129, 0.08); line-height: 1.5;
+}
+.vsl-offer__guarantee svg { flex: 0 0 auto; width: 24px; height: 24px; color: var(--signal); }

@@ -27,19 +27,14 @@ to the Hebrew pages (`vercel.json`).
 | `node scripts/og-cards.mjs` | Regenerate the share cards (`public/images/og/*`, one per page) after adding a page or article (a test fails if one is missing). Needs Chrome + global `@playwright/cli` |
 | `node scripts/build-article-index.mjs` | Regenerate `src/data/articleIndex.js` after adding or editing an article (a test fails if it is stale) |
 
-## Design: the "Signal" system (2026-10)
-- Rules and rationale: `DESIGN.md`. Tokens and primitives: `src/styles/system.css`.
-  Atoms: `src/components/ui.jsx`. Motion engine: `src/motion/useMotion.js`.
-  Reference implementation: the home page.
-- White + ink + one cobalt accent ("Midnight" palette); WhatsApp green only for the WhatsApp action.
-  Every page opens dark: ink header + ink hero (Osher, 2026-10-02: the all-light version was too light).
-  Rubik variable (300 beside 900 in headings; replaced Heebo 2026-10-12, Osher wanted a livelier face); Frank Ruhl Libre for one quote per page.
-- Motion is scroll-driven. Hover changes colour only. No hover transforms, no
-  custom cursor, no animated backgrounds, no `backdrop-filter`, no smooth-scroll library.
-- No "three equal cards with an icon". Lists are numbered rows; layouts are asymmetric.
-- Above the fold never waits for JS (CSS keyframes, not `.m-reveal`).
-- Pinned/stacked layouts only at `(min-width: 1024px) and (min-height: 800px)`.
-- No Font Awesome, no Google Fonts, no animation library. Icons: `src/components/Icon.jsx`.
+## Design: Obsidian emergency system (2026-10-20, from ITF-Landing-VSL-Spec.md)
+- The spec file (`Downloads/ITF-Landing-VSL-Spec.md`) is the source of truth for the home page and `/VSL-BMS`. Tokens: `src/styles/system.css`.
+- 60-30-10: Obsidian `#090d16` base, slate cards `#131b2e`/`#1e293b`, emerald `#10b981` accent (WhatsApp `#22c55e`), coral `#ef4444` for danger only. Whole site is dark; `.theme-*` classes only change depth.
+  Text on the accent uses `--on-signal`, never white (contrast).
+- Heebo variable (replaced Rubik). Home order: header (live status + call + WhatsApp) > hero (platform picker) > proof strip > bento services > 3 steps > about > testimonials > FAQ > conversion hub (WhatsApp + 3-field form). No articles section, no guide links on home.
+- Mobile: `FloatingWhatsApp` is a two-button bar (call + WhatsApp) at every scroll depth.
+- VSL: spec headline, 297 ILS with 997 value anchor, 14-day refund, syllabus bento, purchase button revealed at `OFFER_AT_SECONDS` (placeholder 360, set the real timestamp).
+- Older Signal rules (no hover transforms, no animated backgrounds, no `backdrop-filter`, Above the fold never waits for JS) still apply.
 
 ## Map
 - Routes: `app/routes.js`. Page hierarchy and funnel: `SITE-HIERARCHY.md`.

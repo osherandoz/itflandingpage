@@ -12,7 +12,7 @@
   color: #ffffff;
   border-radius: var(--r-lg);
 }
-.arts__lead .tag--solid { background: var(--signal); color: #fff; }
+.arts__lead .tag--solid { background: var(--signal); color: var(--on-signal); }
 .arts__lead .h2 { max-width: 24ch; padding-inline-end: 48px; }
 .arts__excerpt { color: #c2ccdc; max-width: 52ch; }
 .arts__meta { display: inline-flex; gap: 8px; color: var(--fg-3); }
@@ -54,7 +54,7 @@
 
 @media (hover: hover) {
   .arts__row:hover .arts__go { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .arts__lead:hover .arts__go { background: var(--signal); color: #fff; border-color: var(--signal); }
+  .arts__lead:hover .arts__go { background: var(--signal); color: var(--on-signal); border-color: var(--signal); }
 }
 
 @media (min-width: 960px) {

@@ -15,8 +15,8 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 24px 24px calc(24px + env(safe-area-inset-bottom));
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--ink-2);
+  color: var(--fg);
   border-radius: var(--r-lg) var(--r-lg) 0 0;
   animation: modal-rise 0.35s var(--ease-out);
 }

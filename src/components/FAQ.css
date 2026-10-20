@@ -1,6 +1,6 @@
 /* FAQ: sticky headline + CTA on the start side, native accordion beside it.
    .faq-item is shared by every page that lists questions. */
-.faq { background: var(--paper); }
+.faq { background: var(--bg); }
 .faq__grid { display: grid; gap: 40px; }
 
 .faq__head .lead { margin-block-start: 16px; }
@@ -52,7 +52,7 @@
   border-radius: 2px;
 }
 .faq-item__icon::after { rotate: 90deg; }
-.faq-item[open] .faq-item__icon { background: var(--signal); border-color: var(--signal); color: #fff; rotate: 45deg; }
+.faq-item[open] .faq-item__icon { background: var(--signal); border-color: var(--signal); color: var(--on-signal); rotate: 45deg; }
 .faq-item[open] summary { color: var(--accent); }
 .faq-item[open] .faq-item__num { color: inherit; }
 .faq-item__a {

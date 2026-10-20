@@ -5,11 +5,11 @@
   flex-direction: column;
   min-height: 100vh;
   min-height: 100svh;
-  background: var(--paper);
+  background: var(--bg);
 }
 .typ__top .container { display: flex; align-items: center; height: var(--nav-h); }
 .typ__logo { display: block; }
-.typ__logo img { height: 40px; width: auto; filter: invert(1); }
+.typ__logo img { height: 40px; width: auto; }
 
 .typ__main {
   flex: 1 0 auto;
@@ -85,7 +85,7 @@
   inset-block: var(--node) 0;
   inset-inline-start: calc(var(--node) / 2 - 2px);
   width: 4px;
-  background: var(--paper);
+  background: var(--line-strong);
 }
 .typ__node {
   position: relative;

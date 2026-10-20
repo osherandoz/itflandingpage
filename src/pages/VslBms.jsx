@@ -30,6 +30,11 @@ const purchaseUrlFor = (lpVariant) => `https://mrng.to/engo98ytvh?variant=${lpVa
 const IMG = '/images/vsl-bms';
 
 const PRICE = 297;
+const VALUE_ANCHOR = 997; // estimated value of the full package (spec 5.1)
+const GUARANTEE_DAYS = 14; // full refund, no questions asked (spec 5.4: 14-30 days)
+// Second of the video where the offer is revealed. The purchase button under
+// the player appears then (or when the video ends). TODO: set to the real timestamp.
+const OFFER_AT_SECONDS = 360;
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 
 // In-page anchor clicks, custom event, NOT Lead (Lead fires only on thank-you-lead)
@@ -98,31 +103,23 @@ const STEPS = [
 const MODULES = [
   {
     label: 'מודול 01',
-    lessons: '3 שיעורים',
-    title: 'פרופיל אישי, היסוד של הכל',
-    body: 'כל BMS בנוי על פרופיל אישי אחד. אם הוא חשוף, הכל חשוף. פותחים מהיסודות: תקנות, ותק, סטטוס חשבון, פרטים ואבטחה.',
-    punch: 'הבסיס שאם הוא לא יציב, שום דבר אחר לא יחזיק.',
+    title: 'ארכיטקטורת תיק עסקי תקנית וקישור נכסים בטוח',
+    body: 'איך בנוי תיק עסקי נכון, מי מחזיק במה, ואיך מחברים דפים, חשבונות מודעות ופיקסלים בלי ליצור נקודת כשל אחת.',
   },
   {
     label: 'מודול 02',
-    lessons: 'שיעור 1',
-    title: 'הפרדה בין הפרטי לעסקי',
-    body: 'ההפרדה בין הפרטי לעסקי היא ההבדל בין עסק שמוגן לבין עסק שתלוי בכם אישית.',
-    punch: 'למה זה קריטי, איך עושים את זה נכון, ואיך שומרים על זה כשהעסק גדל.',
+    title: 'ניהול הרשאות, מנהלים ואימות דו-שלבי',
+    body: 'מי מקבל גישה ובאיזו רמה, איך מוסיפים מנהל גיבוי, ואיך מגדירים אימות דו-שלבי בלי סיכון חסימת שרשרת.',
   },
   {
     label: 'מודול 03',
-    lessons: '2 שיעורים',
-    title: 'הקמת Business Manager ואיסוף הנכסים',
-    body: "ההבדל בין מרכז החשבונות לביזנס מנג'ר. איך מקימים תיק עסקי נכון, ואיך אוספים את כל הנכסים שלכם תחת קורת גג אחת.",
-    punch: 'הצעד הטכני שלילך לא ידעה לעשות, וזה עלה לה ביוקר.',
+    title: 'ניטור Business Support Home',
+    body: 'איך קוראים את ההתראות, ומה נכון לעשות מול אלגוריתם הניטור של Meta לפני שהן הופכות לחסימה.',
   },
   {
     label: 'מודול 04',
-    lessons: '3 שיעורים',
-    title: 'חשבון מודעות, תשלום, אנשים והרשאות',
-    body: 'חשבון המודעות, הגדרתו ואמצעי התשלום. אנשים, שותפים, הרשאות. מידע על העסק ואבטחה.',
-    punch: 'כאן הטעויות הכי יקרות נולדות. כאן גם נמנעות.',
+    title: 'פרוטוקול חירום ראשוני ומניעת שריפת ערעורים',
+    body: 'מה עושים בשעה הראשונה, באיזה סדר מגישים ערעור, ואיך לא מפסידים ערעור שאי אפשר לחזור עליו.',
   },
 ];
 
@@ -151,10 +148,9 @@ const BONUSES = [
 ];
 
 const INCLUDED = [
-  { label: '4 מודולי יסוד, 9 שיעורים מוקלטים (הקלטת מסך מלאה)' },
-  { bonus: 'בונוס 01', label: 'מודול פריצות וחסימות' },
-  { bonus: 'בונוס 02', label: 'מודול אימות ואישורי פעילות' },
-  { bonus: 'בונוס 03', label: 'הרצאת אורח של בר שלג' },
+  { label: '15 שיעורים מוקלטים (הקלטת מסך מלאה)' },
+  { label: "צ'קליסט סינון לקוחות" },
+  { label: 'תבניות ערעור מוכנות' },
   { label: 'גישה ללא הגבלת זמן, כולל כל עדכון עתידי של הקורס', value: 'ללא הגבלה' },
 ];
 
@@ -178,7 +174,7 @@ const FAQS = [
   ['אין לי רקע טכנולוגי. אפשר בכלל להתמודד עם זה?', 'בהחלט. הקורס בנוי בהקלטות מסך עם הנחיה צעד-אחר-צעד. אין הנחה של ידע מוקדם. אם אתם יודעים להפעיל פייסבוק ולהיכנס לחשבון, אתם יודעים מספיק.'],
   ['כמה זמן ייקח לי לסיים את הקורס?', 'בערך 3 שעות מצטברות של תוכן. אפשר לעבור הכל בערב אחד, או לפזר על פני שבוע. את היישום עצמו אפשר לעשות תוך כדי, מסך אחרי מסך.'],
   ['מה מקבלים אחרי הרכישה?', 'גישה מיידית ל-LMS עם כל המודולים והבונוסים. שולחים לכם מייל עם שם משתמש וסיסמה תוך דקות. גישה ללא הגבלת זמן, כולל כל עדכון עתידי של הקורס. לא הגיע מייל? כתבו בוואטסאפ ונסדר.'],
-  ['האם יש החזר כספי אם הקורס לא מתאים לי?', 'לפני שאתם מתלבטים: הסילבוס המלא מפורט כאן בדף (4 מודולים + 3 בונוסים, כ-3 שעות), הגישה היא ללא הגבלת זמן כולל עדכונים, ואני זמין בוואטסאפ לכל שאלה, גם לפני הרכישה. מכיוון שמדובר בתוכן דיגיטלי עם גישה מיידית, לא ניתן החזר לאחר הרכישה, בהתאם לחוק הגנת הצרכן. יש ספק? שלחו לי הודעה ואענה אישית.'],
+  ['האם יש החזר כספי אם הקורס לא מתאים לי?', `כן. יש אחריות החזר מלא תוך ${GUARANTEE_DAYS} ימים מיום הרכישה, בלי שאלות. כותבים לי בוואטסאפ או במייל ומקבלים את הכסף חזרה.`],
   ['מה ההבדל בין הקורס הזה לכל מה שיש בחינם ביוטיוב?', 'ביוטיוב יש "טיפים". כאן יש שיטה. הקורס בנוי על עבודה מאז 2020 עם מעל 2,500 חשבונות אמיתיים שהושבתו או נפרצו, והוא מתעדכן בהתאם לשינויים האחרונים של מטא. אין כפילויות, אין מילוי זמן, רק יישום.'],
   ['האם הקורס מתעדכן?', 'כן. כשמטא משנה משהו, אני מעדכן. הגישה שלכם אוטומטית כוללת את כל העדכונים העתידיים, ללא תוספת תשלום.'],
   ['אפשר לדבר איתך אם נתקעתי תוך כדי?', 'התלמידים שלי יכולים לפנות אליי בוואטסאפ בשאלות על יישום החומר מהקורס. זו לא תמיכה אישית מלאה, ולא שחזור של חשבון חסום (זה שירות נפרד), אבל על שאלות יישום אני עונה בפועל לכולם.'],
@@ -201,22 +197,6 @@ const V2_CTA = {
   closing: 'אני רוצה תשתית שלא נופלת · ₪297',
 };
 
-const RailItem = ({ item, node, bonus }) => (
-  <li className={`vsl-rail__item m-reveal${bonus ? ' vsl-rail__item--bonus' : ''}`}>
-    <span className="vsl-rail__node num" aria-hidden="true">{node}</span>
-    <div className="vsl-rail__card">
-      <p className="vsl-rail__meta">
-        {bonus
-          ? <span className="sticker sticker--paper m-in">{item.label}</span>
-          : <span className="vsl-rail__label">{item.label}</span>}
-        <span className="tag">{item.lessons}</span>
-      </p>
-      <h3 className="h3">{item.title}</h3>
-      <p className="muted">{item.body} <strong>{item.punch}</strong></p>
-    </div>
-  </li>
-);
-
 export default function VslBms({ variant = 'v1' }) {
   const v2 = variant === 'v2';
   const lpVariant = LP_VARIANTS[variant];
@@ -236,6 +216,26 @@ export default function VslBms({ variant = 'v1' }) {
   }, []);
   const trackCheckout = (where) => () => trackInitiateCheckout(where, lpVariant);
   const checkout = (cta) => `${purchaseUrl}&cta=${cta}`;
+
+  // The player reports its clock through postMessage (no extra script loaded):
+  // the purchase button appears when the offer is shown, or when the video ends.
+  const [offerRevealed, setOfferRevealed] = useState(false);
+  function listenToPlayer(e) {
+    e.currentTarget.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*');
+  }
+  useEffect(() => {
+    if (!videoStarted) return undefined;
+    const onMessage = (e) => {
+      if (typeof e.origin !== 'string' || !e.origin.includes('youtube')) return;
+      let data;
+      try { data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch { return; }
+      const info = data?.info;
+      if (data?.event !== 'infoDelivery' || !info) return;
+      if (info.currentTime >= OFFER_AT_SECONDS || info.playerState === 0) setOfferRevealed(true);
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [videoStarted]);
 
   function startVideo() {
     setVideoStarted(true);
@@ -278,18 +278,11 @@ export default function VslBms({ variant = 'v1' }) {
           {/* The title runs the full width so each phrase stays on one line */}
           <header className="vsl-hero__head">
             {v2 && <p className="vsl-hero__eyebrow">קורס BMS · Business Manager Setup</p>}
-            <p className="vsl-hero__kicker">קורס מוקלט בעברית · כ-3 שעות · <bdi>₪{PRICE}</bdi> תשלום אחד</p>
-            {v2 ? (
-              <h1 className="vsl-hero__title">
-                <span className="lt">העסק שלכם לא אמור</span>{' '}
-                <span>ליפול בגלל <span className="mk">פרופיל אחד.</span></span>
-              </h1>
-            ) : (
-              <h1 className="vsl-hero__title">
-                <span className="lt">קורס BMS: מגדירים Business Manager נכון,</span>{' '}
-                <span>לפני <span className="mk">שהעסק נחסם</span></span>
-              </h1>
-            )}
+            <p className="vsl-hero__kicker">קורס מוקלט בעברית · <bdi>15</bdi> שיעורים קצרים · <bdi>₪{PRICE}</bdi> תשלום אחד</p>
+            <h1 className="vsl-hero__title">
+              <span className="lt">איך לבנות תיק עסקי (Business Portfolio) חסין חסימות ב-<bdi>15</bdi> שיעורים קצרים</span>{' '}
+              <span>מתוך לקחי שחזור של <span className="mk"><bdi>2,500+</bdi> חשבונות</span> מול Meta</span>
+            </h1>
           </header>
           <div className="vsl-hero__copy">
             <p className="vsl-hero__sub">
@@ -306,10 +299,11 @@ export default function VslBms({ variant = 'v1' }) {
             <div className="vsl-video__frame">
               {videoStarted ? (
                 <iframe
-                  src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0&cc_load_policy=1&cc_lang_pref=he`}
+                  src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&enablejsapi=1&cc_load_policy=1&cc_lang_pref=he`}
                   title={VIDEO_TITLE}
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
+                  onLoad={listenToPlayer}
                 />
               ) : (
                 <button type="button" className="vsl-video__facade" onClick={startVideo}>
@@ -332,14 +326,29 @@ export default function VslBms({ variant = 'v1' }) {
           </figure>
 
           <div className="vsl-hero__cta">
-            <Btn variant="signal" href={checkout('hero')} onClick={trackCheckout('hero')}>
-              {cta('hero', `הצטרפו לקורס ב-₪${PRICE}`)}
-            </Btn>
-            <p className="vsl-hero__terms small"><bdi>₪{PRICE}</bdi>. תשלום אחד, כולל מע"מ. אחרי התשלום מגיע מייל עם פרטי הגישה, ומתחילים.</p>
-            <a href="#deliverables" className="link small" onClick={trackCtaClick}>
-              מה בדיוק יש בקורס? לסילבוס המלא
-            </a>
+            {offerRevealed ? (
+              <>
+                <Btn variant="signal" href={checkout('hero')} onClick={trackCheckout('hero')}>
+                  {cta('hero', `הצטרפו לקורס ב-₪${PRICE}`)}
+                </Btn>
+                <p className="vsl-hero__terms small">
+                  שווי <del><bdi>₪{VALUE_ANCHOR}</bdi></del> · מחיר השקה <bdi>₪{PRICE}</bdi>, תשלום אחד כולל מע"מ. החזר מלא תוך <bdi>{GUARANTEE_DAYS}</bdi> ימים.
+                </p>
+              </>
+            ) : (
+              <a href="#final-cta" className="link small" onClick={trackCtaClick}>
+                מעדיפים לקרוא? קפצו להצעה המלאה
+              </a>
+            )}
           </div>
+
+          {/* For the people who scan instead of watching */}
+          <ul className="vsl-hero__points">
+            <li><Icon name="check" /><span><bdi>15</bdi> שיעורים קצרים, הקלטת מסך, יישום תוך כדי צפייה</span></li>
+            <li><Icon name="check" /><span>תיק עסקי, הרשאות ואימות דו-שלבי שלא מפילים אחד את השני</span></li>
+            <li><Icon name="check" /><span>צ'קליסט סינון לקוחות ותבניות ערעור מוכנות</span></li>
+            <li><Icon name="check" /><span>החזר מלא תוך <bdi>{GUARANTEE_DAYS}</bdi> ימים, בלי שאלות</span></li>
+          </ul>
         </div>
       </section>
 
@@ -532,15 +541,23 @@ export default function VslBms({ variant = 'v1' }) {
             </div>
           </header>
 
-          <ol className="vsl-rail" data-scrub="0.7 0.55">
-            <li className="vsl-rail__line" aria-hidden="true"><span /></li>
-            {MODULES.map((m, i) => <RailItem key={m.label} item={m} node={`0${i + 1}`} />)}
-            <li className="vsl-rail__break m-reveal">
-              <span className="vsl-rail__node vsl-rail__node--plus" aria-hidden="true">+</span>
-              <p>ובחבילה גם, 3 בונוסים מתנה</p>
-            </li>
-            {BONUSES.map((b) => <RailItem key={b.label} item={b} node="+" bonus />)}
-          </ol>
+          <div className="vsl-bento m-stagger">
+            {MODULES.map((m, i) => (
+              <article className="vsl-bento__cell" key={m.label}>
+                <p className="vsl-bento__meta"><span className="num">0{i + 1}</span>{m.label}</p>
+                <h3 className="h3">{m.title}</h3>
+                <p className="muted">{m.body}</p>
+              </article>
+            ))}
+            <article className="vsl-bento__cell vsl-bento__cell--bonus">
+              <p className="vsl-bento__meta">בונוסים</p>
+              <ul>
+                {BONUSES.map((b) => (
+                  <li key={b.label}><b>{b.title}</b></li>
+                ))}
+              </ul>
+            </article>
+          </div>
         </div>
 
         <div className="container vsl-pack m-reveal">
@@ -663,7 +680,7 @@ export default function VslBms({ variant = 'v1' }) {
           <div className="vsl-offer card card--ink theme-ink m-reveal">
             <div className="vsl-offer__head">
               <p className="vsl-offer__lilach">אצל לילך, אמצעי תשלום אחד שלא היה במקום הנכון עלה 150,000 ש״ח. הקורס עולה 297.</p>
-              <p className="vsl-offer__today">המחיר שלכם היום:</p>
+              <p className="vsl-offer__today">שווי מוערך <del><bdi>₪{VALUE_ANCHOR}</bdi></del> · מחיר השקה חד-פעמי:</p>
               <p className="vsl-offer__price num"><bdi>₪{PRICE}</bdi></p>
               <p className="small muted">תשלום חד-פעמי · כולל מע"מ · פרטי הגישה נשלחים למייל תוך דקות</p>
             </div>
@@ -674,6 +691,14 @@ export default function VslBms({ variant = 'v1' }) {
               </Btn>
               <p className="small dim">
                 אחרי הרכישה תקבלו למייל את פרטי הגישה ועדכונים על הקורס. ניתן להסיר דיוור בכל עת.
+              </p>
+              <p className="vsl-offer__wallets" aria-label="אמצעי תשלום מהירים">
+                <span>Apple Pay</span><span>Google Pay</span><span>Bit</span>
+                <span className="vsl-offer__wallets-note">תשלום ב-1-Click</span>
+              </p>
+              <p className="vsl-offer__guarantee">
+                <Icon name="shield" />
+                <span><b>אחריות החזר מלא תוך <bdi>{GUARANTEE_DAYS}</bdi> ימים.</b> לא מתאים? כותבים לי, מקבלים את הכסף חזרה, בלי שאלות.</span>
               </p>
               <ul className="vsl-offer__trust">
                 <li><IconLock />תשלום מאובטח</li>

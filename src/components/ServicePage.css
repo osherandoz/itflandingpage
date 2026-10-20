@@ -1,6 +1,6 @@
 /* ServicePage: one template for the six service landing pages, built on the
    Signal system (src/styles/system.css). Everything is scoped under .svcp. */
-.svcp { min-height: 100vh; min-height: 100svh; background: var(--paper); }
+.svcp { min-height: 100vh; min-height: 100svh; background: var(--bg); }
 
 /* ---------- Hero: copy on the start side, proof panel on the end side ---------- */
 .svcp__hero {
@@ -124,7 +124,7 @@
     background: var(--white);
     border: 1px solid var(--line);
     border-radius: var(--r-lg);
-    box-shadow: 0 1px 0 rgba(10, 17, 40, 0.05), 0 32px 48px -36px rgba(31, 77, 255, 0.45);
+    box-shadow: 0 1px 0 rgba(10, 17, 40, 0.05), 0 32px 48px -36px rgba(16, 185, 129, 0.45);
   }
   .svcp__hero:not(.svcp__hero--callback) .svcp__proof-head {
     display: block;
@@ -223,7 +223,7 @@
 .svcp__go svg { width: 18px; height: 18px; }
 
 /* ---------- What is it: an editorial long read beside a sticky label ---------- */
-.svcp__about { background: var(--paper); border-block-start: 1px solid var(--line); }
+.svcp__about { background: var(--bg); border-block-start: 1px solid var(--line); }
 .svcp__about-grid { display: grid; gap: 32px; }
 
 .svcp__prose { max-width: var(--measure); color: var(--fg-2); }
@@ -305,7 +305,7 @@
 }
 
 /* ---------- Testimonials: one lead quote + two smaller ---------- */
-.svcp__tst { background: var(--paper); }
+.svcp__tst { background: var(--bg); }
 .svcp__tst-all { justify-self: start; }
 @media (min-width: 900px) { .svcp__tst-all { justify-self: end; } }
 
@@ -373,7 +373,7 @@
 }
 
 /* ---------- Related guides (rows) + "not exactly your case?" ---------- */
-.svcp__more { background: var(--paper); }
+.svcp__more { background: var(--bg); }
 .svcp__more-grid { display: grid; gap: 32px; }
 
 .svcp__arts { border-block-start: 1px solid var(--fg); }
@@ -408,7 +408,7 @@
 
 @media (hover: hover) {
   .svcp__art:hover .svcp__go { background: var(--ink); color: var(--paper); border-color: var(--ink); }
-  .svcp__cross-link:hover .svcp__go { background: var(--signal); color: #fff; border-color: var(--signal); }
+  .svcp__cross-link:hover .svcp__go { background: var(--signal); color: var(--on-signal); border-color: var(--signal); }
 }
 
 @media (min-width: 960px) {

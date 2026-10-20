@@ -25,7 +25,7 @@
 }
 .artl__lead-head { display: flex; align-items: center; gap: 16px; }
 .artl__lead .artl__num { color: #93a0b6; }
-.artl__lead .tag--solid { background: var(--signal); color: #fff; }
+.artl__lead .tag--solid { background: var(--signal); color: var(--on-signal); }
 .artl__lead-title {
   font-size: var(--fs-h2);
   line-height: 1.18;
@@ -107,7 +107,7 @@
 @media (hover: hover) {
   .artl__row:hover .artl__go { background: var(--ink); color: var(--paper); border-color: var(--ink); }
   .artl__row:hover .artl__row-title { color: var(--signal-deep); }
-  .artl__lead:hover .artl__go { background: var(--signal); color: #fff; border-color: var(--signal); }
+  .artl__lead:hover .artl__go { background: var(--signal); color: var(--on-signal); border-color: var(--signal); }
 }
 .artl__row-title { transition: color 0.2s ease-out; }
 

@@ -80,7 +80,7 @@
 /* ---------- Reading layout ---------- */
 .artp__read {
   padding-block: clamp(24px, 4vw, 56px) var(--section);
-  background: var(--paper);
+  background: var(--bg);
 }
 .artp__aside { display: none; }
 .artp__main { min-width: 0; max-width: 68ch; counter-reset: artp-h2; }
@@ -98,7 +98,7 @@
   line-height: 1.7;
   color: var(--fg);
 }
-.artp__answer .tag--solid { background: var(--signal); color: #fff; }
+.artp__answer .tag--solid { background: var(--signal); color: var(--on-signal); }
 
 /* ---------- Table of contents ---------- */
 .artp__toc-list { position: relative; border-inline-start: 2px solid var(--line); }
@@ -155,7 +155,7 @@
   border-radius: 2px;
 }
 .artp__toc-m-icon::after { rotate: 90deg; }
-.artp__toc-m[open] .artp__toc-m-icon { background: var(--signal); border-color: var(--signal); color: #fff; rotate: 45deg; }
+.artp__toc-m[open] .artp__toc-m-icon { background: var(--signal); border-color: var(--signal); color: var(--on-signal); rotate: 45deg; }
 .artp__toc-m nav { padding: 0 20px 20px; }
 .artp__toc-m .artp__toc-item a { padding-block: 10px; }
 
@@ -426,7 +426,7 @@
 /* ---------- Not found / placeholder ---------- */
 .artp__empty {
   padding-block: calc(var(--nav-h) + clamp(48px, 10vw, 120px)) var(--section);
-  background: var(--paper);
+  background: var(--bg);
 }
 .artp__empty .container { display: grid; gap: 24px; justify-items: start; }
 
