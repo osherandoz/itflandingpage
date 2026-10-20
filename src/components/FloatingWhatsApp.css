@@ -33,6 +33,21 @@
   font-weight: 800;
   transition: background-color 0.2s ease-out;
 }
+.fab__call {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding-inline: 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: var(--paper);
+  font-weight: 700;
+}
+.fab__call svg { width: 20px; height: 20px; }
+.fab__note { margin-inline-end: auto; }
+
 .fab__btn svg { width: 22px; height: 22px; }
 .fab__btn:active { scale: 0.98; }
 @media (hover: hover) { .fab__btn:hover { background: var(--go-deep); } }
@@ -48,7 +63,7 @@
     transition: transform 0.4s var(--ease-out), opacity 0.3s ease-out, visibility 0s linear 0.4s;
   }
   .fab.is-visible { opacity: 1; }
-  .fab__note { display: none; }
+  .fab__note, .fab__call { display: none; }
   .fab__btn { min-height: 56px; padding-inline: 24px; box-shadow: 0 16px 32px -12px rgba(10, 17, 40, 0.5); }
 }
 

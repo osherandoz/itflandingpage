@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
+import { FACTS } from '../data/businessFacts';
+import { trackSiteEvent } from '../utils/track';
 import Icon from './Icon';
 import './FloatingWhatsApp.css';
 
@@ -35,6 +37,17 @@ const FloatingWhatsApp = ({ message = DEFAULT_MESSAGE, label = 'דבר/י אית
   return (
     <div className={`fab${visible ? ' is-visible' : ''}`} aria-hidden={!visible}>
       <p className="fab__note">{note}</p>
+      {/* Phones only: a call is the fastest route for someone locked out of WhatsApp */}
+      <a
+        className="fab__call"
+        href={`tel:${FACTS.phone}`}
+        onClick={() => trackSiteEvent('call_click', { channel: 'phone', cta_location: location, intent: 'contact' })}
+        aria-label="חיוג מהיר"
+        tabIndex={visible ? 0 : -1}
+      >
+        <Icon name="phone" />
+        <span>חיוג</span>
+      </a>
       <a
         className="fab__btn"
         href={getWhatsAppUrl(message)}
