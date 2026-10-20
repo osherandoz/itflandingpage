@@ -1,7 +1,7 @@
 /* Press page: paper hero, the coverage as editorial rows with the outlet name
    set large, the community groups as a short secondary list on mist, and a
    small ink band for journalists and tips. */
-.pressp { background: var(--paper); }
+.pressp { background: var(--bg); }
 
 /* ---- Hero ---- */
 .pressp__hero {

@@ -21,11 +21,9 @@ describe('checkout attribution', () => {
     expect(out.searchParams.get('utm_source')).toBe('fixed');
   });
 
-  it('both VSL variants tag themselves with variant=, not utm_content=', () => {
+  it('the VSL tags itself with variant=, not utm_content=', () => {
     expect(page).toMatch(/mrng\.to\/engo98ytvh\?variant=/);
     expect(page).not.toMatch(/utm_content=v1/);
-    expect(page).toMatch(/v2: 'v2-outcome-headline'/);
-    expect(page).not.toMatch(/utm_content=v2/);
   });
 });
 

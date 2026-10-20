@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
+import { FACTS } from '../data/businessFacts';
+import { trackSiteEvent } from '../utils/track';
 import Icon from './Icon';
 import './FloatingWhatsApp.css';
 
 const DEFAULT_MESSAGE = 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים';
 
-// The always-reachable action. A pill in the corner on desktop; on phones a
-// bar across the bottom, under the thumb. It appears once the page's own
-// first CTA has scrolled away and leaves when the footer's CTA arrives, so
-// there is never more than one on screen.
-const FloatingWhatsApp = ({ message = DEFAULT_MESSAGE, label = 'דבר/י איתי', note = 'אבחון חינם, תשובה תוך דקות', location = 'floating' }) => {
+// The always-reachable action. Phones: a bar across the bottom with two
+// buttons (emergency call, quick WhatsApp check), present at every scroll
+// depth. Desktop: a WhatsApp pill that appears once the first CTA has scrolled away.
+const FloatingWhatsApp = ({ message = DEFAULT_MESSAGE, label = 'בדיקה מהירה בוואטסאפ', location = 'floating' }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -33,8 +34,17 @@ const FloatingWhatsApp = ({ message = DEFAULT_MESSAGE, label = 'דבר/י אית
   }, []);
 
   return (
-    <div className={`fab${visible ? ' is-visible' : ''}`} aria-hidden={!visible}>
-      <p className="fab__note">{note}</p>
+    <div className={`fab${visible ? ' is-visible' : ''}`}>
+            {/* Phones only: a call is the fastest route for someone locked out of WhatsApp */}
+      <a
+        className="fab__call"
+        href={`tel:${FACTS.phone}`}
+        onClick={() => trackSiteEvent('call_click', { channel: 'phone', cta_location: location, intent: 'contact' })}
+        aria-label="חיוג מהיר"
+      >
+        <Icon name="phone" />
+        <span>חיוג חירום</span>
+      </a>
       <a
         className="fab__btn"
         href={getWhatsAppUrl(message)}
@@ -42,7 +52,6 @@ const FloatingWhatsApp = ({ message = DEFAULT_MESSAGE, label = 'דבר/י אית
         rel="noopener noreferrer"
         onClick={onWhatsAppClick(location)}
         aria-label="פתח שיחת WhatsApp"
-        tabIndex={visible ? 0 : -1}
       >
         <Icon name="whatsapp" />
         <span>{label}</span>

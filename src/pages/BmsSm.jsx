@@ -247,63 +247,21 @@ const BENEFITS_V1 = [
 ];
 
 
-// V2 (/bms-sm-v2): the same page in the feminine plural, for the paid campaign
-// aimed at women who manage social media.
-const FAQS_V2 = [
-  {
-    q: 'יש לי כבר שנים של ניסיון עם ביזנס מנג׳ר, זה רלוונטי אליי?',
-    a: 'דווקא כן. ניסיון לא מחסן מבעיות בסיסיות: הרשאות שנשארו פתוחות מעובד ישן, פיקסל שמשויך לסוכנות הקודמת, חשבון שהבעלות עליו לא ברורה. הצ׳קליסט מארגן את כל הבדיקות שחשבתן שאתן כבר יודעות לעשות.',
-  },
-  {
-    q: 'מה קורה אם הלקוחה היא שגרמה לבעיה? זה עוזר גם בדיעבד?',
-    a: 'הצ׳קליסט בנוי בעיקר למניעה, לפני שמסכימות לקחת לקוחה חדשה. אם כבר יש בעיה, הוא עוזר להבין מה קרה ולאסוף תיעוד שמוכיח שהמצב היה כך לפני שהגעתן. זה לא מחליף ייעוץ, אבל זו הגנה ראשונית טובה.',
-  },
-  {
-    q: 'כמה זמן לוקח למלא אותו עם לקוחה חדשה?',
-    a: 'חמש דקות אם הלקוחה מסודרת ויודעת לענות. עשר דקות אם היא לא בטוחה מה קורה בחשבון שלה. שמרו אותו כ-PDF ומלאו אותו לפני כל אונבורדינג.',
-  },
-  {
-    q: 'הצ׳קליסט מבטיח שלא יהיו בעיות?',
-    a: 'לא. אין מסמך שמבטיח את זה. אבל מי שנכנסת ללקוחה עם תיעוד מסודר יודעת לאן להצביע כשמשהו משתבש, ולא נשאלת ״מה עשית לנו?״ בלי תשובה.',
-  },
-  {
-    q: 'זה מתאים גם למי שרק מתחילה בתחום?',
-    a: 'כן. אם אתן בתחילת הדרך, הצ׳קליסט ילמד אתכן מה בכלל צריך לבדוק לפני שחותמות על לקוחה. אם אתן ותיקות, הוא ייתן לכן פורמט עקבי שאפשר לסמוך עליו.',
-  },
-];
-
-const BENEFITS_V2 = [
-  {
-    title: 'הפרדה מהתקלות של הלקוחה',
-    body: 'הצ׳קליסט מראה בדיוק איך לשמור את החשבון הפרטי שלכן מחוץ לבלגן של הלקוחה, כך שהתקלות שלה לא הופכות לבעיה שלכן.',
-  },
-  {
-    title: 'ביטחון בשיחת המכירה',
-    body: 'תדעו בדיוק מה המצב של החשבון לפני שסיכמתן על מחיר. אתן נכנסות לשיחה כשאתן יודעות מה שווה ומה לא, ויוצאות ממנה עם הצעה ריאלית, לא הבטחת שווא.',
-  },
-  {
-    title: 'תיעוד שמכסה אתכן לפני הבעיה',
-    body: 'תיעוד מסודר של מצב החשבון ביום שאתן מתחילות. זה מה שמפריד בין ״זה לא הייתי אני״ לבין ״אין לי איך להוכיח את זה״.',
-  },
-];
-
-// Every number comes from the evidence register (businessFacts.js)
-// No rating counter: the 4.9 has no review source behind it (businessFacts.js).
 const STATS = [
   { value: FACTS.accountsRecovered.display, label: 'חשבונות שוחזרו' },
   { value: FACTS.successRate.display, label: 'הצלחה בשחזור' },
 ];
 
-function FaqSection({ v2, faqs }) {
+function FaqSection({ faqs }) {
   return (
     <section className="bmsm__faq section" id="faq" aria-labelledby="faqHead">
       <div className="container bmsm__split">
         <header className="bmsm__split-head m-reveal">
           <Eyebrow num="03">שאלות נפוצות</Eyebrow>
           <h2 className="h1" id="faqHead">
-            <span className="lt">{v2 ? 'שאלות שכולן' : 'שאלות שכולם'}</span> <span className="mk m-in">{v2 ? 'תמיד שואלות' : 'תמיד שואלים'}</span>
+            <span className="lt">שאלות שכולם</span> <span className="mk m-in">תמיד שואלים</span>
           </h2>
-          <p className="lead">{v2 ? 'תשובות ישירות לכל מה שעולה לפני שלוחצות להוריד.' : 'תשובות ישירות לכל מה שעולה לפני שלוחצים להוריד.'}</p>
+          <p className="lead">תשובות ישירות לכל מה שעולה לפני שלוחצים להוריד.</p>
           <p className="bmsm__nudge">
             עוד שאלות?{' '}
             <a className="link" href="https://wa.me/972509823235" target="_blank" rel="noopener noreferrer">
@@ -329,9 +287,8 @@ function FaqSection({ v2, faqs }) {
   );
 }
 
-export default function BmsSm({ variant = 'v1' }) {
-  const v2 = variant === 'v2';
-  const benefits = v2 ? BENEFITS_V2 : BENEFITS_V1;
+export default function BmsSm() {
+  const benefits = BENEFITS_V1;
   const firedRef = useRef(false);
   const finalRef = useRef(null);
   const [stickyClosed, setStickyClosed] = useState(false);
@@ -385,7 +342,7 @@ export default function BmsSm({ variant = 'v1' }) {
         <div className="container bmsm__topbar-in">
           <span className="bmsm__dot" aria-hidden="true" />
           <span>צ׳קליסט סינון לקוחות 2026</span>
-          <span className="bmsm__pill">{v2 ? 'לכל מי שמנהלת סושיאל' : 'לכל מי שמנהל סושיאל'}</span>
+          <span className="bmsm__pill">לכל מי שמנהל סושיאל</span>
         </div>
       </div>
 
@@ -414,17 +371,10 @@ export default function BmsSm({ variant = 'v1' }) {
           <div className="container bmsm__hero-grid">
             <div className="bmsm__hero-head">
               <p className="bmsm__kicker">( צ׳קליסט סינון לקוחות · עדכון 2026 )</p>
-              {v2 ? (
-                <h1 className="bmsm__title h1">
-                  <span className="lt">החשבון של הלקוחה נחסם.</span>{' '}
-                  <span className="mk">אתן לא אלה</span> שצריכות להסביר.
-                </h1>
-              ) : (
-                <h1 className="bmsm__title h1">
-                  <span className="lt">תפסיקו לשלם בזמן ובאנרגיה</span>{' '}
-                  על <span className="mk">הבלאגן</span> של הלקוחות שלכם.
-                </h1>
-              )}
+              <h1 className="bmsm__title h1">
+                <span className="lt">תפסיקו לשלם בזמן ובאנרגיה</span>{' '}
+                על <span className="mk">הבלאגן</span> של הלקוחות שלכם.
+              </h1>
             </div>
 
             <div className="bmsm__hero-form" id="getit" aria-label="קבלו את הצ׳קליסט" role="region">
@@ -432,17 +382,11 @@ export default function BmsSm({ variant = 'v1' }) {
             </div>
 
             <div className="bmsm__hero-lede">
-              {v2 ? (
-                <p className="lead">
-                  5 שאלות ששואלות לפני שחותמות על לקוחה. כשמשהו נופל, יש לכן מסמך מהיום הראשון, ולא רק ״זה לא הייתי אני״.
-                </p>
-              ) : (
-                <p className="lead">
-                  צ׳קליסט הסינון המעודכן ל‑2026:{' '}
-                  <b>איך להבין מה קורה מאחורי הקלעים</b> של החשבון
-                  ב‑5 דקות, ולהגן על המוניטין המקצועי שלכם לפני שאתם בכלל מסכימים לקחת את הלקוח.
-                </p>
-              )}
+              <p className="lead">
+                צ׳קליסט הסינון המעודכן ל‑2026:{' '}
+                <b>איך להבין מה קורה מאחורי הקלעים</b> של החשבון
+                ב‑5 דקות, ולהגן על המוניטין המקצועי שלכם לפני שאתם בכלל מסכימים לקחת את הלקוח.
+              </p>
               <ul className="bmsm__chips">
                 <li className="tag">5 בדיקות קריטיות</li>
                 <li className="tag">‏5 דקות קריאה</li>
@@ -484,7 +428,7 @@ export default function BmsSm({ variant = 'v1' }) {
               <Eyebrow num="01">מה כלול</Eyebrow>
               <h2 className="h1" id="benefitsHead">
                 <span className="lt">3 שכבות שמגנות על</span>{' '}
-                <span className="mk m-in">{v2 ? 'המוניטין, הכסף והזמן' : 'המוניטין, הכסף, והזמן'}</span> {v2 ? 'שלכן' : 'שלכם'}
+                <span className="mk m-in">המוניטין, הכסף, והזמן</span> שלכם
               </h2>
               <p className="lead">
                 נבנה אחרי חמש שנים של ראיית אותן טעויות שוב ושוב.
@@ -508,11 +452,6 @@ export default function BmsSm({ variant = 'v1' }) {
                 </li>
               ))}
             </ol>
-            {v2 && (
-              <p className="bmsm__bold m-reveal">
-                ביום שהלקוחה כותבת ״מה עשית לנו?״, את שולחת לה את מה שמילאתן ביחד ביום הראשון. השיחה נגמרת שם.
-              </p>
-            )}
             </div>
           </div>
         </section>
@@ -536,19 +475,11 @@ export default function BmsSm({ variant = 'v1' }) {
               <div className="bmsm__about-text m-reveal">
                 <Eyebrow num="02">מי מאחורי הצ׳קליסט</Eyebrow>
                 <h2 className="h2">אושר רווח · <span className="lt">מומחה תשתיות מטא</span></h2>
-                {v2 ? (
-                  <p className="lead">
-                    חמש שנים של טיפול בכל סוגי הלקוחות, ביותר מ-2,500 חשבונות של עסקים בישראל.
-                    הצ׳קליסט הזה הוא תקציר של כל הטעויות שראיתי, ואיך אפשר למנוע
-                    אותן עוד לפני שלוקחות את הלקוחה.
-                  </p>
-                ) : (
-                  <p className="lead">
-                    חמש שנים של טיפול בכל סוגי הלקוחות למעל 2,500 חשבונות של עסקים בישראל.
-                    הצ׳קליסט הזה הוא תקציר של כל הטעויות שראיתי, ואיך אפשר למנוע
-                    אותן עוד לפני שלוקחים את הלקוח.
-                  </p>
-                )}
+                <p className="lead">
+                  חמש שנים של טיפול בכל סוגי הלקוחות למעל 2,500 חשבונות של עסקים בישראל.
+                  הצ׳קליסט הזה הוא תקציר של כל הטעויות שראיתי, ואיך אפשר למנוע
+                  אותן עוד לפני שלוקחים את הלקוח.
+                </p>
               </div>
             </div>
             <dl className="bmsm__stats">
@@ -563,7 +494,7 @@ export default function BmsSm({ variant = 'v1' }) {
         </section>
 
         {/* ── FAQ ─────────────────────────────────────────────── */}
-        <FaqSection v2={v2} faqs={v2 ? FAQS_V2 : FAQS_V1} />
+        <FaqSection faqs={FAQS_V1} />
 
         {/* ── FORM, AGAIN ─────────────────────────────────────── */}
         <section className="bmsm__final section theme-signal" ref={finalRef} aria-labelledby="finalHead">
@@ -572,11 +503,10 @@ export default function BmsSm({ variant = 'v1' }) {
               <Eyebrow num="04">חינם, ישר למייל</Eyebrow>
               <h2 className="h1" id="finalHead">
                 <span className="lt">תשלח לי את הצ׳קליסט,</span>{' '}
-                <span className="mk m-in">{v2 ? 'זה לוקח שנייה' : 'זה לוקח שניה'}</span>
+                <span className="mk m-in">זה לוקח שניה</span>
               </h2>
             </div>
             <div className="bmsm__final-form m-reveal">
-              {v2 && <p className="bmsm__final-note">ממלאים אותו לפני האונבורדינג הבא. אחרי זה כבר מדובר בתיעוד בדיעבד.</p>}
               <LeadForm where="final" />
             </div>
           </div>

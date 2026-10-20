@@ -1,7 +1,7 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import Navbar from '../components/Navbar';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
-import PressSection from '../components/PressSection';
+import ProofStrip from '../components/ProofStrip';
 import HeroSection from '../components/HeroSection';
 import AboutMe from '../components/AboutMe';
 import Services from '../components/Services';
@@ -9,12 +9,13 @@ import HowItWorks from '../components/HowItWorks';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
 import { Eyebrow } from '../components/ui';
+import Icon from '../components/Icon';
+import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
 import { FACTS } from '../data/businessFacts';
 import './Home.css';
 
 // Below-fold, non-critical for first paint — split out of the initial bundle
 const Testimonials = lazy(() => import('../components/Testimonials'));
-const ArticlesSection = lazy(() => import('../components/ArticlesSection'));
 const FAQ = lazy(() => import('../components/FAQ'));
 
 const Home = () => {
@@ -47,9 +48,7 @@ const Home = () => {
         <section id="hero">
           <HeroSection />
         </section>
-        <PressSection />
-        {/* Services + diagnosis before the About block (audit D1): let a visitor
-            find their own problem and see how this works before reading a bio. */}
+        <ProofStrip />
         <section id="services">
           <Services />
         </section>
@@ -64,38 +63,51 @@ const Home = () => {
             <Testimonials />
           </Suspense>
         </section>
-        <section id="articles">
-          <Suspense fallback={null}>
-            <ArticlesSection />
-          </Suspense>
-        </section>
         <section id="faq">
           <Suspense fallback={null}>
             <FAQ />
           </Suspense>
         </section>
+        {/* Conversion hub: two routes, one decision. WhatsApp first, a three-field form for anyone without it. */}
         <section id="contact" className="home-contact section theme-mist">
           <div className="container home-contact__grid">
             <div className="home-contact__copy m-reveal">
-              <Eyebrow num="07">יצירת קשר</Eyebrow>
+              <Eyebrow num="06">יצירת קשר</Eyebrow>
               <h2 className="h1">
-                <span className="lt">מעדיפים שאחזור</span> אליכם?
+                <span className="lt">שולחים את המקרה.</span> מקבלים תשובה
               </h2>
-              <p className="lead">משאירים פרטים, מספרים בקצרה מה קרה, ואני חוזר עם אבחון ראשוני. בלי תשלום מראש.</p>
+              <p className="lead">אבחון ראשוני חינם תוך <bdi>10</bdi> דקות. בלי תשלום מראש.</p>
+              <a
+                className="btn btn--go home-contact__wa"
+                href={getWhatsAppUrl('היי אושר, יש לי תקלה בחשבון שלי. אשמח לבדיקת היתכנות מהירה.')}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={onWhatsAppClick('contact-hub')}
+              >
+                <span>שיחה מיידית בוואטסאפ</span>
+                <span className="btn__arrow" aria-hidden="true"><Icon name="whatsapp" /></span>
+              </a>
               <ul className="home-contact__points">
-                <li>אבחון ראשוני חינם</li>
                 <li>תשלום רק אחרי הצלחה</li>
+                <li>אחריות <bdi>24</bdi> שעות מרגע השחרור</li>
                 <li>זמינות {FACTS.hours.he}</li>
               </ul>
             </div>
-            <div className="card card--lift home-contact__card m-reveal">
-              <ContactForm />
+            <div className="card home-contact__card m-reveal">
+              <ContactForm
+                compact
+                hideWhatsApp
+                heading="מעדיפים שיחה טלפונית?"
+                subheading="נחזור אליכם תוך דקות ספורות."
+                submitLabel="תתקשרו אליי"
+                location="contact-hub"
+              />
             </div>
           </div>
         </section>
       </main>
       <Footer />
-      <FloatingWhatsApp message="היי, החשבון שלי חסום, אשמח לעזרה" label="קבל עזרה עכשיו" />
+      <FloatingWhatsApp />
     </div>
   );
 };

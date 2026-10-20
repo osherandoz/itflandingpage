@@ -11,11 +11,12 @@
 .home-contact__grid { display: grid; gap: 40px; align-items: start; }
 .home-contact__copy .lead { margin-block-start: 16px; }
 
+.home-contact__wa { margin-block-start: 28px; width: 100%; max-width: 440px; min-height: 64px; font-size: 1.1875rem; }
 .home-contact__points {
   display: grid;
   gap: 0;
   margin-block-start: 32px;
-  border-block-start: 1px solid var(--ink);
+  border-block-start: 1px solid var(--line-strong);
 }
 .home-contact__points li {
   padding-block: 16px;

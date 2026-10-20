@@ -272,10 +272,10 @@
   color: var(--fg-3);
   font-size: 14px;
 }
-.nls__fit-icon--yes { background: var(--signal); border-color: var(--signal); color: #fff; }
+.nls__fit-icon--yes { background: var(--signal); border-color: var(--signal); color: var(--on-signal); }
 
 /* ---- Author ---- */
-.nls__author { background: var(--paper); }
+.nls__author { background: var(--bg); }
 .nls__author-grid { display: grid; gap: 40px; align-items: center; }
 .nls__author-photo { width: min(70%, 360px); }
 .nls__author-photo img {

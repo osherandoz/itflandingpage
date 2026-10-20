@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router';
 import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
+import { FACTS } from '../data/businessFacts';
+import { trackSiteEvent } from '../utils/track';
 import Icon from './Icon';
 import './Navbar.css';
 
@@ -13,7 +15,6 @@ const NAV_ITEMS = [
   { id: 'how-it-works', label: 'איך זה עובד', anchor: true },
   { id: 'testimonials', label: 'תוצאות', anchor: true },
   { id: 'about', label: 'מי אני', anchor: true },
-  { id: 'resources', label: 'מדריכים', anchor: false, href: '/articles' },
 ];
 const WHATSAPP_MESSAGE = 'היי, הגעתי דרך האתר שלך אשמח לקבל פרטים';
 
@@ -103,6 +104,15 @@ const Navbar = () => {
           <img src="/images/brand/logo-white-320.webp" alt="" width="320" height="236" />
         </a>
 
+        {/* Live status: the page's first promise is that someone answers */}
+        <p className="navbar__live">
+          <span className="navbar__live-dot" aria-hidden="true" />
+          <span className="navbar__live-text">
+            <b>מוקד שחזור פעיל · מענה תוך דקות</b>
+            <span>זמן מענה ממוצע: <bdi>2–5</bdi> דקות</span>
+          </span>
+        </p>
+
         <nav className="navbar__links" aria-label="ניווט ראשי">
           {NAV_ITEMS.map((item) => (
             <a
@@ -116,7 +126,17 @@ const Navbar = () => {
         </nav>
 
         <a
-          className="btn btn--paper btn--sm btn--plain navbar__cta"
+          className="navbar__call"
+          href={`tel:${FACTS.phone}`}
+          onClick={() => trackSiteEvent('call_click', { channel: 'phone', cta_location: 'navbar', intent: 'contact' })}
+          aria-label={`חיוג מהיר ${FACTS.phoneDisplay}`}
+        >
+          <Icon name="phone" />
+          <span>חיוג מהיר</span>
+        </a>
+
+        <a
+          className="btn btn--go btn--sm btn--plain navbar__cta"
           href={getWhatsAppUrl(WHATSAPP_MESSAGE)}
           target="_blank"
           rel="noopener noreferrer"

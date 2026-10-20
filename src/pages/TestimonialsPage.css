@@ -1,6 +1,6 @@
 /* Testimonials page: paper hero with the aggregate rating, then a mosaic of
    real client quotes in three sizes on mist, then an ink closing band. */
-.tstp { background: var(--paper); }
+.tstp { background: var(--bg); }
 
 /* ---- Hero ---- */
 .tstp__hero {

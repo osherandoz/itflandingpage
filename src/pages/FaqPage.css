@@ -1,7 +1,7 @@
 /* FAQ page: paper hero, a category index beside the question groups, and an
    ink band that sends the unanswered question to WhatsApp.
    The accordion itself (.faq-item, .faq-list) comes from components/FAQ.css. */
-.faqp { background: var(--paper); }
+.faqp { background: var(--bg); }
 
 /* ---- Hero ---- */
 .faqp__hero {

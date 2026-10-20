@@ -62,7 +62,7 @@ const Testimonials = () => (
         <div>
           <Eyebrow num="04">תוצאות</Eyebrow>
           <h2 className="h1">
-            <span className="lt">הם כבר</span> <span className="mk m-in">חזרו לאוויר</span>
+            <span className="lt">הם כבר חזרו</span> <span className="mk m-in">לפעילות עסקית מלאה</span>
           </h2>
         </div>
         <div className="tst__head-side">

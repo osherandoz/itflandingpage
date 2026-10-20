@@ -5,11 +5,11 @@
   flex-direction: column;
   min-height: 100vh;
   min-height: 100svh;
-  background: var(--paper);
+  background: var(--bg);
 }
 .tyl__top .container { display: flex; align-items: center; height: var(--nav-h); }
 .tyl__logo { display: block; }
-.tyl__logo img { height: 40px; width: auto; filter: invert(1); }
+.tyl__logo img { height: 40px; width: auto; }
 
 .tyl__main { flex: 1 0 auto; padding-block: clamp(16px, 4vw, 56px) clamp(48px, 7vw, 96px); }
 .tyl__grid { display: grid; gap: 48px; align-items: start; }

@@ -2,10 +2,8 @@ import { useEffect, useState } from 'react';
 import { withCampaignParams } from '../utils/track';
 import { Btn, Eyebrow, FillText, SlotNumber } from '../components/ui';
 import Icon from '../components/Icon';
-import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
+import Modal from '../components/Modal';
 import '../components/FAQ.css';
-// Both VSL variants render this component (`variant` prop): one visual system,
-// so the A/B test compares the copy, not the paint.
 import './VslBms.css';
 
 /* Local icons that the shared Icon set does not carry */
@@ -23,13 +21,14 @@ const VIDEO_TITLE = 'השיטה שתצמצם לכם את הסיכוי להיחס
 // Landing-page variant tag. Kept OUT of utm_content so the ad creative's own
 // utm_content survives into checkout (creative attribution and page variant
 // are separate dimensions).
-const LP_VARIANTS = { v1: 'v1-mistake-headline', v2: 'v2-outcome-headline' };
-const purchaseUrlFor = (lpVariant) => `https://mrng.to/engo98ytvh?variant=${lpVariant}`;
+const LP_VARIANT = 'v1-mistake-headline';
+const PURCHASE_URL_BASE = `https://mrng.to/engo98ytvh?variant=${LP_VARIANT}`;
 // Optimized WebPs. See public/images/vsl-bms/. The originals (osher_with_laptop
 // is 5504x8256) are never referenced: only the -sm / -md variants.
 const IMG = '/images/vsl-bms';
 
 const PRICE = 297;
+const VALUE_ANCHOR = 997; // estimated value of the full package (spec 5.1)
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 
 // In-page anchor clicks, custom event, NOT Lead (Lead fires only on thank-you-lead)
@@ -98,31 +97,23 @@ const STEPS = [
 const MODULES = [
   {
     label: 'מודול 01',
-    lessons: '3 שיעורים',
-    title: 'פרופיל אישי, היסוד של הכל',
-    body: 'כל BMS בנוי על פרופיל אישי אחד. אם הוא חשוף, הכל חשוף. פותחים מהיסודות: תקנות, ותק, סטטוס חשבון, פרטים ואבטחה.',
-    punch: 'הבסיס שאם הוא לא יציב, שום דבר אחר לא יחזיק.',
+    title: 'ארכיטקטורת תיק עסקי תקנית וקישור נכסים בטוח',
+    body: 'איך בנוי תיק עסקי נכון, מי מחזיק במה, ואיך מחברים דפים, חשבונות מודעות ופיקסלים בלי ליצור נקודת כשל אחת.',
   },
   {
     label: 'מודול 02',
-    lessons: 'שיעור 1',
-    title: 'הפרדה בין הפרטי לעסקי',
-    body: 'ההפרדה בין הפרטי לעסקי היא ההבדל בין עסק שמוגן לבין עסק שתלוי בכם אישית.',
-    punch: 'למה זה קריטי, איך עושים את זה נכון, ואיך שומרים על זה כשהעסק גדל.',
+    title: 'ניהול הרשאות, מנהלים ואימות דו-שלבי',
+    body: 'מי מקבל גישה ובאיזו רמה, איך מוסיפים מנהל גיבוי, ואיך מגדירים אימות דו-שלבי בלי סיכון חסימת שרשרת.',
   },
   {
     label: 'מודול 03',
-    lessons: '2 שיעורים',
-    title: 'הקמת Business Manager ואיסוף הנכסים',
-    body: "ההבדל בין מרכז החשבונות לביזנס מנג'ר. איך מקימים תיק עסקי נכון, ואיך אוספים את כל הנכסים שלכם תחת קורת גג אחת.",
-    punch: 'הצעד הטכני שלילך לא ידעה לעשות, וזה עלה לה ביוקר.',
+    title: 'ניטור Business Support Home',
+    body: 'איך קוראים את ההתראות, ומה נכון לעשות מול אלגוריתם הניטור של Meta לפני שהן הופכות לחסימה.',
   },
   {
     label: 'מודול 04',
-    lessons: '3 שיעורים',
-    title: 'חשבון מודעות, תשלום, אנשים והרשאות',
-    body: 'חשבון המודעות, הגדרתו ואמצעי התשלום. אנשים, שותפים, הרשאות. מידע על העסק ואבטחה.',
-    punch: 'כאן הטעויות הכי יקרות נולדות. כאן גם נמנעות.',
+    title: 'פרוטוקול חירום ראשוני ומניעת שריפת ערעורים',
+    body: 'מה עושים בשעה הראשונה, באיזה סדר מגישים ערעור, ואיך לא מפסידים ערעור שאי אפשר לחזור עליו.',
   },
 ];
 
@@ -151,10 +142,9 @@ const BONUSES = [
 ];
 
 const INCLUDED = [
-  { label: '4 מודולי יסוד, 9 שיעורים מוקלטים (הקלטת מסך מלאה)' },
-  { bonus: 'בונוס 01', label: 'מודול פריצות וחסימות' },
-  { bonus: 'בונוס 02', label: 'מודול אימות ואישורי פעילות' },
-  { bonus: 'בונוס 03', label: 'הרצאת אורח של בר שלג' },
+  { label: '15 שיעורים מוקלטים (הקלטת מסך מלאה)' },
+  { label: "צ'קליסט סינון לקוחות" },
+  { label: 'תבניות ערעור מוכנות' },
   { label: 'גישה ללא הגבלת זמן, כולל כל עדכון עתידי של הקורס', value: 'ללא הגבלה' },
 ];
 
@@ -184,44 +174,10 @@ const FAQS = [
   ['אפשר לדבר איתך אם נתקעתי תוך כדי?', 'התלמידים שלי יכולים לפנות אליי בוואטסאפ בשאלות על יישום החומר מהקורס. זו לא תמיכה אישית מלאה, ולא שחזור של חשבון חסום (זה שירות נפרד), אבל על שאלות יישום אני עונה בפועל לכולם.'],
 ];
 
-/* ============================================================
-   V2 (outcome headline): the only copy that differs from V1
-   ============================================================ */
-const V2_AFTER = [
-  'שבת בבוקר. הפרופיל שלכם קיבל השבתה. ה-admin הגיבוי נכנס לביזנס מנג׳ר, הנכסים במקום, ואתם פותחים ערעור בלי להתנשם.',
-  'לקוחה שואלת ״מי בעצם מחזיק בדף שלנו?״. אתם שולחים צילום מסך תוך שתי דקות.',
-  'מגיעה ״הודעה ממטא״ עם לינק דחוף. אתם יודעים מה זה, ומוחקים.',
-];
-
-const V2_CTA = {
-  hero: 'אני רוצה תשתית שלא נופלת · ₪297',
-  author: 'בוא נבנה את זה · ₪297',
-  pricing: 'אני רוצה תשתית שלא נופלת · ₪297',
-  sticky: '₪297 · להתחיל עכשיו',
-  closing: 'אני רוצה תשתית שלא נופלת · ₪297',
-};
-
-const RailItem = ({ item, node, bonus }) => (
-  <li className={`vsl-rail__item m-reveal${bonus ? ' vsl-rail__item--bonus' : ''}`}>
-    <span className="vsl-rail__node num" aria-hidden="true">{node}</span>
-    <div className="vsl-rail__card">
-      <p className="vsl-rail__meta">
-        {bonus
-          ? <span className="sticker sticker--paper m-in">{item.label}</span>
-          : <span className="vsl-rail__label">{item.label}</span>}
-        <span className="tag">{item.lessons}</span>
-      </p>
-      <h3 className="h3">{item.title}</h3>
-      <p className="muted">{item.body} <strong>{item.punch}</strong></p>
-    </div>
-  </li>
-);
-
-export default function VslBms({ variant = 'v1' }) {
-  const v2 = variant === 'v2';
-  const lpVariant = LP_VARIANTS[variant];
-  const PURCHASE_URL = purchaseUrlFor(lpVariant);
-  const cta = (where, v1Text) => (v2 ? V2_CTA[where] : v1Text);
+export default function VslBms() {
+  const lpVariant = LP_VARIANT;
+  const PURCHASE_URL = PURCHASE_URL_BASE;
+  const cta = (where, text) => text;
   const [showStickyCta, setShowStickyCta] = useState(false);
   // Sticky retires while the real purchase section is on screen.
   const [finalCtaInView, setFinalCtaInView] = useState(false);
@@ -234,8 +190,37 @@ export default function VslBms({ variant = 'v1' }) {
   useEffect(() => {
     if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'VSL-BMS' });
   }, []);
-  const trackCheckout = (where) => () => trackInitiateCheckout(where, lpVariant);
+  // Payment happens on the page: the checkout opens in a dialog instead of leaving.
+  // The href stays as the fallback (no JS, middle-click, blocked frame).
+  const [checkoutUrl, setCheckoutUrl] = useState(null);
+  const trackCheckout = (where) => (e) => {
+    trackInitiateCheckout(where, lpVariant);
+    if (e?.preventDefault && !(e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) {
+      e.preventDefault();
+      setCheckoutUrl(checkout(where));
+    }
+  };
   const checkout = (cta) => `${purchaseUrl}&cta=${cta}`;
+
+  // The player reports its clock through postMessage (no extra script loaded):
+  // the purchase button appears when the video ends (the offer is made at the end).
+  const [offerRevealed, setOfferRevealed] = useState(false);
+  function listenToPlayer(e) {
+    e.currentTarget.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*');
+  }
+  useEffect(() => {
+    if (!videoStarted) return undefined;
+    const onMessage = (e) => {
+      if (typeof e.origin !== 'string' || !e.origin.includes('youtube')) return;
+      let data;
+      try { data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch { return; }
+      const info = data?.info;
+      if (data?.event !== 'infoDelivery' || !info) return;
+      if (info.playerState === 0) setOfferRevealed(true);
+    };
+    window.addEventListener('message', onMessage);
+    return () => window.removeEventListener('message', onMessage);
+  }, [videoStarted]);
 
   function startVideo() {
     setVideoStarted(true);
@@ -277,19 +262,11 @@ export default function VslBms({ variant = 'v1' }) {
         <div className="container vsl-hero__grid vsl-hero__grid--wide">
           {/* The title runs the full width so each phrase stays on one line */}
           <header className="vsl-hero__head">
-            {v2 && <p className="vsl-hero__eyebrow">קורס BMS · Business Manager Setup</p>}
-            <p className="vsl-hero__kicker">קורס מוקלט בעברית · כ-3 שעות · <bdi>₪{PRICE}</bdi> תשלום אחד</p>
-            {v2 ? (
-              <h1 className="vsl-hero__title">
-                <span className="lt">העסק שלכם לא אמור</span>{' '}
-                <span>ליפול בגלל <span className="mk">פרופיל אחד.</span></span>
-              </h1>
-            ) : (
-              <h1 className="vsl-hero__title">
-                <span className="lt">קורס BMS: מגדירים Business Manager נכון,</span>{' '}
-                <span>לפני <span className="mk">שהעסק נחסם</span></span>
-              </h1>
-            )}
+            <p className="vsl-hero__kicker">קורס מוקלט בעברית · <bdi>15</bdi> שיעורים קצרים · <bdi>₪{PRICE}</bdi> תשלום אחד</p>
+            <h1 className="vsl-hero__title">
+              <span className="lt">איך לבנות תיק עסקי (Business Portfolio) חסין חסימות ב-<bdi>15</bdi> שיעורים קצרים</span>{' '}
+              <span>מתוך לקחי שחזור של <span className="mk"><bdi>2,500+</bdi> חשבונות</span> מול Meta</span>
+            </h1>
           </header>
           <div className="vsl-hero__copy">
             <p className="vsl-hero__sub">
@@ -306,10 +283,11 @@ export default function VslBms({ variant = 'v1' }) {
             <div className="vsl-video__frame">
               {videoStarted ? (
                 <iframe
-                  src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0&cc_load_policy=1&cc_lang_pref=he`}
+                  src={`https://www.youtube-nocookie.com/embed/${VIDEO_ID}?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3&playsinline=1&enablejsapi=1&cc_load_policy=1&cc_lang_pref=he`}
                   title={VIDEO_TITLE}
                   allow="autoplay; fullscreen; picture-in-picture"
                   allowFullScreen
+                  onLoad={listenToPlayer}
                 />
               ) : (
                 <button type="button" className="vsl-video__facade" onClick={startVideo}>
@@ -332,14 +310,28 @@ export default function VslBms({ variant = 'v1' }) {
           </figure>
 
           <div className="vsl-hero__cta">
-            <Btn variant="signal" href={checkout('hero')} onClick={trackCheckout('hero')}>
-              {cta('hero', `הצטרפו לקורס ב-₪${PRICE}`)}
-            </Btn>
-            <p className="vsl-hero__terms small"><bdi>₪{PRICE}</bdi>. תשלום אחד, כולל מע"מ. אחרי התשלום מגיע מייל עם פרטי הגישה, ומתחילים.</p>
-            <a href="#deliverables" className="link small" onClick={trackCtaClick}>
-              מה בדיוק יש בקורס? לסילבוס המלא
-            </a>
+            {offerRevealed ? (
+              <>
+                <Btn variant="signal" href={checkout('hero')} onClick={trackCheckout('hero')}>
+                  {cta('hero', `הצטרפו לקורס ב-₪${PRICE}`)}
+                </Btn>
+                <p className="vsl-hero__terms small">
+                  שווי <del><bdi>₪{VALUE_ANCHOR}</bdi></del> · מחיר השקה <bdi>₪{PRICE}</bdi>, תשלום אחד כולל מע"מ.
+                </p>
+              </>
+            ) : (
+              <a href="#final-cta" className="link small" onClick={trackCtaClick}>
+                מעדיפים לקרוא? קפצו להצעה המלאה
+              </a>
+            )}
           </div>
+
+          {/* For the people who scan instead of watching */}
+          <ul className="vsl-hero__points">
+            <li><Icon name="check" /><span><bdi>15</bdi> שיעורים קצרים, הקלטת מסך, יישום תוך כדי צפייה</span></li>
+            <li><Icon name="check" /><span>תיק עסקי, הרשאות ואימות דו-שלבי שלא מפילים אחד את השני</span></li>
+            <li><Icon name="check" /><span>צ'קליסט סינון לקוחות ותבניות ערעור מוכנות</span></li>
+          </ul>
         </div>
       </section>
 
@@ -432,16 +424,10 @@ export default function VslBms({ variant = 'v1' }) {
             ))}
           </ol>
 
-          {v2 ? (
-            <p className="vsl-note m-reveal">
-              אף אחת מהן לא עשתה משהו טיפשי. הן עבדו כמו שכולם עובדים, כי אף אחד לא מלמד שיש דבר כזה admin גיבוי, או שצריך לבדוק מי בעצם הבעלים של הדף. זה הפער שהקורס סוגר.
-            </p>
-          ) : (
             <p className="vsl-note m-reveal">
               <strong>התירוץ של כולן היה:</strong> "זה עבד לי ככה עד עכשיו".
               וכשמשהו השתבש? הן לא ידעו מה לעשות ולמי לפנות. זה הסיפור שקורה יום יום.
             </p>
-          )}
 
           <dl className="vsl-nums">
             <div className="vsl-nums__item">
@@ -494,25 +480,6 @@ export default function VslBms({ variant = 'v1' }) {
         </div>
       </section>
 
-      {/* V2 only: what the setup looks like on the day it matters */}
-      {v2 && (
-        <section className="section theme-paper vsl-after">
-          <div className="container">
-            <header className="sec-head m-reveal">
-              <h2 className="h2">איך זה נראה אחרי</h2>
-            </header>
-            <ol className="vsl-after__list">
-              {V2_AFTER.map((text, i) => (
-                <li className="vsl-after__item m-reveal" key={text}>
-                  <span className="vsl-after__num num" aria-hidden="true">0{i + 1}</span>
-                  <p>{text}</p>
-                </li>
-              ))}
-            </ol>
-            <p className="vsl-after__close m-reveal">זה לא ביטוח מפני כל תקלה. זה ההבדל בין שבוע של פאניקה לשעה של סדר.</p>
-          </div>
-        </section>
-      )}
 
       {/* DELIVERABLES. 4 modules + 3 bonuses on a rail that fills with scroll */}
       <section className="section theme-mist" id="deliverables">
@@ -532,15 +499,23 @@ export default function VslBms({ variant = 'v1' }) {
             </div>
           </header>
 
-          <ol className="vsl-rail" data-scrub="0.7 0.55">
-            <li className="vsl-rail__line" aria-hidden="true"><span /></li>
-            {MODULES.map((m, i) => <RailItem key={m.label} item={m} node={`0${i + 1}`} />)}
-            <li className="vsl-rail__break m-reveal">
-              <span className="vsl-rail__node vsl-rail__node--plus" aria-hidden="true">+</span>
-              <p>ובחבילה גם, 3 בונוסים מתנה</p>
-            </li>
-            {BONUSES.map((b) => <RailItem key={b.label} item={b} node="+" bonus />)}
-          </ol>
+          <div className="vsl-bento m-stagger">
+            {MODULES.map((m, i) => (
+              <article className="vsl-bento__cell" key={m.label}>
+                <p className="vsl-bento__meta"><span className="num">0{i + 1}</span>{m.label}</p>
+                <h3 className="h3">{m.title}</h3>
+                <p className="muted">{m.body}</p>
+              </article>
+            ))}
+            <article className="vsl-bento__cell vsl-bento__cell--bonus">
+              <p className="vsl-bento__meta">בונוסים</p>
+              <ul>
+                {BONUSES.map((b) => (
+                  <li key={b.label}><b>{b.title}</b></li>
+                ))}
+              </ul>
+            </article>
+          </div>
         </div>
 
         <div className="container vsl-pack m-reveal">
@@ -663,7 +638,7 @@ export default function VslBms({ variant = 'v1' }) {
           <div className="vsl-offer card card--ink theme-ink m-reveal">
             <div className="vsl-offer__head">
               <p className="vsl-offer__lilach">אצל לילך, אמצעי תשלום אחד שלא היה במקום הנכון עלה 150,000 ש״ח. הקורס עולה 297.</p>
-              <p className="vsl-offer__today">המחיר שלכם היום:</p>
+              <p className="vsl-offer__today">שווי מוערך <del><bdi>₪{VALUE_ANCHOR}</bdi></del> · מחיר השקה חד-פעמי:</p>
               <p className="vsl-offer__price num"><bdi>₪{PRICE}</bdi></p>
               <p className="small muted">תשלום חד-פעמי · כולל מע"מ · פרטי הגישה נשלחים למייל תוך דקות</p>
             </div>
@@ -680,23 +655,6 @@ export default function VslBms({ variant = 'v1' }) {
                 <li><Icon name="invoice" />חשבונית מס מיידית</li>
                 <li><IconZap />גישה מיידית</li>
               </ul>
-              {v2 && (
-                <div className="vsl-obj">
-                  <p><strong>״זה עבד לי ככה עד עכשיו.״</strong> גם ללילך. עד הלילה שזה הפסיק.</p>
-                  <p>
-                    <strong>״אין לי 3 שעות.״</strong> זה ערב אחד, ואת היישום עושים תוך כדי צפייה. אין גם ערב? בהקמה מוגנת אני עושה את זה איתכם בזום, בשעה אחת.{' '}
-                    <a
-                      href={getWhatsAppUrl('היי אושר, אשמח לפרטים על הקמה מוגנת')}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link"
-                      onClick={onWhatsAppClick('vsl-v2-protected-setup')}
-                    >
-                      לפרטים בוואטסאפ
-                    </a>
-                  </p>
-                </div>
-              )}
             </div>
 
             <div className="value-box">
@@ -782,22 +740,20 @@ export default function VslBms({ variant = 'v1' }) {
         </div>
       </section>
 
-      {v2 && (
-        <section className="section theme-paper vsl-closing">
-          <div className="container">
-            <p className="vsl-closing__text m-reveal">
-              אם משהו כבר נפל לכם פעם, זה לא כי עשיתם משהו לא בסדר. אף אחד לא סיפר לכם שכל העסק יושב על פרופיל אחד. עכשיו אתם יודעים, ומה שעושים עם זה כבר בידיים שלכם.
-            </p>
-            <div className="vsl-cta">
-              <Btn variant="signal" href={checkout('closing')} onClick={trackCheckout('closing')}>
-                {V2_CTA.closing}
-              </Btn>
-            </div>
-          </div>
-        </section>
-      )}
 
       </main>
+
+      <Modal isOpen={!!checkoutUrl} onClose={() => setCheckoutUrl(null)} title="תשלום מאובטח · קורס BMS">
+        <iframe
+          className="vsl-pay"
+          src={checkoutUrl || undefined}
+          title="תשלום מאובטח"
+          allow="payment *"
+        />
+        <p className="small muted">
+          לא נטען? <a className="link" href={checkoutUrl || '#'} target="_blank" rel="noopener noreferrer">פתחו את התשלום בחלון חדש</a>
+        </p>
+      </Modal>
 
       {/* STICKY MOBILE CTA, always straight to checkout, hidden while the purchase section is on screen */}
       <div className={`vsl-bar${stickyVisible ? ' is-visible' : ''}`} role="region" aria-label="קיצור דרך לרכישה">

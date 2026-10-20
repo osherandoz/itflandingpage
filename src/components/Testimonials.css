@@ -1,5 +1,5 @@
 /* Testimonials: a mosaic in two sizes with one lead quote. */
-.tst { background: var(--paper); }
+.tst { background: var(--bg); }
 
 .tst__head-side { display: grid; gap: 16px; justify-items: start; }
 @media (min-width: 900px) { .tst__head-side { justify-items: end; text-align: end; } }

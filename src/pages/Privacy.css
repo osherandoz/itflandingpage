@@ -1,7 +1,7 @@
 /* Privacy policy: calm and readable. Paper, a narrow reading column, a sticky
    section index on desktop. No decoration; the only motion is the header
    easing in. Element selectors are scoped to this page's own blocks. */
-.privp { background: var(--paper); color: var(--fg); }
+.privp { background: var(--bg); color: var(--fg); }
 .privp__main { padding-block: clamp(32px, 5vw, 64px) var(--section); }
 
 .privp__back { color: var(--fg-2); min-height: 44px; }

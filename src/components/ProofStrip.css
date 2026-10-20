@@ -1,0 +1,38 @@
+/* First-scroll credibility: four tabular numbers and the outlets, right under the hero. */
+.proof { padding-block: clamp(8px, 2vw, 24px) 0; }
+.proof__inner { display: grid; gap: 24px; }
+
+.proof__stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.proof__stat {
+  display: grid;
+  gap: 4px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--ink-2);
+}
+.proof__value { font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.25rem); line-height: 1; font-weight: 900; color: var(--fg); }
+.proof__label { font-size: var(--fs-small); color: var(--fg-2); }
+
+.proof__media {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+  padding-block-start: 8px;
+}
+.proof__media-label { font-size: var(--fs-small); color: var(--fg-3); }
+.proof__logos { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.proof__logos li {
+  font-size: 1.125rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  color: var(--wave);
+  transition: color 0.2s ease-out;
+}
+@media (hover: hover) { .proof__logos li:hover { color: var(--fg); } }
+.proof__more { margin-inline-start: auto; }
+
+@media (min-width: 768px) {
+  .proof__stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}

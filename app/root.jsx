@@ -6,15 +6,15 @@ import { useMotion } from '../src/motion/useMotion.js';
 import NotFound from '../src/pages/NotFound';
 // Self-hosted variable font, preloaded below: text paints in the brand face
 // on first render with no third-party round-trip.
-import rubikHebrew from '@fontsource-variable/rubik/files/rubik-hebrew-wght-normal.woff2?url';
+import heeboHebrew from '@fontsource-variable/heebo/files/heebo-hebrew-wght-normal.woff2?url';
 // Punctuation and digits live in the Latin file: without it the headline is
 // repainted when it arrives, and that repaint is what LCP records.
-import rubikLatin from '@fontsource-variable/rubik/files/rubik-latin-wght-normal.woff2?url';
+import heeboLatin from '@fontsource-variable/heebo/files/heebo-latin-wght-normal.woff2?url';
 import '../src/styles/system.css';
 
 export const links = () => [
-  { rel: 'preload', href: rubikHebrew, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
-  { rel: 'preload', href: rubikLatin, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+  { rel: 'preload', href: heeboHebrew, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
+  { rel: 'preload', href: heeboLatin, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
 ];
 
 export function Layout({ children }) {
@@ -25,7 +25,7 @@ export function Layout({ children }) {
         {/* Marks the document as scripted so scroll reveals may start hidden.
             If the app never boots, the class is dropped and everything shows. */}
         <script dangerouslySetInnerHTML={{ __html: `(function(d){d.classList.add('js');setTimeout(function(){if(!d.classList.contains('motion-ready'))d.classList.remove('js')},4000)})(document.documentElement)` }} />
-        <meta name="theme-color" content="#0a1128" />
+        <meta name="theme-color" content="#090d16" />
         <link rel="icon" type="image/png" sizes="64x64" href="/images/favicon-64.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />

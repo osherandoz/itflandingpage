@@ -27,19 +27,14 @@ to the Hebrew pages (`vercel.json`).
 | `node scripts/og-cards.mjs` | Regenerate the share cards (`public/images/og/*`, one per page) after adding a page or article (a test fails if one is missing). Needs Chrome + global `@playwright/cli` |
 | `node scripts/build-article-index.mjs` | Regenerate `src/data/articleIndex.js` after adding or editing an article (a test fails if it is stale) |
 
-## Design: the "Signal" system (2026-10)
-- Rules and rationale: `DESIGN.md`. Tokens and primitives: `src/styles/system.css`.
-  Atoms: `src/components/ui.jsx`. Motion engine: `src/motion/useMotion.js`.
-  Reference implementation: the home page.
-- White + ink + one cobalt accent ("Midnight" palette); WhatsApp green only for the WhatsApp action.
-  Every page opens dark: ink header + ink hero (Osher, 2026-10-02: the all-light version was too light).
-  Rubik variable (300 beside 900 in headings; replaced Heebo 2026-10-12, Osher wanted a livelier face); Frank Ruhl Libre for one quote per page.
-- Motion is scroll-driven. Hover changes colour only. No hover transforms, no
-  custom cursor, no animated backgrounds, no `backdrop-filter`, no smooth-scroll library.
-- No "three equal cards with an icon". Lists are numbered rows; layouts are asymmetric.
-- Above the fold never waits for JS (CSS keyframes, not `.m-reveal`).
-- Pinned/stacked layouts only at `(min-width: 1024px) and (min-height: 800px)`.
-- No Font Awesome, no Google Fonts, no animation library. Icons: `src/components/Icon.jsx`.
+## Design: Obsidian emergency system (2026-10-20, from ITF-Landing-VSL-Spec.md)
+- The spec file (`Downloads/ITF-Landing-VSL-Spec.md`) is the source of truth for the home page and `/VSL-BMS`. Tokens: `src/styles/system.css`.
+- 60-30-10: Obsidian `#090d16` base, slate cards `#131b2e`/`#1e293b`, emerald `#10b981` accent (WhatsApp `#22c55e`), coral `#ef4444` for danger only. Whole site is dark; `.theme-*` classes only change depth.
+  Text on the accent uses `--on-signal`, never white (contrast).
+- Heebo variable (replaced Rubik). Home order: header (live status + call + WhatsApp) > hero (platform picker) > proof strip > bento services > 3 steps > about > testimonials > FAQ > conversion hub (WhatsApp + 3-field form). No articles section, no guide links on home.
+- Mobile: `FloatingWhatsApp` is a two-button bar (call + WhatsApp) at every scroll depth.
+- VSL: spec headline, 297 ILS with 997 value anchor, 14-day refund, syllabus bento, purchase button revealed when the video ends.
+- Older Signal rules (no hover transforms, no animated backgrounds, no `backdrop-filter`, Above the fold never waits for JS) still apply.
 
 ## Map
 - Routes: `app/routes.js`. Page hierarchy and funnel: `SITE-HIERARCHY.md`.
@@ -47,9 +42,8 @@ to the Hebrew pages (`vercel.json`).
 - Six service pages share `src/components/ServicePage.jsx` + `src/data/servicePages.js`.
   Each carries a `notice`: the block message drawn in CSS (an illustration, labelled as one, not a screenshot).
 - Every lead form (`ContactForm`) lands on `/תודה` (noindex) once the server confirms; the Lead event still fires in the form.
-- BMS course funnel: `/bms-sm` (free checklist; `/bms-sm-v2` = feminine-plural variant, noindex) → `/תודה-קליסט`;
-  `/VSL-BMS` and `/VSL-BMS-V2` (A/B, noindex) → external checkout → `/תודה-רכישה`.
-  Both pairs are one component with a `variant` prop (`VslBms`, `BmsSm`). `/akamol` = 19.90 ILS PDF bundle
+- BMS course funnel: `/bms-sm` (free checklist; the `-v2` variant was removed 2026-10-20, redirects here) → `/תודה-קליסט`;
+  `/VSL-BMS` → checkout (opens in an on-page dialog, Green Invoice link) → `/תודה-רכישה`. `/akamol` = 19.90 ILS PDF bundle
   (`src/pages/Akamol.jsx`; Grow link, covers, chat proof live in `src/data/akamol.js`).
   Product brief for these pages: `PRODUCT.md`.
 - Analytics: the fbq / gtag / clarity queues are created in `<head>`; the three libraries load on the
@@ -127,7 +121,7 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 ## Decided (2026-10-19, brief `itf-landing-pages-brief.md`)
 - `/VSL-BMS` lost the "שווי אמיתי ₪638" line and all "ערך ₪" labels; a Lilach line sits above the price. `SlotNumber`
   renders the final number as plain text on the server (digit strips mount after hydration).
-- `/VSL-BMS-V2` is now the outcome-headline variant (`variant=v2-outcome-headline`); the old loss-headline V2 is gone (git history).
+- One VSL only: `/VSL-BMS-V2` was removed 2026-10-20 and redirects to `/VSL-BMS`.
 - `/akamol` ships with the Grow link empty: buy buttons open WhatsApp until `GROW_AKAMOL_URL` is set. Covers and
   the chat-proof screenshot stay unrendered until supplied (the screenshot also needs the client's consent).
 
