@@ -29,9 +29,6 @@ const IMG = '/images/vsl-bms';
 
 const PRICE = 297;
 const VALUE_ANCHOR = 997; // estimated value of the full package (spec 5.1)
-// Second of the video where the offer is revealed. The purchase button under
-// the player appears then (or when the video ends). TODO: set to the real timestamp.
-const OFFER_AT_SECONDS = 360;
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 
 // In-page anchor clicks, custom event, NOT Lead (Lead fires only on thank-you-lead)
@@ -206,7 +203,7 @@ export default function VslBms() {
   const checkout = (cta) => `${purchaseUrl}&cta=${cta}`;
 
   // The player reports its clock through postMessage (no extra script loaded):
-  // the purchase button appears when the offer is shown, or when the video ends.
+  // the purchase button appears when the video ends (the offer is made at the end).
   const [offerRevealed, setOfferRevealed] = useState(false);
   function listenToPlayer(e) {
     e.currentTarget.contentWindow?.postMessage(JSON.stringify({ event: 'listening', id: 1, channel: 'widget' }), '*');
@@ -219,7 +216,7 @@ export default function VslBms() {
       try { data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch { return; }
       const info = data?.info;
       if (data?.event !== 'infoDelivery' || !info) return;
-      if (info.currentTime >= OFFER_AT_SECONDS || info.playerState === 0) setOfferRevealed(true);
+      if (info.playerState === 0) setOfferRevealed(true);
     };
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);

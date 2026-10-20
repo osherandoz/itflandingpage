@@ -33,7 +33,7 @@ to the Hebrew pages (`vercel.json`).
   Text on the accent uses `--on-signal`, never white (contrast).
 - Heebo variable (replaced Rubik). Home order: header (live status + call + WhatsApp) > hero (platform picker) > proof strip > bento services > 3 steps > about > testimonials > FAQ > conversion hub (WhatsApp + 3-field form). No articles section, no guide links on home.
 - Mobile: `FloatingWhatsApp` is a two-button bar (call + WhatsApp) at every scroll depth.
-- VSL: spec headline, 297 ILS with 997 value anchor, 14-day refund, syllabus bento, purchase button revealed at `OFFER_AT_SECONDS` (placeholder 360, set the real timestamp).
+- VSL: spec headline, 297 ILS with 997 value anchor, 14-day refund, syllabus bento, purchase button revealed when the video ends.
 - Older Signal rules (no hover transforms, no animated backgrounds, no `backdrop-filter`, Above the fold never waits for JS) still apply.
 
 ## Map
