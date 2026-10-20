@@ -16,7 +16,7 @@
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net https://*.clarity.ms https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.facebook.com https://connect.facebook.net https://*.clarity.ms https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://vitals.vercel-insights.com https://itf-crm.vercel.app; frame-src https://www.facebook.com https://www.youtube.com; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://www.facebook.com" },
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net https://*.clarity.ms https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.facebook.com https://connect.facebook.net https://*.clarity.ms https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://vitals.vercel-insights.com https://itf-crm.vercel.app; frame-src https://www.facebook.com https://www.youtube.com https://www.youtube-nocookie.com https://pages.greeninvoice.co.il; object-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://www.facebook.com" },
         { "key": "Link", "value": "</llms.txt>; rel=\"service-doc\"" }
       ]
     },
@@ -40,6 +40,7 @@
     }
   ],
   "redirects": [
+    { "source": "/VSL-BMS-V2", "destination": "/VSL-BMS", "permanent": false },
     { "source": "/en/facebook-account-recovery", "destination": "/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7", "permanent": true },
     { "source": "/en/instagram-account-recovery", "destination": "/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D", "permanent": true },
     { "source": "/en/whatsapp-account-recovery", "destination": "/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%95%D7%95%D7%90%D7%98%D7%A1%D7%90%D7%A4", "permanent": true },

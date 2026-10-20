@@ -26,8 +26,6 @@ export default [
   route("bms-sm-v2", "./routes/bms-sm-v2.jsx"),
   // VSL-BMS — Video sales letter for BMS course
   route("VSL-BMS", "./routes/vsl-bms.jsx"),
-  // VSL-BMS-V2 — A/B test variant (noindex)
-  route("VSL-BMS-V2", "./routes/vsl-bms-v2.jsx"),
   // Akamol — first-aid PDF bundle, 19.90 ILS
   route("akamol", "./routes/akamol.jsx"),
   route("תודה", "./routes/thank-you.jsx"),

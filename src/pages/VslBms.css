@@ -528,3 +528,6 @@
   background: rgba(16, 185, 129, 0.08); line-height: 1.5;
 }
 .vsl-offer__guarantee svg { flex: 0 0 auto; width: 24px; height: 24px; color: var(--signal); }
+
+/* On-page checkout dialog */
+.vsl-pay { width: 100%; height: min(70vh, 640px); border: 0; border-radius: var(--r-sm); background: #fff; }

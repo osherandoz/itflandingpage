@@ -2,10 +2,8 @@ import { useEffect, useState } from 'react';
 import { withCampaignParams } from '../utils/track';
 import { Btn, Eyebrow, FillText, SlotNumber } from '../components/ui';
 import Icon from '../components/Icon';
-import { getWhatsAppUrl, onWhatsAppClick } from '../utils/whatsapp';
+import Modal from '../components/Modal';
 import '../components/FAQ.css';
-// Both VSL variants render this component (`variant` prop): one visual system,
-// so the A/B test compares the copy, not the paint.
 import './VslBms.css';
 
 /* Local icons that the shared Icon set does not carry */
@@ -23,15 +21,14 @@ const VIDEO_TITLE = 'השיטה שתצמצם לכם את הסיכוי להיחס
 // Landing-page variant tag. Kept OUT of utm_content so the ad creative's own
 // utm_content survives into checkout (creative attribution and page variant
 // are separate dimensions).
-const LP_VARIANTS = { v1: 'v1-mistake-headline', v2: 'v2-outcome-headline' };
-const purchaseUrlFor = (lpVariant) => `https://mrng.to/engo98ytvh?variant=${lpVariant}`;
+const LP_VARIANT = 'v1-mistake-headline';
+const PURCHASE_URL_BASE = `https://mrng.to/engo98ytvh?variant=${LP_VARIANT}`;
 // Optimized WebPs. See public/images/vsl-bms/. The originals (osher_with_laptop
 // is 5504x8256) are never referenced: only the -sm / -md variants.
 const IMG = '/images/vsl-bms';
 
 const PRICE = 297;
 const VALUE_ANCHOR = 997; // estimated value of the full package (spec 5.1)
-const GUARANTEE_DAYS = 14; // full refund, no questions asked (spec 5.4: 14-30 days)
 // Second of the video where the offer is revealed. The purchase button under
 // the player appears then (or when the video ends). TODO: set to the real timestamp.
 const OFFER_AT_SECONDS = 360;
@@ -174,34 +171,16 @@ const FAQS = [
   ['אין לי רקע טכנולוגי. אפשר בכלל להתמודד עם זה?', 'בהחלט. הקורס בנוי בהקלטות מסך עם הנחיה צעד-אחר-צעד. אין הנחה של ידע מוקדם. אם אתם יודעים להפעיל פייסבוק ולהיכנס לחשבון, אתם יודעים מספיק.'],
   ['כמה זמן ייקח לי לסיים את הקורס?', 'בערך 3 שעות מצטברות של תוכן. אפשר לעבור הכל בערב אחד, או לפזר על פני שבוע. את היישום עצמו אפשר לעשות תוך כדי, מסך אחרי מסך.'],
   ['מה מקבלים אחרי הרכישה?', 'גישה מיידית ל-LMS עם כל המודולים והבונוסים. שולחים לכם מייל עם שם משתמש וסיסמה תוך דקות. גישה ללא הגבלת זמן, כולל כל עדכון עתידי של הקורס. לא הגיע מייל? כתבו בוואטסאפ ונסדר.'],
-  ['האם יש החזר כספי אם הקורס לא מתאים לי?', `כן. יש אחריות החזר מלא תוך ${GUARANTEE_DAYS} ימים מיום הרכישה, בלי שאלות. כותבים לי בוואטסאפ או במייל ומקבלים את הכסף חזרה.`],
+  ['האם יש החזר כספי אם הקורס לא מתאים לי?', 'לפני שאתם מתלבטים: הסילבוס המלא מפורט כאן בדף (4 מודולים + 3 בונוסים, כ-3 שעות), הגישה היא ללא הגבלת זמן כולל עדכונים, ואני זמין בוואטסאפ לכל שאלה, גם לפני הרכישה. מכיוון שמדובר בתוכן דיגיטלי עם גישה מיידית, לא ניתן החזר לאחר הרכישה, בהתאם לחוק הגנת הצרכן. יש ספק? שלחו לי הודעה ואענה אישית.'],
   ['מה ההבדל בין הקורס הזה לכל מה שיש בחינם ביוטיוב?', 'ביוטיוב יש "טיפים". כאן יש שיטה. הקורס בנוי על עבודה מאז 2020 עם מעל 2,500 חשבונות אמיתיים שהושבתו או נפרצו, והוא מתעדכן בהתאם לשינויים האחרונים של מטא. אין כפילויות, אין מילוי זמן, רק יישום.'],
   ['האם הקורס מתעדכן?', 'כן. כשמטא משנה משהו, אני מעדכן. הגישה שלכם אוטומטית כוללת את כל העדכונים העתידיים, ללא תוספת תשלום.'],
   ['אפשר לדבר איתך אם נתקעתי תוך כדי?', 'התלמידים שלי יכולים לפנות אליי בוואטסאפ בשאלות על יישום החומר מהקורס. זו לא תמיכה אישית מלאה, ולא שחזור של חשבון חסום (זה שירות נפרד), אבל על שאלות יישום אני עונה בפועל לכולם.'],
 ];
 
-/* ============================================================
-   V2 (outcome headline): the only copy that differs from V1
-   ============================================================ */
-const V2_AFTER = [
-  'שבת בבוקר. הפרופיל שלכם קיבל השבתה. ה-admin הגיבוי נכנס לביזנס מנג׳ר, הנכסים במקום, ואתם פותחים ערעור בלי להתנשם.',
-  'לקוחה שואלת ״מי בעצם מחזיק בדף שלנו?״. אתם שולחים צילום מסך תוך שתי דקות.',
-  'מגיעה ״הודעה ממטא״ עם לינק דחוף. אתם יודעים מה זה, ומוחקים.',
-];
-
-const V2_CTA = {
-  hero: 'אני רוצה תשתית שלא נופלת · ₪297',
-  author: 'בוא נבנה את זה · ₪297',
-  pricing: 'אני רוצה תשתית שלא נופלת · ₪297',
-  sticky: '₪297 · להתחיל עכשיו',
-  closing: 'אני רוצה תשתית שלא נופלת · ₪297',
-};
-
-export default function VslBms({ variant = 'v1' }) {
-  const v2 = variant === 'v2';
-  const lpVariant = LP_VARIANTS[variant];
-  const PURCHASE_URL = purchaseUrlFor(lpVariant);
-  const cta = (where, v1Text) => (v2 ? V2_CTA[where] : v1Text);
+export default function VslBms() {
+  const lpVariant = LP_VARIANT;
+  const PURCHASE_URL = PURCHASE_URL_BASE;
+  const cta = (where, text) => text;
   const [showStickyCta, setShowStickyCta] = useState(false);
   // Sticky retires while the real purchase section is on screen.
   const [finalCtaInView, setFinalCtaInView] = useState(false);
@@ -214,7 +193,16 @@ export default function VslBms({ variant = 'v1' }) {
   useEffect(() => {
     if (typeof window.fbq === 'function') window.fbq('track', 'ViewContent', { content_name: 'VSL-BMS' });
   }, []);
-  const trackCheckout = (where) => () => trackInitiateCheckout(where, lpVariant);
+  // Payment happens on the page: the checkout opens in a dialog instead of leaving.
+  // The href stays as the fallback (no JS, middle-click, blocked frame).
+  const [checkoutUrl, setCheckoutUrl] = useState(null);
+  const trackCheckout = (where) => (e) => {
+    trackInitiateCheckout(where, lpVariant);
+    if (e?.preventDefault && !(e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1)) {
+      e.preventDefault();
+      setCheckoutUrl(checkout(where));
+    }
+  };
   const checkout = (cta) => `${purchaseUrl}&cta=${cta}`;
 
   // The player reports its clock through postMessage (no extra script loaded):
@@ -277,7 +265,6 @@ export default function VslBms({ variant = 'v1' }) {
         <div className="container vsl-hero__grid vsl-hero__grid--wide">
           {/* The title runs the full width so each phrase stays on one line */}
           <header className="vsl-hero__head">
-            {v2 && <p className="vsl-hero__eyebrow">קורס BMS · Business Manager Setup</p>}
             <p className="vsl-hero__kicker">קורס מוקלט בעברית · <bdi>15</bdi> שיעורים קצרים · <bdi>₪{PRICE}</bdi> תשלום אחד</p>
             <h1 className="vsl-hero__title">
               <span className="lt">איך לבנות תיק עסקי (Business Portfolio) חסין חסימות ב-<bdi>15</bdi> שיעורים קצרים</span>{' '}
@@ -332,7 +319,7 @@ export default function VslBms({ variant = 'v1' }) {
                   {cta('hero', `הצטרפו לקורס ב-₪${PRICE}`)}
                 </Btn>
                 <p className="vsl-hero__terms small">
-                  שווי <del><bdi>₪{VALUE_ANCHOR}</bdi></del> · מחיר השקה <bdi>₪{PRICE}</bdi>, תשלום אחד כולל מע"מ. החזר מלא תוך <bdi>{GUARANTEE_DAYS}</bdi> ימים.
+                  שווי <del><bdi>₪{VALUE_ANCHOR}</bdi></del> · מחיר השקה <bdi>₪{PRICE}</bdi>, תשלום אחד כולל מע"מ.
                 </p>
               </>
             ) : (
@@ -347,7 +334,6 @@ export default function VslBms({ variant = 'v1' }) {
             <li><Icon name="check" /><span><bdi>15</bdi> שיעורים קצרים, הקלטת מסך, יישום תוך כדי צפייה</span></li>
             <li><Icon name="check" /><span>תיק עסקי, הרשאות ואימות דו-שלבי שלא מפילים אחד את השני</span></li>
             <li><Icon name="check" /><span>צ'קליסט סינון לקוחות ותבניות ערעור מוכנות</span></li>
-            <li><Icon name="check" /><span>החזר מלא תוך <bdi>{GUARANTEE_DAYS}</bdi> ימים, בלי שאלות</span></li>
           </ul>
         </div>
       </section>
@@ -441,16 +427,10 @@ export default function VslBms({ variant = 'v1' }) {
             ))}
           </ol>
 
-          {v2 ? (
-            <p className="vsl-note m-reveal">
-              אף אחת מהן לא עשתה משהו טיפשי. הן עבדו כמו שכולם עובדים, כי אף אחד לא מלמד שיש דבר כזה admin גיבוי, או שצריך לבדוק מי בעצם הבעלים של הדף. זה הפער שהקורס סוגר.
-            </p>
-          ) : (
             <p className="vsl-note m-reveal">
               <strong>התירוץ של כולן היה:</strong> "זה עבד לי ככה עד עכשיו".
               וכשמשהו השתבש? הן לא ידעו מה לעשות ולמי לפנות. זה הסיפור שקורה יום יום.
             </p>
-          )}
 
           <dl className="vsl-nums">
             <div className="vsl-nums__item">
@@ -503,25 +483,6 @@ export default function VslBms({ variant = 'v1' }) {
         </div>
       </section>
 
-      {/* V2 only: what the setup looks like on the day it matters */}
-      {v2 && (
-        <section className="section theme-paper vsl-after">
-          <div className="container">
-            <header className="sec-head m-reveal">
-              <h2 className="h2">איך זה נראה אחרי</h2>
-            </header>
-            <ol className="vsl-after__list">
-              {V2_AFTER.map((text, i) => (
-                <li className="vsl-after__item m-reveal" key={text}>
-                  <span className="vsl-after__num num" aria-hidden="true">0{i + 1}</span>
-                  <p>{text}</p>
-                </li>
-              ))}
-            </ol>
-            <p className="vsl-after__close m-reveal">זה לא ביטוח מפני כל תקלה. זה ההבדל בין שבוע של פאניקה לשעה של סדר.</p>
-          </div>
-        </section>
-      )}
 
       {/* DELIVERABLES. 4 modules + 3 bonuses on a rail that fills with scroll */}
       <section className="section theme-mist" id="deliverables">
@@ -692,36 +653,11 @@ export default function VslBms({ variant = 'v1' }) {
               <p className="small dim">
                 אחרי הרכישה תקבלו למייל את פרטי הגישה ועדכונים על הקורס. ניתן להסיר דיוור בכל עת.
               </p>
-              <p className="vsl-offer__wallets" aria-label="אמצעי תשלום מהירים">
-                <span>Apple Pay</span><span>Google Pay</span><span>Bit</span>
-                <span className="vsl-offer__wallets-note">תשלום ב-1-Click</span>
-              </p>
-              <p className="vsl-offer__guarantee">
-                <Icon name="shield" />
-                <span><b>אחריות החזר מלא תוך <bdi>{GUARANTEE_DAYS}</bdi> ימים.</b> לא מתאים? כותבים לי, מקבלים את הכסף חזרה, בלי שאלות.</span>
-              </p>
               <ul className="vsl-offer__trust">
                 <li><IconLock />תשלום מאובטח</li>
                 <li><Icon name="invoice" />חשבונית מס מיידית</li>
                 <li><IconZap />גישה מיידית</li>
               </ul>
-              {v2 && (
-                <div className="vsl-obj">
-                  <p><strong>״זה עבד לי ככה עד עכשיו.״</strong> גם ללילך. עד הלילה שזה הפסיק.</p>
-                  <p>
-                    <strong>״אין לי 3 שעות.״</strong> זה ערב אחד, ואת היישום עושים תוך כדי צפייה. אין גם ערב? בהקמה מוגנת אני עושה את זה איתכם בזום, בשעה אחת.{' '}
-                    <a
-                      href={getWhatsAppUrl('היי אושר, אשמח לפרטים על הקמה מוגנת')}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link"
-                      onClick={onWhatsAppClick('vsl-v2-protected-setup')}
-                    >
-                      לפרטים בוואטסאפ
-                    </a>
-                  </p>
-                </div>
-              )}
             </div>
 
             <div className="value-box">
@@ -807,22 +743,20 @@ export default function VslBms({ variant = 'v1' }) {
         </div>
       </section>
 
-      {v2 && (
-        <section className="section theme-paper vsl-closing">
-          <div className="container">
-            <p className="vsl-closing__text m-reveal">
-              אם משהו כבר נפל לכם פעם, זה לא כי עשיתם משהו לא בסדר. אף אחד לא סיפר לכם שכל העסק יושב על פרופיל אחד. עכשיו אתם יודעים, ומה שעושים עם זה כבר בידיים שלכם.
-            </p>
-            <div className="vsl-cta">
-              <Btn variant="signal" href={checkout('closing')} onClick={trackCheckout('closing')}>
-                {V2_CTA.closing}
-              </Btn>
-            </div>
-          </div>
-        </section>
-      )}
 
       </main>
+
+      <Modal isOpen={!!checkoutUrl} onClose={() => setCheckoutUrl(null)} title="תשלום מאובטח · קורס BMS">
+        <iframe
+          className="vsl-pay"
+          src={checkoutUrl || undefined}
+          title="תשלום מאובטח"
+          allow="payment *"
+        />
+        <p className="small muted">
+          לא נטען? <a className="link" href={checkoutUrl || '#'} target="_blank" rel="noopener noreferrer">פתחו את התשלום בחלון חדש</a>
+        </p>
+      </Modal>
 
       {/* STICKY MOBILE CTA, always straight to checkout, hidden while the purchase section is on screen */}
       <div className={`vsl-bar${stickyVisible ? ' is-visible' : ''}`} role="region" aria-label="קיצור דרך לרכישה">
