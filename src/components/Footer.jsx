@@ -5,7 +5,7 @@ import { FACTS } from '../data/businessFacts';
 import Icon from './Icon';
 import Modal from './Modal';
 import ContactForm from './ContactForm';
-import { WaBtn, ArrowIcon } from './ui';
+import { WaBtn } from './ui';
 import './Footer.css';
 
 const ACCESSIBILITY_CONTENT = (
@@ -52,7 +52,6 @@ const QUICK_LINKS = [
   { to: '/testimonials', label: 'המלצות לקוחות' },
   { to: '/articles', label: 'מאמרים' },
   { to: '/press', label: 'בתקשורת' },
-  { to: '/newsletter', label: 'ניוזלטר חודשי' },
   { to: '/אושר-רווח', label: 'עליי' },
 ];
 
@@ -128,21 +127,14 @@ const Footer = () => {
             </ul>
           </nav>
 
-          <div className="footer__col footer__col--wide">
-            <h3>The Safety Signal</h3>
-            <p className="footer__text">
-              הניוזלטר החודשי שלי: מה מטא שינתה, מקרה חסימה אמיתי מהחודש האחרון, ובדיקה אחת שמורידה סיכון. חמש דקות קריאה.
-            </p>
-            <Link to="/newsletter" className="btn btn--paper btn--sm">
-              <span>הצטרף/י לניוזלטר</span>
-              <span className="btn__arrow" aria-hidden="true"><ArrowIcon /></span>
-            </Link>
-            <ul className="footer__course">
+          <nav className="footer__col" aria-label="ללמוד ולהגן מראש">
+            <h3>ללמוד ולהגן מראש</h3>
+            <ul>
               {COURSE_LINKS.map((link) => (
                 <li key={link.to}><Link to={link.to}>{link.label}</Link></li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
 
         <img

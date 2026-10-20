@@ -40,8 +40,6 @@
   color: var(--fg-2);
 }
 .footer__contact svg { flex: 0 0 auto; width: 18px; height: 18px; color: var(--wave); }
-.footer__text { color: var(--fg-2); margin-block-end: 24px; max-width: 40ch; font-size: 1rem; }
-.footer__course { margin-block-start: 24px; padding-block-start: 16px; border-block-start: 1px solid var(--line); }
 
 .footer__social { display: flex; gap: 8px; margin-block-start: 24px; }
 .footer__social a {
@@ -56,8 +54,9 @@
 .footer__social svg { width: 20px; height: 20px; }
 
 .footer__mark {
-  width: min(100%, 560px);
+  width: min(55%, 200px);
   height: auto;
+  margin-block-start: clamp(8px, 2vw, 24px);
   margin-inline-start: auto;
   opacity: 0.1;
 }
@@ -93,5 +92,5 @@
 }
 @media (min-width: 1024px) {
   .footer__cta { grid-template-columns: 1fr auto; align-items: end; }
-  .footer__cols { grid-template-columns: 1.2fr 1fr 1fr 1.4fr; }
+  .footer__cols { grid-template-columns: 1.2fr 1fr 1fr 1fr; }
 }
