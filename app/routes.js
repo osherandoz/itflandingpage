@@ -22,8 +22,6 @@ export default [
   route("testimonials", "./routes/testimonials.jsx"),
   // BMS-SM — Course landing page + thank-you pages
   route("bms-sm", "./routes/bms-sm.jsx"),
-  // BMS-SM-V2 — feminine-plural variant for the women-targeted campaign (noindex)
-  route("bms-sm-v2", "./routes/bms-sm-v2.jsx"),
   // VSL-BMS — Video sales letter for BMS course
   route("VSL-BMS", "./routes/vsl-bms.jsx"),
   // Akamol — first-aid PDF bundle, 19.90 ILS

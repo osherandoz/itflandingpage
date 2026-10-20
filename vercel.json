@@ -40,6 +40,7 @@
     }
   ],
   "redirects": [
+    { "source": "/bms-sm-v2", "destination": "/bms-sm", "permanent": false },
     { "source": "/VSL-BMS-V2", "destination": "/VSL-BMS", "permanent": false },
     { "source": "/en/facebook-account-recovery", "destination": "/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%A4%D7%99%D7%99%D7%A1%D7%91%D7%95%D7%A7", "permanent": true },
     { "source": "/en/instagram-account-recovery", "destination": "/%D7%A9%D7%97%D7%96%D7%95%D7%A8-%D7%97%D7%A9%D7%91%D7%95%D7%9F-%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%92%D7%A8%D7%9D", "permanent": true },

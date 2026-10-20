@@ -42,9 +42,8 @@ to the Hebrew pages (`vercel.json`).
 - Six service pages share `src/components/ServicePage.jsx` + `src/data/servicePages.js`.
   Each carries a `notice`: the block message drawn in CSS (an illustration, labelled as one, not a screenshot).
 - Every lead form (`ContactForm`) lands on `/תודה` (noindex) once the server confirms; the Lead event still fires in the form.
-- BMS course funnel: `/bms-sm` (free checklist; `/bms-sm-v2` = feminine-plural variant, noindex) → `/תודה-קליסט`;
-  `/VSL-BMS` and `/VSL-BMS-V2` (A/B, noindex) → external checkout → `/תודה-רכישה`.
-  Both pairs are one component with a `variant` prop (`VslBms`, `BmsSm`). `/akamol` = 19.90 ILS PDF bundle
+- BMS course funnel: `/bms-sm` (free checklist; the `-v2` variant was removed 2026-10-20, redirects here) → `/תודה-קליסט`;
+  `/VSL-BMS` → checkout (opens in an on-page dialog, Green Invoice link) → `/תודה-רכישה`. `/akamol` = 19.90 ILS PDF bundle
   (`src/pages/Akamol.jsx`; Grow link, covers, chat proof live in `src/data/akamol.js`).
   Product brief for these pages: `PRODUCT.md`.
 - Analytics: the fbq / gtag / clarity queues are created in `<head>`; the three libraries load on the
@@ -122,7 +121,7 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 ## Decided (2026-10-19, brief `itf-landing-pages-brief.md`)
 - `/VSL-BMS` lost the "שווי אמיתי ₪638" line and all "ערך ₪" labels; a Lilach line sits above the price. `SlotNumber`
   renders the final number as plain text on the server (digit strips mount after hydration).
-- `/VSL-BMS-V2` is now the outcome-headline variant (`variant=v2-outcome-headline`); the old loss-headline V2 is gone (git history).
+- One VSL only: `/VSL-BMS-V2` was removed 2026-10-20 and redirects to `/VSL-BMS`.
 - `/akamol` ships with the Grow link empty: buy buttons open WhatsApp until `GROW_AKAMOL_URL` is set. Covers and
   the chat-proof screenshot stay unrendered until supplied (the screenshot also needs the client's consent).
 
