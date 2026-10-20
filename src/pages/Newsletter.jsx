@@ -7,7 +7,7 @@ import './Newsletter.css';
 
 /* ============================================================
    THE SAFETY SIGNAL: squeeze page (brief: Instagram-to-Email CRO).
-   One action (subscribe), one field (email), everything the decision
+   One action (subscribe), two fields (first name, email), everything the decision
    needs on the first mobile screen. No nav, no outbound links, no
    secondary sections. All rules scoped to .nls.
    ============================================================ */
@@ -45,6 +45,9 @@ const t = {
     'גיליון אחד בחודש, חמש דקות קריאה: מה מטא שינתה, מקרה חסימה אמיתי ובדיקה של עשר דקות לביצוע באותו יום. בלי ספאם, והסרה בקליק אחד.',
   proof: 'נכתב על ידי אושר רווח, ששחזר',
   proofTail: 'חשבונות. מצוטט ב-N12 וב-ice.',
+  nameLabel: 'שם פרטי',
+  namePlaceholder: 'שם פרטי',
+  nameError: 'איך לקרוא לך? צריך שם פרטי',
   emailLabel: 'כתובת מייל',
   emailPlaceholder: 'you@company.co.il',
   submit: 'שלחו לי את הגיליון הבא',
@@ -56,6 +59,7 @@ const t = {
 };
 
 function SignupForm() {
+  const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState(''); // honeypot, must stay empty
   const [busy, setBusy] = useState(false);
@@ -65,13 +69,17 @@ function SignupForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (busy) return;
+    if (!firstName.trim()) {
+      setError(t.nameError);
+      return;
+    }
     if (!validateEmail(email)) {
       setError(t.emailError);
       return;
     }
     setBusy(true);
     setError('');
-    const result = await subscribeToNewsletter('', '', email, website);
+    const result = await subscribeToNewsletter(firstName, '', email, website);
     setBusy(false);
     if (result.success) {
       setDone(true);
@@ -108,6 +116,22 @@ function SignupForm() {
         aria-hidden="true"
         className="nls__honeypot"
       />
+
+      <label className="nls__field">
+        <span className="sr-only">{t.nameLabel}</span>
+        <input
+          type="text"
+          name="firstName"
+          value={firstName}
+          onChange={(e) => { setFirstName(e.target.value); setError(''); }}
+          placeholder={t.namePlaceholder}
+          autoComplete="given-name"
+          disabled={busy}
+          required
+          aria-invalid={!!error && !firstName.trim()}
+          aria-describedby={error ? 'nls-error' : undefined}
+        />
+      </label>
 
       <label className="nls__field">
         <span className="sr-only">{t.emailLabel}</span>

@@ -126,8 +126,8 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
   the chat-proof screenshot stay unrendered until supplied (the screenshot also needs the client's consent).
 
 ## Decided (2026-10-21, brief `Instagram-to-Email-CRO-Agent-Brief.md`)
-- `/newsletter` is a squeeze page: no nav, no outbound links, one email field, everything on the first 375x667 screen.
-  `/api/subscribe` takes an email with no names (names omitted from the Smoove upsert when empty). utm_* are copied into the Lead / `newsletter_subscribe` events.
+- `/newsletter` is a squeeze page: no nav, no outbound links, first name + email (Osher needs the name for personal replies), everything on the first 375x667 screen.
+  `/api/subscribe` still accepts an email with no name (omitted from the Smoove upsert when empty). utm_* are copied into the Lead / `newsletter_subscribe` events.
   The social proof is the 2,500+ figure and N12/ice (no subscriber count exists: do not invent one). `newsletterFaqs.js` is kept only for its test.
 - Not built (outside the page): the ManyChat DM flow and the welcome email sequence from the brief.
 

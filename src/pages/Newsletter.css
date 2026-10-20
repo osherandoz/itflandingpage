@@ -25,8 +25,8 @@
 .nls__form { display: grid; gap: 10px; width: 100%; }
 .nls__field input {
   width: 100%;
-  min-height: 56px;
-  padding: 14px 16px;
+  min-height: 52px;
+  padding: 12px 16px;
   border: 1.5px solid var(--line-strong);
   border-radius: 16px;
   background: var(--ink-2);
