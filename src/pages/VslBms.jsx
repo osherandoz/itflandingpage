@@ -27,7 +27,7 @@ const PURCHASE_URL_BASE = `https://mrng.to/engo98ytvh?variant=${LP_VARIANT}`;
 // is 5504x8256) are never referenced: only the -sm / -md variants.
 const IMG = '/images/vsl-bms';
 
-const PRICE = 297;
+const PRICE = 99;
 const VALUE_ANCHOR = 997; // estimated value of the full package (spec 5.1)
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 
@@ -637,7 +637,7 @@ export default function VslBms() {
 
           <div className="vsl-offer card card--ink theme-ink m-reveal">
             <div className="vsl-offer__head">
-              <p className="vsl-offer__lilach">אצל לילך, אמצעי תשלום אחד שלא היה במקום הנכון עלה 150,000 ש״ח. הקורס עולה 297.</p>
+              <p className="vsl-offer__lilach">אצל לילך, אמצעי תשלום אחד שלא היה במקום הנכון עלה 150,000 ש״ח. הקורס עולה 99.</p>
               <p className="vsl-offer__today">שווי מוערך <del><bdi>₪{VALUE_ANCHOR}</bdi></del> · מחיר השקה חד-פעמי:</p>
               <p className="vsl-offer__price num"><bdi>₪{PRICE}</bdi></p>
               <p className="small muted">תשלום חד-פעמי · כולל מע"מ · פרטי הגישה נשלחים למייל תוך דקות</p>
