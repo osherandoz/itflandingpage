@@ -28,7 +28,7 @@ const PURCHASE_URL_BASE = `https://mrng.to/engo98ytvh?variant=${LP_VARIANT}`;
 const IMG = '/images/vsl-bms';
 
 const PRICE = 99;
-const VALUE_ANCHOR = 997; // estimated value of the full package (spec 5.1)
+const VALUE_ANCHOR = 600; // estimated value of the full package (spec 5.1)
 const WHATSAPP_URL = 'https://wa.me/972509823235';
 
 // In-page anchor clicks, custom event, NOT Lead (Lead fires only on thank-you-lead)
