@@ -9,7 +9,7 @@ describe('share cards', () => {
   const files = [
     ...SERVICE_PAGES.map((p) => `og/${p.slug}.png`),
     ...articleIndex.map((a) => `og/a-${a.slug}.png`),
-    ...['faq', 'testimonials', 'press', 'articles', 'newsletter', 'author'].map((n) => `og/${n}.png`),
+    ...['faq', 'testimonials', 'press', 'articles', 'newsletter', 'author', 'security-check'].map((n) => `og/${n}.png`),
   ];
   it.each(files)('%s exists', (file) => {
     expect(existsSync(`public/images/${file}`)).toBe(true);

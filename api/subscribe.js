@@ -20,6 +20,16 @@ export function validateInputs(firstName, lastName, email) {
   return null;
 }
 
+// Lead source → extra Smoove list, so each source can get its own welcome sequence.
+// Unknown or missing source = the newsletter list only. A source whose env var is
+// unset also falls back to the newsletter list alone (signup still works).
+export function listsFor(source, env = process.env) {
+  const lists = [parseInt(env.SMOOVE_LIST_ID || '1078775', 10)];
+  const extra = source === 'security-check' ? parseInt(env.SMOOVE_SECURITY_CHECK_LIST_ID || '', 10) : NaN;
+  if (Number.isInteger(extra) && !lists.includes(extra)) lists.push(extra);
+  return lists;
+}
+
 export default async function handler(req, res) {
   if (applyCors(req, res, ALLOWED_ORIGINS)) return;
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -30,7 +40,7 @@ export default async function handler(req, res) {
 
   const body = readJsonBody(req);
   if (!body) return res.status(400).json({ error: 'בקשה לא תקינה' });
-  const { firstName, lastName, email, website } = body;
+  const { firstName, lastName, email, website, source } = body;
 
   // Honeypot — bots fill the hidden "website" field; humans don't
   if (website) return res.status(200).json({ success: true });
@@ -46,13 +56,12 @@ export default async function handler(req, res) {
   const fresh = await claim(key, HOUR, 'pending').catch(() => true);
   if (!fresh) return res.status(200).json({ success: true, duplicate: true });
 
-  const listId = parseInt(process.env.SMOOVE_LIST_ID || '1078775', 10);
   try {
     const r = await upsertContact({
       email: safeEmail,
       firstName: safeFirst,
       lastName: safeLast,
-      lists_ToSubscribe: [listId],
+      lists_ToSubscribe: listsFor(source),
     });
     if (r.ok) {
       await set(key, 'completed', HOUR).catch(() => {});

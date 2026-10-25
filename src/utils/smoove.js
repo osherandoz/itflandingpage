@@ -17,13 +17,13 @@ const MESSAGES = {
  * Subscribe a user to the newsletter.
  * Sends to /api/subscribe which proxies to Smoove server-side.
  */
-export const subscribeToNewsletter = async (firstName, lastName, email, website = '') => {
+export const subscribeToNewsletter = async (firstName, lastName, email, website = '', source = 'newsletter') => {
   const m = MESSAGES;
   try {
     const response = await fetch('/api/subscribe', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ firstName, lastName, email, website, lang: 'he' }),
+      body: JSON.stringify({ firstName, lastName, email, website, lang: 'he', source }),
     });
 
     const data = await response.json().catch(() => ({}));

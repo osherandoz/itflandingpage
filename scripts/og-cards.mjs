@@ -33,6 +33,7 @@ const cards = [
   { file: 'og/press.png', k: 'כפי שסוקרנו בתקשורת', l: 'IsraelTechForce', t: 'בתקשורת' },
   { file: 'og/articles.png', k: 'שחזור ואבטחת חשבונות', l: 'מאמרים', t: 'ומדריכים' },
   { file: 'og/newsletter.png', k: 'The Safety Signal · ניוזלטר חודשי', l: 'מה מטא משנה בפועל,', t: 'ומה כדאי לבדוק אצלך' },
+  { file: 'og/security-check.png', k: 'בדיקת אבטחה לאינסטגרם · 5 דקות', l: 'בדוק כמה החשבון שלך', t: 'מוגן' },
   { file: 'og/author.png', k: 'מייסד IsraelTechForce', l: 'אושר רווח', t: 'מומחה שחזור חשבונות' },
 ];
 
