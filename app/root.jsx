@@ -12,6 +12,9 @@ import heeboHebrew from '@fontsource-variable/heebo/files/heebo-hebrew-wght-norm
 import heeboLatin from '@fontsource-variable/heebo/files/heebo-latin-wght-normal.woff2?url';
 import '../src/styles/system.css';
 
+// Same as PATH in src/data/securityCheck.instagram.js (not imported: that file would ship on every page)
+const SECURITY_CHECK_PATH = '/בדיקת-אבטחה-אינסטגרם';
+
 export const links = () => [
   { rel: 'preload', href: heeboHebrew, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
   { rel: 'preload', href: heeboLatin, as: 'font', type: 'font/woff2', crossOrigin: 'anonymous' },
@@ -54,6 +57,10 @@ export function Layout({ children }) {
         {/* Google Search Console verification */}
         <meta name="google-site-verification" content="aE9CLpD9QGwjrSkACJUNpS8Ps8vCkLxMuP9jRl3v_aM" />
 
+        {/* The security check promises that nothing the visitor marks leaves the browser:
+            landing there, Clarity (session recording) never loads and the Pixel's
+            automatic button-click events are off. SecurityCheck.jsx also stops Clarity
+            for visitors who arrive from another page. */}
         {/* Meta Pixel, GA4 and Clarity. The fbq / gtag / clarity queues exist from
             the first byte, so PageView and every later event are recorded in
             order. The libraries themselves (about 450KB of script) are fetched on
@@ -66,9 +73,11 @@ var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push
 w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments)};
 w.clarity=w.clarity||function(){(w.clarity.q=w.clarity.q||[]).push(arguments)};
 var done=0,ev=['pointerdown','touchstart','keydown','scroll'];
+var priv=(function(){try{return decodeURIComponent(w.location.pathname)==='${SECURITY_CHECK_PATH}'}catch(e){return 0}})();
+if(priv)fbq('set','autoConfig',false,'1911202046942044');
 function add(src){var s=d.createElement('script');s.async=1;s.src=src;d.head.appendChild(s)}
 function boot(){if(done)return;done=1;ev.forEach(function(e){w.removeEventListener(e,boot)});
-add('https://connect.facebook.net/en_US/fbevents.js');add('https://www.googletagmanager.com/gtag/js?id=G-M2TYTNN02X');add('https://www.clarity.ms/tag/x8uz4h0y6b')}
+add('https://connect.facebook.net/en_US/fbevents.js');add('https://www.googletagmanager.com/gtag/js?id=G-M2TYTNN02X');if(!priv)add('https://www.clarity.ms/tag/x8uz4h0y6b')}
 ev.forEach(function(e){w.addEventListener(e,boot,{passive:true})});
 function timer(){setTimeout(boot,4000)}
 if(d.readyState==='complete')timer();else w.addEventListener('load',timer,{once:true});

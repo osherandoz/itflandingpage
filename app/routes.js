@@ -17,6 +17,8 @@ export default [
   route("שחזור-מנהל-מודעות", "./routes/ads-manager.jsx"),
   // Newsletter — The Safety Signal subscribe page
   route("newsletter", "./routes/newsletter.jsx"),
+  // Free Instagram security self-check (newsletter gift, SEO page)
+  route("בדיקת-אבטחה-אינסטגרם", "./routes/security-check.jsx"),
   // Phase C — FAQ + Testimonials
   route("faq", "./routes/faq.jsx"),
   route("testimonials", "./routes/testimonials.jsx"),

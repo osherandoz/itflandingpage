@@ -125,7 +125,19 @@ Meta Pixel `1911202046942044` · Vercel project `itflandingpage`.
 - `/akamol` ships with the Grow link empty: buy buttons open WhatsApp until `GROW_AKAMOL_URL` is set. Covers and
   the chat-proof screenshot stay unrendered until supplied (the screenshot also needs the client's consent).
 
+## Decided (2026-10-25, brief `docs/security-check-brief.md`)
+- `/בדיקת-אבטחה-אינסטגרם`: self-check page. Checks, click paths, scoring and FAQ live in
+  `src/data/securityCheck.instagram.js` (edit paths there only; bump `UPDATED`).
+- Privacy promise is enforced in code: marks stay in localStorage; GA4 events carry no segment, id,
+  result or score; on this page Clarity is not loaded (or is stopped) and the Pixel's automatic
+  button-click events are off (`root.jsx`). Keep it that way when adding tracking.
+- Email signup posts to `/api/subscribe` with `source: 'security-check'`; the server adds
+  `SMOOVE_SECURITY_CHECK_LIST_ID` (env) to the newsletter list when set.
+
 ## Open (needs Osher)
+- Security check: every `TODO(verify path)` in `securityCheck.instagram.js` needs a check in the live app;
+  create the Smoove list + set `SMOOVE_SECURITY_CHECK_LIST_ID` + 3-month reminder automation; the
+  "הקמה מוגנת" CTA opens WhatsApp until a page exists.
 - `/akamol`: `GROW_AKAMOL_URL`, three PDF covers (hero + og:image), WhatsApp screenshot + client consent. Do not send paid traffic before the link is in.
 - The pixel's config also tries two Meta-run hosts (`*.us-central1.run.app/events`,
   `*.ecs.us-west-2.on.aws/events`); the CSP blocks them. Meta reports the dataset's gateway as
